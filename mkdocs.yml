@@ -10,6 +10,8 @@ theme:
     - navigation.expand
     - content.code.copy
     - content.tabs.link
+    - toc.follow        # Add this
+    - toc.integrate     # Optional: integrates TOC into left nav 
   icon:
     logo: material/shield-account
 

@@ -2,19 +2,20 @@
 
 <div align="center">
 
-## **Building secure, data‑driven systems that elevate operational resilience**
+### **Building secure, data‑driven systems that elevate operational resilience**
 
 </div>
 
 ---
-### **Paul Leone** | *Aspiring Security Analyst & Infrastructure Engineer*
+## About
+**Paul Leone** | *Aspiring Security Analyst & Infrastructure Engineer*
 
 !!! info "Welcome to My Professional Portfolio"
     This site showcases my work across security engineering, data analytics, threat intelligence, and hands‑on homelab design. Each project includes architecture, methodology, and practical outcomes.
 
 ---
 
-# Projects
+## Projects
 
 | Project | Description |
 |--------|-------------|
@@ -24,7 +25,7 @@
 
 ---
 
-## Example Project Card
+### Featured Project
 
 === "Featured Project"
 
@@ -36,9 +37,9 @@
 
 ---
 
-# What I Do
+## What I Do
 
-- :material-shield-cog: **Security Engineering** — building detection pipelines, log ingestion workflows, and monitoring architectures.  
+- :material-shield-search: **Security Engineering** — building detection pipelines, log ingestion workflows, and monitoring architectures.  
 - :material-bullseye-arrow: **Threat‑Informed Defense** — mapping adversary behaviors to detections, controls, and SOC processes.  
 - :material-database-search: **Data Analytics & Automation** — transforming raw data into dashboards, insights, and automated workflows.  
 - :material-cloud-outline: **Cloud & Infrastructure** — designing secure, scalable environments for experimentation and learning.  
@@ -46,36 +47,20 @@
 
 ---
 
-# Career Focus
+## Career Focus
 
 I'm focused on roles where I can combine **security engineering**, **analytics**, and **operational problem‑solving**. I'm especially drawn to environments that value curiosity, continuous improvement, and building systems that make teams more effective.
 
 ---
 
-# Resume
+## Resume
 
-- [:material-file-account: Resume (PDF)](path/to/resume.pdf)
+-!!! [:material-file-account: Resume (PDF)](path/to/resume.pdf)
 
 ---
 
-# Connect
+## Connect
 
 - [:material-linkedin: LinkedIn](https://linkedin.com/in/yourprofile)  
 - [:material-github: GitHub](https://github.com/yourusername)  
 - [:material-email: Email](mailto:your@email.com)
----
-:material-chart-line:
-
-:material-shield-search:
-
-:material-home-analytics:
-
-:material-target:
-
-:material-file-account:
-
-:material-linkedin:
-
-:material-github:
-
-:material-email:
