@@ -1,0 +1,16 @@
+site_name: Paul Leone – Projects & Portfolio
+theme:
+  name: material
+  palette:
+    scheme: slate
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+nav:
+  - Home: index.md
+  - Projects:
+      - Business Intelligence: projects/business-intelligence.md
+      - Threat Intelligence: projects/threat-intel.md
+      - Security Homelab: projects/homelab.md
