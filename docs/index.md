@@ -65,3 +65,19 @@ I’m focused on roles where I can combine **security engineering**, **analytics
 - :material-linkedin: **LinkedIn**  
 - :material-github: **GitHub**  
 - :material-email: **Email**
+---
+:material-chart-line:
+
+:material-shield-search:
+
+:material-home-analytics:
+
+:material-target:
+
+:material-file-account:
+
+:material-linkedin:
+
+:material-github:
+
+:material-email:
