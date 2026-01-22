@@ -76,7 +76,6 @@ I'm focused on roles where I can combine **security engineering**, **analytics**
 - **Infrastructure Security** — Securing cloud/on-prem infrastructure, identity management, and network defense
 - **Detection Engineer** — Creating custom detection rules, tuning SIEM, and improving alert fidelity
 
- #### I'm especially drawn to environments that value **curiosity**, **continuous improvement**, and building systems that make teams more effective. My background bridging IT operations and security operations provides unique perspective on securing infrastructure while maintaining operational efficiency.
 ---
 
 ## Professional Development
@@ -120,7 +119,7 @@ Python • PowerShell • Bash • SQL • Ansible • Terraform • n8n • Git
 ### Compliance & Frameworks
 NIST CSF 2.0 • CIS Controls v8.1 • ISO 27001 • MITRE ATT&CK • OWASP • CIS Benchmarks
 ### Operating System Administration
-Windows 11 • Windows Server • Linux (Debian/Red Hat) FreeBSD • macOS • iOS • Android
+Windows 11 • Windows Server • Linux (Debian/Red Hat) • FreeBSD • macOS • iOS • Android
 
 ---
 
