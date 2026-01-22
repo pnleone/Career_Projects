@@ -12,7 +12,6 @@ theme:
     - content.tabs.link
   icon:
     logo: material/shield-account
-    repo: fontawesome/brands/github
 
 markdown_extensions:
   - attr_list
@@ -20,9 +19,12 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
 nav:
   - Home: index.md
   - Projects:
