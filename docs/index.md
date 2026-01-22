@@ -9,7 +9,7 @@
 
 Welcome to my professional portfolio. This site showcases my journey into cybersecurity, documenting the technical labs, security frameworks, and automation workflows I've built to defend modern infrastructure.
 
-My focus is on bridging the gap between IT Operations (SysAdmin) and Security Operations (Blue Teaming). Through these projects, I demonstrate a commitment to continuous learning, a "security-by-design" mindset, and the technical proficiency required to mitigate risks in enterprise environments.
+My focus is on bridging the gap between IT Operations (SysAdmin) and Security Operations (Blue Teaming). Through these projects, I demonstrate a commitment to continuous learning, a "secure-by-design" mindset, and the technical proficiency required to mitigate risks in enterprise environments.
 
 ---
 
@@ -76,7 +76,7 @@ I'm focused on roles where I can combine **security engineering**, **analytics**
 - **Infrastructure Security** — Securing cloud/on-prem infrastructure, identity management, and network defense
 - **Detection Engineer** — Creating custom detection rules, tuning SIEM, and improving alert fidelity
 
-I'm especially drawn to environments that value **curiosity**, **continuous improvement**, and building systems that make teams more effective. My background bridging IT operations and security operations provides unique perspective on securing infrastructure while maintaining operational efficiency.
+ #### I'm especially drawn to environments that value **curiosity**, **continuous improvement**, and building systems that make teams more effective. My background bridging IT operations and security operations provides unique perspective on securing infrastructure while maintaining operational efficiency.
 ---
 
 ## Professional Development
@@ -107,24 +107,20 @@ Active participant in hands-on security training platforms (TryHackMe) and CTF c
 
 ### Security Operations
 Wazuh XDR • Splunk • ELK Stack • Suricata • Snort • TheHive • Shuffle SOAR • MISP • Nessus • OpenVAS • VirusTotal
-
 ### Network & Infrastructure
-pfSense • OPNsense • Proxmox • Docker • Kubernetes • VMware ESXi • Traefik • Cloudflare • Tailscale • Pi-hole
-
+pfSense • OPNsense • FortiGate • Proxmox • Docker • Kubernetes • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS
 ### Identity & Access Management
-Authentik • Active Directory • StepCA PKI • Vaultwarden • OAuth2/OIDC/SAML • MFA • RBAC
-
+Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA • RBAC
+### Security Tooling
+Wireshark • Brim • Sysinternals • CyberChef • Volatility • Nmap • Burp Suite • Metasploit 
 ### Monitoring & Analysis
-Grafana • Prometheus • Checkmk • Uptime Kuma • Wireshark • Brim • Sysinternals • CyberChef • Volatility
-
+Grafana • Prometheus • Checkmk • Uptime Kuma • NetAlertX • Pulse
 ### Automation & Scripting
-Python • PowerShell • Bash • SQL • Ansible • Terraform • Git/GitHub • JSON/YAML/XML
-
+Python • PowerShell • Bash • SQL • Ansible • Terraform • n8n • Git/GitHub • JSON/YAML/XML • REST API
 ### Compliance & Frameworks
-NIST CSF 2.0 • CIS Controls v8 • ISO 27001 • MITRE ATT&CK • OWASP • CIS Benchmarks
-
-### Operating Systems
-Windows 11 • Windows Server • Debian/Ubuntu • RHEL/Rocky • FreeBSD • macOS • iOS • Android
+NIST CSF 2.0 • CIS Controls v8.1 • ISO 27001 • MITRE ATT&CK • OWASP • CIS Benchmarks
+### Operating System Administration
+Windows 11 • Windows Server • Linux (Debian/Red Hat) FreeBSD • macOS • iOS • Android
 
 ---
 
