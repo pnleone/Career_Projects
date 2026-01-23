@@ -30,6 +30,6 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Projects:
-      - Business Intelligence: projects/business-intelligence.md
-      - Threat Intelligence: projects/threat-intel.md
+      - Business Intelligence & Data Analytics: projects/business-intelligence.md
+      - Threat Intelligence Brief & SOC Improvement Plan: projects/threat-intel.md
       - Security Homelab: projects/homelab.md
