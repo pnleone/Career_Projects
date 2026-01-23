@@ -352,7 +352,7 @@ Enterprise environments frequently operate multiple virtualization platforms whe
 
 
 
-<div class="two-col-right-narow">
+<div class="two-col-right-narrow">
   <div class="text-col">
     <p>
    The lab operates a three-node Cisco virtual network infrastructure providing enterprise-grade routing and switching simulation. Two vRouters (R1 and R2) running Cisco IOS Software Version 15.9(3)M6 (VIOS-ADVENTERPRISEK9-M) implement dynamic routing via OSPF, while a vSwitch operates experimental Version 15.2 (vios_l2-ADVENTERPRISEK9-M) for Layer 2 operations. All instances run as KVM virtual machines within the Proxmox environment, enabling full-featured network protocol testing, routing policy validation, and security hardening without physical hardware dependencies.
@@ -444,7 +444,27 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 - Provides VLAN trunking and access port simulation
 - Supports STP testing and loop prevention validation
 - Enables port security and MAC address filtering research
+<div class="two-col-right">
+  <div class="text-col">
+    <h3>vSwitch (Layer 2):</h3>
+    <ul>
+      <li>Provides VLAN trunking and access port simulation</li>
+      <li>Supports STP testing and loop prevention validation</li>
+      <li>Enables port security and MAC address filtering research</li>
+    </ul>
 
+   </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/cisco-switch.png" alt="vSwitch Config screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        vSwitch VLAN and Interface Configuration.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 #### OSPF Routing Configuration
 
 **Protocol:** OSPF Version 2 (OSPFv2 for IPv4)  
