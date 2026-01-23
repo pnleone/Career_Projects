@@ -550,19 +550,19 @@ labels:
 ``` 
 #### 2.3.5 Firewall Filter Rules
 CrowdSec remediation service deployed on the NG Firewall can ingest firewall rules via packages or block lists.
-![Firewall Rules Screenshot](../assets/screenshots/fw_rules.svg)
+![Firewall Rules Screenshot](/Career_Projects/assets/screenshots/fw_rules.svg)
 
-<img src="/projects/assets/screenshots/fw_rules.svg" alt="Firewall Rules" width="800">
+<img src="/Career_Projects/assets/screenshots/fw_rules.svg" alt="Firewall Rules" width="800">
 
 Example of deployed Scenarios:
 
-![CrowdSec Deployed Scenarios Screenshot](../assets/screenshots/fw_deployed.svg)
+![CrowdSec Deployed Scenarios Screenshot](/Career_Projects/assets/screenshots/fw_deployed.svg)
 
-<img src="/projects/assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800">
+<img src="/Career_Projects/assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800">
 
 <div style="text-align: center;">
-  <img src="/projects/assets/screenshots/fw_deployed.svg"
-       alt="MITRE ATT&CK Framework Visualization"
+  <img src="/Career_Projects/assets/screenshots/fw_deployed.svg"
+       alt="CrowdSec Deployed Scenarios"
        style="max-width: 80%; height: auto;">
 </div>
 
