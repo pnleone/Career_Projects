@@ -550,7 +550,7 @@ K3s is ideal for homelab and edge environments requiring full Kubernetes functio
 | MetalLB Speaker | metallb-system | Announces LoadBalancer IPs via ARP/BGP | DaemonSet (runs on all nodes) |
 | Nginx Ingress Controller | nginx-ingress | HTTP/HTTPS ingress traffic routing and SSL termination | Helm chart (1 replica) |
 | Portainer Agent | portainer-agent | Cluster management and monitoring via Portainer UI | DaemonSet (runs on all nodes) |
-
+| Cert-Manager | cert-manager | StepCA/ACME client for nginx-ingress SSL termination | Helm Chart Deployment |
 **MetalLB Load Balancer Configuration:**
 
 - **Address Pool:** 192.168.200.30-192.168.200.49 (20 available IPs)
@@ -561,7 +561,7 @@ K3s is ideal for homelab and edge environments requiring full Kubernetes functio
 
 - **Controller:** Nginx Ingress Controller (official Kubernetes ingress-nginx)
 - **External Access:** LoadBalancer service at 192.168.200.31 (HTTP: 80, HTTPS: 443)
-- **Use Case:** Centralized ingress point for HTTP-based services with path-based routing
+- **Use Case:** Centralized ingress point for HTTP-based services with path-based routing. Provides rate limiting, IP allow list and TLS/HTTPS connectivity to the NGINX Webserver. Certificates are delivered via Cert-Manager service that is auto-generated from StepCA/ACME.  
 
 #### Nginx Namespace - Web Services
 
@@ -590,6 +590,13 @@ K3s is ideal for homelab and edge environments requiring full Kubernetes functio
 |-------------|------|----------|---------|
 | portainer-agent | DaemonSet | 2/2 | Portainer agent for cluster management via Portainer UI |
 
+**cert-manager Namespace:**
+
+| Application | Type | Replicas | External IP | Purpose |
+|-------------|------|----------|-------------|---------|
+| Cert-Manager | Helm | 1/1 | - | StepCA/ACME client for nginx-ingress SSL termination |
+| Cert-Manager-cainjector | Helm | 1/1 | - | - |
+| Cert-Manager-webhook | Helm | 1/1 | - | - |
 #### SOC Namespace - Security Operations Center Platform
 
 The SOC namespace hosts the lab's comprehensive Security Operations Center platform, implementing a modern threat intelligence, incident response, and security orchestration architecture. Integrating threat intelligence sharing (MISP), automated analysis (Cortex), workflow automation (Shuffle), and case management (TheHive).
