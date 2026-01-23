@@ -1,8 +1,7 @@
 # Infrastructure, Platform and Hardware Summary
 
-**Created By:** [Your Name]  
+**Created By:** Paul Leone  
 **Date:** January 19, 2026  
-**Organization:** [Organization Name]
 
 ---
 
@@ -256,7 +255,8 @@ Used for VLAN and Link Aggregation (LAG) testing between The Proxmox host server
 
 The majority of hosts and services run within the Proxmox environment and run within one of the two integrated technologies supported:
 
-![KVM-LXC](/Career_Projects/assets/misc/kvm-lxc.png)
+<img class="image-small" src="/Career_Projects/assets/misc/kvm-lxc.png" alt="KVM-LXC">
+
 #### 🖥️ Virtual Machines (VMs)
 
 - **Tech Stack**: KVM (Kernel-based Virtual Machine) + QEMU
@@ -350,11 +350,26 @@ Enterprise environments frequently operate multiple virtualization platforms whe
 
 #### Deployment Overview
 
-The lab operates a three-node Cisco virtual network infrastructure providing enterprise-grade routing and switching simulation. Two vRouters (R1 and R2) running Cisco IOS Software Version 15.9(3)M6 (VIOS-ADVENTERPRISEK9-M) implement dynamic routing via OSPF, while a vSwitch operates experimental Version 15.2 (vios_l2-ADVENTERPRISEK9-M) for Layer 2 operations. All instances run as KVM virtual machines within the Proxmox environment, enabling full-featured network protocol testing, routing policy validation, and security hardening without physical hardware dependencies.
 
-The topology implements a hub-and-spoke design where R1 and R2 connect via a dedicated point-to-point link (10.30.0.0/30) and exchange routing information through OSPF Area 0. R1 serves as the primary gateway for production lab networks (192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24), while R2 handles isolated test networks (192.168.2.0/24, 192.168.3.0/24). Two Ubuntu 25.10 LXC containers (cisco-host1 and cisco-host2) validate routing functionality by using their respective local routers as default gateways.
 
-**Diagram Placeholder: Cisco Topology Diagram**
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The lab operates a three-node Cisco virtual network infrastructure providing enterprise-grade routing and switching simulation. Two vRouters (R1 and R2) running Cisco IOS Software Version 15.9(3)M6 (VIOS-ADVENTERPRISEK9-M) implement dynamic routing via OSPF, while a vSwitch operates experimental Version 15.2 (vios_l2-ADVENTERPRISEK9-M) for Layer 2 operations. All instances run as KVM virtual machines within the Proxmox environment, enabling full-featured network protocol testing, routing policy validation, and security hardening without physical hardware dependencies.
+
+   The topology implements a hub-and-spoke design where R1 and R2 connect via a dedicated point-to-point link (10.30.0.0/30) and exchange routing information through OSPF Area 0. R1 serves as the primary gateway for production lab networks (192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24), while R2 handles isolated test networks (192.168.2.0/24, 192.168.3.0/24). Two Ubuntu 25.10 LXC containers (cisco-host1 and cisco-host2) validate routing functionality by using their respective local routers as default gateways.
+    </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/cisco-r1.png" alt="r1 Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cisco r1 Configuration.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 #### Security Impact
 
@@ -395,24 +410,35 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 
 ### 4.1 Network Topology & Configuration
 
-#### Physical Connectivity
+#### Connectivity
 
-**Diagram Placeholder: R1 Configuration Screenshot**
+<div class="two-col-right">
+  <div class="text-col">
+    <h3>R1 (192.168.200.6) - Primary Router</h3>
+    <ul>
+      <li><strong>G0/0:</strong> 192.168.1.6/24 — Production network uplink</li>
+      <li><strong>G0/1:</strong> 192.168.100.6/24 — Primary lab network (K3s cluster, Docker hosts)</li>
+      <li><strong>G0/2:</strong> 192.168.200.6/24 — Secondary lab network (SOC namespace, server-admin)</li>
+      <li><strong>G0/3:</strong> 10.30.0.1/30 — Point-to-point link to R2</li>
+    </ul>
 
-**R1 (192.168.200.6) - Primary Router:**
+   <h3 style="margin-top:1rem;">R2 (192.168.3.9) - Secondary Router</h3>
+   <ul>
+      <li><strong>G0/0:</strong> 10.30.0.2/30 — Point-to-point link to R1</li>
+      <li><strong>G0/1:</strong> 192.168.3.9/24 — Management VLAN (FortiGate protected)</li>
+      <li><strong>G0/2:</strong> 192.168.2.9/24 — External lab network</li>
+   </ul>
+  </div>
 
-- G0/0: 192.168.1.6/24 - Production network uplink
-- G0/1: 192.168.100.6/24 - Primary lab network (K3s cluster, Docker hosts)
-- G0/2: 192.168.200.6/24 - Secondary lab network (SOC namespace, server-admin)
-- G0/3: 10.30.0.1/30 - Point-to-point link to R2
-
-**Diagram Placeholder: R2 Configuration Screenshot**
-
-**R2 (192.168.3.9) - Secondary Router:**
-
-- G0/0: 10.30.0.2/30 - Point-to-point link to R1
-- G0/1: 192.168.3.9/24 - Management VLAN (FortiGate protected)
-- G0/2: 192.168.2.9/24 - External lab network
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/cisco.png" alt="Routing diagram screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Routing overview: R1 ↔ R2 point-to-point and VLAN uplinks.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 **vSwitch (Layer 2):**
 

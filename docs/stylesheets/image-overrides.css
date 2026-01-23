@@ -93,10 +93,55 @@
     max-width: 100%;
   }
 }
+/* Two-column: text left, image right */
+.two-col-right-narrow {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
 
+/* Image column controls how much width the image takes.
+   Set flex-basis to 60% or 75% depending on desired size. */
+.two-col-right-narrow .image-col {
+  flex: 0 0 75%; /* change to desired % */
+  max-width: 75%;
+}
+.two-col-right-narrow .text-col {
+  flex: 1 1 25%;
+  min-width: 200px; /* prevents text column from collapsing */
+}
+
+/* Ensure image scales and preserves aspect ratio */
+.two-col-right-narrow img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .two-col-right-narrow {
+    flex-direction: column-reverse; /* text first on narrow screens */
+  }
+  .two-col-right-narrow .image-col,
+  .two-col-right-narrow .text-col {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
 .image-large {
   width: 80%;
   max-width: 1200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.image-small {
+  width: 20%;
+  max-width: 400px;
   height: auto;
   display: block;
   margin: 0 auto;
