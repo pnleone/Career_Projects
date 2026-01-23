@@ -1,11 +1,12 @@
 # Threat Intelligence Brief and SOC Enhancement Plan
+![PMG Medical Centre](../assets/misc/pmg.png)
 
-**Capstone Project**  
+
 **Created By:** Paul Leone  
 **Date:** October 6, 2025  
 **Organization:** Piedmont Medical Group (PMG)
 
-![PMG Medical Centre Logo - Placeholder]
+
 
 ---
 
@@ -207,6 +208,7 @@ Neo-reGeorg is an open-source web shell designed as a restructuring of reGeorg w
 ---
 
 #### 1.3.3 MITRE ATT&CK Mapping for Ivanti CVEs
+![MITRE ATT&CK Framework Visualization](../assets/misc/mitre.png)
 
 | Tactic | Technique ID | Technique Name | Description |
 |--------|--------------|----------------|-------------|
@@ -380,7 +382,14 @@ This section outlines the detection logic, rule formats, and platform-specific i
 
 #### 2.3.1 YARA Rules for Detection
 
-![YARA Logo](../assets/misc/yara.svg)
+<div style="background: white; padding: 1rem; border-radius: 12px; max-width: 350px; margin: 2rem auto;">
+  <img src="/Career_Projects/assets/misc/yara.svg"
+       alt="Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+</div>
+
+
+
 
 This section outlines YARA-based detection logic for identifying memory-resident implants and file-based indicators. These rules can be applied across the security stack, SentinelOne, Microsoft Defender, DLP solutions and forensic platforms.
 
@@ -551,19 +560,17 @@ labels:
 #### 2.3.5 Firewall Filter Rules
 CrowdSec remediation service deployed on the NG Firewall can ingest firewall rules via packages or block lists.
 
-![Firewall Rules Screenshot](/Career_Projects/assets/screenshots/fw_rules.svg)
-
-<img src="/Career_Projects/assets/screenshots/fw_rules.svg" alt="Firewall Rules" width="800">
+<img src="/Career_Projects/assets/screenshots/fw_rules.svg"
+     alt="CrowdSec Deployed Scenarios"
+     style="max-width: 90%; height: auto;">
 
 Example of deployed Scenarios:
 
-![CrowdSec Deployed Scenarios](/Career_Projects/assets/screenshots/fw_deployed.svg)
-
-<img src="/Career_Projects/assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800">
+<!-- <img src="/Career_Projects/assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800"> -->
 
 <img src="/Career_Projects/assets/screenshots/fw_deployed.svg"
      alt="CrowdSec Deployed Scenarios"
-     style="max-width: 80%; height: auto;">
+     style="max-width: 90%; height: auto;">
 
 
 #### 2.3.6 File Integrity Monitoring (FIM)
@@ -586,8 +593,12 @@ Flag:
 
 
 #### 2.3.8 Sigma Rules and Splunk Correlation Logic
-![Sigma Logo](../assets/misc/sigma.svg)
 
+<div style="background: white; padding: 1rem; border-radius: 12px; max-width: 350px; margin: 2rem auto;">
+  <img src="/Career_Projects/assets/misc/sigma.svg"
+       alt="Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+</div>
 These queries and rules are designed to detect Ivanti exploitation activity across multiple stages of the kill chain, from initial access to post-exploitation. They correlate logs from:
 
 - Ivanti VPN appliances (e.g., login.cgi, welcome.cgi)
