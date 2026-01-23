@@ -352,13 +352,14 @@ Enterprise environments frequently operate multiple virtualization platforms whe
 
 
 
-<div class="two-col-right">
+<div class="two-col-right-narow">
   <div class="text-col">
     <p>
-      The lab operates a three-node Cisco virtual network infrastructure providing enterprise-grade routing and switching simulation. Two vRouters (R1 and R2) running Cisco IOS Software Version 15.9(3)M6 (VIOS-ADVENTERPRISEK9-M) implement dynamic routing via OSPF, while a vSwitch operates experimental Version 15.2 (vios_l2-ADVENTERPRISEK9-M) for Layer 2 operations. All instances run as KVM virtual machines within the Proxmox environment, enabling full-featured network protocol testing, routing policy validation, and security hardening without physical hardware dependencies.
-
+   The lab operates a three-node Cisco virtual network infrastructure providing enterprise-grade routing and switching simulation. Two vRouters (R1 and R2) running Cisco IOS Software Version 15.9(3)M6 (VIOS-ADVENTERPRISEK9-M) implement dynamic routing via OSPF, while a vSwitch operates experimental Version 15.2 (vios_l2-ADVENTERPRISEK9-M) for Layer 2 operations. All instances run as KVM virtual machines within the Proxmox environment, enabling full-featured network protocol testing, routing policy validation, and security hardening without physical hardware dependencies.
+   </p><br>
+   <p>
    The topology implements a hub-and-spoke design where R1 and R2 connect via a dedicated point-to-point link (10.30.0.0/30) and exchange routing information through OSPF Area 0. R1 serves as the primary gateway for production lab networks (192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24), while R2 handles isolated test networks (192.168.2.0/24, 192.168.3.0/24). Two Ubuntu 25.10 LXC containers (cisco-host1 and cisco-host2) validate routing functionality by using their respective local routers as default gateways.
-    </p>
+   </p>
   </div>
 
   <div class="image-col">
@@ -410,8 +411,6 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 
 ### 4.1 Network Topology & Configuration
 
-#### Connectivity
-
 <div class="two-col-right">
   <div class="text-col">
     <h3>R1 (192.168.200.6) - Primary Router</h3>
@@ -432,7 +431,7 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/cisco.png" alt="Routing diagram screenshot">
+      <img src="/Career_Projects/assets/diagrams/cisco.png" alt="Routing diagram screenshot">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Routing overview: R1 ↔ R2 point-to-point and VLAN uplinks.
       </figcaption>
