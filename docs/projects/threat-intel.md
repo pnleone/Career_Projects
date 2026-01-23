@@ -229,7 +229,7 @@ Neo-reGeorg is an open-source web shell designed as a restructuring of reGeorg w
 | Discovery | T1518 | Software Discovery | SPAWNSLOTH disables dslogserver and remote syslog |
 | Execution | T1047 | Windows Management Instrumentation | Used in lateral movement and remote command execution (especially in hybrid Windows environments) |
 
-![MITRE ATT&CK Framework Visualization](/docs/assets/screenshots/mitre_ivanti.svg)
+![MITRE ATT&CK Framework Visualization](../assets/screenshots/mitre_ivanti.svg)
 
 ---
 
@@ -380,7 +380,7 @@ This section outlines the detection logic, rule formats, and platform-specific i
 
 #### 2.3.1 YARA Rules for Detection
 
-![YARA Logo](/docs/assets/misc/yara.svg)
+![YARA Logo](../assets/misc/yara.svg)
 
 This section outlines YARA-based detection logic for identifying memory-resident implants and file-based indicators. These rules can be applied across the security stack, SentinelOne, Microsoft Defender, DLP solutions and forensic platforms.
 
@@ -550,9 +550,9 @@ labels:
 ``` 
 #### 2.3.5 Firewall Filter Rules
 CrowdSec remediation service deployed on the NG Firewall can ingest firewall rules via packages or block lists.
-![Firewall Rules Screenshot](/docs/assets/screenshots/fw_rules.svg)
+![Firewall Rules Screenshot](../assets/screenshots/fw_rules.svg)
 Example of deployed Scenarios:
-![CrowdSec Deployed Scenarios Screenshot](/docs/assets/screenshots/fw_deployed.svg)
+![CrowdSec Deployed Scenarios Screenshot](../assets/screenshots/fw_deployed.svg)
 
 #### 2.3.6 File Integrity Monitoring (FIM)
 Monitor critical paths such as /home/bin/web, /tmp/, and /var/log/ for unauthorized changes, implant drops, and log tampering.
@@ -574,8 +574,8 @@ Flag:
 
 
 #### 2.3.8 Sigma Rules and Splunk Correlation Logic
-![Sigma Logo](/docs/assets/misc/sigma.svg)
-![Sigma Logo](/docs/assets/misc/79842123.png)
+![Sigma Logo](../assets/misc/sigma.svg)
+![Sigma Logo](../assets/misc/79842123.png)
 These queries and rules are designed to detect Ivanti exploitation activity across multiple stages of the kill chain, from initial access to post-exploitation. They correlate logs from:
 
 - Ivanti VPN appliances (e.g., login.cgi, welcome.cgi)
@@ -618,7 +618,7 @@ tags:
   - attack.persistence
   - cve.CVE-2023-46805
   - cve.CVE-2024-21887
-  ```
+```
 
 **Splunk Alert and Query Translations**
 
