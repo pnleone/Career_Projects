@@ -18,7 +18,7 @@ My focus is on bridging the gap between IT Operations (SysAdmin) and Security Op
 | Project | Description |
 |---------|-------------|
 | :material-chart-line: **[Business Intelligence & Data Analytics](https://github.com/pnleone/Projects/blob/2609cdfdda6550f52d09b516700322a828f24c2e/Business%20Intelligence%20%26%20Data%20Analytics/Business%20Intelligence%20project%2001(Final).pdf)** | Engineered data pipelines using SQL Server and Power Query to transform raw data into actionable insights. Developed automated reporting dashboards in Power BI for executive decision support. |
-| :material-shield-search: **[Threat Intelligence Brief & SOC Improvement Plan](/projects/threat-intel.md)** | Enhanced threat intelligence brief with TTP breakdown mapped to MITRE ATT&CK framework. Strategic improvement plan aligned to NIST CSF 2.0 and CIS Controls 8.1 with custom YARA and Sigma detection rules. |
+| :material-shield-search: **[Threat Intelligence Brief & SOC Improvement Plan](../projects/threat-intel.md)** | Enhanced threat intelligence brief with TTP breakdown mapped to MITRE ATT&CK framework. Strategic improvement plan aligned to NIST CSF 2.0 and CIS Controls 8.1 with custom YARA and Sigma detection rules. |
 | :material-home-analytics: **Security Homelab** | Enterprise-grade security laboratory demonstrating production-ready capabilities across SecOps, systems engineering, and network defense. Multi-layered architecture with SIEM, IDS/IPS, SOAR automation, and zero trust controls. |
 
 ---

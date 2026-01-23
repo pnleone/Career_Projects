@@ -551,8 +551,13 @@ labels:
 #### 2.3.5 Firewall Filter Rules
 CrowdSec remediation service deployed on the NG Firewall can ingest firewall rules via packages or block lists.
 ![Firewall Rules Screenshot](../assets/screenshots/fw_rules.svg)
+<img src="../assets/screenshots/fw_rules.svg" alt="Firewall Rules" width="800">
+
 Example of deployed Scenarios:
+
 ![CrowdSec Deployed Scenarios Screenshot](../assets/screenshots/fw_deployed.svg)
+
+<img src="../assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800">
 
 #### 2.3.6 File Integrity Monitoring (FIM)
 Monitor critical paths such as /home/bin/web, /tmp/, and /var/log/ for unauthorized changes, implant drops, and log tampering.
@@ -575,7 +580,7 @@ Flag:
 
 #### 2.3.8 Sigma Rules and Splunk Correlation Logic
 ![Sigma Logo](../assets/misc/sigma.svg)
-![Sigma Logo](../assets/misc/79842123.png)
+
 These queries and rules are designed to detect Ivanti exploitation activity across multiple stages of the kill chain, from initial access to post-exploitation. They correlate logs from:
 
 - Ivanti VPN appliances (e.g., login.cgi, welcome.cgi)
