@@ -134,8 +134,10 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 - Purpose: Off-host backup target with deduplication and compression
 - Rationale: Leverages existing production hardware for cost-effective DR solution
 
-![Proxmox Backup Server Screenshot](/Career_Projects/assets/screenshots/pbs.png)
-
+<!-- ![Proxmox Backup Server Screenshot](/Career_Projects/assets/screenshots/pbs.png) -->
+ <img src="/Career_Projects/assets/screenshots/pbs.png"
+       alt="Proxmox Backup Server Screenshot"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
 ---
 
 ### 2.3 Proxmox Datacenter Manager
@@ -154,8 +156,11 @@ A shared Synology NAS is configured to receive automated backups from the Proxmo
 - Encryption: AES-256 at rest, TLS in transit
 - Purpose: rapid VM restoration, long-term archival, K3s off-host PVCs
 
-![NAS Backups Screenshot](/Career_Projects/assets/screenshots/nas-backups.png)
+<!-- ![NAS Backups Screenshot](/Career_Projects/assets/screenshots/nas-backups.png) -->
 
+ <img src="/Career_Projects/assets/screenshots/nas-backups.png"
+       alt="NAS Backups Screenshot"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
 ---
 
 ### 2.5 Virtual Network Attached Storage (NAS) Integration
