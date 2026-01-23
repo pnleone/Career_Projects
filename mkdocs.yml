@@ -33,17 +33,17 @@ nav:
       - Business Intelligence & Data Analytics: projects/business-intelligence.md
       - Threat Intelligence Brief & SOC Improvement Plan: projects/threat-intel.md
       - Security Homelab:
-          - Overview: projects/homelab/index.md
-          - Executive Summary: projects/homelab/01-exec-summary.md
+          - Overview/Landing Page: projects/homelab/index.md
+          - Executive Summary/Posture: projects/homelab/01-exec-summary.md
           - Platform and Virtualization: projects/homelab/02-platform.md
-          - Network Security: projects/homelab/03-network.md
-          - Identity Access and Secrets: projects/homelab/04-iam-secrets.md
-          - Observability and SIEM: projects/homelab/05-auto-iac.md
-          - Detection and Response: projects/homelab/06-apps-service.md
-          - Automation and SOAR: projects/homelab/07-vis-response-pt1.md
-          - Hardware and Deployment: projects/homelab/08-vis-response-pt2.md
+          - Network Security and Remote Access: projects/homelab/03-network.md
+          - Identity, Access and Secrets: projects/homelab/04-iam-secrets.md
+          - Automation and IaC: projects/homelab/05-auto-iac.md
+          - Applications and Services: projects/homelab/06-apps-service.md
+          - Observability and Response, part 1: projects/homelab/07-vis-response-pt1.md
+          - Observability and Response, part 2: projects/homelab/08-vis-response-pt2.md
           - GRC Frameworks:
-              - GRC Overview: projects/homelab/grc/grc-index.md
+              - GRC Overview/Landing Page: projects/homelab/grc/grc-index.md
               - GRC Summary: projects/homelab/grc/01-summary.md
               - NIST CSF: projects/homelab/grc/grc-nist-csf.md
               - NIST SP 800-53: projects/homelab/grc/grc-nist-800.md
