@@ -551,6 +551,7 @@ labels:
 #### 2.3.5 Firewall Filter Rules
 CrowdSec remediation service deployed on the NG Firewall can ingest firewall rules via packages or block lists.
 ![Firewall Rules Screenshot](../assets/screenshots/fw_rules.svg)
+
 <img src="../assets/screenshots/fw_rules.svg" alt="Firewall Rules" width="800">
 
 Example of deployed Scenarios:
