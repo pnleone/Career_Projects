@@ -38,7 +38,12 @@
 
 #### Deployment Overview
 
+![Proxmox overview](../../assets/diagrams/proxmox.svg){.float-right width=40%}
 The lab's foundation is a single-node Proxmox Virtual Environment (VE) cluster running on enterprise-class bare-metal hardware, serving as the Type-1 hypervisor for the entire security operations platform. Proxmox provides KVM-based full virtualization for operating systems (Windows, BSD, Linux, MacOS) and LXC containerization for lightweight Linux workloads. The platform hosts approximately 30+ concurrent virtual machines and containers, supporting everything from high-availability pfSense firewalls to Kubernetes clusters, SIEM platforms, and malware analysis environments. Automated backup infrastructure via Proxmox Backup Server ensures rapid disaster recovery, while Proxmox Datacenter Manager provides centralized orchestration and monitoring.
+ 
+ <img src="/Career_Projects/assets/diagrams/proxmox.svg"
+       alt="Diagram"
+       style="width: 80%; height: auto; display: block; margin: 0 auto;">
 
 #### Security Impact
 
@@ -621,9 +626,116 @@ The SOC namespace hosts the lab's comprehensive Security Operations Center platf
 
 | Application | Type | Image | Replicas | External IP | Ports | Purpose |
 |-------------|------|-------|----------|-------------|-------|---------|
-| thehive | Helm | strangebee/thehive:5.5.13-1 | 1/1 | 192.168.200.33 | 9000 (HTTP), 9095 (metrics) | Security incident response platform and case management
+| thehive | Helm | strangebee/thehive:5.5.13-1 | 1/1 | 192.168.200.33 | 9000 (HTTP), 9095 (metrics) | Security incident response platform and case management |
+| cortex | Deployment | thehiveproject/cortex:latest | 1/1 | 192.168.200.40 | 9001 (HTTP) | Observable analysis engine with automated responders |
+| cassandra | StatefulSet | cassandra:4.1.7 | 1/1 | 192.168.200.36 | 9042 (CQL) | Distributed database for TheHive persistent storage |
+| elasticsearch | StatefulSet | elasticsearch:9.2.2 | 1/1 | 192.168.200.34 | 9200 (HTTP) | Search and analytics engine for cases and observables |
+| misp-core | Deployment | misp-docker/misp-core:latest | 1/1 | 192.168.200.37 | 80/443 (HTTP/HTTPS) | Threat intelligence platform and IOC management |
+| misp-db | Deployment | mariadb:10.11 | 1/1 | ClusterIP only | 3306 (MySQL) | MySQL database for MISP data |
+| misp-redis | Deployment | valkey/valkey:7.2 | 1/1 | ClusterIP only | 6379 (Redis) | Redis cache for MISP sessions and jobs |
+| misp-modules | Deployment | misp-docker/misp-modules:latest | 1/1 | ClusterIP only | 6666 (HTTP) | MISP enrichment and expansion modules |
+| misp-guard | Deployment | misp-docker/misp-guard:latest | 1/1 | ClusterIP only | 8888 (HTTP) | Security proxy for MISP core protection |
+| misp-mail | Deployment | egos-tech/smtp:latest | 1/1 | 192.168.200.38 | 25 (SMTP) | SMTP relay for threat intelligence email sharing |
+| msmtp-relay | Deployment | alpine:latest | 1/1 | ClusterIP only | N/A | Lightweight SMTP relay for internal notifications |
+| shuffle-frontend | Deployment | shuffle-frontend:latest | 1/1 | 192.168.200.41 | 80/443 (HTTP/HTTPS) | React-based web UI for visual workflow design, execution monitoring, and SOAR administration |
+| shuffle-backend | Deployment | shuffle-backend:latest | 1/1 | ClusterIP only | 5001 | Go-based backend API handling workflow orchestration, webhook processing, and app management |
+| shuffle-opensearch | StatefulSet | opensearch:3.2.0 | 1/1 | ClusterIP only | 9200 (HTTP) | Search and analytics engine for workflow definitions, execution history, and audit logs |
+| shuffle-orborus | Deployment | shuffle-orborus:latest | 1/1 | none | | Worker orchestration daemon managing Docker containers for workflow app execution |
+
+#### Server-Admin Namespace - Infrastructure Management
+
+| Application | Type | Image | Replicas | External IP | Ports | Purpose |
+|-------------|------|-------|----------|-------------|-------|---------|
+| patchmon-frontend | Deployment | patchmon-frontend:latest | 1/1 | 192.168.200.35 | 3000 (HTTP) | Web UI for Windows patch management dashboard |
+| patchmon-backend | Deployment | patchmon-backend:latest | 1/1 | 192.168.200.39 | 3001 (HTTP API) | Backend API for patch compliance tracking |
+| patchmon-database | Deployment | postgres:17-alpine | 1/1 | ClusterIP only | 5432 (PostgreSQL) | PostgreSQL database for patch status data |
+| patchmon-redis | Deployment | redis:7-alpine | 1/1 | ClusterIP only | 6379 (Redis) | Redis cache for session management |
+
+---
+
+## 6. Network Services Summary
+
+### LoadBalancer Services (Externally Accessible)
+
+| Service Name | Namespace | Type | External IP | Ports | Application | Access Method |
+|--------------|-----------|------|-------------|-------|-------------|---------------|
+| nginx-ingress-controller | nginx-ingress | LoadBalancer | 192.168.200.31 | 80, 443 | Ingress Controller | Primary HTTP/HTTPS ingress point |
+| nginx | nginx | LoadBalancer | 192.168.200.32 | 80 | Nginx Web Server | Static web content hosting |
+| thehive | soc | LoadBalancer | 192.168.200.33 | 9000, 9095 | TheHive SIRP | Case management UI |
+| elasticsearch | soc | LoadBalancer | 192.168.200.34 | 9200 | Elasticsearch | Search API (admin only) |
+| patchmon-frontend | server-admin | LoadBalancer | 192.168.200.35 | 3000 | PatchMon UI | Patch management dashboard |
+| cassandra | soc | LoadBalancer | 192.168.200.36 | 9042 | Cassandra DB | Database access (admin only) |
+| misp-core | soc | LoadBalancer | 192.168.200.37 | 80, 443 | MISP Platform | Threat intelligence portal |
+| misp-mail | soc | LoadBalancer | 192.168.200.38 | 25 | SMTP Relay | Email-based threat sharing |
+| patchmon-backend | server-admin | LoadBalancer | 192.168.200.39 | 3001 | PatchMon API | Backend API (internal) |
+| cortex | soc | LoadBalancer | 192.168.200.40 | 9001 | Cortex Engine | Observable analysis API |
+| shuffle | soc | LoadBalancer | 192.168.200.41 | 80/443 | Shuffle | Automation UI |
+
+**Access Control:**
+
+- All services accessible only via Tailscale VPN (no direct internet exposure)
+- Administrative services (Elasticsearch, Cassandra) require Authentik SSO + MFA
+- Network policies enforce namespace isolation and least-privilege access
+- pfSense firewall rules restrict access by source IP and service port
+
+### ClusterIP Services (Internal Only)
+
+| Service Name | Namespace | Cluster IP | Ports | Purpose |
+|--------------|-----------|------------|-------|---------|
+| kubernetes | default | 10.43.0.1 | 6443 | Kubernetes API server |
+| patchmon-database | server-admin | 10.43.3.202 | 5432 | PostgreSQL backend for PatchMon |
+| misp-db | soc | 10.43.151.59 | 3306 | MariaDB backend for MISP |
+| misp-redis | soc | 10.43.131.214 | 6379 | Redis cache for MISP |
+| misp-modules | soc | 10.43.234.246 | 6666 | MISP enrichment modules |
+| misp-guard | soc | 10.43.97.195 | 8888 | MISP security proxy |
+| patchmon-backend | server-admin | 10.43.99.91 | 3001 | PatchMon API (internal routing) |
+| patchmon-redis | server-admin | 10.43.126.102 | 6379 | Redis cache for PatchMon |
+| metallb-webhook-service | metallb-system | 10.43.122.116 | 9443 | MetalLB webhook validation |
+| shuffle-backend | soc | 10.43.189.138 | 5001 | Shuffle backend integration |
+| shuffle-opensearch | soc | 10.43.137.30 | 9200 | Shuffle database |
+| nginx-ingress-admission | nginx-ingress | 10.43.241.54 | 443 | Ingress admission webhook |
+| cert-manager-webhook | cert-manager | 10.43.150.38 | 443 | SSL termination for nginx-ingress |
+
+**Network Policies:**
+
+- Default deny all ingress/egress traffic
+- Explicit allow rules for required service-to-service communication
+- Database services (PostgreSQL, MariaDB, Redis) accessible only from their respective application pods
+- Rate limiting for Ingress HTTP services
+- SSL termination for all ingress HTTP services
 
 
+### Deployed Containers
+
+**Diagram Placeholder: Deployed Containers Screenshot**
+
+### Example Workload: Pi-hole DNS
+
+- Deployment: 2 replicas with anti-affinity rules
+- Persistent Storage: local-path-provisioner (hostPath-based PVCs)
+- Exposure: MetalLB LoadBalancer with external IP
+- Health Checks: HTTP liveness/readiness probes on /admin
+- Resource Limits: 512MB memory, 0.5 CPU per pod
+- Persistent Volume Claims / Volumes: pihole-config and dnsmasq-config
+
+**Diagram Placeholder: Pi-hole Deployment Screenshots (3 images)**
+
+---
+
+## 7. Version Control Strategy
+
+- Repository: GitHub repo (infrastructure-as-code)
+- Structure: Organized by service (docker-compose/, k8s-manifests/, terraform/Ansible)
+- Tooling: VS Code with Docker, Kubernetes, SSH, Ansible, Terraform extensions
+- Automation: Watchtower monitors container images, WUD provides update alerts
+
+---
+
+**Document Version:** 1.0  
+**Last Updated:** January 19, 2026  
+**Classification:** Internal Use Only
+
+---
 ---
 ## Security Homelab Section Links
 
