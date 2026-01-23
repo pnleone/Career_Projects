@@ -26,7 +26,7 @@
    - 2.10 [Behavioral Threat Intelligence (CrowdSec)](#behavioral-threat-intelligence-crowdsec)
    - 2.11 [Security Tooling & Digital Forensics](#security-tooling--digital-forensics)
    - 2.12 [Backup & Business Continuity](#backup--business-continuity)
-
+3. [Security Homelab Section Links](#security-homelab-section-links)
 ---
 
 ## 1. Executive Overview & Security Posture
@@ -652,9 +652,13 @@ Proxmox snapshots captured before configuration changes, system updates, or expe
 **Document Version:** 1.0  
 **Last Updated:** January 22, 2026  
 ---
-#### Quick Links
+## Security Homelab Section Links
 
-- **[Security Homelab: Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
-- **[Security Homelab: Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 
-- **[Security Homelab: Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** 
-- **[Security Homelab: Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** 
+- **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
+- **[Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 
+- **[Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** 
+- **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** 
+- **[Automation and IaC](/Career_Projects/projects/homelab/05-auto-iac/)**
+- **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
+- **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
+- **[Observability and Response, Part 2](/Career_Projects/projects/homelab/07-vis-response-pt2/)**
