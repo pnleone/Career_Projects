@@ -19,7 +19,10 @@ My focus is on bridging the gap between IT Operations (SysAdmin) and Security Op
 |---------|-------------|
 | :material-chart-line: **[Business Intelligence & Data Analytics](https://github.com/pnleone/Projects/blob/2609cdfdda6550f52d09b516700322a828f24c2e/Business%20Intelligence%20%26%20Data%20Analytics/Business%20Intelligence%20project%2001(Final).pdf)** | Engineered data pipelines using SQL Server and Power Query to transform raw data into actionable insights. Developed automated reporting dashboards in Power BI for executive decision support. |
 | :material-shield-search: **[Threat Intelligence Brief & SOC Improvement Plan](/Career_Projects/projects/threat-intel/)** | Enhanced threat intelligence brief with TTP breakdown mapped to MITRE ATT&CK framework. Strategic improvement plan aligned to NIST CSF 2.0 and CIS Controls 8.1 with custom YARA and Sigma detection rules. |
-| :material-home-analytics: **Security Homelab** | Enterprise-grade security laboratory demonstrating production-ready capabilities across SecOps, systems engineering, and network defense. Multi-layered architecture with SIEM, IDS/IPS, SOAR automation, and zero trust controls. |
+| :material-home-analytics: **[Security Homelab: Executive Summary and Security Posture](/Career_Projects/projects/homelab-summary/)** | Enterprise-grade security laboratory demonstrating production-ready capabilities across SecOps, systems engineering, and network defense. Multi-layered architecture with SIEM, IDS/IPS, SOAR automation, and zero trust controls. |
+| :material-home-analytics: **[Security Homelab: Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab-platform/)** | Proxmox virtualization stack, Workload deployment, VMware, Cisco and Container envionment overview |
+| :material-home-analytics: **[Security Homelab: Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab-network/)** | Network security architecture (Firewall/IPS/WAF), Privacy and remote access |
+| :material-home-analytics: **[Security Homelab: Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab-iam/)** | PKI/Certificate Authority Overview, Identity and Access Management (Authentik/Active Directory), Secrets Management |
 
 ---
 
