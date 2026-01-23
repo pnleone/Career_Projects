@@ -37,11 +37,11 @@
   margin: 1.5rem 0;
 }
 .two-col .image-col {
-  flex: 0 0 40%;
+  flex: 0 0 60%;
   max-width: 420px;
 }
 .two-col .text-col {
-  flex: 1 1 60%;
+  flex: 1 1 40%;
 }
 .two-col img {
   width: 100%;
@@ -51,5 +51,45 @@
 @media (max-width: 720px) {
   .two-col {
     flex-direction: column;
+  }
+}
+
+/* Two-column: text left, image right */
+.two-col-right {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+
+/* Image column controls how much width the image takes.
+   Set flex-basis to 60% or 75% depending on desired size. */
+.two-col-right .image-col {
+  flex: 0 0 65%; /* change to desired % */
+  max-width: 75%;
+}
+.two-col-right .text-col {
+  flex: 1 1 35%;
+  min-width: 220px; /* prevents text column from collapsing */
+}
+
+/* Ensure image scales and preserves aspect ratio */
+.two-col-right img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .two-col-right {
+    flex-direction: column-reverse; /* text first on narrow screens */
+  }
+  .two-col-right .image-col,
+  .two-col-right .text-col {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
