@@ -9,14 +9,15 @@
 | :material-home-analytics: **[Security Homelab: Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** | Network security architecture (Firewall/IPS/WAF), Privacy and remote access |
 | :material-home-analytics: **[Security Homelab: Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** | PKI/Certificate Authority Overview, Identity and Access Management (Authentik/Active Directory), Secrets Management |
 | :material-home-analytics: **[Security Homelab: GRC Landing Page](/Career_Projects/projects/homelab/grc/grc-index/)** | Governance, Risk and Compliance Sesctions |
+---
 ## **Security Homelab Network Overview**
 
   <img src="/Career_Projects/assets/diagrams/SecurityLab_Network-2026-01-22.png"
        alt="Homelab Network Overview Diagram"
-       style="width: 80%; height: auto; display: block; margin: 0 auto;">
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
 
-![Security Homelab Network Overview](../projects/homelab/assets/diagrams/SecurityLab_Network-2026-01-22.png)
+![Security Homelab Network Overview](/Career_Projects/assets/diagrams/SecurityLab_Network-2026-01-22.png)
 ### Management and Production LAN — 192.168.3.0/24
 
 **Purpose**  
@@ -132,14 +133,8 @@ Perimeter connectivity, remote access, and perimeter security controls.
 **Key components**  
 - Cloudflare DNS/WAF; Verizon Fios uplink; Tailscale and mesh VPNs; pfSense HA; Suricata and Snort sensors
 
-**Top priorities**  
-1. **Perimeter defense in depth** — Cloudflare WAF + edge filtering + firewall rules.  
-2. **Secure remote access** — prefer Tailscale/mesh VPN for admin access; restrict management plane to VPN only.  
-3. **Network IDS placement** — place Suricata/Snort at chokepoints and feed alerts to Wazuh/Elastic.  
-4. **HA and failover testing** — validate pfSense HA and automated failover.
 
-**Immediate risks and mitigations**  
-- **Risk:** Remote access bypassing controls. **Mitigation:** Enforce device posture checks, MFA, and limit admin access to jump hosts.  
-- **Risk:** IDS blind spots. **Mitigation:** Ensure mirrored/span ports or TAPs feed IDS and validate rule sets.
+
+
 
     
