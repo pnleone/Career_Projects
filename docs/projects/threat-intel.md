@@ -552,13 +552,19 @@ labels:
 CrowdSec remediation service deployed on the NG Firewall can ingest firewall rules via packages or block lists.
 ![Firewall Rules Screenshot](../assets/screenshots/fw_rules.svg)
 
-<img src="../assets/screenshots/fw_rules.svg" alt="Firewall Rules" width="800">
+<img src="/projects/assets/screenshots/fw_rules.svg" alt="Firewall Rules" width="800">
 
 Example of deployed Scenarios:
 
 ![CrowdSec Deployed Scenarios Screenshot](../assets/screenshots/fw_deployed.svg)
 
-<img src="../assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800">
+<img src="/projects/assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800">
+
+<div style="text-align: center;">
+  <img src="/projects/assets/screenshots/fw_deployed.svg"
+       alt="MITRE ATT&CK Framework Visualization"
+       style="max-width: 80%; height: auto;">
+</div>
 
 #### 2.3.6 File Integrity Monitoring (FIM)
 Monitor critical paths such as /home/bin/web, /tmp/, and /var/log/ for unauthorized changes, implant drops, and log tampering.
