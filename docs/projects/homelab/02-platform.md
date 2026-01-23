@@ -134,7 +134,7 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 - Purpose: Off-host backup target with deduplication and compression
 - Rationale: Leverages existing production hardware for cost-effective DR solution
 
-**Diagram Placeholder: Proxmox Backup Server Screenshot**
+![Proxmox Backup Server Screenshot](/Career_Projects/assets/screenshots/pbs.png)
 
 ---
 
@@ -142,7 +142,7 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 
 Centralized management solution to oversee and manage multiple nodes and clusters of Proxmox-based virtual environments.
 
-**Diagram Placeholder: Proxmox Datacenter Manager Screenshots (2 images)**
+![Proxmox Datacenter Manager Screenshot](/Career_Projects/assets/screenshots/dcm.png)
 
 ---
 
@@ -154,7 +154,7 @@ A shared Synology NAS is configured to receive automated backups from the Proxmo
 - Encryption: AES-256 at rest, TLS in transit
 - Purpose: rapid VM restoration, long-term archival, K3s off-host PVCs
 
-**Diagram Placeholder: Synology NAS Configuration Screenshots (2 images)**
+![NAS Backups Screenshot](/Career_Projects/assets/screenshots/nas-backups.png)
 
 ---
 
@@ -162,7 +162,7 @@ A shared Synology NAS is configured to receive automated backups from the Proxmo
 
 Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS) mounts for data sharing and redundancy. The single storage pool is configured for mirroring across the two NVMe drives.
 
-**Diagram Placeholder: TrueNAS Configuration Screenshots (4 images)**
+![TrueNAS Screenshot](/Career_Projects/assets/screenshots/truenas.png)
 
 ---
 
