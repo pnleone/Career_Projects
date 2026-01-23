@@ -93,3 +93,11 @@
     max-width: 100%;
   }
 }
+
+.image-large {
+  width: 80%;
+  max-width: 1200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

@@ -135,9 +135,12 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 - Rationale: Leverages existing production hardware for cost-effective DR solution
 
 <!-- ![Proxmox Backup Server Screenshot](/Career_Projects/assets/screenshots/pbs.png) -->
- <img src="/Career_Projects/assets/screenshots/pbs.png"
+ <!-- <img src="/Career_Projects/assets/screenshots/pbs.png"
        alt="Proxmox Backup Server Screenshot"
-       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+       style="width: 100%; height: auto; display: block; margin: 0 auto;"> -->
+
+<img class="image-large" src="/Career_Projects/assets/screenshots/pbs.png" alt="Proxmox Backup Server Screenshot">
+
 ---
 
 ### 2.3 Proxmox Datacenter Manager
@@ -158,9 +161,7 @@ A shared Synology NAS is configured to receive automated backups from the Proxmo
 
 <!-- ![NAS Backups Screenshot](/Career_Projects/assets/screenshots/nas-backups.png) -->
 
- <img src="/Career_Projects/assets/screenshots/nas-backups.png"
-       alt="NAS Backups Screenshot"
-       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+<img class="image-large" src="/Career_Projects/assets/screenshots/nas-backups.png" alt="NAS Backups Screenshot">
 ---
 
 ### 2.5 Virtual Network Attached Storage (NAS) Integration
