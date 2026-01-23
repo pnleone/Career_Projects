@@ -38,12 +38,21 @@
 
 #### Deployment Overview
 
-![Proxmox overview](../../assets/diagrams/proxmox.svg){.float-right width=40%}
-The lab's foundation is a single-node Proxmox Virtual Environment (VE) cluster running on enterprise-class bare-metal hardware, serving as the Type-1 hypervisor for the entire security operations platform. Proxmox provides KVM-based full virtualization for operating systems (Windows, BSD, Linux, MacOS) and LXC containerization for lightweight Linux workloads. The platform hosts approximately 30+ concurrent virtual machines and containers, supporting everything from high-availability pfSense firewalls to Kubernetes clusters, SIEM platforms, and malware analysis environments. Automated backup infrastructure via Proxmox Backup Server ensures rapid disaster recovery, while Proxmox Datacenter Manager provides centralized orchestration and monitoring.
+<div class="two-col">
+  <div class="col image-col">
+    <img src="/Career_Projects/assets/diagrams/proxmox.png" alt="Proxmox overview">
+  </div>
+  <div class="col text-col">
+    <p>The lab's foundation is a single-node Proxmox Virtual Environment (VE) cluster running on enterprise-class bare-metal hardware, serving as the Type-1 hypervisor for the entire security operations platform. Proxmox provides KVM-based full virtualization for operating systems (Windows, BSD, Linux, MacOS) and LXC containerization for lightweight Linux workloads. The platform hosts approximately 30+ concurrent virtual machines and containers, supporting everything from high-availability pfSense firewalls to Kubernetes clusters, SIEM platforms, and malware analysis environments. Automated backup infrastructure via Proxmox Backup Server ensures rapid disaster recovery, while Proxmox Datacenter Manager provides centralized orchestration and monitoring.</p>
+  </div>
+</div>
+
+<!-- ![Proxmox overview](../../assets/diagrams/proxmox.png){.float-right width=60%}
+The lab's foundation is a single-node Proxmox Virtual Environment (VE) cluster running on enterprise-class bare-metal hardware, serving as the Type-1 hypervisor for the entire security operations platform. Proxmox provides KVM-based full virtualization for operating systems (Windows, BSD, Linux, MacOS) and LXC containerization for lightweight Linux workloads. The platform hosts approximately 30+ concurrent virtual machines and containers, supporting everything from high-availability pfSense firewalls to Kubernetes clusters, SIEM platforms, and malware analysis environments. Automated backup infrastructure via Proxmox Backup Server ensures rapid disaster recovery, while Proxmox Datacenter Manager provides centralized orchestration and monitoring. -->
  
- <img src="/Career_Projects/assets/diagrams/proxmox.svg"
+ <img src="/Career_Projects/assets/diagrams/proxmox.png"
        alt="Diagram"
-       style="width: 80%; height: auto; display: block; margin: 0 auto;">
+       style="width: 75%; height: auto; display: block; margin: 0 auto;">
 
 #### Security Impact
 
