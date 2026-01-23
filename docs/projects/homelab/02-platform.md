@@ -55,7 +55,7 @@
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/proxmox.svg" alt="Proxmox VE single-node cluster diagram">
+      <img src="/Career_Projects/assets/diagrams/proxmox.png" alt="Proxmox VE single-node cluster diagram">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Proxmox VE single-node cluster and hosted services.
       </figcaption>
