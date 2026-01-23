@@ -129,17 +129,26 @@ Proxmox VE mirrors enterprise virtualization platforms (VMware vSphere, Microsof
 
 Integrated for automated, deduplicated backups of all virtual machines and containers. Backup jobs are scheduled to run weekly, with retention policies aligned to provide redundancies without taking up a lot of space since the server has been deployed within VMware Workstation running on my main production PC.
 
-- Proxmox Backup Server deployed as nested VM within VMware Workstation
-- Host: Production workstation (separate from lab infrastructure)
-- Purpose: Off-host backup target with deduplication and compression
-- Rationale: Leverages existing production hardware for cost-effective DR solution
 
-<!-- ![Proxmox Backup Server Screenshot](/Career_Projects/assets/screenshots/pbs.png) -->
- <!-- <img src="/Career_Projects/assets/screenshots/pbs.png"
-       alt="Proxmox Backup Server Screenshot"
-       style="width: 100%; height: auto; display: block; margin: 0 auto;"> -->
+<div class="two-col-right">
+  <div class="text-col">
+    <ul>
+      <li>Proxmox Backup Server deployed as nested VM within VMware Workstation</li>
+      <li>Host: Production workstation (separate from lab infrastructure)</li>
+      <li>Purpose: Off-host backup target with deduplication and compression</li>
+      <li>Rationale: Leverages existing production hardware for cost-effective DR solution</li>
+    </ul>
+  </div>
 
-<img class="image-large" src="/Career_Projects/assets/screenshots/pbs.png" alt="Proxmox Backup Server Screenshot">
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/pbs.png" alt="Proxmox Backup Server Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Proxmox Backup Server Dashboard.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 ---
 
@@ -215,29 +224,39 @@ TP-Link TL-SG108E Smart Switch
 
 Used for VLAN and Link Aggregation (LAG) testing between The Proxmox host server and a Windows 11 Pro workstation.
 
-**Configuration:**
+<div class="two-col-right">
+  <div class="text-col">
+    <b>Configuration:</B>
+    <ul>
+      <li>Link Aggregation: Static LAG (802.3ad equivalent) on ports 2-3</li>
+      <li>Lab server NICs 1-2 bonded (LACP mode balance-rr)</li>
+      <li>Aggregate bandwidth: 2 Gbps</li>
+    </ul>
+    <b>VLAN Segmentation:</B>
+    <ul>
+      <li>VLAN 3 (192.168.3.0/24): Isolated testing subnet</li>
+      <li>Ports 2, 3, 7: Tagged VLAN3 members</li>
+      <li>Purpose: Dedicated high-speed link between office PC and lab server</li>
+      <li>Use case: Large file transfers, iSCSI testing, backup replication</li>
+    </ul>
+  </div>
 
-- Link Aggregation: Static LAG (802.3ad equivalent) on ports 2-3
-- Lab server NICs 1-2 bonded (LACP mode balance-rr)
-- Aggregate bandwidth: 5 Gbps
-
-**Diagram Placeholder: Switch Configuration Screenshot**
-
-**VLAN Segmentation:**
-
-- VLAN 3 (192.168.3.0/24): Isolated testing subnet
-- Ports 2, 3, 7: Tagged VLAN3 members
-- Purpose: Dedicated high-speed link between office PC and lab server
-- Use case: Large file transfers, iSCSI testing, backup replication
-
-**Diagram Placeholder: VLAN Configuration Screenshot**
-
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/tp-link.png" alt="TP-Link VLAN/LAG Settings">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        tp-link VLAN and LAG Settings.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 ---
 
 ### 2.8 Proxmox Workload Overview
 
 The majority of hosts and services run within the Proxmox environment and run within one of the two integrated technologies supported:
 
+![KVM-LXC](/Career_Projects/assets/misc/kvm-lxc.png)
 #### 🖥️ Virtual Machines (VMs)
 
 - **Tech Stack**: KVM (Kernel-based Virtual Machine) + QEMU
@@ -264,14 +283,7 @@ Application Inventory: Per-host service mapping with version tracking
 - OS Distribution Analysis: Platform breakdown (RHEL, Ubuntu, Debian, Windows)
 
 ---
-
-### 2.10 Proxmox Node PVE Summary
-
-**Diagram Placeholder: Proxmox Node Summary Screenshot**
-
----
-
-### 2.11 OS Platform and Distribution/Edition Summary
+### 2.10 OS Platform and Distribution/Edition Summary
 
 **Diagram Placeholder: OS Distribution Screenshots (2 images)**
 
@@ -300,25 +312,37 @@ Enterprise environments frequently operate multiple virtualization platforms whe
 - **Secure by Design:** Nested virtualization enforces additional isolation layers; backup encryption at rest and in transit
 - **Zero Trust:** No implicit trust between hypervisor platforms; each VM authenticated independently
 
-**Diagram Placeholder: VMware Environment Screenshot**
 
 #### Configuration Details
 
 **VMware Workstation Pro 25H2 (Build 24995812):**
 
-- Proxmox Backup Server v4.1.0 - Deduplicated backup target with AES-256 encryption
-- Proxmox Datacenter Manager v1.0.1 - Centralized multi-cluster orchestration
-- Proxmox Mail Gateway - Email security gateway testing
-- REMnux Linux - Malware analysis and reverse engineering toolkit
+<div class="two-col-right">
+  <div class="text-col">
+    <ul>
+      <li>Proxmox Backup Server v4.1.0 - Deduplicated backup target with AES-256 encryption</li>
+      <li>Proxmox Datacenter Manager v1.0.1 - Centralized multi-cluster orchestration</li>
+      <li>Proxmox Mail Gateway - Email security gateway testing</li>
+      <li>REMnux Linux - Malware analysis and reverse engineering toolkit</li>
+    </ul>
+    <b>ESXi r8 (Build 24677879-standard):</B>
+    <ul>
+      <li>Windows Server 2019 Hyper-V - Nested hypervisor for AD security research</li>
+      <li>Debian Live r13 - Ephemeral forensics and incident response platform</li>
+   </ul>
+  </div>
 
-**ESXi r8 (Build 24677879-standard):**
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/vmware.png" alt="VMware ESXi and Workstation Pro Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        VMware ESXi and Workstation Pro Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
-- Windows Server 2019 Hyper-V - Nested hypervisor for AD security research
-- Debian Live r13 - Ephemeral forensics and incident response platform
-
-**Diagram Placeholder: ESXi Configuration Screenshot**
-
-**Diagram Placeholder: VMware Infrastructure Screenshots (3 images)**
+![VMware ESXi](/Career_Projects/assets/screenshots/vmware-esxi.png)
 
 ---
 
