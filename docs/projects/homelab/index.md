@@ -1,3 +1,4 @@
+ # Security Homelab 
   <img src="/Career_Projects/assets/misc/homelab-banner2.png"
        alt="Homelab"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
@@ -11,7 +12,9 @@
 | :material-home-analytics: **[Security Homelab: Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** | Network security architecture (Firewall/IPS/WAF), Privacy and remote access |
 | :material-home-analytics: **[Security Homelab: Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** | PKI/Certificate Authority Overview, Identity and Access Management (Authentik/Active Directory), Secrets Management |
 | :material-home-analytics: **[Security Homelab: GRC Landing Page](/Career_Projects/projects/homelab/grc/grc-index/)** | Governance, Risk and Compliance Sesctions |
----
+
+
+
 ## **Security Homelab Network Overview**
 
   <img src="/Career_Projects/assets/diagrams/SecurityLab_Network-2026-01-22.png"
