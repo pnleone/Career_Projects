@@ -256,7 +256,7 @@ Used for VLAN and Link Aggregation (LAG) testing between The Proxmox host server
 The majority of hosts and services run within the Proxmox environment and run within one of the two integrated technologies supported:
 
 <div style="background: white; padding: 1rem; border-radius: 12px; max-width: 350px; margin: 2rem auto;">
-  <img src="/Career_Projects/assets/misc/kvm-lxc"
+  <img src="/Career_Projects/assets/misc/kvm-lxc.png"
        alt="Diagram"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
 </div>
