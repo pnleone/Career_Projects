@@ -362,7 +362,7 @@ The topology implements a hub-and-spoke design where R1 and R2 connect via a ded
 <div class="two-image-row" role="group" aria-label="Two images with captions">
   <figure class="img-wrap">
     <img src="/Career_Projects/assets/screenshots/cisco-r1.png"
-         alt="Left image description"
+         alt="Cisco r1 Configuration"
          loading="lazy">
     <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem; text-align:center;">
       Cisco r1 Configuration
@@ -371,7 +371,7 @@ The topology implements a hub-and-spoke design where R1 and R2 connect via a ded
 
   <figure class="img-wrap">
     <img src="/Career_Projects/assets/screenshots/cisco-r2.png"
-         alt="Right image description"
+         alt="Cisco r2 Configuration"
          loading="lazy">
     <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem; text-align:center;">
       Cisco r2 Configuration
