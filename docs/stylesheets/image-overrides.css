@@ -137,29 +137,38 @@
   gap: 1rem;
   align-items: stretch;
   justify-content: center;
-  flex-wrap: nowrap;        /* prevent automatic wrapping */
+  flex-wrap: nowrap;
   margin: 1.25rem 0;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Each wrapper can shrink below its content width (prevents forced wrap) */
+/* Wrapper: column layout with fixed visible height */
 .two-image-row .img-wrap {
-  flex: 1 1 0;              /* grow, shrink, no base width */
-  min-width: 0;             /* allow the wrapper to shrink inside flex */
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
-  flex-direction: column;   /* image above caption */
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* image area above caption */
+  align-items: stretch;
   overflow: hidden;
-  height: 360px;            /* visible height for both images; adjust as needed */
+  height: 500px; /* visible height for both images; adjust as needed */
   background: var(--md-default-bg-color);
   border-radius: 8px;
   padding: 0.25rem;
+  box-sizing: border-box;
 }
 
-/* Image fills the wrapper height while preserving aspect ratio */
-.two-image-row .img-wrap img {
+/* Separate image box that takes all remaining vertical space */
+.two-image-row .img-box {
+  flex: 1 1 auto;           /* grow to fill available height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Image fills the img-box height, width auto to preserve aspect ratio */
+.two-image-row .img-box img {
   height: 100%;
   width: auto;
   display: block;
@@ -167,12 +176,15 @@
   max-width: 100%;
 }
 
-/* Caption styling inside the figure */
+/* Caption sits below the image and does not affect image height */
 .two-image-row .img-wrap figcaption {
+  flex: 0 0 auto;
   margin-top: 0.5rem;
   font-size: 0.9rem;
   color: var(--md-secondary-text-color);
   text-align: center;
+  line-height: 1.2;
+  padding: 0 0.25rem;
 }
 
 /* Responsive: stack on small screens and reduce height */
