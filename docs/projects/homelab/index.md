@@ -1,4 +1,5 @@
- # **Security Homelab** 
+# Security Lab Overview
+
   <img src="/Career_Projects/assets/misc/homelab-banner2.png"
        alt="Homelab"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
