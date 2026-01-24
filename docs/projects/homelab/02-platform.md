@@ -570,7 +570,22 @@ Enterprises frequently operate hybrid container environments where Docker suppor
 
 #### Deployment Overview
 
-The lab operates six independent Docker engines, each hosting isolated workloads to minimize cross‑service impact. Portainer Community Edition provides a centralized GUI for managing all engines, while Portainer Agents enable secure API communication with remote hosts. Home Assistant remains intentionally standalone to preserve stability and reduce risk from shared infrastructure.
+<div class="two-col-right">
+  <div class="text-col">
+   <p>
+      The lab operates six independent Docker engines, each hosting isolated workloads to minimize cross‑service impact. Portainer Community Edition provides a centralized GUI for managing all engines, while Portainer Agents enable secure API communication with remote hosts. Home Assistant remains intentionally standalone to preserve stability and reduce risk from shared infrastructure.
+   </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/docker.png" alt="Docker Deployment Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Docker Deployment Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 #### Security Impact
 
@@ -715,7 +730,7 @@ volumes:
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/k3s.png" alt="Proxmox VE single-node cluster diagram">
+      <img src="/Career_Projects/assets/diagrams/k3s.png" alt="K3s Cluster Deployment Overview">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         K3s Cluster Deployment Overview.
       </figcaption>
@@ -754,6 +769,7 @@ K3s is ideal for homelab and edge environments requiring full Kubernetes functio
 | Nginx Ingress Controller | nginx-ingress | HTTP/HTTPS ingress traffic routing and SSL termination | Helm chart (1 replica) |
 | Portainer Agent | portainer-agent | Cluster management and monitoring via Portainer UI | DaemonSet (runs on all nodes) |
 | Cert-Manager | cert-manager | StepCA/ACME client for nginx-ingress SSL termination | Helm Chart Deployment |
+
 **MetalLB Load Balancer Configuration:**
 
 - **Address Pool:** 192.168.200.30-192.168.200.49 (20 available IPs)
@@ -785,7 +801,7 @@ K3s is ideal for homelab and edge environments requiring full Kubernetes functio
 
 | Application | Type | Replicas | External IP | Purpose |
 |-------------|------|----------|-------------|---------|
-| nginx-ingress-controller | Helm | 1/1 | 192.168.200.31 | HTTP/HTTPS ingress controller for path-based routing |
+| nginx-ingress-controller | Helm/DaemonSet | 2/2 | 192.168.200.31 | HTTP/HTTPS ingress controller for path-based routing |
 
 **portainer-agent Namespace:**
 
