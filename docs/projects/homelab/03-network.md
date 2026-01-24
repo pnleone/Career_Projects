@@ -1116,15 +1116,6 @@ Tor is widely used in security research, OSINT, and threat intelligence workflow
 
 ---
 
-### Appendix: Suricata Block List
-
-<a id="suricata-block-list"></a>
-
-**Diagram Placeholder: Suricata Block List Screenshot**
-
-[Return to Suricata Summary](#suricata-intrusion-detectionprevention-system-on-pfsense)
-
----
 
 **Document Version:** 1.0  
 **Last Updated:** January 19, 2026  

@@ -603,21 +603,125 @@ Multi‑engine Docker deployments mirror enterprise environments where isolated 
 | Home Assistant VM | Home automation (isolated) | HA core + add-ons |
 
 #### Docker Compose
-
-**Diagram Placeholder: Docker Compose Screenshots (2 images)**
-
 Compose files are created in VS Code and stored in a Github repository for version control.
+```yaml
+services:
+  postgresql:
+    image: docker.io/library/postgres:16-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: #######
+      POSTGRES_USER: #######
+      POSTGRES_DB: authentik-db
+    
+  redis:
+    image: docker.io/library/redis:alpine
+    
+    command: --save 60 1 --loglevel warning
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    volumes:
+      - redis:/data
+  server:
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.3}
+    restart: unless-stopped
+    
+    command: server
+    environment:
+      AUTHENTIK_SECRET_KEY: ########
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ######
+      AUTHENTIK_POSTGRESQL__NAME: authentik-db
+      AUTHENTIK_POSTGRESQL__PASSWORD: ######
 
+    volumes:
+      - ./media:/media
+      - ./custom-templates:/templates
+      - /opt/authentik/certs/:/certs/
+      
+    ports:
+      - "80:9000"
+      - "443:9443"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  worker:
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.3}
+    restart: unless-stopped
+    
+    command: worker
+    environment:
+      AUTHENTIK_SECRET_KEY: #######
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ######
+      AUTHENTIK_POSTGRESQL__NAME: authentik-db
+      AUTHENTIK_POSTGRESQL__PASSWORD: #######
+      AUTHENTIK_ERROR_REPORTING__ENABLED: true
+      AUTHENTIK_EMAIL__HOST: 192.168.1.89
+      AUTHENTIK_EMAIL__PORT: 25
+      AUTHENTIK_EMAIL__FROM: #########
+
+    user: ######
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./media:/media
+      - ./custom-templates:/templates
+      - /opt/authentik/certs/:/certs/
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  database:
+    driver: local
+  redis:
+    driver: local
+
+```
 ---
 
 ### 5.2 Cloud-Native Kubernetes Cluster Deployment
 
 #### Deployment Overview
 
-The lab runs a dual‑node K3s cluster (one control plane, one worker) on Red Hat Enterprise Linux 10 VMs within the 192.168.200.0/24 subnet. K3s is a fully compliant Kubernetes distribution packaged as a single binary, minimizing external dependencies and simplifying cluster operations. It includes a batteries‑included stack: containerd runtime, Flannel CNI, CoreDNS, Kube‑router, Local‑path‑provisioner, and Spegel registry mirror.
+<div class="two-col-right">
+  <div class="text-col">
+   <p>
+      The lab runs a dual‑node K3s cluster (one control plane, one worker) on Red Hat Enterprise Linux 10 VMs within the 192.168.200.0/24 subnet. K3s is a fully compliant Kubernetes distribution packaged as a single binary, minimizing external dependencies and simplifying cluster operations. It includes a batteries‑included stack: containerd runtime, Flannel CNI, CoreDNS, Kube‑router, Local‑path‑provisioner, and Spegel registry mirror.
+   </p>
+   <p>
+      The embedded Traefik ingress controller and ServiceLB load balancer have been intentionally disabled and replaced with NGINX Ingress and MetalLB, providing enterprise‑grade ingress routing and Layer‑2 external IP allocation. Portainer integrates with the cluster via a DaemonSet‑based Portainer Agent for full lifecycle management.
+   </p>
+  </div>
 
-The embedded Traefik ingress controller and ServiceLB load balancer have been intentionally disabled and replaced with NGINX Ingress and MetalLB, providing enterprise‑grade ingress routing and Layer‑2 external IP allocation. Portainer integrates with the cluster via a DaemonSet‑based Portainer Agent for full lifecycle management.
-
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/k3s.png" alt="Proxmox VE single-node cluster diagram">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        K3s Cluster Deployment Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
 #### Security Impact
 
 - K3s certificate automation secures all control plane and node communications
@@ -639,7 +743,7 @@ K3s is ideal for homelab and edge environments requiring full Kubernetes functio
 
 **Zero Trust:** Every pod, service, and ingress request authenticated and authorized; no implicit trust between namespaces
 
-**Diagram Placeholder: K3s Cluster Screenshots (4 images)**
+![K3s Node COnfiguration](/Career_Projects/assets/screenshots/k3s-nodes.png)
 
 #### Core Infrastructure Services
 
@@ -799,21 +903,292 @@ The SOC namespace hosts the lab's comprehensive Security Operations Center platf
 - SSL termination for all ingress HTTP services
 
 
-### Deployed Containers
-
-**Diagram Placeholder: Deployed Containers Screenshot**
-
-### Example Workload: Pi-hole DNS
-
-- Deployment: 2 replicas with anti-affinity rules
+### Example Workload: PatchMon
+- Namspace: server-admin
+- Deployments: 1 replica per deployment with anti-affinity rules
 - Persistent Storage: local-path-provisioner (hostPath-based PVCs)
-- Exposure: MetalLB LoadBalancer with external IP
-- Health Checks: HTTP liveness/readiness probes on /admin
-- Resource Limits: 512MB memory, 0.5 CPU per pod
-- Persistent Volume Claims / Volumes: pihole-config and dnsmasq-config
+- Exposure: MetalLB LoadBalancer with external IPs
+- Persistent Volume Claims / Volumes: patchmon-postgres-pvc & patchmon-redis-pvc
 
-**Diagram Placeholder: Pi-hole Deployment Screenshots (3 images)**
+#### Namespace
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: server-admin
+```
 
+#### Postgres/Redis PVCs
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: patchmon-postgres-pvc
+  namespace: server-admin
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: local-path
+---
+# Redis PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: patchmon-redis-pvc
+  namespace: server-admin
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: local-path
+```
+
+##### Postgres Deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patchmon-database
+  namespace: server-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patchmon-database
+  template:
+    metadata:
+      labels:
+        app: patchmon-database
+    spec:
+      initContainers:
+      - name: init-chown
+        image: busybox
+        command: ["sh", "-c", "chown -R 999:999 /var/lib/postgresql/data"]
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+      containers:
+      - name: database
+        image: postgres:17-alpine
+        env:
+        - name: POSTGRES_DB
+          value: patchmon_db
+        - name: POSTGRES_USER
+          value: patchmon_user
+        - name: POSTGRES_PASSWORD
+          value: ######
+        livenessProbe:
+          exec:
+            command: ["pg_isready","-U","patchmon_user","-d","patchmon_db"]
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command: ["pg_isready","-U","patchmon_user","-d","patchmon_db"]
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+          subPath: data
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: patchmon-postgres-pvc
+```
+
+#### Redis Deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patchmon-redis
+  namespace: server-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patchmon-redis
+  template:
+    metadata:
+      labels:
+        app: patchmon-redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        command: ["redis-server","--requirepass","#####","--appendonly","yes"]
+        livenessProbe:
+          exec:
+            command: ["redis-cli","-a","#####","ping"]
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command: ["redis-cli","-a","#####","ping"]
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: redis-storage
+          mountPath: /data
+      volumes:
+      - name: redis-storage
+        persistentVolumeClaim:
+          claimName: patchmon-redis-pvc
+
+```
+
+#### Backend Deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patchmon-backend
+  namespace: server-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patchmon-backend
+  template:
+    metadata:
+      labels:
+        app: patchmon-backend
+    spec:
+      containers:
+      - name: backend
+        image: ghcr.io/patchmon/patchmon-backend:latest
+        env:
+        - name: LOG_LEVEL
+          value: info
+        - name: DATABASE_URL
+          value: postgresql://patchmon_user:#######
+        - name: JWT_SECRET
+          value: 
+        - name: SERVER_PORT
+          value: "3001"
+        - name: CORS_ORIGIN
+          value: "http://192.168.200.35:3000"
+        - name: REDIS_HOST
+          value: patchmon-redis
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          value: ####### 
+        - name: REDIS_DB
+          value: "0"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3001
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3001
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+```
+#### Frontend Deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patchmon-frontend
+  namespace: server-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patchmon-frontend
+  template:
+    metadata:
+      labels:
+        app: patchmon-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: ghcr.io/patchmon/patchmon-frontend:latest
+        env:
+        - name: BACKEND_HOST
+          value: patchmon-backend
+        - name: BACKEND_PORT
+          value: "3001"
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+```
+#### Services
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: patchmon-frontend
+  namespace: server-admin
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.200.35
+  selector:
+    app: patchmon-frontend
+  ports:
+  - port: 3000
+    targetPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: patchmon-backend
+  namespace: server-admin
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.200.39
+  selector:
+    app: patchmon-backend
+  ports:
+  - port: 3001
+    targetPort: 3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: patchmon-database
+  namespace: server-admin
+spec:
+  selector:
+    app: patchmon-database
+  ports:
+  - port: 5432
+    targetPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: patchmon-redis
+  namespace: server-admin
+spec:
+  selector:
+    app: patchmon-redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+
+```
 ---
 
 ## 7. Version Control Strategy
