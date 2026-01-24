@@ -1,5 +1,8 @@
 # **Security Homelab Langing Page**
-
+  <img src="/Career_Projects/assets/misc/homelab-banner2.png"
+       alt="Homelab"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+       
 ## **Table of Contents**
 
 | Section | Description |
@@ -17,7 +20,6 @@
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
 
-![Security Homelab Network Overview](/Career_Projects/assets/diagrams/SecurityLab_Network-2026-01-22.png)
 ### Management and Production LAN — 192.168.3.0/24
 
 **Purpose**  
