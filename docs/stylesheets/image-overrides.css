@@ -131,6 +131,50 @@
     flex: 1 1 100%;
     max-width: 100%;
   }
+/* Two-image row: equal visible heights, preserve aspect ratio */
+.two-image-row {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch; /* ensures both image containers match height */
+  margin: 1.25rem 0;
+}
+
+/* Each image wrapper controls the visible height */
+.two-image-row .img-wrap {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Set the visible height for the row; change 360px to taste or use % */
+  height: 700px;
+  background: var(--md-default-bg-color);
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+/* Image fills height, width auto to preserve aspect ratio */
+.two-image-row .img-wrap img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Optional: ensure very wide images don't exceed container width */
+.two-image-row .img-wrap img.max-width {
+  max-width: 100%;
+}
+
+/* Responsive: stack on small screens and reduce height */
+@media (max-width: 900px) {
+  .two-image-row {
+    flex-direction: column;
+  }
+  .two-image-row .img-wrap {
+    height: 240px;
+  }
+}
 }
 .image-large {
   width: 80%;
