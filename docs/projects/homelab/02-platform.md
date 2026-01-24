@@ -1213,14 +1213,6 @@ spec:
 - Structure: Organized by service (docker-compose/, k8s-manifests/, terraform/Ansible)
 - Tooling: VS Code with Docker, Kubernetes, SSH, Ansible, Terraform extensions
 - Automation: Watchtower monitors container images, WUD provides update alerts
-
----
-
-**Document Version:** 1.0  
-**Last Updated:** January 19, 2026  
-**Classification:** Internal Use Only
-
----
 ---
 ## Security Homelab Section Links
 
@@ -1232,3 +1224,10 @@ spec:
 - **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
 - **[Observability and Response, Part 2](/Career_Projects/projects/homelab/07-vis-response-pt2/)**
+---
+
+**Document Version:** 1.0  
+**Last Updated:** January 24, 2026  
+
+
+

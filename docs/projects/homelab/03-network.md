@@ -1118,7 +1118,6 @@ Tor is widely used in security research, OSINT, and threat intelligence workflow
 
 
 **Document Version:** 1.0  
-**Last Updated:** January 19, 2026  
-**Classification:** Internal Use Only
+**Last Updated:** January 24, 2026  
 
 ---
