@@ -944,15 +944,11 @@ Tailscale provides secure, identity‑based remote access using a WireGuard mesh
 - NAT traversal eliminates the need for exposed ports
 - Audit logs track session activity for governance and incident response
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p><strong>Integration Notes:</strong></p>
-    <ul>
-      <li>Tailscale is deployed on key lab VMs</li>
-      <li>Used for remote SSH, dashboard access, and secure file transfers.</li>
-      <li>WireGuard / ChaCha20-Poly1305 encryption</li>
-    </ul>
-  </div>
+#### Integration Notes:
+
+- Tailscale is deployed on key lab VMs
+- Used for remote SSH, dashboard access, and secure file transfers.
+- WireGuard / ChaCha20-Poly1305 encryption
 
 #### Deployment Rationale
 
