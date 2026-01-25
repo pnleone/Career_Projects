@@ -285,7 +285,7 @@ Fortinet holds significant market share in enterprise network security, making F
 - External (port2): 192.168.1.x/24 - Uplink to production network
 - DMZ (port3): Reserved for future isolated services deployment
 
-<figure>
+<figure class="full-content">
       <img src="/Career_Projects/assets/screenshots/fortigate-int.png" alt="FortiGate Address/Device Configuration">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         FortiGate Address/Device Configuration.
@@ -388,7 +388,7 @@ This critical floating rule ensures that if the PIA VPN tunnel drops (failure, m
 
 #### FortiGate Firewall Rules
 
-<figure>
+<figure class="full-content">
       <img src="/Career_Projects/assets/screenshots/fortigate-rules.png" alt="FortiGate Rules">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         FortiGate ISO_LAN2 and Prod_LAN Rules.
