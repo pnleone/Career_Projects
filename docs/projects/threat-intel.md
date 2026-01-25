@@ -986,4 +986,4 @@ This comprehensive threat intelligence brief and SOC enhancement plan provides P
 
 ---
 
-*For questions or clarifications regarding this document, contact Paul Leone at [contact information]*
+*For questions or clarifications regarding this document, contact Paul Leone at [:material-email: pnleone@outlook.com](mailto:pnleone@outlook.com)*

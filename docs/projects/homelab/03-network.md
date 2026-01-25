@@ -220,8 +220,6 @@ Microsegmentation is a core zero‑trust principle used in enterprise environmen
 
 Default Deny with Explicit Allow - Zero trust model where all traffic is blocked unless explicitly permitted by rule. This inverts traditional firewall logic and ensures unknown traffic patterns are automatically rejected.
 
-**Diagram Placeholder: OPNsense Firewall Rules Screenshot**
-
 ---
 
 ### 2.3 Fortinet FortiGate 30D Appliance
@@ -237,7 +235,7 @@ Default Deny with Explicit Allow - Zero trust model where all traffic is blocked
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/fortigate-appliance.png" alt="FortiGate 30D Hardware">
+      <img src="/Career_Projects/assets/misc/fortinet.png" alt="FortiGate 30D Hardware">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         FortiGate 30D Physical Appliance.
       </figcaption>
@@ -287,9 +285,19 @@ Fortinet holds significant market share in enterprise network security, making F
 - External (port2): 192.168.1.x/24 - Uplink to production network
 - DMZ (port3): Reserved for future isolated services deployment
 
-**Diagram Placeholder: FortiGate Address/Device Configuration Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/fortigate-int.png" alt="FortiGate Address/Device Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        FortiGate Address/Device Configuration.
+      </figcaption>
+    </figure>
 
-**Diagram Placeholder: FortiGate SSL VPN Screenshots (3 images)**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/fortigate-vpn.png" alt="FortiGate VPN Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        FortiGate VPN Configuration.
+      </figcaption>
+    </figure>
 
 **Limitations & Compensating Controls**
 
@@ -316,15 +324,30 @@ Due to end-of-support status:
 
 ##### LAN Rules Configuration
 
-**Diagram Placeholder: pfSense LAN Rules Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/pfs-lab_lan1.png" alt="pfSense Lab_LAN1 Rules">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        pfSense Lab_LAN1 Rules.
+      </figcaption>
+    </figure>
 
 ##### WAN Rules Configuration
 
-**Diagram Placeholder: pfSense WAN Rules Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/pfs-prod_LAN1.png" alt="pfSense Prod_LAN Rules">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        pfSense Prod_LAN Rules.
+      </figcaption>
+    </figure>
 
 ##### Floating Rules Configuration
 
-**Diagram Placeholder: pfSense Floating Rules Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/pfs-float.png" alt="pfSense Floating Rules">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        pfSense Floating Rules.
+      </figcaption>
+    </figure>
 
 **VPN Kill Switch Details:**
 
@@ -332,9 +355,12 @@ This critical floating rule ensures that if the PIA VPN tunnel drops (failure, m
 
 #### OPNsense Rule Sets
 
-**Diagram Placeholder: OPNsense ISO_LAN Rules Screenshot**
-
-**Diagram Placeholder: OPNsense Prod_LAN Rules Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/opn-rules.png" alt="OPNsense Rules">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        OPNsense ISO_LAN and Prod_LAN Rules.
+      </figcaption>
+    </figure>
 
 **Firewall Rule Logic**
 
@@ -362,7 +388,12 @@ This critical floating rule ensures that if the PIA VPN tunnel drops (failure, m
 
 #### FortiGate Firewall Rules
 
-**Diagram Placeholder: FortiGate Policy Table Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/fortigate-rules.png" alt="FortiGate Rules">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        FortiGate ISO_LAN2 and Prod_LAN Rules.
+      </figcaption>
+    </figure>
 
 | Name | From | To | Source | Destination | Service | Action | NAT | Log |
 |------|------|-----|--------|-------------|---------|--------|-----|-----|

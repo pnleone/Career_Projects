@@ -573,7 +573,7 @@ Enterprises frequently operate hybrid container environments where Docker suppor
 <div class="two-col-right">
   <div class="text-col">
    <p>
-      The lab operates six independent Docker engines, each hosting isolated workloads to minimize cross‑service impact. Portainer Community Edition provides a centralized GUI for managing all engines, while Portainer Agents enable secure API communication with remote hosts. Home Assistant remains intentionally standalone to preserve stability and reduce risk from shared infrastructure.
+      The lab operates five independent Docker engines, each hosting isolated workloads to minimize cross‑service impact. Portainer Community Edition provides a centralized GUI for managing all engines, while Portainer Agents enable secure API communication with remote hosts. 
    </p>
   </div>
 
@@ -615,7 +615,6 @@ Multi‑engine Docker deployments mirror enterprise environments where isolated 
 | LXC-1 (Primary DNS) | Network infrastructure | Pi-hole; prometheus-exporter |
 | LXC-2 (Ingress) | Reverse proxy & SSO | Traefik; Authentik outpost |
 | Safeline-WAF | Web Application Firewall and Gmail notifications | Safeline stack, SMTP relay |
-| Home Assistant VM | Home automation (isolated) | HA core + add-ons |
 
 #### Docker Compose
 Compose files are created in VS Code and stored in a Github repository for version control.

@@ -52,6 +52,6 @@ nav:
               - NIST SP 800-53: projects/homelab/grc/grc-nist-800.md
               - CIS Controls: projects/homelab/grc/grc-cis-controls.md
               - ISO 27001: projects/homelab/grc/grc-iso27001.md
-              - Mitre Att&ck: projects/homelab/grc/grc-mitre.md
+              - MITRE ATT&CK: projects/homelab/grc/grc-mitre.md
               - OWASP 2025: projects/homelab/grc/owasp.md
               - CISA & NIST Zero Trust: projects/homelab/grc/zero-trust.md
