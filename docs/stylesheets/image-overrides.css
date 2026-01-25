@@ -65,11 +65,11 @@
 /* Image column controls how much width the image takes.
    Set flex-basis to 60% or 75% depending on desired size. */
 .two-col-right .image-col {
-  flex: 0 0 65%; /* change to desired % */
-  max-width: 75%;
+  flex: 0 0 70%; /* change to desired % */
+  max-width: 80%;
 }
 .two-col-right .text-col {
-  flex: 1 1 35%;
+  flex: 1 1 30%;
   min-width: 220px; /* prevents text column from collapsing */
 }
 

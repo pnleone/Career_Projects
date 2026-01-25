@@ -211,19 +211,12 @@ Default Deny with Explicit Allow - Zero trust model where all traffic is blocked
     </p>
   </div>
 
-  <div class="image-col">
-    <figure>
-      <div style="background: white; padding: 1rem; border-radius: 12px; max-width: 350px; margin: 2rem auto;">
-       <img src="/Career_Projects/assets/misc/fortinet.png"
-       alt="FortiGate 30D Hardware"
-       style="width: 100%; height: auto; display: block; margin: 0 auto;">
-    </div>
+  <figure>
+      <img src="/Career_Projects/assets/misc/fortinet.png" alt="FortiGate">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        FortiGate 30D Physical Appliance.
+        FortiGate Interface Configuration.
       </figcaption>
     </figure>
-    
-  </div>
 </div>
 
 #### Security Impact
