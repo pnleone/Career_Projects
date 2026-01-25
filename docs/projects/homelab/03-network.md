@@ -710,7 +710,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 **Password and OIDC Authorization:**
 
 <figure>
-      <img src="/Career_Projects/assets/screenshots/safeline-offline.png" alt="Safeline Offline">
+      <img src="/Career_Projects/assets/screenshots/safeline-pwd.png" alt="Safeline Offline">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Password and OIDC Authorization.
       </figcaption>
@@ -995,7 +995,13 @@ Tailscale mirrors enterprise zero‑trust remote access solutions by replacing t
 **Secure by Design:** WireGuard encryption, OAuth/OIDC authentication, device ACLs  
 **Zero Trust:** Every connection authenticated; no implicit trust in IP or location
 
-**Diagram Placeholder: Tailscale Network Diagram Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/tailscale.png" alt="Tailscale">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Tailscale Configured Devices.
+      </figcaption>
+    </figure>
+
 
 **Tailscale Use Cases:**
 
@@ -1037,12 +1043,18 @@ Cloudflare Tunnels mirror enterprise zero‑trust access patterns where applicat
   - On IP change, the client automatically updates the A record in Cloudflare using API integration.
   - This ensures persistent domain resolution despite dynamic IP churn, enabling stable access to exposed services.
 
+<figure>
+      <img src="/Career_Projects/assets/screenshots/cloudflare.png" alt="Cloudflare">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cloudflare DNS Management.
+      </figcaption>
+    </figure>
+
 #### Object Storage & File Sharing
 
 - **Cloudflare R2 Bucket**: Used for lightweight, S3-compatible object storage.
   - **Public Access Endpoint**: files.shadowitlab.com
 
-**Diagram Placeholder: Cloudflare R2 Bucket Screenshot**
 
 #### Secure Service Exposure via Cloudflare Tunnel
 
@@ -1077,7 +1089,13 @@ This tunnel multiplexes several key services hosted on DockerVM1:
 | prom.shadowitlab.com | Prometheus metrics endpoint |
 | wud.shadowitlab.com | Watchtower UI for Docker image update visibility |
 
-**Diagram Placeholder: Cloudflare Tunnels Configuration Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/cloudflared.png" alt="Cloudflare">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cloudflared Tunnel Configuration.
+      </figcaption>
+    </figure>
+
 
 **Use Case:**
 

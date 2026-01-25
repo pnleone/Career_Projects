@@ -156,7 +156,12 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 Centralized management solution to oversee and manage multiple nodes and clusters of Proxmox-based virtual environments.
 
 ![Proxmox Datacenter Manager Screenshot](/Career_Projects/assets/screenshots/dcm.png)
-
+<figure>
+      <img src="/Career_Projects/assets/screenshots/dcm.png" alt="Proxmox Datacenter Manager Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Proxmox Datacenter Manager Screenshot.
+      </figcaption>
+    </figure>
 ---
 
 ### 2.4 Physical Network Attached Storage (NAS) Integration
@@ -168,16 +173,25 @@ A shared Synology NAS is configured to receive automated backups from the Proxmo
 - Purpose: rapid VM restoration, long-term archival, K3s off-host PVCs
 
 <!-- ![NAS Backups Screenshot](/Career_Projects/assets/screenshots/nas-backups.png) -->
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/nas-backups.png" alt="NAS Backups Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Synology NAS Backups Screenshot.
+      </figcaption>
+    </figure>
 
-<img class="image-large" src="/Career_Projects/assets/screenshots/nas-backups.png" alt="NAS Backups Screenshot">
 ---
 
 ### 2.5 Virtual Network Attached Storage (NAS) Integration
 
 Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS) mounts for data sharing and redundancy. The single storage pool is configured for mirroring across the two NVMe drives.
 
-![TrueNAS Screenshot](/Career_Projects/assets/screenshots/truenas.png)
-
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/truenas.png" alt="TrueNAS Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        TrueNAS Screenshots.
+      </figcaption>
+    </figure>
 ---
 
 ### 2.6 Proxmox Host Hardware
@@ -347,8 +361,12 @@ Enterprise environments frequently operate multiple virtualization platforms whe
   </div>
 </div>
 
-![VMware ESXi](/Career_Projects/assets/screenshots/vmware-esxi.png)
-
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/vmware-esxi.png" alt="ESXi Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        VMware ESXi Screenshots.
+      </figcaption>
+    </figure>
 ---
 
 ## 4. Cisco Virtual Infrastructure
@@ -359,25 +377,12 @@ The lab operates a three-node Cisco virtual network infrastructure providing ent
 
 The topology implements a hub-and-spoke design where R1 and R2 connect via a dedicated point-to-point link (10.30.0.0/30) and exchange routing information through OSPF Area 0. R1 serves as the primary gateway for production lab networks (192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24), while R2 handles isolated test networks (192.168.2.0/24, 192.168.3.0/24). Two Ubuntu 25.10 LXC containers (cisco-host1 and cisco-host2) validate routing functionality by using their respective local routers as default gateways.
 
-<div class="two-image-row" role="group" aria-label="Two images with captions">
-  <figure class="img-wrap">
-    <div class="img-box">
-      <img src="/Career_Projects/assets/screenshots/cisco-r1.png"
-           alt="Cisco r1 Configuration"
-           loading="lazy">
-    </div>
-    <figcaption>Cisco r1 Configuration</figcaption>
-  </figure>
-
-  <figure class="img-wrap">
-    <div class="img-box">
-      <img src="/Career_Projects/assets/screenshots/cisco-r2.png"
-           alt="Cisco r2 Configuration"
-           loading="lazy">
-    </div>
-    <figcaption>Cisco r2 Configuration</figcaption>
-  </figure>
-</div>
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/cisco-r1-r2.png" alt="Cisco Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cisco r1 and r2 Configuration.
+      </figcaption>
+    </figure>
 
 #### Security Impact
 
