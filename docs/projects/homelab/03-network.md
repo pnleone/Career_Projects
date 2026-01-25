@@ -905,22 +905,8 @@ Modern environments require privacy‑preserving egress, secure remote access, a
 
 #### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>
-      PIA provides encrypted outbound VPN tunneling using OpenVPN with AES‑256 encryption and SHA256 authentication. It masks the lab's public‑facing identity, supports multi‑hop routing, and enables region‑based egress selection. PIA is configured directly on the pfSense firewalls and serves as the default outbound path for the 192.168.100.0/24 and 192.168.2.0/24 networks. Policy‑based routing ensures selected applications always use the VPN tunnel.
-    </p>
-  </div>
+PIA provides encrypted outbound VPN tunneling using OpenVPN with AES‑256 encryption and SHA256 authentication. It masks the lab's public‑facing identity, supports multi‑hop routing, and enables region‑based egress selection. PIA is configured directly on the pfSense firewalls and serves as the default outbound path for the 192.168.100.0/24 and 192.168.2.0/24 networks. Policy‑based routing ensures selected applications always use the VPN tunnel.
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/screenshots/pia-config.png" alt="PIA VPN Configuration">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        PIA VPN Configuration on pfSense.
-      </figcaption>
-    </figure>
-  </div>
-</div>
 
 #### Security Impact
 
@@ -974,16 +960,6 @@ Tailscale provides secure, identity‑based remote access using a WireGuard mesh
       <li>WireGuard / ChaCha20-Poly1305 encryption</li>
     </ul>
   </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/screenshots/tailscale-config.png" alt="Tailscale Configuration">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Tailscale Mesh VPN Configuration.
-      </figcaption>
-    </figure>
-  </div>
-</div>
 
 #### Deployment Rationale
 
