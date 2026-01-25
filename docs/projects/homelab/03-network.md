@@ -83,34 +83,12 @@ High‑availability firewalls are standard in enterprise networks where downtime
 | pfSense-Secondary | 192.168.100.3/24 | 192.168.100.1/24 | Backup |
 | Sync Network | 10.10.0.0/24 | Dedicated | xmlrpc |
 
-<div class="two-col-right">
-  <div class="text-col">
-    <h4>Interface Design</h4>
-    <ul>
-      <li>WAN(Prod_LAN) - Eth0</li>
-      <li>LAN - WIFI bridge</li>
-      <li>Sync - virtual interface for HA sync</li>
-      <li>PIA_NY - VPN for outbound traffic</li>
-      <li>PIA_CAN_MONT - VPN for outbound traffic</li>
-      <li>TSCALE - Mesh VPN for remote access</li>
-      <li>LAN2 - virtual interface</li>
-      <li>External LAN - virtual interface</li>
-    </ul>
-  </div>
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/diagrams/pfsense-interfaces.png" alt="pfSense Interface Configuration">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        pfSense HA Interface Configuration.
-      </figcaption>
-    </figure>
-  </div>
-</div>
+#### Interface Design
 
 | Interface | Physical/Virtual | Network | Purpose |
 |-----------|------------------|---------|---------|
-| Prod_LAN | vtnet0 | 192.168.1.253/24 | Upstream gateway to ISP router |
+| Prod_LAN | vtnet0 | 192.168.1.253/24 | Prod LAN hosts, Upstream gateway to ISP router |
 | Lab_LAN1 | vtnet1 (bridge) | 192.168.100.2/24 | Primary lab network |
 | SYNC | vtnet2 | 10.10.0.2/24 | HA state synchronization |
 | PIA_NY | ovpnc1 | (Dynamic) | VPN egress - New York endpoint |
@@ -434,7 +412,7 @@ This critical floating rule ensures that if the PIA VPN tunnel drops (failure, m
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/suricata-config.png" alt="Suricata Configuration">
+      <img src="/Career_Projects/assets/screenshots/suricata-int.png" alt="Suricata Configuration">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Suricata IPS Configuration on pfSense.
       </figcaption>
@@ -460,7 +438,12 @@ Suricata is widely used in enterprise IDS/IPS deployments due to its performance
 **Secure by Design:** Inline blocking, updated rule feeds, and custom signatures  
 **Zero Trust:** All traffic inspected; no packet trusted without validation
 
-[Suricata block list Screenshot](#suricata-block-list)
+<figure>
+      <img src="/Career_Projects/assets/screenshots/suricata-block.png" alt="Suricata Block List Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Suricata Block List Screenshot.
+      </figcaption>
+    </figure>
 
 ---
 
@@ -477,7 +460,7 @@ Suricata is widely used in enterprise IDS/IPS deployments due to its performance
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/snort-config.png" alt="Snort Configuration">
+      <img src="/Career_Projects/assets/screenshots/snort-int.png" alt="Snort Configuration">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Snort IPS Configuration on pfSense.
       </figcaption>
@@ -579,7 +562,12 @@ Behavior‑based detection is essential in modern environments where attackers u
 - Enforcement: Dynamic firewall rules via pfSense bouncer API
 - Visibility: Decision stream visible in CrowdSec dashboard
 
-**Diagram Placeholder: CrowdSec Dashboard Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/crowdsec-setup.png" alt="CrowdSec Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        CrowdSec Engine and Remediation Setup.
+      </figcaption>
+    </figure>
 
 ---
 
@@ -648,8 +636,6 @@ Deployed on a Debian 13 host with an embedded Docker engine, the solution follow
 
 ### Configuration Overview
 
-**Diagram Placeholder: SafeLine Protected Sites Screenshots (2 images)**
-
 SafeLine WAF currently protects four separate web portals:
 
 - Heimdall main lab dashboard
@@ -657,11 +643,14 @@ SafeLine WAF currently protects four separate web portals:
 - Nginx web server in K3s
 - Proxmox PVE admin portal
 
-**Diagram Placeholder: SafeLine Protection Modules Screenshot**
-
 Active protections include Intelligent web threat detection, bot and HTTP flood DDoS protection. Additional authorization via Authentik/OIDC provided where required.
 
-**Diagram Placeholder: SafeLine Bot Protection Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-config.png" alt="Safeline WAF Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Safeline WAF Configuration.
+      </figcaption>
+    </figure>
 
 ### Active Protection Modules
 
@@ -694,19 +683,38 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 - **Burst Handling**: Allows legitimate traffic spikes while blocking sustained flood attacks
 - **Geo-Rate Limiting**: Stricter rate limits for high-risk geographic regions
 
-**Diagram Placeholder: SafeLine HTTP Flood/Rate Limiting Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-flood.png" alt="Safeline Flood/Bot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        HTTP Flood and Anti-Bot Protection.
+      </figcaption>
+    </figure>
 
-**Diagram Placeholder: SafeLine Anti-Bot Screenshot**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-protections.png" alt="Safeline Flood/Bot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        SQLi, Code Injection, File Inclusion, Path Traversal, XSS Protections.
+      </figcaption>
+    </figure>
 
-**Diagram Placeholder: SafeLine Attack Protection Screenshots (5 images showing SQLi, Code Injection, File Inclusion, Path Traversal, XSS)**
 
 **Offline Mode:**
 
-**Diagram Placeholder: SafeLine Offline Mode Screenshots (2 images)**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-offline.png" alt="Safeline Offline">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Offline Mode.
+      </figcaption>
+    </figure>
 
 **Password and OIDC Authorization:**
 
-**Diagram Placeholder: SafeLine Authorization Screenshots (2 images)**
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-offline.png" alt="Safeline Offline">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Password and OIDC Authorization.
+      </figcaption>
+    </figure>
 
 ---
 
