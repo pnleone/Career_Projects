@@ -441,21 +441,111 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
    </ul>
   </div>
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/diagrams/cisco.png" alt="Routing diagram screenshot">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Routing overview: R1 ↔ R2 point-to-point and VLAN uplinks.
-      </figcaption>
-    </figure>
-  </div>
-</div>
+### Router R1 Configuration
 
-**vSwitch (Layer 2):**
+```
+      R1#show ip int br
+      Interface                  IP-Address      OK? Method Status                Protocol
+      GigabitEthernet0/0         192.168.1.6     YES NVRAM  up                    up
+      GigabitEthernet0/1         192.168.100.6   YES NVRAM  up                    up
+      GigabitEthernet0/2         192.168.200.6   YES NVRAM  up                    up
+      GigabitEthernet0/3         10.30.0.1       YES manual up                    up
+      R1#show ip route
+      Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+            D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+            N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+            E1 - OSPF external type 1, E2 - OSPF external type 2
+            i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+            ia - IS-IS inter area, * - candidate default, U - per-user static route
+            o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+            a - application route
+            + - replicated route, % - next hop override, p - overrides from PfR
 
-- Provides VLAN trunking and access port simulation
-- Supports STP testing and loop prevention validation
-- Enables port security and MAC address filtering research
+      Gateway of last resort is not set
+
+            10.0.0.0/8 is variably subnetted, 3 subnets, 3 masks
+      S        10.20.0.0/24 [1/0] via 192.168.1.1
+      C        10.30.0.0/30 is directly connected, GigabitEthernet0/3
+      L        10.30.0.1/32 is directly connected, GigabitEthernet0/3
+            192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
+      C        192.168.1.0/24 is directly connected, GigabitEthernet0/0
+      L        192.168.1.6/32 is directly connected, GigabitEthernet0/0
+      O     192.168.2.0/24 [110/2] via 10.30.0.2, 6d22h, GigabitEthernet0/3
+      O     192.168.3.0/24 [110/2] via 10.30.0.2, 6d22h, GigabitEthernet0/3
+            192.168.100.0/24 is variably subnetted, 2 subnets, 2 masks
+      C        192.168.100.0/24 is directly connected, GigabitEthernet0/1
+      L        192.168.100.6/32 is directly connected, GigabitEthernet0/1
+            192.168.200.0/24 is variably subnetted, 2 subnets, 2 masks
+      C        192.168.200.0/24 is directly connected, GigabitEthernet0/2
+      L        192.168.200.6/32 is directly connected, GigabitEthernet0/2
+      R1#show ip proto
+      *** IP Routing is NSF aware ***
+
+      Routing Protocol is "application"
+      Sending updates every 0 seconds
+      Invalid after 0 seconds, hold down 0, flushed after 0
+      Outgoing update filter list for all interfaces is not set
+      Incoming update filter list for all interfaces is not set
+      Maximum path: 32
+      Routing for Networks:
+      Routing Information Sources:
+         Gateway         Distance      Last Update
+      Distance: (default is 4)
+
+      Routing Protocol is "ospf 1"
+      Outgoing update filter list for all interfaces is not set
+      Incoming update filter list for all interfaces is not set
+      Router ID 192.168.200.6
+      It is an autonomous system boundary router
+      Redistributing External Routes from,
+      Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+      Maximum path: 4
+      Routing for Networks:
+         192.168.1.0 0.0.0.255 area 0
+         192.168.100.0 0.0.0.255 area 0
+         192.168.200.0 0.0.0.255 area 0
+      Routing on Interfaces Configured Explicitly (Area 0):
+         GigabitEthernet0/3
+      Passive Interface(s):
+         GigabitEthernet0/0
+         GigabitEthernet0/1
+         GigabitEthernet0/2
+      Routing Information Sources:
+         Gateway         Distance      Last Update
+         192.168.3.9          110      6d22h
+      Distance: (default is 110)
+```
+
+#### OSPF Routing Configuration
+
+**Protocol:** OSPF Version 2 (OSPFv2 for IPv4)  
+**Process ID:** 1  
+**Area:** 0 (Backbone area - single-area design)  
+**Network Type:** Point-to-point (10.30.0.0/30 link)
+
+**R1 OSPF Configuration:**
+```
+router ospf 1
+router-id 192.168.200.6
+network 192.168.1.0 0.0.0.255 area 0
+network 192.168.100.0 0.0.0.255 area 0
+network 192.168.200.0 0.0.0.255 area 0
+```
+
+**R2 OSPF Configuration:**
+```
+router ospf 1
+router-id 192.168.3.9
+network 192.168.2.0 0.0.0.255 area 0
+network 192.168.3.0 0.0.0.255 area 0
+```
+**Routing Table Verification:**
+
+- R1 learns routes to 192.168.2.0/24 and 192.168.3.0/24 via OSPF (Administrative Distance 110)
+- R2 learns routes to 192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24 via OSPF
+- OSPF neighbor adjacency established (Full state) on G0/3 (R1) and G0/0 (R2)
+
+
 <div class="two-col-right">
   <div class="text-col">
     <h3>vSwitch (Layer 2):</h3>
@@ -477,38 +567,6 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
     </figure>
   </div>
 </div>
-#### OSPF Routing Configuration
-
-**Protocol:** OSPF Version 2 (OSPFv2 for IPv4)  
-**Process ID:** 1  
-**Area:** 0 (Backbone area - single-area design)  
-**Network Type:** Point-to-point (10.30.0.0/30 link)
-
-**R1 OSPF Configuration:**
-```
-router ospf 1
-router-id 192.168.200.6
-network 192.168.1.0 0.0.0.255 area 0
-network 192.168.100.0 0.0.0.255 area 0
-network 192.168.200.0 0.0.0.255 area 0
-network 10.30.0.0 0.0.0.3 area 0
-```
-
-**R2 OSPF Configuration:**
-```
-router ospf 1
-router-id 192.168.3.9
-network 192.168.2.0 0.0.0.255 area 0
-network 192.168.3.0 0.0.0.255 area 0
-network 10.30.0.0 0.0.0.3 area 0
-```
-**Routing Table Verification:**
-
-- R1 learns routes to 192.168.2.0/24 and 192.168.3.0/24 via OSPF (Administrative Distance 110)
-- R2 learns routes to 192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24 via OSPF
-- Point-to-point link (10.30.0.0/30) advertised by both routers
-- OSPF neighbor adjacency established (Full state) on G0/3 (R1) and G0/0 (R2)
-
 #### Test Host Configuration
 
 **cisco-host1 (192.168.100.4):**
