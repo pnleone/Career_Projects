@@ -212,85 +212,35 @@
   display: block;
   margin: 0 auto;
 }
-/* custom-images.css */
-
-/* Target the typeset/content area used by MkDocs Material and similar themes */
-.md-typeset figure.full-content,
-.md-content figure.full-content {
-  width: 100%;
-  max-width: 100%;
-  margin: 1rem 0;
-}
-
-/* Make the image fill the content column and remain responsive */
-.md-typeset figure.full-content img,
-.md-content figure.full-content img {
-  display: block;
-  width: 80%;
-  height: auto;
-  max-width: 80%;
-  object-fit: contain;
-}
-
-/* Caption styling that follows theme variables where available */
-.md-typeset figure.full-content figcaption,
-.md-content figure.full-content figcaption {
-  font-size: 0.9rem;
-  color: var(--md-secondary-text-color, #666);
-  margin-top: 0.5rem;
-  line-height: 1.3;
-}
-
-/* Optional: center the figure if theme adds extra alignment rules */
-.md-typeset figure.full-content,
-.md-content figure.full-content {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Mobile safety: ensure no horizontal overflow on very small screens */
-@media (max-width: 640px) {
-  .md-typeset figure.full-content,
-  .md-content figure.full-content {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
-}
-/* Two-column staggered text layout */
-.two-col-text-staggered {
+/* Two equal text columns, side by side */
+.two-col-text-even {
   display: flex;
   gap: 1.5rem;
   align-items: flex-start;
   margin: 1.5rem 0;
 }
 
-/* Left text column */
-.two-col-text-staggered .text-col-left {
+/* Left column */
+.two-col-text-even .text-left {
   flex: 1 1 50%;
   min-width: 220px;
 }
 
-/* Right text column (starts halfway down) */
-.two-col-text-staggered .text-col-right {
+/* Right column */
+.two-col-text-even .text-right {
   flex: 1 1 50%;
   min-width: 220px;
-  margin-top: 50%;   /* key offset */
 }
 
 /* Responsive: stack on small screens */
 @media (max-width: 900px) {
-  .two-col-text-staggered {
+  .two-col-text-even {
     flex-direction: column;
   }
 
-  .two-col-text-staggered .text-col-left,
-  .two-col-text-staggered .text-col-right {
+  .two-col-text-even .text-left,
+  .two-col-text-even .text-right {
     flex: 1 1 100%;
     max-width: 100%;
-  }
-
-  /* Remove stagger on mobile */
-  .two-col-text-staggered .text-col-right {
-    margin-top: 0;
   }
 }

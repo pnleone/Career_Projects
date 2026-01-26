@@ -422,8 +422,9 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 ---
 
 ### 4.1 Network Topology & Configuration
-<div class="two-col-text-staggered">
-  <div class="text-col-left">
+
+<div class="two-col-text-even">
+  <div class="text-left">
    <h3>R1 (192.168.200.6) - Primary Router</h3>
     <ul>
       <li><strong>G0/0:</strong> 192.168.1.6/24 — Production network uplink</li>
@@ -433,7 +434,7 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
     </ul>
   </div>
 
-  <div class="text-col-right">
+  <div class="text-right">
    <h3>R2 (192.168.3.9) - Secondary Router</h3>
    <ul>
       <li><strong>G0/0:</strong> 10.30.0.2/30 — Point-to-point link to R1</li>
