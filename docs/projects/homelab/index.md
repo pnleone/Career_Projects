@@ -35,13 +35,13 @@
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
 #### Main lab LAN Hosting the following workloads:
-- Docker engines supporting container services 
-- Microsoft Active Directory Domain Services
+- **Docker** engines supporting container services 
+- **Microsoft Active Directory** Domain Services
 - Reverse Proxy and DNS Services
-- FortiGate Management Services
+- **FortiGate** Management Services
 - Integration to ISO LANs
-  - Cisco ISO LAN
-  - OPNsense ISO LAN
+    - **Cisco** ISO LAN
+    - **OPNsense** ISO LAN
 
 ### LAB_LAN1 and EXT_LAN
 
@@ -51,7 +51,7 @@
 
 #### Lab/Ext LANs Hosting the following workloads:
 - PKI Services
-- VMware ESXi
+- **VMware** ESXi
 - Test external workloads 
 
 ### LAB_LAN2
@@ -61,5 +61,5 @@
        style="width: 100%; height: auto; display: block; margin: 0 auto;">   
 
 #### Lab2 LAN Hosting the following workloads:
-- Kubernetes/K3s Cluster Services (SOC Services)
+- **Kubernetes/K3s** Cluster Services (SOC Services)
 - ELK Stack and Lab Dashboard 
