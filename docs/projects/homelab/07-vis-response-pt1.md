@@ -1,0 +1,1129 @@
+# Observability and Response Architecture
+
+**Created By:** Paul Leone  
+**Date:** January 11, 2026
+
+---
+
+## Table of Contents
+
+1. [Architecture Overview](#architecture-overview)
+2. [Splunk Enterprise SIEM Platform](#splunk-enterprise-siem-platform)
+3. [Elastic Stack (ELK) Observability Platform](#elastic-stack-elk-observability-platform)
+4. [Wazuh Endpoint Detection and Response (EDR)](#wazuh-endpoint-detection-and-response-edr)
+5. [Security Homelab Section Links](#security-homelab-section-links)
+
+---
+
+## 1. Architecture Overview
+
+The lab implements a comprehensive observability and security monitoring stack that provides real-time visibility across infrastructure, applications, and security events. This multi-layered approach demonstrates enterprise-grade security operations center (SOC) capabilities and incident response readiness.
+
+### Core Technology Stack
+
+<div class="two-col-right">
+  <div class="text-col">
+    <ul>
+      <li><b>SIEM Platforms:</b> Splunk Enterprise (primary), Elastic Stack (secondary)</li>
+      <li><b>Endpoint Detection:</b> Wazuh EDR agents deployed on 25+ hosts across Windows, Linux, BSD, and macOS</li>
+      <li><b>Network Monitoring:</b> Suricata/Snort IDS, pfSense logging</li>
+      <li><b>Infrastructure Monitoring:</b> Prometheus + Grafana for metrics visualization, CheckMK for system monitoring</li>
+      <li><b>Service Availability:</b> Uptime Kuma for service availability tracking, Pulse for Proxmox-specific monitoring</li>
+      <li><b>Alerting Hub:</b> Discord notifications through webhooks and email alerts through local SMTP relay</li>
+    </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/observability-overview.png" alt="Observability Architecture Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Observability and Response Architecture Overview
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+### Deployment Rationale
+
+Security visibility is foundational to detecting and responding to threats before they cause damage. This architecture demonstrates:
+
+- **Correlation across multiple data sources:** Network, host, and application telemetry
+- **Real-time detection:** Security events and anomalies identified within seconds
+- **Hands-on experience:** Industry-standard SIEM and monitoring tools (Splunk, Elastic, Prometheus, Wazuh)
+- **Enterprise SOC patterns:** Integration workflows used in production environments
+- **Automated response:** Incident response workflows triggered by alert conditions
+
+### Architecture Principles Alignment
+
+**Defense in Depth:**
+
+- Real-time SIEM correlation across multiple data sources (network, host, application)
+- Multiple detection mechanisms reduce blind spots (SIEM, EDR)
+- Correlation across network, application, and endpoint layers
+- Redundant monitoring platforms (Splunk + Elastic) ensure continuity
+
+**Secure by Design:**
+
+- Integration patterns demonstrate enterprise SOC workflows
+- Documented playbooks and alert workflows for incident response
+
+**Zero Trust:**
+
+- Continuous verification through comprehensive logging (100% security event coverage)
+- Identity-aware monitoring tracks user behavior across systems
+
+### Strategic Value
+
+**Comprehensive Visibility:**
+
+- 360-degree view from network perimeter to application layer
+- Unified dashboards provide single pane of glass for security posture
+
+**Defense in Depth:**
+
+- Multiple detection mechanisms reduce single points of failure
+- Overlapping coverage ensures threats are caught by at least one control
+
+**Skills Development:**
+
+- Experience with commercial (Splunk) and open-source (Elastic) platforms
+- Hands-on with tools directly transferable to SOC Analyst roles
+
+**Incident Response:**
+
+- Documented playbooks and alert workflows demonstrate operational maturity
+- Integration with TheHive enables case management and forensic tracking
+
+**Compliance Readiness:**
+
+- Audit logs retained for 90 days with searchable correlation
+- Immutable SIEM indexes support forensic investigations
+- Comprehensive logging satisfies PCI-DSS 10.2, NIST SP 800-53 AU-2
+
+### Why Multiple SIEM Platforms?
+
+**Splunk (Primary):**
+
+- Mature SPL query language for security event correlation
+- Industry-standard platform used in enterprise SOCs
+- Robust alerting and dashboard capabilities
+
+**Elastic (Secondary):**
+
+- ECS (Elastic Common Schema) standardization for vendor-neutral data modeling
+- Focus on application telemetry and infrastructure metrics
+- Open-source alternative demonstrates platform versatility
+
+**Rationale:** Dual deployment provides redundancy and learning opportunities with both commercial and open-source platforms commonly used in enterprise environments. This approach demonstrates adaptability and reduces vendor lock-in risk.
+
+---
+
+## 2. Splunk Enterprise SIEM Platform
+
+### Deployment Overview
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Splunk Enterprise functions as the centralized Security Information and Event Management (SIEM) platform for the lab environment, providing unified log aggregation, correlation, and real-time detection across all security and infrastructure layers. The deployment uses a single-instance architecture optimized for lab-scale operations, with a clear expansion path toward distributed indexing and search head clustering as data volume grows.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/splunk-architecture.png" alt="Splunk Architecture Diagram">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Splunk Enterprise SIEM Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+Splunk ingests telemetry from firewalls, IDS/IPS sensors, EDR agents, authentication systems, and application logs, normalizing events through the Common Information Model (CIM) to enable consistent, cross-source analytics.
+
+### Security Impact
+
+Splunk delivers enterprise-grade detection and visibility by consolidating more than 30 data sources into a single analytical plane. Real-time alerting identifies brute-force attempts, port scans, anomalous authentication behavior, and early indicators of lateral movement. Correlation searches detect multi-stage attack patterns such as privilege escalation, internal reconnaissance, and data exfiltration.
+
+### Deployment Rationale
+
+A SIEM is the analytical backbone of any modern security program, enabling defenders to transform raw telemetry into actionable intelligence. This Splunk deployment demonstrates core SIEM competencies found in enterprise environments: CIM-based normalization, multi-source correlation, automated alerting, and integration with downstream SOAR workflows.
+
+### Architecture Principles Alignment
+
+**Defense in Depth:**
+
+- Aggregates telemetry from every security layer (network, endpoint, identity, application)
+- Correlation searches combine multiple signals to detect attacks that bypass single controls
+- Redundant sourcetypes (pfSense, Suricata, Wazuh) ensure detection continuity
+
+**Secure by Design:**
+
+- CIM standardization enforces consistent field structures
+- Universal Forwarders provide authenticated, encrypted log transport
+- Automated alerting and workflow triggers reduce human error
+
+**Zero Trust:**
+
+- No event or data source is implicitly trusted
+- Identity-centric analytics detect anomalous authentication
+- Continuous monitoring ensures every action is observable
+
+### Deployment Architecture
+
+| Component | Technology | Location | Purpose |
+|-----------|------------|----------|---------|
+| Splunk Indexer | Splunk Enterprise 9.2.x | Ubuntu VM | Log storage and search |
+| Splunk Forwarder | Universal Forwarder 9.2 | All monitored hosts | Log collection and forwarding |
+| Data Inputs | Syslog, file monitoring | Various | Ingestion methods |
+| Indexes | Time-series buckets | /opt/splunk/var/lib | Segmented storage |
+
+### Universal Forwarder Deployment
+
+| Host Type | Forwarder Count | Logs Forwarded | Volume/Day |
+|-----------|-----------------|----------------|------------|
+| pfSense Firewalls | 2 | Firewall, VPN, System, Auth | 500 MB |
+| OPNsense Firewall | 1 | Firewall logs | 100 MB |
+| Suricata IDS | 2 (LAN + WAN) | IDS/IPS alerts, flow data | 2 GB |
+| Snort IDS | 2 (VPN tunnels) | IDS alerts | 200 MB |
+| Wazuh Manager | 1 | Security alerts, audit logs | 300 MB |
+| Windows Hosts | 4 | Sysmon XML events | 800 MB |
+| Linux Hosts | 15 | Syslog auth logs | 400 MB |
+
+### Index Design
+
+| Index Name | Data Sources | Retention | Size/Day | Purpose |
+|------------|--------------|-----------|----------|---------|
+| firewall-a | pfSense filterlog | 90 days | 400 MB | Network traffic logs |
+| vpn | pfSense VPN logs | 90 days | 50 MB | VPN connection logs |
+| system | pfSense system logs | 90 days | 50 MB | System events |
+| auth | pfSense auth logs | 90 days | 20 MB | Authentication events |
+| opnsense-syslog | OPNsense firewall | 90 days | 100 MB | Firewall logs |
+| suricata-lan | Suricata LAN interface | 90 days | 1 GB | IDS alerts (internal) |
+| suricata-wan | Suricata WAN interface | 90 days | 1 GB | IDS alerts (external) |
+| pia-ny | Snort on PIA NY tunnel | 90 days | 100 MB | VPN tunnel IDS |
+| pia-can-mont | Snort on PIA Montreal | 90 days | 100 MB | VPN tunnel IDS |
+| wazuh-alerts | Wazuh security events | 90 days | 300 MB | Endpoint security |
+| xmlwineventlog | Windows Sysmon | 90 days | 800 MB | Windows telemetry |
+
+**Index Optimization:**
+
+- Hot/Warm/Cold Architecture: 7 days hot, 30 days warm, 53 days cold
+- Compression: ~70% compression ratio on warm/cold buckets
+- Frozen: Archive to NAS after 90 days (compressed tar.gz)
+
+### Log Aggregation
+
+**Data Inputs:**
+
+| Source | Input Type | Method | Notes |
+|--------|------------|--------|-------|
+| Wazuh | JSON over TCP | Splunk Universal Forwarder | Includes security alerts and audit logs |
+| pfSense | Log files | Splunk Universal Forwarder | Firewall logs, VPN, authorization, and System |
+| Suricata | JSON over File | Splunk Universal Forwarder | IDS/IPS alerts, flow data |
+| OPNsense | Syslog (UDP) | Splunk Universal Forwarder | Firewall logs |
+| Sysmon | XML via EventLog | Splunk Universal Forwarder | Windows endpoint telemetry, process tracking |
+
+![Splunk Data Inputs Screenshot](/Career_Projects/assets/screenshots/splunk-inputs.png)
+
+### Data Normalization and Field Extraction
+
+**Common Information Model (CIM) Compliance:**
+
+Splunk CIM provides standardized field names across data sources for correlation.
+
+| CIM Data Model | Normalized Fields | Source Types |
+|----------------|-------------------|--------------|
+| Network Traffic | src_ip, dest_ip, src_port, dest_port | pfsense:filterlog, suricata |
+| Authentication | user, src, dest, action | pfsense:auth, wazuh-alerts |
+| Intrusion Detection | signature, severity, category | suricata, snort |
+| Endpoint | process, parent_process, user | xmlwineventlog:sysmon |
+
+**Field Extraction Example (transforms.conf):**
+```ini
+[pfsense-filterlog-extract]
+REGEX = ^(\S+)\s+\S+\s+filterlog\[\d+\]:\s+\d+,,,(\d+),(\w+),(\d+),(\S+),(\d+),(\S+),(\d+),(\w+),(\d+),(\d+),(\d+),(\S+),(\d+),(\d+),(\d+),(\d+),(\w+)
+FORMAT = interface::$1 rule_number::$2 action::$3 protocol::$4 src_ip::$5 src_port::$6 dest_ip::$7 dest_port::$8
+```
+
+### Searches, Reports, and Dashboards
+
+#### SIEM Overview Dashboard
+
+**Panels:**
+
+- Events per Second (EPS): Real-time ingestion rate
+- Alerts by Source: Pie chart of alert volume by tool
+- Top Source IPs: Bar chart of most active IPs
+- Blocked vs Allowed Traffic: Percentage breakdown
+- Failed Authentication Attempts: Table with user, src_ip, count
+- Suricata Alerts by Severity: Critical/High/Medium/Low distribution
+
+**Search Query Example (Failed SSH Attempts):**
+```spl
+index=auth sourcetype=pfsense:auth "Failed password"
+| rex field=_raw "Failed password for (?<user>\w+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| stats count by src_ip, user
+| where count > 5
+| sort -count
+| eval severity=if(count>20,"Critical",if(count>10,"High","Medium"))
+```
+
+![Splunk SIEM Overview Dashboard](/Career_Projects/assets/screenshots/splunk-siem-overview.png)
+
+#### Firewall Activity Dashboard
+
+**Panels:**
+
+- Traffic by Interface: Line chart over time (vtnet0, ovpnc1, ovpnc2)
+- Top Talkers: Table of src_ip, dest_ip, bytes transferred
+- Blocked Connections: Geolocation map of blocked source IPs
+- Protocol Distribution: Pie chart (TCP, UDP, ICMP)
+- Port Scan Detection: Search for rapid connection attempts to multiple ports
+
+**Search Query Example (VPN Traffic Analysis):**
+```spl
+index=firewall-a sourcetype=pfsense:filterlog
+| eval interface=if(like(interface,"%ovpnc%"),"VPN","Direct")
+| stats sum(bytes) as total_bytes by interface
+| eval total_gb=round(total_bytes/1024/1024/1024,2)
+```
+
+![Splunk Firewall Activity Dashboard](/Career_Projects/assets/screenshots/splunk-firewall-dashboard.png)
+
+#### Wazuh Alerts Dashboard
+
+**Query:** `index=wazuh-alerts agent.name=DC01`
+
+![Wazuh Alerts for Windows Server DC01](/Career_Projects/assets/screenshots/splunk-wazuh-dc01.png)
+
+#### Intrusion Prevention System Alerts
+
+**Query:** `index=ids sourcetype=suricata`
+
+![Suricata IDS Alerts Dashboard](/Career_Projects/assets/screenshots/splunk-suricata-alerts.png)
+
+#### Firewall Filter Logs
+
+**Query:** `index=firewall-a sourcetype=pfsense:firewall`
+
+![pfSense Firewall Filter Logs](/Career_Projects/assets/screenshots/splunk-pfsense-filter.png)
+
+### Correlation Searches
+
+#### Brute Force Detection (Multi-Source)
+```spl
+(index=auth sourcetype=pfsense:auth "Failed password") OR
+(index=wazuh-alerts rule.description="*authentication failed*")
+| eval src_ip=coalesce(src,source_ip)
+| stats count by src_ip, dest
+| where count > 10
+| eval threat_level="High"
+```
+
+#### Port Scan Detection
+```spl
+index=firewall-a action=block
+| stats dc(dest_port) as unique_ports, count by src_ip, dest_ip
+| where unique_ports > 50 AND count > 100
+| eval description="Possible port scan: ".src_ip." scanning ".unique_ports." ports on ".dest_ip
+```
+
+### Alert Configuration
+
+**Scheduled Alerts:**
+
+| Alert Name | Search Schedule | Trigger Condition | Action |
+|------------|-----------------|-------------------|--------|
+| Failed SSH Brute Force | Every 5 minutes | >20 failed attempts | Discord |
+| Critical Wazuh Alert | Real-time | rule.level >= 12 | Discord |
+| Suricata High Severity | Every 15 minutes | alert.severity = 1 | Discord |
+| VPN Tunnel Down | Every 1 minute | No VPN traffic in 2 min | Discord |
+| Anomalous Outbound Traffic | Every 30 minutes | Bytes > 10GB in 30min | Discord |
+
+**Alert Tuning and False Positive Management:**
+
+- Baseline Period: 30 days to establish normal behavior
+- Dynamic Thresholds: Adjust based on time of day, day of week
+- Whitelist: Known benign IPs/hosts excluded from alerts
+- Alert Suppression: Maximum 1 alert per source per hour
+- Escalation: Critical alerts escalate after 15 minutes if unacknowledged
+
+### Security Use Cases
+
+#### Use Case 1: Lateral Movement Detection
+
+**Objective:** Detect unauthorized account access across multiple systems
+
+**SPL Query:**
+```spl
+index=wazuh-alerts OR index=auth
+| eval user=coalesce(user.name,user)
+| stats dc(agent.name) as unique_hosts by user
+| where unique_hosts > 5
+| eval threat="Potential lateral movement: user accessed ".unique_hosts." hosts"
+```
+
+#### Use Case 2: Data Exfiltration Detection
+
+**Objective:** Identify large outbound data transfers
+
+**SPL Query:**
+```spl
+index=firewall-a action=pass
+| eval outbound=if(like(dest_ip,"192.168.%"),0,1)
+| where outbound=1
+| stats sum(bytes) as total_bytes by src_ip, dest_ip
+| where total_bytes > 1073741824
+| eval total_gb=round(total_bytes/1024/1024/1024,2)
+| eval alert="Potential data exfiltration: ".total_gb."GB transferred"
+```
+
+#### Use Case 3: Malware Execution Detection
+
+**Objective:** Detect execution of known malicious files
+
+**SPL Query:**
+```spl
+index=xmlwineventlog EventCode=1
+| eval md5=lower(Hashes)
+| lookup malware_hashes.csv md5 OUTPUT malware_name
+| where isnotnull(malware_name)
+| table _time, Computer, User, Image, malware_name, CommandLine
+```
+
+---
+
+## 3. Elastic Stack (ELK) Observability Platform
+
+### Deployment Overview
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>The Elastic Stack provides end-to-end observability across applications, infrastructure, and security events using the Elastic Common Schema (ECS) for standardized data modeling. This deployment emphasizes application performance monitoring (APM), infrastructure telemetry, and container visibility, complementing Splunk's security-centric analytics.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/elastic-architecture.png" alt="Elastic Stack Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Elastic Stack Observability Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+Fleet Server centrally manages more than 25 distributed Elastic Agents, enforcing consistent policies across hybrid environments including VMs, Docker containers, and Kubernetes workloads. Kibana dashboards deliver real-time insights into system performance, application behavior, and operational health.
+
+### Security Impact
+
+Elastic enhances the security posture by delivering deep visibility into application and infrastructure behavior. ECS-compliant data modeling enables vendor-neutral threat detection and correlation across diverse telemetry sources. Infrastructure metrics expose resource exhaustion attacks, while container security monitoring identifies anomalous behavior within Docker and Kubernetes environments.
+
+### Deployment Rationale
+
+While Splunk serves as the primary SIEM for security event correlation, Elastic Stack provides complementary strengths in application-level observability, infrastructure telemetry, and open-source analytics. ECS-based normalization supports vendor-agnostic correlation and multi-SIEM workflows.
+
+### Architecture Principles Alignment
+
+**Defense in Depth:**
+
+- Adds application-level and infrastructure-level visibility
+- Container and Kubernetes monitoring provide additional layers of behavioral detection
+- ECS normalization enables correlation across heterogeneous data sources
+
+**Secure by Design:**
+
+- ECS enforces consistent field structures
+- Fleet Server centralizes agent policy enforcement
+- Scalable architecture supports high-cardinality metrics
+
+**Zero Trust:**
+
+- No telemetry source is implicitly trusted
+- Continuous monitoring of applications, containers, and infrastructure
+- Segmented data pipelines prevent cross-contamination
+
+### Component Architecture
+
+- **Elasticsearch:** Distributed search and analytics engine that stores and indexes structured and unstructured data
+- **Logstash:** Data processing pipeline that ingests, transforms, and forwards logs to Elasticsearch (used selectively)
+- **Kibana:** Visualization and management interface for exploring data, building dashboards, and managing Fleet
+- **Fleet Server:** Manages Elastic Agent enrollment, policy distribution, and secure communication with Elasticsearch
+
+![Elastic Component Architecture](/Career_Projects/assets/diagrams/elastic-components.png)
+
+### Core ELK Stack Configuration
+
+The central Elastic Stack is deployed on a KVM virtual machine running Debian 13, hosting:
+
+- **Elasticsearch**, **Logstash**, and **Kibana** (ELK)
+- **Fleet Server** and a local **Elastic Agent**
+- Version: **9.2.1**
+
+This VM serves as the central ingest, processing, and visualization hub for all telemetry across the lab environment.
+
+### Distributed Elastic Agents
+
+Elastic Agents are deployed across multiple hosts, each assigned a tailored Fleet policy with relevant integrations:
+
+| Hostname | OS / Platform | Agent Policy Integrations |
+|----------|---------------|---------------------------|
+| Traefik LXC Host | LXC container | system, Traefik integration for access logs and metrics |
+| DC01 | Windows Server 2022 VM | system, Windows, and Sysmon integrations for endpoint and process telemetry |
+| DockerVM1 | Ubuntu VM | system, Docker, Prometheus, and OPNSense (pfSense) integrations |
+| DockerVM2 | Docker container running on Debian VM | system, Docker, authentik integration for event and user activity logs |
+| Proxmox PVE Host | Proxmox VE (Debian) | system, Auditd integration for kernel-level audit logging, Cisco IOS Syslog |
+| Ubuntu-Apache LXC | LXC container | system, Apache HTTP Server, Suricata, and pfSense integrations for web and IDS logs |
+| K3s-control | Kubernetes container | System, Kubernetes metrics, network packet capture |
+| K3s-worker | Kubernetes container | System, Kubernetes metrics, network packet capture |
+
+![Elastic Agent Deployment](/Career_Projects/assets/screenshots/elastic-agents.png)
+
+Each agent is enrolled via Fleet and centrally managed through Kibana, enabling consistent policy updates, secure API key rotation, and streamlined observability across the lab.
+
+### Fleet Policy Configuration
+
+**Example: Windows Endpoint Policy**
+
+**Integrations:**
+
+- System: CPU, memory, disk, network metrics
+- Windows: Event logs (Security, Application, System)
+- Sysmon: Process creation, network connections, registry changes
+
+**Data Stream Configuration:**
+
+`logs-windows.sysmon-default:`
+
+- EventID 1: Process creation
+- EventID 3: Network connection
+- EventID 7: Image loaded
+- EventID 10: Process access
+- EventID 11: File creation
+- EventID 13: Registry value set
+
+`metrics-system.cpu-default:`
+
+- Metricset: cpu
+- Period: 10s
+- CPU percentages: user, system, idle, iowait
+
+### Elastic Common Schema (ECS) Mapping
+
+**ECS Field Standardization:**
+
+| Integration | ECS Dataset Prefix | Key ECS Fields Used |
+|-------------|-------------------|---------------------|
+| System | system.* | host.name, process.name, user.name, event.type |
+| Windows/Sysmon | windows.* | event.code, process.parent.name, registry.path |
+| Docker | docker.* | container.id, container.image.name, host.hostname |
+| Prometheus | prometheus.* | metricset.name, service.name, labels.* |
+| Suricata | suricata.eve | network.protocol, source.ip, event.category |
+| Apache | apache.access | http.request.method, url.path, user_agent.name |
+| Authentik | authentik.* (custom) | user.name, event.action, event.dataset |
+| Auditd | auditd.* | process.executable, event.action, user.id |
+| pfSense/OPNSense | firewall.* | source.ip, destination.port, event.outcome |
+
+**ECS Benefits:**
+
+- Vendor Neutrality: Same queries work across different data sources
+- Future-Proof: Adding new integrations automatically compatible
+- Community Standard: Widely adopted in security and observability communities
+
+![Elastic Ingest Pipeline](/Career_Projects/assets/screenshots/elastic-ingest-pipeline.png)
+
+### Kibana Dashboards
+
+#### Ingest Pipelines
+
+- **Filebeat-style inputs** via Elastic Agent for eve.json, Apache logs, and custom JSON
+- **Syslog inputs** for pfSense and OPNSense firewall logs
+- **HTTP JSON inputs** for Authentik API event collection
+- **Processors** include:
+  - decode_json_fields for NDJSON
+  - add_fields for tagging source and dataset
+  - geoip and user_agent enrichment where applicable
+
+#### Dashboard Examples
+
+**Authentik Authentication Dashboard:**
+
+**Visualizations:**
+
+- Login Success Rate: Pie chart showing successful vs failed logins
+- Login Attempts by User: Bar chart
+- Geographic Login Distribution: Map of source.geo.location
+- Authentication Timeline: Bar chart of login events
+- Top Applications Accessed: Pie chart of event.dataset
+
+![Authentik Authentication Dashboard](/Career_Projects/assets/screenshots/kibana-authentik.png)
+
+**Suricata IDS Dashboard:**
+
+**Visualizations:**
+
+- Event Count
+- Alert Severity Distribution: Pie chart (Critical, High, Medium, Low, Info)
+- Activity Types Over Time: Stacked bar chart with 5-minute buckets
+- Top Attack Signatures: Data table with alert.signature and count
+- Protocol Breakdown: Donut chart of network.protocol
+- Destination Ports: Heatmap of frequently targeted ports
+
+**Example Kibana Query (KQL):**
+```kql
+event.dataset: suricata.eve AND event.kind: alert AND alert.severity: [1 TO 2]
+```
+
+![Suricata IDS Dashboard](/Career_Projects/assets/screenshots/kibana-suricata.png)
+
+**pfSense Firewall Filter Log and Location Dashboard:**
+
+![pfSense Firewall Logs](/Career_Projects/assets/screenshots/kibana-pfsense-filter.png)
+
+![pfSense Geographic Location Map](/Career_Projects/assets/screenshots/kibana-pfsense-geo.png)
+
+**Windows Overview and Security Dashboards:**
+
+**Visualizations:**
+
+- Number of events
+- Top Event IDs
+- Number of Events Over Time by Channel: Bar chart of events by date
+- Total Administrator and standard logins
+- Login Event Timeline: Line graph of administrator and standard login events
+- Administrator Users: Pie chart of logins by account
+- Login Types: Pie chart of the login event by type
+- Login Sources: Bar chart of the logins by source IP
+- Login events: Table of login event by account, source IP and threads
+
+![Windows Overview Dashboard](/Career_Projects/assets/screenshots/kibana-windows-overview.png)
+
+![Windows Security Dashboard](/Career_Projects/assets/screenshots/kibana-windows-security.png)
+
+---
+
+## 4. Wazuh Endpoint Detection and Response (EDR)
+
+### Deployment Overview
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Wazuh provides host-based security monitoring, threat detection, and compliance auditing across Windows, Linux, BSD, and macOS endpoints. The platform combines SIEM-style log analysis with EDR-grade telemetry to deliver comprehensive endpoint visibility. Wazuh Agents collect file integrity data, vulnerability information, authentication logs, and system events, forwarding them to a centralized Wazuh Manager for correlation and alerting.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/wazuh-architecture.png" alt="Wazuh EDR Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Wazuh EDR Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+### Security Impact
+
+Wazuh strengthens endpoint security by detecting unauthorized file changes, rootkits, suspicious processes, and privilege escalation attempts. File Integrity Monitoring (FIM) provides early detection of tampering with critical system files, while rootkit detection identifies hidden processes and kernel-level threats. Vulnerability assessment scans endpoints for missing patches and known CVEs, and Security Configuration Assessment (SCA) enforces CIS benchmark compliance.
+
+### Deployment Rationale
+
+Endpoint compromise remains one of the most common initial access vectors in modern attacks. Wazuh provides essential host-level visibility and automated response capabilities that complement network-based and SIEM-based detection. Its multi-OS support ensures consistent monitoring across heterogeneous environments.
+
+### Architecture Principles Alignment
+
+**Defense in Depth:**
+
+- Adds endpoint-layer detection to complement network, identity, and application telemetry
+- FIM, rootkit detection, and vulnerability scanning provide overlapping security controls
+- Active Response automates containment to reduce dwell time
+
+**Secure by Design:**
+
+- CIS benchmark audits enforce hardened configurations
+- SCA policies detect deviations from approved security baselines
+- VirusTotal integration validates suspicious artifacts
+
+**Zero Trust:**
+
+- No endpoint activity is implicitly trusted
+- Continuous monitoring ensures every process, file change, and authentication event is observable
+- Automated containment actions enforce least-privilege
+
+### Component Architecture
+
+**Deployment Model:** Single-node manager running on an LXC, distributed agents
+
+**Components:**
+
+- Wazuh Manager: Core analysis and correlation engine
+- Wazuh Indexer: Stores and indexes security events
+- Wazuh Dashboard: Web UI for search, visualization, and alert management
+- Agents: Installed on monitored endpoints
+- Splunk Universal Forwarder: Log export for system-wide normalization and correlation
+
+### Agent List
+
+| ID | Name | IP address | OS Platform and Release | Agent Version | Status |
+|----|------|------------|-------------------------|---------------|--------|
+| 0 | wazuh | 127.0.0.1 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
+| 1 | Lab-Win11Pro | 192.168.1.200 | Microsoft Windows 11 Pro, r10.0.26100.4652 | Wazuh v4.12.0 | disconnected |
+| 3 | Win11-pfS | 192.168.2.30 | Microsoft Windows 11 Home, r10.0.26100.6899 | Wazuh v4.14.1 | disconnected |
+| 7 | KaliVM | 192.168.1.100 | Kali GNU/Linux, r2025.3 | Wazuh v4.14.1 | active |
+| 13 | Logans-MacBook-Air.local | 192.168.1.207 | macOS, r14.7.8 | Wazuh v4.14.1 | active |
+| 14 | OPNsense.internal | 192.168.1.201 | BSD, r14.3 | Wazuh v4.12.0 | active |
+| 15 | ApacheWeb-lxc | 192.168.1.108 | Ubuntu, r25.04 | Wazuh v4.14.1 | active |
+| 16 | stepca | 192.168.100.51 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
+| 17 | Win11Pro | 192.168.1.111 | Microsoft Windows 11 Pro, r10.0.26100.7171 | Wazuh v4.14.1 | active |
+| 18 | UbuntuGenVM | 192.168.1.126 | Ubuntu, r25.04 | Wazuh v4.14.1 | active |
+| 19 | DC01 | 192.168.1.152 | Microsoft Windows Server 2022 Standard Evaluation, r10.0.20348.4405 | Wazuh v4.14.1 | active |
+| 20 | win11pro2 | 192.168.1.184 | Microsoft Windows 11 Pro for Workstations, r10.0.26200.7171 | Wazuh v4.14.1 | active |
+| 21 | Plex-lxc | 192.168.1.136 | Ubuntu, r22.04.5 LTS | Wazuh v4.14.1 | active |
+| 22 | redhat-control | 192.168.200.21 | Red Hat Enterprise Linux, r10 | Wazuh v4.14.1 | active |
+| 23 | K3s-control | 192.168.200.22 | Red Hat Enterprise Linux, r10 | Wazuh v4.14.1 | active |
+| 24 | pihole | 192.168.1.250 | Ubuntu, r22.04.5 LTS | Wazuh v4.14.1 | active |
+| 25 | traefik | 192.168.1.247 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
+| 26 | dockerVM2 | 192.168.1.166 | Debian GNU/Linux, r13 | Wazuh v4.14.1 | active |
+| 27 | bind9 | 192.168.1.251 | Ubuntu, r25.04 | Wazuh v4.14.1 | active |
+| 28 | unbound | 192.168.1.252 | Ubuntu, r22.04.5 LTS | Wazuh v4.14.1 | active |
+| 29 | grafana | 192.168.1.246 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
+| 30 | ansible | 192.168.1.25 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
+| 31 | centos | 192.168.1.93 | CentOS Stream, r9 | Wazuh v4.14.1 | active |
+| 32 | splunk | 192.168.1.109 | Ubuntu, r24.1 | Wazuh v4.14.1 | active |
+| 33 | fedora | 192.168.100.5 | Fedora Linux, r43 | Wazuh v4.14.1 | active |
+| 34 | elastic | 192.168.200.8 | Debian GNU/Linux, r13 | Wazuh v4.14.1 | active |
+
+![Wazuh Agent List](/Career_Projects/assets/screenshots/wazuh-agents.png)
+
+### Security Monitoring Modules
+
+#### File Integrity Monitoring (FIM)
+
+**Purpose:** Detect unauthorized changes to critical system files and attacker-target directories
+
+**Configuration:**
+
+- Real-time monitoring: Enabled for critical paths and high-risk directories
+- Linux: /root, /tmp, /var/tmp, /home/*/Downloads
+- Windows: C:\Users\*\Downloads, C:\Windows\Temp, C:\Temp, C:\Users\*\AppData\Local\Temp
+- Scheduled scans: Every 12 hours for full filesystem baseline
+- Hash algorithms: MD5, SHA1, SHA256
+- Attributes tracked: Size, permissions, ownership, mtime
+- Alert on: Creation, modification, deletion
+
+![Wazuh FIM Configuration](/Career_Projects/assets/screenshots/wazuh-fim-config.png)
+
+**Example FIM Alerts:**
+
+- Description: New file created in /tmp
+- File: /tmp/malicious.sh
+- Action: Alert + snapshot of file metadata
+
+- Description: Integrity checksum changed
+- File: C:\Windows\System32\drivers\etc\hosts
+- Old MD5: abc123...
+- New MD5: def456...
+- Action: Alert + snapshot of file content
+
+#### Rootkit Detection
+
+**Purpose:** Identify hidden processes, ports, and kernel modules
+
+**Checks Performed:**
+
+- Hidden processes: Compare ps output with /proc
+- Hidden ports: Netstat vs /proc/net/* comparison
+- Kernel modules: Verify against known-good list
+- System binaries: Check for trojaned ls, ps, netstat
+- Registry anomalies: Windows registry rootkits
+
+![Wazuh Rootkit Detection](/Career_Projects/assets/screenshots/wazuh-rootkit.png)
+
+#### Vulnerability Assessment
+
+**Purpose:** Identify missing patches and known CVEs
+
+**Vulnerability Sources:**
+
+- Windows: Microsoft Security Update Guide (MSU)
+- Red Hat/CentOS: OVAL feeds
+- Debian/Ubuntu: Debian Security Tracker
+- macOS: Apple Security Updates
+
+**Example Vulnerability Alert:**
+
+- CVE: CVE-2024-43451
+- Title: NTLM Hash Disclosure Vulnerability
+- CVSS: 8.1 (High)
+- Affected: Windows Server 2022 DC01
+- Package: ntlm.dll version 10.0.20348.2227
+- Fix Available: Yes (KB5043936)
+- Recommendation: Apply security update immediately
+
+#### Security Configuration Assessment (SCA)
+
+**Purpose:** Audit compliance with security benchmarks
+
+**Policies Applied:**
+
+- CIS Windows Server 2022 Benchmark
+- CIS Windows 11 Benchmark
+- CIS Debian 12 Benchmark
+- CIS Debian 13 Benchmark
+- CIS Ubuntu 22.04 LTS Benchmark
+- CIS Red Hat Enterprise Linux 10 Benchmark
+- CIS CentOS Linux 9 Benchmark
+- CIS Distribution Independent Linux Benchmark v2.0.0
+- CIS Apache 2.4 Benchmark
+- PCI-DSS v4.0 requirements
+- NIST 800-53 controls
+
+**Example SCA Finding:**
+
+- Policy: CIS Windows Server 2022
+- Check ID: 2.3.10.5
+- Title: Network access: Do not allow storage of passwords and credentials
+- Status: FAIL
+- Current Value: Enabled
+- Expected Value: Disabled
+- Remediation: Set HKLM\SYSTEM\CurrentControlSet\Control\Lsa\DisableDomainCreds to 1
+- Severity: High
+
+#### Login Monitoring (SSH/RDP)
+
+**Purpose:** Detect brute force attempts and unauthorized remote access
+
+**Configuration:**
+
+- Linux: Monitor /var/log/auth.log for failed SSH login attempts
+- Windows: Monitor Security event channel for Event ID 4625 (failed RDP logins)
+- Thresholds: Multiple failed attempts within a short timeframe trigger high-severity alerts
+
+**Example Alert:**
+
+- Rule ID: 5710
+- Description: Multiple failed SSH login attempts detected
+- Source IP: 192.168.3.45
+- Action: Alert + optional active response (firewall drop)
+
+![Wazuh Login Monitoring](/Career_Projects/assets/screenshots/wazuh-login-monitor.png)
+
+### Active Response
+
+![Wazuh Active Response Configuration](/Career_Projects/assets/screenshots/wazuh-active-response.png)
+
+#### Firewall Drop
+
+**Command:**
+```xml
+<command>
+  <name>firewall-drop</name>
+  <executable>firewall-drop</executable>
+  <expect>srcip</expect>
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+```
+
+**Active Response:**
+```xml
+<active-response>
+  <command>firewall-drop</command>
+  <location>any</location>
+  <rules_group>authentication_failed,sshd</rules_group>
+  <timeout>600</timeout>
+</active-response>
+```
+
+- **Alerts/Trigger:** Fires when rules in the authentication_failed or sshd groups are triggered
+- **Workflow:** Wazuh passes the offending source IP (srcip) to the firewall-drop script, which inserts an iptables rule to block traffic. After 600 seconds, the block is lifted.
+- **Benefit:** Immediate containment of brute-force attackers
+
+#### Host Deny
+
+**Command:**
+```xml
+<command>
+  <name>host-deny</name>
+  <executable>host-deny</executable>
+  <expect>srcip</expect>
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+```
+
+**Active Response:**
+```xml
+<active-response>
+  <command>host-deny</command>
+  <location>any</location>
+  <rules_group>authentication_failed</rules_group>
+  <timeout>600</timeout>
+</active-response>
+```
+
+- **Alerts/Trigger:** Activated on authentication_failed events
+- **Workflow:** The offending IP is added to /etc/hosts.deny. After 600 seconds, the entry is removed.
+- **Benefit:** Lightweight containment using TCP wrappers
+
+#### Disable Account
+
+**Command:**
+```xml
+<command>
+  <name>disable-account</name>
+  <executable>disable-account</executable>
+  <expect>user</expect>
+  <timeout_allowed>no</timeout_allowed>
+</command>
+```
+
+**Active Response:**
+```xml
+<active-response>
+  <command>disable-account</command>
+  <location>local</location>
+  <rules_group>authentication_failed</rules_group>
+</active-response>
+```
+
+- **Alerts/Trigger:** Fires when a local user repeatedly fails authentication
+- **Workflow:** Wazuh passes the username to the disable-account script, which locks the account immediately
+- **Benefit:** Prevents compromised or brute-forced accounts from being abused
+
+### Integrations
+
+#### Splunk
+
+**Log Forwarding Configuration:**
+
+Wazuh Manager → Splunk Universal Forwarder → Splunk Indexer
+
+**Forwarder Configuration (inputs.conf):**
+```ini
+[monitor:///var/ossec/logs/alerts/alerts.json]
+disabled = false
+sourcetype = wazuh:alerts
+index = wazuh-alerts
+source = wazuh-manager
+```
+
+**Alert Enrichment in Splunk:**
+
+- MITRE ATT&CK Mapping: Techniques and tactics
+- Asset Context: Host criticality, owner, location
+- Threat Intelligence: IOC matching from feeds
+- User Context: AD user attributes, group membership
+
+#### VirusTotal
+
+VirusTotal is integrated into the File Integrity Monitoring workflow through a custom rule that targets new or modified executable and script files.
+
+- **Scope:** Applies to File Integrity Monitoring events involving executable and script files in monitored directories
+- **Trigger:** Custom rule_id 87105 fires when VirusTotal reports multiple positive detections
+- **Action:** Host-level Bash script is invoked automatically to quarantine or remove the flagged file
+- **Benefit:** Only suspicious binaries are escalated; preserves VirusTotal API quota
+
+**Configuration:**
+```xml
+<integration>
+  <name>virustotal</name>
+  <api_key>xxxxxxxxxxxxxxxxxxx</api_key>
+  <rule_id>100003</rule_id>
+  <alert_format>json</alert_format>
+</integration>
+```
+
+![VirusTotal Integration Configuration](/Career_Projects/assets/screenshots/wazuh-virustotal-config.png)
+```xml
+<command>
+  <name>remove-threat</name>
+  <executable>remove-threat.sh</executable>
+  <timeout_allowed>no</timeout_allowed>
+</command>
+```
+
+![VirusTotal Active Response Script](/Career_Projects/assets/screenshots/wazuh-virustotal-script.png)
+```xml
+<active-response>
+  <disabled>no</disabled>
+  <command>remove-threat</command>
+  <location>local</location>
+  <rules_id>87105</rules_id>
+</active-response>
+```
+
+![VirusTotal Detection Alerts](/Career_Projects/assets/screenshots/wazuh-virustotal-alerts.png)
+
+#### Discord
+
+External alerting to Discord has been configured for specific workflows. Alerts from the sshd, authentication_failure, or syscheck_file groups trigger a custom script that sends a message to a Discord webhook in the #wazuh channel.
+
+- **Scope:** Alerts generated by sshd, authentication_failure, syscheck_file groups
+- **Trigger:** When any of these groups fire, Wazuh's active response mechanism invokes a custom Bash script
+- **Action:** The script formats the alert into a Discord embed enriched with rule, group, and host metadata
+- **Benefit:** Real-time visibility into critical security events with actionable context
+
+**Configuration:**
+```xml
+<integration>
+  <name>discord</name>
+  <hook_url>https://discord.com/api/webhooks/xxxxxxxx</hook_url>
+  <group>multiple_drops,authentication_failed,sshd,syscheck_file</group>
+  <alert_format>json</alert_format>
+</integration>
+```
+
+![Discord Integration Configuration](/Career_Projects/assets/screenshots/wazuh-discord-config.png)
+```xml
+<command>
+  <name>discord</name>
+  <executable>discord.sh</executable>
+  <expect>json</expect>
+  <timeout_allowed>no</timeout_allowed>
+</command>
+```
+```xml
+<active-response>
+  <disabled>no</disabled>
+  <command>discord</command>
+  <location>local</location>
+  <rules_group>sshd,authentication_failure,syscheck_file</rules_group>
+</active-response>
+```
+
+### Alerting and Notifications
+
+**Purpose:** Provide immediate visibility into critical events
+
+**Configuration:**
+
+**Email Alerts (Outlook):**
+
+- Wazuh configured to send alerts via local relay (msmtp/Postfix) → smtp.office365.com:587
+- Alerts delivered to recipient@outlook.com
+
+**Discord Alerts:**
+
+- Custom active response script posts alerts to Discord webhook channel
+- Triggered on new file creation in monitored directories or multiple failed login attempts
+
+### Wazuh Dashboard Analytics
+
+#### File Integrity Monitoring
+
+**Visualizations:**
+
+**Overview:**
+
+- Alerts by action over time: Line chart showing file modifications, additions, and deletions
+- Top 5 agents: Donut chart showing the top 5 agents by events
+- Rule Distribution: Donut chart showing the events by rule type
+- Actions: Donut chart showing events by modification, addition, or deletion action
+- Top 5 Users: Table showing the number of events by agent ID
+
+**Events:**
+
+- Events over time
+- Event Summary table showing total events by agent, file, action, and rule information
+
+**Inventory:**
+
+- Detailed inventory information showing file and registry (Windows) actions including path/key, modification timestamp, user, file size
+
+![Wazuh FIM Overview Dashboard](/Career_Projects/assets/screenshots/wazuh-fim-overview.png)
+
+![Wazuh FIM Events Dashboard](/Career_Projects/assets/screenshots/wazuh-fim-events.png)
+
+![Wazuh FIM Inventory Dashboard](/Career_Projects/assets/screenshots/wazuh-fim-inventory.png)
+
+#### Configuration Management
+
+**Visualizations:**
+
+**Dashboard:**
+
+- Per agent SCA showing a summary of passed, failed, and N/A results and overall score
+- Policy information, scan data, and checks
+- Inventory information: policy, description, scan data, score
+- Events: Event count over time, detailed check and policy information
+
+![Wazuh SCA Dashboard](/Career_Projects/assets/screenshots/wazuh-sca-dashboard.png)
+
+![Wazuh SCA Checks](/Career_Projects/assets/screenshots/wazuh-sca-checks.png)
+
+![Wazuh SCA Events](/Career_Projects/assets/screenshots/wazuh-sca-events.png)
+
+#### Security Operations / IT Hygiene Dashboard
+
+**Visualizations:**
+
+**Dashboard:** Overview of deployed agent hygiene showing OS, installed packages, running processes, hardware, network traffic, and identity information
+
+- **System:** Platform, OS, and architecture information
+- **Software:** Package, KB, Browser extension, and vendor information
+- **Processes:** Process name, start, PID, PPID, and command line information
+- **Network:** IP address, interface, protocol, listener, and traffic information
+- **Identity:** User and group, shell, and home directory information
+- **Services:** Running service information
+
+![Wazuh IT Hygiene Dashboard](/Career_Projects/assets/screenshots/wazuh-hygiene-dashboard.png)
+
+![Wazuh IT Hygiene System](/Career_Projects/assets/screenshots/wazuh-hygiene-system.png)
+
+![Wazuh IT Hygiene Services](/Career_Projects/assets/screenshots/wazuh-hygiene-services.png)
+
+#### Threat Intelligence
+
+**Threat Hunting:**
+
+- Total threats detected, alert level, authentication failures/successes, attacks by MITRE tactic/technique, alerts by agent
+
+**Vulnerability Detection:**
+
+- Severity level counts, top 5 CVEs, vulnerabilities by OS, agent, package, and year
+
+**MITRE ATT&CK:**
+
+- Alert evolution over time, top tactics, attacks by technique, tactics and techniques by agent
+
+##### Threat Hunting Queries
+
+**Suspicious PowerShell Execution:**
+```kql
+rule.groups: windows AND data.win.eventdata.image: *powershell.exe
+AND (data.win.eventdata.commandLine: *-encodedcommand*
+OR data.win.eventdata.commandLine: *bypass*)
+```
+
+**Lateral Movement Detection:**
+```kql
+rule.id: 60204 AND rule.description: "Windows: User logon with explicit credentials"
+| stats count by data.win.eventdata.subjectUserName, agent.name
+```
+
+**Privilege Escalation Attempts:**
+```kql
+rule.groups: authentication_success AND
+data.win.eventdata.targetUserName: Administrator
+| where data.win.eventdata.subjectUserName != Administrator
+```
+
+![Wazuh Threat Hunting Dashboard](/Career_Projects/assets/screenshots/wazuh-threat-hunting.png)
+
+![Wazuh Vulnerability Dashboard](/Career_Projects/assets/screenshots/wazuh-vulnerabilities.png)
+
+![Wazuh MITRE ATT&CK Dashboard](/Career_Projects/assets/screenshots/wazuh-mitre.png)
+
+---
+
+## 5. Security Homelab Section Links
+
+- **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
+- **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)**
+- **[Network Security, Privacy and Remote Access](/Career_Projects/projects/homelab/03-network/)**
+- **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)**
+- **[Automation and IaC](/Career_Projects/projects/homelab/05-auto-iac/)**
+- **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
+- **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
+- **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
+
+---
+
+**Document Version:** 1.0  
+**Last Updated:** January 11, 2026

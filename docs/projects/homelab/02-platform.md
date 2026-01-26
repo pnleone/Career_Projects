@@ -292,19 +292,49 @@ The majority of hosts and services run within the Proxmox environment and run wi
 
 #### PowerBI Dashboards
 
-Custom-built Power BI reports provide real-time visibility into lab operations:
-
-**Diagram Placeholder: PowerBI Dashboard Screenshots (2 images)**
+Custom-built Power BI reports provide real-time visibility into lab operations
 
 Application Inventory: Per-host service mapping with version tracking
 
-- Resource Utilization: CPU/memory/storage trends across Proxmox nodes
+- Resource Utilization: CPU/memory/storage trends across Proxmox
 - OS Distribution Analysis: Platform breakdown (RHEL, Ubuntu, Debian, Windows)
 
----
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-overview.png" alt="Platform Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Platform Overview.
+      </figcaption>
+    </figure>
+  </div>
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-hosts.png" alt="Platform Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Host/Asset Summary.
+      </figcaption>
+    </figure>
+  </div>
+
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-apps.png" alt="Platform Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Application Overview.
+      </figcaption>
+    </figure>
+  </div>
+
 ### 2.10 OS Platform and Distribution/Edition Summary
 
-**Diagram Placeholder: OS Distribution Screenshots (2 images)**
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-os.png" alt="OS Platform and Distribution/Edition Summary">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Host OS Overview.
+      </figcaption>
+    </figure>
+  </div>
 
 ---
 
@@ -422,7 +452,6 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 ---
 
 ### 4.1 Network Topology & Configuration
-
 <div class="two-col-text-even">
   <div class="text-left">
    <h3>R1 (192.168.200.6) - Primary Router</h3>
