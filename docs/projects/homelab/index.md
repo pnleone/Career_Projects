@@ -36,12 +36,12 @@
 
 ### LAB_LAN1 and EXT_LAN
 
-  <img src="/Career_Projects/assets/diagrams/lab-network-lab-lan1.png"
+  <img src="/Career_Projects/assets/diagrams/lab-network-lab_lan.png"
        alt="Homelab Network LAB_LAN1-EXT_LAN Diagram"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
  ### LAB_LAN2
 
-  <img src="/Career_Projects/assets/diagrams/lab-network-lab-lan2.png"
+  <img src="/Career_Projects/assets/diagrams/lab-network-lab_lan2.png"
        alt="Homelab Network LAB_LAN2 Diagram"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">   
