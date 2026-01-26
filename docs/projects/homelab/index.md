@@ -34,14 +34,32 @@
        alt="Homelab Network Prod_LAN Diagram"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
+#### Main lab LAN Hosting the following workloads:
+- Docker engines supporting container services 
+- Microsoft Active Directory Domain Services
+- Reverse Proxy and DNS Services
+- FortiGate Management Services
+- Integration to ISO LANs
+  - Cisco ISO LAN
+  - OPNsense ISO LAN
+
 ### LAB_LAN1 and EXT_LAN
 
   <img src="/Career_Projects/assets/diagrams/lab-network-lab_lan.png"
        alt="Homelab Network LAB_LAN1-EXT_LAN Diagram"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
- ### LAB_LAN2
+#### Lab/Ext LANs Hosting the following workloads:
+- PKI Services
+- VMware ESXi
+- Test external workloads 
+
+### LAB_LAN2
 
   <img src="/Career_Projects/assets/diagrams/lab-network-lab_lan2.png"
        alt="Homelab Network LAB_LAN2 Diagram"
        style="width: 100%; height: auto; display: block; margin: 0 auto;">   
+
+#### Lab2 LAN Hosting the following workloads:
+- Kubernetes/K3s Cluster Services (SOC Services)
+- ELK Stack and Lab Dashboard 
