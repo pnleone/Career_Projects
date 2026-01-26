@@ -256,3 +256,41 @@
     margin-right: 0.5rem;
   }
 }
+/* Two-column staggered text layout */
+.two-col-text-staggered {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+
+/* Left text column */
+.two-col-text-staggered .text-col-left {
+  flex: 1 1 50%;
+  min-width: 220px;
+}
+
+/* Right text column (starts halfway down) */
+.two-col-text-staggered .text-col-right {
+  flex: 1 1 50%;
+  min-width: 220px;
+  margin-top: 50%;   /* key offset */
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .two-col-text-staggered {
+    flex-direction: column;
+  }
+
+  .two-col-text-staggered .text-col-left,
+  .two-col-text-staggered .text-col-right {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  /* Remove stagger on mobile */
+  .two-col-text-staggered .text-col-right {
+    margin-top: 0;
+  }
+}

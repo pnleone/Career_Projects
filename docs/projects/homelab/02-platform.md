@@ -422,26 +422,25 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 ---
 
 ### 4.1 Network Topology & Configuration
-
-<div class="two-col-right">
-   <div class="text-col">
-    <h3>R1 (192.168.200.6) - Primary Router</h3>
+<div class="two-col-text-staggered">
+  <div class="text-col-left">
+   <h3>R1 (192.168.200.6) - Primary Router</h3>
     <ul>
       <li><strong>G0/0:</strong> 192.168.1.6/24 — Production network uplink</li>
       <li><strong>G0/1:</strong> 192.168.100.6/24 — Primary lab network (K3s cluster, Docker hosts)</li>
       <li><strong>G0/2:</strong> 192.168.200.6/24 — Secondary lab network (SOC namespace, server-admin)</li>
       <li><strong>G0/3:</strong> 10.30.0.1/30 — Point-to-point link to R2</li>
     </ul>
-   </div>
+  </div>
 
-  <div class="image-col">
-    <h3>R2 (192.168.3.9) - Secondary Router</h3>
+  <div class="text-col-right">
+   <h3>R2 (192.168.3.9) - Secondary Router</h3>
    <ul>
       <li><strong>G0/0:</strong> 10.30.0.2/30 — Point-to-point link to R1</li>
       <li><strong>G0/1:</strong> 192.168.3.9/24 — Management VLAN (FortiGate protected)</li>
       <li><strong>G0/2:</strong> 192.168.2.9/24 — External lab network</li>
    </ul>
-   </div>
+  </div>
 </div>
  
 ### Router R1 Configuration
