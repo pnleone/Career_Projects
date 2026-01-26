@@ -28,10 +28,20 @@
 
 [:material-file-account: Download Diagram (png)](https://github.com/pnleone/Career_Projects/blob/2b9f8a8b99ed76adf1b7c67fc59aad9b91dbf623/docs/assets/diagrams/SecurityLab_Network-2026-01-22.png)
 
-### Network Summary TBD
+### PROD_LAN, ISO_LAN1 and ISO_LAN2
 
+  <img src="/Career_Projects/assets/diagrams/lab-network-prod_lan.png"
+       alt="Homelab Network Prod_LAN Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
+### LAB_LAN1 and EXT_LAN
 
+  <img src="/Career_Projects/assets/diagrams/lab-network-lab-lan1.png"
+       alt="Homelab Network LAB_LAN1-EXT_LAN Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
 
+ ### LAB_LAN2
 
-    
+  <img src="/Career_Projects/assets/diagrams/lab-network-lab-lan2.png"
+       alt="Homelab Network LAB_LAN2 Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">   
