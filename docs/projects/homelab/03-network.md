@@ -7,29 +7,29 @@
 
 ## Table of Contents
 
-1. [Network Security Architecture](#network-security-architecture)
-2. [Network Firewall/Router Architecture](#network-firewallrouter-architecture)
-   - 2.1 [High-Availability pfSense Cluster](#high-availability-pfsense-cluster)
-   - 2.2 [OPNsense Microsegmentation Firewall](#opnsense-microsegmentation-firewall)
-   - 2.3 [Fortinet FortiGate 30D Appliance](#fortinet-fortigate-30d-appliance)
-   - 2.4 [Firewall Policy Architecture](#firewall-policy-architecture)
-3. [Intrusion Detection/Prevention Solutions](#intrusion-detectionprevention-solutions)
-   - 3.1 [Suricata Intrusion Detection/Prevention System on pfSense](#suricata-intrusion-detectionprevention-system-on-pfsense)
-   - 3.2 [Snort Intrusion Detection/Prevention System on pfSense](#snort-intrusion-detectionprevention-system-on-pfsense)
-   - 3.3 [CrowdSec Behavioral Threat Intelligence](#crowdsec-behavioral-threat-intelligence)
-   - 3.4 [Multi-Engine Intrusion Detection & Prevention](#multi-engine-intrusion-detection--prevention)
-4. [SafeLine Web Application Firewall (WAF)](#safeline-web-application-firewall-waf)
-5. [Security Control Summary](#security-control-summary)
-6. [Operational Resilience](#operational-resilience)
-7. [Use Cases & Deployment Scenarios](#use-cases--deployment-scenarios)
-8. [Threat Modeling](#threat-modeling)
-9. [Privacy and Remote Access Architecture](#privacy-and-remote-access-architecture)
-   - 9.1 [Private Internet Access (PIA) - Encrypted Egress VPN](#private-internet-access-pia---encrypted-egress-vpn)
-   - 9.2 [Tailscale - Zero-Trust Remote Access](#tailscale---zero-trust-remote-access)
-   - 9.3 [Cloudflare - Secure Service Exposure & DNS Management](#cloudflare---secure-service-exposure--dns-management)
-   - 9.4 [Tor Browser - Anonymous Outbound Browsing](#tor-browser---anonymous-outbound-browsing)
-10. [Summary](#summary)
-11. [Security Homelab Section Links](#security-homelab-section-links)
+1. [Network Security Architecture](#1-network-security-architecture)
+2. [Network Firewall/Router Architecture](#2-network-firewallrouter-architecture)
+   - 2.1 [High-Availability pfSense Cluster](#21-high-availability-pfsense-cluster)
+   - 2.2 [OPNsense Microsegmentation Firewall](#22-opnsense-microsegmentation-firewall)
+   - 2.3 [Fortinet FortiGate 30D Appliance](#23-fortinet-fortigate-30d-appliance)
+   - 2.4 [Firewall Policy Architecture](#24-firewall-policy-architecture)
+3. [Intrusion Detection/Prevention Solutions](#3-intrusion-detectionprevention-solutions)
+   - 3.1 [Suricata Intrusion Detection/Prevention System on pfSense](#31-suricata-intrusion-detectionprevention-system-on-pfsense)
+   - 3.2 [Snort Intrusion Detection/Prevention System on pfSense](#32-snort-intrusion-detectionprevention-system-on-pfsense)
+   - 3.3 [CrowdSec Behavioral Threat Intelligence](#33-crowdsec-behavioral-threat-intelligence)
+   - 3.4 [Multi-Engine Intrusion Detection and Prevention](#34-multi-engine-intrusion-detection--prevention)
+4. [SafeLine Web Application Firewall (WAF)](#4-safeline-web-application-firewall-waf)
+5. [Security Control Summary](#5-security-control-summary)
+6. [Operational Resilience](#6-operational-resilience)
+7. [Use Cases and Deployment Scenarios](#7-use-cases--deployment-scenarios)
+8. [Threat Modeling](#8-threat-modeling)
+9. [Privacy and Remote Access Architecture](#9-privacy-and-remote-access-architecture)
+   - 9.1 [Private Internet Access (PIA) - Encrypted Egress VPN](#91-private-internet-access-pia---encrypted-egress-vpn)
+   - 9.2 [Tailscale - Zero-Trust Remote Access](#92-tailscale---zero-trust-remote-access)
+   - 9.3 [Cloudflare - Secure Service Exposure and DNS Management](#93-cloudflare---secure-service-exposure--dns-management)
+   - 9.4 [Tor Browser - Anonymous Outbound Browsing](#94-tor-browser---anonymous-outbound-browsing)
+10. [Summary](#10-summary)
+11. [Security Homelab Section Links](#11-security-homelab-section-links)
 
 ---
 
@@ -106,7 +106,7 @@ High‑availability firewalls are standard in enterprise networks where downtime
 
 #### Security Enhancement Packages
 
-**pfBlockerNG - IP Reputation & Geofencing**
+**pfBlockerNG - IP Reputation and Geofencing**
 
 Purpose: Network-layer blocking of malicious IPs and geographic regions
 
@@ -275,7 +275,7 @@ Fortinet holds significant market share in enterprise network security, making F
       </figcaption>
     </figure>
 
-**Limitations & Compensating Controls**
+**Limitations and Compensating Controls**
 
 Due to end-of-support status:
 
@@ -564,7 +564,7 @@ Behavior‑based detection is essential in modern environments where attackers u
 
 ---
 
-### 3.4 Multi-Engine Intrusion Detection & Prevention
+### 3.4 Multi-Engine Intrusion Detection and Prevention
 
 #### Layered IDS/IPS Strategy
 
@@ -728,7 +728,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 | Zero Trust Access | Tailscale mesh VPN + ACLs | Remote administrative access |
 | Data Loss Prevention | VPN kill switch floating rule | Prevents cleartext fallback |
 
-#### Detection & Response Capabilities
+#### Detection and Response Capabilities
 
 - Real-Time Alerting: Suricata/Snort alerts forwarded to Splunk within seconds
 - Automated Blocking: CrowdSec decisions enforced at firewall in <5 seconds
@@ -741,7 +741,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ## 6. Operational Resilience
 
-### Operational Resilience & High Availability
+### Operational Resilience and High Availability
 
 #### Redundancy Architecture
 
@@ -752,7 +752,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 | Suricata IDS | Active | Active | N/A | Distributed |
 | CrowdSec LAPI | LXC-Primary | Manual failover | <1 minute | API endpoint change |
 
-#### Failure Scenarios & Response
+#### Failure Scenarios and Response
 
 | Scenario | Detection Method | Automated Response |
 |----------|------------------|-------------------|
@@ -762,7 +762,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 | CrowdSec engine failure | Systemd watchdog | Service restart; alert to monitoring |
 | Network interface failure | Link state monitoring | Traffic reroutes to alternate interface |
 
-#### Monitoring & Alerting
+#### Monitoring and Alerting
 
 - Prometheus Node Exporter: Collects firewall metrics (CPU, memory, connection count)
 - Splunk/Elastic Dashboards: Real-time visibility into blocked threats, VPN status, rule hits
@@ -770,7 +770,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 - Uptime Kuma: External health checks on firewall management interfaces
 - Discord Alerts: Triggered on VPN failure, IPS signature hits (HIGH severity)
 
-#### Backup & Recovery
+#### Backup and Recovery
 
 - Configuration Backups: Weekly to Proxmox Backup Server and Synology NAS
 - Disaster Recovery: Restore from backup to new VM in <15 minutes
@@ -778,7 +778,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ---
 
-## 7. Use Cases & Deployment Scenarios
+## 7. Use Cases and Deployment Scenarios
 
 ### Practical Use Cases
 
@@ -807,7 +807,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 **Result:** Zero-trust remote access without exposed public IPs or open firewall ports
 
-#### Scenario 3: Threat Intelligence Sharing & Automated Response
+#### Scenario 3: Threat Intelligence Sharing and Automated Response
 
 **Objective:** Leverage community threat data for proactive blocking
 
@@ -836,7 +836,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ## 8. Threat Modeling
 
-### Threat Landscape & Mitigation Strategy
+### Threat Landscape and Mitigation Strategy
 
 #### Threats Addressed
 
@@ -976,7 +976,7 @@ Tailscale mirrors enterprise zero‑trust remote access solutions by replacing t
 
 ---
 
-### 9.3 Cloudflare - Secure Service Exposure & DNS Management
+### 9.3 Cloudflare - Secure Service Exposure and DNS Management
 
 #### Deployment Overview
 
@@ -1000,7 +1000,7 @@ Cloudflare Tunnels mirror enterprise zero‑trust access patterns where applicat
 **Secure by Design:** TLS termination, identity‑aware access, no open ports  
 **Zero Trust:** Every inbound request authenticated and authorized
 
-#### Public Domain & DNS Management
+#### Public Domain and DNS Management
 
 - **Primary Domain**: shadowitlab.com is registered and managed via **Cloudflare**, enabling centralized control over DNS, security policies, and tunneling endpoints.
 - **Dynamic DNS Resilience**:
@@ -1015,7 +1015,7 @@ Cloudflare Tunnels mirror enterprise zero‑trust access patterns where applicat
       </figcaption>
     </figure>
 
-#### Object Storage & File Sharing
+#### Object Storage and File Sharing
 
 - **Cloudflare R2 Bucket**: Used for lightweight, S3-compatible object storage.
   - **Public Access Endpoint**: files.shadowitlab.com
@@ -1097,7 +1097,7 @@ Tor is widely used in security research, OSINT, and threat intelligence workflow
 
 ## 10. Summary
 
-### Multi-Layered VPN & Zero-Trust Access
+### Multi-Layered VPN and Zero-Trust Access
 
 | Technology | Use Case | Protocol | Encryption | Trust Model |
 |------------|----------|----------|------------|-------------|
