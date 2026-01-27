@@ -1,10 +1,11 @@
 # CIS Critical Security Controls v8.1
-
-**Document Control:**
-**Version:** 2.0
-**Last Updated:** January 2026
-**Owner:** Paul Leone
-**Classification:** External Use
+```text
+Document Control:
+Version: 2.0
+Last Updated: January 2026
+Owner: Paul Leone
+Classification: External Use
+```    
 ---
 
 ## Table of Contents
@@ -355,12 +356,4 @@
 | **IG1** (56 safeguards) | 52 (93%) | 4 (7%) | 0 (0%) | **93% Compliant** |
 | **IG2** (74 additional safeguards) | 60 (81%) | 12 (16%) | 2 (3%) | **81% Compliant** |
 | **IG3** (29 additional safeguards) | 15 (52%) | 8 (28%) | 6 (20%) | **52% Compliant** |
-
----
-
-**Document Control:**
-**Version:** 2.0
-**Last Updated:** January 2026
-**Owner:** Paul Leone
-**Classification:** External Use
 

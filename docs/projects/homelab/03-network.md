@@ -24,10 +24,10 @@
 7. [Use Cases and Deployment Scenarios](#7-use-cases--deployment-scenarios)
 8. [Threat Modeling](#8-threat-modeling)
 9. [Privacy and Remote Access Architecture](#9-privacy-and-remote-access-architecture)
-   - 9.1 [Private Internet Access (PIA) - Encrypted Egress VPN](#91-private-internet-access-pia---encrypted-egress-vpn)
-   - 9.2 [Tailscale - Zero-Trust Remote Access](#92-tailscale---zero-trust-remote-access)
-   - 9.3 [Cloudflare - Secure Service Exposure and DNS Management](#93-cloudflare---secure-service-exposure--dns-management)
-   - 9.4 [Tor Browser - Anonymous Outbound Browsing](#94-tor-browser---anonymous-outbound-browsing)
+   - 9.1 [Private Internet Access (PIA) Encrypted Egress VPN](#91-private-internet-access-pia-encrypted-egress-vpn)
+   - 9.2 [Tailscale Zero Trust Remote Access](#92-tailscale-zero-trust-remote-access)
+   - 9.3 [Cloudflare Secure Service Exposure and DNS Management](#93-cloudflare-secure-service-exposure-and-dns-management)
+   - 9.4 [Tor Browser Anonymous Outbound Browsing](#94-tor-browser-anonymous-outbound-browsing)
 10. [Summary](#10-summary)
 11. [Security Homelab Section Links](#11-security-homelab-section-links)
 
@@ -894,7 +894,7 @@ Modern environments require privacy‑preserving egress, secure remote access, a
 
 ---
 
-### 9.1 Private Internet Access (PIA) - Encrypted Egress VPN
+### 9.1 Private Internet Access (PIA) Encrypted Egress VPN
 
 #### Deployment Overview
 
@@ -931,7 +931,7 @@ Encrypted egress is essential for privacy‑sensitive environments and aligns wi
 
 ---
 
-### 9.2 Tailscale - Zero-Trust Remote Access
+### 9.2 Tailscale Zero Trust Remote Access
 
 #### Deployment Overview
 
@@ -976,7 +976,7 @@ Tailscale mirrors enterprise zero‑trust remote access solutions by replacing t
 
 ---
 
-### 9.3 Cloudflare - Secure Service Exposure and DNS Management
+### 9.3 Cloudflare Secure Service Exposure and DNS Management
 
 #### Deployment Overview
 
@@ -1070,7 +1070,7 @@ This tunnel multiplexes several key services hosted on DockerVM1:
 
 ---
 
-### 9.4 Tor Browser - Anonymous Outbound Browsing
+### 9.4 Tor Browser Anonymous Outbound Browsing
 
 #### Deployment Overview
 

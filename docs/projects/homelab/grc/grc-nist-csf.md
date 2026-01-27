@@ -1,8 +1,12 @@
 # NIST Cybersecurity Framework 2.0
 
-**Created By:** Paul Leone  
-**Date:** January 14, 2026  
-
+```text
+Document Control:
+Version: 1.0
+Last Updated: January 2026
+Owner: Paul Leone
+Classification: External Use
+```  
 ---
 
 ## GOVERN (GV)
