@@ -1,11 +1,11 @@
 # CIS Critical Security Controls v8.1
-```text
-Document Control:
-Version: 2.0
-Last Updated: January 2026
-Owner: Paul Leone
-Classification: External Use
-```    
+**Document Control:**   
+Version: 1.0  
+Last Updated: January 2026  
+Owner: Paul Leone 
+  
+**Framework Versions:** CIS Controls v8.1
+ 
 ---
 
 ## Table of Contents

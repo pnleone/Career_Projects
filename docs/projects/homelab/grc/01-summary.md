@@ -3,8 +3,8 @@
 **Document Control:**   
 Version: 1.0  
 Last Updated: January 2026  
-Owner: Paul Leone 
-Classification: External Use  
+Owner: Paul Leone
+
 **Framework Versions:** NIST CSF 2.0, CIS Controls v8.1, NIST SP 800-53 Rev 5, ISO 27001:2022, PCI-DSS v4.0, OWASP Top 10 2025, MITRE ATT&CK Enterprise v18.1, CISA ZTMM v2.0, NIST SP 800-207 Zero Trust
 
 ---

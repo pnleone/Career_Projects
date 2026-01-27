@@ -1,12 +1,12 @@
 # NIST Cybersecurity Framework 2.0
 
-```text
-Document Control:
-Version: 1.0
-Last Updated: January 2026
-Owner: Paul Leone
-Classification: External Use
-```  
+**Document Control:**   
+Version: 1.0  
+Last Updated: January 2026  
+Owner: Paul Leone 
+ 
+**Framework Versions:** NIST CSF 2.0
+
 ---
 
 ## GOVERN (GV)

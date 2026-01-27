@@ -1,7 +1,9 @@
 # Infrastructure, Platform and Hardware Summary
 
-**Created By:** Paul Leone  
-**Date:** January 19, 2026  
+**Document Control:**   
+Version: 1.0  
+Last Updated: January 27, 2026  
+Owner: Paul Leone 
 
 ---
 
@@ -1318,10 +1320,4 @@ spec:
 - **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
 - **[Observability and Response, Part 2](/Career_Projects/projects/homelab/07-vis-response-pt2/)**
----
-
-**Document Version:** 1.0  
-**Last Updated:** January 24, 2026  
-
-
 

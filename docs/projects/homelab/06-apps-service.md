@@ -1,7 +1,9 @@
 # Applications and Services
 
-**Created By:** Paul Leone  
-**Date:** January 9, 2026
+**Document Control:**   
+Version: 1.0  
+Last Updated: January 27, 2026  
+Owner: Paul Leone 
 
 ---
 
@@ -1552,7 +1554,3 @@ index=auth sourcetype=authentik
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
 - **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
 
----
-
-**Document Version:** 1.0  
-**Last Updated:** January 26, 2026
