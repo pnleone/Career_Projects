@@ -357,7 +357,7 @@ Authentik acts as the unified identity provider for multiple services in the lab
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/logos/MS_AD.png" alt="Active Directory Logo">
+      <img src="/Career_Projects/assets/diagrams/MS_AD.png" alt="Active Directory Logo">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Microsoft Active Directory Overview.
       </figcaption>

@@ -146,7 +146,80 @@ terraform/
 
 #### LXC Container Provisioning (main.tf)
 
-**Diagram Placeholder: Terraform LXC Configuration Screenshot**
+```json
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "Terraform-for-Proxmox/proxmox"
+      
+    }
+  }
+}
+variable "pm_api_token_id" {
+  description = "Proxmox API token ID"
+  type        = string
+}
+
+variable "pm_api_token_secret" {
+  description = "Proxmox API token secret"
+  type        = string
+  sensitive   = true
+}
+variable "rootpassword" {
+  description = "Cloud-init password for this VM"
+  type        = string
+  sensitive   = true
+}
+variable "lxc_name" {
+  description = "Hostname of the LXC container"
+  type        = string
+  default     = "debian-lxc"
+
+}
+
+variable "lxc_id" {
+  description = "VMID for the LXC container"
+  type        = number
+}
+
+
+provider "proxmox" {
+    pm_api_url          = "https://pve.home.com:8006/api2/json"
+    pm_api_token_id     = var.pm_api_token_id
+    pm_api_token_secret = var.pm_api_token_secret
+    pm_tls_insecure     = false
+}
+
+resource "proxmox_lxc" "testct" {
+  hostname     = var.lxc_name
+  target_node  = "pve"
+  vmid         = var.lxc_id
+  ostemplate   = "Media4TBnvme:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst"
+  password     = var.rootpassword
+  unprivileged = true
+  cores        = 2
+  memory       = 512
+  swap         = 512
+  onboot       = true
+  start        = true
+
+
+  rootfs {
+    storage = "local-lvm"
+    size    = "8G"
+  }
+
+  network {
+    name   = "eth0"
+    bridge = "vmbr0"
+    ip     = "dhcp"
+  }
+
+  features {
+    nesting = true
+  }
+}
+```
 
 **Purpose:** Deploy unprivileged Debian 12 containers with security isolation and resource limits suitable for containerized workloads.
 
@@ -183,7 +256,85 @@ terraform/
 
 **Purpose:** Clone cloud-init ready Ubuntu VMs with optimized storage and network configuration for performance and manageability.
 
-**Diagram Placeholder: Terraform VM Configuration Screenshot**
+```json
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "Terraform-for-Proxmox/proxmox"
+      #version = "~> 0.65" # or latest
+    }
+  }
+}
+
+variable "pm_api_token_id" {
+  description = "Proxmox API token ID"
+  type        = string
+}
+
+variable "pm_api_token_secret" {
+  description = "Proxmox API token secret"
+  type        = string
+  sensitive   = true
+}
+variable "ciuser" {
+  description = "Cloud-init username for this VM"
+  type        = string
+}
+
+variable "cipassword" {
+  description = "Cloud-init password for this VM"
+  type        = string
+  sensitive   = true
+}
+
+variable "vm_name" {
+  description = "Name of the VM"
+  type        = string
+  default     = "ubuntu-vm"
+
+}
+
+variable "vm_id" {
+  description = "VMID for the VM"
+  type        = number
+}
+
+
+provider "proxmox" {
+    pm_api_url          = "https://pve.home.com:8006/api2/json"
+    pm_api_token_id     = var.pm_api_token_id
+    pm_api_token_secret = var.pm_api_token_secret
+    pm_tls_insecure     = false
+}
+
+resource "proxmox_vm_qemu" "ubuntu-vm" {
+    name                = var.vm_name
+    vmid                = var.vm_id
+    target_node         = "pve"
+    clone               = "ubuntu-cloud"
+    full_clone          = true
+    cores               = 2
+    memory              = 2048
+    sockets             = 1
+    onboot              = true
+    agent               = 1
+    os_type             = "l26"
+    clone_wait          = 0
+    ciuser     = var.ciuser
+    cipassword = var.cipassword
+
+
+    boot    = "order=scsi0;ide2"
+    bootdisk = "scsi0"
+    scsihw      = "virtio-scsi-single"
+
+    network {
+        model     = "virtio"
+        bridge    = "vmbr0"
+        firewall  = false
+        link_down = false
+    }
+```
 
 **Key sections:**
 
@@ -332,8 +483,183 @@ Sudo Without Password: Required for unattended automation. Mitigated by:
 ### 3.3 Playbook Architecture
 
 #### Bootstrap Playbook (new_install.yaml)
+```yaml
+---
+-  name: Freah install of Linux VM/LXC, add ansible user and SSH access
+   hosts: all
+   tags: always
+   become: true
+   
+   handlers:
+    - name: Restart systemd-resolved (if needed)
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: restarted
+        enabled: yes
+      when:
+        - ansible_service_mgr == "systemd"
+        - "'systemd-resolved.service' in ansible_facts.services | default({})"
 
-**Diagram Placeholder: Ansible Bootstrap Playbook Screenshot**
+   pre_tasks:
+    
+    - name: Update all packages on RedHat family
+      dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "RedHat"
+
+    - name: Update all packages on Debian family
+      apt:
+        upgrade: dist
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+   tasks:
+    - name: add new user
+      become: true
+      tags: always
+      ansible.builtin.user:
+        name: ansible
+        group: root
+        shell: /bin/bash
+        password:  "{{ '-----' | password_hash('sha512') }}"
+
+    - name: Ensure OpenSSH server is installed
+      package:
+        name: openssh-server
+        state: present
+
+    - name: Backup existing sshd_config
+      become: true
+      copy:
+        src: /etc/ssh/sshd_config
+        dest: /etc/ssh/sshd_config.bak
+        remote_src: yes
+      when: ansible_facts['os_family'] != 'Windows'
+
+    - name: Set SSH configuration options
+      become: true
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?{{ item.key }}'
+        line: '{{ item.key }} {{ item.value }}'
+        state: present
+        create: yes
+        backup: yes
+      loop:
+        - { key: 'PermitRootLogin', value: 'no' }
+        - { key: 'PasswordAuthentication', value: 'no' }
+        - { key: 'PubkeyAuthentication', value: 'yes' }
+        - { key: 'AuthorizedKeysFile', value: '.ssh/authorized_keys' }
+        - { key: 'PermitEmptyPasswords', value: 'no' }
+        - { key: 'ChallengeResponseAuthentication', value: 'no' }
+        - { key: 'UsePAM', value: 'yes' }
+
+    - name: Ensure SSH service is enabled and restarted
+      become: true
+      service:
+        name: "{{ item  }}"
+        state: restarted
+        enabled: yes
+      loop:
+        - ssh
+        - sshd
+
+
+    - name: Ensure .ssh directory exists for ansible user
+      become: true
+      file:
+        path: /home/ansible/.ssh
+        state: directory
+        owner: ansible
+        group: root
+        mode: '0700'
+
+    - name: add SSH key for ansible host
+      become: true
+      tags: always
+      ansible.posix.authorized_key:
+        user: ansible
+        key: "ssh-ed25519 ------------ root@ansible"
+        state: present
+
+    - name: Ensure sudo is installed
+      package:
+        name: sudo
+        state: present
+
+    - name: Ensure /etc/sudoers.d exists
+      become: true
+      file:
+        path: /etc/sudoers.d
+        state: directory
+        owner: root
+        group: root
+        mode: '0750'
+
+    - name: add sudoers file to ansible
+      become: true
+      ansible.builtin.copy:
+        src: sudoer_ansible
+        dest: /etc/sudoers.d/ansible
+        owner: root
+        group: root
+        mode: '0440'
+        validate: '/usr/sbin/visudo -cf %s'
+      
+    - name: Replace /etc/resolv.conf with specified nameservers
+      copy:
+        dest: /etc/resolv.conf
+        content: |
+          nameserver 192.168.1.250
+          nameserver 192.168.1.126
+        owner: root
+        group: root
+        mode: '0644'
+        backup: yes
+      notify: Restart systemd-resolved (if needed)
+
+  
+-  name: add a new user and enable remote access via SSH
+   hosts: all
+   become: true
+
+   handlers:
+    - name: Restart systemd-resolved (if needed)
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: restarted
+        enabled: yes
+      when:
+        - ansible_service_mgr == "systemd"
+        - "'systemd-resolved.service' in ansible_facts.services | default({})"
+
+
+    # Debian reboot check
+    - name: Check if reboot is required (Debian/Ubuntu)
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+      when: ansible_os_family == "Debian"
+
+    # RedHat reboot check
+    - name: Check if reboot is required (RedHat family)
+      command: needs-restarting -r
+      register: needs_reboot
+      failed_when: false
+      changed_when: false
+      when: ansible_os_family == "RedHat"
+
+    - name: Reboot if required (Debian)
+      reboot:
+      when: reboot_required.stat.exists
+
+    - name: Reboot if required (RedHat)
+      reboot:
+      when: needs_reboot.rc == 1
+```
 
 **Purpose:** Initial host configuration to establish Ansible management capability.
 
@@ -508,6 +834,116 @@ This automated workflow runs two playbooks, a weekly schedule and performs a con
 
 **Diagram Placeholder: n8n Workflow Results Screenshots (2 images)**
 
+**JSON Output Example**
+
+```json
+PLAY [Audit system info] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [web.home.com]
+ok: [192.168.1.136]
+ok: [unbound.home.com]
+ok: [bind.home.com]
+ok: [192.168.1.250]
+ok: [uptimek.home.com]
+ok: [192.168.1.4]
+ok: [stepca.home.com]
+ok: [trfk.home.com]
+ok: [wazuh.home.com]
+ok: [192.168.1.93]
+ok: [192.168.100.15]
+ok: [192.168.1.246]
+ok: [192.168.1.33]
+ok: [192.168.2.6]
+ok: [192.168.200.8]
+ok: [192.168.200.7]
+ok: [192.168.1.126]
+ok: [192.168.1.109]
+ok: [192.168.1.166]
+ok: [192.168.100.5]
+
+TASK [Show disk usage] *********************************************************
+ok: [web.home.com] => {
+    "disk_usage.stdout_lines": [
+        "Filesystem      Size  Used Avail Use% Mounted on",
+        "/dev/loop0       16G   12G  3.2G  79% /",
+        "none            492K  4.0K  488K   1% /dev",
+        "efivarfs        192K  180K  7.6K  96% /sys/firmware/efi/efivars",
+        "tmpfs            47G     0   47G   0% /dev/shm",
+        "tmpfs            19G  156K   19G   1% /run",
+        "tmpfs           5.0M     0  5.0M   0% /run/lock",
+        "tmpfs            47G  124K   47G   1% /tmp",
+        "tmpfs           9.4G  8.0K  9.4G   1% /run/user/0",
+        "tmpfs           9.4G  8.0K  9.4G   1% /run/user/1001"
+    ]
+}
+TASK [Show IP address info] ****************************************************
+ok: [web.home.com] => {
+    "ip_info.stdout_lines": [
+        "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000",
+        "    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00",
+        "    inet 127.0.0.1/8 scope host lo",
+        "       valid_lft forever preferred_lft forever",
+        "    inet6 ::1/128 scope host noprefixroute ",
+        "       valid_lft forever preferred_lft forever",
+        "2: eth0@if76: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000",
+        "    link/ether bc:24:11:f9:a0:8c brd ff:ff:ff:ff:ff:ff link-netnsid 0",
+        "    inet 192.168.1.108/24 brd 192.168.1.255 scope global eth0",
+        "       valid_lft forever preferred_lft forever",
+        "    inet6 fe80::be24:11ff:fef9:a08c/64 scope link proto kernel_ll ",
+        "       valid_lft forever preferred_lft forever"
+    ]
+}
+TASK [Show routing table] ******************************************************
+ok: [web.home.com] => {
+    "route_info.stdout_lines": [
+        "default via 192.168.1.1 dev eth0 proto static ",
+        "192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.108 "
+    ]
+}
+TASK [Show hostname] ***********************************************************
+ok: [web.home.com] => {
+    "host_name.stdout": "apache-ubuntu"
+}
+TASK [Show nameservers] ********************************************************
+ok: [web.home.com] => {
+    "resolv_conf.stdout_lines": [
+        "# --- BEGIN PVE ---",
+        "search home.com",
+        "nameserver 192.168.1.250",
+        "# --- END PVE ---"
+    ]
+}
+TASK [Show authorized SSH keys] ************************************************
+ok: [web.home.com] => {
+    "msg": [
+        "ssh-ed25519 --------- root@ansible",
+        ""
+    ]
+}
+PLAY RECAP *********************************************************************
+192.168.1.109              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.126              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.136              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.166              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.246              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.250              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.33               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.4                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.1.93               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.100.15             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.100.5              : ok=12   changed=5    unreachable=0    failed=0    skipped=1    rescued=0    ignored=1   
+192.168.2.6                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.200.7              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.200.8              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+bind.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+stepca.home.com            : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+trfk.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+unbound.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+uptimek.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+wazuh.home.com             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web.home.com               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
 ---
 
 ### 5.3 Workflow 2: Threat Intelligence Aggregation
@@ -598,7 +1034,98 @@ Custom automation scripts are developed in both PowerShell (for Windows systems)
 
 #### Bash Script Example: Backup Automation
 
-**Diagram Placeholder: Bash Backup Script Screenshot**
+```bash
+#!/bin/bash
+#
+# backup_web.sh - Versioned rsync backup with validation
+# Usage: backup_web.sh <source> <target>
+# Example: backup_web.sh /var/www/lab /backup
+#
+# Exit Codes:
+#   0 - Success
+#   1 - Invalid arguments
+#   2 - Missing dependency
+#   3 - Rsync failed
+set -euo pipefail  # Exit on error, undefined vars, pipe failures
+
+# check to make sure the user has entrered exactly two arguments.
+if [ $# -ne 2 ]
+then    
+    /usr/bin/echo "Usage: backup.sh <source_directory> <target_directory>"
+    /usr/bin/echo "Please try again."
+    exit 1
+fi
+SOURCE="$1"
+TARGET="$2"
+
+# Validate paths (prevent directory traversal)
+if [[ ! "$SOURCE" =~ ^/[a-zA-Z0-9/_-]+$RetryPContinuebash]]; then
+    echo "Error: Invalid source path format"
+    exit 1
+fi
+
+if [[ ! "$TARGET" =~ ^/[a-zA-Z0-9/_-]+$ ]]; then
+    echo "Error: Invalid target path format"
+    exit 1
+fi
+
+#check to see if rsync is installed
+if ! command -v rsync > /dev/null 2>&1
+then
+    /usr/bin/echo "This script requires rsync to be installed."
+    /usr/bin/echo "Please install the package and run the script again."
+    exit 2
+fi
+# Verify source exists
+if [ ! -d "$SOURCE" ]; then
+    /usr/bin/echo "Error: Source directory does not exist: $SOURCE"
+    exit 1
+fi
+
+# Create target if needed
+mkdir -p "$TARGET"
+
+# Generate timestamp
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+BACKUP_DATE=$(date +%Y-%m-%d)
+LOG_FILE="/var/log/backup_${BACKUP_DATE}.log"
+
+# Rsync options
+RSYNC_OPTS=(
+    -avz                                    # Archive, verbose, compress
+    --delete                                # Remove deleted files
+    --backup                                # Backup changed files
+    --backup-dir="$TARGET/versions/$TIMESTAMP"  # Versioned backups
+    --exclude='*.tmp'                       # Exclude temp files
+    --exclude='.git'                        # Exclude version control
+    --log-file="$LOG_FILE"                  # Detailed logging
+    --stats                                 # Show transfer statistics
+)
+
+# Log start
+/usr/bin/echo "=== Backup started at $(date) ===" | tee -a "$LOG_FILE"
+logger -t backup_web "Starting backup: $SOURCE -> $TARGET"
+
+# Execute rsync
+if rsync "${RSYNC_OPTS[@]}" "$SOURCE/" "$TARGET/current/"; then
+    /usr/bin/echo "=== Backup completed successfully at $(date) ===" | tee -a "$LOG_FILE"
+    logger -t backup_web "SUCCESS: Backup completed"
+    
+    # Calculate backup size
+    BACKUP_SIZE=$(du -sh "$TARGET/current" | cut -f1)
+    /usr/bin/echo "Backup size: $BACKUP_SIZE" | tee -a "$LOG_FILE"
+    
+    # Retention: Keep only last 7 version directories
+    find "$TARGET/versions/" -maxdepth 1 -type d -mtime +7 -exec rm -rf {} \;
+    
+    exit 0
+else
+    RSYNC_EXIT=$?
+    /usr/bin/echo "=== Backup FAILED at $(date) with exit code $RSYNC_EXIT ===" | tee -a "$LOG_FILE"
+    logger -t backup_web "FAILED: rsync exited with code $RSYNC_EXIT"
+    exit 3
+fi
+```
 
 This Bash script is designed to perform a backup using rsync, with versioned backups stored by date. It validates input, checks for dependencies, and logs the simulated operation.
 
@@ -621,7 +1148,92 @@ This Bash script is designed to perform a backup using rsync, with versioned bac
 
 #### Linux Upgrade Script Overview
 
-**Diagram Placeholder: Linux Upgrade Script Screenshots (2 images)**
+```bash
+#!/bin/bash
+set -e
+
+logfile=/var/log/update_script.log
+errorlog=/var/log/update_script_errors.log
+hostname=$(hostname)
+
+/usr/bin/echo "-------------------START SCRIPT on $hostname-------------------" 1>>$logfile 2>>$errorlog
+check_exit_status() {
+    if [ $? -ne 0 ]
+    then
+        /usr/bin/echo "An error occured, please check the $errorlog file."
+    fi    
+}
+
+if [ -d /etc/apt ]; then
+    # Debian or Ubuntu
+    /usr/bin/echo "Detected Debian/Ubuntu system"
+    /usr/bin/sudo apt update 1>>$logfile 2>>$errorlog
+    check_exit_status
+    /usr/bin/sudo apt dist-upgrade -y 1>>$logfile 2>>$errorlog
+    check_exit_status
+elif [ -f /etc/redhat-release ]; then
+    distro=$(cat /etc/redhat-release)
+
+    if [[ "$distro" == *"Fedora"* ]]; then
+        /usr/bin/echo "Detected Fedora system"
+        /usr/bin/sudo dnf upgrade --refresh -y #!/bin/bash
+
+logfile=/var/log/update_script.log
+errorlog=/var/log/update_script_errors.log
+
+
+check_exit_status() {
+    if [ $? -ne 0 ]
+    then
+        /usr/bin/echo "An error occured, please check the $errorlog file."
+    fi    
+}
+
+if [ -d /etc/apt ]; then
+    # Debian or Ubuntu
+    /usr/bin/echo "Detected Debian/Ubuntu system"
+    /usr/bin/sudo apt update 1>>$logfile 2>>$errorlog
+    check_exit_status
+    /usr/bin/sudo apt dist-upgrade -y 1>>$logfile 2>>$errorlog
+    check_exit_status
+elif [ -f /etc/redhat-release ]; then
+    distro=$(cat /etc/redhat-release)
+
+    if [[ "$distro" == *"Fedora"* ]]; then
+        /usr/bin/echo "Detected Fedora system"
+        /usr/bin/sudo dnf upgrade --refresh -y 1>>$logfile 2>>$errorlog
+        check_exit_status   
+    elif [[ "$distro" == *"CentOS"* ]] || [[ "$distro" == *"Red Hat"* ]]; then
+        /usr/bin/echo "Detected CentOS or RHEL system"
+        /usr/bin/sudo yum update -y 1>>$logfile 2>>$errorlog
+        check_exit_status      
+    else
+        /usr/bin/echo "Detected unknown Red Hat-based system"
+        /usr/bin/sudo yum update -y 1>>$logfile 2>>$errorlog
+        check_exit_status 
+    fi
+else
+    /usr/bin/echo "Unsupported or unknown Linux distribution"
+fi
+
+
+        check_exit_status   
+    elif [[ "$distro" == *"CentOS"* ]] || [[ "$distro" == *"Red Hat"* ]]; then
+        /usr/bin/echo "Detected CentOS or RHEL system"
+        /usr/bin/sudo yum update -y 1>>$logfile 2>>$errorlog
+        check_exit_status      
+    else
+        /usr/bin/echo "Detected unknown Red Hat-based system"
+        /usr/bin/sudo yum update -y 1>>$logfile 2>>$errorlog
+        check_exit_status 
+    fi
+else
+    /usr/bin/echo "Unsupported or unknown Linux distribution"
+fi
+
+/usr/bin/echo "The script completed at: $(/usr/bin/date)" 1>>$logfile 2>>$errorlog
+/usr/bin/echo "-------------------END SCRIPT on $hostname-------------------" 1>>$logfile 2>>$errorlog
+```
 
 This Bash script performs a distribution-aware system upgrade, logging all output and errors to dedicated log files. It supports Debian/Ubuntu, Fedora, CentOS, and RHEL, and includes error checking after each upgrade step.
 
@@ -643,7 +1255,76 @@ This Bash script performs a distribution-aware system upgrade, logging all outpu
 
 #### PowerShell Script Example: Windows Update Automation
 
-**Diagram Placeholder: PowerShell Update Script Screenshots (2 images)**
+```powershell
+$ErrorActionPreference = "Continue"
+
+# Start logging
+$logPath = "C:\Logs\update_log.txt"
+Start-Transcript -Path $logPath -Append
+
+# Log header with host and user info
+$hostname = $env:COMPUTERNAME
+$username = $env:USERNAME
+Write-Host "`n==================== UPDATE SCRIPT START ===================="
+Write-Host "Host: $hostname"
+Write-Host "User: $username"
+Write-Host "Start Time: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+Write-Host "=============================================================`n"
+
+# Timestamp helper
+function Write-Timestamped {
+    param ([string]$message)
+    Write-Host "`n[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $message"
+}
+
+# Update Windows Store apps
+function Update-WindowsStoreApps {
+    Write-Timestamped "Starting Windows Store App updates..."
+    Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
+    Write-Timestamped "Completed Windows Store App updates."
+}
+Update-WindowsStoreApps
+
+# Update Chocolatey packages
+function Update-ChocoApps {
+    Write-Timestamped "Checking for Chocolatey..."
+    if (Get-Command choco -ErrorAction SilentlyContinue) {
+        Write-Timestamped "Updating Chocolatey packages..."
+        choco upgrade all -y
+        Write-Timestamped "Completed Chocolatey updates."
+    } else {
+        Write-Timestamped "Chocolatey is not installed. Skipping."
+    }
+}
+Update-ChocoApps
+
+# Update Winget packages
+function Update-WingetApps {
+    Write-Timestamped "Checking for Winget..."
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        Write-Timestamped "Updating Winget packages..."
+        winget upgrade --all
+        Write-Timestamped "Completed Winget updates."
+    } else {
+        Write-Timestamped "Winget is not installed. Skipping."
+    }
+}
+Update-WingetApps
+
+# Windows OS Updates
+Write-Timestamped "Starting Windows OS updates..."
+Import-Module PSWindowsUpdate
+Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
+Write-Timestamped "Completed Windows OS updates."
+
+# Log footer
+Write-Host "`n==================== UPDATE SCRIPT END ====================="
+Write-Host "End Time: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+Write-Host "============================================================="
+
+# End logging
+Stop-Transcript
+```
 
 This script performs a comprehensive update sweep across a Windows system, covering:
 
@@ -698,7 +1379,200 @@ Python scripts are deployed where more complex logic, data processing, or API in
 
 #### Python Script Example: Network Scanner
 
-**Diagram Placeholder: Python Network Scanner Script Screenshots (2 images)**
+```python
+import sys 
+import socket
+from datetime import datetime
+import threading
+import platform
+import subprocess
+
+# Load common ports from external file
+def load_common_ports(filename='common_ports.txt'):
+    """
+    Load port mappings from a text file
+    Format: port:service_name (one per line)
+    """
+    ports = {}
+    try:
+        with open(filename, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#'):  # Skip empty lines and comments
+                    try:
+                        port, service = line.split(':', 1)
+                        # Strip whitespace and remove quotes/commas
+                        service = service.strip().strip('"').strip("'").rstrip(',')
+                        ports[int(port)] = service
+                    except ValueError:
+                        print(f'Warning: Skipping malformed line: {line}')
+        return ports
+    except FileNotFoundError:
+        print(f'Warning: {filename} not found. Using empty port dictionary.')
+        return {}
+    except Exception as e:
+        print(f'Error loading port file: {e}')
+        return {}
+
+# Load the common ports dictionary
+COMMON_PORTS = load_common_ports()
+
+# Global verbose flag
+verbose = False
+
+def ping_host(target_ip):
+    """
+    Ping the host to check if it's reachable before scanning
+    """
+    param = '-n' if platform.system().lower() == 'windows' else '-c'
+    command = ['ping', param, '1', target_ip]
+    
+    try:
+        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
+        return result.returncode == 0
+    except Exception as e:
+        print(f'Ping test failed: {e}')
+        return False
+
+def scan_port(target, port):
+    """
+    Function to scan a single port
+    """
+    try: 
+        if verbose:
+            print(f'Scanning port {port}...')
+        
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(1)
+        result = s.connect_ex((target, port))
+        
+        if result == 0:
+            service_info = COMMON_PORTS.get(port, "Unknown Service")
+            print(f"Port {port} is open - {service_info}")
+        
+        s.close()
+    except socket.error as e:
+        print(f'Socket error on port {port}: {e}')
+    except Exception as e:
+        print(f'Unexpected error on port {port}: {e}')
+
+def main():
+    global verbose
+    
+    # Parse arguments for verbose flag
+    args = sys.argv[1:]
+    
+    if len(args) < 1 or len(args) > 2:
+        print("Invalid number of arguments.") 
+        print("Usage: python network_scanner.py <target> [-v|--verbose]") 
+        sys.exit(1)
+    
+    target = args[0]
+    
+    # Check for verbose flag
+    if len(args) == 2 and args[1] in ['-v', '--verbose']:
+        verbose = True
+        print("Verbose mode enabled")
+
+    # Resolve the target hostname to an IP address
+    try:
+        target_ip = socket.gethostbyname(target) 
+    except socket.gaierror:
+        print(f'Error: Unable to resolve hostname {target}')
+        sys.exit(1)
+
+    # Ping test before scanning
+    print("-" * 50)
+    print(f'Running ping test on {target_ip}...')
+    if ping_host(target_ip):
+        print(f'Host {target_ip} is reachable!')
+    else:
+        print(f'Warning: Host {target_ip} may be unreachable or blocking ICMP')
+        response = input('Continue with scan anyway? (y/n): ')
+        if response.lower() != 'y':
+            print("Scan cancelled.")
+            sys.exit(0)
+
+    # Add a banner
+    print("-" * 50)
+    print(f'Scanning target {target_ip}')
+    print(f'Time started: {datetime.now()}')
+    print("-" * 50)            
+
+    try:
+        # Use multithreading to scan ports concurrently
+        threads = []
+        for port in range(1, 65536):
+            thread = threading.Thread(target=scan_port, args=(target_ip, port))
+            threads.append(thread)
+            thread.start()
+        
+        # Wait for threads to complete
+        for thread in threads:
+            thread.join()
+            
+    except KeyboardInterrupt:
+        print("\nExiting program.")
+        sys.exit(0)
+    
+    except socket.error as e:
+        print(f'Socket error: {e}')
+        sys.exit(1)
+
+    print("\nScan completed!")  
+    print(f'Time finished: {datetime.now()}')
+
+if __name__ == "__main__":
+    main()
+```    
+**Common Ports txt example:**
+```text
+20:FTP Data
+21:FTP Control
+22:SSH
+53:DNS/Pi-hole/Bind
+67:DHCP Server
+68:DHCP Client
+80:HTTP
+443:HTTPS
+445:SMB
+2375:Docker Daemon (insecure/TCP)
+2376:Docker Daemon (Secure/TLS)
+4444:Metasploit
+5335:Unbound
+5432:PostgreSQL
+6379:Redis
+7655:Pulse
+8001:Elastic Agent
+8002:Elastic Agent
+8006:Proxmox - PVE
+8007:Proxmox - PBS
+9000:Authentik/PHP/Netdata
+9443:Authentik/Portainer
+9090:Prometheus
+9200:Elasticsearch
+9093:Alert Manager
+9094:Alert Manager - Discord
+12320:Ansible
+12321:Ansible
+9115:Blackbox
+5000:Checkmk
+5050:Checkmk
+6060:CrowdSec
+8220:ELK Fleet
+7990:Heimdall
+5601:Kibana
+5678:n8n
+9392:OpenVAS
+5055:Overseer
+9617:Pi-Hole Exporter
+9001:Portainer Agent
+9221:Prometheus PVE Exporter
+6443:K3s
+3001:Uptime Kuma
+1514:Wazuh
+1515:Wazuh
+```
 
 A custom Python-based network scanner has been developed to provide tailored reconnaissance capabilities specific to the lab environment. The scanner performs several functions:
 
