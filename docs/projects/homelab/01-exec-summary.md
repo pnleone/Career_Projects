@@ -1,5 +1,5 @@
 # Security Lab Solution Document
-## Executive Overview & Security Posture
+## Executive Overview and Security Posture
 
 **Created By:** Paul Leone  
 **Date:** January 22, 2026  
@@ -9,21 +9,21 @@
 
 ## Table of Contents
 
-1. [Executive Overview & Security Posture](#1-executive-overview--security-posture)
+1. [Executive Overview and Security Posture](#1-executive-overview--security-posture)
    - 1.1 [Lab Mission Statement](#11-lab-mission-statement)
    - 1.2 [Architecture Principals](#12-architecture-principals)
    - 1.3 [Key Capabilities Demonstrated](#13-key-capabilities-demonstrated)
 
 2. [Security Posture](#2-security-posture)
-   - 2.1 [Network & Perimeter Security](#21-network--perimeter-security)
-   - 2.2 [Identity & Access Management](#22-identity--access-management)
-   - 2.3 [Web & Application Security](#23-web--application-security)
-   - 2.4 [DNS & Name Resolution](#24-dns--name-resolution)
-   - 2.5 [Remote Access, Privacy & Endpoint Security](#25-remote-access-privacy--endpoint-security)
-   - 2.6 [Observability & Monitoring](#26-observability--monitoring)
-   - 2.7 [Alerting & Notification Infrastructure](#27-alerting--notification-infrastructure)
-   - 2.8 [Automation & Orchestration](#28-automation--orchestration)
-   - 2.9 [Security Orchestration, Automation & Response (SOAR)](#29-security-orchestration-automation--response-soar)
+   - 2.1 [Network and Perimeter Security](#21-network-and-perimeter-security)
+   - 2.2 [Identity and Access Management](#22-identity-and-access-management)
+   - 2.3 [Web and Application Security](#23-web-and-application-security)
+   - 2.4 [DNS and Name Resolution](#24-dns-and-name-resolution)
+   - 2.5 [Remote Access, Privacy and Endpoint Security](#25-remote-access-privacy-and-endpoint-security)
+   - 2.6 [Observability and Monitoring](#26-observability--monitoring)
+   - 2.7 [Alerting and Notification Infrastructure](#27-alerting-and-notification-infrastructure)
+   - 2.8 [Automation and Orchestration](#28-automation-and-orchestration)
+   - 2.9 [Security Orchestration, Automation and Response (SOAR)](#29-security-orchestration-automation-and-response-soar)
    - 2.10 [Behavioral Threat Intelligence (CrowdSec)](#210-behavioral-threat-intelligence-crowdsec)
    - 2.11 [Security Tooling and Digital Forensics](#211-security-tooling-and-digital-forensics)
    - 2.12 [Backup and Business Continuity](#212-backup-and-business-continuity)
@@ -32,16 +32,16 @@
 
 ---
 
-## 1. Executive Overview & Security Posture
+## 1. Executive Overview and Security Posture
 
 ### 1.1 Lab Mission Statement
 
 This enterprise-grade security lab demonstrates production-ready capabilities across **Security Operations (SecOps), Systems Engineering**, and **Network Defense**. Designed to simulate real-world enterprise environments, the lab serves as both a technical proving ground and a continuous learning platform focused on:
 
-- **Threat Detection & Response** — Deploying SIEM/XDR platforms, orchestrating automated incident response, and implementing behavioral threat intelligence
+- **Threat Detection and Response** — Deploying SIEM/XDR platforms, orchestrating automated incident response, and implementing behavioral threat intelligence
 - **Defense-in-Depth Architecture** — Building multi-layered security controls spanning network perimeter, application layer, identity management, and endpoint protection
 - **Enterprise Infrastructure Operations** — Managing hybrid virtualization platforms, container orchestration, and high-availability services at scale
-- **Security Engineering & Automation** — Implementing Infrastructure as Code (IaC), SOAR workflows, and policy-driven security controls
+- **Security Engineering and Automation** — Implementing Infrastructure as Code (IaC), SOAR workflows, and policy-driven security controls
 
 **Business Value Demonstrated:** This lab mirrors the security architecture, operational workflows, and technical complexity found in mid-to-large enterprise environments, providing hands-on experience directly transferable to SOC Analyst, Security Engineer, and Infrastructure Security roles.
 
@@ -49,7 +49,7 @@ This enterprise-grade security lab demonstrates production-ready capabilities ac
 
 ### 1.2 Architecture Principals
 
-Every design decision in this lab is guided by three core security principles that align with industry frameworks (NIST CSF 2.0, CIS Controls v8, MITRE ATT&CK):
+Every design decision in this lab is guided by three core security principles that align with industry frameworks (NIST CSF 2.0, CIS Controls v8, MITRE ATTandCK):
 
 #### 1. Defense in Depth
 
@@ -92,7 +92,7 @@ No implicit trust is granted based on network location. Every request is authent
 
 - **Reduced Attack Surface:** Multi-layer controls detect and block threats at network, application, and endpoint levels
 - **Operational Resilience:** High-availability architecture ensures continuous security monitoring even during maintenance
-- **Compliance Readiness:** Framework alignment with NIST CSF 2.0, CIS Controls v8, and MITRE ATT&CK demonstrates audit-ready documentation
+- **Compliance Readiness:** Framework alignment with NIST CSF 2.0, CIS Controls v8, and MITRE ATTandCK demonstrates audit-ready documentation
 - **Scalability:** Container orchestration and IaC enable rapid deployment of new security controls without manual configuration
 
 #### Engineering Depth
@@ -107,9 +107,9 @@ No implicit trust is granted based on network location. Every request is authent
 
 ## 2. Security Posture
 
-### 2.1 Network & Perimeter Security
+### 2.1 Network and Perimeter Security
 
-#### Network Segmentation & Zone-Based Firewall
+#### Network Segmentation and Zone-Based Firewall
 
 Multiple VLANs create trust boundaries between production services, internal lab systems, and isolated research environments. pfSense/OPNsense firewalls enforce stateful inspection with default-deny rules, permitting only explicitly authorized traffic flows between zones.
 
@@ -161,7 +161,7 @@ OpenVAS and Nessus perform authenticated and unauthenticated scans across all ne
 
 ---
 
-### 2.2 Identity & Access Management
+### 2.2 Identity and Access Management
 
 #### Centralized Identity Provider (IdP)
 
@@ -214,7 +214,7 @@ Isolated Windows domain Active Directory Enterprise Certificate Authority also d
 
 ---
 
-### 2.3 Web & Application Security
+### 2.3 Web and Application Security
 
 #### Reverse Proxy with TLS Termination
 
@@ -239,7 +239,7 @@ Traefik middleware integrates with Authentik via ForwardAuth protocol. Before pr
 - Single Sign-On at the edge: authenticate once, access multiple services
 - Customizable authorization rules per service (e.g., "only SOC Analyst role")
 
-#### Security Headers & IP Allowlisting
+#### Security Headers and IP Allowlisting
 
 Middleware enforces HTTP Strict Transport Security (HSTS), X-Frame-Options, Content-Security-Policy, and X-Content-Type-Options headers. Source IP filtering restricts access to trusted subnets (RFC 1918 ranges).
 
@@ -265,9 +265,9 @@ SafeLine inspects HTTP/HTTPS traffic for OWASP Top 10 vulnerabilities including 
 
 ---
 
-### 2.4 DNS & Name Resolution
+### 2.4 DNS and Name Resolution
 
-#### Network-Wide Ad Blocking & Threat Intelligence
+#### Network-Wide Ad Blocking and Threat Intelligence
 
 Pi-hole filters DNS queries against blocklists containing advertising, tracking, and known-malicious domains. Conditional forwarding routes internal queries to Bind9 authoritative DNS server.
 
@@ -304,7 +304,7 @@ Dual Pi-hole instances deployed across separate Docker hosts with external Sync 
 
 ---
 
-### 2.5 Remote Access, Privacy & Endpoint Security
+### 2.5 Remote Access, Privacy and Endpoint Security
 
 #### Hardened SSH Configuration
 
@@ -321,9 +321,9 @@ SSH event logging in Wazuh with active response rules to block access when multi
 - SSH keys rotated annually; compromised keys revoked via authorized_keys updates
 - Automated blocking via active response rules in Wazuh
 
-#### Endpoint Detection & Response (EDR)
+#### Endpoint Detection and Response (EDR)
 
-Wazuh agents collect security telemetry from Windows, Linux, FreeBSD, and macOS endpoints. Central manager correlates events using MITRE ATT&CK-aligned rules, generating alerts for suspicious activities.
+Wazuh agents collect security telemetry from Windows, Linux, FreeBSD, and macOS endpoints. Central manager correlates events using MITRE ATTandCK-aligned rules, generating alerts for suspicious activities.
 
 **Security Impact:** Real-time visibility into endpoint behavior; detection of Living-off-the-Land (LOTL) techniques and anomalous processes.
 
@@ -371,7 +371,7 @@ Select subnets and containers route outbound traffic through VPN gateways (PIA, 
 
 ---
 
-### 2.6 Observability & Monitoring
+### 2.6 Observability and Monitoring
 
 #### Unified Metrics Platform
 
@@ -423,7 +423,7 @@ Checkmk deploys agents to monitor OS-level metrics, application services, and ne
 
 ---
 
-### 2.7 Alerting & Notification Infrastructure
+### 2.7 Alerting and Notification Infrastructure
 
 #### Centralized Alert Hub (Discord)
 
@@ -463,7 +463,7 @@ Gmail SMTP relay with app-specific password and TLS encryption enables email not
 
 ---
 
-### 2.8 Automation & Orchestration
+### 2.8 Automation and Orchestration
 
 #### Infrastructure as Code (IaC)
 
@@ -526,12 +526,12 @@ Multi-platform patch management ensures timely deployment of security updates ac
 **Technical Details:**
 
 - PatchMon: Monitors Linux hosts for outdated packages via apt/yum/dnf; alerts on available security updates with CVE mapping
-- Watchtower & WUD (What's Up Docker): Monitors Docker container images for new releases; WUD sends Discord alerts when updates available; Watchtower automates container updates on approved images
+- Watchtower and WUD (What's Up Docker): Monitors Docker container images for new releases; WUD sends Discord alerts when updates available; Watchtower automates container updates on approved images
 - Windows Server Update Services (WSUS): Centralized management of Microsoft product updates; approval workflows ensure controlled deployment; clients pull updates from internal WSUS server reducing internet bandwidth consumption
 
 ---
 
-### 2.9 Security Orchestration, Automation & Response (SOAR)
+### 2.9 Security Orchestration, Automation and Response (SOAR)
 
 #### Incident Case Management (TheHive)
 
@@ -599,7 +599,7 @@ Dedicated attack platform validates security controls via authorized penetration
 - Attack logs correlated with defensive tool alerts to validate detection coverage
 - Post-test reports document findings and remediation recommendations
 
-#### Network Forensics & Packet Analysis
+#### Network Forensics and Packet Analysis
 
 Wireshark, Brim, and tcpdump capture and analyze network traffic for incident investigation, protocol troubleshooting, and malware C2 detection.
 
@@ -611,7 +611,7 @@ Wireshark, Brim, and tcpdump capture and analyze network traffic for incident in
 - Zeek logs parsed for connection metadata, file extraction, and protocol anomalies
 - NetworkMiner extracts credentials, files, and OS fingerprints from captures
 
-#### Digital Forensics & Incident Response (DFIR)
+#### Digital Forensics and Incident Response (DFIR)
 
 Comprehensive DFIR toolkit including Volatility (memory forensics), KAPE (rapid triage), Autopsy (disk analysis), Eric Zimmerman Tools (Windows artifact parsing), and Velociraptor (scalable endpoint queries).
 

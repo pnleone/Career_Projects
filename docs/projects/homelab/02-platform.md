@@ -21,7 +21,7 @@
    - 1.11 [OS Platform and Distribution/Edition Summary](#111-os-platform-and-distributionedition-summary)
 2. [VMware vSphere r8 Environment](#2-vmware-vsphere-r8-environment)
 3. [Cisco Virtual Infrastructure](#3-cisco-virtual-infrastructure)
-   - 3.1 [Network Topology & Configuration](#31-network-topology--configuration)
+   - 3.1 [Network Topology and Configuration](#31-network-topology-and-configuration)
    - 3.2 [Technical Capabilities Demonstrated](#32-technical-capabilities-demonstrated)
 4. [Container Orchestration Architecture](#4-container-orchestration-architecture)
    - 4.1 [Multi-Engine Docker Deployment](#41-multi-engine-docker-deployment)
@@ -451,7 +451,7 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 
 ---
 
-### 3.1 Network Topology & Configuration
+### 3.1 Network Topology and Configuration
 <div class="two-col-text-even">
   <div class="text-left">
    <h3>R1 (192.168.200.6) - Primary Router</h3>
