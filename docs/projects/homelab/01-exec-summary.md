@@ -9,24 +9,27 @@
 
 ## Table of Contents
 
-1. [Executive Overview & Security Posture](#executive-overview--security-posture)
-   - 1.1 [Lab Mission Statement](#lab-mission-statement)
-   - 1.2 [Architecture Principals](#architecture-principals)
-   - 1.3 [Key Capabilities Demonstrated](#key-capabilities-demonstrated)
-2. [Security Posture](#security-posture)
-   - 2.1 [Network & Perimeter Security](#network--perimeter-security)
-   - 2.2 [Identity & Access Management](#identity--access-management)
-   - 2.3 [Web & Application Security](#web--application-security)
-   - 2.4 [DNS & Name Resolution](#dns--name-resolution)
-   - 2.5 [Remote Access, Privacy & Endpoint Security](#remote-access-privacy--endpoint-security)
-   - 2.6 [Observability & Monitoring](#observability--monitoring)
-   - 2.7 [Alerting & Notification Infrastructure](#alerting--notification-infrastructure)
-   - 2.8 [Automation & Orchestration](#automation--orchestration)
-   - 2.9 [Security Orchestration, Automation & Response (SOAR)](#security-orchestration-automation--response-soar)
-   - 2.10 [Behavioral Threat Intelligence (CrowdSec)](#behavioral-threat-intelligence-crowdsec)
-   - 2.11 [Security Tooling & Digital Forensics](#security-tooling--digital-forensics)
-   - 2.12 [Backup & Business Continuity](#backup--business-continuity)
-3. [Security Homelab Section Links](#security-homelab-section-links)
+1. [Executive Overview & Security Posture](#1-executive-overview--security-posture)
+   - 1.1 [Lab Mission Statement](#11-lab-mission-statement)
+   - 1.2 [Architecture Principals](#12-architecture-principals)
+   - 1.3 [Key Capabilities Demonstrated](#13-key-capabilities-demonstrated)
+
+2. [Security Posture](#2-security-posture)
+   - 2.1 [Network & Perimeter Security](#21-network--perimeter-security)
+   - 2.2 [Identity & Access Management](#22-identity--access-management)
+   - 2.3 [Web & Application Security](#23-web--application-security)
+   - 2.4 [DNS & Name Resolution](#24-dns--name-resolution)
+   - 2.5 [Remote Access, Privacy & Endpoint Security](#25-remote-access-privacy--endpoint-security)
+   - 2.6 [Observability & Monitoring](#26-observability--monitoring)
+   - 2.7 [Alerting & Notification Infrastructure](#27-alerting--notification-infrastructure)
+   - 2.8 [Automation & Orchestration](#28-automation--orchestration)
+   - 2.9 [Security Orchestration, Automation & Response (SOAR)](#29-security-orchestration-automation--response-soar)
+   - 2.10 [Behavioral Threat Intelligence (CrowdSec)](#210-behavioral-threat-intelligence-crowdsec)
+   - 2.11 [Security Tooling & Digital Forensics](#211-security-tooling--digital-forensics)
+   - 2.12 [Backup & Business Continuity](#212-backup--business-continuity)
+
+3. [Security Homelab Section Links](#3-security-homelab-section-links)
+
 ---
 
 ## 1. Executive Overview & Security Posture
