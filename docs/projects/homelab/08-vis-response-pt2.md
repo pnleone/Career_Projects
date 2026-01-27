@@ -1842,4 +1842,95 @@ Risk Level: Medium
 | T1005 | Data from Local System | Unusual file access patterns, data staging detection, large file operations |
 | T1071.001 | Application Layer Protocol: Web Protocols | HTTP/HTTPS traffic analysis, MISP C2 infrastructure lookups, DNS queries |
 | T1041 | Exfiltration Over C2 Channel | Egress traffic monitoring, MISP IOC matching, unusual data transfers |
-| T1486 | Data Encrypted for Impact (Ransomware) | Wazuh FIM (>
+| T1486 | Data Encrypted for Impact (Ransomware) | Wazuh FIM (>50 files modified <60 sec), file extension changes, ransom notes |
+| T1499 | Endpoint Denial of Service | HTTP flood detection (Safeline WAF), connection rate monitoring, resource exhaustion |
+
+### ISO 27001:2022 Controls Implementation
+
+| Control | Title | Implementation |
+|---------|-------|----------------|
+| 5.24 | Information Security Incident Management Planning and Preparation | TheHive IR workflows, Cortex responders, documented playbooks, SOC team structure |
+| 5.25 | Assessment and Decision on Information Security Events | Cortex analysis, MISP correlation, threat scoring, severity assessment |
+| 5.26 | Response to Information Security Incidents | TheHive case management, automated containment, multi-party coordination |
+| 5.27 | Learning from Information Security Incidents | Post-incident reviews, metrics tracking, process improvement, lessons learned |
+| 8.7 | Protection Against Malware | Safeline WAF, Suricata/Snort IDS, Wazuh EDR, email security, ClamAV/Yara |
+| 8.16 | Monitoring Activities | Prometheus, Grafana, Splunk SIEM, Wazuh EDR, Elastic Stack |
+| A.12.4.1 | Event Logging | Comprehensive logging across endpoints, network, applications, cloud services |
+| A.16.1.4 | Assessment of Security Events | Splunk/Elastic correlation, Cortex automated analysis, threat intelligence enrichment |
+| A.16.1.5 | Response to Security Incidents | TheHive case workflows, automated containment, coordinated response |
+
+### PCI-DSS v4.0 Requirement 10 (Logging and Monitoring)
+
+| Requirement | Description | Implementation |
+|-------------|-------------|----------------|
+| 10.2.1 | All user access to cardholder data logged | Wazuh file access monitoring, database audit logs, application logging |
+| 10.2.2 | All privileged actions logged | Active Directory privileged access tracking, sudo logging, admin portal access |
+| 10.3.1 | User identity recorded | ECS normalized user fields, authentication logs, session tracking |
+| 10.3.2 | Event type recorded | Standardized event taxonomy, ECS event.action field, categorization |
+| 10.3.3 | Date and time recorded | NTP synchronization, UTC timestamps, millisecond precision |
+| 10.3.4 | Success/failure indication | Event outcome field, authentication result, transaction status |
+| 10.3.5 | Origination of event | Source IP, hostname, device ID, geographic location |
+| 10.4.1 | Audit logs reviewed daily | Splunk/Elastic dashboards reviewed by SOC analysts, automated correlation searches |
+| 10.5.1 | Audit logs protected from modification | Write-once Elasticsearch indexes, immutable S3 archival, tamper detection |
+| 10.6.1 | Automated log review and anomaly detection | Prometheus alerting, Splunk correlation searches, Wazuh rules, ML anomaly detection |
+| 10.7.1 | Audit log retention | 90 days hot, 1 year archive |
+
+### GDPR (EU 2016/679) - Data Protection Requirements
+
+| Article | Requirement | Implementation |
+|---------|-------------|----------------|
+| Article 25 | Data Protection by Design and by Default | Security controls at application layer (WAF, encryption), minimal data retention, access controls |
+| Article 32 | Security of Processing | Technical security measures (encryption, pseudonymization, monitoring, incident response) |
+| Article 33 | Notification of Personal Data Breach to Supervisory Authority (72 hours) | TheHive breach assessment workflow, timeline tracking, notification templates |
+| Article 34 | Communication of Personal Data Breach to Data Subject | Affected user identification, breach impact assessment, notification procedures |
+
+### HIPAA Security Rule (45 CFR Part 164) - Healthcare Compliance
+
+| Rule | Requirement | Implementation |
+|------|-------------|----------------|
+| §164.308(a)(1) | Security Management Process | Risk analysis, risk management, sanction policy, information system activity review |
+| §164.308(a)(6) | Security Incident Procedures | Incident response plan, reporting, mitigation |
+| §164.312(a)(1) | Access Control | Unique user identification, emergency access, automatic logoff, encryption |
+| §164.312(b) | Audit Controls | Logging and monitoring of PHI access |
+| §164.312(e)(1) | Transmission Security | Encryption of PHI in transit, integrity controls |
+
+### Syslog Compliance (RFC 5424)
+
+| Component | Specification | Implementation |
+|-----------|---------------|----------------|
+| Facility | USER, LOCAL0-LOCAL7 | Properly categorized |
+| Severity | 0 (Emergency) to 7 | Mapped correctly |
+| Timestamp | ISO 8601 format | NTP synchronized |
+| Hostname | FQDN or IP | FQDN preferred |
+| Message Format | Structured data | JSON where possible |
+
+### Elastic Common Schema (ECS) Compliance
+
+**ECS Version:** 8.x
+
+**Compliance:** 95%+ for integrated data sources
+
+**Benefits:**
+
+- Cross-source correlation without field mapping
+- Pre-built Kibana dashboards work out-of-box
+- Future integrations automatically compatible
+- Machine learning models use standard fields
+
+---
+
+## 7. Security Homelab Section Links
+
+- **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
+- **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)**
+- **[Network Security, Privacy and Remote Access](/Career_Projects/projects/homelab/03-network/)**
+- **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)**
+- **[Automation and IaC](/Career_Projects/projects/homelab/05-auto-iac/)**
+- **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
+- **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
+- **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
+
+---
+
+**Document Version:** 1.0  
+**Last Updated:** January 13, 2026

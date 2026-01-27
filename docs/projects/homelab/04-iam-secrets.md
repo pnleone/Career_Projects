@@ -61,7 +61,22 @@ Enterprise environments deploy similar architectures where Active Directory mana
 
 ### 2.1 Overview and Hierarchy
 
-The lab PKI follows a two-tier architecture with an offline root CA and an online intermediate CA powered by StepCA. The offline root CA acts as the long-term trust anchor, while the intermediate CA handles day-to-day certificate issuance for internal services, Kubernetes workloads, web applications, and mTLS-enabled components.
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The lab PKI follows a two-tier architecture with an offline root CA and an online intermediate CA powered by StepCA. The offline root CA acts as the long-term trust anchor, while the intermediate CA handles day-to-day certificate issuance for internal services, Kubernetes workloads, web applications, and mTLS-enabled components.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/pki-stepca.png" alt="StepCA Certificate Flow">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Lab PKI Overview / StepCA Chain of Trust
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
 
 **Security Impact**
 
@@ -198,19 +213,27 @@ A two-tier PKI mirrors enterprise best practices by separating long-term trust f
 
 ### 2.6 Active Directory Certificate Services
 
-**Diagram Placeholder: AD Certificate Services Screenshot**
-
 Windows 2025 Server, dc02.home.com configured as the domain enterpriseCA supporting local AD auto-enrollment.
 
-**Diagram Placeholder: User and Computer Templates Screenshots (2 images)**
-
-User and Computer home.com templates supporting domain auto-enrollment. Computer/policies/Windows settings/security settings/public key policies/certificate services client -- auto-enrollment/Enabled in the default domain policy.
+User and Computer home.com templates supporting domain auto-enrollment. Computer/policies/Windows settings/security settings/public key policies/certificate services client-auto-enrollment/Enabled in the default domain policy.
+<figure>
+      <img src="/Career_Projects/assets/screenshots/ad-cert1.png" alt="Safeline WAF Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Issued Certificates / Template Information.
+      </figcaption>
+    </figure>
 
 **Certificate Details**
-
-**Diagram Placeholder: Certificate Details Screenshots (4 images)**
-
 Trusted Root Certificate: Win2025-CA
+
+<figure>
+      <img src="/Career_Projects/assets/screenshots/ad-cert1.png" alt="Safeline WAF Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Win2025-CA Trust.
+      </figcaption>
+    </figure>
+
+
 
 ---
 
@@ -232,9 +255,9 @@ Identity services are split between Authentik for modern SSO/OIDC-based authenti
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/logos/authentik.png" alt="Authentik Logo">
+      <img src="/Career_Projects/assets/diagrams/authentik.png" alt="Authentik Logo">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Authentik Identity Provider
+        Authentik Identity Provider Overview.
       </figcaption>
     </figure>
   </div>
@@ -334,9 +357,9 @@ Authentik acts as the unified identity provider for multiple services in the lab
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/logos/active-directory.png" alt="Active Directory Logo">
+      <img src="/Career_Projects/assets/logos/MS_AD.png" alt="Active Directory Logo">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Microsoft Active Directory
+        Microsoft Active Directory Overview.
       </figcaption>
     </figure>
   </div>
