@@ -25,8 +25,8 @@
    - 2.8 [Automation & Orchestration](#28-automation--orchestration)
    - 2.9 [Security Orchestration, Automation & Response (SOAR)](#29-security-orchestration-automation--response-soar)
    - 2.10 [Behavioral Threat Intelligence (CrowdSec)](#210-behavioral-threat-intelligence-crowdsec)
-   - 2.11 [Security Tooling & Digital Forensics](#211-security-tooling--digital-forensics)
-   - 2.12 [Backup & Business Continuity](#212-backup--business-continuity)
+   - 2.11 [Security Tooling and Digital Forensics](#211-security-tooling-and-digital-forensics)
+   - 2.12 [Backup and Business Continuity](#212-backup-and-business-continuity)
 
 3. [Security Homelab Section Links](#3-security-homelab-section-links)
 
@@ -586,7 +586,7 @@ pfSense firewall bouncer receives blocking decisions from CrowdSec Local API and
 
 ---
 
-### 2.11 Security Tooling & Digital Forensics
+### 2.11 Security Tooling and Digital Forensics
 
 #### Offensive Security Validation (Kali ParrotOS Linux)
 
@@ -625,7 +625,7 @@ Comprehensive DFIR toolkit including Volatility (memory forensics), KAPE (rapid 
 
 ---
 
-### 2.12 Backup & Business Continuity
+### 2.12 Backup and Business Continuity
 
 #### Multi-Tier Backup Strategy
 
@@ -651,7 +651,7 @@ Proxmox snapshots captured before configuration changes, system updates, or expe
 - Snapshot storage monitoring prevents disk exhaustion
 
 ---
-## Security Homelab Section Links
+## 3 Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 

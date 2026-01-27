@@ -31,9 +31,9 @@
 7. [Security Homelab Section Links](#7-security-homelab-section-links)
 ---
 
-## 2. Core Virtualization Stack
+## 1. Core Virtualization Stack
 
-### 2.1 Proxmox Virtual Environment (VE)
+### 1.1 Proxmox Virtual Environment (VE)
 
 #### Deployment Overview
 
@@ -124,7 +124,7 @@ Proxmox VE mirrors enterprise virtualization platforms (VMware vSphere, Microsof
 
 ---
 
-### 2.2 Proxmox Backup Server
+### 1.2 Proxmox Backup Server
 
 Integrated for automated, deduplicated backups of all virtual machines and containers. Backup jobs are scheduled to run weekly, with retention policies aligned to provide redundancies without taking up a lot of space since the server has been deployed within VMware Workstation running on my main production PC.
 
@@ -151,7 +151,7 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 
 ---
 
-### 2.3 Proxmox Datacenter Manager
+### 1.3 Proxmox Datacenter Manager
 
 Centralized management solution to oversee and manage multiple nodes and clusters of Proxmox-based virtual environments.
 
@@ -164,7 +164,7 @@ Centralized management solution to oversee and manage multiple nodes and cluster
     </figure>
 ---
 
-### 2.4 Physical Network Attached Storage (NAS) Integration
+### 1.4 Physical Network Attached Storage (NAS) Integration
 
 A shared Synology NAS is configured to receive automated backups from the Proxmox Backup Server. This ensures off-host redundancy and supports rapid restoration in case of lab-wide failure or rollback testing.
 
@@ -182,7 +182,7 @@ A shared Synology NAS is configured to receive automated backups from the Proxmo
 
 ---
 
-### 2.5 Virtual Network Attached Storage (NAS) Integration
+### 1.5 Virtual Network Attached Storage (NAS) Integration
 
 Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS) mounts for data sharing and redundancy. The single storage pool is configured for mirroring across the two NVMe drives.
 
@@ -194,7 +194,7 @@ Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS)
     </figure>
 ---
 
-### 2.6 Proxmox Host Hardware
+### 1.6 Proxmox Host Hardware
 
 | Component | Specification | Justification |
 |-----------|---------------|---------------|
@@ -231,7 +231,7 @@ Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS)
 
 ---
 
-### 2.7 Lab Switch
+### 1.7 Lab Switch
 
 TP-Link TL-SG108E Smart Switch
 
@@ -265,7 +265,7 @@ Used for VLAN and Link Aggregation (LAG) testing between The Proxmox host server
 </div>
 ---
 
-### 2.8 Proxmox Workload Overview
+### 1.8 Proxmox Workload Overview
 
 The majority of hosts and services run within the Proxmox environment and run within one of the two integrated technologies supported:
 
@@ -288,7 +288,7 @@ The majority of hosts and services run within the Proxmox environment and run wi
 
 ---
 
-### 2.9 Infrastructure Visualization
+### 1.9 Infrastructure Visualization
 
 #### PowerBI Dashboards
 
@@ -325,7 +325,7 @@ Application Inventory: Per-host service mapping with version tracking
     </figure>
   </div>
 
-### 2.10 OS Platform and Distribution/Edition Summary
+### 1.10 OS Platform and Distribution/Edition Summary
 
 <div class="image-col">
     <figure>
@@ -338,7 +338,7 @@ Application Inventory: Per-host service mapping with version tracking
 
 ---
 
-## 3. VMware vSphere r8 Environment
+## 2. VMware vSphere r8 Environment
 
 #### Deployment Overview
 
@@ -399,7 +399,7 @@ Enterprise environments frequently operate multiple virtualization platforms whe
     </figure>
 ---
 
-## 4. Cisco Virtual Infrastructure
+## 3. Cisco Virtual Infrastructure
 
 #### Deployment Overview
 
@@ -451,7 +451,7 @@ Cisco IOS powers the majority of enterprise routers and Layer 3 switches globall
 
 ---
 
-### 4.1 Network Topology & Configuration
+### 3.1 Network Topology & Configuration
 <div class="two-col-text-even">
   <div class="text-left">
    <h3>R1 (192.168.200.6) - Primary Router</h3>
@@ -617,7 +617,7 @@ network 192.168.3.0 0.0.0.255 area 0
 
 ---
 
-### 4.2 Technical Capabilities Demonstrated
+### 3.2 Technical Capabilities Demonstrated
 
 #### Dynamic Routing Protocols
 
@@ -632,7 +632,7 @@ network 192.168.3.0 0.0.0.255 area 0
 
 ---
 
-## 5. Container Orchestration Architecture
+## 4. Container Orchestration Architecture
 
 #### Deployment Overview
 
@@ -661,7 +661,7 @@ Enterprises frequently operate hybrid container environments where Docker suppor
 
 ---
 
-### 5.1 Multi-Engine Docker Deployment
+### 4.1 Multi-Engine Docker Deployment
 
 #### Deployment Overview
 
@@ -808,7 +808,7 @@ volumes:
 ```
 ---
 
-### 5.2 Cloud-Native Kubernetes Cluster Deployment
+### 4.2 Cloud-Native Kubernetes Cluster Deployment
 
 #### Deployment Overview
 
@@ -961,7 +961,7 @@ The SOC namespace hosts the lab's comprehensive Security Operations Center platf
 
 ---
 
-## 6. Network Services Summary
+## 5. Network Services Summary
 
 ### LoadBalancer Services (Externally Accessible)
 
@@ -1301,14 +1301,14 @@ spec:
 ```
 ---
 
-## 7. Version Control Strategy
+## 6. Version Control Strategy
 
 - Repository: GitHub repo (infrastructure-as-code)
 - Structure: Organized by service (docker-compose/, k8s-manifests/, terraform/Ansible)
 - Tooling: VS Code with Docker, Kubernetes, SSH, Ansible, Terraform extensions
 - Automation: Watchtower monitors container images, WUD provides update alerts
 ---
-## Security Homelab Section Links
+## 7. Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 
