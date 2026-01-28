@@ -9,13 +9,12 @@ Owner: Paul Leone
 
 ## Table of Contents
 
-1. [Security Orchestration, Automation and Response (SOAR) Platform](#security-orchestration-automation-and-response-soar-platform)
-2. [Monitoring & Observability Architecture](#monitoring--observability-architecture)
-3. [Alerting and Notification Architecture](#alerting-and-notification-architecture)
-4. [Security Controls Summary](#security-controls-summary)
-5. [Use Cases and Scenarios](#use-cases-and-scenarios)
-6. [Standards Alignment](#standards-alignment)
-7. [Security Homelab Section Links](#security-homelab-section-links)
+1. [Security Orchestration, Automation and Response (SOAR) Platform](#1-security-orchestration-automation-and-response-soar-platform)
+2. [Monitoring & Observability Architecture](#2-monitoring--observability-architecture)
+3. [Alerting and Notification Architecture](#3-alerting-and-notification-architecture)
+4. [Security Controls and Compliance Summary](#4-security-controls-and-compliance-summary)
+5. [Use Cases and Scenarios](#5-use-cases-and-scenarios)
+6. [Security Homelab Section Links](#6-security-homelab-section-links)
 
 ---
 
@@ -1450,7 +1449,7 @@ HTTP Get, TLS Cert expiry, Discord ping, local ICMP, TCP SSH and TCP HTTPS
 
 ---
 
-## 4. Security Controls Summary
+## 4. Security Controls and Compliance Summary
 
 ### Visibility and Response Security Controls
 
@@ -1520,6 +1519,28 @@ HTTP Get, TLS Cert expiry, Discord ping, local ICMP, TCP SSH and TCP HTTPS
 | Exfiltration (T1041) | Large outbound transfers | pfSense, Suricata |
 | Command and Control (T1071) | Beacon detection | Suricata, pfSense |
 
+### Syslog Compliance (RFC 5424)
+
+| Component | Specification | Implementation |
+|-----------|---------------|----------------|
+| Facility | USER, LOCAL0-LOCAL7 | Properly categorized |
+| Severity | 0 (Emergency) to 7 | Mapped correctly |
+| Timestamp | ISO 8601 format | NTP synchronized |
+| Hostname | FQDN or IP | FQDN preferred |
+| Message Format | Structured data | JSON where possible |
+
+### Elastic Common Schema (ECS) Compliance
+
+**ECS Version:** 8.x
+
+**Compliance:** 95%+ for integrated data sources
+
+**Benefits:**
+
+- Cross-source correlation without field mapping
+- Pre-built Kibana dashboards work out-of-box
+- Future integrations automatically compatible
+- Machine learning models use standard fields
 ---
 
 ## 5. Use Cases and Scenarios
@@ -1693,235 +1714,7 @@ Risk Level: Medium
 ```
 ---
 
-## 6. Standards Alignment
-
-### Visibility and Response Standards
-
-**Industry Framework Alignment:**
-
-| Framework/Standard | Alignment | Implementation Evidence |
-|-------------------|-----------|-------------------------|
-| NIST Cybersecurity Framework | High | Full Detect, Respond, Recover implementation; Shuffle orchestrates automated response |
-| NIST SP 800-53 (AU controls) | High | Comprehensive audit logging and monitoring |
-| NIST SP 800-61 (Incident Response) | High | Full IR lifecycle automation via Shuffle playbooks; MTTR reduced by 85-97% |
-| CIS Critical Security Controls | High | Controls 6, 7, 8, 13, 16 implemented |
-| ISO 27001:2022 (Operations Security) | High | Logging, monitoring, incident management; automated playbooks for Controls 5.24-5.27 |
-| PCI-DSS v4.0 (Requirement 10) | Moderate | Centralized logging, tamper protection |
-| MITRE ATT&CK Framework | High | Detection coverage across 11 tactics; Shuffle correlates alerts to ATT&CK techniques |
-| SANS Critical Controls | High | Continuous monitoring and alerting |
-| Syslog Protocol (RFC 5424) | High | Standardized log format compliance |
-| Elastic Common Schema (ECS) | High | Normalized field naming for cross-platform correlation |
-
-### NIST Cybersecurity Framework (CSF) - Comprehensive Mapping
-
-#### Detect Function
-
-| Category | Subcategory | Implementation | Maturity Level |
-|----------|-------------|----------------|----------------|
-| DE.AE (Anomalies & Events) | DE.AE-1: Baseline established | Wazuh baseline monitoring; Prometheus metrics; behavioral analysis | **Advanced** |
-| | DE.AE-2: Events analyzed | Cortex multi-engine analysis; MISP correlation; Splunk/Elastic analytics | **Advanced** |
-| | DE.AE-3: Data aggregated | Splunk/Elastic centralized logging; Wazuh EDR; network flow data | **Advanced** |
-| | DE.AE-4: Impact determined | TheHive case severity scoring; asset criticality assessment | **Advanced** |
-| | DE.AE-5: Thresholds defined | Prometheus alerting rules; Splunk/Elastic correlation searches; Wazuh rules | **Advanced** |
-| DE.CM (Continuous Monitoring) | DE.CM-1: Network monitored | Suricata/Snort IDS; pfSense flow logs; Safeline WAF; network observability | **Advanced** |
-| | DE.CM-3: Personnel monitored | Active Directory audit logs; Authentik authentication; privileged access monitoring | **Advanced** |
-| | DE.CM-4: Malicious code detected | Wazuh FIM; Yara rules; Cortex file analysis; WAF blocking | **Advanced** |
-| | DE.CM-5: Unauthorized devices detected | Network device inventory; MAC address tracking; Wazuh agent monitoring | **Intermediate** |
-| | DE.CM-6: External service activity | Cloudflare analytics; VPN logs; public service monitoring | **Advanced** |
-| | DE.CM-7: Unauthorized activity monitored | Failed authentication tracking; privilege escalation detection; lateral movement monitoring | **Advanced** |
-| | DE.CM-8: Vulnerability scans performed | OpenVAS/Nessus weekly scans; continuous assessment | **Advanced** |
-| DE.DP (Detection Processes) | DE.DP-1: Roles defined | Documented SOC team structure; TheHive task assignments | **Advanced** |
-| | DE.DP-2: Detection activities comply | CIS benchmarks; NIST 800-53 controls; vendor security baselines | **Advanced** |
-| | DE.DP-4: Event detection communicated | Discord/email notifications; TheHive case updates | **Advanced** |
-| | DE.DP-5: Detection improved | Post-incident reviews; MTTR tracking; workflow optimization | **Advanced** |
-
-#### Respond Function
-
-| Category | Subcategory | Implementation | Maturity Level |
-|----------|-------------|----------------|----------------|
-| RS.RP (Response Planning) | RS.RP-1: Plan executed | TheHive IR playbooks; documented procedures; runbooks | **Advanced** |
-| RS.CO (Communications) | RS.CO-1: Personnel know roles | SOC team documentation; TheHive task assignments | **Advanced** |
-| | RS.CO-2: Events reported | Internal: Discord, TheHive; External: ISAC sharing via MISP | **Advanced** |
-| | RS.CO-3: Info shared | MISP threat intelligence sharing; CrowdSec community; vendor coordination | **Advanced** |
-| | RS.CO-5: Voluntary info sharing | MISP events shared with trusted ISACs; CrowdSec community contributions | **Advanced** |
-| RS.AN (Analysis) | RS.AN-1: Notifications investigated | Cortex automated analysis; MISP correlation; Splunk queries | **Advanced** |
-| | RS.AN-2: Impact understood | Asset inventory correlation; data classification; business impact analysis | **Advanced** |
-| | RS.AN-3: Forensics performed | Wazuh forensic data collection; memory dumps; network captures | **Advanced** |
-| | RS.AN-4: Incidents categorized | TheHive taxonomy; MITRE ATT&CK mapping; severity scoring | **Advanced** |
-| | RS.AN-5: Processes established | Documented analysis procedures; Cortex analyzer workflows; MISP playbooks | **Advanced** |
-| RS.MI (Mitigation) | RS.MI-1: Incidents contained | Wazuh active response; firewall blocking; network isolation | **Advanced** |
-| | RS.MI-2: Incidents mitigated | Malware removal; account lockouts; vulnerability patching | **Advanced** |
-| | RS.MI-3: Vulnerabilities mitigated | Virtual patching (WAF); IDS signatures; emergency patching via Ansible | **Advanced** |
-| RS.IM (Improvements) | RS.IM-1: Plans incorporate lessons learned | Post-incident reviews in TheHive; workflow optimization; playbook updates | **Advanced** |
-
-#### Recover Function
-
-| Category | Subcategory | Implementation | Maturity Level |
-|----------|-------------|----------------|----------------|
-| RC.RP (Recovery Planning) | RC.RP-1: Plan executed | Backup restoration procedures; system rebuild playbooks; service validation | **Advanced** |
-| RC.IM (Improvements) | RC.IM-1: Lessons incorporated | TheHive post-incident documentation; workflow refinements; control updates | **Advanced** |
-| | RC.IM-2: Strategies updated | Recovery time objectives reviewed; backup testing; disaster recovery exercises | **Intermediate** |
-
-### NIST SP 800-53 Audit Controls
-
-| Control | Requirement | Implementation |
-|---------|-------------|----------------|
-| AU-2 | Auditable Events | Comprehensive logging of all security events |
-| AU-3 | Content of Audit Records | Timestamp, source, outcome, user recorded |
-| AU-4 | Audit Storage Capacity | 90-day retention with capacity monitoring |
-| AU-5 | Response to Audit Failures | Automated alerts on forwarder/indexer failures; failover mechanisms; disk full protection |
-| AU-6 | Audit Review and Analysis | Daily dashboard review, correlation searches |
-| AU-7 | Audit Reduction and Reports | Grafana/Splunk/Elastic dashboards; scheduled reports |
-| AU-8 | Time Stamps | NTP synchronization across all systems |
-| AU-9 | Protection of Audit Info | Write-once Elasticsearch indexes; TLS encryption in transit; RBAC access controls; tamper detection |
-| AU-10 | Non-Repudiation | Digital signatures on critical logs; immutable audit trail; chain of custody for forensics; Shuffle maintains complete execution audit trail in OpenSearch |
-| AU-11 | Audit Record Retention | 90-day hot storage, 1-year cold archive |
-| AU-12 | Audit Generation | Agents deployed on all critical systems |
-| AU-14 | Session Audit | User session logging; command-line auditing (Sysmon, auditd); privileged access tracking |
-
-### NIST SP 800-61 Rev. 2 - Incident Response Lifecycle
-
-| Phase | NIST 800-61 Requirement | Implementation |
-|-------|------------------------|----------------|
-| 1. Preparation | IR plan, tools, team training, communication procedures | TheHive playbooks, Cortex analyzers, MISP threat intel, documented procedures, SOC team structure, Shuffle playbooks (workflows) |
-| 2. Detection & Analysis | Alert monitoring, triage, correlation, severity assessment, documentation | Wazuh/Splunk/Elastic alerting → Cortex enrichment → MISP correlation → TheHive case creation |
-| 3. Containment, Eradication & Recovery | Short-term containment, evidence preservation, eradication, system restoration, vulnerability remediation | Wazuh active response, firewall blocking, network isolation, malware removal, patching, backup restoration, Shuffle workflow automation |
-| 4. Post-Incident Activity | Lessons learned, metrics, process improvement, evidence retention | TheHive case documentation, MTTR tracking, workflow optimization, forensic archival, Shuffle reporting |
-
-### CIS Controls v8 Implementation
-
-| Control | Description | Implementation |
-|---------|-------------|----------------|
-| 6.2 | Activate audit logging | Syslog, Windows Event Log, application logs |
-| 6.3 | Establish log management | Splunk + Elastic centralized aggregation |
-| 6.4 | Ensure adequate log storage | 90-day hot retention, unlimited archive |
-| 7.1 | Establish vulnerability management | OpenVAS/Nessus infrastructure scanning, patch tracking |
-| 8.2 | Collect audit logs | Universal forwarders, Elastic agents |
-| 8.5 | Centralize audit logs | Splunk indexers, Elasticsearch cluster |
-| 8.6 | Collect DNS query logs | Pi-hole query logging, pfSense/OPNsense DNS logs to Splunk/Elastic |
-| 8.8 | Collect command-line audit | Sysmon Event ID 1 (Windows), auditd execve logging (Linux), Wazuh command monitoring |
-| 13.2 | Deploy host-based IDS | Wazuh agents on all endpoints |
-| 13.3 | Deploy network IDS | Suricata/Snort on all network segments |
-| 13.6 | Network boundary logging | pfSense/OPNsense logs to SIEM |
-| 16.11 | Remediate penetration findings | OpenVAS/Nessus findings tracked in TheHive cases, SLA monitoring, validation scanning |
-
-### MITRE ATT&CK Detection Coverage
-
-| Tactic | Techniques Covered | Detection Data Sources |
-|--------|-------------------|------------------------|
-| Initial Access | 6 of 9 | Network traffic, authentication logs, email analysis |
-| Execution | 8 of 12 | Process creation (Sysmon ID 1), command-line logging (auditd) |
-| Persistence | 7 of 19 | Registry monitoring, file system (Wazuh FIM), scheduled tasks |
-| Privilege Escalation | 5 of 13 | Process creation, UAC bypass detection, user activity monitoring |
-| Defense Evasion | 9 of 42 | File integrity monitoring, log clearing detection (Wazuh), obfuscation |
-| Credential Access | 4 of 15 | LSASS access monitoring, credential dumping detection, brute force |
-| Discovery | 8 of 30 | Process creation, network connections, enumeration commands |
-| Lateral Movement | 5 of 9 | Network traffic analysis, authentication logs (RDP/SMB/SSH) |
-| Collection | 3 of 17 | File access monitoring, screen capture detection, clipboard monitoring |
-| Exfiltration | 4 of 9 | Network traffic analysis, egress monitoring, unusual data transfers |
-| Command and Control | 6 of 16 | Network connections, DNS queries, HTTP/HTTPS traffic analysis |
-| Impact | 6 of 9 | Ransomware detection (Wazuh FIM), DoS detection, data destruction |
-
-### Detailed Technique Mapping (High-Priority Techniques)
-
-| ATT&CK ID | Technique | Detection Method |
-|-----------|-----------|------------------|
-| T1190 | Exploit Public-Facing Application | Safeline WAF alerts, vulnerability scanning (OpenVAS/Nessus) |
-| T1566.001 | Phishing: Spearphishing Attachment | Email analysis (attachment scanning), Cortex malware analysis |
-| T1566.002 | Phishing: Spearphishing Link | URL analysis (VirusTotal, URLhaus, PhishTank), Safeline WAF |
-| T1059.001 | Command and Scripting: PowerShell | Sysmon ID 1 (process creation), command-line auditing, obfuscation detection |
-| T1059.003 | Command and Scripting: Windows Command Shell | Command-line logging, Wazuh monitoring, parent-child process analysis |
-| T1136.001 | Create Account: Local Account | Windows Security Event ID 4720, auditd user add, Active Directory logs |
-| T1505.003 | Server Software Component: Web Shell | Wazuh FIM on web directories, Yara web shell signatures, Safeline WAF |
-| T1027 | Obfuscated Files or Information | Yara rules, entropy analysis, Cortex file analysis (multiple engines) |
-| T1070.004 | Indicator Removal: File Deletion | Wazuh FIM, mass deletion detection, suspicious file operations |
-| T1110.001 | Brute Force: Password Guessing | Failed authentication tracking (Splunk correlation), CrowdSec detection |
-| T1110.003 | Brute Force: Password Spraying | Multiple failed authentications across accounts, timeline analysis |
-| T1555.003 | Credentials from Password Stores: Browser | Wazuh monitoring of browser credential file access, process monitoring |
-| T1046 | Network Service Discovery | Port scan detection (Suricata), network reconnaissance patterns |
-| T1021.001 | Remote Services: Remote Desktop Protocol | RDP authentication logs, unusual RDP connections, lateral movement patterns |
-| T1021.002 | Remote Services: SMB/Windows Admin Shares | SMB traffic analysis, authentication logs, file share access monitoring |
-| T1005 | Data from Local System | Unusual file access patterns, data staging detection, large file operations |
-| T1071.001 | Application Layer Protocol: Web Protocols | HTTP/HTTPS traffic analysis, MISP C2 infrastructure lookups, DNS queries |
-| T1041 | Exfiltration Over C2 Channel | Egress traffic monitoring, MISP IOC matching, unusual data transfers |
-| T1486 | Data Encrypted for Impact (Ransomware) | Wazuh FIM (>50 files modified <60 sec), file extension changes, ransom notes |
-| T1499 | Endpoint Denial of Service | HTTP flood detection (Safeline WAF), connection rate monitoring, resource exhaustion |
-
-### ISO 27001:2022 Controls Implementation
-
-| Control | Title | Implementation |
-|---------|-------|----------------|
-| 5.24 | Information Security Incident Management Planning and Preparation | TheHive IR workflows, Cortex responders, documented playbooks, SOC team structure |
-| 5.25 | Assessment and Decision on Information Security Events | Cortex analysis, MISP correlation, threat scoring, severity assessment |
-| 5.26 | Response to Information Security Incidents | TheHive case management, automated containment, multi-party coordination |
-| 5.27 | Learning from Information Security Incidents | Post-incident reviews, metrics tracking, process improvement, lessons learned |
-| 8.7 | Protection Against Malware | Safeline WAF, Suricata/Snort IDS, Wazuh EDR, email security, ClamAV/Yara |
-| 8.16 | Monitoring Activities | Prometheus, Grafana, Splunk SIEM, Wazuh EDR, Elastic Stack |
-| A.12.4.1 | Event Logging | Comprehensive logging across endpoints, network, applications, cloud services |
-| A.16.1.4 | Assessment of Security Events | Splunk/Elastic correlation, Cortex automated analysis, threat intelligence enrichment |
-| A.16.1.5 | Response to Security Incidents | TheHive case workflows, automated containment, coordinated response |
-
-### PCI-DSS v4.0 Requirement 10 (Logging and Monitoring)
-
-| Requirement | Description | Implementation |
-|-------------|-------------|----------------|
-| 10.2.1 | All user access to cardholder data logged | Wazuh file access monitoring, database audit logs, application logging |
-| 10.2.2 | All privileged actions logged | Active Directory privileged access tracking, sudo logging, admin portal access |
-| 10.3.1 | User identity recorded | ECS normalized user fields, authentication logs, session tracking |
-| 10.3.2 | Event type recorded | Standardized event taxonomy, ECS event.action field, categorization |
-| 10.3.3 | Date and time recorded | NTP synchronization, UTC timestamps, millisecond precision |
-| 10.3.4 | Success/failure indication | Event outcome field, authentication result, transaction status |
-| 10.3.5 | Origination of event | Source IP, hostname, device ID, geographic location |
-| 10.4.1 | Audit logs reviewed daily | Splunk/Elastic dashboards reviewed by SOC analysts, automated correlation searches |
-| 10.5.1 | Audit logs protected from modification | Write-once Elasticsearch indexes, immutable S3 archival, tamper detection |
-| 10.6.1 | Automated log review and anomaly detection | Prometheus alerting, Splunk correlation searches, Wazuh rules, ML anomaly detection |
-| 10.7.1 | Audit log retention | 90 days hot, 1 year archive |
-
-### GDPR (EU 2016/679) - Data Protection Requirements
-
-| Article | Requirement | Implementation |
-|---------|-------------|----------------|
-| Article 25 | Data Protection by Design and by Default | Security controls at application layer (WAF, encryption), minimal data retention, access controls |
-| Article 32 | Security of Processing | Technical security measures (encryption, pseudonymization, monitoring, incident response) |
-| Article 33 | Notification of Personal Data Breach to Supervisory Authority (72 hours) | TheHive breach assessment workflow, timeline tracking, notification templates |
-| Article 34 | Communication of Personal Data Breach to Data Subject | Affected user identification, breach impact assessment, notification procedures |
-
-### HIPAA Security Rule (45 CFR Part 164) - Healthcare Compliance
-
-| Rule | Requirement | Implementation |
-|------|-------------|----------------|
-| §164.308(a)(1) | Security Management Process | Risk analysis, risk management, sanction policy, information system activity review |
-| §164.308(a)(6) | Security Incident Procedures | Incident response plan, reporting, mitigation |
-| §164.312(a)(1) | Access Control | Unique user identification, emergency access, automatic logoff, encryption |
-| §164.312(b) | Audit Controls | Logging and monitoring of PHI access |
-| §164.312(e)(1) | Transmission Security | Encryption of PHI in transit, integrity controls |
-
-### Syslog Compliance (RFC 5424)
-
-| Component | Specification | Implementation |
-|-----------|---------------|----------------|
-| Facility | USER, LOCAL0-LOCAL7 | Properly categorized |
-| Severity | 0 (Emergency) to 7 | Mapped correctly |
-| Timestamp | ISO 8601 format | NTP synchronized |
-| Hostname | FQDN or IP | FQDN preferred |
-| Message Format | Structured data | JSON where possible |
-
-### Elastic Common Schema (ECS) Compliance
-
-**ECS Version:** 8.x
-
-**Compliance:** 95%+ for integrated data sources
-
-**Benefits:**
-
-- Cross-source correlation without field mapping
-- Pre-built Kibana dashboards work out-of-box
-- Future integrations automatically compatible
-- Machine learning models use standard fields
-
----
-
-## 7. Security Homelab Section Links
+## 6. Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)**

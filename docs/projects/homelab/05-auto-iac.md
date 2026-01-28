@@ -9,27 +9,26 @@ Owner: Paul Leone
 
 ## Table of Contents
 
-1. [Automation and Infrastructure as Code (IaC)](#automation-and-infrastructure-as-code-iac)
-2. [Infrastructure Provisioning with Terraform](#infrastructure-provisioning-with-terraform)
-3. [Configuration Management with Ansible](#configuration-management-with-ansible)
-   - 3.1 [Architecture Overview](#architecture-overview)
-   - 3.2 [Setup Overview](#setup-overview)
-   - 3.3 [Playbook Architecture](#playbook-architecture)
-4. [Version Control and GitOps](#version-control-and-gitops)
-5. [Workflow Automation with n8n](#workflow-automation-with-n8n)
-   - 5.1 [Platform Overview](#platform-overview)
-   - 5.2 [Workflow 1: Ansible Playbook Automation](#workflow-1-ansible-playbook-automation)
-   - 5.3 [Workflow 2: Threat Intelligence Aggregation](#workflow-2-threat-intelligence-aggregation)
-6. [Scripting for Advanced Automation](#scripting-for-advanced-automation)
-   - 6.1 [PowerShell & Bash Scripting](#powershell--bash-scripting)
-   - 6.2 [Cron Job Scheduling Strategy](#cron-job-scheduling-strategy)
-   - 6.3 [Python Scripting for Advanced Automation](#python-scripting-for-advanced-automation)
-   - 6.4 [Script Integration & Orchestration](#script-integration--orchestration)
-7. [Automation Security Controls](#automation-security-controls)
-8. [Operational Resilience & Disaster Recovery](#operational-resilience--disaster-recovery)
-9. [Practical Use Cases and Workflows](#practical-use-cases-and-workflows)
-10. [Standards Alignment](#standards-alignment)
-11. [Security Homelab Section Links](#security-homelab-section-links)
+1. [Automation and Infrastructure as Code (IaC)](#1-automation-and-infrastructure-as-code-iac)
+2. [Infrastructure Provisioning with Terraform](#2-infrastructure-provisioning-with-terraform)
+3. [Configuration Management with Ansible](#3-configuration-management-with-ansible)
+   - 3.1 [Architecture Overview](#31-architecture-overview)
+   - 3.2 [Setup Overview](#32-setup-overview)
+   - 3.3 [Playbook Architecture](#33-playbook-architecture)
+4. [Version Control and GitOps](#4-version-control-and-gitops)
+5. [Workflow Automation with n8n](#5-workflow-automation-with-n8n)
+   - 5.1 [Platform Overview](#51-platform-overview)
+   - 5.2 [Workflow 1: Ansible Playbook Automation](#52-workflow-1-ansible-playbook-automation)
+   - 5.3 [Workflow 2: Threat Intelligence Aggregation](#53-workflow-2-threat-intelligence-aggregation)
+6. [Scripting for Advanced Automation](#6-scripting-for-advanced-automation)
+   - 6.1 [PowerShell and Bash Scripting](#61-powershell-and-bash-scripting)
+   - 6.2 [Cron Job Scheduling Strategy](#62-cron-job-scheduling-strategy)
+   - 6.3 [Python Scripting for Advanced Automation](#63-python-scripting-for-advanced-automation)
+   - 6.4 [Script Integration and Orchestration](#64-script-integration-and-orchestration)
+7. [Automation Security Controls](#7-automation-security-controls)
+8. [Operational Resilience and Disaster Recovery](#8-operational-resilience-and-disaster-recovery)
+9. [Practical Use Cases and Workflows](#9-practical-use-cases-and-workflows)
+10. [Security Homelab Section Links](#10-security-homelab-section-links)
 
 ---
 
@@ -1030,7 +1029,7 @@ Custom scripts supplement configuration management tools for tasks requiring com
 
 ---
 
-### 6.1 PowerShell & Bash Scripting
+### 6.1 PowerShell and Bash Scripting
 
 Custom automation scripts are developed in both PowerShell (for Windows systems) and Bash (for Linux systems) to handle repetitive administrative tasks, enforce configuration standards, and respond to system events. These scripts automate activities such as user account provisioning, log rotation, backup verification, certificate renewal checks, and security baseline enforcement. PowerShell scripts leverage native Windows management frameworks like Active Directory modules and WMI, while Bash scripts utilize standard Unix utilities and interact with system APIs. Scripts are version-controlled in GitHub alongside infrastructure code, enabling rollback capability and documentation of automation logic.
 
@@ -1584,7 +1583,7 @@ A custom Python-based network scanner has been developed to provide tailored rec
 
 ---
 
-### 6.4 Script Integration & Orchestration
+### 6.4 Script Integration and Orchestration
 
 Scripts are integrated into broader workflows through several mechanisms. Some scripts are triggered directly by cron jobs for time-based execution. Others are called by monitoring systems in response to alerts or threshold violations (for example, a Grafana alert triggering a remediation script). Ansible playbooks orchestrate multi-step automation by calling shell scripts and Python utilities in sequence, passing parameters and handling error conditions. This layered approach combines the flexibility of custom scripts with the orchestration capabilities of configuration management tools, enabling sophisticated automation scenarios while maintaining maintainability and reusability.
 
@@ -1743,45 +1742,6 @@ Scripts are integrated into broader workflows through several mechanisms. Some s
 - Discord alert sent with details
 
 **Result:** Proactive detection of configuration drift and unauthorized changes
-
----
-
-## 10. Standards Alignment
-
-### Automation and DevOps Standards
-
-### Industry Framework Alignment
-
-| Framework/Standard | Alignment | Implementation Evidence |
-|--------------------|-----------|------------------------|
-| Infrastructure as Code (IaC) | High | Terraform for all infrastructure |
-| GitOps Principles | Moderate | Git as source of truth; automated workflows |
-| CIS Controls v8 | High | Control 4.1 (Config management) |
-| NIST SP 800-53 (CM-2) | High | Configuration baseline enforcement |
-| 12-Factor App Methodology | Moderate | Config externalization; stateless processes |
-| ISO 27001 (A.12.1) | Moderate | Documented operational procedures |
-
-### CIS Controls Implementation
-
-| Control | Description | Implementation |
-|---------|-------------|----------------|
-| 4.1 | Establish config management | Terraform + Ansible baseline |
-| 4.2 | Enforce config standards | Ansible playbooks validate compliance |
-| 4.3 | Document configuration | Git commits; inline YAML comments |
-| 4.4 | Perform config change control | Git branches; PR workflow |
-| 4.7 | Manage default accounts | Ansible removes/disables defaults |
-| 4.8 | Uninstall unauthorized software | Ansible package management playbooks |
-
-### NIST SP 800-53 Configuration Management
-
-| Control | Requirement | Lab Implementation |
-|---------|-------------|-------------------|
-| CM-2 | Baseline configuration | Ansible playbooks define baseline |
-| CM-3 | Configuration change control | Git version control; commit messages |
-| CM-5 | Access restrictions | GitHub repo private; SSH key auth |
-| CM-6 | Configuration settings | Documented in Ansible vars |
-| CM-7 | Least functionality | Ansible removes unnecessary packages |
-| CM-8 | System component inventory | Terraform state; Ansible facts |
 
 ---
 

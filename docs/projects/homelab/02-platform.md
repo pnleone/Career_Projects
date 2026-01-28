@@ -299,6 +299,7 @@ Custom-built Power BI reports provide real-time visibility into lab operations
 Application Inventory: Per-host service mapping with version tracking
 
 - Resource Utilization: CPU/memory/storage trends across Proxmox
+- IP Address Management: Assigned IP addresses by subnet and assignment type
 - OS Distribution Analysis: Platform breakdown (RHEL, Ubuntu, Debian, Windows)
 
 <div class="image-col">
@@ -326,6 +327,15 @@ Application Inventory: Per-host service mapping with version tracking
       </figcaption>
     </figure>
   </div>
+
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-ipam.png" alt="IPAM Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        IP Address Overview.
+      </figcaption>
+    </figure>
+  </div>  
 
 ### 1.10 OS Platform and Distribution/Edition Summary
 
