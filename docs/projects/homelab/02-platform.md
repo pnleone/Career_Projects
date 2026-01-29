@@ -19,8 +19,6 @@ Owner: Paul Leone
    - 1.7 [Lab Switch](#17-lab-switch)
    - 1.8 [Proxmox Workload Overview](#18-proxmox-workload-overview)
    - 1.9 [Infrastructure Visualization](#19-infrastructure-visualization)
-   - 1.10 [Proxmox Node PVE Summary](#110-proxmox-node-pve-summary)
-   - 1.11 [OS Platform and Distribution/Edition Summary](#111-os-platform-and-distributionedition-summary)
 2. [VMware vSphere r8 Environment](#2-vmware-vsphere-r8-environment)
 3. [Cisco Virtual Infrastructure](#3-cisco-virtual-infrastructure)
    - 3.1 [Network Topology and Configuration](#31-network-topology-and-configuration)
@@ -28,9 +26,11 @@ Owner: Paul Leone
 4. [Container Orchestration Architecture](#4-container-orchestration-architecture)
    - 4.1 [Multi-Engine Docker Deployment](#41-multi-engine-docker-deployment)
    - 4.2 [Cloud-Native Kubernetes Cluster Deployment](#42-cloud-native-kubernetes-cluster-deployment)
-5. [Network Services Summary](#5-network-services-summary)
-6. [Version Control Strategy](#6-version-control-strategy)
-7. [Security Homelab Section Links](#7-security-homelab-section-links)
+   - 4.3 [Network Services Summary](#43-network-services-summary)
+   - 4.4 [Example Workload PatchMon](#44-example-workload-patchMon)
+   - 4.5 [Version Control Strategy](#45-version-control-strategy)
+5. [Lab Network Topology, Routing and Domain Namespace](#5-lab-network-topology-routing-and-domain-namespace)
+6. [Security Homelab Section Links](#7-security-homelab-section-links)
 ---
 
 ## 1. Core Virtualization Stack
@@ -973,7 +973,7 @@ The SOC namespace hosts the lab's comprehensive Security Operations Center platf
 
 ---
 
-## 5. Network Services Summary
+### 4.3 Network Services Summary
 
 ### LoadBalancer Services (Externally Accessible)
 
@@ -1024,8 +1024,9 @@ The SOC namespace hosts the lab's comprehensive Security Operations Center platf
 - Rate limiting for Ingress HTTP services
 - SSL termination for all ingress HTTP services
 
+---
 
-### Example Workload: PatchMon
+### 4.4 Example Workload PatchMon
 - Namspace: server-admin
 - Deployments: 1 replica per deployment with anti-affinity rules
 - Persistent Storage: local-path-provisioner (hostPath-based PVCs)
@@ -1312,15 +1313,171 @@ spec:
 
 ```
 ---
-
-## 6. Version Control Strategy
+### 4.5 Version Control Strategy
 
 - Repository: GitHub repo (infrastructure-as-code)
 - Structure: Organized by service (docker-compose/, k8s-manifests/, terraform/Ansible)
 - Tooling: VS Code with Docker, Kubernetes, SSH, Ansible, Terraform extensions
 - Automation: Watchtower monitors container images, WUD provides update alerts
 ---
-## 7. Security Homelab Section Links
+---
+## 5. Lab Network Topology, Routing and Domain Namespace
+
+This section outlines the IP addressing scheme, subnet allocations, and internal domain naming conventions used across the Lab infrastructure. It supports modular service deployment, secure DNS resolution, and PKI integration.
+
+### IPv4 Addressing, VLAN and Subnet Allocation
+
+| Subnet | CIDR | VID | Purpose | Notes |
+|--------|------|-----|---------|-------|
+| 192.168.1.0 | /24 | 10 | Production Network | Hosts my production environment. Note: lab services were initially deployed in this subnet, working to migrate everything into the lab subnets. |
+| 192.168.2.0 | /24 | 20 | External LAN Network/DMZ | Test network for segmentation and FW rules. |
+| 192.168.3.0 | /24 | 30 | Isolated Link | Test port-based VLAN between FortiGate, OfficePC and Proxmox host |
+| 192.168.100.0 | /24 | 100 | Primary Lab LAN | Hosts lab containers, virtual machines and services. |
+| 192.168.200.0 | /24 | 200 | Secondary Lab LAN | Isolated test environments, ephemeral services |
+| 10.20.0.0 | /24 | 120 | Isolated LAN | Test network for sensitive data |
+| 10.10.0.0 | /24 | 110 | HA Sync | Isolated subnet for pfSense HA sync/CARP |
+| 10.30.0.0 | /30 | N/A | Router PTP | Point to Point router link between Cisco R1 and R2 |
+
+All subnets are routed internally and firewalled to enforce least privilege access between zones.
+
+### Routing Tables
+
+#### ASUS Router (192.168.1.1)
+
+**Role:** Primary gateway for the entire network  
+**Directly connected:** 192.168.1.0/24
+
+| Destination Subnet | Next Hop | Notes |
+|-------------------|----------|-------|
+| 192.168.100.0/24 | 192.168.1.254 (pfSense) | LAB_LAN1 |
+| 192.168.200.0/24 | 192.168.1.254 (pfSense) | LAB_LAN2 |
+| 192.168.2.0/24 | 192.168.1.254 (pfSense) | EXT_LAN |
+| 10.10.0.0/24 | 192.168.1.254 (pfSense) | Internal VLAN |
+| 10.20.0.0/24 | 192.168.1.201 (OPNsense) | ISO segment #1 |
+| 192.168.3.0/24 | 192.168.1.99 (FortiGate) | ISO segment #2 |
+| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO segment #3 |
+| 0.0.0.0/0 | ISP | Internet |
+
+#### pfSense HA Firewalls (192.168.1.254 VIP)
+
+**Role:** Core routers for all internal VLANs
+
+**Directly connected:**
+- 192.168.1.0/24 (Prod_LAN)
+- 192.168.100.0/24 (LAB_LAN1)
+- 192.168.200.0/24 (LAB_LAN2)
+- 192.168.2.0/24 (EXT_LAN)
+- 10.10.0.0/24 (Internal VLAN)
+
+| Destination Subnet | Next Hop | Notes |
+|-------------------|----------|-------|
+| 192.168.1.0/24 | Direct | Prod_LAN |
+| 192.168.100.0/24 | Direct | LAB_LAN1 |
+| 192.168.200.0/24 | Direct | LAB_LAN2 |
+| 192.168.2.0/24 | Direct | EXT_LAN |
+| 10.10.0.0/24 | Direct | Internal VLAN |
+| 10.20.0.0/24 | 192.168.1.201 (OPNsense) | ISO #1 |
+| 192.168.3.0/24 | 192.168.1.99 (FortiGate) | ISO #2 |
+| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO #3 |
+| 0.0.0.0/0 | 192.168.1.1 (ASUS) | Internet |
+
+#### OPNsense (192.168.1.201)
+
+**Role:** ISO router for 10.20.0.0/24
+
+**Directly connected:**
+- 10.20.0.0/24 (ISO_LAN)
+- 192.168.1.0/24 (Prod_LAN)
+
+| Destination Subnet | Next Hop | Notes |
+|-------------------|----------|-------|
+| 10.20.0.0/24 | Direct | ISO_LAN |
+| 192.168.1.0/24 | Direct | Prod_LAN |
+| 192.168.100.0/24 | 192.168.1.254 (pfSense) | LAB_LAN1 |
+| 192.168.200.0/24 | 192.168.1.254 (pfSense) | LAB_LAN2 |
+| 192.168.2.0/24 | 192.168.1.254 (pfSense) | EXT_LAN |
+| 10.10.0.0/24 | 192.168.1.254 (pfSense) | Internal VLAN |
+| 192.168.3.0/24 | 192.168.1.99 (FortiGate) | ISO #2 |
+| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO #3 |
+| 0.0.0.0/0 | 192.168.1.1 (ASUS) | Internet |
+
+#### FortiGate (192.168.1.99)
+
+**Role:** ISO router for 192.168.3.0/24
+
+**Directly connected:**
+- 192.168.3.0/24 (ISO_LAN)
+- 192.168.1.0/24 (Prod_LAN)
+
+| Destination Subnet | Next Hop | Notes |
+|-------------------|----------|-------|
+| 192.168.3.0/24 | Direct | ISO_LAN |
+| 192.168.1.0/24 | Direct | Prod_LAN |
+| 192.168.100.0/24 | 192.168.1.254 (pfSense) | LAB_LAN1 |
+| 192.168.200.0/24 | 192.168.1.254 (pfSense) | LAB_LAN2 |
+| 192.168.2.0/24 | 192.168.1.254 (pfSense) | EXT_LAN |
+| 10.10.0.0/24 | 192.168.1.254 (pfSense) | Internal VLAN |
+| 10.20.0.0/24 | 192.168.1.201 (OPNsense) | ISO #1 |
+| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO #3 |
+| 0.0.0.0/0 | 192.168.1.1 (ASUS) | Internet |
+
+#### Cisco r1 vRouter (192.168.1.6)
+
+**Hostname:** R1.home.com  
+**Role:** Core router for PROD, LAB1, LAB2
+
+**Directly connected:**
+- 192.168.1.0/24 (Prod_LAN)
+- 192.168.100.0/24 (LAB_LAN1)
+- 192.168.200.0/24 (LAB_LAN2)
+- 10.30.0.0/30 (PTP link to R2)
+
+| Destination Subnet | Next Hop | Notes |
+|-------------------|----------|-------|
+| 192.168.1.0/24 | Direct | Prod_LAN |
+| 192.168.100.0/24 | Direct | LAB_LAN1 |
+| 192.168.200.0/24 | Direct | LAB_LAN2 |
+| 10.30.0.0/30 | Direct | PTP to R2 |
+| 192.168.2.0/24 | 10.30.0.2 | OSPF via R2 |
+| 192.168.3.0/24 | 10.30.0.2 | OSPF via R2 |
+| 10.20.0.0/24 | 192.168.1.1 | Static route to ISO #1 (via ASUS) |
+| 0.0.0.0/0 | Not set | No default route configured |
+
+#### Cisco r2 vRouter (192.168.3.9)
+
+**Hostname:** R2.home.com  
+**Role:** Edge router for EXT and ISO
+
+**Directly connected:**
+- 10.30.0.0/30 (PTP to R1)
+- 192.168.3.0/24 (ISO_LAN2)
+- 192.168.2.0/24 (EXT_LAN)
+
+| Destination Subnet | Next Hop | Notes |
+|-------------------|----------|-------|
+| 10.30.0.0/30 | Direct | PTP link to R1 |
+| 192.168.3.0/24 | Direct | ISO_LAN2 |
+| 192.168.2.0/24 | Direct | EXT_LAN |
+| 192.168.1.0/24 | 10.30.0.1 | OSPF via R1 (Prod_LAN) |
+| 192.168.100.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN1) |
+| 192.168.200.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN2) |
+| 0.0.0.0/0 | Not set | No default route configured |
+
+<figure>
+      <img src="/Career_Projects/assets/diagrams/routing-flow.png" alt="Routing">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Lab Routing Flowchart.
+      </figcaption>
+    </figure>
+
+### Domain Namespace Design
+
+| Domain | Purpose | Notes |
+|--------|---------|-------|
+| home.com | Production / Lab services | Current state: Production, lab and AD environments. Future State: migration of domain to shadowitlab.com, AD will remain on home.com. |
+| shadowitlab.com | Public DNS | Used to expose services externally through Cloudflare tunnels. Future migration to all internal DNS FQDNs. |
+---
+## 6. Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 

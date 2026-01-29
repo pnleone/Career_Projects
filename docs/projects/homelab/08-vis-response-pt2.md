@@ -10,7 +10,7 @@ Owner: Paul Leone
 ## Table of Contents
 
 1. [Security Orchestration, Automation and Response (SOAR) Platform](#1-security-orchestration-automation-and-response-soar-platform)
-2. [Monitoring & Observability Architecture](#2-monitoring--observability-architecture)
+2. [Monitoring and Observability Architecture](#2-monitoring-and-observability-architecture)
 3. [Alerting and Notification Architecture](#3-alerting-and-notification-architecture)
 4. [Security Controls and Compliance Summary](#4-security-controls-and-compliance-summary)
 5. [Use Cases and Scenarios](#5-use-cases-and-scenarios)
@@ -919,7 +919,7 @@ MISP is deployed as a multi-container application stack with the following compo
 
 ---
 
-## 2. Monitoring & Observability Architecture
+## 2. Monitoring and Observability Architecture
 
 ### Deployment Overview
 

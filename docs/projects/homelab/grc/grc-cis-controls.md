@@ -4,7 +4,7 @@ Version: 1.0
 Last Updated: January 2026  
 Owner: Paul Leone 
   
-**Framework Versions:** CIS Controls v8.1
+**Framework Version:** CIS Controls v8.1
  
 ---
 

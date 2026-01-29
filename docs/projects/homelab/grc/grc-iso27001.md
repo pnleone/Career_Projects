@@ -5,7 +5,7 @@ Version: 1.1
 Last Updated: January 2026  
 Owner: Paul Leone  
 
-**Framework Versions:** 2022
+**Framework Version:** 2022
 
 ---
 
