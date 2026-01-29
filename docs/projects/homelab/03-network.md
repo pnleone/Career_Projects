@@ -18,8 +18,9 @@ Owner: Paul Leone
 3. [Intrusion Detection/Prevention Solutions](#3-intrusion-detectionprevention-solutions)
    - 3.1 [Suricata Intrusion Detection/Prevention System on pfSense](#31-suricata-intrusion-detectionprevention-system-on-pfsense)
    - 3.2 [Snort Intrusion Detection/Prevention System on pfSense](#32-snort-intrusion-detectionprevention-system-on-pfsense)
-   - 3.3 [CrowdSec Behavioral Threat Intelligence](#33-crowdsec-behavioral-threat-intelligence)
-   - 3.4 [Multi-Engine Intrusion Detection and Prevention](#34-multi-engine-intrusion-detection--prevention)
+   - 3.3 [Custom Ruleset Architecture](#33-custom-ruleset-architecture)
+   - 3.4 [CrowdSec Behavioral Threat Intelligence](#34-crowdsec-behavioral-threat-intelligence)
+   - 3.5 [Multi-Engine Intrusion Detection and Prevention](#35-multi-engine-intrusion-detection-and-prevention)
 4. [SafeLine Web Application Firewall (WAF)](#4-safeline-web-application-firewall-waf)
 5. [Security Control Summary](#5-security-control-summary)
 6. [Operational Resilience](#6-operational-resilience)
@@ -480,9 +481,188 @@ Running both Suricata and Snort mirrors enterprise SOC environments where multip
 **Secure by Design:** Inline enforcement and updated rule sets  
 **Zero Trust:** VPN traffic inspected and validated; no implicit trust in encrypted tunnel
 
+### 3.3 Custom Ruleset Architecture
+
+#### Overview
+
+Interface-specific Suricata and Snort rulesets deployed per subnet. Each ruleset addresses the security requirements of its associated network segment.
+
+#### Rule Categories
+
+- Linux/SSH Security Controls
+- Reconnaissance & Scanning Detection
+- Lateral Movement Prevention
+- SMB/NetBIOS Hygiene
+- Test & Validation Rules
+
 ---
 
-### 3.3 CrowdSec Behavioral Threat Intelligence
+### Network Segments & Security Posture
+
+### Prod_LAN (192.168.1.0/24)
+
+**Role:** Primary production network
+
+**Security Objectives:**
+
+- Block LAB/ISO → PROD lateral movement
+- Detect reconnaissance and SSH abuse
+- Enforce SMB protocol hygiene
+
+**Detection Coverage:**
+
+- SSH brute-force attacks (threshold-based)
+- Privilege escalation keywords (sudo detection)
+- Nmap OS fingerprinting
+- Cross-segment port access (LAB→PROD high-risk ports)
+- ISO network isolation violations
+- SMBv1/NetBIOS legacy protocol usage
+- Rule validation traffic
+
+---
+
+### Lab_LAN1 (192.168.100.0/24)
+
+**Role:** Primary development and testing environment
+
+**Security Objectives:**
+
+- Prevent LAB1 → PROD unauthorized access
+- Detect internal reconnaissance activity
+- Maintain ISO network isolation
+
+**Detection Coverage:**
+
+- SSH authentication abuse
+- Privilege escalation indicators
+- Network scanning (Nmap signatures)
+- Cross-segment violations (LAB1→PROD)
+- ISO→LAB1 boundary violations
+- SMB/NetBIOS misuse
+
+---
+
+### Lab_LAN2 (192.168.200.0/24)
+
+**Role:** Isolated sandbox for malware analysis and adversary simulation
+
+**Security Objectives:**
+
+- Prevent LAB2 → PROD compromise
+- Detect malicious reconnaissance patterns
+- Enforce strict ISO network containment
+
+**Detection Coverage:**
+
+- SSH attack patterns
+- Command execution monitoring
+- Active scanning detection
+- LAB2→PROD isolation enforcement
+- ISO→LAB2 traffic violations
+- Protocol security controls
+
+---
+
+### EXT_LAN/DMZ (192.168.2.0/24)
+
+**Role:** DMZ for external-facing and semi-trusted services
+
+**Security Objectives:**
+
+- Prevent DMZ → Internal lateral movement
+- Detect DMZ-originated reconnaissance
+- Protect HA Sync and ISO infrastructure
+
+**Detection Coverage:**
+
+- DMZ→Internal SSH blocking
+- Brute-force detection
+- DMZ→Internal scan attempts
+- DMZ→ISO isolation enforcement
+- DMZ→HA Sync protection
+- SMB protocol controls
+
+---
+
+## Rule Engineering Methodology
+
+### Detection Logic
+
+Rules implement defense-in-depth through:
+
+- **Signature-based detection:** Pattern matching (content, pcre)
+- **Behavioral analysis:** Statistical thresholds (detection_filter, threshold)
+- **Policy enforcement:** Network segmentation violations
+- **Anomaly detection:** Protocol abuse and legacy service usage
+
+### Rule Performance Optimization
+
+- Interface-specific deployment reduces ruleset overhead
+- Fast-pattern matching on content rules
+- Stateful tracking (by_src, by_dst) for threshold efficiency
+- Tuned thresholds based on network baseline (e.g., count 5 in 60s for SSH)
+
+### False Positive Mitigation
+
+- Environment-specific tuning per network segment
+- Stateful detection (detection_filter vs. threshold)
+- Protocol-aware inspection (flags, content depth)
+- Contextual alerting (source/destination network awareness)
+
+---
+
+## Rule Examples
+
+### SSH / Linux Security Controls
+```
+# Brute-force detection with stateful tracking
+alert tcp any any -> 192.168.100.0/24 22 \
+(msg:"LAB1: SSH Brute Force Attempt"; flags:S; detection_filter:track by_src, count 5, seconds 60; sid:910001; rev:2;)
+
+# Cross-segment SSH policy enforcement
+alert tcp 192.168.2.0/24 any -> 192.168.100.0/24 22 \
+(msg:"LAB1: SSH Attempt from EXT_LAN"; sid:910002; rev:1;)
+
+# Privilege escalation keyword monitoring
+alert tcp any any -> 192.168.100.0/24 22 \
+(msg:"LAB1: sudo Keyword in SSH Session"; content:"sudo"; sid:910003; rev:1;)
+```
+
+### Reconnaissance & Scanning Detection
+```
+# Tool-specific signature detection
+alert tcp any any -> 192.168.100.0/24 any \
+(msg:"LAB1: Nmap OS Detection Scan"; content:"|4E 4D 41 50|"; sid:910004; rev:1;)
+
+# Behavioral scan detection via port sweep threshold
+alert tcp 192.168.100.0/24 any -> 192.168.1.0/24 any \
+(msg:"LAB1: LAB → PROD Port Scan"; flags:S; threshold:type both, track by_src, count 20, seconds 10; sid:900008; rev:1;)
+```
+
+### Lateral Movement Prevention
+```
+# High-risk port blocking across trust boundaries
+alert tcp 192.168.200.0/24 any -> 192.168.1.0/24 [22,135,139,445,3389] \
+(msg:"LAB2: LAB → PROD Unauthorized High-Risk Port"; sid:920005; rev:3;)
+
+# Isolation network policy enforcement
+alert ip [10.20.0.0/24,192.168.3.0/24] any -> 192.168.200.0/24 any \
+(msg:"LAB2: ISO → LAB2 Traffic (Policy Violation)"; sid:920006; rev:1;)
+```
+
+### SMB / NetBIOS Hygiene
+```
+# Legacy protocol detection
+alert tcp any any -> any 139 \
+(msg:"NetBIOS Session Service Detected"; sid:9xxxxx; rev:1;)
+
+# SMBv1 usage monitoring
+alert tcp any any -> any 445 \
+(msg:"SMBv1 Protocol Negotiation"; content:"|ff|SMB"; depth:8; sid:9xxxxx; rev:1;)
+```
+---
+
+### 3.4 CrowdSec Behavioral Threat Intelligence
 
 #### Deployment Overview
 
@@ -566,7 +746,7 @@ Behavior‑based detection is essential in modern environments where attackers u
 
 ---
 
-### 3.4 Multi-Engine Intrusion Detection and Prevention
+### 3.5 Multi-Engine Intrusion Detection and Prevention
 
 #### Layered IDS/IPS Strategy
 
