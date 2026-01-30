@@ -395,7 +395,7 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 #### pfSense Rule Configuration (Prod_LAN Interface)
 
 <figure>
-      <img src="/Career_Projects/assets/screenshots/pfs-prod-LAN1.png" alt="pfSense Prod_LAN Rules">
+      <img src="/Career_Projects/assets/screenshots/pfs-prod_LAN1.png" alt="pfSense Prod_LAN Rules">
       <figcaption>pfSense Prod_LAN Interface Rules</figcaption>
     </figure>
 
@@ -421,7 +421,7 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 #### pfSense Log Examples
 
 <figure>
-    <img src="/Career_Projects/assets/screenshots/pfsense-log.png" alt="pfSense Firewall Logs">
+    <img src="/Career_Projects/assets/screenshots/pfs-log.png" alt="pfSense Firewall Logs">
     <figcaption>pfSense Firewall Event Logs</figcaption>
 </figure>
 
