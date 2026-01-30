@@ -123,7 +123,7 @@ Configuration:
 
 **Suricata IDS/IPS**
 
-Deployment: Active on WAN and LAN interfaces (both pfSense nodes)  
+Deployment: Active on all internal LAN interfaces (both pfSense nodes)  
 Mode: Inline IPS with legacy blocking (balances performance vs. protection)
 
 Rulesets:
@@ -143,7 +143,7 @@ Use Case: Real-time detection of exploits, malware, and lateral movement attempt
 **Snort IDS/IPS**
 
 Deployment: Active on PIA VPN interfaces (monitors encrypted tunnel egress)  
-Mode: Inline IPS for outbound traffic inspection
+Mode: LEgacy (IDS) mode for outbound traffic inspection
 
 Rulesets:
 
@@ -395,7 +395,7 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 #### pfSense Rule Configuration (Prod_LAN Interface)
 
 <figure>
-      <img src="/Career_Projects/assets/firewall/pfsense-prod-lan-rules.png" alt="pfSense Prod_LAN Rules">
+      <img src="/Career_Projects/assets/screenshots/pfs-prod-LAN1.png" alt="pfSense Prod_LAN Rules">
       <figcaption>pfSense Prod_LAN Interface Rules</figcaption>
     </figure>
 
@@ -412,7 +412,7 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/firewall/pfsense-vpn-killswitch.png" alt="VPN Kill Switch Rule">
+      <img src="/Career_Projects/assets/screenshots/pfs-float.png" alt="VPN Kill Switch Rule">
       <figcaption>pfSense VPN Kill Switch Floating Rule</figcaption>
     </figure>
   </div>
@@ -421,19 +421,19 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 #### pfSense Log Examples
 
 <figure>
-    <img src="/Career_Projects/assets/firewall/pfsense-logs.png" alt="pfSense Firewall Logs">
+    <img src="/Career_Projects/assets/screenshots/pfsense-log.png" alt="pfSense Firewall Logs">
     <figcaption>pfSense Firewall Event Logs</figcaption>
 </figure>
 
 #### OPNsense Rule Configuration
 <figure>
-    <img src="/Career_Projects/assets/firewall/pfsense-logs.png" alt="pfSense Firewall Logs">
+    <img src="/Career_Projects/assets/screenshots/opn-rules.png" alt="pfSense Firewall Logs">
     <figcaption>OPNsense Rule Configuration</figcaption>
 </figure>
 
 #### FortiGate Rule Configuration
 <figure>
-    <img src="/Career_Projects/assets/firewall/pfsense-logs.png" alt="pfSense Firewall Logs">
+    <img src="/Career_Projects/assets/screenshots/fortigate-rules.png" alt="pfSense Firewall Logs">
     <figcaption>FortiGate Rule Configuration</figcaption>
 </figure>
 ---
@@ -704,6 +704,30 @@ alert tcp any any -> any 139 \
 alert tcp any any -> any 445 \
 (msg:"SMBv1 Protocol Negotiation"; content:"|ff|SMB"; depth:8; sid:9xxxxx; rev:1;)
 ```
+### Custom Rule Breakdown Example: 
+
+#### SSH Brute Force Detection
+Rule
+```
+alert tcp any any -> 192.168.100.0/24 22 \
+(msg:"LAB1: SSH Brute Force Attempt"; flags:S; detection_filter:track by_src, count 5, seconds 60; sid:910001; rev:2;)
+```
+#### Field Breakdown:
+insert table
+
+#### Operational Impact
+- Detects brute force attempts before authentication begins
+- Low noise due to SYN only matching
+- Helps identify compromised hosts or bots scanning SSH
+- Works across VLAN boundaries
+
+### Suricata event log example
+<figure>
+      <img src="/Career_Projects/assets/screenshots/suricata-events.png" alt="Snort Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Custom Rule Events.
+      </figcaption>
+    </figure>
 ---
 
 ### 3.4 CrowdSec Behavioral Threat Intelligence
