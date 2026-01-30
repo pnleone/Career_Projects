@@ -2,33 +2,8 @@
 
 **Document Control:**   
 Version: 1.0  
-Last Updated: January 27, 2026  
+Last Updated: January 30, 2026  
 Owner: Paul Leone 
-
----
-
-## Table of Contents
-
-1. [Automation and Infrastructure as Code (IaC)](#1-automation-and-infrastructure-as-code-iac)
-2. [Infrastructure Provisioning with Terraform](#2-infrastructure-provisioning-with-terraform)
-3. [Configuration Management with Ansible](#3-configuration-management-with-ansible)
-   - 3.1 [Architecture Overview](#31-architecture-overview)
-   - 3.2 [Setup Overview](#32-setup-overview)
-   - 3.3 [Playbook Architecture](#33-playbook-architecture)
-4. [Version Control and GitOps](#4-version-control-and-gitops)
-5. [Workflow Automation with n8n](#5-workflow-automation-with-n8n)
-   - 5.1 [Platform Overview](#51-platform-overview)
-   - 5.2 [Workflow 1: Ansible Playbook Automation](#52-workflow-1-ansible-playbook-automation)
-   - 5.3 [Workflow 2: Threat Intelligence Aggregation](#53-workflow-2-threat-intelligence-aggregation)
-6. [Scripting for Advanced Automation](#6-scripting-for-advanced-automation)
-   - 6.1 [PowerShell and Bash Scripting](#61-powershell-and-bash-scripting)
-   - 6.2 [Cron Job Scheduling Strategy](#62-cron-job-scheduling-strategy)
-   - 6.3 [Python Scripting for Advanced Automation](#63-python-scripting-for-advanced-automation)
-   - 6.4 [Script Integration and Orchestration](#64-script-integration-and-orchestration)
-7. [Automation Security Controls](#7-automation-security-controls)
-8. [Operational Resilience and Disaster Recovery](#8-operational-resilience-and-disaster-recovery)
-9. [Practical Use Cases and Workflows](#9-practical-use-cases-and-workflows)
-10. [Security Homelab Section Links](#10-security-homelab-section-links)
 
 ---
 

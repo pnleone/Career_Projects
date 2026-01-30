@@ -9,41 +9,6 @@ Owner: Paul Leone
 
 ---
 
-## Table of Contents
-
-1. [GOVERN (GV)](#govern-gv)
-   - 1.1 [GV.OC - Organizational Context](#gvoc---organizational-context)
-   - 1.2 [GV.OV - Oversight](#gvov---oversight)
-   - 1.3 [GV.RM - Risk Management Strategy](#gvrm---risk-management-strategy)
-   - 1.4 [GV.RR - Roles, Responsibilities, and Authorities](#gvrr---roles-responsibilities-and-authorities)
-   - 1.5 [GV.PO - Policy](#gvpo---policy)
-   - 1.6 [GV.SC - Cybersecurity Supply Chain Risk Management](#gvsc---cybersecurity-supply-chain-risk-management)
-2. [IDENTIFY (ID)](#identify-id)
-   - 2.1 [ID.AM - Asset Management](#idam---asset-management)
-   - 2.2 [ID.RA - Risk Assessment](#idra---risk-assessment)
-   - 2.3 [ID.IM - Improvement](#idim---improvement)
-3. [PROTECT (PR)](#protect-pr)
-   - 3.1 [PR.AA - Identity Management, Authentication and Access Control](#praa---identity-management-authentication-and-access-control)
-   - 3.2 [PR.AT - Awareness and Training](#prat---awareness-and-training)
-   - 3.3 [PR.DS - Data Security](#prds---data-security)
-   - 3.4 [PR.IR - Technology Infrastructure Resilience](#prir---technology-infrastructure-resilience)
-   - 3.5 [PR.PS - Platform Security](#prps---platform-security)
-4. [DETECT (DE)](#detect-de)
-   - 4.1 [DE.AE - Adverse Event Analysis](#deae---adverse-event-analysis)
-   - 4.2 [DE.CM - Continuous Monitoring](#decm---continuous-monitoring)
-5. [RESPOND (RS)](#respond-rs)
-   - 5.1 [RS.AN - Analysis](#rsan---analysis)
-   - 5.2 [RS.CO - Communications](#rsco---communications)
-   - 5.3 [RS.MA - Incident Management](#rsma---incident-management)
-   - 5.4 [RS.MI - Incident Mitigation](#rsmi---incident-mitigation)
-6. [RECOVER (RC)](#recover-rc)
-   - 6.1 [RC.CO - Incident Recovery Communications](#rcco---incident-recovery-communications)
-   - 6.2 [RC.HL - Incident Recovery Plan Execution](#rchl---incident-recovery-plan-execution)
-   - 6.3 [RC.RP - Recovery Planning](#rcrp---recovery-planning)
-
----
----
-
 ## GOVERN (GV)
 
 ### GV.OC - Organizational Context

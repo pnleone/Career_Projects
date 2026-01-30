@@ -9,25 +9,6 @@ Owner: Paul Leone
 
 ---
 
-## Table of Contents
-
-1. [TA0001 - Initial Access](#ta0001---initial-access)
-2. [TA0003 - Persistence](#ta0003---persistence)
-3. [TA0004 - Privilege Escalation](#ta0004---privilege-escalation)
-4. [TA0005 - Defense Evasion](#ta0005---defense-evasion)
-5. [TA0006 - Credential Access](#ta0006---credential-access)
-6. [TA0007 - Discovery](#ta0007---discovery)
-7. [TA0008 - Lateral Movement](#ta0008---lateral-movement)
-8. [TA0009 - Collection](#ta0009---collection)
-9. [TA0010 - Exfiltration](#ta0010---exfiltration)
-10. [TA0011 - Command and Control](#ta0011---command-and-control)
-11. [TA0040 - Impact](#ta0040---impact)
-12. [Overall Coverage Summary](#overall-coverage-summary)
-13. [Key Changes in v18.1](#key-changes-in-v181)
-14. [Threat Intelligence Updates](#threat-intelligence-updates)
-
----
-
 ## TA0001 - Initial Access
 
 | Technique ID | Technique Name | Defense Status | Lab Implementation | Recommendations |

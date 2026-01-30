@@ -2,37 +2,8 @@
 
 **Document Control:**   
 Version: 1.0  
-Last Updated: January 27, 2026  
+Last Updated: January 307, 2026  
 Owner: Paul Leone 
-
----
-
-## Table of Contents
-
-1. [Network Security Architecture](#1-network-security-architecture)
-2. [Network Firewall/Router Architecture](#2-network-firewallrouter-architecture)
-   - 2.1 [High-Availability pfSense Cluster](#21-high-availability-pfsense-cluster)
-   - 2.2 [OPNsense Microsegmentation Firewall](#22-opnsense-microsegmentation-firewall)
-   - 2.3 [Fortinet FortiGate 30D Appliance](#23-fortinet-fortigate-30d-appliance)
-   - 2.4 [Firewall Policy Architecture](#24-firewall-policy-architecture)
-3. [Intrusion Detection/Prevention Solutions](#3-intrusion-detectionprevention-solutions)
-   - 3.1 [Suricata Intrusion Detection/Prevention System on pfSense](#31-suricata-intrusion-detectionprevention-system-on-pfsense)
-   - 3.2 [Snort Intrusion Detection/Prevention System on pfSense](#32-snort-intrusion-detectionprevention-system-on-pfsense)
-   - 3.3 [Custom Ruleset Architecture](#33-custom-ruleset-architecture)
-   - 3.4 [CrowdSec Behavioral Threat Intelligence](#34-crowdsec-behavioral-threat-intelligence)
-   - 3.5 [Multi-Engine Intrusion Detection and Prevention](#35-multi-engine-intrusion-detection-and-prevention)
-4. [SafeLine Web Application Firewall (WAF)](#4-safeline-web-application-firewall-waf)
-5. [Security Control Summary](#5-security-control-summary)
-6. [Operational Resilience](#6-operational-resilience)
-7. [Use Cases and Deployment Scenarios](#7-use-cases--deployment-scenarios)
-8. [Threat Modeling](#8-threat-modeling)
-9. [Privacy and Remote Access Architecture](#9-privacy-and-remote-access-architecture)
-   - 9.1 [Private Internet Access (PIA) Encrypted Egress VPN](#91-private-internet-access-pia-encrypted-egress-vpn)
-   - 9.2 [Tailscale Zero Trust Remote Access](#92-tailscale-zero-trust-remote-access)
-   - 9.3 [Cloudflare Secure Service Exposure and DNS Management](#93-cloudflare-secure-service-exposure-and-dns-management)
-   - 9.4 [Tor Browser Anonymous Outbound Browsing](#94-tor-browser-anonymous-outbound-browsing)
-10. [Summary](#10-summary)
-11. [Security Homelab Section Links](#11-security-homelab-section-links)
 
 ---
 

@@ -2,18 +2,8 @@
 
 **Document Control:**   
 Version: 1.0  
-Last Updated: January 27, 2026  
+Last Updated: January 30, 2026  
 Owner: Paul Leone 
-
----
-
-## Table of Contents
-
-1. [Architecture Overview](#1-architecture-overview)
-2. [Splunk Enterprise SIEM Platform](#2-splunk-enterprise-siem-platform)
-3. [Elastic Stack (ELK) Observability Platform](#3-elastic-stack-elk-observability-platform)
-4. [Wazuh Endpoint Detection and Response (EDR)](#4-wazuh-endpoint-detection-and-response-edr)
-5. [Security Homelab Section Links](#5-security-homelab-section-links)
 
 ---
 

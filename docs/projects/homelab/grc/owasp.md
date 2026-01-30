@@ -10,22 +10,6 @@ Classification: Internal Use
 
 ---
 
-## Table of Contents
-
-1. [A01:2025 - Broken Access Control](#a012025---broken-access-control)
-2. [A02:2025 - Security Misconfiguration](#a022025---security-misconfiguration)
-3. [A03:2025 - Software Supply Chain Failures](#a032025---software-supply-chain-failures)
-4. [A04:2025 - Cryptographic Failures](#a042025---cryptographic-failures)
-5. [A05:2025 - Injection](#a052025---injection)
-6. [A06:2025 - Insecure Design](#a062025---insecure-design)
-7. [A07:2025 - Authentication Failures](#a072025---authentication-failures)
-8. [A08:2025 - Software or Data Integrity Failures](#a082025---software-or-data-integrity-failures)
-9. [A09:2025 - Security Logging and Alerting Failures](#a092025---security-logging-and-alerting-failures)
-10. [A10:2025 - Mishandling of Exceptional Conditions](#a102025---mishandling-of-exceptional-conditions)
-11. [OWASP Top 10:2025 - Compliance Summary](#owasp-top-102025---compliance-summary)
-
----
-
 ## A01:2025 - Broken Access Control
 
 **Risk Description:** Failures in access control allow unauthorized users to access, modify, or delete resources beyond their intended permissions. This includes SSRF (Server-Side Request Forgery), which has been rolled into this category.

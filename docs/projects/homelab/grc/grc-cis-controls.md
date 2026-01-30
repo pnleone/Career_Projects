@@ -8,30 +8,6 @@ Owner: Paul Leone
  
 ---
 
-## Table of Contents
-
-1. [CIS Control 1: Inventory and Control of Enterprise Assets](#cis-control-1-inventory-and-control-of-enterprise-assets)
-2. [CIS Control 2: Inventory and Control of Software Assets](#cis-control-2-inventory-and-control-of-software-assets)
-3. [CIS Control 3: Data Protection](#cis-control-3-data-protection)
-4. [CIS Control 4: Secure Configuration of Enterprise Assets and Software](#cis-control-4-secure-configuration-of-enterprise-assets-and-software)
-5. [CIS Control 5: Account Management](#cis-control-5-account-management)
-6. [CIS Control 6: Access Control Management](#cis-control-6-access-control-management)
-7. [CIS Control 7: Continuous Vulnerability Management](#cis-control-7-continuous-vulnerability-management)
-8. [CIS Control 8: Audit Log Management](#cis-control-8-audit-log-management)
-9. [CIS Control 9: Email and Web Browser Protections](#cis-control-9-email-and-web-browser-protections)
-10. [CIS Control 10: Malware Defenses](#cis-control-10-malware-defenses)
-11. [CIS Control 11: Data Recovery](#cis-control-11-data-recovery)
-12. [CIS Control 12: Network Infrastructure Management](#cis-control-12-network-infrastructure-management)
-13. [CIS Control 13: Network Monitoring and Defense](#cis-control-13-network-monitoring-and-defense)
-14. [CIS Control 14: Security Awareness and Skills Training](#cis-control-14-security-awareness-and-skills-training)
-15. [CIS Control 15: Service Provider Management](#cis-control-15-service-provider-management)
-16. [CIS Control 16: Application Software Security](#cis-control-16-application-software-security)
-17. [CIS Control 17: Incident Response Management](#cis-control-17-incident-response-management)
-18. [CIS Control 18: Penetration Testing](#cis-control-18-penetration-testing)
-19. [Summary of Compliance Status](#summary-of-compliance-status)
-
----
-
 ## CIS Control 1: Inventory and Control of Enterprise Assets
 
 | Safeguard | Requirement | Implementation | Notes |

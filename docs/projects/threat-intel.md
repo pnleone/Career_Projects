@@ -1,28 +1,9 @@
 # Threat Intelligence Brief and SOC Enhancement Plan
 ![PMG Medical Centre](../assets/misc/pmg.png)
 
-
 **Created By:** Paul Leone  
 **Date:** October 6, 2025  
 **Organization:** Piedmont Medical Group (PMG)
-
-
-
----
-
-## Table of Contents
-
-1. [Threat Intelligence Brief](#threat-intelligence-brief)
-   - 1.1 [Purpose](#11-purpose)
-   - 1.2 [Overview of UNC5221 Threat Landscape](#12-overview-of-unc5221-threat-landscape)
-   - 1.3 [Threat Analysis – Ivanti Connect Secure](#13-threat-analysis--ivanti-connect-secure)
-2. [Security Operations Center - Detection Strategy and Rule Deployment](#2-security-operations-center---detection-strategy-and-rule-deployment)
-   - 2.1 [Purpose](#21-purpose)
-   - 2.2 [Critical Log Sources and Telemetry](#22-critical-log-sources-and-telemetry)
-   - 2.3 [Detection Rule Suggestions](#23-detection-rule-suggestions)
-   - 2.4 [Workflow and Feature Enhancements to Existing Solutions](#24-workflow-and-feature-enhancements-to-existing-solutions)
-   - 2.5 [New Platform and Technology Acquisitions](#25-new-platform-and-technology-acquisitions)
-   - 2.6 [Detection Rule Summary Table](#26-detection-rule-summary-table)
 
 ---
 

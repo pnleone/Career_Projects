@@ -2,25 +2,8 @@
 
 **Document Control:**   
 Version: 1.0  
-Last Updated: January 27, 2026  
+Last Updated: January 30, 2026  
 Owner: Paul Leone 
-
----
-
-## Table of Contents
-
-1. [Architecture Overview](#architecture-overview)
-2. [Platform and Service Dashboard](#platform-and-service-dashboard)
-3. [DNS Infrastructure Architecture](#dns-infrastructure-architecture)
-4. [Secure Shell (SSH) Access](#secure-shell-ssh-access)
-5. [Reverse Proxy and Ingress Controllers](#reverse-proxy-and-ingress-controllers)
-6. [Vulnerability Management](#vulnerability-management)
-7. [Software Patch Management](#software-patch-management)
-8. [Malware Protection Management](#malware-protection-management)
-9. [Web Services Architecture](#web-services-architecture)
-10. [Service Integration Architecture](#service-integration-architecture)
-11. [Use Cases and Deployment Scenarios](#use-cases-and-deployment-scenarios)
-12. [Security Homelab Section Links](#security-homelab-section-links)
 
 ---
 

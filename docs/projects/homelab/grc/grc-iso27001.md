@@ -9,18 +9,6 @@ Owner: Paul Leone
 
 ---
 
-## Table of Contents
-
-1. [Organizational Controls](#5-organizational-controls)
-2. [People Controls](#6-people-controls-8-controls)
-3. [Physical Controls](#7-physical-controls-14-controls)
-4. [Technological Controls](#8-technological-controls-34-controls)
-5. [Control Deployment Summary](#control-deployment-summary)
-6. [Control Family Breakdown](#control-family-breakdown)
-7. [Version History](#version-history)
-
----
-
 ## 5. Organizational Controls
 
 | Control | 2013 Ref | Control Name | Evidence/Implementation Detail | Status |

@@ -9,24 +9,6 @@ Owner: Paul Leone
 
 ---
 
-## Table of Contents
-
-1. [Zero Trust Architecture Implementation Overview](#zero-trust-architecture-implementation-overview)
-2. [CISA Zero Trust Maturity Model v2.0 Alignment](#cisa-zero-trust-maturity-model-v20-alignment)
-3. [Zero Trust Pillar Implementation](#zero-trust-pillar-implementation)
-   - 3.1 [Identity (CISA ZTMM Table 2)](#identity-cisa-ztmm-table-2)
-   - 3.2 [Devices (CISA ZTMM Table 3)](#devices-cisa-ztmm-table-3)
-   - 3.3 [Networks (CISA ZTMM Table 4)](#networks-cisa-ztmm-table-4)
-   - 3.4 [Applications and Workloads (CISA ZTMM Table 5)](#applications-and-workloads-cisa-ztmm-table-5)
-   - 3.5 [Data (CISA ZTMM Table 6)](#data-cisa-ztmm-table-6)
-4. [Cross-Cutting Capabilities (CISA ZTMM Table 7)](#cross-cutting-capabilities-cisa-ztmm-table-7)
-   - 4.1 [Visibility and Analytics](#visibility-and-analytics)
-   - 4.2 [Automation and Orchestration](#automation-and-orchestration)
-   - 4.3 [Governance](#governance)
-5. [Zero Trust Maturity Summary](#zero-trust-maturity-summary)
-
----
-
 ## Zero Trust Architecture Implementation Overview
 
 This cybersecurity lab demonstrates comprehensive Zero Trust Architecture (ZTA) principles aligned with **NIST SP 800-207** and **CISA Zero Trust Maturity Model v2.0**. The implementation achieves **Advanced maturity** (Stage 3 of 4) across core Zero Trust pillars through explicit verification of every access request, least-privilege enforcement via RBAC, assume-breach mentality with continuous monitoring, and encrypt-everything policies using modern cryptographic standards.

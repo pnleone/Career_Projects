@@ -9,52 +9,6 @@ Owner: Paul Leone
 
 ---
 
-## Table of Contents
-
-1. [Zero Trust Architecture Implementation Overview](#zero-trust-architecture-implementation-overview)
-2. [Zero Trust Tenets Implementation](#zero-trust-tenets-implementation)
-   - 2.1 [Tenet 1: All Data Sources and Computing Services as Resources](#tenet-1-all-data-sources-and-computing-services-as-resources)
-   - 2.2 [Tenet 2: All Communication Secured Regardless of Network Location](#tenet-2-all-communication-secured-regardless-of-network-location)
-   - 2.3 [Tenet 3: Per-Session Resource Access with Least Privilege](#tenet-3-per-session-resource-access-with-least-privilege)
-   - 2.4 [Tenet 4: Dynamic Policy Based on Observable State](#tenet-4-dynamic-policy-based-on-observable-state)
-   - 2.5 [Tenet 5: Monitor and Measure All Asset Integrity](#tenet-5-monitor-and-measure-all-asset-integrity)
-   - 2.6 [Tenet 6: Dynamic Authentication and Authorization](#tenet-6-dynamic-authentication-and-authorization)
-   - 2.7 [Tenet 7: Collect and Use Security Posture Data](#tenet-7-collect-and-use-security-posture-data)
-3. [NIST SP 800-207 Logical Components](#nist-sp-800-207-logical-components)
-   - 3.1 [Policy Engine (PE)](#policy-engine-pe)
-   - 3.2 [Policy Administrator (PA)](#policy-administrator-pa)
-   - 3.3 [Policy Enforcement Point (PEP)](#policy-enforcement-point-pep)
-4. [Data Sources for Policy Decisions](#data-sources-for-policy-decisions)
-   - 4.1 [Continuous Diagnostics and Mitigation (CDM)](#continuous-diagnostics-and-mitigation-cdm)
-   - 4.2 [Industry Compliance System](#industry-compliance-system)
-   - 4.3 [Threat Intelligence Feeds](#threat-intelligence-feeds)
-   - 4.4 [Network and System Activity Logs](#network-and-system-activity-logs)
-   - 4.5 [Data Access Policies](#data-access-policies)
-   - 4.6 [Enterprise PKI](#enterprise-pki)
-   - 4.7 [ID Management System](#id-management-system)
-   - 4.8 [SIEM System](#siem-system)
-5. [ZTA Deployment Model Assessment](#zta-deployment-model-assessment)
-   - 5.1 [Primary Model: Device Agent/Gateway (Hybrid)](#primary-model-device-agentgateway-hybrid)
-   - 5.2 [Secondary Model: Enclave-Based](#secondary-model-enclave-based)
-   - 5.3 [Tertiary Model: Resource Portal](#tertiary-model-resource-portal)
-6. [ZTA Use Case Alignment](#zta-use-case-alignment)
-   - 6.1 [Use Case 1: Enterprise with Satellite Facilities (Remote Workers)](#use-case-1-enterprise-with-satellite-facilities-remote-workers)
-   - 6.2 [Use Case 2: Multi-Cloud/Cloud-to-Cloud](#use-case-2-multi-cloudcloud-to-cloud)
-   - 6.3 [Use Case 3: Contracted Services/Nonemployee Access](#use-case-3-contracted-servicesnonemployee-access)
-   - 6.4 [Use Case 4: Cross-Enterprise Collaboration](#use-case-4-cross-enterprise-collaboration)
-   - 6.5 [Use Case 5: Public/Customer-Facing Services](#use-case-5-publiccustomer-facing-services)
-7. [Threats and Mitigations](#threats-and-mitigations)
-   - 7.1 [Threat 1: Subversion of ZTA Decision Process](#threat-1-subversion-of-zta-decision-process)
-   - 7.2 [Threat 2: Denial-of-Service or Network Disruption](#threat-2-denial-of-service-or-network-disruption)
-   - 7.3 [Threat 3: Stolen Credentials/Insider Threat](#threat-3-stolen-credentialsinsider-threat)
-   - 7.4 [Threat 4: Visibility Limitations on Encrypted Traffic](#threat-4-visibility-limitations-on-encrypted-traffic)
-   - 7.5 [Threat 5: Stored Data Compromise](#threat-5-stored-data-compromise)
-   - 7.6 [Threat 6: Vendor Lock-in/Proprietary Formats](#threat-6-vendor-lock-inproprietary-formats)
-   - 7.7 [Threat 7: Automated Agent/NPE Compromise](#threat-7-automated-agentnpe-compromise)
-8. [Deployment Maturity Assessment](#deployment-maturity-assessment)
-
----
-
 ## Zero Trust Architecture Implementation Overview
 
 This cybersecurity lab demonstrates comprehensive Zero Trust Architecture (ZTA) principles aligned with **NIST SP 800-207** and **CISA Zero Trust Maturity Model v2.0**. The implementation achieves **Advanced maturity** (Stage 3 of 4) across core Zero Trust pillars through explicit verification of every access request, least-privilege enforcement via RBAC, assume-breach mentality with continuous monitoring, and encrypt-everything policies using modern cryptographic standards.

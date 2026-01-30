@@ -10,28 +10,6 @@ Classification: Internal Use
 
 ---
 
-## Table of Contents
-
-1. [Access Control (AC) Family](#access-control-ac-family)
-2. [Audit and Accountability (AU) Family](#audit-and-accountability-au-family)
-3. [Assessment, Authorization, and Monitoring (CA) Family](#assessment-authorization-and-monitoring-ca-family)
-4. [Configuration Management (CM) Family](#configuration-management-cm-family)
-5. [Contingency Planning (CP) Family](#contingency-planning-cp-family)
-6. [Identification and Authentication (IA) Family](#identification-and-authentication-ia-family)
-7. [Incident Response (IR) Family](#incident-response-ir-family)
-8. [Maintenance (MA) Family](#maintenance-ma-family)
-9. [Media Protection (MP) Family](#media-protection-mp-family)
-10. [Physical and Environmental Protection (PE) Family](#physical-and-environmental-protection-pe-family)
-11. [Planning (PL) Family](#planning-pl-family)
-12. [Program Management (PM) Family](#program-management-pm-family)
-13. [Personnel Security (PS) Family](#personnel-security-ps-family)
-14. [Risk Assessment (RA) Family](#risk-assessment-ra-family)
-15. [System and Communications Protection (SC) Family](#system-and-communications-protection-sc-family)
-16. [System and Information Integrity (SI) Family](#system-and-information-integrity-si-family)
-17. [Supply Chain Risk Management (SR) Family](#supply-chain-risk-management-sr-family)
-
----
-
 ## Access Control (AC) Family
 
 | Control | Control Name | Implementation | Status |

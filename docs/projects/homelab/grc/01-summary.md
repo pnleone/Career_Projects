@@ -9,25 +9,6 @@ Owner: Paul Leone
 
 ---
 
-## Table of Contents
-
-1. [Executive Overview](#executive-overview)
-2. [Framework Alignment with Lab Mission](#framework-alignment-with-lab-mission)
-3. [Architectural Principles Demonstrated](#architectural-principles-demonstrated)
-4. [Framework Purpose & Organizational Value](#framework-purpose--organizational-value)
-5. [Overall Lab Assessment](#overall-lab-assessment)
-6. [NIST Cybersecurity Framework 2.0 Implementation Summary](#nist-cybersecurity-framework-20-implementation-summary)
-7. [CIS Critical Security Controls v8.1 Implementation Summary](#cis-critical-security-controls-v81-implementation-summary)
-8. [ISO 27001:2022 Annex A Implementation Summary](#iso-270012022-annex-a-implementation-summary)
-9. [NIST SP 800-53 Rev 5 Implementation Summary](#nist-sp-800-53-rev-5-implementation-summary)
-10. [MITRE ATT&CK Enterprise v18.1 Implementation Summary](#mitre-attck-enterprise-v181-implementation-summary)
-11. [OWASP Top 10 (2025) Implementation Summary](#owasp-top-10-2025-implementation-summary)
-12. [Zero Trust Architecture Implementation Summary](#zero-trust-architecture-implementation-summary)
-13. [PCI-DSS v4.0 Conceptual Alignment Summary](#pci-dss-v40-conceptual-alignment-summary)
-14. [Comprehensive Framework Alignment Matrix](#comprehensive-framework-alignment-matrix)
-
----
-
 ## Executive Overview
 
 ### Framework Alignment with Lab Mission

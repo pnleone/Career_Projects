@@ -2,33 +2,8 @@
 
 **Document Control:**   
 Version: 1.0  
-Last Updated: January 27, 2026  
+Last Updated: January 30, 2026  
 Owner: Paul Leone 
-
----
-
-## Table of Contents
-
-1. [Architecture Overview](#1-architecture-overview)
-2. [PKI/Certificate Authority Configuration](#2-pkicertificate-authority-configuration)
-   - 2.1 [Overview and Hierarchy](#21-overview-and-hierarchy)
-   - 2.2 [PKI Architecture and Roles](#22-pki-architecture-and-roles)
-   - 2.3 [Trust Chain and Workflow](#23-trust-chain-and-workflow)
-   - 2.4 [X.509 Certificate Profile](#24-x509-certificate-profile)
-   - 2.5 [Operational Considerations](#25-operational-considerations)
-   - 2.6 [Active Directory Certificate Services](#26-active-directory-certificate-services)
-3. [Identity and Access Management](#3-identity-and-access-management)
-   - 3.1 [Authentik Identity Stack](#31-authentik-identity-stack)
-   - 3.2 [Microsoft Active Directory](#32-microsoft-active-directory)
-   - 3.3 [User and Group Policy Management](#33-user-and-group-policy-management)
-4. [Secrets Management](#4-secrets-management)
-   - 4.1 [Vaultwarden Password Manager](#41-vaultwarden-password-manager)
-5. [Security Controls Summary](#5-security-controls-summary)
-6. [Operational Resilience](#6-operational-resilience)
-7. [Use Cases and Deployment Scenarios](#7-use-cases-and-deployment-scenarios)
-8. [Standards Alignment](#8-standards-alignment)
-9. [Integration Architecture](#9-integration-architecture)
-10. [Security Homelab Section Links](#10-security-homelab-section-links)
 
 ---
 

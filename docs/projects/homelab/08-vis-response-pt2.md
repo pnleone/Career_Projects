@@ -2,19 +2,8 @@
 
 **Document Control:**   
 Version: 1.0  
-Last Updated: January 27, 2026  
+Last Updated: January 30, 2026  
 Owner: Paul Leone 
-
----
-
-## Table of Contents
-
-1. [Security Orchestration, Automation and Response (SOAR) Platform](#1-security-orchestration-automation-and-response-soar-platform)
-2. [Monitoring and Observability Architecture](#2-monitoring-and-observability-architecture)
-3. [Alerting and Notification Architecture](#3-alerting-and-notification-architecture)
-4. [Security Controls and Compliance Summary](#4-security-controls-and-compliance-summary)
-5. [Use Cases and Scenarios](#5-use-cases-and-scenarios)
-6. [Security Homelab Section Links](#6-security-homelab-section-links)
 
 ---
 

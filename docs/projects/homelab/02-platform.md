@@ -2,37 +2,10 @@
 
 **Document Control:**   
 Version: 1.0  
-Last Updated: January 27, 2026  
+Last Updated: January 30, 2026  
 Owner: Paul Leone 
 
 ---
-
-## Table of Contents
-
-1. [Core Virtualization Stack](#1-core-virtualization-stack)
-   - 1.1 [Proxmox Virtual Environment (VE)](#11-proxmox-virtual-environment-ve)
-   - 1.2 [Proxmox Backup Server](#12-proxmox-backup-server)
-   - 1.3 [Proxmox Datacenter Manager](#13-proxmox-datacenter-manager)
-   - 1.4 [Physical Network Attached Storage (NAS) Integration](#14-physical-network-attached-storage-nas-integration)
-   - 1.5 [Virtual Network Attached Storage (NAS) Integration](#15-virtual-network-attached-storage-nas-integration)
-   - 1.6 [Proxmox Host Hardware](#16-proxmox-host-hardware)
-   - 1.7 [Lab Switch](#17-lab-switch)
-   - 1.8 [Proxmox Workload Overview](#18-proxmox-workload-overview)
-   - 1.9 [Infrastructure Visualization](#19-infrastructure-visualization)
-2. [VMware vSphere r8 Environment](#2-vmware-vsphere-r8-environment)
-3. [Cisco Virtual Infrastructure](#3-cisco-virtual-infrastructure)
-   - 3.1 [Network Topology and Configuration](#31-network-topology-and-configuration)
-   - 3.2 [Technical Capabilities Demonstrated](#32-technical-capabilities-demonstrated)
-4. [Container Orchestration Architecture](#4-container-orchestration-architecture)
-   - 4.1 [Multi-Engine Docker Deployment](#41-multi-engine-docker-deployment)
-   - 4.2 [Cloud-Native Kubernetes Cluster Deployment](#42-cloud-native-kubernetes-cluster-deployment)
-   - 4.3 [Network Services Summary](#43-network-services-summary)
-   - 4.4 [Example Workload PatchMon](#44-example-workload-patchMon)
-   - 4.5 [Version Control Strategy](#45-version-control-strategy)
-5. [Lab Network Topology, Routing and Domain Namespace](#5-lab-network-topology-routing-and-domain-namespace)
-6. [Security Homelab Section Links](#7-security-homelab-section-links)
----
-
 ## 1. Core Virtualization Stack
 
 ### 1.1 Proxmox Virtual Environment (VE)
