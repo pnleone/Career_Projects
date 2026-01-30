@@ -447,7 +447,7 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 <div class="two-col-right">
   <div class="text-col">
     <p>
-      Each pfSense node runs Suricata in inline IPS mode, inspecting both WAN and LAN interfaces. Suricata performs deep packet inspection, signature‑based detection, and behavioral anomaly detection. Rule sets include Emerging Threats, custom local rules, and tuned signatures for lab‑specific traffic patterns.
+      Each pfSense node runs Suricata in inline IPS mode, inspecting four internal LAN interfaces. Suricata performs deep packet inspection, signature‑based detection, and behavioral anomaly detection. Rule sets include Emerging Threats, custom local rules, and tuned signatures for lab‑specific traffic patterns.
     </p>
   </div>
 
@@ -495,7 +495,7 @@ Suricata is widely used in enterprise IDS/IPS deployments due to its performance
 <div class="two-col-right">
   <div class="text-col">
     <p>
-      Snort runs in inline IPS mode on each pfSense node, monitoring PIA VPN interfaces for malicious traffic. This provides an additional detection engine specifically focused on encrypted or tunneled traffic paths.
+      Snort runs in legacy (IDS) mode on each pfSense node, monitoring PIA VPN interfaces for malicious traffic. This provides an additional detection engine specifically focused on encrypted or tunneled traffic paths.
     </p>
   </div>
 
@@ -514,7 +514,6 @@ Suricata is widely used in enterprise IDS/IPS deployments due to its performance
 - Detects threats traversing VPN tunnels
 - Provides signature diversity alongside Suricata
 - Alerts forwarded to Splunk for unified SOC visibility
-- Inline blocking prevents malicious VPN traffic from entering the network
 
 #### Deployment Rationale
 
@@ -523,7 +522,7 @@ Running both Suricata and Snort mirrors enterprise SOC environments where multip
 #### Architecture Principles Alignment
 
 **Defense in Depth:** Dual IDS engines reduce reliance on a single detection method  
-**Secure by Design:** Inline enforcement and updated rule sets  
+**Secure by Design:** Custom updated rule sets  
 **Zero Trust:** VPN traffic inspected and validated; no implicit trust in encrypted tunnel
 
 ### 3.3 Custom Ruleset Architecture
@@ -797,8 +796,8 @@ Behavior‑based detection is essential in modern environments where attackers u
 
 | Engine | Vendor | Deployment Location | Detection Method | Rule Sets | Purpose |
 |--------|--------|---------------------|------------------|-----------|---------|
-| Suricata | OISF | pfSense WAN interface | Signature + Protocol Anomaly | Emerging Threats, ET Pro | Primary IPS (inline blocking) |
-| Snort | Cisco/Talos | pfSense LAN interface | Signature-based | Snort Community, VRT | Secondary IDS (monitoring) |
+| Suricata | OISF | pfSense LAN interfaces | Signature + Protocol Anomaly | Emerging Threats, ET Pro | Primary IPS (inline blocking) |
+| Snort | Cisco/Talos | pfSense VLAN interfaces | Signature-based | Snort Community, VRT | Secondary IDS (monitoring) |
 | CrowdSec | CrowdSec SAS | Dedicated Debian LXC | Behavioral Analytics | Community scenarios + custom | Brute-force/scan detection |
 
 **Why Multiple IDS/IPS Engines?**
