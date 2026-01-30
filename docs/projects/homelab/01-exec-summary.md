@@ -7,32 +7,6 @@ Last Updated: January 22, 2026
 Owner: Paul Leone 
  
 ---
-
-## Table of Contents
-
-1. [Executive Overview and Security Posture](#1-executive-overview--security-posture)
-   - 1.1 [Lab Mission Statement](#11-lab-mission-statement)
-   - 1.2 [Architecture Principals](#12-architecture-principals)
-   - 1.3 [Key Capabilities Demonstrated](#13-key-capabilities-demonstrated)
-
-2. [Security Posture](#2-security-posture)
-   - 2.1 [Network and Perimeter Security](#21-network-and-perimeter-security)
-   - 2.2 [Identity and Access Management](#22-identity-and-access-management)
-   - 2.3 [Web and Application Security](#23-web-and-application-security)
-   - 2.4 [DNS and Name Resolution](#24-dns-and-name-resolution)
-   - 2.5 [Remote Access, Privacy and Endpoint Security](#25-remote-access-privacy-and-endpoint-security)
-   - 2.6 [Observability and Monitoring](#26-observability--monitoring)
-   - 2.7 [Alerting and Notification Infrastructure](#27-alerting-and-notification-infrastructure)
-   - 2.8 [Automation and Orchestration](#28-automation-and-orchestration)
-   - 2.9 [Security Orchestration, Automation and Response (SOAR)](#29-security-orchestration-automation-and-response-soar)
-   - 2.10 [Behavioral Threat Intelligence (CrowdSec)](#210-behavioral-threat-intelligence-crowdsec)
-   - 2.11 [Security Tooling and Digital Forensics](#211-security-tooling-and-digital-forensics)
-   - 2.12 [Backup and Business Continuity](#212-backup-and-business-continuity)
-
-3. [Security Homelab Section Links](#3-security-homelab-section-links)
-
----
-
 ## 1. Executive Overview and Security Posture
 
 ### 1.1 Lab Mission Statement
