@@ -299,98 +299,143 @@ Due to end-of-support status:
 
 ### 2.4 Firewall Policy Architecture
 
-#### pfSense Rule Sets
+#### Deployment Overview
 
-##### LAN Rules Configuration
+The lab implements a three-platform firewall architecture (pfSense, OPNsense, FortiGate) using zone-based segmentation with zero-trust principles. Each VLAN operates as an isolated security zone with explicit allow rules—no implicit trust between networks. Rules are deployed directionally on ingress interfaces for predictable packet flow and consistent state management across platforms.
+
+**Security Impact:**
+
+- Zone-based segmentation prevents lateral movement between network tiers
+- Default-deny policies block unauthorized traffic at zone boundaries
+- Alias-driven rule definitions enable rapid security updates without rule rewrites
+- Bidirectional state validation ensures return traffic authorization
+- Comprehensive logging feeds SOC visibility and threat correlation
+
+**Deployment Rationale:**
+
+Enterprise networks rely on zone-based firewalls to enforce trust boundaries between network segments (DMZ, production, management). This architecture demonstrates production firewall design patterns: ingress-based rule placement, object-based policy definitions, and platform-agnostic security controls that survive hardware migrations.
+
+**Architecture Principles Alignment:**
+
+- **Defense in Depth:** Multi-platform inspection layers with independent policy engines
+- **Secure by Design:** Default-deny baseline with explicit allow rules; automated threat feed integration
+- **Zero Trust:** Cross-zone traffic requires explicit authorization regardless of source network
+
+### Policy Framework
+
+#### Directional Rule Placement
+
+Rules apply on the ingress interface where traffic enters the firewall. This ensures deterministic packet flow, predictable state table creation, and consistent logging behavior across pfSense, OPNsense, and FortiGate platforms.
+
+#### Alias Architecture
+
+Host, network, and service definitions use reusable aliases:
+
+- **Host Groups:** WEB_SERVERS, SOC_APPS, K3S_NODES, ADMIN_HOSTS, DNS_SERVERS, PROXY_HOST
+- **Network Groups:** INTERNAL_SUBNETS, ISO_SUBNETS, LAB_NETWORKS
+- **Service Groups:** WEB_PORTS, SOC_PORTS, K3S_PORTS, ADMIN_PORTS, WAZUH_PORTS
+
+Aliases enable single-point updates—adding a new web server requires updating WEB_SERVERS alias, not 15+ individual rules.
+
+#### Logging and Detection
+
+All security-relevant rules generate logs tagged for SIEM ingestion (Splunk/Elastic/Wazuh). Suricata/Snort rules normalize alerts across platforms for consistent threat detection and correlation.
+
+### Ruleset Summary
+
+**Total Rules Deployed:** 133 rules across three platforms
+
+**Rule Distribution by Platform:**
+
+- **FortiGate (Management Firewall):** 16 rules protecting Management and ISO_LAN2 192.168.3.0/24 subnet
+- **OPNsense (Microsegmentation):** 23 rules isolating sensitive ISO_LAN (10.20.0.0/24)
+- **pfSense (Edge/Core):** 94 rules managing perimeter, inter-VLAN routing, VPN policy
+
+**Rule Categories:**
+
+- **Cross-Zone Access:** 78 rules (59%) - traffic between security zones
+- **Security Controls:** 18 rules (14%) - CrowdSec blocks, bogon filters, CARP HA
+- **Diagnostics:** 12 rules (9%) - ICMP/traceroute for network troubleshooting
+- **Management Access:** 15 rules (11%) - administrative SSH/HTTPS to infrastructure
+- **Monitoring/EDR:** 10 rules (8%) - Wazuh agents, Prometheus metrics, log forwarding
+
+**Representative Rules:**
+
+| Platform | Source | Destination | Service | Purpose | Logged |
+|----------|--------|-------------|---------|---------|--------|
+| FortiGate | ISO_LAN | DNS_Servers | 53/UDP | DNS resolution for isolated subnet | Yes |
+| FortiGate | ISO_LAN | Wazuh_Server | 1514/UDP, 1515/TCP | EDR agent → manager communication | Yes |
+| OPNsense | Admin_Hosts | ISO_LAN | 22, 80, 443, 8080 | Administrative access to isolated hosts | Yes |
+| pfSense | Ext_LAN | Web_Server | 80, 443, 8080 | DMZ access to internal web services | Yes |
+| pfSense | ANY | crowdsec_blocklists | ANY | Drop traffic from behavioral threat intel | No |
+| pfSense | Lab_LAN2 | Elastic_Server | 8220, 9200, 5044 | Elastic Agent → Fleet Server enrollment | Yes |
+
+**Security Enforcement Highlights:**
+
+- **CrowdSec Integration:** 12 block rules across all platforms enforce behavioral threat intelligence
+- **Bogon Filtering:** Reserved/private IP ranges blocked on WAN-facing interfaces
+- **Default Deny:** Implicit deny-all rule terminates each interface ruleset
+- **VPN Kill Switch:** Floating rules block LAN egress when VPN tunnels fail
+- **Geo-blocking:** pfBlockerNG drops inbound connections from high-risk countries
+
+**Zone Trust Model:**
+```
+Trusted Zone (Prod_LAN) ←→ Restricted Zone (ISO_LAN)
+  ↓                              ↓
+Lab Zones (Lab_LAN1/2) ←→ DMZ (Ext_LAN)
+  ↓
+Internet (via VPN/direct routing)
+```
+
+Cross-zone traffic requires explicit firewall rules with service-level restrictions. No zone has blanket access to another—even administrative subnets require per-service authorization.
+
+
+### Configuration Examples
+
+#### pfSense Rule Configuration (Prod_LAN Interface)
 
 <figure>
-      <img src="/Career_Projects/assets/screenshots/pfs-lab_lan1.png" alt="pfSense Lab_LAN1 Rules">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        pfSense Lab_LAN1 Rules.
-      </figcaption>
+      <img src="/Career_Projects/assets/firewall/pfsense-prod-lan-rules.png" alt="pfSense Prod_LAN Rules">
+      <figcaption>pfSense Prod_LAN Interface Rules</figcaption>
     </figure>
 
-##### WAN Rules Configuration
+#### VPN Floating Rule Configuration
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      <strong>VPN Kill Switch Details:</strong>
+    </p>
+    <p>
+      This critical floating rule ensures that if the PIA VPN tunnel drops (failure, misconfiguration, or provider outage), traffic from LAN/LAN2 networks cannot egress through the unencrypted Verizon WAN connection. The rule triggers when the gateway is not one of the PIA interfaces, immediately blocking traffic to prevent IP leakage or unintended cleartext transmission.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/firewall/pfsense-vpn-killswitch.png" alt="VPN Kill Switch Rule">
+      <figcaption>pfSense VPN Kill Switch Floating Rule</figcaption>
+    </figure>
+  </div>
+</div>
+
+#### pfSense Log Examples
 
 <figure>
-      <img src="/Career_Projects/assets/screenshots/pfs-prod_LAN1.png" alt="pfSense Prod_LAN Rules">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        pfSense Prod_LAN Rules.
-      </figcaption>
-    </figure>
+    <img src="/Career_Projects/assets/firewall/pfsense-logs.png" alt="pfSense Firewall Logs">
+    <figcaption>pfSense Firewall Event Logs</figcaption>
+</figure>
 
-##### Floating Rules Configuration
-
+#### OPNsense Rule Configuration
 <figure>
-      <img src="/Career_Projects/assets/screenshots/pfs-float.png" alt="pfSense Floating Rules">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        pfSense Floating Rules.
-      </figcaption>
-    </figure>
+    <img src="/Career_Projects/assets/firewall/pfsense-logs.png" alt="pfSense Firewall Logs">
+    <figcaption>OPNsense Rule Configuration</figcaption>
+</figure>
 
-**VPN Kill Switch Details:**
-
-This critical floating rule ensures that if the PIA VPN tunnel drops (failure, misconfiguration, or provider outage), traffic from LAN/LAN2 networks cannot egress through the unencrypted Verizon WAN connection. The rule triggers when the gateway is not one of the PIA interfaces, immediately blocking traffic to prevent IP leakage or unintended cleartext transmission.
-
-#### OPNsense Rule Sets
-
+#### FortiGate Rule Configuration
 <figure>
-      <img src="/Career_Projects/assets/screenshots/opn-rules.png" alt="OPNsense Rules">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        OPNsense ISO_LAN and Prod_LAN Rules.
-      </figcaption>
-    </figure>
-
-**Firewall Rule Logic**
-
-**ISO_LAN Rules**
-
-- **Default Policy**: Deny all; allow only explicitly defined flows.
-- **Allowed Destinations**:
-  - Webserver1, Proxy on ports defined by alias web_ports (e.g., 80, 443)
-  - DNS_Servers via UDP port 53
-- **Special Notes**:
-  - Automatically generated rules allow traffic to the firewall itself and interface IPs.
-  - No blanket LAN-to-any rules—only scoped access to specific services.
-
-**Prod_LAN Rules**
-
-- **Allowed Ingress to ISO_LAN**:
-  - Port 22 (SSH) for OfficePC and Ansible access
-  - Any for OpenVAS scanning and secure access
-- **Logging Enabled**
-
-**Security Considerations:**
-
-- OpenVAS "Allow Any": Required for comprehensive vulnerability scanning across diverse ports and protocols. Traffic is authenticated and logged. Consideration: time-based scheduling to limit exposure window.
-- Automatic Rules: OPNsense auto-generates rules for firewall self-management (DHCP, DNS, NTP). These are not shown but are logged in audit trail.
-
-#### FortiGate Firewall Rules
-
-<figure class="full-content">
-      <img src="/Career_Projects/assets/screenshots/fortigate-rules.png" alt="FortiGate Rules">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        FortiGate ISO_LAN2 and Prod_LAN Rules.
-      </figcaption>
-    </figure>
-
-| Name | From | To | Source | Destination | Service | Action | NAT | Log |
-|------|------|-----|--------|-------------|---------|--------|-----|-----|
-| VPN-users | SSL-VPN tunnel interface (ssl.root) | Prod_LAN (lan) | all | paul | ALL | **P** | **P** | All |
-| Allow MGMT to ISO_LAN | Prod_LAN (lan) | ISO_LAN (wan) | Lab_LAN1;Lab_LAN2;Prod_LAN | ISO_LAN | ALL_ICMP;HTTP;HTTPS;SSH | **P** | **O** | All |
-| DNS Access for ISO_LAN | ISO_LAN (wan) | Prod_LAN (lan) | ISO_LAN | DNS Servers | DNS | **P** | **O** | All |
-| OpenVAS scanning | Prod_LAN (lan) | ISO_LAN (wan) | OpenVAS | ISO_LAN | ALL | **P** | **O** | UTM |
-| Syslog Access | ISO_LAN (wan) | Prod_LAN (lan) | ISO_LAN | Web/Syslog Server | SYSLOG;Web Access | **P** | **O** | UTM |
-| Prometheus Metrics | ISO_LAN (wan) | Prod_LAN (lan) | ISO_LAN | Prometheus Server | prometheus | **P** | **O** | UTM |
-| Wazuh EDR Monitoring | ISO_LAN (wan) | Prod_LAN (lan) | ISO_LAN | Wazuh Server | ALL | **P** | **O** | UTM |
-| Ansible Provisioning | Prod_LAN (lan) | ISO_LAN (wan) | Ansible Server | ISO_LAN | SSH | **P** | **O** | All |
-| Elastic Agent to Fleet Server | ISO_LAN (wan) | Prod_LAN (lan) | ISO_LAN | Elastic Server | Elastic Ports | **P** | **O** | UTM |
-| StepCA/ACME Access to ISO_LAN | Prod_LAN (lan) | ISO_LAN (wan) | StepCA Server | ISO_LAN | ALL | **P** | **O** | UTM |
-| Admin Access to ISO_LAN | Prod_LAN (lan) | ISO_LAN (wan) | iPad Pro;OfficePC | ISO_LAN | ALL | **P** | **O** | All |
-| Nessus Scanner Access to ISO | Prod_LAN (lan) | ISO_LAN (wan) | Nessus Server | ISO_LAN | ALL | **P** | **O** | UTM |
-| Traefik Proxy Access | Prod_LAN (lan) | ISO_LAN (wan) | Traefik Server | ISO_LAN | Web Access | **P** | **O** | All |
-| Implicit Deny | any | any | all | all | ALL | **O** | **O** | |
-
+    <img src="/Career_Projects/assets/firewall/pfsense-logs.png" alt="pfSense Firewall Logs">
+    <figcaption>FortiGate Rule Configuration</figcaption>
+</figure>
 ---
 
 ## 3. Intrusion Detection/Prevention Solutions
