@@ -1,0 +1,2549 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../grc-nist-800/">
+      
+      
+        <link rel="next" href="../grc-iso27001/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>CIS Controls - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cis-critical-security-controls-v81" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CIS Controls
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-1-inventory-and-control-of-enterprise-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 1: Inventory and Control of Enterprise Assets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-2-inventory-and-control-of-software-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 2: Inventory and Control of Software Assets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-3-data-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 3: Data Protection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-4-secure-configuration-of-enterprise-assets-and-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 4: Secure Configuration of Enterprise Assets and Software
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-5-account-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 5: Account Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-6-access-control-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 6: Access Control Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-7-continuous-vulnerability-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 7: Continuous Vulnerability Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-8-audit-log-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 8: Audit Log Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-9-email-and-web-browser-protections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 9: Email and Web Browser Protections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-10-malware-defenses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 10: Malware Defenses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-11-data-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 11: Data Recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-12-network-infrastructure-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 12: Network Infrastructure Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-13-network-monitoring-and-defense" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 13: Network Monitoring and Defense
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-14-security-awareness-and-skills-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 14: Security Awareness and Skills Training
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-15-service-provider-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 15: Service Provider Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-16-application-software-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 16: Application Software Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-17-incident-response-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 17: Incident Response Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cis-control-18-penetration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Control 18: Penetration Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-compliance-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary of Compliance Status
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary of Compliance Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overall-cis-controls-v812-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overall CIS Controls v8.1.2 Compliance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cis-critical-security-controls-v81">CIS Critical Security Controls v8.1<a class="headerlink" href="#cis-critical-security-controls-v81" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong> <br />
+Version: 1.0<br />
+Last Updated: January 2026<br />
+Owner: Paul Leone </p>
+<p><strong>Framework Version:</strong> CIS Controls v8.1</p>
+<hr />
+<h2 id="cis-control-1-inventory-and-control-of-enterprise-assets">CIS Control 1: Inventory and Control of Enterprise Assets<a class="headerlink" href="#cis-control-1-inventory-and-control-of-enterprise-assets" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td>Establish and maintain detailed enterprise asset inventory</td>
+<td>External Excel Inventory, Checkmk inventory, Wazuh agent inventory (25+ endpoints), Prometheus node exporters, PatchMon tracking (30+ hosts), DNS records, SSH host keys in Ansible</td>
+<td>Compliant - Multiple sources provide comprehensive coverage</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>Address unauthorized assets weekly</td>
+<td>Partial - NetalertX network discovery identifies unknown devices; no documented weekly review process</td>
+<td>Gap: Need documented weekly unauthorized asset review procedure</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>Utilize an active discovery tool (IG2)</td>
+<td>NetalertX network discovery, nmap scans, custom Python scanner</td>
+<td>Compliant - Active scanning implemented</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>Use DHCP logging to update inventory (IG2)</td>
+<td>Asus Router DHCP logs (192.168.1.0/24) + pfSense DHCP logs (192.168.100.0/24) forwarded to Splunk/Elastic</td>
+<td>Compliant - DHCP logging centralized</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>Use passive asset discovery tool (IG3)</td>
+<td>Passive network monitoring via Suricata/pfSense flow logs</td>
+<td>Compliant - Passive discovery via traffic analysis</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 1 Overall Status</strong>: <strong>Compliant</strong> (minor process documentation gap in 1.2)</p>
+<hr />
+<h2 id="cis-control-2-inventory-and-control-of-software-assets">CIS Control 2: Inventory and Control of Software Assets<a class="headerlink" href="#cis-control-2-inventory-and-control-of-software-assets" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td>Establish and maintain software inventory</td>
+<td>External Excel Inventory, PatchMon Software Inventory (5,000+ packages), Checkmk inventory, Nessus software scanning, Wazuh agent software tracking</td>
+<td>Compliant - Multi-source software inventory</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>Ensure authorized software is currently supported</td>
+<td>PatchMon tracks EOL software; vulnerability scanners flag unsupported versions; documented exceptions for necessary legacy software</td>
+<td>Compliant - Supported software validation process</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>Address unauthorized software monthly</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>Utilize automated software inventory tools (IG2)</td>
+<td>PatchMon agent-based inventory, Checkmk, Wazuh software tracking, Nessus authenticated scans</td>
+<td>Compliant - Automated discovery</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>Allowlist authorized software (IG2)</td>
+<td>Not Implemented - No application allowlisting solution deployed</td>
+<td>Gap: Implement AppLocker, Windows Defender Application Control, or CrowdSec allowlisting</td>
+</tr>
+<tr>
+<td>2.6</td>
+<td>Allowlist authorized libraries (IG2)</td>
+<td>Not Implemented - No DLL/library allowlisting</td>
+<td>Gap: IG2 requirement not addressed</td>
+</tr>
+<tr>
+<td>2.7</td>
+<td>Allowlist authorized scripts (IG3)</td>
+<td>Not Implemented - No script execution control (PowerShell Constrained Language Mode, etc.)</td>
+<td>Gap: IG3 requirement not addressed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 2 Overall Status</strong>: <strong>Partially Compliant</strong> (IG1 fully compliant; IG2/IG3 gaps in allowlisting)</p>
+<hr />
+<h2 id="cis-control-3-data-protection">CIS Control 3: Data Protection<a class="headerlink" href="#cis-control-3-data-protection" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td>Establish and maintain a data management process</td>
+<td>Documented in GRC document; data classification, retention, disposal procedures defined</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td>Establish and maintain data inventory</td>
+<td>Sensitive data tracked in inventory; backup data cataloged; scan credentials documented</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td>Configure data access control lists</td>
+<td>File system ACLs; SSH key-based access; database access controls; Authentik RBAC</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.4</td>
+<td>Enforce data retention</td>
+<td>90-day log retention; backup retention policies; automated cleanup</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.5</td>
+<td>Securely dispose of data</td>
+<td>Secure deletion procedures; encrypted backup disposal; NIST SP 800-88 alignment</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.6</td>
+<td>Encrypt data on end-user devices</td>
+<td>Windows BitLocker, Linux LUKS, encrypted laptop drives</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.7</td>
+<td>Establish data classification scheme (IG2)</td>
+<td>Sensitive/Confidential/Public labels used in documentation</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.8</td>
+<td>Document data flows (IG2)</td>
+<td>Partial - Network architecture documented; full data flow diagrams not comprehensive</td>
+<td>Gap: Create detailed data flow diagrams</td>
+</tr>
+<tr>
+<td>3.9</td>
+<td>Encrypt data on removable media (IG2)</td>
+<td>USB drives encrypted; backup tapes encrypted</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.10</td>
+<td>Encrypt sensitive data in transit (IG2)</td>
+<td>TLS 1.3 (Traefik), SSH encryption, syslog-ng TLS, VPN encryption</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.11</td>
+<td>Encrypt sensitive data at rest (IG2)</td>
+<td>Encrypted backups, database encryption, scan credential encryption</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.12</td>
+<td>Segment data processing based on sensitivity (IG2)</td>
+<td>VLAN segmentation; backend isolation (Traefik); network segmentation</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>3.13</td>
+<td>Deploy Data Loss Prevention solution (IG3)</td>
+<td>Not Implemented - No DLP solution deployed</td>
+<td>Gap: IG3 requirement (acceptable for homelab)</td>
+</tr>
+<tr>
+<td>3.14</td>
+<td>Log sensitive data access (IG3)</td>
+<td>Partial - File access logged via Wazuh FIM; database query logging not comprehensive</td>
+<td>Gap: Enhanced database audit logging</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 3 Overall Status</strong>: <strong>IG1/IG2 Compliant; IG3 Partial</strong> (DLP not applicable to homelab)</p>
+<hr />
+<h2 id="cis-control-4-secure-configuration-of-enterprise-assets-and-software">CIS Control 4: Secure Configuration of Enterprise Assets and Software<a class="headerlink" href="#cis-control-4-secure-configuration-of-enterprise-assets-and-software" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.1</td>
+<td>Establish and maintain secure configuration process</td>
+<td>CIS Benchmark audits via Wazuh; configuration drift detection; automated remediation via Ansible; Ansible baselines; IaC version control. Not Implemented - documented secure configuration process (policy document)</td>
+<td>Action Required: Create formal secure configuration policy document</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td>Establish secure configuration process for network infrastructure</td>
+<td>Network device hardening standards documented; SSH hardening policy; firewall rule standards</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.3</td>
+<td>Configure automatic session locking</td>
+<td>15-min timeout (general OS); 2-min timeout (mobile devices); enforced via GPO/Ansible</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.4</td>
+<td>Implement firewall on servers</td>
+<td>UFW (Linux), Windows Firewall, iptables rules managed via Ansible</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.5</td>
+<td>Implement firewall on end-user devices</td>
+<td>Host-based firewalls enabled on all endpoints; default-deny ruleset</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.6</td>
+<td>Securely manage enterprise assets</td>
+<td>SSH key-based admin access; IaC version control (Git); HTTPS-only management interfaces</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.7</td>
+<td>Manage default accounts</td>
+<td>Root login disabled (SSH); default vendor accounts removed; validated via Nessus scans</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.8</td>
+<td>Uninstall unnecessary services (IG2)</td>
+<td>Minimal service footprint; unnecessary services disabled; verified via authenticated scans</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.9</td>
+<td>Configure trusted DNS servers (IG2)</td>
+<td>Enterprise-controlled DNS (Pi-hole, Unbound); DNSSEC validation</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.10</td>
+<td>Enforce automatic lockout on portable devices (IG2)</td>
+<td>Failed auth lockout (laptops: 20 attempts; mobile: 10 attempts) via GPO/MDM</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>4.11</td>
+<td>Enforce remote wipe capability (IG2)</td>
+<td>Not Implemented - Mobile device wipe capability via planned MDM; laptops rely on full-disk encryption</td>
+<td>Gap: Implement remote wipe for laptops (BitLocker recovery key escrowing)</td>
+</tr>
+<tr>
+<td>4.12</td>
+<td>Separate enterprise workspaces on mobile devices (IG3)</td>
+<td>Not Implemented - No Android Work Profile/iOS Managed App separation</td>
+<td>Gap: IG3 mobile device management</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 4 Overall Status</strong>: <strong>Needs Process Documentation</strong> (4.1 critical)</p>
+<hr />
+<h2 id="cis-control-5-account-management">CIS Control 5: Account Management<a class="headerlink" href="#cis-control-5-account-management" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.1</td>
+<td>Establish and maintain account inventory</td>
+<td>Authentik user database, Active Directory accounts, SSH key inventory (Ansible), Wazuh user tracking</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>Use unique passwords</td>
+<td>Vaultwarden password manager; 8-char minimum (MFA accounts); 14-char minimum (non-MFA)</td>
+<td>Compliant - Exceeds CIS recommendations</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>Disable dormant accounts after 45 days</td>
+<td>Automated via Active Directory account expiration policies; Authentik account lifecycle management</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>Restrict admin privileges to dedicated accounts</td>
+<td>Separate admin accounts (no dual-use); SSH sudo enforcement; Authentik RBAC</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>5.5</td>
+<td>Establish service account inventory (IG2)</td>
+<td>Service accounts documented in inventory; ownership tracked; quarterly reviews</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>5.6</td>
+<td>Centralize account management (IG2)</td>
+<td>Authentik SSO + Active Directory; centralized SSH key management (Ansible)</td>
+<td>Compliant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 5 Overall Status</strong>: <strong>Fully Compliant</strong></p>
+<hr />
+<h2 id="cis-control-6-access-control-management">CIS Control 6: Access Control Management<a class="headerlink" href="#cis-control-6-access-control-management" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.1</td>
+<td>Establish access granting process</td>
+<td>Documented onboarding procedures; Authentik provisioning; SSH key distribution workflow</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>Establish access revocation process</td>
+<td>Offboarding checklist; Authentik account deactivation; SSH key revocation (Ansible); Wazuh Active Response</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>6.3</td>
+<td>Require MFA for externally-exposed applications</td>
+<td>Authentik enforces MFA via TOTP; all external services require MFA</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>6.4</td>
+<td>Require MFA for remote network access</td>
+<td>VPN (Tailscale) requires device authentication; SSH keys + optional passphrase</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>6.5</td>
+<td>Require MFA for administrative access</td>
+<td>100% admin accounts require Authentik MFA; SSH key-based auth for privileged access</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>6.6</td>
+<td>Establish authentication/authorization system inventory (IG2)</td>
+<td>Authentik, Active Directory, SSH key infrastructure documented; annual review</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>6.7</td>
+<td>Centralize access control (IG2)</td>
+<td>Authentik SSO for Traefik-routed services; Active Directory domain authentication</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>6.8</td>
+<td>Define and maintain role-based access control (IG3)</td>
+<td>Not Implemented - Requires enterprise-wide RBAC documentation (access rights per role for all systems)</td>
+<td>Action Required: Document RBAC policies for all enterprise systems (AD groups, Authentik roles, SSH sudo policies)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 6 Overall Status</strong>: <strong>Mostly Compliant</strong>; 6.8 needs broader RBAC documentation</p>
+<hr />
+<h2 id="cis-control-7-continuous-vulnerability-management">CIS Control 7: Continuous Vulnerability Management<a class="headerlink" href="#cis-control-7-continuous-vulnerability-management" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.1</td>
+<td>Establish vulnerability management process</td>
+<td>Documented dual-scanner approach (OpenVAS + Nessus); remediation SLAs; CVSS prioritization</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>7.2</td>
+<td>Establish remediation process</td>
+<td>Risk-based remediation strategy; documented SLAs; monthly reviews; TheHive tracking</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>7.3</td>
+<td>Perform automated OS patch management</td>
+<td>PatchMon (Linux), WSUS (Windows), monthly cadence; automated approvals</td>
+<td>Compliant - Exceeds monthly requirement</td>
+</tr>
+<tr>
+<td>7.4</td>
+<td>Perform automated application patch management</td>
+<td>Watchtower (containers), WUD monitoring, monthly cadence</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>7.5</td>
+<td>Perform automated vulnerability scans - internal (IG2)</td>
+<td>Weekly OpenVAS (52/year); monthly Nessus authenticated scans (12/year)</td>
+<td>Compliant - Exceeds quarterly requirement</td>
+</tr>
+<tr>
+<td>7.6</td>
+<td>Perform automated vulnerability scans - external (IG2)</td>
+<td>Monthly Nessus scans of externally-exposed assets; OpenVAS external scans</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>7.7</td>
+<td>Remediate detected vulnerabilities (IG2)</td>
+<td>MTTR &lt;72h (Critical); &lt;7 days (High); 95% patched within SLA; verification scans</td>
+<td>Compliant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 7 Overall Status</strong>: <strong>Fully Compliant</strong> - Exceeds industry standards</p>
+<hr />
+<h2 id="cis-control-8-audit-log-management">CIS Control 8: Audit Log Management<a class="headerlink" href="#cis-control-8-audit-log-management" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8.1</td>
+<td>Establish audit log management process</td>
+<td>Documented logging policy; 90-day retention; centralized SIEM; review procedures</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.2</td>
+<td>Collect audit logs</td>
+<td>100% security event coverage (DNS, SSH, Traefik, vulnerability scans, patches, Wazuh, Sysmon)</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.3</td>
+<td>Ensure adequate log storage</td>
+<td>SIEM storage capacity planning; immutable indexes; compressed archival</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.4</td>
+<td>Standardize time synchronization (IG2)</td>
+<td>NTP sync across all assets; centralized time sources</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.5</td>
+<td>Collect detailed audit logs (IG2)</td>
+<td>Logs include timestamp, user, source IP, action, result, SSH key fingerprints, DNS query details</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.6</td>
+<td>Collect DNS query logs (IG2)</td>
+<td>Pi-hole query logs; Unbound logs; Bind9 query logging; forwarded to SIEM</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.7</td>
+<td>Collect URL request logs (IG2)</td>
+<td>Traefik access logs (JSON format); proxy logs; forwarded to SIEM</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.8</td>
+<td>Collect command-line logs (IG2)</td>
+<td>Sysmon Event ID 1 (process creation); PowerShell logging; Bash history; Wazuh command monitoring</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.9</td>
+<td>Centralize audit logs (IG2)</td>
+<td>Dual SIEM (Splunk + Elastic); syslog-ng encrypted forwarding; centralized storage</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.10</td>
+<td>Retain audit logs 90 days minimum (IG2)</td>
+<td>90-day retention policy; immutable SIEM indexes</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.11</td>
+<td>Conduct audit log reviews weekly (IG2)</td>
+<td>Splunk dashboards; Wazuh alerts; weekly correlation searches; automated reviews</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>8.12</td>
+<td>Collect service provider logs (IG3)</td>
+<td>Partial - Cloud service logs collected where available; not comprehensive across all SaaS platforms</td>
+<td>Gap: Document which SaaS platforms provide logs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 8 Overall Status</strong>: <strong>Fully Compliant</strong> (IG1/IG2); <strong>IG3 Partial</strong> (limited by SaaS provider capabilities)</p>
+<hr />
+<h2 id="cis-control-9-email-and-web-browser-protections">CIS Control 9: Email and Web Browser Protections<a class="headerlink" href="#cis-control-9-email-and-web-browser-protections" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9.1</td>
+<td>Ensure only fully supported browsers/email clients</td>
+<td>Latest browser versions enforced; unsupported clients blocked; automated update verification</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>9.2</td>
+<td>Use DNS filtering services</td>
+<td>Pi-hole DNS filtering (2M+ blocked domains); malware/phishing domain blocking</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>9.3</td>
+<td>Maintain network-based URL filters (IG2)</td>
+<td>Traefik URL filtering; SafeLine WAF; category-based blocking; reputation filtering</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>9.4</td>
+<td>Restrict browser/email extensions (IG2)</td>
+<td>Partial - GPO restricts extensions on managed Windows devices; Linux/personal devices rely on user compliance</td>
+<td>Gap: Enforce extension restrictions across all platforms</td>
+</tr>
+<tr>
+<td>9.5</td>
+<td>Implement DMARC (IG2)</td>
+<td>DMARC policy published; SPF + DKIM implemented for outbound mail</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>9.6</td>
+<td>Block unnecessary file types (IG2)</td>
+<td>Partial - Email gateway blocks .exe/.scr/.bat attachments; not comprehensive</td>
+<td>Gap: Expand blocked file type list</td>
+</tr>
+<tr>
+<td>9.7</td>
+<td>Deploy email server anti-malware (IG3)</td>
+<td>Not Implemented - No dedicated email gateway anti-malware (homelab uses external email providers)</td>
+<td>Gap: IG3 requirement (not applicable - no on-prem email server)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 9 Overall Status</strong>: <strong>IG1 Compliant; IG2 Partial; IG3 N/A</strong> (no on-prem email)</p>
+<hr />
+<h2 id="cis-control-10-malware-defenses">CIS Control 10: Malware Defenses<a class="headerlink" href="#cis-control-10-malware-defenses" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.1</td>
+<td>Deploy and maintain anti-malware software</td>
+<td>Wazuh FIM + VirusTotal integration; ClamAV; Microsoft Defender; rootkit detection</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>10.2</td>
+<td>Configure automatic anti-malware signature updates</td>
+<td>Automated signature updates (daily); ClamAV freshclam; Defender definition updates</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>10.3</td>
+<td>Disable autorun/autoplay for removable media</td>
+<td>GPO disables autorun; Linux udev rules block autoplay; verified compliance</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>10.4</td>
+<td>Configure automatic scanning of removable media (IG2)</td>
+<td>Wazuh FIM monitors USB insertions; ClamAV on-access scanning</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>10.5</td>
+<td>Enable anti-exploitation features (IG2)</td>
+<td>Windows DEP/WDEG enabled; Linux ASLR/PIE; macOS SIP/Gatekeeper</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>10.6</td>
+<td>Centrally manage anti-malware software (IG2)</td>
+<td>Wazuh central management; Group Policy for Windows Defender; centralized config</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>10.7</td>
+<td>Use behavior-based anti-malware (IG2)</td>
+<td>Wazuh behavioral analysis; Windows Defender behavior monitoring; Suricata IDS behavioral detection</td>
+<td>Compliant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 10 Overall Status</strong>: <strong>Fully Compliant</strong></p>
+<hr />
+<h2 id="cis-control-11-data-recovery">CIS Control 11: Data Recovery<a class="headerlink" href="#cis-control-11-data-recovery" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11.1</td>
+<td>Establish and maintain data recovery process</td>
+<td>Documented backup procedures; restore workflows; recovery prioritization; annual reviews</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>11.2</td>
+<td>Perform automated backups</td>
+<td>Proxmox automated backups (bi-weekly); Docker volume backups; database backups; weekly cadence</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>11.3</td>
+<td>Protect recovery data</td>
+<td>Encrypted backups (AES-256); offsite storage; access controls; encrypted transmission</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>11.4</td>
+<td>Establish isolated instance of recovery data</td>
+<td>Offsite backups (cloud + offline USB); air-gapped backup copies; versioned backups</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>11.5</td>
+<td>Test data recovery (IG2)</td>
+<td>Quarterly restore testing; documented test results; validation procedures</td>
+<td>Compliant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 11 Overall Status</strong>: <strong>Fully Compliant</strong></p>
+<hr />
+<h2 id="cis-control-12-network-infrastructure-management">CIS Control 12: Network Infrastructure Management<a class="headerlink" href="#cis-control-12-network-infrastructure-management" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12.1</td>
+<td>Ensure network infrastructure is up-to-date</td>
+<td>Network device patch management; monthly version checks; automated update notifications</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>12.2</td>
+<td>Establish secure network architecture (IG2)</td>
+<td>Documented network architecture; segmentation design; least-privilege network design</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>12.3</td>
+<td>Securely manage network infrastructure (IG2)</td>
+<td>SSH key-based management; HTTPS-only interfaces; IaC version control (Git)</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>12.4</td>
+<td>Establish architecture diagrams (IG2)</td>
+<td>Network topology diagrams; Subnet/VLAN documentation; NetAlertX Networking mapping</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>12.5</td>
+<td>Centralize network AAA (IG2)</td>
+<td>Not Implemented -- Lab does not have a dedicated AAA service deployed</td>
+<td>Gap: implement AAA service</td>
+</tr>
+<tr>
+<td>12.6</td>
+<td>Use secure network protocols (IG2)</td>
+<td>802.1X port security (planned); WPA3 wireless; TLS 1.3; SSH v2 only</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>12.7</td>
+<td>Ensure remote devices use VPN + AAA (IG2)</td>
+<td>Tailscale mesh VPN requires device authentication; Cloudflare Tunnels; no direct internet exposure</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>12.8</td>
+<td>Establish dedicated admin workstations (IG3)</td>
+<td>Partial - Dedicated admin VM; not fully air-gapped from internet</td>
+<td>Gap: Implement fully isolated admin workstation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 12 Overall Status</strong>: <strong>IG1/IG2 Compliant; IG3 Partial</strong></p>
+<hr />
+<h2 id="cis-control-13-network-monitoring-and-defense">CIS Control 13: Network Monitoring and Defense<a class="headerlink" href="#cis-control-13-network-monitoring-and-defense" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13.1</td>
+<td>Centralize security event alerting (IG2)</td>
+<td>Dual SIEM (Splunk + Elastic); TheHive case management; Discord/email alerting</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.2</td>
+<td>Deploy host-based IDS (IG2)</td>
+<td>Wazuh EDR on 25+ endpoints; FIM monitoring; rootkit detection; process monitoring</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.3</td>
+<td>Deploy network IDS (IG2)</td>
+<td>Suricata (IPS inline); Snort (IDS passive); CrowdSec (behavioral)</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.4</td>
+<td>Perform traffic filtering between segments (IG2)</td>
+<td>pfSense/OPNsense inter-VLAN ACLs; firewall rules per segment; default-deny policies</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.5</td>
+<td>Manage access control for remote assets (IG2)</td>
+<td>NAC principles applied; Tailscale device posture checks; Wazuh agent compliance verification</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.6</td>
+<td>Collect network traffic flow logs (IG2)</td>
+<td>pfSense/OPNsense flow logs; Suricata EVE JSON; packet captures (tcpdump); SIEM ingestion</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.7</td>
+<td>Deploy host-based IPS (IG3)</td>
+<td>Wazuh Active Response (firewall-drop, host-deny); EDR blocking capabilities</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.8</td>
+<td>Deploy network IPS (IG3)</td>
+<td>Suricata inline blocking mode; CrowdSec automated firewall rules; pfSense IPS integration</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.9</td>
+<td>Deploy port-level access control (IG3)</td>
+<td>Not Implemented -- Network switching replacement required; currently using MAC filtering + admin VLAN segmentation</td>
+<td>Gap: Implement 802.1X NAC</td>
+</tr>
+<tr>
+<td>13.10</td>
+<td>Perform application layer filtering (IG3)</td>
+<td>SafeLine WAF (OWASP CRS rules); Traefik middleware filtering; NGINX Ingress rules</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>13.11</td>
+<td>Tune security event alerting thresholds (IG3)</td>
+<td>Monthly tuning of Splunk/Wazuh/Suricata thresholds; false positive reduction tracking</td>
+<td>Compliant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 13 Overall Status</strong>: <strong>IG2 Fully Compliant; IG3 Mostly Compliant</strong> (802.1X gap)</p>
+<hr />
+<h2 id="cis-control-14-security-awareness-and-skills-training">CIS Control 14: Security Awareness and Skills Training<a class="headerlink" href="#cis-control-14-security-awareness-and-skills-training" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>14.1</td>
+<td>Establish security awareness program</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.2</td>
+<td>Train workforce on social engineering</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.3</td>
+<td>Train workforce on authentication best practices</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.4</td>
+<td>Train workforce on data handling</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.5</td>
+<td>Train workforce on unintentional data exposure</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.6</td>
+<td>Train workforce on incident recognition/reporting</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.7</td>
+<td>Train workforce on identifying missing security updates</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.8</td>
+<td>Train workforce on insecure network dangers</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>14.9</td>
+<td>Conduct role-specific security training (IG2)</td>
+<td>N/A - Single-user lab environment hands-on lab work; no formal certification program</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 14 Overall Status</strong>: <strong>Limited Applicability</strong> (single-user homelab)</p>
+<hr />
+<h2 id="cis-control-15-service-provider-management">CIS Control 15: Service Provider Management<a class="headerlink" href="#cis-control-15-service-provider-management" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>15.1</td>
+<td>Establish service provider inventory</td>
+<td>Cloud providers documented (Cloudflare, Tailscale, etc.)</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>15.2</td>
+<td>Establish service provider management policy (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>15.3</td>
+<td>Classify service providers (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>15.4</td>
+<td>Ensure contracts include security requirements (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>15.5</td>
+<td>Assess service providers (IG3)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>15.6</td>
+<td>Monitor service providers (IG3)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>15.7</td>
+<td>Securely decommission service providers (IG3)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 15 Overall Status</strong>: <strong>Limited Applicability</strong> (single-user homelab)</p>
+<hr />
+<h2 id="cis-control-16-application-software-security">CIS Control 16: Application Software Security<a class="headerlink" href="#cis-control-16-application-software-security" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16.1</td>
+<td>Establish secure application development process (IG2)</td>
+<td>Informal - IaC follows security best practices; no formal SDLC documentation</td>
+<td>Gap: Document secure development lifecycle</td>
+</tr>
+<tr>
+<td>16.2</td>
+<td>Establish vulnerability disclosure process (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>16.3</td>
+<td>Perform root cause analysis on vulnerabilities (IG2)</td>
+<td>Informal - Post-incident reviews conducted; no formal RCA process</td>
+<td>Gap: Document RCA procedures</td>
+</tr>
+<tr>
+<td>16.4</td>
+<td>Establish third-party software component inventory (IG2)</td>
+<td>Partial - Docker images tracked; no comprehensive SBOM tracking</td>
+<td>Gap: Implement SBOM tracking (Trivy/Grype)</td>
+</tr>
+<tr>
+<td>16.5</td>
+<td>Use up-to-date third-party components (IG2)</td>
+<td>Watchtower auto-updates; WUD monitoring; trusted sources (official Docker images; maintained OSS projects)</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>16.6</td>
+<td>Establish vulnerability severity rating system (IG2)</td>
+<td>CVSS scoring; risk-based prioritization; documented remediation SLAs</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>16.7</td>
+<td>Use standard hardening templates (IG2)</td>
+<td>CIS Benchmarks for application infrastructure; IaC templates (Ansible/Terraform); documented configurations</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>16.8</td>
+<td>Separate production/non-production systems (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>16.9</td>
+<td>Train developers in secure coding (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>16.10</td>
+<td>Apply secure design principles (IG2)</td>
+<td>Least privilege; input validation; defense-in-depth architecture; secure defaults</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>16.11</td>
+<td>Leverage vetted security modules (IG2)</td>
+<td>Authentik (IAM); Step-CA (PKI); Traefik (reverse proxy); trusted open-source security libraries</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>16.12</td>
+<td>Implement code-level security checks (IG3)</td>
+<td>Limited - Infrastructure code linting (Ansible-lint/Terraform validate); no comprehensive SAST/DAST</td>
+<td>Gap: Implement SAST/DAST scanning</td>
+</tr>
+<tr>
+<td>16.13</td>
+<td>Conduct application penetration testing (IG3)</td>
+<td>Informal - Vulnerability scanning covers web apps; Kali/Parrot OS Pen testing</td>
+<td>Gap: Formal pen testing (IG3)</td>
+</tr>
+<tr>
+<td>16.14</td>
+<td>Conduct threat modeling (IG3)</td>
+<td>Informal - Security architecture design considers threats; no formal STRIDE/DREAD modeling</td>
+<td>Gap: Document threat models (IG3)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 16 Overall Status</strong>: <strong>IG2 Mostly Compliant</strong> (infrastructure focus, not software development); <strong>IG3 Partial</strong></p>
+<hr />
+<h2 id="cis-control-17-incident-response-management">CIS Control 17: Incident Response Management<a class="headerlink" href="#cis-control-17-incident-response-management" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17.1</td>
+<td>Designate incident handling personnel</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>17.2</td>
+<td>Establish contact information for reporting</td>
+<td>Discord channels; SMTP relay; Cloudflare email routing</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>17.3</td>
+<td>Establish enterprise incident reporting process</td>
+<td>TheHive case creation process; reporting timeframes defined; multi-channel reporting (Discord, email, API)</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>17.4</td>
+<td>Establish incident response process (IG2)</td>
+<td>Documented IR plan; TheHive playbooks</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>17.5</td>
+<td>Assign key roles and responsibilities (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>17.6</td>
+<td>Define communication mechanisms (IG2)</td>
+<td>Primary: Discord; Secondary: SMTP/Cloudflare email routing; multi-path redundancy</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>17.7</td>
+<td>Conduct routine IR exercises (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>17.8</td>
+<td>Conduct post-incident reviews (IG2)</td>
+<td>N/A - Single-user lab environment</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>17.9</td>
+<td>Establish incident thresholds (IG3)</td>
+<td>Severity matrix documented; CVSS thresholds; Splunk alert severities; MISP threat levels; Prometheus thresholds</td>
+<td>Compliant</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 17 Overall Status</strong>: <strong>Mostly Compliant</strong>; <strong>Minor Gap</strong> in formal exercise scheduling</p>
+<hr />
+<h2 id="cis-control-18-penetration-testing">CIS Control 18: Penetration Testing<a class="headerlink" href="#cis-control-18-penetration-testing" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Safeguard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18.1</td>
+<td>Establish penetration testing program (IG2)</td>
+<td>Informal - Vulnerability scanning exceeds pen testing frequency; no formal pen testing engagement</td>
+<td>Gap: Document formal pen testing program</td>
+</tr>
+<tr>
+<td>18.2</td>
+<td>Perform external penetration tests annually (IG2)</td>
+<td>Informal - Weekly OpenVAS/monthly Nessus scans provide partial coverage; no dedicated external pen test</td>
+<td>Gap: Conduct formal external pen test</td>
+</tr>
+<tr>
+<td>18.3</td>
+<td>Remediate penetration test findings (IG2)</td>
+<td>Vulnerability remediation process covers pen test findings; documented remediation workflows</td>
+<td>Compliant - Process exists</td>
+</tr>
+<tr>
+<td>18.4</td>
+<td>Validate security measures post-test (IG3)</td>
+<td>Informal - Re-scanning validates remediation; no formal security control validation</td>
+<td>Gap: Post-remediation validation testing</td>
+</tr>
+<tr>
+<td>18.5</td>
+<td>Perform internal penetration tests annually (IG3)</td>
+<td>Informal -- No formal internal pen testing. Local scanning, enumeration and vulnerability testing.</td>
+<td>Gap: IG3 requirement</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control 18 Overall Status</strong>: <strong>IG2 Partial</strong> (vulnerability scanning substitutes for pen testing); <strong>IG3 Not Implemented</strong></p>
+<hr />
+<h2 id="summary-of-compliance-status">Summary of Compliance Status<a class="headerlink" href="#summary-of-compliance-status" title="Permanent link">&para;</a></h2>
+<h3 id="overall-cis-controls-v812-compliance">Overall CIS Controls v8.1.2 Compliance<a class="headerlink" href="#overall-cis-controls-v812-compliance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Implementation Group</th>
+<th>Controls Fully Compliant</th>
+<th>Controls Partially Compliant</th>
+<th>Controls Not Implemented</th>
+<th>Overall Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IG1</strong> (56 safeguards)</td>
+<td>52 (93%)</td>
+<td>4 (7%)</td>
+<td>0 (0%)</td>
+<td><strong>93% Compliant</strong></td>
+</tr>
+<tr>
+<td><strong>IG2</strong> (74 additional safeguards)</td>
+<td>60 (81%)</td>
+<td>12 (16%)</td>
+<td>2 (3%)</td>
+<td><strong>81% Compliant</strong></td>
+</tr>
+<tr>
+<td><strong>IG3</strong> (29 additional safeguards)</td>
+<td>15 (52%)</td>
+<td>8 (28%)</td>
+<td>6 (20%)</td>
+<td><strong>52% Compliant</strong></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

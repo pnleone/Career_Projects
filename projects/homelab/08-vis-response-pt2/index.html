@@ -1,0 +1,3669 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../07-vis-response-pt1/">
+      
+      
+        <link rel="next" href="../grc/grc-index/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Observability and Response, part 2 - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#observability-and-response-architecture-part-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Observability and Response, part 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-security-orchestration-automation-and-response-soar-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Security Orchestration, Automation and Response (SOAR) Platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Security Orchestration, Automation and Response (SOAR) Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-shuffle-security-automation-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Shuffle - Security Automation Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Shuffle - Security Automation Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-thehive-incident-response-and-case-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 TheHive - Incident Response and Case Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 TheHive - Incident Response and Case Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Specifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Capabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Points
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-cortex-observable-analysis-and-active-response-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Cortex - Observable Analysis and Active Response Engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Cortex - Observable Analysis and Active Response Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-specifications_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Specifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-misp-threat-intelligence-sharing-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 MISP - Threat Intelligence Sharing Platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 MISP - Threat Intelligence Sharing Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-specifications_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Specifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supporting-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supporting Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases-and-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Cases and Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-monitoring-and-observability-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Monitoring and Observability Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Monitoring and Observability Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-prometheus-grafana-infrastructure-metrics-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Prometheus &amp; Grafana - Infrastructure Metrics Platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Prometheus &amp; Grafana - Infrastructure Metrics Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grafana-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grafana Dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proxmox-ve-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proxmox VE Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pi-hole-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pi-hole Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traefik-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traefik Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pfsense-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pfSense Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-uptime-kuma-service-availability-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Uptime Kuma - Service Availability Monitoring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Uptime Kuma - Service Availability Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-checkmk-deep-infrastructure-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Checkmk - Deep Infrastructure Monitoring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Checkmk - Deep Infrastructure Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-level-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Level Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-pulse-proxmox-virtual-environment-and-backup-server-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Pulse - Proxmox Virtual Environment and Backup Server Monitoring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Pulse - Proxmox Virtual Environment and Backup Server Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alert-dashboard-and-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert Dashboard and Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-alerting-and-notification-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Alerting and Notification Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Alerting and Notification Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31-discord-private-server-centralized-notification-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Discord Private Server - Centralized Notification Hub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Discord Private Server - Centralized Notification Hub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notification-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord-channel-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discord Channel Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-smtp-relay-gmail-backed-email-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 SMTP Relay - Gmail-Backed Email Alerting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 SMTP Relay - Gmail-Backed Email Alerting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-cloudflare-email-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Cloudflare Email Routing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Cloudflare Email Routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample Alerts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sample Alerts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uptime-kuma-service-status-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uptime Kuma Service Status Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proxmox-pve-and-pbs-successful-backup-job-completion-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proxmox PVE and PBS Successful Backup Job Completion Alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#splunk-scheduled-weekly-vpn-activity-log-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Splunk Scheduled Weekly VPN Activity Log Notification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pfsense-firewall-event-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pfSense Firewall Event Alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grafana-pfsense-interface-status-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grafana pfSense Interface Status Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prometheus-blackbox-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus Blackbox Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-security-controls-and-compliance-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Security Controls and Compliance Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Security Controls and Compliance Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visibility-and-response-security-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visibility and Response Security Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syslog-compliance-rfc-5424" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syslog Compliance (RFC 5424)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-common-schema-ecs-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Common Schema (ECS) Compliance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-use-cases-and-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Use Cases and Scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Use Cases and Scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#practical-use-cases-and-detection-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Use Cases and Detection Scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Use Cases and Detection Scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-1-brute-force-attack-detection-and-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 1: Brute Force Attack Detection and Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-2-malware-execution-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 2: Malware Execution Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-3-lateral-movement-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 3: Lateral Movement Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-4-configuration-drift-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 4: Configuration Drift Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-5-compliance-violation-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 5: Compliance Violation Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-security-homelab-section-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Security Homelab Section Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="observability-and-response-architecture-part-2">Observability and Response Architecture - Part 2<a class="headerlink" href="#observability-and-response-architecture-part-2" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong> <br />
+Version: 1.0<br />
+Last Updated: January 30, 2026<br />
+Owner: Paul Leone </p>
+<hr />
+<h2 id="1-security-orchestration-automation-and-response-soar-platform">1. Security Orchestration, Automation and Response (SOAR) Platform<a class="headerlink" href="#1-security-orchestration-automation-and-response-soar-platform" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview">Deployment Overview<a class="headerlink" href="#deployment-overview" title="Permanent link">&para;</a></h3>
+<p>The SOAR platform unifies case management, automated enrichment, threat intelligence sharing, and workflow automation across the entire security stack. It integrates SIEM alerts, EDR telemetry, threat intelligence feeds, and infrastructure controls into a coordinated response ecosystem. The platform consists of four primary applications: Shuffle, TheHive, Cortex, and MISP. Each fulfills a specialized role within the incident response lifecycle.</p>
+<h3 id="security-impact">Security Impact<a class="headerlink" href="#security-impact" title="Permanent link">&para;</a></h3>
+<p>The SOAR ecosystem dramatically reduces response time by automating repetitive tasks, enriching alerts with contextual intelligence, and orchestrating multi-tool actions. Automated workflows ensure consistent triage, reduce human error, and provide structured case management. Integrated threat intelligence enhances detection accuracy, while automated containment actions limit adversary dwell time.</p>
+<h3 id="deployment-rationale">Deployment Rationale<a class="headerlink" href="#deployment-rationale" title="Permanent link">&para;</a></h3>
+<p>Modern SOC operations require more than detection—they require coordinated, automated response. This SOAR architecture mirrors enterprise-grade security operations by combining case management, enrichment engines, threat intelligence platforms, and automation pipelines. It demonstrates proficiency with incident response frameworks, multi-tool orchestration, and automated decision-making.</p>
+<h3 id="architecture-principles-alignment">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment" title="Permanent link">&para;</a></h3>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Multiple enrichment engines validate IOCs across independent sources</li>
+<li>Automated containment actions complement SIEM/EDR detections</li>
+<li>Case management, enrichment, and threat intelligence form overlapping response layers</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>Structured workflows enforce consistent triage and investigation procedures</li>
+<li>API-based integrations use authenticated, encrypted communication</li>
+<li>Automated playbooks reduce manual error and enforce policy compliance</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>No alert or IOC is implicitly trusted; all are enriched and validated</li>
+<li>Automated workflows enforce least-privilege actions and controlled response steps</li>
+<li>Continuous verification of threat intelligence before actioning</li>
+</ul>
+<h3 id="11-shuffle-security-automation-engine">1.1 Shuffle - Security Automation Engine<a class="headerlink" href="#11-shuffle-security-automation-engine" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_1">Deployment Overview<a class="headerlink" href="#deployment-overview_1" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Shuffle is the low-code/no-code automation engine that orchestrates workflows across all SOC tools, SIEM platforms, and security infrastructure. It serves as the automation backbone of the SOAR ecosystem, enabling rapid integration, event-driven workflows, and multi-tool response actions. Shuffle processes alerts from Wazuh, Splunk, Elastic, and other sources, automatically enriching them with intelligence from Cortex, VirusTotal, Shodan, and MISP before triggering case creation or containment actions.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/shuffle-logo.png" alt="Shuffle Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Shuffle Automation Engine
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_1">Security Impact<a class="headerlink" href="#security-impact_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Automates triage, enrichment, and response actions to reduce MTTR</li>
+<li>Executes containment workflows (firewall blocks, host isolation, account disablement)</li>
+<li>Ensures consistent, repeatable response actions across all alerts</li>
+<li>Provides real-time notifications and workflow execution logs</li>
+</ul>
+<h4 id="deployment-rationale_1">Deployment Rationale<a class="headerlink" href="#deployment-rationale_1" title="Permanent link">&para;</a></h4>
+<p>Shuffle demonstrates the ability to build enterprise-grade automation pipelines without requiring custom code. It integrates seamlessly with SIEM, EDR, threat intelligence, and case management systems, enabling end-to-end automated response.</p>
+<h4 id="architecture-principles-alignment_1">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Automates multi-layer response actions across EDR, firewalls, SIEM, and threat intelligence</li>
+<li><strong>Secure by Design:</strong> API-key isolation, encrypted communication, and controlled workflow execution</li>
+<li><strong>Zero Trust:</strong> Every alert is enriched and validated before action; no implicit trust in raw telemetry</li>
+</ul>
+<h4 id="deployment-architecture">Deployment Architecture<a class="headerlink" href="#deployment-architecture" title="Permanent link">&para;</a></h4>
+<p>Shuffle is deployed as a multi-container microservices architecture with the following components:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Image</th>
+<th>IP Address</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shuffle-frontend</td>
+<td>shuffle-frontend:latest</td>
+<td>192.168.200.41 (LB)</td>
+<td>React-based web UI for workflow design, execution monitoring, and administration</td>
+</tr>
+<tr>
+<td>shuffle-backend</td>
+<td>shuffle-backend:latest</td>
+<td>10.43.xxx.xxx (ClusterIP)</td>
+<td>Go-based backend API handling workflow execution orchestration, app management, webhook processing</td>
+</tr>
+<tr>
+<td>shuffle-opensearch</td>
+<td>opensearch:3.2.0</td>
+<td>10.43.xxx.xxx (ClusterIP)</td>
+<td>OpenSearch database storing workflow definitions, execution history, app configurations, and audit logs</td>
+</tr>
+<tr>
+<td>shuffle-orborus</td>
+<td>shuffle-orborus:latest</td>
+<td>None (internal)</td>
+<td>Worker orchestration daemon responsible for spinning up Docker containers to execute workflow app actions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>External Access:</strong></p>
+<ul>
+<li><strong>Web Interface:</strong> https://192.168.200.41 (ports 80/443)</li>
+<li><strong>Webhook Receiver:</strong> https://192.168.200.41/api/v1/hooks/ (for external trigger integrations)</li>
+<li><strong>API Endpoint:</strong> https://192.168.200.41/api/v1/ (RESTful API for programmatic workflow management)</li>
+</ul>
+<h3 id="12-thehive-incident-response-and-case-management">1.2 TheHive - Incident Response and Case Management<a class="headerlink" href="#12-thehive-incident-response-and-case-management" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_2">Deployment Overview<a class="headerlink" href="#deployment-overview_2" title="Permanent link">&para;</a></h4>
+<p>TheHive provides centralized case management, investigation workflows, and collaborative incident response. It aggregates alerts from SIEM and EDR platforms into structured cases, enabling analysts to track tasks, observables, timelines, and response actions. TheHive acts as the command center for incident response, coordinating investigations across Cortex, MISP, Wazuh, and Shuffle.</p>
+<h4 id="security-impact_2">Security Impact<a class="headerlink" href="#security-impact_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Centralizes all incidents into structured, auditable cases</li>
+<li>Enables collaborative investigations with task assignments and timelines</li>
+<li>Correlates alerts from Splunk, Wazuh, and other sources into unified cases</li>
+<li>Provides metrics dashboards for MTTD, MTTR, and case volume trends</li>
+<li>Ensures consistent documentation for forensic and compliance requirements</li>
+</ul>
+<h4 id="deployment-rationale_2">Deployment Rationale<a class="headerlink" href="#deployment-rationale_2" title="Permanent link">&para;</a></h4>
+<p>TheHive mirrors enterprise SIRP (Security Incident Response Platform) capabilities, demonstrating proficiency with structured case management, workflow orchestration, and collaborative investigations. It provides the backbone for SOC processes, ensuring every incident is tracked, enriched, and resolved with full accountability.</p>
+<h4 id="architecture-principles-alignment_2">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Combines SIEM, EDR, and threat intelligence alerts into multi-source cases</li>
+<li><strong>Secure by Design:</strong> Role-based access, audit logs, and structured workflows</li>
+<li><strong>Zero Trust:</strong> All observables validated through Cortex/MISP before actioning</li>
+</ul>
+<h4 id="deployment-specifications">Deployment Specifications<a class="headerlink" href="#deployment-specifications" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Container Image:</strong> strangebee/thehive:5.5.13-1</li>
+<li><strong>Deployment Type:</strong> Helm chart (managed deployment)</li>
+<li><strong>Replicas:</strong> 1 (single instance)</li>
+<li><strong>External Access:</strong> LoadBalancer service at <strong>192.168.200.33</strong></li>
+<li>Port 9000 (HTTP/HTTPS web interface)</li>
+<li>Port 9095 (Kamon metrics for Prometheus integration)</li>
+<li><strong>Persistent Storage:</strong> Backed by Cassandra and Elasticsearch for data durability</li>
+<li><strong>Resource Allocation:</strong></li>
+<li>CPU: 2 cores</li>
+<li>Memory: 4GB</li>
+<li>Storage: 20GB (application data via Cassandra)</li>
+</ul>
+<p><img alt="TheHive Architecture Diagram" src="/Career_Projects/assets/diagrams/thehive-architecture.png" /></p>
+<h4 id="key-capabilities">Key Capabilities<a class="headerlink" href="#key-capabilities" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Case Management:</strong> Create, assign, and track security incidents with customizable workflows</li>
+<li><strong>Task Orchestration:</strong> Break down investigations into actionable tasks with assignments and deadlines</li>
+<li><strong>Observable Analysis:</strong> Submit IOCs (IPs, domains, hashes, URLs) to Cortex for automated analysis</li>
+<li><strong>Alert Correlation:</strong> Aggregate alerts from SIEM (Splunk, Wazuh) into unified cases</li>
+<li><strong>Collaboration:</strong> Team-based investigations with real-time updates and commenting</li>
+<li><strong>Reporting:</strong> Generate executive summaries and technical reports from case data</li>
+<li><strong>Metrics Dashboard:</strong> Track MTTD (Mean Time to Detect), MTTR (Mean Time to Respond), case volume trends</li>
+</ul>
+<h4 id="integration-points">Integration Points<a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Cortex:</strong> Automated observable analysis and enrichment</li>
+<li><strong>MISP:</strong> Bi-directional IOC sharing (export confirmed threats, import external intelligence)</li>
+<li><strong>Wazuh:</strong> Automated case creation from EDR alerts (via n8n workflow)</li>
+<li><strong>Splunk:</strong> SIEM alert ingestion and correlation</li>
+<li><strong>Shuffle:</strong> Workflow automation for alert triage and notification distribution</li>
+<li><strong>Discord:</strong> Real-time notifications for high-severity cases</li>
+</ul>
+<h3 id="13-cortex-observable-analysis-and-active-response-engine">1.3 Cortex - Observable Analysis and Active Response Engine<a class="headerlink" href="#13-cortex-observable-analysis-and-active-response-engine" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_3">Deployment Overview<a class="headerlink" href="#deployment-overview_3" title="Permanent link">&para;</a></h4>
+<p>Cortex automates the analysis of observables (IOCs) using a wide range of analyzers and responders. It enriches IPs, domains, hashes, URLs, and files with intelligence from VirusTotal, AbuseIPDB, Shodan, OTX, and internal sources. Cortex responders execute automated containment actions such as firewall rule updates, blocklist modifications, and case escalations.</p>
+<h4 id="security-impact_3">Security Impact<a class="headerlink" href="#security-impact_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Provides automated, multi-engine IOC analysis</li>
+<li>Executes rapid containment actions via responders</li>
+<li>Enhances detection accuracy through cross-source enrichment</li>
+<li>Supports dynamic malware analysis via sandbox integrations</li>
+</ul>
+<h4 id="deployment-rationale_3">Deployment Rationale<a class="headerlink" href="#deployment-rationale_3" title="Permanent link">&para;</a></h4>
+<p>Cortex demonstrates advanced enrichment and automated response capabilities found in enterprise SOCs. Its analyzer/responder model enables modular, scalable intelligence processing and automated containment workflows.</p>
+<h4 id="architecture-principles-alignment_3">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Multiple analyzer categories validate IOCs across independent sources</li>
+<li><strong>Secure by Design:</strong> Controlled responder execution; strict API authentication</li>
+<li><strong>Zero Trust:</strong> No IOC trusted without multi-engine validation</li>
+</ul>
+<h4 id="deployment-specifications_1">Deployment Specifications<a class="headerlink" href="#deployment-specifications_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Container Image:</strong> thehiveproject/cortex:latest</li>
+<li><strong>Deployment Type:</strong> Kubernetes Deployment</li>
+<li><strong>Replicas:</strong> 1 (scalable to 3+ for high-volume analysis)</li>
+<li><strong>External Access:</strong> LoadBalancer service at <strong>192.168.200.40</strong></li>
+<li>Port 9001 (HTTP API and web interface)</li>
+<li><strong>Backend Database:</strong> Elasticsearch (for job history and results)</li>
+<li><strong>Resource Allocation:</strong></li>
+<li>CPU: 2 cores (scales with analyzer concurrency)</li>
+<li>Memory: 4GB (increases with active jobs)</li>
+<li>Storage: 10GB (job results and cache)</li>
+</ul>
+<h3 id="14-misp-threat-intelligence-sharing-platform">1.4 MISP - Threat Intelligence Sharing Platform<a class="headerlink" href="#14-misp-threat-intelligence-sharing-platform" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_4">Deployment Overview<a class="headerlink" href="#deployment-overview_4" title="Permanent link">&para;</a></h4>
+<p>MISP provides structured threat intelligence management, IOC sharing, and collaborative intelligence workflows. It stores, correlates, and distributes threat indicators across the SOAR ecosystem. MISP integrates with Cortex, TheHive, Shuffle, and external intelligence feeds to enrich alerts and cases with contextual threat data.</p></p>
+<h4 id="security-impact_4">Security Impact<a class="headerlink" href="#security-impact_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enhances detection accuracy through curated threat intelligence</li>
+<li>Enables bi-directional sharing of confirmed IOCs</li>
+<li>Correlates related events to identify campaigns and intrusion sets</li>
+<li>Supports automated enrichment and threat scoring</li>
+</ul>
+<h4 id="deployment-rationale_4">Deployment Rationale<a class="headerlink" href="#deployment-rationale_4" title="Permanent link">&para;</a></h4>
+<p>MISP demonstrates proficiency with structured threat intelligence, IOC lifecycle management, and intelligence-driven detection. It mirrors enterprise CTI workflows where intelligence is continuously ingested, validated, enriched, and distributed across SOC tools.</p>
+<h4 id="architecture-principles-alignment_4">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Adds intelligence-driven detection to complement SIEM/EDR telemetry</li>
+<li><strong>Secure by Design:</strong> Signed events, role-based access, and controlled feed synchronization</li>
+<li><strong>Zero Trust:</strong> All intelligence validated before distribution; no implicit trust in external feeds</li>
+</ul>
+<h4 id="deployment-specifications_2">Deployment Specifications<a class="headerlink" href="#deployment-specifications_2" title="Permanent link">&para;</a></h4>
+<p>MISP is deployed as a multi-container application stack with the following components:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Image</th>
+<th>IP Address</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>misp-core</td>
+<td>ghcr.io/misp/misp-docker/misp-core:latest</td>
+<td>192.168.200.37 (LB)</td>
+<td>Main MISP application (web UI, API, background workers)</td>
+</tr>
+<tr>
+<td>misp-db</td>
+<td>mariadb:10.11</td>
+<td>10.43.151.59 (ClusterIP)</td>
+<td>MySQL/MariaDB database for MISP data storage</td>
+</tr>
+<tr>
+<td>misp-redis</td>
+<td>valkey/valkey:7.2</td>
+<td>10.43.131.214 (ClusterIP)</td>
+<td>Redis cache for session management and job queuing</td>
+</tr>
+<tr>
+<td>misp-modules</td>
+<td>ghcr.io/misp/misp-docker/misp-modules:latest</td>
+<td>10.43.234.246 (ClusterIP)</td>
+<td>Expansion and enrichment modules for automated IOC enrichment</td>
+</tr>
+<tr>
+<td>misp-guard</td>
+<td>ghcr.io/misp/misp-docker/misp-guard:latest</td>
+<td>10.43.97.195 (ClusterIP)</td>
+<td>Security proxy protecting MISP core from malicious input</td>
+</tr>
+<tr>
+<td>misp-mail</td>
+<td>registry.gitlab.com/egos-tech/smtp:latest</td>
+<td>192.168.200.38 (LB)</td>
+<td>SMTP relay for email notifications and sharing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>External Access:</strong></p>
+<ul>
+<li><strong>Web Interface:</strong> https://192.168.200.37 (ports 80/443)</li>
+<li><strong>SMTP Server:</strong> 192.168.200.38:25 (for receiving threat intelligence emails)</li>
+</ul>
+<h4 id="supporting-infrastructure">Supporting Infrastructure<a class="headerlink" href="#supporting-infrastructure" title="Permanent link">&para;</a></h4>
+<p><strong>Cassandra - Distributed NoSQL Database:</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Scalable, fault-tolerant data store for TheHive case data, observables, and audit logs</li>
+<li><strong>Container Image:</strong> cassandra:4.1.7</li>
+<li><strong>Deployment Type:</strong> StatefulSet (ensures stable network identity and persistent storage)</li>
+<li><strong>Replicas:</strong> 1 (production would use 3+ node cluster for high availability)</li>
+<li><strong>External Access:</strong> LoadBalancer service at <strong>192.168.200.36</strong> (Port 9042 - CQL native protocol)</li>
+<li><strong>Persistent Volume:</strong> 100GB SSD-backed storage</li>
+<li><strong>Replication Strategy:</strong> SimpleStrategy with replication_factor=1 (single node)</li>
+</ul>
+<p><strong>Configuration Highlights:</strong></p>
+<ul>
+<li><strong>Keyspace:</strong> TheHive data stored in dedicated keyspace with TTL policies for data retention</li>
+<li><strong>Consistency Level:</strong> LOCAL_ONE (single node) / LOCAL_QUORUM (production multi-node)</li>
+<li><strong>Backup Strategy:</strong> Daily snapshots via cron job, retained for 14 days</li>
+<li><strong>Monitoring:</strong> Exposed JMX metrics for Prometheus scraping</li>
+</ul>
+<p><strong>Elasticsearch - Search and Analytics Engine:</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Full-text search, log aggregation, and analytics for TheHive cases, Cortex job results, and observables</li>
+<li><strong>Container Image:</strong> docker.elastic.co/elasticsearch/elasticsearch:9.2.2</li>
+<li><strong>Deployment Type:</strong> StatefulSet (single-node cluster)</li>
+<li><strong>Replicas:</strong> 1</li>
+<li><strong>External Access:</strong> LoadBalancer service at <strong>192.168.200.34</strong> (Port 9200 - HTTP REST API)</li>
+<li><strong>Persistent Volume:</strong> 200GB SSD-backed storage</li>
+<li><strong>Cluster Name:</strong> soc-elasticsearch</li>
+<li><strong>Node Roles:</strong> master, data, ingest (combined role in single-node deployment)</li>
+</ul>
+<p><strong>Index Management:</strong></p>
+<ul>
+<li><strong>TheHive Indices:</strong> Cases, tasks, observables, audit logs with 90-day retention</li>
+<li><strong>Cortex Indices:</strong> Analysis jobs, results, analyzer reports with 30-day retention</li>
+<li><strong>Index Lifecycle Management (ILM):</strong> Automated rollover and deletion based on age/size</li>
+<li><strong>Snapshots:</strong> Daily backups to NAS via snapshot repository</li>
+</ul>
+<p><strong>Performance Tuning:</strong></p>
+<ul>
+<li><strong>Heap Size:</strong> 4GB (50% of allocated memory)</li>
+<li><strong>Shards:</strong> 1 primary shard per index (low-volume lab environment)</li>
+<li><strong>Replicas:</strong> 0 (single node, no replication)</li>
+<li><strong>Refresh Interval:</strong> 5 seconds (balance between real-time search and indexing performance)</li>
+</ul>
+<p><strong>OpenSearch - Shuffle Workflow Database:</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Storage and retrieval of Shuffle workflow definitions, execution history, app configurations, and audit logs</li>
+<li><strong>Container Image:</strong> opensearch:3.2.0</li>
+<li><strong>Deployment Type:</strong> StatefulSet (single-node cluster)</li>
+<li><strong>Replicas:</strong> 1</li>
+<li><strong>External Access:</strong> ClusterIP only (internal communication with Shuffle backend) (Port 9200 - HTTP REST API)</li>
+<li><strong>Persistent Volume:</strong> 100GB SSD-backed storage</li>
+<li><strong>Cluster Name:</strong> shuffle-opensearch</li>
+</ul>
+<p><strong>Data Storage:</strong></p>
+<ul>
+<li><strong>Workflow Definitions:</strong> JSON representations of workflow configurations and app settings</li>
+<li><strong>Execution History:</strong> Complete audit trail of all workflow runs with timestamps, inputs, outputs, and errors</li>
+<li><strong>App Cache:</strong> Downloaded app containers and OpenAPI specifications for rapid workflow execution</li>
+<li><strong>User Activity Logs:</strong> Authentication events, workflow modifications, permission changes</li>
+</ul>
+<p><strong>Performance Characteristics:</strong></p>
+<ul>
+<li><strong>Query Performance:</strong> Sub-second search for workflow debugging and historical analysis</li>
+<li><strong>Retention:</strong> 90-day execution history (configurable based on storage capacity)</li>
+<li><strong>Backup Strategy:</strong> Daily snapshots to NAS; integrated with Kubernetes backup automation</li>
+</ul>
+<h3 id="use-cases-and-workflows">Use Cases and Workflows<a class="headerlink" href="#use-cases-and-workflows" title="Permanent link">&para;</a></h3>
+<p><strong>Work in Progress - Future</strong></p>
+<hr />
+<h2 id="2-monitoring-and-observability-architecture">2. Monitoring and Observability Architecture<a class="headerlink" href="#2-monitoring-and-observability-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview_5">Deployment Overview<a class="headerlink" href="#deployment-overview_5" title="Permanent link">&para;</a></h3>
+<p>The monitoring stack provides comprehensive visibility into the health, performance, and availability of all systems across the lab environment. Unlike SIEM platforms that focus on security events, the monitoring layer captures operational telemetry: CPU, memory, disk, network throughput, service uptime, virtualization metrics, and application-level health checks.</p>
+<h3 id="security-impact_5">Security Impact<a class="headerlink" href="#security-impact_5" title="Permanent link">&para;</a></h3>
+<p>Monitoring is a critical component of operational security. Performance anomalies often precede or accompany security incidents: unexpected CPU spikes, abnormal network traffic, failing services, or resource exhaustion can indicate brute-force attempts, malware execution, or lateral movement. By correlating infrastructure telemetry with SIEM data, defenders gain a holistic view of system behavior.</p>
+<h3 id="deployment-rationale_5">Deployment Rationale<a class="headerlink" href="#deployment-rationale_5" title="Permanent link">&para;</a></h3>
+<p>Modern environments require more than log-based security analytics; they require continuous operational awareness. This monitoring architecture demonstrates proficiency with enterprise-grade observability tools, hybrid infrastructure monitoring, and multi-channel alerting.</p>
+<h3 id="architecture-principles-alignment_5">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_5" title="Permanent link">&para;</a></h3>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Multiple monitoring layers (metrics, uptime, hypervisor, infrastructure) ensure no single blind spot</li>
+<li>Redundant alerting channels prevent missed notifications</li>
+<li>Cross-tool correlation strengthens detection of operational anomalies</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>TLS-secured communication for metrics and alerting pipelines</li>
+<li>Segmented monitoring networks reduce exposure of sensitive telemetry</li>
+<li>Centralized dashboards enforce consistent visibility</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>No host or service is implicitly trusted; all must report health and availability</li>
+<li>Continuous validation of service uptime and performance</li>
+<li>Alerting pipelines enforce accountability and traceability</li>
+</ul>
+<h3 id="21-prometheus-grafana-infrastructure-metrics-platform">2.1 Prometheus &amp; Grafana - Infrastructure Metrics Platform<a class="headerlink" href="#21-prometheus-grafana-infrastructure-metrics-platform" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_6">Deployment Overview<a class="headerlink" href="#deployment-overview_6" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Prometheus collects high-resolution time-series metrics from servers, containers, network devices, and applications. Grafana visualizes these metrics through customizable dashboards, providing real-time insights into system performance and long-term trends. This stack focuses on operational telemetry—CPU, memory, disk I/O, network throughput, container health, and service latency.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/prometheus-grafana.png" alt="Prometheus and Grafana Logos">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Prometheus & Grafana Monitoring Stack
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_6">Security Impact<a class="headerlink" href="#security-impact_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Detects resource exhaustion attacks (CPU spikes, memory leaks, disk saturation)</li>
+<li>Identifies anomalous network throughput that may indicate data exfiltration</li>
+<li>Monitors container and Kubernetes health for signs of compromise</li>
+<li>Provides early warning when security tools (SIEM, EDR, IDS) degrade or fail</li>
+</ul>
+<h4 id="deployment-rationale_6">Deployment Rationale<a class="headerlink" href="#deployment-rationale_6" title="Permanent link">&para;</a></h4>
+<p>Prometheus and Grafana are industry-standard observability tools used across cloud-native and hybrid environments. Their inclusion demonstrates proficiency with metrics-driven monitoring, dashboard creation, alerting rules, and containerized instrumentation.</p>
+<h4 id="architecture-principles-alignment_6">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Metrics complement logs and endpoint telemetry for multi-layer detection</li>
+<li><strong>Secure by Design:</strong> TLS-secured Prometheus endpoints; role-based Grafana access</li>
+<li><strong>Zero Trust:</strong> Every host must expose metrics; no implicit trust in service health</li>
+</ul>
+<h4 id="prometheus-configuration">Prometheus Configuration<a class="headerlink" href="#prometheus-configuration" title="Permanent link">&para;</a></h4>
+<p><strong>Core Prometheus:</strong></p>
+<ul>
+<li><strong>Labels:</strong> prom, pve, pihole</li>
+<li><strong>Intervals:</strong> 1m</li>
+</ul>
+<p><strong>Alert Manager and Blackbox:</strong></p>
+<ul>
+<li>Notifications and Discord integration</li>
+</ul>
+<p><strong>Exporters:</strong></p>
+<ul>
+<li><strong>Node Exporter:</strong> Linux hosts (PVE node, VMs, Docker hosts)</li>
+<li><strong>Proxmox Exporter:</strong> prometheus-pve-exporter hitting the PVE API</li>
+<li><strong>Pi-hole Exporter:</strong> Containerized exporter reading FTL metrics</li>
+<li><strong>Traefik:</strong> Reverse proxy details</li>
+<li><strong>pfSense Exporter:</strong> System-level monitoring</li>
+<li><strong>Uptime-Kuma:</strong> Service uptime monitoring</li>
+</ul>
+<p><img alt="Prometheus Configuration Screenshot" src="/Career_Projects/assets/screenshots/prometheus-config.png" /></p>
+<h4 id="grafana-dashboards">Grafana Dashboards<a class="headerlink" href="#grafana-dashboards" title="Permanent link">&para;</a></h4>
+<p><strong>Dashboards:</strong></p>
+<ul>
+<li><strong>Node/Host Overview:</strong> CPU, memory, FS, network, load (per host)</li>
+<li><strong>Proxmox:</strong> Node status, VM CPU/mem/disk IO, cluster quorum</li>
+<li><strong>Pi-hole:</strong> Query volume, block rate, upstream latency, cache hit rate, top domains</li>
+<li><strong>Traefik:</strong> HTTP requests, slow services</li>
+<li><strong>pfSense:</strong> System monitoring, CPU, RAM, traffic</li>
+</ul>
+<p><strong>Infrastructure Dashboards:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dashboard Name</th>
+<th>Data Source</th>
+<th>Refresh Rate</th>
+<th>Panels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node Exporter Full</td>
+<td>Prometheus</td>
+<td>30s</td>
+<td>CPU, RAM, Disk, Network, Load</td>
+</tr>
+<tr>
+<td>Proxmox VE Overview</td>
+<td>Prometheus</td>
+<td>1m</td>
+<td>Cluster status, VM metrics, storage</td>
+</tr>
+<tr>
+<td>Pi-hole Statistics</td>
+<td>Prometheus</td>
+<td>30s</td>
+<td>Query rate, block %, cache hits</td>
+</tr>
+<tr>
+<td>Traefik Overview</td>
+<td>Prometheus</td>
+<td>15s</td>
+<td>Request rate, latency, error rate</td>
+</tr>
+<tr>
+<td>pfSense System Metrics</td>
+<td>Prometheus</td>
+<td>30s</td>
+<td>CPU, RAM, interfaces, throughput</td>
+</tr>
+<tr>
+<td>Blackbox Exporter</td>
+<td>Prometheus</td>
+<td>1m</td>
+<td>HTTP status, TLS cert expiry, latency</td>
+</tr>
+</tbody>
+</table>
+<h4 id="proxmox-ve-dashboard">Proxmox VE Dashboard<a class="headerlink" href="#proxmox-ve-dashboard" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Exporter:</strong> prometheus-pve-exporter as a service or container</li>
+<li><strong>Metrics:</strong> Node/VM CPU, memory, storage pools, task failures, HA state</li>
+<li><strong>Alerts:</strong></li>
+<li><strong>Node pressure:</strong> CPU &gt; 85% for 10m, RAM &gt; 90% for 5m</li>
+<li><strong>Storage:</strong> Datastore free &lt; 15%</li>
+<li><strong>VM health:</strong> No metrics from a VM for &gt; 5m (down)</li>
+</ul>
+<p><img alt="Grafana Proxmox Dashboard" src="/Career_Projects/assets/screenshots/grafana-proxmox.png" /></p>
+<h4 id="pi-hole-dashboard">Pi-hole Dashboard<a class="headerlink" href="#pi-hole-dashboard" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Exporter:</strong> Containerized pihole_exporter or FTL-compatible exporter</li>
+<li><strong>Metrics:</strong> Query rate, block rate, cache hit %, upstream latency, gravity update age</li>
+<li><strong>Alerts:</strong></li>
+<li><strong>FTL down:</strong> No scrape &gt; 2m</li>
+<li><strong>Block rate anomaly:</strong> Sudden drop to near 0% or spike &gt; 95%</li>
+<li><strong>Upstream failures:</strong> SERVFAIL/timeout ratio increases</li>
+</ul>
+<p><img alt="Grafana Pi-hole Dashboard" src="/Career_Projects/assets/screenshots/grafana-pihole.png" /></p>
+<h4 id="traefik-dashboard">Traefik Dashboard<a class="headerlink" href="#traefik-dashboard" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Exporter:</strong> Direct Prometheus integration</li>
+<li><strong>Metrics:</strong> Instances, HTTP requests per entrypoint, application and HTTP method, slow services</li>
+</ul>
+<p><img alt="Grafana Traefik Dashboard" src="/Career_Projects/assets/screenshots/grafana-traefik.png" /></p>
+<h4 id="pfsense-dashboard">pfSense Dashboard<a class="headerlink" href="#pfsense-dashboard" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Exporter:</strong> Direct Prometheus integration</li>
+<li><strong>Metrics:</strong> CPU, RAM, Disk monitoring, network packets by interface, pkt/sec, load avg, traps and system calls</li>
+</ul>
+<p><img alt="Grafana pfSense Dashboard" src="/Career_Projects/assets/screenshots/grafana-pfsense.png" /></p>
+<h3 id="22-uptime-kuma-service-availability-monitoring">2.2 Uptime Kuma - Service Availability Monitoring<a class="headerlink" href="#22-uptime-kuma-service-availability-monitoring" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_7">Deployment Overview<a class="headerlink" href="#deployment-overview_7" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Uptime Kuma provides heartbeat monitoring for all lab services using HTTP/S, TCP, and ICMP checks. Each monitored service is continuously probed for availability, latency, and response integrity. Any deviation triggers immediate alerts routed to dedicated Discord channels.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/uptime-kuma-logo.png" alt="Uptime Kuma Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Uptime Kuma Service Monitoring
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_7">Security Impact<a class="headerlink" href="#security-impact_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Detects service outages caused by attacks, misconfigurations, or resource exhaustion</li>
+<li>Identifies unstable or degraded services before they impact security tooling</li>
+<li>Provides uptime baselines useful for correlating with SIEM events</li>
+</ul>
+<h4 id="deployment-rationale_7">Deployment Rationale<a class="headerlink" href="#deployment-rationale_7" title="Permanent link">&para;</a></h4>
+<p>Service uptime is foundational to both operational stability and security visibility. Uptime Kuma offers a lightweight, flexible, and highly responsive monitoring layer that mirrors enterprise heartbeat monitoring systems.</p>
+<h4 id="architecture-principles-alignment_7">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Adds availability monitoring to complement metrics and logs</li>
+<li><strong>Secure by Design:</strong> Segmented monitoring probes reduce attack surface</li>
+<li><strong>Zero Trust:</strong> No service is assumed healthy; continuous validation required</li>
+</ul>
+<p><img alt="Uptime Kuma Dashboard Screenshot" src="/Career_Projects/assets/screenshots/uptime-kuma-dashboard.png" /></p>
+<p><img alt="Uptime Kuma Status Page Screenshot" src="/Career_Projects/assets/screenshots/uptime-kuma-status.png" /></p>
+<h3 id="23-checkmk-deep-infrastructure-monitoring">2.3 Checkmk - Deep Infrastructure Monitoring<a class="headerlink" href="#23-checkmk-deep-infrastructure-monitoring" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_8">Deployment Overview<a class="headerlink" href="#deployment-overview_8" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Checkmk delivers comprehensive monitoring across servers, applications, network devices, storage systems, and containerized workloads. It provides granular visibility into multi-layer dependencies and deep host-level inspection.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/checkmk-logo.png" alt="Checkmk Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Checkmk Infrastructure Monitoring
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_8">Security Impact<a class="headerlink" href="#security-impact_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Detects abnormal system behavior (high load, failing disks, service crashes)</li>
+<li>Monitors critical infrastructure supporting security tools</li>
+<li>Provides granular visibility into multi-layer dependencies</li>
+</ul>
+<h4 id="deployment-rationale_8">Deployment Rationale<a class="headerlink" href="#deployment-rationale_8" title="Permanent link">&para;</a></h4>
+<p>Checkmk represents enterprise-grade monitoring with agent-based and agentless capabilities. Its inclusion demonstrates proficiency with large-scale infrastructure monitoring, rule-based alerting, and hybrid environment observability.</p>
+<h4 id="architecture-principles-alignment_8">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Adds deep host-level inspection to complement Prometheus metrics</li>
+<li><strong>Secure by Design:</strong> Encrypted agent communication; strict role-based access</li>
+<li><strong>Zero Trust:</strong> Every host must report detailed health metrics continuously</li>
+</ul>
+<h4 id="high-level-configuration">High-Level Configuration<a class="headerlink" href="#high-level-configuration" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Unified Monitoring:</strong> Deployed across physical devices, virtual machines, LXC and Docker containers</li>
+<li><strong>Agent-Based:</strong> Lightweight agents for Linux, Windows, FreeBSD</li>
+<li><strong>Custom Checks &amp; Plugins:</strong> Extendable with shell scripts, Python, or Checkmk's plugin framework</li>
+<li><strong>Security-Aware Monitoring:</strong> Integrates with vulnerability scanners, SIEM platforms, and EDR tools</li>
+<li><strong>Audit-Friendly Logging:</strong> Every alert, metric, and change is timestamped and traceable</li>
+</ul>
+<p><img alt="Checkmk Dashboard Screenshot" src="/Career_Projects/assets/screenshots/checkmk-dashboard.png" /></p>
+<p><img alt="Checkmk Services Screenshot" src="/Career_Projects/assets/screenshots/checkmk-services.png" /></p>
+<p><img alt="Checkmk Topology Map Screenshot" src="/Career_Projects/assets/screenshots/checkmk-topology.png" /></p>
+<h3 id="24-pulse-proxmox-virtual-environment-and-backup-server-monitoring">2.4 Pulse - Proxmox Virtual Environment and Backup Server Monitoring<a class="headerlink" href="#24-pulse-proxmox-virtual-environment-and-backup-server-monitoring" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_9">Deployment Overview<a class="headerlink" href="#deployment-overview_9" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Pulse provides real-time monitoring and alerting specifically for Proxmox VE and Proxmox Backup Server. It consolidates hypervisor metrics—VM performance, storage health, cluster state, backup integrity—into a unified dashboard, enabling rapid situational awareness and proactive incident response.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/pulse-logo.png" alt="Pulse Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Pulse Proxmox Monitoring
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_9">Security Impact<a class="headerlink" href="#security-impact_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Detects hypervisor-level anomalies that may indicate compromise or misconfiguration</li>
+<li>Monitors VM performance for signs of malicious activity</li>
+<li>Ensures backup integrity and cluster stability</li>
+</ul>
+<p><img alt="Pulse Architecture Diagram" src="/Career_Projects/assets/diagrams/pulse-architecture.png" /></p>
+<h4 id="deployment-rationale_9">Deployment Rationale<a class="headerlink" href="#deployment-rationale_9" title="Permanent link">&para;</a></h4>
+<p>Virtualization is the backbone of the lab environment. Pulse provides hypervisor-specific insights that general monitoring tools cannot, mirroring enterprise virtualization monitoring platforms.</p>
+<h4 id="architecture-principles-alignment_9">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Adds hypervisor-layer visibility beneath OS-level monitoring</li>
+<li><strong>Secure by Design:</strong> Dedicated monitoring channel reduces exposure of Proxmox APIs</li>
+<li><strong>Zero Trust:</strong> No VM or node is implicitly trusted; all must report health</li>
+</ul>
+<p><img alt="Pulse Connection Settings Screenshot" src="/Career_Projects/assets/screenshots/pulse-connection.png" /></p>
+<h4 id="lab-integration">Lab Integration<a class="headerlink" href="#lab-integration" title="Permanent link">&para;</a></h4>
+<p>In this lab environment, Pulse is connected to both the Proxmox VE cluster and the PBS node. Authentication is handled via a dedicated Proxmox service account configured with an API token. This account is assigned minimal, read-only permissions required to:</p>
+<ul>
+<li>Query node, VM, and container status</li>
+<li>Retrieve backup job results</li>
+<li>Report on storage utilization</li>
+</ul>
+<p><img alt="Pulse Service Account Configuration" src="/Career_Projects/assets/screenshots/pulse-service-account.png" /></p>
+<h4 id="dashboards">Dashboards<a class="headerlink" href="#dashboards" title="Permanent link">&para;</a></h4>
+<p>The Pulse main dashboard provides a real-time operational view of the Proxmox environment, including:</p>
+<ul>
+<li><strong>Node statistics:</strong> CPU load, memory consumption, and storage usage for each Proxmox VE host</li>
+<li><strong>Guest statistics:</strong> Resource usage for all deployed VMs and LXCs</li>
+<li><strong>Visual threshold indicators:</strong> Color-coded gauges and bars highlight when usage approaches or exceeds configured limits</li>
+<li><strong>Interactive webhooks:</strong> Clicking on a monitored service or resource can open its corresponding Proxmox web portal page for direct management</li>
+</ul>
+<p><strong>Example Use Cases in the Lab:</strong></p>
+<ul>
+<li><strong>Proactive capacity planning:</strong> Identify nodes nearing CPU or memory saturation before performance degrades</li>
+<li><strong>Backup compliance:</strong> Immediate notification if a PBS backup job fails, allowing for same-day remediation</li>
+<li><strong>Storage health:</strong> Early warning when datastore usage trends toward capacity, preventing unexpected outages</li>
+</ul>
+<p><img alt="Pulse Main Dashboard Screenshot" src="/Career_Projects/assets/screenshots/pulse-dashboard.png" /></p>
+<h4 id="backup-dashboard">Backup Dashboard<a class="headerlink" href="#backup-dashboard" title="Permanent link">&para;</a></h4>
+<p>Reports on the various backup methods. The first screenshot provides details on the snapshot status and the second screenshot outlines the PBS status and history of backups.</p>
+<p><img alt="Pulse Backup Dashboard Screenshot" src="/Career_Projects/assets/screenshots/pulse-backup.png" /></p>
+<h4 id="alert-dashboard-and-notifications">Alert Dashboard and Notifications<a class="headerlink" href="#alert-dashboard-and-notifications" title="Permanent link">&para;</a></h4>
+<p>Summary of current alerts, configured thresholds, notifications, schedule, and alert history.</p>
+<p><img alt="Pulse Alert Dashboard Screenshot" src="/Career_Projects/assets/screenshots/pulse-alerts.png" /></p>
+<hr />
+<h2 id="3-alerting-and-notification-architecture">3. Alerting and Notification Architecture<a class="headerlink" href="#3-alerting-and-notification-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview_10">Deployment Overview<a class="headerlink" href="#deployment-overview_10" title="Permanent link">&para;</a></h3>
+<p>The alerting architecture ensures real-time visibility into operational and security events across the entire lab environment. Alerts from monitoring tools, SIEM platforms, EDR agents, and infrastructure services are routed through multiple redundant channels (Discord, SMTP relay, and Cloudflare email routing).</p>
+<h3 id="security-impact_10">Security Impact<a class="headerlink" href="#security-impact_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Immediate notification of outages, anomalies, or security events</li>
+<li>Redundant channels prevent alert loss due to single-system failure</li>
+<li>Segmented channels reduce noise and improve triage efficiency</li>
+</ul>
+<h3 id="deployment-rationale_10">Deployment Rationale<a class="headerlink" href="#deployment-rationale_10" title="Permanent link">&para;</a></h3>
+<p>Modern SOC/NOC operations rely on multi-channel alerting to ensure rapid response. This architecture demonstrates proficiency with webhook-based alerting, SMTP relays, email routing, and real-time collaboration platforms.</p>
+<h3 id="architecture-principles-alignment_10">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Defense in Depth:</strong> Multiple alerting paths ensure resilience</li>
+<li><strong>Secure by Design:</strong> TLS-encrypted SMTP; restricted webhook endpoints</li>
+<li><strong>Zero Trust:</strong> Alerts validated and routed per-service; no implicit trust in any channel</li>
+</ul>
+<h3 id="31-discord-private-server-centralized-notification-hub">3.1 Discord Private Server - Centralized Notification Hub<a class="headerlink" href="#31-discord-private-server-centralized-notification-hub" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_11">Deployment Overview<a class="headerlink" href="#deployment-overview_11" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>A private Discord server acts as the real-time alerting hub for the entire environment. Each monitored service has its own dedicated channel, enabling noise isolation, targeted triage, and clear operational separation.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/discord-logo.png" alt="Discord Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Discord Notification Hub
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_11">Security Impact<a class="headerlink" href="#security-impact_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Instant visibility into outages, anomalies, and security alerts</li>
+<li>Channel segmentation prevents alert overload</li>
+<li>Provides audit trails for incident response</li>
+</ul>
+<h4 id="deployment-rationale_11">Deployment Rationale<a class="headerlink" href="#deployment-rationale_11" title="Permanent link">&para;</a></h4>
+<p>Discord offers low-latency notifications, webhook integration, and structured channel organization—mirroring enterprise chat-ops workflows.</p>
+<h4 id="architecture-principles-alignment_11">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Secondary alerting path alongside email</li>
+<li><strong>Secure by Design:</strong> Private server; restricted webhook tokens</li>
+<li><strong>Zero Trust:</strong> No alert is trusted without validation; all events logged</li>
+</ul>
+<p><img alt="Discord Channel Structure Screenshot" src="/Career_Projects/assets/screenshots/discord-channels.png" /></p>
+<h4 id="notification-flow">Notification Flow<a class="headerlink" href="#notification-flow" title="Permanent link">&para;</a></h4>
+<p>[Monitoring Source] → [Alert Trigger] → [Webhook or Script] → [Discord Channel] → [Push Notification]</p>
+<ul>
+<li>Monitoring tools detect anomalies or threshold breaches</li>
+<li>Alerts are triggered via native webhook integrations or custom scripts</li>
+<li>Messages are sent to service-specific Discord channels using Discord's webhook API</li>
+<li>Discord's push notification system delivers alerts to:</li>
+<li>Windows 11 desktop app</li>
+<li>iPad and iPhone mobile apps</li>
+</ul>
+<p><img alt="Discord Mobile Notifications Screenshot" src="/Career_Projects/assets/screenshots/discord-mobile.png" /></p>
+<h4 id="discord-channel-structure">Discord Channel Structure<a class="headerlink" href="#discord-channel-structure" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Channel Name</th>
+<th>Source Tool</th>
+<th>Alert Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#proxmox</td>
+<td>Proxmox VE</td>
+<td>Node status, backup failures</td>
+</tr>
+<tr>
+<td>#grafana</td>
+<td>Grafana</td>
+<td>Dashboard alerts, data source issues</td>
+</tr>
+<tr>
+<td>#splunk</td>
+<td>Splunk</td>
+<td>Security events, log anomalies</td>
+</tr>
+<tr>
+<td>#wazuh</td>
+<td>Wazuh</td>
+<td>Host-based intrusion alerts</td>
+</tr>
+<tr>
+<td>#pulse</td>
+<td>Pulse</td>
+<td>OpenSearch monitor triggers</td>
+</tr>
+<tr>
+<td>#uptime-kuma</td>
+<td>Uptime Kuma</td>
+<td>Service downtime, latency spikes</td>
+</tr>
+<tr>
+<td>#openvas</td>
+<td>OpenVAS</td>
+<td>Vulnerability scan results</td>
+</tr>
+<tr>
+<td>#pfsense</td>
+<td>pfSense</td>
+<td>Firewall events, VPN status</td>
+</tr>
+<tr>
+<td>#prometheus</td>
+<td>Prometheus</td>
+<td>Node exporter, resource thresholds</td>
+</tr>
+<tr>
+<td>#authentik</td>
+<td>Authentik</td>
+<td>Auth flow errors/alarms, auth failures</td>
+</tr>
+<tr>
+<td>#windowsupdates</td>
+<td>Windows VMs</td>
+<td>Python script completion</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-smtp-relay-gmail-backed-email-alerting">3.2 SMTP Relay - Gmail-Backed Email Alerting<a class="headerlink" href="#32-smtp-relay-gmail-backed-email-alerting" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_12">Deployment Overview<a class="headerlink" href="#deployment-overview_12" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>An msmtp container provides a secure SMTP relay to Gmail using STARTTLS and application-specific passwords. Internal services send alerts via standard SMTP on port 25, and msmtp handles encrypted delivery to the dedicated alert mailbox.</p>
+    <p>Configured services include: Proxmox, pfSense, OPNsense, TheHive, Uptime Kuma, Wazuh, Grafana, n8n, Synology NAS.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/smtp-relay-diagram.png" alt="SMTP Relay Diagram">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        SMTP Relay Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p>Gmail relay to dedicated email address: shad0w1t1a6@gmail.com</p>
+<h4 id="security-impact_12">Security Impact<a class="headerlink" href="#security-impact_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Provides a reliable, encrypted alerting channel</li>
+<li>Ensures alerts are preserved even if chat-ops channels fail</li>
+<li>Supports forensic review through email retention</li>
+</ul>
+<h4 id="deployment-rationale_12">Deployment Rationale<a class="headerlink" href="#deployment-rationale_12" title="Permanent link">&para;</a></h4>
+<p>Email remains a universal, durable alerting mechanism. This relay demonstrates secure outbound email configuration and multi-service integration.</p>
+<h4 id="architecture-principles-alignment_12">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Email complements Discord for redundancy</li>
+<li><strong>Secure by Design:</strong> STARTTLS encryption; app-password authentication</li>
+<li><strong>Zero Trust:</strong> All alerts validated and logged; no implicit trust in sender</li>
+</ul>
+<p><img alt="SMTP Relay Configuration Screenshot" src="/Career_Projects/assets/screenshots/smtp-relay-config.png" /></p>
+<h3 id="33-cloudflare-email-routing">3.3 Cloudflare Email Routing<a class="headerlink" href="#33-cloudflare-email-routing" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_13">Deployment Overview<a class="headerlink" href="#deployment-overview_13" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Cloudflare Email Routing provides alias-based forwarding for individual services, enabling clean separation of alert sources and simplified identity management. Each service is assigned a unique alias for traceability.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/cloudflare-logo.png" alt="Cloudflare Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cloudflare Email Routing
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_13">Security Impact<a class="headerlink" href="#security-impact_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Prevents spoofing by enforcing domain-validated routing</li>
+<li>Enables per-service alert attribution</li>
+<li>Provides an additional layer of redundancy</li>
+</ul>
+<h4 id="deployment-rationale_13">Deployment Rationale<a class="headerlink" href="#deployment-rationale_13" title="Permanent link">&para;</a></h4>
+<p>Cloudflare's routing service mirrors enterprise email aliasing strategies, improving traceability and reducing operational complexity.</p>
+<h4 id="architecture-principles-alignment_13">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Adds routing redundancy and identity separation</li>
+<li><strong>Secure by Design:</strong> Domain-validated forwarding; Cloudflare-managed security</li>
+<li><strong>Zero Trust:</strong> Each alias treated as an independent identity; no implicit trust</li>
+</ul>
+<p><img alt="Cloudflare Email Routing Configuration Screenshot" src="/Career_Projects/assets/screenshots/cloudflare-email-routing.png" /></p>
+<p><img alt="n8n Workflow Alert Triggers Screenshot" src="/Career_Projects/assets/screenshots/n8n-alert-workflows.png" /></p>
+<h3 id="sample-alerts">Sample Alerts<a class="headerlink" href="#sample-alerts" title="Permanent link">&para;</a></h3>
+<h4 id="uptime-kuma-service-status-alerts">Uptime Kuma Service Status Alerts<a class="headerlink" href="#uptime-kuma-service-status-alerts" title="Permanent link">&para;</a></h4>
+<p><strong>Discord:</strong></p>
+<p><img alt="Uptime Kuma Discord Alert Screenshot" src="/Career_Projects/assets/screenshots/alert-uptime-kuma-discord.png" /></p>
+<p><strong>Gmail:</strong></p>
+<p><img alt="Uptime Kuma Gmail Alert Screenshot" src="/Career_Projects/assets/screenshots/alert-uptime-kuma-gmail.png" /></p>
+<h4 id="proxmox-pve-and-pbs-successful-backup-job-completion-alert">Proxmox PVE and PBS Successful Backup Job Completion Alert<a class="headerlink" href="#proxmox-pve-and-pbs-successful-backup-job-completion-alert" title="Permanent link">&para;</a></h4>
+<p><strong>Discord:</strong></p>
+<p><img alt="Proxmox Backup Success Discord Alert Screenshot" src="/Career_Projects/assets/screenshots/alert-proxmox-backup-discord.png" /></p>
+<p><strong>Gmail:</strong></p>
+<p><img alt="Proxmox Backup Success Gmail Alert Screenshot" src="/Career_Projects/assets/screenshots/alert-proxmox-backup-gmail.png" /></p>
+<h4 id="splunk-scheduled-weekly-vpn-activity-log-notification">Splunk Scheduled Weekly VPN Activity Log Notification<a class="headerlink" href="#splunk-scheduled-weekly-vpn-activity-log-notification" title="Permanent link">&para;</a></h4>
+<p><img alt="Splunk VPN Activity Alert Screenshot" src="/Career_Projects/assets/screenshots/alert-splunk-vpn.png" /></p>
+<h4 id="pfsense-firewall-event-alert">pfSense Firewall Event Alert<a class="headerlink" href="#pfsense-firewall-event-alert" title="Permanent link">&para;</a></h4>
+<p><img alt="pfSense Alert Screenshot" src="/Career_Projects/assets/screenshots/alert-pfsense.png" /></p>
+<h4 id="grafana-pfsense-interface-status-alerts">Grafana pfSense Interface Status Alerts<a class="headerlink" href="#grafana-pfsense-interface-status-alerts" title="Permanent link">&para;</a></h4>
+<p><img alt="Grafana Interface Status Alert Screenshot" src="/Career_Projects/assets/screenshots/alert-grafana-interface.png" /></p>
+<p><img alt="Grafana Alert Details Screenshot" src="/Career_Projects/assets/screenshots/alert-grafana-details.png" /></p>
+<h4 id="prometheus-blackbox-alerts">Prometheus Blackbox Alerts<a class="headerlink" href="#prometheus-blackbox-alerts" title="Permanent link">&para;</a></h4>
+<p>HTTP Get, TLS Cert expiry, Discord ping, local ICMP, TCP SSH and TCP HTTPS</p>
+<p><strong>Alert Manager - Endpoint Reachability Alerts:</strong></p>
+<p><img alt="Prometheus Blackbox Alerts Screenshot" src="/Career_Projects/assets/screenshots/alert-prometheus-blackbox.png" /></p>
+<hr />
+<h2 id="4-security-controls-and-compliance-summary">4. Security Controls and Compliance Summary<a class="headerlink" href="#4-security-controls-and-compliance-summary" title="Permanent link">&para;</a></h2>
+<h3 id="visibility-and-response-security-controls">Visibility and Response Security Controls<a class="headerlink" href="#visibility-and-response-security-controls" title="Permanent link">&para;</a></h3>
+<p><strong>Control Framework:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control Domain</th>
+<th>Implementation</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Log Aggregation</td>
+<td>Splunk + Elastic centralized collection</td>
+<td>All infrastructure</td>
+</tr>
+<tr>
+<td>Endpoint Detection</td>
+<td>Wazuh EDR on 12 hosts</td>
+<td>Windows, Linux, MacOS</td>
+</tr>
+<tr>
+<td>Network Monitoring</td>
+<td>Suricata/Snort IDS on all interfaces</td>
+<td>100% traffic inspection</td>
+</tr>
+<tr>
+<td>File Integrity Monitoring</td>
+<td>Wazuh FIM on critical paths</td>
+<td>System files, configs</td>
+</tr>
+<tr>
+<td>Vulnerability Assessment</td>
+<td>Wazuh + OpenVAS automated scanning</td>
+<td>All hosts</td>
+</tr>
+<tr>
+<td>Compliance Auditing</td>
+<td>Wazuh SCA policies (CIS, PCI-DSS)</td>
+<td>Continuous assessment</td>
+</tr>
+<tr>
+<td>Alert Correlation</td>
+<td>Splunk SPL queries, Elastic detection rules</td>
+<td>Multi-source correlation</td>
+</tr>
+<tr>
+<td>Incident Response</td>
+<td>Automated containment, Discord alerting</td>
+<td>Real-time response</td>
+</tr>
+<tr>
+<td>Audit Logging</td>
+<td>90-day retention in SIEM</td>
+<td>Full audit trail</td>
+</tr>
+<tr>
+<td>Performance Monitoring</td>
+<td>Prometheus + Grafana dashboards</td>
+<td>All infrastructure</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Event Pipeline:</strong></p>
+<ol>
+<li>Collection: Agents/forwarders collect logs from sources</li>
+<li>Transport: Encrypted TLS/SSL to SIEM platforms</li>
+<li>Parsing: Field extraction and normalization</li>
+<li>Enrichment: GeoIP, threat intel, asset context</li>
+<li>Correlation: Multi-source event correlation</li>
+<li>Detection: Rule-based and ML anomaly detection</li>
+<li>Alerting: Discord webhooks + email notifications</li>
+<li>Response: Automated containment actions</li>
+<li>Investigation: Search and visualization tools</li>
+<li>Retention: 90-day storage, then archive</li>
+</ol>
+<p><strong>Data Classification:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Sensitivity</th>
+<th>Retention</th>
+<th>Encryption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Security Alerts</td>
+<td>High</td>
+<td>90 days</td>
+<td>At rest + in transit</td>
+</tr>
+<tr>
+<td>System Logs</td>
+<td>Medium</td>
+<td>90 days</td>
+<td>At rest + in transit</td>
+</tr>
+<tr>
+<td>Application Logs</td>
+<td>Low</td>
+<td>30 days</td>
+<td>In transit only</td>
+</tr>
+<tr>
+<td>Performance Metrics</td>
+<td>Low</td>
+<td>90 days</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Access Control:</strong></p>
+<ul>
+<li>SIEM Platforms: Authentik SSO with MFA required</li>
+<li>API Access: API tokens with 90-day rotation</li>
+<li>Dashboard Access: Role-based permissions (admin, analyst, viewer)</li>
+<li>Alert Management: Admin-only response actions</li>
+</ul>
+<p><strong>Encryption Standards:</strong></p>
+<ul>
+<li>Log Transport: TLS 1.3 for all forwarder connections</li>
+<li>At Rest: AES-256 for stored logs and backups</li>
+<li>Certificates: Step-CA issued, auto-renewed</li>
+</ul>
+<p><strong>Detection Coverage:</strong></p>
+<table>
+<thead>
+<tr>
+<th>MITRE ATT&amp;CK Technique</th>
+<th>Detection Method</th>
+<th>Data Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial Access (T1078)</td>
+<td>Failed login correlation</td>
+<td>Wazuh, pfSense</td>
+</tr>
+<tr>
+<td>Execution (T1059)</td>
+<td>PowerShell command monitoring</td>
+<td>Sysmon</td>
+</tr>
+<tr>
+<td>Persistence (T1547)</td>
+<td>Registry/startup monitoring</td>
+<td>Wazuh FIM</td>
+</tr>
+<tr>
+<td>Privilege Escalation (T1068)</td>
+<td>Process creation anomalies</td>
+<td>Sysmon, Wazuh</td>
+</tr>
+<tr>
+<td>Defense Evasion (T1070)</td>
+<td>Log clearing detection</td>
+<td>Windows Event Log</td>
+</tr>
+<tr>
+<td>Credential Access (T1003)</td>
+<td>LSASS access monitoring</td>
+<td>Sysmon Event ID 10</td>
+</tr>
+<tr>
+<td>Discovery (T1082)</td>
+<td>System info enumeration</td>
+<td>Wazuh, Sysmon</td>
+</tr>
+<tr>
+<td>Lateral Movement (T1021)</td>
+<td>RDP/SMB connection tracking</td>
+<td>Suricata, Wazuh</td>
+</tr>
+<tr>
+<td>Collection (T1005)</td>
+<td>Unusual file access patterns</td>
+<td>Wazuh FIM</td>
+</tr>
+<tr>
+<td>Exfiltration (T1041)</td>
+<td>Large outbound transfers</td>
+<td>pfSense, Suricata</td>
+</tr>
+<tr>
+<td>Command and Control (T1071)</td>
+<td>Beacon detection</td>
+<td>Suricata, pfSense</td>
+</tr>
+</tbody>
+</table>
+<h3 id="syslog-compliance-rfc-5424">Syslog Compliance (RFC 5424)<a class="headerlink" href="#syslog-compliance-rfc-5424" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Specification</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Facility</td>
+<td>USER, LOCAL0-LOCAL7</td>
+<td>Properly categorized</td>
+</tr>
+<tr>
+<td>Severity</td>
+<td>0 (Emergency) to 7</td>
+<td>Mapped correctly</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>ISO 8601 format</td>
+<td>NTP synchronized</td>
+</tr>
+<tr>
+<td>Hostname</td>
+<td>FQDN or IP</td>
+<td>FQDN preferred</td>
+</tr>
+<tr>
+<td>Message Format</td>
+<td>Structured data</td>
+<td>JSON where possible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="elastic-common-schema-ecs-compliance">Elastic Common Schema (ECS) Compliance<a class="headerlink" href="#elastic-common-schema-ecs-compliance" title="Permanent link">&para;</a></h3>
+<p><strong>ECS Version:</strong> 8.x</p>
+<p><strong>Compliance:</strong> 95%+ for integrated data sources</p>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Cross-source correlation without field mapping</li>
+<li>Pre-built Kibana dashboards work out-of-box</li>
+<li>Future integrations automatically compatible</li>
+<li>Machine learning models use standard fields</li>
+</ul>
+<hr />
+<h2 id="5-use-cases-and-scenarios">5. Use Cases and Scenarios<a class="headerlink" href="#5-use-cases-and-scenarios" title="Permanent link">&para;</a></h2>
+<h3 id="practical-use-cases-and-detection-scenarios">Practical Use Cases and Detection Scenarios<a class="headerlink" href="#practical-use-cases-and-detection-scenarios" title="Permanent link">&para;</a></h3>
+<h4 id="scenario-1-brute-force-attack-detection-and-response">Scenario 1: Brute Force Attack Detection and Response<a class="headerlink" href="#scenario-1-brute-force-attack-detection-and-response" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Detect and automatically block SSH brute force attempts</p>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li>Attacker attempts SSH login to docker-vm-01 from 192.168.1.99</li>
+<li>Failed attempts logged to /var/log/auth.log</li>
+<li>Splunk Universal Forwarder forwards logs to Splunk indexer</li>
+<li>Splunk correlation search detects &gt;20 failed attempts in 5 minutes</li>
+<li>Alert triggered: "SSH Brute Force from 192.168.1.99"</li>
+<li>Discord webhook notification sent to #security channel</li>
+<li>Wazuh active response triggers firewall-drop.sh script</li>
+<li>iptables rule added: Block 192.168.1.99 for 10 minutes</li>
+<li>Security analyst reviews alert in Splunk dashboard</li>
+<li>Analyst extends block to permanent if deemed malicious</li>
+</ol>
+<p><strong>SPL Query:</strong>
+<div class="highlight"><pre><span></span><code>index=auth sourcetype=syslog &quot;Failed password&quot;
+| rex field=_raw &quot;Failed password for (?&lt;user&gt;\w+) from (?&lt;src_ip&gt;\d+\.\d+\.\d+\.\d+)&quot;
+| stats count by src_ip, dest_host
+| where count &gt; 20
+| eval threat_level=&quot;High&quot;, action=&quot;Block IP&quot;
+</code></pre></div></p>
+<h4 id="scenario-2-malware-execution-detection">Scenario 2: Malware Execution Detection<a class="headerlink" href="#scenario-2-malware-execution-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Detect execution of malicious file on Windows endpoint</p>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li>User on Win11Pro opens malicious email attachment</li>
+<li>Malware (ransomware.exe) executes</li>
+<li>Sysmon Event ID 1 (Process Creation) logged</li>
+<li>Wazuh agent forwards event to Wazuh manager</li>
+<li>Wazuh rule matches suspicious process characteristics:</li>
+<li>Unsigned executable</li>
+<li>Launched from %TEMP% directory</li>
+<li>Network connection to unknown IP</li>
+<li>Wazuh generates Critical alert (level 15)</li>
+<li>Alert forwarded to Splunk for correlation</li>
+<li>Splunk enriches alert with threat intelligence lookup</li>
+<li>MD5 hash matches known ransomware family</li>
+<li>Discord notification: "CRITICAL: Ransomware detected on Win11Pro"</li>
+<li>Wazuh active response kills process</li>
+<li>File quarantined to secure location</li>
+<li>Host isolated from network (manual step)</li>
+<li>Incident response team engages</li>
+</ol>
+<p><strong>Wazuh Rule:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;rule</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;100200&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;15&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;if_sid&gt;</span>18106<span class="nt">&lt;/if_sid&gt;</span>
+<span class="w">  </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;win.eventdata.image&quot;</span><span class="nt">&gt;</span>\.exe$<span class="nt">&lt;/field&gt;</span>
+<span class="w">  </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;win.eventdata.commandLine&quot;</span><span class="nt">&gt;</span>\\Temp\\<span class="nt">&lt;/field&gt;</span>
+<span class="w">  </span><span class="nt">&lt;description&gt;</span>Suspicious<span class="w"> </span>executable<span class="w"> </span>launched<span class="w"> </span>from<span class="w"> </span>Temp<span class="w"> </span>directory<span class="nt">&lt;/description&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mitre&gt;</span>
+<span class="w">    </span><span class="nt">&lt;id&gt;</span>T1204.002<span class="nt">&lt;/id&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/mitre&gt;</span>
+<span class="nt">&lt;/rule&gt;</span>
+</code></pre></div></p>
+<h4 id="scenario-3-lateral-movement-detection">Scenario 3: Lateral Movement Detection<a class="headerlink" href="#scenario-3-lateral-movement-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Identify attacker moving between hosts after initial compromise</p>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li>Attacker compromises Win11Pro via phishing</li>
+<li>Attacker attempts RDP to DC01 using stolen credentials</li>
+<li>Suricata IDS detects RDP connection: 192.168.1.200 → 192.168.1.152:3389</li>
+<li>Windows Security Event 4624 (Successful Logon) on DC01</li>
+<li>Wazuh agent on DC01 forwards event to manager</li>
+<li>Splunk correlation search identifies:</li>
+<li>User "jdoe" logged in from Win11Pro (unusual source)</li>
+<li>Time: 2:30 AM (outside normal business hours)</li>
+<li>Logon Type 10 (RemoteInteractive/RDP)</li>
+<li>Alert generated: "Suspicious Lateral Movement Detected"</li>
+<li>Discord notification with full context</li>
+<li>Analyst reviews:</li>
+<li>User's normal login pattern (9 AM - 5 PM from office PC)</li>
+<li>No scheduled maintenance windows</li>
+<li>Source host shows signs of compromise</li>
+<li>Analyst disables user account in AD</li>
+<li>Terminates RDP session on DC01</li>
+<li>Initiates forensic investigation</li>
+</ol>
+<p><strong>Splunk Correlation Query:</strong>
+<div class="highlight"><pre><span></span><code>(index=wazuh-alerts rule.id=&quot;60204&quot;) OR (index=suricata-lan dest_port=3389)
+| eval time_hour=strftime(_time,&quot;%H&quot;)
+| where (time_hour &lt; 6 OR time_hour &gt; 22)
+| stats values(src_ip) as source_ips, values(dest_ip) as dest_hosts by user
+| where mvcount(dest_hosts) &gt; 1
+| eval threat=&quot;Lateral movement: user accessed multiple hosts outside business hours&quot;
+</code></pre></div></p>
+<h4 id="scenario-4-configuration-drift-detection">Scenario 4: Configuration Drift Detection<a class="headerlink" href="#scenario-4-configuration-drift-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Detect unauthorized changes to critical system configurations</p>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li>Attacker gains access to web server (Apache LXC)</li>
+<li>Modifies /etc/ssh/sshd_config to enable PasswordAuthentication</li>
+<li>Wazuh FIM detects file change within seconds</li>
+<li>Wazuh generates alert with file diff:</li>
+<li>Old value: PasswordAuthentication no</li>
+<li>New value: PasswordAuthentication yes</li>
+<li>Alert includes MD5/SHA256 hash of modified file</li>
+<li>Alert forwarded to Splunk and displayed in dashboard</li>
+<li>Discord notification: "File Integrity Violation on Apache LXC"</li>
+<li>Analyst reviews change:</li>
+<li>Change made by root user</li>
+<li>No change ticket associated with modification</li>
+<li>Unauthorized change confirmed</li>
+<li>Wazuh active response:</li>
+<li>Restores original sshd_config from backup</li>
+<li>Restarts SSH service with secure config</li>
+<li>Analyst investigates how attacker gained root access</li>
+</ol>
+<p><strong>Wazuh FIM Alert:</strong>
+<div class="highlight"><pre><span></span><code>Event: Modified
+File: /etc/ssh/sshd_config
+Old MD5: a1b2c3d4e5f6...
+New MD5: f6e5d4c3b2a1...
+User: root
+Time: 2024-11-06 14:23:45
+Severity: High (level 10)
+</code></pre></div></p>
+<h4 id="scenario-5-compliance-violation-detection">Scenario 5: Compliance Violation Detection<a class="headerlink" href="#scenario-5-compliance-violation-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Identify hosts failing CIS benchmark requirements</p>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li>Wazuh SCA scan runs every 12 hours</li>
+<li>Scan detects violations on DC01:</li>
+<li>Password minimum length: 8 (Required: 14)</li>
+<li>Account lockout threshold: 5 (Required: 3)</li>
+<li>Audit log retention: 30 days (Required: 90 days)</li>
+<li>Wazuh generates compliance report</li>
+<li>Report forwarded to Splunk</li>
+<li>Compliance dashboard shows:</li>
+<li>Overall score: 89.2% (below 95% target)</li>
+<li>Critical failures: 3</li>
+<li>Affected hosts: DC01</li>
+<li>Weekly compliance report emailed to IT management</li>
+<li>Security team creates remediation tickets:</li>
+<li>GPO update for password policy</li>
+<li>GPO update for lockout threshold</li>
+<li>Increase audit log retention</li>
+<li>Changes applied via Group Policy</li>
+<li>Next scan confirms compliance: 96.5%</li>
+</ol>
+<p><strong>Wazuh Compliance Query:</strong>
+<div class="highlight"><pre><span></span><code>Policy: CIS Windows Server 2022
+Failed Checks: 3
+Score: 89.2%
+Risk Level: Medium
+</code></pre></div></p>
+<hr />
+<h2 id="6-security-homelab-section-links">6. Security Homelab Section Links<a class="headerlink" href="#6-security-homelab-section-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="/Career_Projects/projects/homelab/01-exec-summary/">Executive Summary and Security Posture</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/02-platform/">Infrastructure Platform, Virtualization Stack and Hardware</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/03-network/">Network Security, Privacy and Remote Access</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/04-iam-secrets/">Identity, Access, Secrets and Trust Management</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/05-auto-iac/">Automation and IaC</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/06-apps-service/">Applications and Services</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/07-vis-response-pt1/">Observability and Response, Part 1</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/08-vis-response-pt2/">Observability and Response, Part 2</a></strong></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2659 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../grc-iso27001/">
+      
+      
+        <link rel="next" href="../owasp/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>MITRE ATT&CK - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mitre-attck-enterprise-framework-v181" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MITRE ATT&CK
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ta0001-initial-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0001 - Initial Access
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0002-execution-8-of-12-techniques-67-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0002 - Execution (8 of 12 techniques - 67% coverage)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0003-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0003 - Persistence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0004-privilege-escalation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0004 - Privilege Escalation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0005-defense-evasion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0005 - Defense Evasion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TA0005 - Defense Evasion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-defense-evasion-techniques-in-v181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Defense Evasion Techniques in v18.1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0006-credential-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0006 - Credential Access
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0007-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0007 - Discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0008-lateral-movement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0008 - Lateral Movement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0009-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0009 - Collection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0010-exfiltration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0010 - Exfiltration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0011-command-and-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0011 - Command and Control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ta0040-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TA0040 - Impact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overall-coverage-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overall Coverage Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-changes-in-v181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Changes in v18.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threat-intelligence-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Intelligence Updates
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mitre-attck-enterprise-framework-v181">MITRE ATT&amp;CK Enterprise Framework v18.1<a class="headerlink" href="#mitre-attck-enterprise-framework-v181" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong><br />
+Version: 1.0<br />
+Last Updated: January 2026<br />
+Owner: Paul Leone  </p>
+<p><strong>Framework Version:</strong> ATT&amp;CK v18.1 (October 2025)</p>
+<hr />
+<h2 id="ta0001-initial-access">TA0001 - Initial Access<a class="headerlink" href="#ta0001-initial-access" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1078</td>
+<td>Valid Accounts</td>
+<td><strong>FULL</strong></td>
+<td>Splunk correlation detects failed auth patterns; Wazuh monitors authentication logs; TheHive creates cases for brute force (&gt;5 failures/5min); Authentik enforces account lockout; SSH tracks all authentication attempts</td>
+<td>Deploy UEBA for behavioral baselines; implement impossible travel detection</td>
+</tr>
+<tr>
+<td>T1133</td>
+<td>External Remote Services</td>
+<td><strong>FULL</strong></td>
+<td>pfSense logs all VPN connections; SSH session logging to SIEM; Traefik access logs track ForwardAuth requests; Uptime Kuma monitors service availability; Tailscale audit logs</td>
+<td>Add geolocation-based alerts; implement time-of-day access policies</td>
+</tr>
+<tr>
+<td>T1190</td>
+<td>Exploit Public-Facing Application</td>
+<td><strong>PARTIAL</strong></td>
+<td>Weekly OpenVAS scans detect vulnerabilities; Nessus authenticated scans verify patch levels; Suricata/Snort IDS signatures; SafeLine WAF blocks OWASP Top 10 attacks (25% block rate)</td>
+<td>Deploy virtual patching via WAF rules; implement honeypot services</td>
+</tr>
+<tr>
+<td>T1566</td>
+<td>Phishing</td>
+<td><strong>FULL</strong></td>
+<td>Shuffle phishing analysis workflow analyzes email headers, URLs, attachments; Cortex multi-engine analysis (VirusTotal, URLhaus, PhishTank); MISP correlates known phishing IOCs; Pi-hole blocks malicious domains</td>
+<td>Add email gateway integration; deploy user reporting mechanism; implement DMARC/SPF/DKIM validation</td>
+</tr>
+<tr>
+<td>T1091</td>
+<td>Replication Through Removable Media</td>
+<td><strong>FULL</strong></td>
+<td>Group Policy blocks autorun.inf execution; Wazuh FIM monitors USB device insertion (Event ID 2003); alerts on unauthorized removable media; registry monitoring detects autorun changes</td>
+<td>Deploy USB whitelisting; implement file encryption requirements for removable media</td>
+</tr>
+<tr>
+<td>T1189</td>
+<td>Drive-by Compromise</td>
+<td><strong>PARTIAL</strong></td>
+<td>Pi-hole blocks 2M+ malicious domains; Suricata/Snort detect exploit kit traffic patterns; SafeLine WAF protects web applications; DNS filtering prevents callback connections</td>
+<td>Add browser isolation technology; implement content security policies; deploy endpoint isolation for high-risk browsing</td>
+</tr>
+<tr>
+<td>T1199</td>
+<td>Trusted Relationship</td>
+<td><strong>PARTIAL</strong></td>
+<td>MISP tracks vendor compromise campaigns; vulnerability scanning includes supply chain components; monitoring of third-party integrations</td>
+<td><strong>GAP:</strong> Implement vendor security assessments; deploy third-party risk management program; add API gateway monitoring</td>
+</tr>
+<tr>
+<td>T1195</td>
+<td>Supply Chain Compromise</td>
+<td><strong>PARTIAL</strong></td>
+<td>Package signature verification on Linux systems; Docker image verification (SHA-256); Git commit signing enforced</td>
+<td><strong>GAP:</strong> Deploy SBOM tracking (Trivy/Grype); implement dependency scanning; add software composition analysis</td>
+</tr>
+<tr>
+<td>T1659</td>
+<td>Content Injection</td>
+<td><strong>MINIMAL</strong></td>
+<td>SafeLine WAF blocks common injection patterns; input validation at application layer</td>
+<td><strong>GAP:</strong> Deploy Content Security Policy (CSP) headers globally; implement subresource integrity (SRI) checks</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong authentication monitoring, phishing detection, network-based filtering</p>
+<p><strong>Gaps:</strong> Limited supply chain visibility, minimal content injection protection</p>
+<p><strong>Priority:</strong> Implement SBOM tracking (Q1 2026), enhance WAF rulesets (Q2 2026)</p>
+<hr />
+<h2 id="ta0002-execution-8-of-12-techniques-67-coverage">TA0002 - Execution (8 of 12 techniques - 67% coverage)<a class="headerlink" href="#ta0002-execution-8-of-12-techniques-67-coverage" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1059.001</td>
+<td>PowerShell</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon captures PowerShell commands (Event ID 1, 4103, 4104); Wazuh detects obfuscated PowerShell (base64, encoded commands); Splunk searches for suspicious patterns (Invoke-Expression, DownloadString); script block logging enabled</td>
+<td>Add PowerShell Constrained Language Mode; implement JEA (Just Enough Administration)</td>
+</tr>
+<tr>
+<td>T1059.003</td>
+<td>Windows Command Shell</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon logs cmd.exe execution with full command-line; Wazuh detects living-off-the-land binaries (LOLBins); parent-child process analysis identifies anomalies; TheHive escalates suspicious executions</td>
+<td>Deploy application whitelisting (AppLocker/WDAC); implement command-line auditing policies</td>
+</tr>
+<tr>
+<td>T1059.006</td>
+<td>Python</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh monitors Python process execution; auditd logs script execution on Linux; limited visibility into script content analysis</td>
+<td><strong>GAP:</strong> Implement Python script sandboxing; add runtime application self-protection (RASP); deploy code signing requirements</td>
+</tr>
+<tr>
+<td>T1059.013</td>
+<td>Container CLI/API</td>
+<td><strong>PARTIAL</strong></td>
+<td>Required Action: Enable comprehensive container command auditing: kubectl exec logging, docker exec logging, Container escape detection</td>
+<td>Wazuh: Add rules for container command execution; Splunk: Create correlation for kubectl/docker exec; Audit: Enable Kubernetes audit logging (--audit-log-path)</td>
+</tr>
+<tr>
+<td>T1053</td>
+<td>Scheduled Task/Job</td>
+<td><strong>FULL</strong></td>
+<td>Wazuh monitors scheduled task creation (Event ID 4698, 106); Sysmon tracks Task Scheduler API calls; FIM detects changes to cron/Task Scheduler directories; Splunk correlates privileged task creation</td>
+<td>Add baseline of legitimate scheduled tasks; implement approval workflow for new tasks</td>
+</tr>
+<tr>
+<td>T1106</td>
+<td>Native API</td>
+<td><strong>PARTIAL</strong></td>
+<td>auditd logs system calls on Linux; Sysmon captures CreateRemoteThread, VirtualAllocEx; limited direct API call visibility</td>
+<td><strong>GAP:</strong> Deploy endpoint detection with API hooking; implement process injection detection; add kernel-level monitoring</td>
+</tr>
+<tr>
+<td>T1129</td>
+<td>Shared Modules</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon ImageLoad events (Event ID 7) track DLL loading; Wazuh alerts on unsigned/untrusted DLLs; code signing validation enforced; detection of DLL search order hijacking</td>
+<td>Implement DLL whitelisting; add certificate pinning for critical modules</td>
+</tr>
+<tr>
+<td>T1203</td>
+<td>Exploitation for Client Execution</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata/Snort IDS signatures detect known exploit patterns; vulnerability scanning identifies unpatched client software; Cortex analyzes suspicious files with VirusTotal</td>
+<td><strong>GAP:</strong> Add exploit mitigation features (EMET/Windows Defender Exploit Guard); implement application sandboxing; deploy zero-day protection</td>
+</tr>
+<tr>
+<td>T1204</td>
+<td>User Execution</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon tracks process creation from user-writable directories; Wazuh monitors execution of files from Temp/Downloads; Cortex analyzes executables with multi-engine scanning; VirusTotal integration for malware detection</td>
+<td>Add email attachment sandboxing; implement user training simulation; deploy macro blocking policies</td>
+</tr>
+<tr>
+<td>T1569</td>
+<td>System Services</td>
+<td><strong>FULL</strong></td>
+<td>Wazuh monitors service creation/modification (Event ID 7045, 7036); Sysmon tracks service installation; FIM alerts on service binary changes; unauthorized service detection</td>
+<td>Implement service whitelisting; add approval workflow for service changes</td>
+</tr>
+<tr>
+<td>T1047</td>
+<td>Windows Management Instrumentation</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited WMI event monitoring; Sysmon tracks WMI activity (Event ID 19-21)</td>
+<td><strong>GAP:</strong> Enable comprehensive WMI logging; implement WMI subscription monitoring; add WMI persistence detection</td>
+</tr>
+<tr>
+<td>T1648</td>
+<td>Serverless Execution</td>
+<td><strong>NOT APPLICABLE</strong></td>
+<td>No cloud serverless infrastructure in scope</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>T1609</td>
+<td>Container Administration Command</td>
+<td><strong>PARTIAL</strong></td>
+<td>Docker audit logging enabled; Kubernetes audit logs to SIEM; monitoring of kubectl/docker exec commands; see also T1059.013 for container CLI/API execution monitoring</td>
+<td><strong>GAP:</strong> Implement admission controllers; add runtime container security (Falco); deploy container network policies</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Comprehensive process monitoring, script execution detection, service tracking</p>
+<p><strong>Gaps:</strong> Limited WMI visibility, minimal API call monitoring, container CLI/API monitoring incomplete (T1059.013)</p>
+<p><strong>Priority:</strong> Enhance WMI logging (immediate), implement container command auditing (T1059.013 - Q1 2026), deploy container security tools (Q2 2026)</p>
+<hr />
+<h2 id="ta0003-persistence">TA0003 - Persistence<a class="headerlink" href="#ta0003-persistence" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1098</td>
+<td>Account Manipulation</td>
+<td><strong>FULL</strong></td>
+<td>Active Directory logs track group membership changes (Event ID 4728, 4732, 4756); Wazuh monitors user attribute modifications; Splunk correlation detects privilege escalation patterns; TheHive escalates unauthorized changes</td>
+<td>Implement privileged access management (PAM); add approval workflow for admin group changes</td>
+</tr>
+<tr>
+<td>T1136</td>
+<td>Create Account</td>
+<td><strong>FULL</strong></td>
+<td>Wazuh monitors account creation (Event ID 4720 Windows, useradd Linux); Splunk alerts on new accounts created outside business hours; unauthorized account detection via baseline comparison</td>
+<td>Add account provisioning workflow; implement automated account lifecycle management</td>
+</tr>
+<tr>
+<td>T1543</td>
+<td>Create or Modify System Process</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon Event ID 7045 tracks service creation; Wazuh monitors systemd unit changes on Linux; FIM alerts on service binary modifications; unauthorized service detection</td>
+<td>Deploy service creation approval workflow; implement signed service binary requirement</td>
+</tr>
+<tr>
+<td>T1547</td>
+<td>Boot or Logon Autostart Execution</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon Event ID 13 monitors registry Run keys; Wazuh FIM tracks startup folders, /etc/init.d, systemd; detection of persistence via: Run keys, startup scripts, scheduled tasks, WMI subscriptions</td>
+<td>Add autostart location baseline; implement startup item approval process</td>
+</tr>
+<tr>
+<td>T1053</td>
+<td>Scheduled Task/Job</td>
+<td><strong>FULL</strong></td>
+<td>Comprehensive monitoring (see TA0002 above); persistence-specific detection includes: task creation by non-admin users, tasks with SYSTEM privileges, tasks pointing to suspicious paths</td>
+<td>Implement task scheduler hardening; add scheduled task inventory baseline</td>
+</tr>
+<tr>
+<td>T1505</td>
+<td>Server Software Component</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors web directories (/var/www, IIS wwwroot); Yara signatures detect common web shells (China Chopper, WSO, b374k); IDS signatures for web shell activity; limited PHP/ASP behavioral analysis</td>
+<td><strong>GAP:</strong> Deploy web shell-specific detection (NeoPI); implement web application firewall with virtual patching; add file integrity baseline for web assets</td>
+</tr>
+<tr>
+<td>T1078</td>
+<td>Valid Accounts</td>
+<td><strong>FULL</strong></td>
+<td>Behavioral analysis detects: unusual login times, geographic anomalies, impossible travel, privileged account usage patterns; Splunk dashboards track authentication trends; UEBA planned for Q2 2026</td>
+<td>Deploy full UEBA capabilities; implement privileged access analytics; add session recording for admin accounts</td>
+</tr>
+<tr>
+<td>T1546.018</td>
+<td>Event Triggered Execution: Python Startup Hooks</td>
+<td><strong>MINIMAL</strong></td>
+<td>No monitoring of Python startup files (.pythonrc, sitecustomize.py, usercustomize.py); Limited tracking of PYTHONSTARTUP environment variable; Wazuh FIM does not monitor Python site-packages directories</td>
+<td><strong>GAP:</strong> Implement Wazuh FIM on ~/.pythonrc, /usr/lib/python*/site-packages, /etc/pythonrc.d/; Monitor PYTHONSTARTUP environment variable changes; Add auditd rules for Python startup file access; Deploy baseline for legitimate Python customizations</td>
+</tr>
+<tr>
+<td>T1556</td>
+<td>Modify Authentication Process</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors: /etc/pam.d, LSASS process memory, credential providers, SSH authorized_keys; limited detection of in-memory credential provider injection</td>
+<td><strong>GAP:</strong> Implement memory scanning for credential provider tampering; add LSASS protection; deploy credential guard on Windows</td>
+</tr>
+<tr>
+<td>T1197</td>
+<td>BITS Jobs</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited BITS job monitoring</td>
+<td><strong>GAP:</strong> Enable BitsAdmin logging (Event ID 59, 60, 61); implement BITS job enumeration; add suspicious BITS transfer detection</td>
+</tr>
+<tr>
+<td>T1037</td>
+<td>Boot or Logon Initialization Scripts</td>
+<td><strong>PARTIAL</strong></td>
+<td>FIM monitors common script locations (bashrc, profile, logon scripts); limited detection of obfuscated scripts</td>
+<td><strong>GAP:</strong> Add script content analysis; implement script whitelisting; deploy behavioral analysis for script execution</td>
+</tr>
+<tr>
+<td>T1176</td>
+<td>Browser Extensions</td>
+<td><strong>MINIMAL</strong></td>
+<td>No browser extension monitoring</td>
+<td><strong>GAP:</strong> Deploy browser extension inventory; implement extension whitelisting; add browser telemetry collection</td>
+</tr>
+<tr>
+<td>T1554</td>
+<td>Compromise Client Software Binary</td>
+<td><strong>PARTIAL</strong></td>
+<td>FIM monitors application directories; code signing validation detects unsigned binaries; limited binary integrity verification</td>
+<td><strong>GAP:</strong> Implement application whitelisting; add runtime binary verification; deploy EDR with process hollowing detection</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additional Unmonitored Persistence Techniques:</strong></p>
+<ul>
+<li><strong>T1137</strong> (Office Application Startup): No Office macro/add-in monitoring</li>
+<li><strong>T1525</strong> (Implant Internal Image): No VM/container image integrity monitoring</li>
+<li><strong>T1137</strong> (Office Test): No Office persistence mechanism detection</li>
+<li><strong>T1546</strong> (Event Triggered Execution): Partial coverage; WMI, Accessibility Features need enhancement; T1546.018 (Python Startup Hooks) not monitored</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong account monitoring, registry persistence detection, service tracking</p>
+<p><strong>Gaps:</strong> Limited BITS monitoring, minimal browser extension visibility, no Office persistence detection</p>
+<p><strong>Priority:</strong> Enable BITS logging (immediate), deploy application binary monitoring (Q1 2026)</p>
+<hr />
+<h2 id="ta0004-privilege-escalation">TA0004 - Privilege Escalation<a class="headerlink" href="#ta0004-privilege-escalation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1068</td>
+<td>Exploitation for Privilege Escalation</td>
+<td><strong>PARTIAL</strong></td>
+<td>Weekly OpenVAS + monthly Nessus scans identify kernel exploits; Sysmon monitors unusual child processes from vulnerable applications; Wazuh detects known exploit patterns; limited zero-day detection</td>
+<td><strong>GAP:</strong> Deploy exploit mitigation features (EMET, Windows Defender Exploit Guard); implement kernel patch verification; add memory exploit detection</td>
+</tr>
+<tr>
+<td>T1134</td>
+<td>Access Token Manipulation</td>
+<td><strong>PARTIAL</strong></td>
+<td>Sysmon Event ID 4648 (explicit credential logon), 4672 (special privileges assigned); detection of SeDebugPrivilege abuse; limited token impersonation monitoring</td>
+<td><strong>GAP:</strong> Implement comprehensive token manipulation detection; add Windows Defender Credential Guard; deploy API hooking for token APIs</td>
+</tr>
+<tr>
+<td>T1548</td>
+<td>Abuse Elevation Control Mechanism</td>
+<td><strong>PARTIAL</strong></td>
+<td>Sysmon detects UAC bypass attempts (registry keys, file system redirects); Wazuh monitors eventvwr.exe, fodhelper.exe abuse; limited coverage of all bypass techniques</td>
+<td><strong>GAP:</strong> Enable UAC monitoring (Event ID 4103); implement UAC configuration auditing; add detection for UIPI bypasses</td>
+</tr>
+<tr>
+<td>T1053</td>
+<td>Scheduled Task/Job</td>
+<td><strong>FULL</strong></td>
+<td>Comprehensive monitoring of privileged task creation; detection of task creation with SYSTEM privileges; alerts on tasks created by non-admin users; tracking of task modification</td>
+<td>Deploy task creation approval workflow; implement privileged task baseline</td>
+</tr>
+<tr>
+<td>T1078</td>
+<td>Valid Accounts</td>
+<td><strong>FULL</strong></td>
+<td>Tracks privileged account usage patterns; monitors admin account logons outside business hours; detects lateral movement via admin accounts; TheHive escalates anomalous privileged access</td>
+<td>Add privileged access management (PAM) solution; implement just-in-time (JIT) admin access</td>
+</tr>
+<tr>
+<td>T1055</td>
+<td>Process Injection</td>
+<td><strong>MINIMAL</strong></td>
+<td>Sysmon captures CreateRemoteThread, QueueUserAPC; limited visibility into process hollowing, reflective DLL injection</td>
+<td><strong>GAP:</strong> Deploy advanced EDR with process injection detection; implement memory scanning; add API hooking for injection techniques</td>
+</tr>
+<tr>
+<td>T1543</td>
+<td>Create or Modify System Process</td>
+<td><strong>FULL</strong></td>
+<td>Covered under TA0003 Persistence</td>
+<td>See Persistence section</td>
+</tr>
+<tr>
+<td>T1574</td>
+<td>Hijack Execution Flow</td>
+<td><strong>MINIMAL</strong></td>
+<td>FIM monitors DLL directories; limited DLL search order hijacking detection; no PATH hijacking monitoring</td>
+<td><strong>GAP:</strong> Implement DLL preloading detection; add PATH manipulation monitoring; deploy signed binary enforcement</td>
+</tr>
+<tr>
+<td>T1484</td>
+<td>Domain Policy Modification</td>
+<td><strong>FULL</strong></td>
+<td>Active Directory audit logs track GPO changes (Event ID 5136, 5137, 5141); Wazuh alerts on unauthorized GPO modifications; SIEM correlation detects privilege escalation via GPO</td>
+<td>Implement GPO change approval workflow; add GPO baseline comparison</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additional Unmonitored Techniques:</strong></p>
+<ul>
+<li><strong>T1547</strong> (Boot or Logon Autostart): Covered under Persistence</li>
+<li><strong>T1037</strong> (Boot/Logon Initialization): Partial coverage</li>
+<li><strong>T1611</strong> (Escape to Host): No container escape detection</li>
+<li><strong>T1546</strong> (Event Triggered Execution): Partial WMI coverage; T1546.018 (Python Startup Hooks) not monitored - see Persistence section</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong privileged account monitoring, GPO change detection, scheduled task tracking</p>
+<p><strong>Gaps:</strong> Minimal process injection visibility, limited UAC bypass coverage, no container escape detection</p>
+<p><strong>Priority:</strong> Deploy advanced EDR for process injection (Q2 2026), enhance UAC monitoring (immediate)</p>
+<hr />
+<h2 id="ta0005-defense-evasion">TA0005 - Defense Evasion<a class="headerlink" href="#ta0005-defense-evasion" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1027</td>
+<td>Obfuscated Files or Information</td>
+<td><strong>PARTIAL</strong></td>
+<td>Cortex Yara signatures detect packing, base64 encoding; limited entropy analysis; detection of certutil decode, PowerShell encoding</td>
+<td><strong>GAP:</strong> Deploy advanced entropy analysis; implement sandbox detonation; add machine learning-based obfuscation detection</td>
+</tr>
+<tr>
+<td>T1036</td>
+<td>Masquerading</td>
+<td><strong>PARTIAL</strong></td>
+<td>Sysmon tracks process path anomalies; Wazuh validates code signing; detection of processes running from unusual locations; limited filename spoofing detection</td>
+<td><strong>GAP:</strong> Implement process name whitelist; add parent-child process validation; deploy binary reputation scoring</td>
+</tr>
+<tr>
+<td>T1070</td>
+<td>Indicator Removal</td>
+<td><strong>FULL</strong></td>
+<td>Windows Event ID 1102 alerts on log clearing; Wazuh monitors file deletion in critical directories; immutable SIEM logs prevent tampering; FIM tracks log file modifications</td>
+<td>Add log integrity verification; implement write-once-read-many (WORM) storage for critical logs</td>
+</tr>
+<tr>
+<td>T1112</td>
+<td>Modify Registry</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon Event ID 13 captures all registry modifications; Wazuh FIM monitors critical registry keys; baseline deviation detection; alerts on security-related key changes</td>
+<td>Implement registry change approval workflow; add registry rollback capability</td>
+</tr>
+<tr>
+<td>T1140</td>
+<td>Deobfuscate/Decode Files</td>
+<td><strong>PARTIAL</strong></td>
+<td>Process command-line monitoring detects certutil, base64 commands; limited file content analysis post-decoding</td>
+<td><strong>GAP:</strong> Deploy file detonation sandbox; implement recursive unpacking analysis; add memory-based deobfuscation detection</td>
+</tr>
+<tr>
+<td>T1202</td>
+<td>Indirect Command Execution</td>
+<td><strong>PARTIAL</strong></td>
+<td>Sysmon tracks LOLBin usage (mshta, regsvr32, rundll32, wmic); Wazuh alerts on unusual parent-child relationships; detection of script execution via non-standard interpreters</td>
+<td><strong>GAP:</strong> Implement comprehensive LOLBin baseline; add behavioral analysis for indirect execution; deploy application control policies</td>
+</tr>
+<tr>
+<td>T1222</td>
+<td>File and Directory Permissions Modification</td>
+<td><strong>FULL</strong></td>
+<td>Wazuh FIM alerts on permission changes; auditd logs chmod/chown on Linux; icacls/takeown monitoring on Windows; detection of privilege escalation via ACL modification</td>
+<td>Add permission change approval workflow; implement least privilege validation</td>
+</tr>
+<tr>
+<td>T1484</td>
+<td>Group Policy Modification</td>
+<td><strong>FULL</strong></td>
+<td>Covered under TA0004 Privilege Escalation; comprehensive GPO change auditing</td>
+<td>See Privilege Escalation section</td>
+</tr>
+<tr>
+<td>T1562</td>
+<td>Impair Defenses</td>
+<td><strong>FULL</strong></td>
+<td>Wazuh monitors: Windows Defender tampering (registry, services), firewall rule changes, security service stops, log deletion attempts; alerts on antimalware service termination</td>
+<td>Implement tamper protection; add service recovery automation; deploy security tool health monitoring</td>
+</tr>
+<tr>
+<td>T1564</td>
+<td>Hide Artifacts</td>
+<td><strong>MINIMAL</strong></td>
+<td>FIM monitors hidden file creation; limited alternate data stream (ADS) detection; no VBA stomping detection</td>
+<td><strong>GAP:</strong> Enable ADS scanning; implement VBA source code extraction; add hidden process detection</td>
+</tr>
+<tr>
+<td>T1601</td>
+<td>Modify System Image</td>
+<td><strong>NOT APPLICABLE</strong></td>
+<td>Network device firmware monitoring not implemented (firewall managed via pfSense)</td>
+<td>N/A for current scope</td>
+</tr>
+<tr>
+<td>T1006</td>
+<td>Direct Volume Access</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited raw disk access monitoring</td>
+<td><strong>GAP:</strong> Deploy volume shadow copy monitoring; add raw disk access alerting; implement VSS change detection</td>
+</tr>
+</tbody>
+</table>
+<h3 id="new-defense-evasion-techniques-in-v181">New Defense Evasion Techniques in v18.1<a class="headerlink" href="#new-defense-evasion-techniques-in-v181" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1678</td>
+<td>Delay Execution</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited sleep/timeout command monitoring; Sysmon captures timeout.exe, sleep commands; no behavioral analysis for time-delay patterns</td>
+<td><strong>GAP:</strong> Implement detection for extended sleep commands (&gt;60 seconds); Add correlation for delays preceding malicious activity; Deploy sandbox evasion detection; Monitor timeout/sleep in scripts</td>
+</tr>
+<tr>
+<td>T1679</td>
+<td>Selective Exclusion</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh monitors Windows Defender exclusion additions (registry HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions); Limited detection of firewall/EDR exclusions</td>
+<td><strong>GAP:</strong> Monitor all security tool configuration changes; Alert on antivirus exclusion paths (especially C:\Windows, C:\Users); Track pfSense/firewall bypass rule additions; Implement security tool configuration baseline</td>
+</tr>
+<tr>
+<td>T1036.012</td>
+<td>Masquerading: Browser Fingerprint</td>
+<td><strong>MINIMAL</strong></td>
+<td>No browser fingerprinting detection; limited user-agent analysis in Traefik/Suricata logs</td>
+<td><strong>GAP:</strong> Deploy browser telemetry collection; Implement user-agent anomaly detection; Add browser fingerprinting signature detection (Canvas, WebGL); Monitor for automation frameworks (Puppeteer, Selenium)</td>
+</tr>
+<tr>
+<td>T1562.013</td>
+<td>Disable or Modify Network Device Firewall</td>
+<td><strong>PARTIAL</strong></td>
+<td>pfSense logs firewall rule changes via syslog; Limited SNMP monitoring for network devices</td>
+<td><strong>GAP:</strong> Implement SNMP trap monitoring for all network devices; Add Checkmk SNMP monitoring for firewall config changes; Deploy configuration backup validation; Alert on unauthorized firewall rule deletions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Major Unmonitored Defense Evasion Techniques:</strong></p>
+<ul>
+<li><strong>T1550</strong> (Use Alternate Authentication Material): Pass-the-hash, pass-the-ticket detection needed</li>
+<li><strong>T1218</strong> (System Binary Proxy Execution): Partial LOLBin coverage; need comprehensive monitoring</li>
+<li><strong>T1207</strong> (Rogue Domain Controller): No DC replication monitoring</li>
+<li><strong>T1620</strong> (Reflective Code Loading): No in-memory module detection</li>
+<li><strong>T1553</strong> (Subvert Trust Controls): Code signing bypass detection limited</li>
+<li><strong>T1497</strong> (Virtualization/Sandbox Evasion): No sandbox evasion detection</li>
+<li><strong>T1599</strong> (Network Boundary Bridging): No network bridge detection</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong log protection, registry monitoring, security tool tampering detection</p>
+<p><strong>Gaps:</strong> Minimal obfuscation analysis, limited indirect execution detection, no alternate authentication material monitoring, new v18.1 techniques (T1678 Delay Execution, T1679 Selective Exclusion, T1036.012 Browser Fingerprint, T1562.013 Network Device Firewall) require enhancement</p>
+<p><strong>Priority:</strong> Deploy advanced obfuscation detection (Q2 2026), implement pass-the-hash monitoring (Q1 2026)</p>
+<hr />
+<h2 id="ta0006-credential-access">TA0006 - Credential Access<a class="headerlink" href="#ta0006-credential-access" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1003</td>
+<td>OS Credential Dumping</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon Event ID 10 detects LSASS process access; Wazuh alerts on Mimikatz signatures; detection of SAM/SYSTEM file access; monitoring of credential dumping tools (pwdump, gsecdump)</td>
+<td>Deploy Windows Defender Credential Guard; implement LSASS protection (RunAsPPL); add memory scanning for credential extraction</td>
+</tr>
+<tr>
+<td>T1110</td>
+<td>Brute Force</td>
+<td><strong>FULL</strong></td>
+<td>Multi-source correlation: failed logins from firewall, SSH, Authentik, RDP; Shuffle workflow creates TheHive cases for brute force (&gt;5 failures/5min); account lockout enforcement; IP-based rate limiting</td>
+<td>Add distributed brute force detection; implement CAPTCHA after failed attempts; deploy geolocation-based blocking</td>
+</tr>
+<tr>
+<td>T1555</td>
+<td>Credentials from Password Stores</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors browser credential directories (Chrome, Firefox); limited coverage of password manager access (KeePass, 1Password); no macOS Keychain monitoring</td>
+<td><strong>GAP:</strong> Implement comprehensive password store monitoring; add credential access behavioral analysis; deploy browser credential protection</td>
+</tr>
+<tr>
+<td>T1552</td>
+<td>Unsecured Credentials</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors sensitive directories (/root/.ssh, .aws, .kube); Yara signatures detect credential patterns in files; limited coverage of memory credential scanning</td>
+<td><strong>GAP:</strong> Deploy secret scanning tools (TruffleHog, GitLeaks); implement memory credential detection; add configuration file credential scanning</td>
+</tr>
+<tr>
+<td>T1528</td>
+<td>Steal Application Access Token</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited OAuth token monitoring</td>
+<td><strong>GAP:</strong> Implement OAuth token theft detection; add API token usage monitoring; deploy token expiration enforcement</td>
+</tr>
+<tr>
+<td>T1557</td>
+<td>Adversary-in-the-Middle</td>
+<td><strong>MINIMAL</strong></td>
+<td>TLS validation prevents MITM; limited ARP spoofing detection</td>
+<td><strong>GAP:</strong> Deploy ARP spoofing detection (ArpWatch); implement certificate pinning; add network anomaly detection for MITM</td>
+</tr>
+<tr>
+<td>T1558</td>
+<td>Steal or Forge Kerberos Tickets</td>
+<td><strong>MINIMAL</strong></td>
+<td>No Kerberos ticket monitoring (Event ID 4769, 4768)</td>
+<td><strong>GAP:</strong> Enable Kerberos event logging; implement golden/silver ticket detection; add Kerberos encryption downgrade monitoring</td>
+</tr>
+<tr>
+<td>T1539</td>
+<td>Steal Web Session Cookie</td>
+<td><strong>MINIMAL</strong></td>
+<td>No browser cookie theft monitoring</td>
+<td><strong>GAP:</strong> Implement session hijacking detection; add browser telemetry; deploy session binding (IP, User-Agent validation)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additional Unmonitored Techniques:</strong></p>
+<ul>
+<li><strong>T1556</strong> (Modify Authentication Process): Partial coverage under Persistence</li>
+<li><strong>T1040</strong> (Network Sniffing): No promiscuous mode detection</li>
+<li><strong>T1111</strong> (Multi-Factor Authentication Interception): No MFA push notification monitoring</li>
+<li><strong>T1606</strong> (Forge Web Credentials): No SAML token forgery detection</li>
+<li><strong>T1649</strong> (Steal or Forge Authentication Certificates): No certificate theft detection</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong brute force detection, LSASS access monitoring, credential dumping detection</p>
+<p><strong>Gaps:</strong> Minimal Kerberos monitoring, limited password store coverage, no session hijacking detection</p>
+<p><strong>Priority:</strong> Enable Kerberos logging (immediate), implement session monitoring (Q1 2026)</p>
+<hr />
+<h2 id="ta0007-discovery">TA0007 - Discovery<a class="headerlink" href="#ta0007-discovery" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1087</td>
+<td>Account Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Command-line monitoring detects: net user, net group, whoami, id, getent; Wazuh tracks LDAP queries (Event ID 4662); Active Directory enumeration alerts; detection of account enumeration via SMB</td>
+<td>Add baseline of legitimate discovery activity; implement honeypot accounts for detection</td>
+</tr>
+<tr>
+<td>T1010</td>
+<td>Application Window Discovery</td>
+<td><strong>PARTIAL</strong></td>
+<td>Limited GUI enumeration detection; process monitoring tracks tasklist, Get-Process</td>
+<td><strong>GAP:</strong> Implement GUI interaction monitoring; add screenshot detection; deploy user activity analytics</td>
+</tr>
+<tr>
+<td>T1217</td>
+<td>Browser Bookmark Discovery</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors browser profile access; limited content analysis of bookmarks</td>
+<td><strong>GAP:</strong> Deploy browser telemetry collection; add bookmark enumeration detection; implement user behavior analytics</td>
+</tr>
+<tr>
+<td>T1482</td>
+<td>Domain Trust Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Active Directory logs LDAP queries (Event ID 4662); Wazuh monitors nltest, dsquery commands; detection of trust enumeration; SMB session monitoring</td>
+<td>Implement AD enumeration baseline; add honeypot OUs for detection</td>
+</tr>
+<tr>
+<td>T1083</td>
+<td>File and Directory Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon/auditd tracks dir, ls, find commands; detection of recursive directory traversal; monitoring of file enumeration in sensitive directories; alerts on rapid file system scanning</td>
+<td>Add file access behavioral baseline; implement honeypot files for detection</td>
+</tr>
+<tr>
+<td>T1046</td>
+<td>Network Service Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Suricata/Snort detect port scans (SYN scans, full connects, UDP scans); pfSense logs scan activity; Splunk correlates reconnaissance patterns; detection of network sweeps</td>
+<td>Deploy deception technology (honeypots); implement port scan response automation</td>
+</tr>
+<tr>
+<td>T1049</td>
+<td>System Network Connections Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon Event ID 3 logs network connections; auditd tracks netstat commands; monitoring of connection enumeration; detection of network profiling</td>
+<td>Add network connection baseline; implement connection anomaly detection</td>
+</tr>
+<tr>
+<td>T1018</td>
+<td>Remote System Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Suricata/Snort detect network sweeps; detection of ping sweeps, ARP scans; monitoring of network reconnaissance tools (nmap, masscan); pfSense logs scanning activity</td>
+<td>Deploy network segmentation alerting; add internal reconnaissance detection</td>
+</tr>
+<tr>
+<td>T1082</td>
+<td>System Information Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Command-line monitoring tracks: systeminfo, uname, hostname, Get-ComputerInfo; detection of system profiling commands; monitoring of WMI queries for system info</td>
+<td>Implement discovery command baseline; add system information honeypot values</td>
+</tr>
+<tr>
+<td>T1016</td>
+<td>System Network Configuration Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Monitors ipconfig, ifconfig, ip addr, route, netsh commands; detection of network adapter enumeration; tracking of routing table queries</td>
+<td>Add network configuration change alerting; implement network topology obfuscation</td>
+</tr>
+<tr>
+<td>T1007</td>
+<td>System Service Discovery</td>
+<td><strong>PARTIAL</strong></td>
+<td>Monitors sc query, systemctl, service commands; limited behavioral analysis</td>
+<td><strong>GAP:</strong> Implement service enumeration baseline; add service discovery anomaly detection</td>
+</tr>
+<tr>
+<td>T1518.002</td>
+<td>Backup Software Discovery</td>
+<td><strong>FULL</strong></td>
+<td>Sysmon/auditd tracks backup software processes; Command-line monitoring detects backup enumeration queries; Registry monitoring (HKLM\SOFTWARE\Backup); Process monitoring for backup service queries (Get-Service, sc query)</td>
+<td>Implement backup software inventory baseline; add behavioral detection for rapid backup enumeration; deploy honeypot backup configurations</td>
+</tr>
+<tr>
+<td>T1680</td>
+<td>Local Storage Discovery</td>
+<td><strong>PARTIAL</strong></td>
+<td>Command-line monitoring detects df, mount, lsblk, fsutil commands; auditd logs storage queries on Linux; limited behavioral baseline for storage enumeration patterns</td>
+<td><strong>GAP:</strong> Implement behavioral baseline for normal storage discovery; Add detection for rapid enumeration (&gt;10 queries/min); Deploy SIEM correlation for unusual storage profiling patterns; Add cloud storage enumeration detection</td>
+</tr>
+<tr>
+<td>T1124</td>
+<td>System Time Discovery</td>
+<td><strong>PARTIAL</strong></td>
+<td>Limited time discovery monitoring (net time, w32tm)</td>
+<td><strong>GAP:</strong> Add time synchronization monitoring; implement time-based behavioral analysis</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additional Unmonitored Discovery Techniques:</strong></p>
+<ul>
+<li><strong>T1069</strong> (Permission Groups Discovery): Partial coverage; need comprehensive group enumeration detection</li>
+<li><strong>T1057</strong> (Process Discovery): Process listing commands monitored; behavioral analysis needed</li>
+<li><strong>T1012</strong> (Query Registry): Limited registry query monitoring outside of modifications</li>
+<li><strong>T1518</strong> (Software Discovery): Vulnerability scanners provide inventory; T1518.002 (Backup Software Discovery) fully covered via process/registry monitoring; limited detection for other software enumeration patterns</li>
+<li><strong>T1135</strong> (Network Share Discovery): No share enumeration monitoring (net view, net share)</li>
+<li><strong>T1201</strong> (Password Policy Discovery): No password policy query detection (net accounts)</li>
+<li><strong>T1120</strong> (Peripheral Device Discovery): No device enumeration monitoring</li>
+<li><strong>T1614</strong> (System Location Discovery): No geolocation discovery monitoring</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong network reconnaissance detection, comprehensive command-line monitoring, AD enumeration tracking</p>
+<p><strong>Gaps:</strong> Limited share enumeration detection, minimal peripheral discovery monitoring, no password policy query detection, local storage discovery (T1680) needs behavioral baseline</p>
+<p><strong>Priority:</strong> Implement share enumeration monitoring (Q1 2026), add peripheral device tracking (Q2 2026), enhance local storage discovery detection (T1680 - Q1 2026)</p>
+<hr />
+<h2 id="ta0008-lateral-movement">TA0008 - Lateral Movement<a class="headerlink" href="#ta0008-lateral-movement" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1210</td>
+<td>Exploitation of Remote Services</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata/Snort signatures detect known exploits (EternalBlue, BlueKeep); vulnerability scanning identifies exploitable services; limited zero-day detection</td>
+<td><strong>GAP:</strong> Deploy exploit detection via behavioral analysis; implement exploit mitigation features; add honeypot services</td>
+</tr>
+<tr>
+<td>T1021.001</td>
+<td>Remote Desktop Protocol</td>
+<td><strong>FULL</strong></td>
+<td>Suricata monitors RDP traffic; Wazuh tracks RDP sessions (Event ID 4624 type 10, 4625); Splunk correlates unusual RDP patterns; detection of RDP from unusual sources; monitoring of RDP tunneling</td>
+<td>Implement RDP gateway with MFA; add session recording; deploy geographic restrictions</td>
+</tr>
+<tr>
+<td>T1021.002</td>
+<td>SMB/Windows Admin Shares</td>
+<td><strong>FULL</strong></td>
+<td>Suricata monitors SMB traffic; Event logs track admin share access (Event ID 5140, 5145); Wazuh alerts on lateral movement via PsExec, WMIC; detection of administrative tool usage</td>
+<td>Deploy SMB signing enforcement; implement network segmentation; add admin share access baseline</td>
+</tr>
+<tr>
+<td>T1021.004</td>
+<td>SSH</td>
+<td><strong>FULL</strong></td>
+<td>Comprehensive SSH logging to SIEM; Wazuh monitors all SSH sessions; detection of: key-based auth anomalies, unusual SSH sources, privilege escalation via sudo; Splunk tracks SSH lateral movement patterns</td>
+<td>Implement SSH certificate authority; add session recording; deploy jump host architecture</td>
+</tr>
+<tr>
+<td>T1080</td>
+<td>Taint Shared Content</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors shared directories; detection of file modifications on network shares; limited content tampering detection</td>
+<td><strong>GAP:</strong> Implement share access behavioral baseline; add file integrity verification; deploy honeypot files on shares</td>
+</tr>
+<tr>
+<td>T1563</td>
+<td>Remote Service Session Hijacking</td>
+<td><strong>PARTIAL</strong></td>
+<td>Limited session hijacking detection; monitoring of unusual session activity</td>
+<td><strong>GAP:</strong> Implement session validation (IP, User-Agent binding); add session termination on anomaly; deploy privileged session monitoring</td>
+</tr>
+<tr>
+<td>T1021.006</td>
+<td>Windows Remote Management</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited WinRM monitoring (Event ID 4688 for wsmprovhost.exe)</td>
+<td><strong>GAP:</strong> Enable comprehensive WinRM logging (Event ID 6, 91, 168); implement WinRM usage baseline; add remote PowerShell detection</td>
+</tr>
+<tr>
+<td>T1072</td>
+<td>Software Deployment Tools</td>
+<td><strong>MINIMAL</strong></td>
+<td>No SCCM/deployment tool monitoring</td>
+<td><strong>GAP:</strong> Implement deployment tool activity monitoring; add unauthorized deployment detection; deploy approval workflow</td>
+</tr>
+<tr>
+<td>T1550</td>
+<td>Use Alternate Authentication Material</td>
+<td><strong>MINIMAL</strong></td>
+<td>No pass-the-hash/pass-the-ticket detection</td>
+<td><strong>GAP:</strong> Enable detection of: pass-the-hash (Event ID 4624/4625 type 9), pass-the-ticket (Kerberos anomalies), token theft; deploy Credential Guard</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong RDP/SMB/SSH monitoring, comprehensive authentication logging, lateral movement detection</p>
+<p><strong>Gaps:</strong> Minimal WinRM visibility, no pass-the-hash detection, limited deployment tool monitoring</p>
+<p><strong>Priority:</strong> Implement pass-the-hash detection (immediate), enable WinRM logging (Q1 2026)</p>
+<hr />
+<h2 id="ta0009-collection">TA0009 - Collection<a class="headerlink" href="#ta0009-collection" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1560</td>
+<td>Archive Collected Data</td>
+<td><strong>PARTIAL</strong></td>
+<td>Process monitoring detects: 7zip, WinRAR, tar, zip commands; Wazuh tracks archive creation in suspicious locations; limited behavioral analysis of data staging</td>
+<td><strong>GAP:</strong> Implement data staging detection via file access patterns; add archive content analysis; deploy DLP for sensitive data archiving</td>
+</tr>
+<tr>
+<td>T1123</td>
+<td>Audio Capture</td>
+<td><strong>PARTIAL</strong></td>
+<td>Limited microphone access monitoring; process monitoring detects audio recording tools</td>
+<td><strong>GAP:</strong> Implement audio device access controls; add microphone usage monitoring; deploy privacy controls</td>
+</tr>
+<tr>
+<td>T1005</td>
+<td>Data from Local System</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM detects mass file access; limited data exfiltration staging detection; monitoring of file access in sensitive directories</td>
+<td><strong>GAP:</strong> Deploy DLP for sensitive file access; implement data classification; add user entity behavior analytics (UEBA) for abnormal file access</td>
+</tr>
+<tr>
+<td>T1039</td>
+<td>Data from Network Shared Drive</td>
+<td><strong>MINIMAL</strong></td>
+<td>No dedicated network share access monitoring beyond authentication logs</td>
+<td><strong>GAP:</strong> Implement share access behavioral baseline; deploy file access auditing on shares; add DLP for share-based exfiltration</td>
+</tr>
+<tr>
+<td>T1025</td>
+<td>Data from Removable Media</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh monitors USB device insertion (Event ID 2003); limited file access monitoring from removable media</td>
+<td><strong>GAP:</strong> Implement removable media file access tracking; add DLP for USB data transfers; deploy device control policies</td>
+</tr>
+<tr>
+<td>T1074</td>
+<td>Data Staged</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited staging location monitoring; file creation in Temp directories tracked</td>
+<td><strong>GAP:</strong> Implement behavioral detection for data staging; add anomaly detection for large file consolidation; deploy honeypot staging directories</td>
+</tr>
+<tr>
+<td>T1213.006</td>
+<td>Data from Information Repositories: Databases</td>
+<td><strong>MINIMAL</strong></td>
+<td>No database-specific monitoring implemented; limited visibility into database query patterns or mass data extraction</td>
+<td><strong>GAP:</strong> Implement database access logging (MySQL/PostgreSQL audit logs); Deploy query monitoring for mass SELECT statements; Add SIEM correlation for unusual database access patterns; Implement database exfiltration detection (large result sets, off-hours queries); Consider if databases are in lab scope</td>
+</tr>
+<tr>
+<td>T1114</td>
+<td>Email Collection</td>
+<td><strong>MINIMAL</strong></td>
+<td>No email access monitoring (Outlook PST, webmail)</td>
+<td><strong>GAP:</strong> Deploy email access auditing; implement mailbox audit logging; add email exfiltration detection</td>
+</tr>
+<tr>
+<td>T1115</td>
+<td>Clipboard Data</td>
+<td><strong>NOT APPLICABLE</strong></td>
+<td>No clipboard monitoring capabilities</td>
+<td><strong>GAP:</strong> Implement clipboard access detection; add clipboard content analysis for sensitive data</td>
+</tr>
+<tr>
+<td>T1530</td>
+<td>Data from Cloud Storage</td>
+<td><strong>NOT APPLICABLE</strong></td>
+<td>Minimal cloud storage usage; no cloud access monitoring</td>
+<td>N/A or deploy cloud access security broker (CASB) if cloud usage increases</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Major Unmonitored Collection Techniques:</strong></p>
+<ul>
+<li><strong>T1213.006</strong> (Data from Databases): No database query monitoring or exfiltration detection</li>
+<li><strong>T1056</strong> (Input Capture): No keylogger detection, credential input monitoring</li>
+<li><strong>T1113</strong> (Screen Capture): No screenshot detection capabilities</li>
+<li><strong>T1125</strong> (Video Capture): No webcam access monitoring</li>
+<li><strong>T1119</strong> (Automated Collection): Limited detection of automated data gathering scripts</li>
+<li><strong>T1185</strong> (Browser Session Hijacking): No browser extension/plugin monitoring for data theft</li>
+<li><strong>T1213</strong> (Data from Information Repositories): T1213.006 (Databases) not monitored; No SharePoint/wiki/documentation platform monitoring</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Basic archive detection, USB device monitoring, file access tracking</p>
+<p><strong>Gaps:</strong> Minimal DLP capabilities, no email collection detection, limited staging detection</p>
+<p><strong>Priority:</strong> Deploy DLP solution (Q2 2026), implement email auditing (Q1 2026), add UEBA for collection detection (Q2 2026)</p>
+<hr />
+<h2 id="ta0010-exfiltration">TA0010 - Exfiltration<a class="headerlink" href="#ta0010-exfiltration" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1020</td>
+<td>Automated Exfiltration</td>
+<td><strong>PARTIAL</strong></td>
+<td>pfSense monitors bandwidth usage; Prometheus tracks outbound traffic volume; Suricata detects large data transfers; threshold alerts for unusual upload rates</td>
+<td><strong>GAP:</strong> Implement behavioral baseline for normal data transfers; add time-series anomaly detection; deploy DLP for automated exfiltration prevention</td>
+</tr>
+<tr>
+<td>T1030</td>
+<td>Data Transfer Size Limits</td>
+<td><strong>PARTIAL</strong></td>
+<td>Network monitoring detects chunked transfers; Splunk analyzes transfer patterns; limited detection of data obfuscation via chunking</td>
+<td><strong>GAP:</strong> Implement transfer pattern analysis; add detection for slow exfiltration; deploy statistical analysis of outbound data sizes</td>
+</tr>
+<tr>
+<td>T1048</td>
+<td>Exfiltration Over Alternative Protocol</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata monitors non-standard protocols; pfSense logs unusual port usage; DNS tunneling detection via query analysis (Pi-hole); ICMP tunneling detection</td>
+<td><strong>GAP:</strong> Enhance DNS tunneling detection (entropy analysis, subdomain length); add steganography detection; implement protocol anomaly detection</td>
+</tr>
+<tr>
+<td>T1041</td>
+<td>Exfiltration Over C2 Channel</td>
+<td><strong>FULL</strong></td>
+<td>Suricata/Snort detect C2 beacon patterns; pfSense logs all outbound connections; MISP correlates known C2 IOCs; Cortex enriches suspicious IPs with threat intelligence; TheHive tracks C2 communications</td>
+<td>Deploy automated C2 blocking; implement beacon detection (jitter analysis); add domain generation algorithm (DGA) detection</td>
+</tr>
+<tr>
+<td>T1011</td>
+<td>Exfiltration Over Other Network Medium</td>
+<td><strong>MINIMAL</strong></td>
+<td>No Bluetooth/WiFi exfiltration monitoring</td>
+<td><strong>GAP:</strong> Implement wireless network monitoring; add Bluetooth device detection; deploy air-gapped network controls</td>
+</tr>
+<tr>
+<td>T1052</td>
+<td>Exfiltration Over Physical Medium</td>
+<td><strong>PARTIAL</strong></td>
+<td>USB device insertion monitored; limited file transfer tracking to removable media</td>
+<td><strong>GAP:</strong> Implement USB file transfer auditing; add DLP for removable media; deploy device control policies with allow/block lists</td>
+</tr>
+<tr>
+<td>T1567</td>
+<td>Exfiltration Over Web Service</td>
+<td><strong>MINIMAL</strong></td>
+<td>TLS inspection limited; no web service-specific exfiltration detection (Dropbox, Google Drive, Pastebin)</td>
+<td><strong>GAP:</strong> Deploy web service usage monitoring; implement cloud DLP; add web traffic categorization; monitor OAuth token usage</td>
+</tr>
+<tr>
+<td>T1029</td>
+<td>Scheduled Transfer</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited detection of scheduled exfiltration tasks</td>
+<td><strong>GAP:</strong> Correlate scheduled tasks with network activity; add time-based exfiltration pattern detection; implement job scheduler monitoring</td>
+</tr>
+<tr>
+<td>T1537</td>
+<td>Transfer Data to Cloud Account</td>
+<td><strong>MINIMAL</strong></td>
+<td>No cloud upload monitoring</td>
+<td><strong>GAP:</strong> Deploy CASB for cloud service monitoring; implement cloud DLP; add sanctioned vs. unsanctioned cloud service detection</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong C2 detection, DNS tunneling monitoring, bandwidth alerting</p>
+<p><strong>Gaps:</strong> Limited web service exfiltration detection, no physical medium file tracking, minimal cloud exfiltration monitoring</p>
+<p><strong>Priority:</strong> Deploy DLP capabilities (Q2 2026), implement web service monitoring (Q1 2026), add physical media auditing (Q1 2026)</p>
+<p><strong>Note on ATT&amp;CK v18.1 Updates:</strong></p>
+<ul>
+<li>T1681 (Search Threat Vendor Data): Reconnaissance technique; not directly detectable in lab environment (external attacker activity)</li>
+<li>T1677 (Poisoned Pipeline Execution): Not applicable unless CI/CD pipelines are in scope; see Execution section if implementing</li>
+</ul>
+<hr />
+<h2 id="ta0011-command-and-control">TA0011 - Command and Control<a class="headerlink" href="#ta0011-command-and-control" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1071</td>
+<td>Application Layer Protocol</td>
+<td><strong>FULL</strong></td>
+<td>Suricata/Snort analyze HTTP/HTTPS traffic patterns; pfSense logs all application protocols; Traefik access logs provide HTTP visibility; detection of C2 over HTTP/HTTPS, DNS, SMTP</td>
+<td>Deploy TLS inspection for encrypted C2; implement user-agent analysis; add HTTP header anomaly detection</td>
+</tr>
+<tr>
+<td>T1132</td>
+<td>Data Encoding</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata detects base64, hex encoding in traffic; limited entropy analysis; Splunk searches for encoded data patterns</td>
+<td><strong>GAP:</strong> Implement comprehensive entropy analysis; add multi-layer decoding detection; deploy ML-based encoding detection</td>
+</tr>
+<tr>
+<td>T1001</td>
+<td>Data Obfuscation</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata monitors traffic anomalies; limited protocol obfuscation detection; detection of steganography signatures</td>
+<td><strong>GAP:</strong> Deploy steganography detection tools; implement protocol conformance validation; add traffic normalization analysis</td>
+</tr>
+<tr>
+<td>T1568</td>
+<td>Dynamic Resolution</td>
+<td><strong>FULL</strong></td>
+<td>Pi-hole logs all DNS queries; pfSense DNS logs forwarded to SIEM; Suricata detects DGA patterns; detection of: fast flux, domain generation algorithms, DNS tunneling; MISP correlates suspicious domains</td>
+<td>Enhance DGA detection with ML models; implement NXDomain tracking; add DNS reputation scoring</td>
+</tr>
+<tr>
+<td>T1573</td>
+<td>Encrypted Channel</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata analyzes TLS metadata (certificate details, cipher suites, JA3 fingerprints); limited TLS decryption capabilities; detection of unusual TLS patterns</td>
+<td><strong>GAP:</strong> Deploy TLS inspection infrastructure; implement certificate anomaly detection; add JA3/JA3S fingerprint threat intelligence</td>
+</tr>
+<tr>
+<td>T1571</td>
+<td>Non-Standard Port</td>
+<td><strong>FULL</strong></td>
+<td>Suricata/pfSense detect protocol-port mismatches (HTTP on 8443, SSH on 443); Splunk correlates unusual port usage; detection of port obfuscation; monitoring of all non-standard service ports</td>
+<td>Add port usage behavioral baseline; implement service fingerprinting; deploy protocol conformance validation</td>
+</tr>
+<tr>
+<td>T1095</td>
+<td>Non-Application Layer Protocol</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata monitors ICMP tunneling; pfSense logs raw socket connections; limited detection of custom protocols</td>
+<td><strong>GAP:</strong> Implement comprehensive ICMP analysis; add GRE/IPIP tunnel detection; deploy protocol anomaly detection</td>
+</tr>
+<tr>
+<td>T1572</td>
+<td>Protocol Tunneling</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata detects SSH tunneling, DNS tunneling, VPN-over-DNS; limited detection of protocol encapsulation techniques</td>
+<td><strong>GAP:</strong> Deploy comprehensive tunneling detection; implement encapsulation pattern analysis; add behavioral baseline for tunneling</td>
+</tr>
+<tr>
+<td>T1090</td>
+<td>Proxy</td>
+<td><strong>FULL</strong></td>
+<td>pfSense logs proxy connections; Suricata detects SOCKS, HTTP proxy usage; detection of: internal proxy usage, unusual proxy chains, tor exit nodes</td>
+<td>Add proxy authentication enforcement; implement proxy reputation scoring; deploy allowlist for legitimate proxies</td>
+</tr>
+<tr>
+<td>T1219</td>
+<td>Remote Access Software</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited remote access tool detection (TeamViewer, AnyDesk, LogMeIn signatures in Suricata)</td>
+<td><strong>GAP:</strong> Deploy comprehensive remote access tool inventory; implement application control for remote access; add remote access behavioral baseline</td>
+</tr>
+<tr>
+<td>T1105</td>
+<td>Ingress Tool Transfer</td>
+<td><strong>PARTIAL</strong></td>
+<td>Monitors file downloads via HTTP/HTTPS; PowerShell DownloadFile detection; limited executable download analysis</td>
+<td><strong>GAP:</strong> Implement comprehensive download monitoring; add executable reputation checking; deploy sandbox for downloaded files</td>
+</tr>
+<tr>
+<td>T1104</td>
+<td>Multi-Stage Channels</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited multi-stage C2 detection</td>
+<td><strong>GAP:</strong> Implement C2 session correlation across channels; add multi-protocol C2 detection; deploy behavioral analysis for staged communication</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additional Unmonitored C2 Techniques:</strong></p>
+<ul>
+<li><strong>T1102</strong> (Web Service): Limited detection of C2 over legitimate web services (Twitter, GitHub, Pastebin)</li>
+<li><strong>T1659</strong> (Content Injection): Minimal content injection detection in C2 channels</li>
+<li><strong>T1205</strong> (Traffic Signaling): No port knocking or traffic manipulation detection</li>
+<li><strong>T1665</strong> (Hide Infrastructure): Limited CDN/cloud fronting detection</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Strong DNS monitoring, proxy detection, non-standard port identification</p>
+<p><strong>Gaps:</strong> Limited TLS inspection, minimal remote access tool detection, no traffic signaling monitoring</p>
+<p><strong>Priority:</strong> Deploy TLS inspection (Q2 2026), implement remote access tool controls (Q1 2026), add web service C2 detection (Q2 2026)</p>
+<hr />
+<h2 id="ta0040-impact">TA0040 - Impact<a class="headerlink" href="#ta0040-impact" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Defense Status</th>
+<th>Lab Implementation</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1485</td>
+<td>Data Destruction</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM detects mass file deletion (&gt;50 files/min); monitoring of del, rm, Remove-Item commands; limited detection of secure wipe tools</td>
+<td><strong>GAP:</strong> Implement file deletion behavioral baseline; add volume shadow copy deletion detection; deploy immutable backups</td>
+</tr>
+<tr>
+<td>T1486</td>
+<td>Data Encrypted for Impact</td>
+<td><strong>FULL</strong></td>
+<td>Wazuh detects mass file modification (&gt;50 files/min); Shuffle ransomware workflow monitors: file extension changes (.encrypted, .locked), ransomware note creation (README.txt), encryption tool execution; automated containment via Active Response; sub-30-minute MTTR</td>
+<td>Deploy ransomware-specific behavioral detection; implement canary files for early detection; add automated network isolation</td>
+</tr>
+<tr>
+<td>T1490</td>
+<td>Inhibit System Recovery</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors backup file access; Event ID 524 (VSS deletion) alerts; limited vssadmin, wbadmin command detection</td>
+<td><strong>GAP:</strong> Implement comprehensive backup tampering detection; add volume shadow copy protection; deploy immutable backup verification</td>
+</tr>
+<tr>
+<td>T1498</td>
+<td>Network Denial of Service</td>
+<td><strong>PARTIAL</strong></td>
+<td>Suricata detects SYN floods, UDP floods; pfSense monitors bandwidth spikes; Prometheus alerts on connection exhaustion; limited distributed DDoS detection</td>
+<td><strong>GAP:</strong> Deploy comprehensive DDoS mitigation; implement rate limiting at firewall; add uplink provider DDoS protection</td>
+</tr>
+<tr>
+<td>T1496</td>
+<td>Resource Hijacking</td>
+<td><strong>FULL</strong></td>
+<td>Prometheus monitors CPU/memory anomalies; Grafana alerts on sustained high resource usage; Wazuh detects cryptomining processes (xmrig, cpuminer); detection of GPU mining activity; Checkmk infrastructure monitoring</td>
+<td>Add cryptomining network pattern detection; implement process reputation scoring; deploy GPU usage monitoring</td>
+</tr>
+<tr>
+<td>T1489</td>
+<td>Service Stop</td>
+<td><strong>FULL</strong></td>
+<td>Wazuh monitors service stop events (Event ID 7036); systemd service failures tracked; critical service protection alerts; detection of security service termination; automated service recovery</td>
+<td>Implement service stop approval workflow; add critical service health checks; deploy service dependency mapping</td>
+</tr>
+<tr>
+<td>T1657</td>
+<td>Financial Theft</td>
+<td><strong>NOT APPLICABLE</strong></td>
+<td>No financial transaction monitoring in scope</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>T1491</td>
+<td>Defacement</td>
+<td><strong>PARTIAL</strong></td>
+<td>Wazuh FIM monitors web directories; limited web content integrity verification</td>
+<td><strong>GAP:</strong> Implement website content baseline; add automated defacement detection; deploy web application integrity monitoring</td>
+</tr>
+<tr>
+<td>T1561</td>
+<td>Disk Wipe</td>
+<td><strong>MINIMAL</strong></td>
+<td>Limited detection of disk wipe tools (diskpart, dd, shred)</td>
+<td><strong>GAP:</strong> Implement disk modification monitoring; add MBR/boot sector protection; deploy bootloader integrity verification</td>
+</tr>
+<tr>
+<td>T1499</td>
+<td>Endpoint Denial of Service</td>
+<td><strong>PARTIAL</strong></td>
+<td>Resource exhaustion monitoring; process CPU/memory limits; limited fork bomb detection</td>
+<td><strong>GAP:</strong> Implement process spawn rate limiting; add resource quota enforcement; deploy fork bomb detection</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additional Unmonitored Impact Techniques:</strong></p>
+<ul>
+<li><strong>T1495</strong> (Firmware Corruption): No UEFI/BIOS integrity monitoring</li>
+<li><strong>T1529</strong> (System Shutdown/Reboot): Limited shutdown command monitoring</li>
+<li><strong>T1531</strong> (Account Access Removal): No bulk account deletion detection</li>
+</ul>
+<p><strong>Tactic Summary:</strong></p>
+<p><strong>Strengths:</strong> Excellent ransomware detection, strong resource hijacking monitoring, service stop protection</p>
+<p><strong>Gaps:</strong> Limited disk wipe detection, minimal defacement monitoring, no firmware integrity verification</p>
+<p><strong>Priority:</strong> Implement disk modification monitoring (Q1 2026), add defacement detection (Q1 2026), deploy firmware integrity checks (Q3 2026)</p>
+<hr />
+<h2 id="overall-coverage-summary">Overall Coverage Summary<a class="headerlink" href="#overall-coverage-summary" title="Permanent link">&para;</a></h2>
+<p><strong>Coverage by Tactic</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tactic</th>
+<th>Coverage</th>
+<th>Maturity</th>
+<th>Priority Enhancements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial Access</td>
+<td>67% (6/9)</td>
+<td>Strong</td>
+<td>SBOM tracking, content injection detection (T1659 existing)</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>67% (9/13)</td>
+<td>Strong</td>
+<td>WMI logging, container CLI/API (T1059.013), container security enhancement</td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td>37% (8/20)</td>
+<td>Moderate</td>
+<td>BITS monitoring, browser extension tracking, Office persistence, Python startup hooks (T1546.018)</td>
+</tr>
+<tr>
+<td>Privilege Escalation</td>
+<td>38% (5/13)</td>
+<td>Moderate</td>
+<td>Process injection detection, UAC bypass enhancement, container escape detection</td>
+</tr>
+<tr>
+<td>Defense Evasion</td>
+<td>21% (13/46)</td>
+<td>Weak</td>
+<td>Obfuscation analysis, pass-the-hash detection, alternate auth material monitoring, v18.1 techniques (T1678, T1679, T1036.012, T1562.013)</td>
+</tr>
+<tr>
+<td>Credential Access</td>
+<td>27% (4/15)</td>
+<td>Weak</td>
+<td>Kerberos monitoring, session hijacking detection, password store coverage</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>30% (10/32)</td>
+<td>Moderate</td>
+<td>Share enumeration, peripheral tracking, backup software (T1518.002 covered), local storage (T1680) baseline</td>
+</tr>
+<tr>
+<td>Lateral Movement</td>
+<td>56% (5/9)</td>
+<td>Strong</td>
+<td>Pass-the-hash detection, WinRM logging, deployment tool monitoring</td>
+</tr>
+<tr>
+<td>Collection</td>
+<td>20% (4/18)</td>
+<td>Weak</td>
+<td>DLP implementation, email auditing, UEBA, database monitoring (T1213.006)</td>
+</tr>
+<tr>
+<td>Exfiltration</td>
+<td>44% (4/9)</td>
+<td>Moderate</td>
+<td>DLP deployment, web service monitoring, physical media auditing</td>
+</tr>
+<tr>
+<td>Command and Control</td>
+<td>38% (6/16)</td>
+<td>Moderate</td>
+<td>TLS inspection, remote access tool controls, web service C2 detection</td>
+</tr>
+<tr>
+<td>Impact</td>
+<td>46% (6/13)</td>
+<td>Moderate</td>
+<td>Disk modification monitoring, defacement detection, firmware integrity</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Overall lab coverage: 30% (65 techniques of 216)</strong></p>
+<hr />
+<h2 id="key-changes-in-v181">Key Changes in v18.1<a class="headerlink" href="#key-changes-in-v181" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Change Type</th>
+<th>Count</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New Techniques</strong></td>
+<td>12</td>
+<td>T1059.013, T1213.006, T1678, T1546.018, T1562.013, T1680, T1036.012, T1677, T1681, T1679, T1518.002, T1204.005</td>
+</tr>
+<tr>
+<td><strong>Total Techniques</strong></td>
+<td>216</td>
+<td>Increased from 191 (13% growth)</td>
+</tr>
+<tr>
+<td><strong>Total Sub-techniques</strong></td>
+<td>475</td>
+<td>Increased from 385 (23% growth)</td>
+</tr>
+<tr>
+<td><strong>Lab Coverage Impact</strong></td>
+<td>-4%</td>
+<td>Coverage adjusted from 34% to 30% due to denominator increase</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="threat-intelligence-updates">Threat Intelligence Updates<a class="headerlink" href="#threat-intelligence-updates" title="Permanent link">&para;</a></h2>
+<p><strong>New Threat Actors (Update MISP):</strong></p>
+<ul>
+<li>G1053 - Storm-0501 (Ransomware operations)</li>
+<li>G1048 - UNC3886 (VMware/network device exploitation)</li>
+<li>G1052 - Contagious Interview (Supply chain via fake interviews)</li>
+<li>G1051 - Medusa Group (Ransomware)</li>
+<li>G1050 - Water Galura (APT/critical infrastructure)</li>
+<li>G1049 - AppleJeus (Cryptocurrency theft)</li>
+</ul>
+<p><strong>New Malware Families (Update IDS Signatures):</strong></p>
+<ul>
+<li>S1240 - RedLine Stealer</li>
+<li>S1242 - Qilin Ransomware</li>
+<li>S1244 - Medusa Ransomware</li>
+<li>S1111 - DarkGate Loader</li>
+<li>S1229 - Havoc C2 Framework</li>
+<li>S1247 - Embargo Ransomware</li>
+<li>S1245 - InvisibleFerret Backdoor</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
