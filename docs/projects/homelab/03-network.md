@@ -409,10 +409,11 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 </figure>
 
 ### Firewall Rule Table 
-<figure>
-    <img src="/Career_Projects/assets/screenshots/fw-rule-table.png" alt="pfSense Firewall Logs">
-    <figcaption>Lab Firewall Rules Table (partial)</figcaption>
+<figure class="image-large">
+  <img src="/Career_Projects/assets/screenshots/fw-rule-table.png" alt="pfSense Firewall Logs">
+  <figcaption>Lab Firewall Rules Table (partial)</figcaption>
 </figure>
+
 ---
 
 ## 3. Intrusion Detection/Prevention Solutions
