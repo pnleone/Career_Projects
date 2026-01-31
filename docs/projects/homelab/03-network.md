@@ -404,6 +404,12 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 
 #### FortiGate Rule Configuration
 <figure>
+    <img src="/Career_Projects/assets/screenshots/fw-rule-table.png" alt="Lab FW Rule Table">
+    <figcaption>Lab Firewall Rules Table (partial)</figcaption>
+</figure>
+
+### Firewall Rule Table 
+<figure>
     <img src="/Career_Projects/assets/screenshots/fortigate-rules.png" alt="pfSense Firewall Logs">
     <figcaption>FortiGate Rule Configuration</figcaption>
 </figure>
