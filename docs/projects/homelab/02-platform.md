@@ -277,7 +277,7 @@ Application Inventory: Per-host service mapping with version tracking
 
 <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/powerbi-overview.png" alt="Platform Overview">
+      <img src="/Career_Projects/assets/diagrams/powerbi-overview2.png" alt="Platform Overview">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Platform Overview.
       </figcaption>
@@ -285,7 +285,7 @@ Application Inventory: Per-host service mapping with version tracking
   </div>
 <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/powerbi-hosts.png" alt="Platform Overview">
+      <img src="/Career_Projects/assets/diagrams/powerbi-hosts2.png" alt="Host/Asset Overview">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Host/Asset Summary.
       </figcaption>
@@ -294,27 +294,37 @@ Application Inventory: Per-host service mapping with version tracking
 
 <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/powerbi-apps.png" alt="Platform Overview">
+      <img src="/Career_Projects/assets/diagrams/powerbi-apps2.png" alt="Application Overview">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Application Overview.
       </figcaption>
     </figure>
   </div>
 
+ 
 <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/powerbi-ipam.png" alt="IPAM Overview">
+      <img src="/Career_Projects/assets/diagrams/powerbi-ipam2.png" alt="IPAM Overview">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         IP Address Overview.
       </figcaption>
     </figure>
   </div>  
 
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-fw-rules.png" alt="FW Rules Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Firewall Rules Overview.
+      </figcaption>
+    </figure>
+  </div>
+
 ### 1.10 OS Platform and Distribution/Edition Summary
 
 <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/powerbi-os.png" alt="OS Platform and Distribution/Edition Summary">
+      <img src="/Career_Projects/assets/diagrams/powerbi-os2.png" alt="OS Platform and Distribution/Edition Summary">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Host OS Overview.
       </figcaption>
