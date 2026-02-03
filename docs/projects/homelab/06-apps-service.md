@@ -938,18 +938,14 @@ Patch management is a critical component of defense-in-depth strategy, directly 
 
 ### Linux Software Management - PatchMon
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>
-      PatchMon provides enterprise-grade visibility into Linux package states across Ubuntu, Debian, RHEL, CentOS, and Fedora systems. The platform monitors 30+ hosts via native package managers (apt, yum, dnf), tracking 5,000+ installed packages and correlating available updates with CVE databases to prioritize security-critical patches.
-    </p>
-    <p><strong>Key Features:</strong></p>
-    <ul>
-      <li>Centralized inventory eliminates shadow IT by discovering all installed packages</li>
-      <li>CVE mapping enables risk-based patch prioritization</li>
-      <li>Historical tracking demonstrates continuous security posture improvement</li>
-    </ul>
-  </div>
+PatchMon provides enterprise-grade visibility into Linux package states across Ubuntu, Debian, RHEL, CentOS, and Fedora systems. The platform monitors 30+ hosts via native package managers (apt, yum, dnf), tracking 5,000+ installed packages and correlating available updates with CVE databases to prioritize security-critical patches.
+
+Key Features:
+
+- Centralized inventory eliminates shadow IT by discovering all installed packages
+- CVE mapping enables risk-based patch prioritization
+- Historical tracking demonstrates continuous security posture improvement
+
  
 **Technical Implementation:**
 
