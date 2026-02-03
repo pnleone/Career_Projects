@@ -273,7 +273,7 @@ DIVIDE(
    - Transaction percentage distribution
 
 <figure>
-  <img src="/Career_Projects/assets/diagrams/bi-powerbi-main.png" alt="Power BI Main Dashboard" class="image-large">
+  <img src="/Career_Projects/assets/diagrams/bi-powerbi-main.png" alt="Power BI Main Dashboard">
   <figcaption>Power BI Main Dashboard</figcaption>
 </figure>
 
@@ -307,7 +307,7 @@ DIVIDE(
 - Drill-through: Product-level transaction details
 
 <figure>
-  <img src="/Career_Projects/assets/diagrams/bi-powerbi-product.png" alt="Power BI Product Dashboard" class="image-large">
+  <img src="/Career_Projects/assets/diagrams/bi-powerbi-product.png" alt="Power BI Product Dashboard">
   <figcaption>Power BI Product Analytics Dashboard</figcaption>
 </figure>
 
