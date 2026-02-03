@@ -1,6 +1,8 @@
 # Business Intelligence & Data Analytics
 
+<div class="image-large">
 <img src="/Career_Projects/assets/misc/bi-logo.png" alt="BI-Logo">
+</div>
 
 End-to-end BI implementation demonstrating data engineering, modeling, and visualization capabilities. Multi-platform architecture spanning SQL Server, Excel Power Query, and Power BI with advanced DAX time intelligence and relational integrity controls.
 
@@ -16,6 +18,7 @@ End-to-end BI implementation demonstrating data engineering, modeling, and visua
 | Business Intelligence | Power BI, Excel Pivot Tables | Dashboard design, DAX, time intelligence |
 | Data Visualization | Power BI visuals, Excel charts | KPI design, interactive filtering, drill-through |
 | Programming | DAX, SQL, M (Power Query) | Measure creation, query optimization, data transformation |
+
 ---
 
 ## Project Overview
@@ -181,7 +184,7 @@ GO
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/bi-excel-reg.png" alt="Regional Pivot Analysis">
+      <img src="/Career_Projects/assets/diagrams/bi-pivot-reg.png" alt="Regional Pivot Analysis">
       <figcaption>Regional Performance Pivot Table</figcaption>
     </figure>
   </div>
@@ -232,7 +235,7 @@ DIVIDE(
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/bi-excel-cal.png" alt="Time Intelligence Pivot">
+      <img src="/Career_Projects/assets/diagrams/bi-pivot-time.png" alt="Time Intelligence Pivot">
       <figcaption>DAX Time Intelligence Measures</figcaption>
     </figure>
   </div>
