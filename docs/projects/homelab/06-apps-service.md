@@ -898,20 +898,11 @@ Nessus performs authenticated scans against key infrastructure hosts representin
 #### Example Remediation
 
 **Initial Scan:**
-
-<div class="two-col-right">
-  <div class="text-col">
-    <p><strong>Debian Linux Package Vulnerabilities:</strong></p>
-    <ul>
-      <li>High/Medium CVSS rating</li>
-      <li>Multiple outdated packages identified</li>
-      <li>CVE details and remediation guidance provided</li>
-    </ul>
-  </div>
-
-  <div class="image-col">
-
-
+Debian Linux Package Vulnerabilities:
+- High/Medium CVSS rating
+- Multiple outdated packages identified
+- CVE details and remediation guidance provided
+  
 **Detailed Vulnerability Reports:**
 
 ![Nessus Vulnerability Report 1](/Career_Projects/assets/screenshots/nessus-before.png)
