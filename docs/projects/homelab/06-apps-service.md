@@ -50,7 +50,7 @@ This service architecture mirrors production enterprise environments, providing 
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/heimdall-dashboard.png" alt="Heimdall Dashboard Screenshot">
+      <img src="/Career_Projects/assets/screenshots/heimdall.png" alt="Heimdall Dashboard Screenshot">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Heimdall Dashboard Overview
       </figcaption>
@@ -73,7 +73,7 @@ This service architecture mirrors production enterprise environments, providing 
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/dns-architecture.png" alt="DNS Architecture Diagram">
+      <img src="/Career_Projects/assets/diagrams/dns.png" alt="DNS Architecture Diagram">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Three-Tier DNS Architecture
       </figcaption>
@@ -403,12 +403,7 @@ Host stepca
   </div>
 
   <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/screenshots/vscode-remote-ssh.png" alt="VS Code Remote SSH">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        VS Code Remote SSH Integration
-      </figcaption>
-    </figure>
+   
   </div>
 </div>
 
@@ -634,7 +629,7 @@ For services that do not natively support HTTPS or cannot integrate with the lab
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/traefik-dashboard.png" alt="Traefik Dashboard">
+      <img src="/Career_Projects/assets/screenshots/traefik.png" alt="Traefik Dashboard">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Traefik Dashboard Overview
       </figcaption>
@@ -818,7 +813,7 @@ OpenVAS (Open Vulnerability Assessment System) provides comprehensive vulnerabil
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/openvas-tls-report.png" alt="OpenVAS TLS Report">
+      <img src="/Career_Projects/assets/screenshots/tls-cert.png" alt="OpenVAS TLS Report">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         OpenVAS TLS/Certificate Scan Results
       </figcaption>
@@ -828,17 +823,11 @@ OpenVAS (Open Vulnerability Assessment System) provides comprehensive vulnerabil
 
 **OS and Service Fingerprinting:**
 
-![OpenVAS OS Fingerprinting](/Career_Projects/assets/screenshots/openvas-os-fingerprint.png)
-
-**Sample Host Report:**
-
-![OpenVAS Host Report](/Career_Projects/assets/screenshots/openvas-host-report.png)
+![OpenVAS OS Fingerprinting](/Career_Projects/assets/screenshots/os-fp.png)
 
 **Proxmox Host Scan Results:**
 
-![OpenVAS Proxmox Scan - Before](/Career_Projects/assets/screenshots/openvas-proxmox-before.png)
-
-![OpenVAS Proxmox Scan - After](/Career_Projects/assets/screenshots/openvas-proxmox-after.png)
+![OpenVAS Proxmox Scan](/Career_Projects/assets/screenshots/openvas-results.png)
 
 Results from a scan on Proxmox host. After the initial scan, updates to address the critical vulnerability were downloaded and applied.
 
@@ -921,30 +910,16 @@ Nessus performs authenticated scans against key infrastructure hosts representin
   </div>
 
   <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/screenshots/nessus-initial-scan.png" alt="Nessus Initial Scan">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Initial Scan - Package Vulnerabilities
-      </figcaption>
-    </figure>
-  </div>
-</div>
+
 
 **Detailed Vulnerability Reports:**
 
-![Nessus Vulnerability Report 1](/Career_Projects/assets/screenshots/nessus-vuln-report-1.png)
-
-![Nessus Vulnerability Report 2](/Career_Projects/assets/screenshots/nessus-vuln-report-2.png)
-
-![Nessus Vulnerability Report 3](/Career_Projects/assets/screenshots/nessus-vuln-report-3.png)
+![Nessus Vulnerability Report 1](/Career_Projects/assets/screenshots/nessus-before.png)
 
 **Follow-up Scan After Remediation:**
 
-![Nessus Post-Remediation Scan 1](/Career_Projects/assets/screenshots/nessus-post-remediation-1.png)
+![Nessus Post-Remediation Scan 1](/Career_Projects/assets/screenshots/nessus-after.png)
 
-![Nessus Post-Remediation Scan 2](/Career_Projects/assets/screenshots/nessus-post-remediation-2.png)
-
-![Nessus Post-Remediation Scan 3](/Career_Projects/assets/screenshots/nessus-post-remediation-3.png)
 
 Removal of all Debian Linux package vulnerabilities. Only remaining identified vulnerability higher than "low" is a false positive related to internal lab certificate issued by an "unknown" CA.
 
@@ -984,17 +959,7 @@ Patch management is a critical component of defense-in-depth strategy, directly 
       <li>Historical tracking demonstrates continuous security posture improvement</li>
     </ul>
   </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/diagrams/patchmon-logo.png" alt="PatchMon Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        PatchMon Multi-Platform Patch Management
-      </figcaption>
-    </figure>
-  </div>
-</div>
-
+ 
 **Technical Implementation:**
 
 - **Agent-Based Monitoring:** Lightweight agents poll package managers every 6 hours for update availability
@@ -1043,19 +1008,14 @@ Patch management is a critical component of defense-in-depth strategy, directly 
 
 #### Initial Overview - Pre-Patching
 
-![PatchMon Overview - Before](/Career_Projects/assets/screenshots/patchmon-overview-before.png)
+![PatchMon Overview](/Career_Projects/assets/screenshots/patchmon-overview.png)
 
-![PatchMon Overview - After](/Career_Projects/assets/screenshots/patchmon-overview-after.png)
 
 #### Initial Host Scan
 
 **Host: parrot, parrot-security-7, 6.12.57+deb13-amd64**
 
-![PatchMon Parrot Initial 1](/Career_Projects/assets/screenshots/patchmon-parrot-initial-1.png)
-
-![PatchMon Parrot Initial 2](/Career_Projects/assets/screenshots/patchmon-parrot-initial-2.png)
-
-![PatchMon Parrot Initial 3](/Career_Projects/assets/screenshots/patchmon-parrot-initial-3.png)
+![PatchMon Parrot Initial 1](/Career_Projects/assets/screenshots/patchmon-before.png)
 
 **Outdated packages:** 156, **Security updates:** 27
 
@@ -1063,9 +1023,7 @@ Patch management is a critical component of defense-in-depth strategy, directly 
 
 **Host: parrot, parrot-security-7.1, 6.17.13+2-amd64**
 
-![PatchMon Parrot After 1](/Career_Projects/assets/screenshots/patchmon-parrot-after-1.png)
-
-![PatchMon Parrot After 2](/Career_Projects/assets/screenshots/patchmon-parrot-after-2.png)
+![PatchMon Parrot After 1](/Career_Projects/assets/screenshots/patchmon-after.png)
 
 **Outdated packages:** 0, **Security updates:** 0
 

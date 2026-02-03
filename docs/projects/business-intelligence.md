@@ -51,22 +51,22 @@ Selected complementary tools to address specific stakeholder needs while maintai
 **Architecture Benefits:**
 
 1. **SQL Server as Single Source of Truth**
-   - Centralized storage eliminates data silos
-   - Enforces referential integrity via foreign key constraints
-   - Provides audit trail with transaction logging
-   - Supports concurrent access (10+ simultaneous users)
+- Centralized storage eliminates data silos
+- Enforces referential integrity via foreign key constraints
+- Provides audit trail with transaction logging
+- Supports concurrent access (10+ simultaneous users)
 
 2. **Excel for Transitional Users**
-   - Reduces change management friction (familiar tool)
-   - Power Query enables self-service ETL without coding
-   - DAX measures provide advanced analytics without leaving Excel
-   - Offline analysis capability for remote locations
+- Reduces change management friction (familiar tool)
+- Power Query enables self-service ETL without coding
+- DAX measures provide advanced analytics without leaving Excel
+- Offline analysis capability for remote locations
 
 3. **Power BI for Visual Analytics**
-   - Interactive dashboards reduce time-to-insight from days to minutes
-   - Mobile app enables field managers to monitor store performance on-the-go
-   - Natural language Q&A lowers barrier to entry for non-technical users
-   - Scheduled refresh automates monthly reporting cycles
+- Interactive dashboards reduce time-to-insight from days to minutes
+- Mobile app enables field managers to monitor store performance on-the-go
+- Natural language Q&A lowers barrier to entry for non-technical users
+- Scheduled refresh automates monthly reporting cycles
 
 ---
 
@@ -186,7 +186,7 @@ Star schema with 5 dimension tables and 2 fact tables. Total row count: 280,201 
 **Database Diagram:**
 
 <figure>
-  <img src="/Career_Projects/assets/diagrams/bi-sql-rel.png" alt="SQL Server Database Diagram" class="image-large">
+  <img src="/Career_Projects/assets/diagrams/bi-sql-rel.png" alt="SQL Server Database Diagram">
   <figcaption>SQL Server 2022 Database Relationships</figcaption>
 </figure>
 
