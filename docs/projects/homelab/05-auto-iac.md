@@ -748,8 +748,6 @@ n8n is a self-hosted, low-code workflow automation platform enabling visual work
 - Daily threat Intelligence Alerts
 - Ansible Playbook automation
 
-**Diagram Placeholder: n8n Dashboard Screenshot**
-
 ---
 
 ### 5.2 Workflow 1: Ansible Playbook Automation
@@ -779,7 +777,12 @@ This automated workflow runs two playbooks, a weekly schedule and performs a con
 | Discord Webhook | Send formatted message | Alert on completion |
 | Error Handler | Catch failures; send alert | Notify on errors |
 
-**Diagram Placeholder: n8n Ansible Workflow Screenshot**
+<figure class=image-large>
+      <img src="/Career_Projects/assets/screenshots/n8n-ansible.png" alt="n8n Ansible Playbook Workflow">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        n8n Ansible Playbook Workflow.
+      </figcaption>
+    </figure>
 
 **Audit Playbook Output (JSON):**
 ```json
@@ -808,117 +811,122 @@ This automated workflow runs two playbooks, a weekly schedule and performs a con
 - Provides audit trail via GitHub commits
 - Immediate notification of issues via Discord
 
-**Diagram Placeholder: n8n Workflow Results Screenshots (2 images)**
+<figure class=image-large>
+      <img src="/Career_Projects/assets/screenshots/n8n-ansible-results.png" alt="n8n Anisible Results">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        n8n Ansible Playbook Results/Notification.
+      </figcaption>
+    </figure>
 
 **JSON Output Example**
 
 ```json
-PLAY [Audit system info] *******************************************************
+    PLAY [Audit system info] *******************************************************
 
-TASK [Gathering Facts] *********************************************************
-ok: [web.home.com]
-ok: [192.168.1.136]
-ok: [unbound.home.com]
-ok: [bind.home.com]
-ok: [192.168.1.250]
-ok: [uptimek.home.com]
-ok: [192.168.1.4]
-ok: [stepca.home.com]
-ok: [trfk.home.com]
-ok: [wazuh.home.com]
-ok: [192.168.1.93]
-ok: [192.168.100.15]
-ok: [192.168.1.246]
-ok: [192.168.1.33]
-ok: [192.168.2.6]
-ok: [192.168.200.8]
-ok: [192.168.200.7]
-ok: [192.168.1.126]
-ok: [192.168.1.109]
-ok: [192.168.1.166]
-ok: [192.168.100.5]
+    TASK [Gathering Facts] *********************************************************
+    ok: [web.home.com]
+    ok: [192.168.1.136]
+    ok: [unbound.home.com]
+    ok: [bind.home.com]
+    ok: [192.168.1.250]
+    ok: [uptimek.home.com]
+    ok: [192.168.1.4]
+    ok: [stepca.home.com]
+    ok: [trfk.home.com]
+    ok: [wazuh.home.com]
+    ok: [192.168.1.93]
+    ok: [192.168.100.15]
+    ok: [192.168.1.246]
+    ok: [192.168.1.33]
+    ok: [192.168.2.6]
+    ok: [192.168.200.8]
+    ok: [192.168.200.7]
+    ok: [192.168.1.126]
+    ok: [192.168.1.109]
+    ok: [192.168.1.166]
+    ok: [192.168.100.5]
 
-TASK [Show disk usage] *********************************************************
-ok: [web.home.com] => {
-    "disk_usage.stdout_lines": [
-        "Filesystem      Size  Used Avail Use% Mounted on",
-        "/dev/loop0       16G   12G  3.2G  79% /",
-        "none            492K  4.0K  488K   1% /dev",
-        "efivarfs        192K  180K  7.6K  96% /sys/firmware/efi/efivars",
-        "tmpfs            47G     0   47G   0% /dev/shm",
-        "tmpfs            19G  156K   19G   1% /run",
-        "tmpfs           5.0M     0  5.0M   0% /run/lock",
-        "tmpfs            47G  124K   47G   1% /tmp",
-        "tmpfs           9.4G  8.0K  9.4G   1% /run/user/0",
-        "tmpfs           9.4G  8.0K  9.4G   1% /run/user/1001"
-    ]
-}
-TASK [Show IP address info] ****************************************************
-ok: [web.home.com] => {
-    "ip_info.stdout_lines": [
-        "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000",
-        "    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00",
-        "    inet 127.0.0.1/8 scope host lo",
-        "       valid_lft forever preferred_lft forever",
-        "    inet6 ::1/128 scope host noprefixroute ",
-        "       valid_lft forever preferred_lft forever",
-        "2: eth0@if76: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000",
-        "    link/ether bc:24:11:f9:a0:8c brd ff:ff:ff:ff:ff:ff link-netnsid 0",
-        "    inet 192.168.1.108/24 brd 192.168.1.255 scope global eth0",
-        "       valid_lft forever preferred_lft forever",
-        "    inet6 fe80::be24:11ff:fef9:a08c/64 scope link proto kernel_ll ",
-        "       valid_lft forever preferred_lft forever"
-    ]
-}
-TASK [Show routing table] ******************************************************
-ok: [web.home.com] => {
-    "route_info.stdout_lines": [
-        "default via 192.168.1.1 dev eth0 proto static ",
-        "192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.108 "
-    ]
-}
-TASK [Show hostname] ***********************************************************
-ok: [web.home.com] => {
-    "host_name.stdout": "apache-ubuntu"
-}
-TASK [Show nameservers] ********************************************************
-ok: [web.home.com] => {
-    "resolv_conf.stdout_lines": [
-        "# --- BEGIN PVE ---",
-        "search home.com",
-        "nameserver 192.168.1.250",
-        "# --- END PVE ---"
-    ]
-}
-TASK [Show authorized SSH keys] ************************************************
-ok: [web.home.com] => {
-    "msg": [
-        "ssh-ed25519 --------- root@ansible",
-        ""
-    ]
-}
-PLAY RECAP *********************************************************************
-192.168.1.109              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.126              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.136              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.166              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.246              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.250              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.33               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.4                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.93               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.100.15             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.100.5              : ok=12   changed=5    unreachable=0    failed=0    skipped=1    rescued=0    ignored=1   
-192.168.2.6                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.200.7              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.200.8              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-bind.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-stepca.home.com            : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-trfk.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-unbound.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-uptimek.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-wazuh.home.com             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web.home.com               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+    TASK [Show disk usage] *********************************************************
+    ok: [web.home.com] => {
+        "disk_usage.stdout_lines": [
+            "Filesystem      Size  Used Avail Use% Mounted on",
+            "/dev/loop0       16G   12G  3.2G  79% /",
+            "none            492K  4.0K  488K   1% /dev",
+            "efivarfs        192K  180K  7.6K  96% /sys/firmware/efi/efivars",
+            "tmpfs            47G     0   47G   0% /dev/shm",
+            "tmpfs            19G  156K   19G   1% /run",
+            "tmpfs           5.0M     0  5.0M   0% /run/lock",
+            "tmpfs            47G  124K   47G   1% /tmp",
+            "tmpfs           9.4G  8.0K  9.4G   1% /run/user/0",
+            "tmpfs           9.4G  8.0K  9.4G   1% /run/user/1001"
+        ]
+    }
+    TASK [Show IP address info] ****************************************************
+    ok: [web.home.com] => {
+        "ip_info.stdout_lines": [
+            "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000",
+            "    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00",
+            "    inet 127.0.0.1/8 scope host lo",
+            "       valid_lft forever preferred_lft forever",
+            "    inet6 ::1/128 scope host noprefixroute ",
+            "       valid_lft forever preferred_lft forever",
+            "2: eth0@if76: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000",
+            "    link/ether bc:24:11:f9:a0:8c brd ff:ff:ff:ff:ff:ff link-netnsid 0",
+            "    inet 192.168.1.108/24 brd 192.168.1.255 scope global eth0",
+            "       valid_lft forever preferred_lft forever",
+            "    inet6 fe80::be24:11ff:fef9:a08c/64 scope link proto kernel_ll ",
+            "       valid_lft forever preferred_lft forever"
+        ]
+    }
+    TASK [Show routing table] ******************************************************
+    ok: [web.home.com] => {
+        "route_info.stdout_lines": [
+            "default via 192.168.1.1 dev eth0 proto static ",
+            "192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.108 "
+        ]
+    }
+    TASK [Show hostname] ***********************************************************
+    ok: [web.home.com] => {
+        "host_name.stdout": "apache-ubuntu"
+    }
+    TASK [Show nameservers] ********************************************************
+    ok: [web.home.com] => {
+        "resolv_conf.stdout_lines": [
+            "# --- BEGIN PVE ---",
+            "search home.com",
+            "nameserver 192.168.1.250",
+            "# --- END PVE ---"
+        ]
+    }
+    TASK [Show authorized SSH keys] ************************************************
+    ok: [web.home.com] => {
+        "msg": [
+            "ssh-ed25519 --------- root@ansible",
+            ""
+        ]
+    }
+    PLAY RECAP *********************************************************************
+    192.168.1.109              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.126              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.136              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.166              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.246              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.250              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.33               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.4                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.1.93               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.100.15             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.100.5              : ok=12   changed=5    unreachable=0    failed=0    skipped=1    rescued=0    ignored=1   
+    192.168.2.6                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.200.7              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    192.168.200.8              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    bind.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    stepca.home.com            : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    trfk.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    unbound.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    uptimek.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    wazuh.home.com             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    web.home.com               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 ---
 
@@ -948,7 +956,12 @@ This workflow runs daily to ingest and distribute curated threat intelligence fr
 | Format Node | Create Discord embed message | Visual formatting |
 | Discord Webhook | Post to #threat-intel channel | Distribute to team |
 
-**Diagram Placeholder: n8n Threat Intel Workflow Screenshot**
+<figure class=image-large>
+      <img src="/Career_Projects/assets/screenshots/n8n-feed.png" alt="n8n TI Workflow">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        n8n Threat Intelligence Workflow.
+      </figcaption>
+    </figure>
 
 **ChatGPT Integration:**
 
@@ -969,7 +982,12 @@ This workflow runs daily to ingest and distribute curated threat intelligence fr
 - Discord Webhook Failure: Send email fallback alert
 - All Errors: Logged to n8n execution history
 
-**Diagram Placeholder: Discord Threat Intel Feed Screenshots (4 images)**
+<figure class=image-large>
+      <img src="/Career_Projects/assets/screenshots/n8n-nist.png" alt="OSINT Feed">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Discord Threat Intel Feed and ChatGPT Summary.
+      </figcaption>
+    </figure>
 
 ---
 

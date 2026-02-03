@@ -691,7 +691,17 @@ alert tcp any any -> 192.168.100.0/24 22 \
 (msg:"LAB1: SSH Brute Force Attempt"; flags:S; detection_filter:track by_src, count 5, seconds 60; sid:910001; rev:2;)
 ```
 #### Field Breakdown:
-insert table
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `alert` | Generate an alert when matched | Visible in Suricata → Elastic/Wazuh |
+| `tcp` | Match only TCP traffic | SSH is TCP‑based |
+| `any any` | Any source IP, any source port | Detects brute force from anywhere |
+| `->` | Direction operator | Only inbound SSH attempts |
+| `192.168.100.0/24 22` | Destination network + port | LAB1 SSH servers |
+| `flags:S` | Match SYN packets only | Prevents noisy alerts from full SSH sessions |
+| `detection_filter: track by_src, count 5, seconds 60` | Threshold: 5 SYNs in 60 seconds from same IP | Classic brute‑force pattern |
+| `sid:910001` | Unique rule ID | Required for management |
+| `rev:2` | Revision number | Tracks rule updates |
 
 #### Operational Impact
 - Detects brute force attempts before authentication begins
@@ -1357,8 +1367,231 @@ Tor is widely used in security research, OSINT, and threat intelligence workflow
 - Content access: PIA multi-hop → region-specific service testing
 
 ---
+## 11. Custom IPS/IDS Ruleset – Additional Detail
 
-## 11. Security Homelab Section Links
+### SSH / Linux Security Controls
+
+### SSH Brute Force Detection
+
+**Rule**
+```text
+alert tcp any any -> 192.168.100.0/24 22 \
+(msg:"LAB1: SSH Brute Force Attempt"; flags:S; detection_filter:track by_src, count 5, seconds 60; sid:910001; rev:2;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `alert` | Generate an alert when matched | Visible in Suricata → Elastic/Wazuh |
+| `tcp` | Match only TCP traffic | SSH is TCP based |
+| `any any` | Any source IP, any source port | Detects brute force from anywhere |
+| `->` | Direction operator | Only inbound SSH attempts |
+| `192.168.100.0/24 22` | Destination network + port | LAB1 SSH servers |
+| `flags:S` | Match SYN packets only | Prevents noisy alerts from full SSH sessions |
+| `detection_filter: track by_src, count 5, seconds 60` | Threshold: 5 SYNs in 60 seconds from same IP | Classic brute force pattern |
+| `sid:910001` | Unique rule ID | Required for management |
+| `rev:2` | Revision number | Tracks rule updates |
+
+**Operational Impact**
+
+- Detects brute force attempts before authentication begins
+- Low noise due to SYN only matching
+- Helps identify compromised hosts or bots scanning SSH
+- Works across VLAN boundaries
+
+### Cross Segment SSH Policy Enforcement
+
+**Rule**
+```text
+alert tcp 192.168.2.0/24 any -> 192.168.100.0/24 22 \
+(msg:"LAB1: SSH Attempt from EXT_LAN"; sid:910002; rev:1;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `192.168.2.0/24` | EXT_LAN source | DMZ/External facing internal network |
+| `-> 192.168.100.0/24 22` | SSH into LAB1 | Not allowed by segmentation policy |
+| `msg` | Alert message | Clear policy violation |
+| `sid` | Rule ID | Tracking |
+| `rev` | Revision | Versioning |
+
+**Operational Impact**
+
+- Detects lateral movement attempts from DMZ → LAB
+- Enforces segmentation boundaries
+- Helps identify compromised DMZ hosts attempting privilege escalation
+
+### Privilege Escalation Keyword Monitoring
+
+**Rule**
+```text
+alert tcp any any -> 192.168.100.0/24 22 \
+(msg:"LAB1: sudo Keyword in SSH Session"; content:"sudo"; sid:910003; rev:1;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `content:"sudo"` | Look for the string "sudo" in SSH payload | Detects privilege escalation attempts |
+| `tcp` | SSH is TCP | Required |
+| `any any` | Any source | Global monitoring |
+| `-> 192.168.100.0/24 22` | SSH into LAB1 | Target zone |
+
+**Operational Impact**
+
+- Detects sudo usage inside SSH sessions
+- Useful for insider threat monitoring
+- Helps identify suspicious privilege escalation attempts
+- Works best when SSH is not encrypted (lab/testing only)
+
+### Reconnaissance & Scanning Detection
+
+### Nmap OS Detection Signature
+
+**Rule**
+```text
+alert tcp any any -> 192.168.100.0/24 any \
+(msg:"LAB1: Nmap OS Detection Scan"; content:"|4E 4D 41 50|"; sid:910004; rev:1;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `content:"\|4E 4D 41 50\|"` | Hex for "NMAP" | Matches Nmap OS detection probes |
+| `any any` | Any source | Detects internal or external recon |
+| `-> 192.168.100.0/24 any` | Any port | OS detection uses multiple ports |
+
+**Operational Impact**
+
+- Detects active reconnaissance
+- Identifies compromised hosts performing mapping
+- Useful for early stage intrusion detection
+
+### Behavioral Port Sweep Detection
+
+**Rule**
+```text
+alert tcp 192.168.100.0/24 any -> 192.168.1.0/24 any \
+(msg:"LAB1: LAB → PROD Port Scan"; flags:S; threshold:type both, track by_src, count 20, seconds 10; sid:900008; rev:1;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `flags:S` | SYN packets only | Detects scan attempts, not full sessions |
+| `threshold:type both` | Count both directions | More accurate scan detection |
+| `track by_src` | Track per source IP | Identifies scanning host |
+| `count 20 seconds 10` | 20 SYNs in 10 seconds | Classic port sweep behavior |
+| `192.168.100.0/24 -> 192.168.1.0/24` | LAB → PROD | Enforces segmentation |
+
+**Operational Impact**
+
+- Detects port sweeps from LAB → PROD
+- Helps identify malware propagation attempts
+- Low false positives due to SYN only matching
+
+### Lateral Movement Prevention
+
+### High Risk Port Access Attempt
+
+**Rule**
+```text
+alert tcp 192.168.200.0/24 any -> 192.168.1.0/24 [22,135,139,445,3389] \
+(msg:"LAB2: LAB → PROD Unauthorized High-Risk Port"; sid:920005; rev:3;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `192.168.200.0/24` | LAB2 | Lower trust zone |
+| `-> 192.168.1.0/24` | PROD | High trust zone |
+| `[22,135,139,445,3389]` | SSH, RPC, NetBIOS, SMB, RDP | Classic lateral movement ports |
+| `msg` | Clear violation message | SOC visibility |
+| `sid` | Rule ID | Tracking |
+| `rev` | Revision | Versioning |
+
+**Operational Impact**
+
+- Detects attempts to pivot into PROD
+- Flags malware using SMB/RDP propagation
+- Enforces strict trust boundaries
+
+### Isolation Network Enforcement
+
+**Rule**
+```text
+alert ip [10.20.0.0/24,192.168.3.0/24] any -> 192.168.200.0/24 any \
+(msg:"LAB2: ISO → LAB2 Traffic (Policy Violation)"; sid:920006; rev:1;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `alert ip` | Match any protocol | Covers TCP, UDP, ICMP, etc. |
+| `[10.20.0.0/24,192.168.3.0/24]` | ISO networks | Quarantined/isolated zones |
+| `-> 192.168.200.0/24` | LAB2 | Should never communicate |
+| `any` | Any port | Full isolation enforcement |
+
+**Operational Impact**
+
+- Detects policy violations from isolated networks
+- Helps identify misconfigured hosts or malware breakout attempts
+- Ensures ISO networks remain fully contained
+
+### SMB / NetBIOS Hygiene
+
+### NetBIOS Session Service Detection
+
+**Rule**
+```text
+alert tcp any any -> any 139 \
+(msg:"NetBIOS Session Service Detected"; sid:9xxxxx; rev:1;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `port 139` | NetBIOS Session Service | Legacy Windows protocol |
+| `any any -> any` | Global detection | Hygiene monitoring |
+
+**Operational Impact**
+
+- Detects legacy SMB/NetBIOS traffic
+- Useful for identifying outdated systems
+- Helps enforce modern SMB hygiene
+
+### SMBv1 Protocol Negotiation Detection
+
+**Rule**
+```text
+alert tcp any any -> any 445 \
+(msg:"SMBv1 Protocol Negotiation"; content:"|ff|SMB"; depth:8; sid:9xxxxx; rev:1;)
+```
+
+**Field Breakdown**
+
+| Field | Meaning | Impact |
+|-------|---------|--------|
+| `port 445` | SMB | Modern SMB port |
+| `content:"\|ff\|SMB"` | SMBv1 signature | Detects deprecated protocol |
+| `depth:8` | Only inspect first 8 bytes | Performance optimization |
+
+**Operational Impact**
+
+- Detects SMBv1 usage (deprecated, insecure)
+- Helps enforce compliance and hygiene
+- Identifies vulnerable hosts susceptible to EternalBlue class exploits
+
+## 12. Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 
