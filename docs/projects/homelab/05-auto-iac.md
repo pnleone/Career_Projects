@@ -811,12 +811,14 @@ This automated workflow runs two playbooks, a weekly schedule and performs a con
 - Provides audit trail via GitHub commits
 - Immediate notification of issues via Discord
 
-<figure class=image-large>
-      <img src="/Career_Projects/assets/screenshots/n8n-ansible-results.png" alt="n8n Anisible Results">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        n8n Ansible Playbook Results/Notification.
-      </figcaption>
-    </figure>
+<div class="no-toc">
+<figure class="image-large">
+  <img src="/Career_Projects/assets/screenshots/n8n-ansible-results.png" alt="n8n Ansible Results">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    n8n Ansible Playbook Results/Notification.
+  </figcaption>
+</figure>
+</div>
 
 ### JSON Output Example
 
