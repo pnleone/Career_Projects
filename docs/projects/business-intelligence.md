@@ -1,21 +1,12 @@
 # Business Intelligence & Data Analytics
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>
-      End-to-end BI implementation demonstrating data engineering, modeling, and visualization capabilities. Multi-platform architecture spanning SQL Server, Excel Power Query, and Power BI with advanced DAX time intelligence and relational integrity controls.
-    </p>
-    <p>
-      <strong>Technologies:</strong> SQL Server 2022 Express, Excel Power Query, Power BI Desktop, DAX
-    </p>
-  </div>
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/bi/bi-overview.png" alt="Business Intelligence Architecture">
-      <figcaption>BI Architecture Overview</figcaption>
-    </figure>
-  </div>
-</div>
+<img src="/Career_Projects/assets/misc/bi-logo.png" alt="BI-Logo">
+
+End-to-end BI implementation demonstrating data engineering, modeling, and visualization capabilities. Multi-platform architecture spanning SQL Server, Excel Power Query, and Power BI with advanced DAX time intelligence and relational integrity controls.
+
+**Technologies:** SQL Server 2022 Express, Excel Power Query, Power BI Desktop, DAX
+    
+ 
 
 **Skills Matrix**
 
@@ -67,7 +58,7 @@ Developed comprehensive BI solution using Foodmart sample dataset to demonstrate
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/bi/data-model.png" alt="Excel Data Model">
+      <img src="/Career_Projects/assets/screenshots/bi-excel-rel.png" alt="Excel Data Model">
       <figcaption>Excel Data Model Relationships</figcaption>
     </figure>
   </div>
@@ -111,7 +102,7 @@ CSV Import → Data Profiling → Type Conversion → Calculated Columns → Tab
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/bi/calendar-transform.png" alt="Calendar Table Transformation">
+      <img src="/Career_Projects/assets/screenshots/bi-excel-cal.png" alt="Calendar Table Transformation">
       <figcaption>Calendar Table Enhancement</figcaption>
     </figure>
   </div>
@@ -128,22 +119,16 @@ CSV Import → Data Profiling → Type Conversion → Calculated Columns → Tab
 - **Keys:** Clustered indexes on primary keys, non-clustered on foreign keys
 - **Constraints:** FK constraints enforce referential integrity
 
-<div class="two-col-right">
-  <div class="text-col">
-    <h4>Sample Query: Multi-Table Join</h4>
-    <p>
-      Demonstrates INNER JOIN syntax across 4 tables with date filtering. Query retrieves transaction details with enriched customer, product, and store attributes.
-    </p>
-  </div>
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/bi/sql-query.png" alt="SQL Query Example">
-      <figcaption>SQL JOIN Query</figcaption>
-    </figure>
-  </div>
-</div>
+**Database Diagram:**
+
+<figure>
+  <img src="/Career_Projects/assets/diagrams/bi-sql-rel.png" alt="SQL Server Database Diagram" class="image-large">
+  <figcaption>SQL Server 2022 Database Relationships</figcaption>
+</figure>
 
 **Query Example:**
+
+Demonstrates INNER JOIN syntax across 4 tables with date filtering. Query retrieves transaction details with enriched customer, product, and store attributes.
 ```sql
 USE Foodmart
 GO
@@ -174,15 +159,6 @@ ORDER BY [dbo].[Store_Lookup].[store_city] DESC
 GO
 ```
 
-**Database Diagram:**
-
-<figure>
-  <img src="/Career_Projects/assets/bi/db-diagram.png" alt="SQL Server Database Diagram" class="image-large">
-  <figcaption>SQL Server 2022 Database Relationships</figcaption>
-</figure>
-
----
-
 ## Analytics & Visualization
 
 ### Excel Pivot Analysis
@@ -205,7 +181,7 @@ GO
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/bi/pivot-regional.png" alt="Regional Pivot Analysis">
+      <img src="/Career_Projects/assets/screenshots/bi-excel-reg.png" alt="Regional Pivot Analysis">
       <figcaption>Regional Performance Pivot Table</figcaption>
     </figure>
   </div>
@@ -256,7 +232,7 @@ DIVIDE(
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/bi/time-intelligence.png" alt="Time Intelligence Pivot">
+      <img src="/Career_Projects/assets/screenshots/bi-excel-cal.png" alt="Time Intelligence Pivot">
       <figcaption>DAX Time Intelligence Measures</figcaption>
     </figure>
   </div>
@@ -294,7 +270,7 @@ DIVIDE(
    - Transaction percentage distribution
 
 <figure>
-  <img src="/Career_Projects/assets/bi/power-bi-main.png" alt="Power BI Main Dashboard" class="image-large">
+  <img src="/Career_Projects/assets/diagrams/bi-powerbi-main.png" alt="Power BI Main Dashboard" class="image-large">
   <figcaption>Power BI Main Dashboard</figcaption>
 </figure>
 
@@ -328,7 +304,7 @@ DIVIDE(
 - Drill-through: Product-level transaction details
 
 <figure>
-  <img src="/Career_Projects/assets/bi/power-bi-product.png" alt="Power BI Product Dashboard" class="image-large">
+  <img src="/Career_Projects/assets/diagrams/bi-powerbi-product.png" alt="Power BI Product Dashboard" class="image-large">
   <figcaption>Power BI Product Analytics Dashboard</figcaption>
 </figure>
 
