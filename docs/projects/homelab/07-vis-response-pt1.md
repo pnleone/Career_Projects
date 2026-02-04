@@ -708,7 +708,15 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 | 44 | Win2025server                | 192.168.1.90    | Microsoft Windows Server 2025 Standard, 10.0.26100.7462 (N/A)              |
 | 45 | safeline                     | 192.168.1.89    | Debian GNU/Linux, 13 (trixie)                                              |
 
-![Wazuh Agent List](/Career_Projects/assets/screenshots/wazuh-agents.png)
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/wazuh-agents.png" alt="Wazuh EDR Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Wazuh Agent Overview
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 ### Security Monitoring Modules
 
@@ -726,8 +734,6 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 - Attributes tracked: Size, permissions, ownership, mtime
 - Alert on: Creation, modification, deletion
 
-![Wazuh FIM Configuration](/Career_Projects/assets/screenshots/wazuh-fim-config.png)
-
 **Example FIM Alerts:**
 
 - Description: New file created in /tmp
@@ -740,6 +746,53 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 - New MD5: def456...
 - Action: Alert + snapshot of file content
 
+```xml
+<!-- File Integrity Monitoring -->
+  <syscheck>
+    <disabled>no</disabled>
+    <frequency>43200</frequency>
+    <scan_on_start>yes</scan_on_start>
+    <alert_new_files>yes</alert_new_files>
+    <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
+
+    <!-- Critical system dirs -->
+    <directories realtime="yes">/etc</directories>
+    <directories realtime="yes">/usr/bin</directories>
+    <directories realtime="yes">/usr/sbin</directories>
+    <directories realtime="yes">/bin</directories>
+    <directories realtime="yes">/sbin</directories>
+    <directories realtime="yes">/boot</directories>
+    <directories realtime="yes">C:\Windows\System32</directories>
+
+    <!-- Threat actor targets -->
+    <directories realtime="yes">/root</directories>
+    <directories realtime="yes">/var/tmp</directories>
+    <directories realtime="yes">/home/*/Downloads</directories>
+    <directories realtime="yes">C:\Users\*\Downloads</directories>
+    <directories realtime="yes">C:\Temp</directories>
+    <directories realtime="yes">C:\Users\*\AppData\Local\Temp</directories>
+
+    <!-- Ignore noise -->
+    <ignore>/etc/mtab</ignore>
+    <ignore type="sregex">.log$|.swp$</ignore>
+    <nodiff>/etc/ssl/private.key</nodiff>
+
+    <skip_nfs>yes</skip_nfs>
+    <skip_dev>yes</skip_dev>
+    <skip_proc>yes</skip_proc>
+    <skip_sys>yes</skip_sys>
+
+    <process_priority>10</process_priority>
+    <max_eps>50</max_eps>
+
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </syscheck>
+```
+
 #### Rootkit Detection
 
 **Purpose:** Identify hidden processes, ports, and kernel modules
@@ -751,8 +804,6 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 - Kernel modules: Verify against known-good list
 - System binaries: Check for trojaned ls, ps, netstat
 - Registry anomalies: Windows registry rootkits
-
-![Wazuh Rootkit Detection](/Career_Projects/assets/screenshots/wazuh-rootkit.png)
 
 #### Vulnerability Assessment
 
@@ -821,11 +872,7 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 - Source IP: 192.168.3.45
 - Action: Alert + optional active response (firewall drop)
 
-![Wazuh Login Monitoring](/Career_Projects/assets/screenshots/wazuh-login-monitor.png)
-
 ### Active Response
-
-![Wazuh Active Response Configuration](/Career_Projects/assets/screenshots/wazuh-active-response.png)
 
 #### Firewall Drop
 
@@ -945,19 +992,13 @@ VirusTotal is integrated into the File Integrity Monitoring workflow through a c
   <rule_id>100003</rule_id>
   <alert_format>json</alert_format>
 </integration>
-```
 
-![VirusTotal Integration Configuration](/Career_Projects/assets/screenshots/wazuh-virustotal-config.png)
-```xml
 <command>
   <name>remove-threat</name>
   <executable>remove-threat.sh</executable>
   <timeout_allowed>no</timeout_allowed>
 </command>
-```
 
-![VirusTotal Active Response Script](/Career_Projects/assets/screenshots/wazuh-virustotal-script.png)
-```xml
 <active-response>
   <disabled>no</disabled>
   <command>remove-threat</command>
@@ -965,8 +1006,15 @@ VirusTotal is integrated into the File Integrity Monitoring workflow through a c
   <rules_id>87105</rules_id>
 </active-response>
 ```
-
-![VirusTotal Detection Alerts](/Career_Projects/assets/screenshots/wazuh-virustotal-alerts.png)
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/wazuh-vt.png" alt="Wazuh EDR Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Wazuh VirusTotal Integration
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 #### Discord
 
@@ -985,18 +1033,14 @@ External alerting to Discord has been configured for specific workflows. Alerts 
   <group>multiple_drops,authentication_failed,sshd,syscheck_file</group>
   <alert_format>json</alert_format>
 </integration>
-```
 
-![Discord Integration Configuration](/Career_Projects/assets/screenshots/wazuh-discord-config.png)
-```xml
 <command>
   <name>discord</name>
   <executable>discord.sh</executable>
   <expect>json</expect>
   <timeout_allowed>no</timeout_allowed>
 </command>
-```
-```xml
+
 <active-response>
   <disabled>no</disabled>
   <command>discord</command>
