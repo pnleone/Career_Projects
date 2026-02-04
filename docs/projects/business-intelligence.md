@@ -113,7 +113,7 @@ Selected complementary tools addressing specific stakeholder needs while maintai
   </div>
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/bi-excel-model-full.png" alt="Excel Data Model">
+      <img src="/Career_Projects/assets/screenshots/bi-excel-rel.png" alt="Excel Data Model">
       <figcaption>Excel Data Model with Calculated Measures</figcaption>
     </figure>
   </div>
@@ -658,6 +658,7 @@ Source = Sql.Database("localhost\SQLEXPRESS", "FoodmartDW", [
 **DAX Measures Implemented (21 Total):**
 
 **Core KPIs:**
+
 - **% of all trans:** `= [Total Transactions] / [all transactions]`
 - **Total Transactions:** `= COUNTROWS(transactions)`
 - **Total Revenue (Measure):** `= SUM(transactions.[quantity] * RELATED(Product_Lookup[product_retail_price]))`
@@ -666,6 +667,7 @@ Source = Sql.Database("localhost\SQLEXPRESS", "FoodmartDW", [
 - **Unique Products:** `= DISTINCTCOUNT(Product_Lookup[product_id])`
 
 **Time Intelligence:**
+
 - **MTD Trans:** `= CALCULATE([Total Transactions], DATESMTD(Calendar_Lookup[date]))`
 - **QTD Trans:** `= CALCULATE([Total Transactions], DATESQTD(Calendar_Lookup[date]))`
 - **YTD total trans:** `= CALCULATE([Total Transactions], DATESYTD(Calendar_Lookup[date]))`
@@ -675,12 +677,14 @@ Source = Sql.Database("localhost\SQLEXPRESS", "FoodmartDW", [
 - **10 day rolling trans:** `= CALCULATE([Total Transactions], DATESINPERIOD(Calendar_Lookup[date], MAX(Calendar_Lookup[date]), -10, DAY))`
 
 **Returns & Quality:**
+
 - **Quantity Returned:** `= SUM(Returns[quantity])`
 - **Return Rate:** `= [Quantity Returned] / [Total Quantity]`
 - **Returned loss:** `= SUMX(Returns, Returns[quantity] * RELATED(Product_Lookup[product_retail_price]))`
 - **Recyclable Products:** `= COUNTA(Product_Lookup[recyclable])`
 
 **Product Analytics:**
+
 - **product rank (by revenue):** `= RANKX(ALL(Product_Lookup), [Total Revenue (Measure)])`
 - **transaction under threshold:** `= CALCULATE([Total Transactions], FILTER(Product_Lookup, Product_Lookup[product_retail_price] < [threshold selection]))`
 - **threshold selection:** `= max(price_threshold[price_threshold])`
@@ -834,15 +838,15 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 
 **Executive KPIs:**
 
-- **Total Transactions:** 269.7K (100% of dataset)
-- **Total Returns:** 5.65K (2.1% return rate)
-- **Net Revenue:** $1.19M (gross: $1.2M, returns: $26.8K)
-- **Total Revenue:** $1.2M
-- **Gross Profit:** $478.3K (40.1% margin)
+- **Total Transactions:** 269.7K
+- **Total Returns:** 8.29K
+- **Net Revenue:** $1.75M
+- **Total Revenue:** $1.8M
 
 **Visual Components:**
 
 **1. Transactions by Country (Line Chart)**
+
 - **X-Axis:** Time (Date hierarchy: Year > Quarter > Month)
 - **Y-Axis:** Transaction count
 - **Series:** Country (USA, Mexico, Canada)
@@ -850,6 +854,7 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 - **Insight:** USA represents 65% of transactions
 
 **2. Transaction % by Region (Horizontal Bar)**
+
 - **Values:** Transaction percentage by region
 - **Sort:** Descending by transaction count
 - **Top Performer:** North West (21.3%)
@@ -857,6 +862,7 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 - **Tooltip:** Displays absolute transaction count on hover
 
 **3. Revenue by Quarter (Pie Chart)**
+
 - **Values:** Net revenue aggregated by quarter
 - **Labels:** Quarter name + revenue amount
 - **Peak Quarters:** Q2 and Q4 ($326.4K each)
@@ -864,6 +870,7 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 - **Interaction:** Click to filter entire dashboard by quarter
 
 **4. Regional Detail Table (Matrix)**
+
 - **Rows:** City > State > Country hierarchy
 - **Columns:** Transaction %, absolute count, net revenue
 - **Formatting:** Currency format for revenue, percentage format for shares
@@ -925,13 +932,15 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 
 **3. Regional Performance Breakdown**
 
-| Region | Transactions | Units Sold | Avg Basket Size | Revenue |
+| Region | Transactions | Units Sold | Total Returns | Revenue |
 |--------|--------------|------------|-----------------|---------|
-| North West | 130,451 | 400,236 | 3.07 units | $271,354 |
-| Mexico Central | 157,329 | 50,699 | 3.23 units | $238,742 |
-| South West | 120,847 | 383,294 | 3.17 units | $255,891 |
-| Canada West | 89,234 | 275,103 | 3.08 units | $198,453 |
-| Mexico South | 78,921 | 45,382 | 2.88 units | $167,892 |
+| North West | 130,014 | 400,475 | 3686 units | $847,909 |
+| Mexico Central | 49,851 | 156,772 | 1450 units | $330,381 |
+| South West | 48,051 | 151,021 | 1380 units | $320,805 |
+| Canada West | 16,093 | 50,760 | 507 units | $107,679 |
+| Mexico South | 13,014 | 40,994 | 467 units | $87,254 |
+| Central West | 2,766 | 4,436 | 0 units | $9,325 |
+| Mexico West | 9,943 | 29,080 | 247 units | $61,300 |
 
 <figure>
   <img src="/Career_Projects/assets/diagrams/bi-powerbi-product.png" alt="Power BI Product">
