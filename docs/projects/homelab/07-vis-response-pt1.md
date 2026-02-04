@@ -121,7 +121,7 @@ Security visibility is foundational to detecting and responding to threats befor
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/splunk-architecture.png" alt="Splunk Architecture Diagram">
+      <img src="/Career_Projects/assets/diagrams/splunk-overview.png" alt="Splunk Architecture Diagram">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Splunk Enterprise SIEM Architecture
       </figcaption>
@@ -252,7 +252,7 @@ FORMAT = interface::$1 rule_number::$2 action::$3 protocol::$4 src_ip::$5 src_po
 - Services Pie Chart: A large pie chart showing the distribution of traffic categorized by the application or service, likely derived from flow logs or firewall data.
 
 <figure>
-  <img class="image-large" src="/Career_Projects/assets/screenshots/splunk-overview-db.png" alt="Splunk SIEM Overview Dashboard">
+  <img src="/Career_Projects/assets/screenshots/splunk-overview-db.png" alt="Splunk SIEM Overview Dashboard">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Splunk SIEM Overview Dashboard.
   </figcaption>
@@ -263,7 +263,7 @@ FORMAT = interface::$1 rule_number::$2 action::$3 protocol::$4 src_ip::$5 src_po
 **Query:** `index=wazuh-alerts agent.name=DC01`
 
 <figure>
-  <img class="image-large" src="/Career_Projects/assets/screenshots/splunk-dc01-alerts.png" alt="DC01 Alerts">
+  <img src="/Career_Projects/assets/screenshots/splunk-dc01-alerts.png" alt="DC01 Alerts">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     DC01 Alerts.
   </figcaption>
@@ -600,7 +600,6 @@ event.dataset: suricata.eve AND event.kind: alert AND alert.severity: [1 TO 2]
 - Login Sources: Bar chart of the logins by source IP
 - Login events: Table of login event by account, source IP and threads
 
-![Windows Overview Dashboard](/Career_Projects/assets/screenshots/elk-windows.png)
 <figure>
   <img src="/Career_Projects/assets/screenshots/elk-windows.png" alt="Windows Overview Dashboard">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
