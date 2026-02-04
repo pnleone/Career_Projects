@@ -499,7 +499,7 @@ Each agent is enrolled via Fleet and centrally managed through Kibana, enabling 
 - Future-Proof: Adding new integrations automatically compatible
 - Community Standard: Widely adopted in security and observability communities
 
-![Elastic Ingest Pipeline](/Career_Projects/assets/screenshots/elastic-ingest-pipeline.png)
+![Elastic Ingest Pipeline](/Career_Projects/assets/screenshots/elk-integrations.png)
 
 ### Kibana Dashboards
 
@@ -525,7 +525,7 @@ Each agent is enrolled via Fleet and centrally managed through Kibana, enabling 
 - Authentication Timeline: Bar chart of login events
 - Top Applications Accessed: Pie chart of event.dataset
 
-![Authentik Authentication Dashboard](/Career_Projects/assets/screenshots/kibana-authentik.png)
+![Authentik Authentication Dashboard](/Career_Projects/assets/screenshots/elk-authentik.png)
 
 **Suricata IDS Dashboard:**
 
@@ -543,13 +543,11 @@ Each agent is enrolled via Fleet and centrally managed through Kibana, enabling 
 event.dataset: suricata.eve AND event.kind: alert AND alert.severity: [1 TO 2]
 ```
 
-![Suricata IDS Dashboard](/Career_Projects/assets/screenshots/kibana-suricata.png)
+![Suricata IDS Dashboard](/Career_Projects/assets/screenshots/elk-suricata.png)
 
 **pfSense Firewall Filter Log and Location Dashboard:**
 
-![pfSense Firewall Logs](/Career_Projects/assets/screenshots/kibana-pfsense-filter.png)
-
-![pfSense Geographic Location Map](/Career_Projects/assets/screenshots/kibana-pfsense-geo.png)
+![pfSense Firewall Logs](/Career_Projects/assets/screenshots/elk-fw.png)
 
 **Windows Overview and Security Dashboards:**
 
@@ -565,9 +563,7 @@ event.dataset: suricata.eve AND event.kind: alert AND alert.severity: [1 TO 2]
 - Login Sources: Bar chart of the logins by source IP
 - Login events: Table of login event by account, source IP and threads
 
-![Windows Overview Dashboard](/Career_Projects/assets/screenshots/kibana-windows-overview.png)
-
-![Windows Security Dashboard](/Career_Projects/assets/screenshots/kibana-windows-security.png)
+![Windows Overview Dashboard](/Career_Projects/assets/screenshots/elk-windows.png)
 
 ---
 
