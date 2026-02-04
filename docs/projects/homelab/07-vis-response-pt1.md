@@ -251,26 +251,45 @@ FORMAT = interface::$1 rule_number::$2 action::$3 protocol::$4 src_ip::$5 src_po
 - Mitre Tactic Stats: A line/area chart tracking the count of events mapped to different MITRE ATT&CK Tactics over time, such as Defense Evasion, Impact, Lateral Movement, etc.
 - Services Pie Chart: A large pie chart showing the distribution of traffic categorized by the application or service, likely derived from flow logs or firewall data.
 
-![Splunk SIEM Overview Dashboard](/Career_Projects/assets/screenshots/splunk-overview-db.png)
+<figure>
+  <img class="image-large" src="/Career_Projects/assets/screenshots/splunk-overview-db.png" alt="Splunk SIEM Overview Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Splunk SIEM Overview Dashboard.
+  </figcaption>
+</figure>
 
-
-#### Wazuh alerts for my Windows Server 2022 Domain Controller
+### Wazuh alerts for my Windows Server 2022 Domain Controller
 
 **Query:** `index=wazuh-alerts agent.name=DC01`
 
-![Wazuh Alerts for Windows Server DC01](/Career_Projects/assets/screenshots/splunk-dc01-alerts.png)
+<figure>
+  <img class="image-large" src="/Career_Projects/assets/screenshots/splunk-dc01-alerts.png" alt="DC01 Alerts">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    DC01 Alerts.
+  </figcaption>
+</figure>
 
 #### Intrusion Prevention System Alerts
 
 **Query:** `index=ids sourcetype=suricata`
 
-![Suricata IDS Alerts Dashboard](/Career_Projects/assets/screenshots/splunk-suricata.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/splunk-suricata.png" alt="Suricata IDS Alerts Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Suricata Alerts.
+  </figcaption>
+</figure>
 
 #### Firewall Filter Logs
 
 **Query:** `index=firewall-a sourcetype=pfsense:firewall`
 
-![pfSense Firewall Filter Logs](/Career_Projects/assets/screenshots/splunk-fw.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/splunk-fw.png" alt="pfSense Firewall Filter Logs">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    pfSense Filter Log.
+  </figcaption>
+</figure>
 
 ### Search Examples
 
@@ -446,7 +465,12 @@ Elastic Agents are deployed across multiple hosts, each assigned a tailored Flee
 | K3s-control | Kubernetes container | System, Kubernetes metrics, network packet capture |
 | K3s-worker | Kubernetes container | System, Kubernetes metrics, network packet capture |
 
-![Elastic Agent Deployment](/Career_Projects/assets/screenshots/elk-fleet.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-fleet.png" alt="Elastic Agent Deployment">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Elastic Agent Deployment.
+  </figcaption>
+</figure>
 
 Each agent is enrolled via Fleet and centrally managed through Kibana, enabling consistent policy updates, secure API key rotation, and streamlined observability across the lab.
 
@@ -499,8 +523,6 @@ Each agent is enrolled via Fleet and centrally managed through Kibana, enabling 
 - Future-Proof: Adding new integrations automatically compatible
 - Community Standard: Widely adopted in security and observability communities
 
-![Elastic Ingest Pipeline](/Career_Projects/assets/screenshots/elk-integrations.png)
-
 ### Kibana Dashboards
 
 #### Ingest Pipelines
@@ -525,7 +547,12 @@ Each agent is enrolled via Fleet and centrally managed through Kibana, enabling 
 - Authentication Timeline: Bar chart of login events
 - Top Applications Accessed: Pie chart of event.dataset
 
-![Authentik Authentication Dashboard](/Career_Projects/assets/screenshots/elk-authentik.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-authentik.png" alt="Authentik Authentication Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Authentik Authentication Dashboard.
+  </figcaption>
+</figure>
 
 **Suricata IDS Dashboard:**
 
@@ -543,11 +570,21 @@ Each agent is enrolled via Fleet and centrally managed through Kibana, enabling 
 event.dataset: suricata.eve AND event.kind: alert AND alert.severity: [1 TO 2]
 ```
 
-![Suricata IDS Dashboard](/Career_Projects/assets/screenshots/elk-suricata.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-suricata.png" alt="Suricata IDS Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Suricata IPS Dashboard.
+  </figcaption>
+</figure>
 
 **pfSense Firewall Filter Log and Location Dashboard:**
 
-![pfSense Firewall Logs](/Career_Projects/assets/screenshots/elk-fw.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-fw.png" alt="pfSense Firewall Logs">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    pfSense Firewall Logs.
+  </figcaption>
+</figure>
 
 **Windows Overview and Security Dashboards:**
 
@@ -564,6 +601,12 @@ event.dataset: suricata.eve AND event.kind: alert AND alert.severity: [1 TO 2]
 - Login events: Table of login event by account, source IP and threads
 
 ![Windows Overview Dashboard](/Career_Projects/assets/screenshots/elk-windows.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-windows.png" alt="Windows Overview Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Windows Overview Dashboard.
+  </figcaption>
+</figure>
 
 ---
 
