@@ -707,6 +707,7 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 | 43 | UbuntuVM1                    | 192.168.1.126   | Ubuntu, 25.1 (Questing Quokka)                                             |
 | 44 | Win2025server                | 192.168.1.90    | Microsoft Windows Server 2025 Standard, 10.0.26100.7462 (N/A)              |
 | 45 | safeline                     | 192.168.1.89    | Debian GNU/Linux, 13 (trixie)                                              |
+
 ![Wazuh Agent List](/Career_Projects/assets/screenshots/wazuh-agents.png)
 
 ### Security Monitoring Modules
