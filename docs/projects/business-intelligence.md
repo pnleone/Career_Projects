@@ -843,54 +843,30 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 - **Net Revenue:** $1.75M
 - **Total Revenue:** $1.8M
 
-**Visual Components:**
+**Visualizations:**
 
-**1. Transactions by Country (Line Chart)**
+1. **Transactions by Country** (Line Chart)
+   - MTD/QTD/YTD trendlines for USA, Mexico, Canada
+   - Drill-down to state/city level
 
-- **X-Axis:** Time (Date hierarchy: Year > Quarter > Month)
-- **Y-Axis:** Transaction count
-- **Series:** Country (USA, Mexico, Canada)
-- **Drill-down:** Click to drill to state → city level
-- **Insight:** USA represents 65% of transactions
+2. **Transaction % by Region** (Bar Chart)
+   - Horizontal bars ranked by volume
+   - Top performer: North West (21.3%)
 
-**2. Transaction % by Region (Horizontal Bar)**
+3. **Revenue by Quarter** (Pie Chart)
+   - Q2/Q4 peak seasons ($326.4K each)
+   - Q3 low season ($290.9K)
 
-- **Values:** Transaction percentage by region
-- **Sort:** Descending by transaction count
-- **Top Performer:** North West (21.3%)
-- **Conditional Formatting:** Color gradient by percentage
-- **Tooltip:** Displays absolute transaction count on hover
-
-**3. Revenue by Quarter (Pie Chart)**
-
-- **Values:** Net revenue aggregated by quarter
-- **Labels:** Quarter name + revenue amount
-- **Peak Quarters:** Q2 and Q4 ($326.4K each)
-- **Low Quarter:** Q3 ($290.9K)
-- **Interaction:** Click to filter entire dashboard by quarter
-
-**4. Regional Detail Table (Matrix)**
-
-- **Rows:** City > State > Country hierarchy
-- **Columns:** Transaction %, absolute count, net revenue
-- **Formatting:** Currency format for revenue, percentage format for shares
-- **Drill-down:** Expand/collapse hierarchy levels
+4. **Regional Detail Table**
+   - City/State/Country hierarchy
+   - Transaction percentage distribution
 
 <figure>
-  <img src="/Career_Projects/assets/diagrams/bi-powerbi-main.png" alt="Power BI Main">
+  <img src="/Career_Projects/assets/diagrams/bi-powerbi-main.png" alt="Power BI Main Dashboard">
   <figcaption>Power BI Main Dashboard</figcaption>
 </figure>
 
-**Interactive Filters:**
-
-- **Year Slicer:** 1997, 1998 (multi-select dropdown)
-- **Quarter Slicer:** Q1, Q2, Q3, Q4 (button-style)
-- **Country Slicer:** Canada, Mexico, USA (checkbox list)
-
-**Cross-Filtering Behavior:**
-- Selecting a region in the bar chart filters all visuals
-- Clicking a quarter in the pie chart filters to that time period
-- Country filter in line chart updates all dependent visuals
+**Filters:** Year (1996-1998), Quarter (Q1-Q4), Country (Canada, Mexico, USA)
 
 ---
 
@@ -899,7 +875,7 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 **Operational Metrics:**
 
 - **Stores:** 24 locations across 3 countries
-- **Customers:** 10,281 unique customer accounts
+- **Customers:** 1,648 unique customer accounts
 - **Return Rate:** 1.0% (below 2% industry benchmark)
 - **Products:** 1,560 SKUs across 111 manufacturers
 - **Avg Retail Price:** $2.12 per unit
@@ -907,28 +883,19 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
 
 **Pricing Tier Analysis:**
 
-| Price Tier | Avg Cost | Retail Price | Margin % | SKU Count |
-|-----------|----------|--------------|----------|-----------|
-| Low ($0-$2) | $0.52 | $1.30 | 150% | 780 |
-| Medium ($2-$4) | $1.02 | $2.55 | 150% | 624 |
-| High ($4+) | $1.46 | $3.56 | 144% | 156 |
+| Tier | Avg Cost | Retail Price | Margin |
+|------|----------|--------------|--------|
+| Low | $0.52 | $1.30 | 150% |
+| Medium | $1.02 | $2.55 | 150% |
+| High | $1.46 | $3.56 | 144% |
 
 **Visual Components:**
 
-**1. Revenue by Manufacturer (Bar Chart)**
-- **Top 10 Manufacturers:** Ranked by total revenue
-- **Leader:** Hermanos (13.2% market share, $157K revenue)
-- **Color Coding:** Gradient from high (green) to low (red) performers
-- **Drill-through:** Click manufacturer → product-level breakdown
+**Regional Performance Table:**
 
-**2. Product Performance Table (Matrix)**
-- **Columns:** Manufacturer, Product Name, Qty Sold, Transactions, Total Revenue
-- **Sort:** Descending by Total Revenue (customizable)
-- **Formatting:** 
-  - Revenue: Currency ($)
-  - Quantity: Number with thousands separator
-- **Conditional Formatting:** Top 10 products highlighted in green
-- **Actions:** Right-click for drill-through to transaction details
+- Columns: Manufacturer, Product Name, Qty Sold, Transactions, Total Revenue
+- Sort: Descending by Total Revenue
+- Drill-through: Product-level transaction details
 
 **3. Regional Performance Breakdown**
 
@@ -946,13 +913,6 @@ Recyclable Products = COUNTA(Product_Lookup[recyclable])
   <img src="/Career_Projects/assets/diagrams/bi-powerbi-product.png" alt="Power BI Product">
   <figcaption>Power BI Product Analytics Dashboard</figcaption>
 </figure>
-
-**Interactive Features:**
-
-- **Manufacturer Filter:** Multi-select dropdown (111 options)
-- **Price Tier Slicer:** Low/Medium/High (button-style)
-- **Product Category Filter:** Hierarchical (Department > Category > Subcategory)
-- **Dynamic Calculation:** Selected products update "% of Total" metrics
 
 ---
 

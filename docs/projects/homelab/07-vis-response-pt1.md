@@ -376,7 +376,7 @@ index=xmlwineventlog EventCode=1
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/elk-overview.png" alt="Elastic Stack Architecture">
+      <img src="/Career_Projects/assets/diagrams/elastic-overview.png" alt="Elastic Stack Architecture">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Elastic Stack Observability Architecture
       </figcaption>
@@ -421,8 +421,6 @@ While Splunk serves as the primary SIEM for security event correlation, Elastic 
 - **Kibana:** Visualization and management interface for exploring data, building dashboards, and managing Fleet
 - **Fleet Server:** Manages Elastic Agent enrollment, policy distribution, and secure communication with Elasticsearch
 
-![Elastic Component Architecture](/Career_Projects/assets/diagrams/elastic-components.png)
-
 ### Core ELK Stack Configuration
 
 The central Elastic Stack is deployed on a KVM virtual machine running Debian 13, hosting:
@@ -439,16 +437,16 @@ Elastic Agents are deployed across multiple hosts, each assigned a tailored Flee
 
 | Hostname | OS / Platform | Agent Policy Integrations |
 |----------|---------------|---------------------------|
-| Traefik LXC Host | LXC container | system, Traefik integration for access logs and metrics |
+| Traefik LXC Host | LXC container | system, Traefik integration for access logs and metrics, network packet capture |
 | DC01 | Windows Server 2022 VM | system, Windows, and Sysmon integrations for endpoint and process telemetry |
-| DockerVM1 | Ubuntu VM | system, Docker, Prometheus, and OPNSense (pfSense) integrations |
+| DockerVM1 | Ubuntu VM | system, Prometheus, and OPNSense (pfSense) integrations |
 | DockerVM2 | Docker container running on Debian VM | system, Docker, authentik integration for event and user activity logs |
 | Proxmox PVE Host | Proxmox VE (Debian) | system, Auditd integration for kernel-level audit logging, Cisco IOS Syslog |
 | Ubuntu-Apache LXC | LXC container | system, Apache HTTP Server, Suricata, and pfSense integrations for web and IDS logs |
 | K3s-control | Kubernetes container | System, Kubernetes metrics, network packet capture |
 | K3s-worker | Kubernetes container | System, Kubernetes metrics, network packet capture |
 
-![Elastic Agent Deployment](/Career_Projects/assets/screenshots/elastic-agents.png)
+![Elastic Agent Deployment](/Career_Projects/assets/screenshots/elk-fleet.png)
 
 Each agent is enrolled via Fleet and centrally managed through Kibana, enabling consistent policy updates, secure API key rotation, and streamlined observability across the lab.
 
