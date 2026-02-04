@@ -18,7 +18,7 @@ The lab implements a comprehensive observability and security monitoring stack t
     <ul>
       <li><b>SIEM Platforms:</b> Splunk Enterprise (primary), Elastic Stack (secondary)</li>
       <li><b>Endpoint Detection:</b> Wazuh EDR agents deployed on 25+ hosts across Windows, Linux, BSD, and macOS</li>
-      <li><b>Network Monitoring:</b> Suricata/Snort IDS, pfSense logging</li>
+      <li><b>Network Monitoring:</b> Suricata/Snort IDS, pfSense logging, NetAlertX</li>
       <li><b>Infrastructure Monitoring:</b> Prometheus + Grafana for metrics visualization, CheckMK for system monitoring</li>
       <li><b>Service Availability:</b> Uptime Kuma for service availability tracking, Pulse for Proxmox-specific monitoring</li>
       <li><b>Alerting Hub:</b> Discord notifications through webhooks and email alerts through local SMTP relay</li>

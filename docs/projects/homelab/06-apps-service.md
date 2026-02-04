@@ -1054,7 +1054,7 @@ Windows Server Update Services provides centralized control over Microsoft produ
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/wud-dashboard.png" alt="WUD Dashboard">
+      <img src="/Career_Projects/assets/screenshots/wud.png" alt="WUD Dashboard">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         What's Up Docker Dashboard
       </figcaption>
@@ -1173,16 +1173,6 @@ The lab services are interconnected through multiple integration patterns, demon
 | Certificate Distribution | ACME Protocol | Traefik → Step-CA |
 | Workflow Orchestration | Event-Driven | n8n → Ansible, GitHub, Discord |
 | Configuration Management | Infrastructure as Code | Ansible → All Linux hosts |
-
-**Service Dependency Map:**
-
-![Service Dependency Map 1](/Career_Projects/assets/diagrams/service-dependency-1.png)
-
-![Service Dependency Map 2](/Career_Projects/assets/diagrams/service-dependency-2.png)
-
-![Service Dependency Map 3](/Career_Projects/assets/diagrams/service-dependency-3.png)
-
-![Service Dependency Map 4](/Career_Projects/assets/diagrams/service-dependency-4.png)
 
 ---
 
