@@ -481,7 +481,7 @@ ORDER BY total_revenue DESC;
 
 ---
 
-### ETL Pipeline (Power Query)
+### ETL (Extract, Trasnform and Load) Pipeline (Power Query)
 
 **Transformation Workflow:**
 ```
