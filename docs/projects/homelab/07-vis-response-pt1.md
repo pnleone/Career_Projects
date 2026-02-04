@@ -620,7 +620,7 @@ event.dataset: suricata.eve AND event.kind: alert AND alert.severity: [1 TO 2]
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/wazuh-architecture.png" alt="Wazuh EDR Architecture">
+      <img src="/Career_Projects/assets/diagrams/wazuh-overview.png" alt="Wazuh EDR Architecture">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Wazuh EDR Architecture
       </figcaption>
@@ -669,36 +669,44 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 - Splunk Universal Forwarder: Log export for system-wide normalization and correlation
 
 ### Agent List
-
-| ID | Name | IP address | OS Platform and Release | Agent Version | Status |
-|----|------|------------|-------------------------|---------------|--------|
-| 0 | wazuh | 127.0.0.1 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
-| 1 | Lab-Win11Pro | 192.168.1.200 | Microsoft Windows 11 Pro, r10.0.26100.4652 | Wazuh v4.12.0 | disconnected |
-| 3 | Win11-pfS | 192.168.2.30 | Microsoft Windows 11 Home, r10.0.26100.6899 | Wazuh v4.14.1 | disconnected |
-| 7 | KaliVM | 192.168.1.100 | Kali GNU/Linux, r2025.3 | Wazuh v4.14.1 | active |
-| 13 | Logans-MacBook-Air.local | 192.168.1.207 | macOS, r14.7.8 | Wazuh v4.14.1 | active |
-| 14 | OPNsense.internal | 192.168.1.201 | BSD, r14.3 | Wazuh v4.12.0 | active |
-| 15 | ApacheWeb-lxc | 192.168.1.108 | Ubuntu, r25.04 | Wazuh v4.14.1 | active |
-| 16 | stepca | 192.168.100.51 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
-| 17 | Win11Pro | 192.168.1.111 | Microsoft Windows 11 Pro, r10.0.26100.7171 | Wazuh v4.14.1 | active |
-| 18 | UbuntuGenVM | 192.168.1.126 | Ubuntu, r25.04 | Wazuh v4.14.1 | active |
-| 19 | DC01 | 192.168.1.152 | Microsoft Windows Server 2022 Standard Evaluation, r10.0.20348.4405 | Wazuh v4.14.1 | active |
-| 20 | win11pro2 | 192.168.1.184 | Microsoft Windows 11 Pro for Workstations, r10.0.26200.7171 | Wazuh v4.14.1 | active |
-| 21 | Plex-lxc | 192.168.1.136 | Ubuntu, r22.04.5 LTS | Wazuh v4.14.1 | active |
-| 22 | redhat-control | 192.168.200.21 | Red Hat Enterprise Linux, r10 | Wazuh v4.14.1 | active |
-| 23 | K3s-control | 192.168.200.22 | Red Hat Enterprise Linux, r10 | Wazuh v4.14.1 | active |
-| 24 | pihole | 192.168.1.250 | Ubuntu, r22.04.5 LTS | Wazuh v4.14.1 | active |
-| 25 | traefik | 192.168.1.247 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
-| 26 | dockerVM2 | 192.168.1.166 | Debian GNU/Linux, r13 | Wazuh v4.14.1 | active |
-| 27 | bind9 | 192.168.1.251 | Ubuntu, r25.04 | Wazuh v4.14.1 | active |
-| 28 | unbound | 192.168.1.252 | Ubuntu, r22.04.5 LTS | Wazuh v4.14.1 | active |
-| 29 | grafana | 192.168.1.246 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
-| 30 | ansible | 192.168.1.25 | Debian GNU/Linux, r12 | Wazuh v4.14.1 | active |
-| 31 | centos | 192.168.1.93 | CentOS Stream, r9 | Wazuh v4.14.1 | active |
-| 32 | splunk | 192.168.1.109 | Ubuntu, r24.1 | Wazuh v4.14.1 | active |
-| 33 | fedora | 192.168.100.5 | Fedora Linux, r43 | Wazuh v4.14.1 | active |
-| 34 | elastic | 192.168.200.8 | Debian GNU/Linux, r13 | Wazuh v4.14.1 | active |
-
+| ID | Name                         | IP address      | OS Platform and Release                                                     |
+|----|------------------------------|-----------------|----------------------------------------------------------------------------|
+| 0  | wazuh                        | 127.0.0.1       | Debian GNU/Linux, 12 (bookworm)                                            |
+| 1  | Lab-Win11Pro                 | 192.168.1.200   | Microsoft Windows 11 Pro, 10.0.26100.4652 (N/A)                            |
+| 3  | Win11-pfS                    | 192.168.2.30    | Microsoft Windows 11 Home, 10.0.26100.7171 (N/A)                           |
+| 7  | KaliVM                       | 192.168.1.100   | Kali GNU/Linux, 2025.4 (N/A)                                               |
+| 13 | Logans-MacBook-Air.local     | 192.168.1.207   | macOS, 14.7.8 (Sonoma)                                                     |
+| 14 | OPNsense.internal            | 192.168.1.201   | FreeBSD, 14.3 (N/A)                                                             |
+| 15 | ApacheWeb-lxc                | 192.168.1.108   | Ubuntu, 25.04 (Plucky Puffin)                                              |
+| 16 | stepca                       | 192.168.100.51  | Debian GNU/Linux, 12 (bookworm)                                            |
+| 17 | Win11Pro                     | 192.168.1.111   | Microsoft Windows 11 Pro, 10.0.26100.7462 (N/A)                            |
+| 18 | UbuntuGenVM                  | 192.168.1.126   | Ubuntu, 25.1 (Questing Quokka)                                             |
+| 19 | DC01                         | 192.168.1.152   | Microsoft Windows Server 2022 Standard Evaluation, 10.0.20348.4529 (N/A)   |
+| 20 | win11pro2                    | 192.168.1.184   | Microsoft Windows 11 Pro for Workstations, 10.0.26200.7462 (N/A)           |
+| 21 | Plex-lxc                     | 192.168.1.136   | Ubuntu, 22.04.5 LTS (Jammy Jellyfish)                                      |
+| 22 | redhat-control               | 192.168.200.21  | Red Hat Enterprise Linux, 10 (Coughlan)                                    |
+| 23 | K3s-control                  | 192.168.200.22  | Red Hat Enterprise Linux, 10.1 (Coughlan)                                  |
+| 24 | pihole                       | 192.168.1.250   | Ubuntu, 22.04.5 LTS (Jammy Jellyfish)                                      |
+| 26 | dockerVM2                    | 192.168.1.166   | Debian GNU/Linux, 13 (trixie)                                              |
+| 27 | bind9                        | 192.168.1.251   | Ubuntu, 25.04 (Plucky Puffin)                                              |
+| 28 | unbound                      | 192.168.1.252   | Ubuntu, 22.04.5 LTS (Jammy Jellyfish)                                      |
+| 29 | grafana                      | 192.168.1.246   | Debian GNU/Linux, 12 (bookworm)                                            |
+| 30 | ansible                      | 192.168.1.25    | Debian GNU/Linux, 12 (bookworm)                                            |
+| 31 | centos                       | 192.168.1.93    | CentOS Stream, 9 (N/A)                                                     |
+| 32 | splunk                       | 192.168.1.109   | Ubuntu, 24.1 (Oracular Oriole)                                             |
+| 33 | fedora                       | 192.168.100.5   | Fedora Linux, 43 (Server Edition)                                          |
+| 34 | elastic                      | 192.168.200.8   | Debian GNU/Linux, 13 (trixie)                                              |
+| 35 | Ubuntu-pfLAN                 | 192.168.2.7     | Ubuntu, 25.1 (Questing Quokka)                                             |
+| 36 | ubuntu-pfs2                  | 192.168.3.5     | Ubuntu, 25.1 (Questing Quokka)                                             |
+| 37 | ubuntupfs                    | 192.168.100.4   | Ubuntu, 25.1 (Questing Quokka)                                             |
+| 38 | K3s-worker                   | 192.168.200.21  | Red Hat Enterprise Linux, 10.1 (Coughlan)                                  |
+| 39 | traefik                      | 192.168.1.247   | Debian GNU/Linux, 12 (bookworm)                                            |
+| 40 | debian-Extlan                | 192.168.2.5     | Debian GNU/Linux, 12 (bookworm)                                            |
+| 41 | kms-iso                      | 10.20.0.1       | Ubuntu, 25.04 (Plucky Puffin)                                              |
+| 42 | parrotOS                     | 192.168.100.16  | Parrot Security, 7.1 (echo)                                                |
+| 43 | UbuntuVM1                    | 192.168.1.126   | Ubuntu, 25.1 (Questing Quokka)                                             |
+| 44 | Win2025server                | 192.168.1.90    | Microsoft Windows Server 2025 Standard, 10.0.26100.7462 (N/A)              |
+| 45 | safeline                     | 192.168.1.89    | Debian GNU/Linux, 13 (trixie)                                              |
 ![Wazuh Agent List](/Career_Projects/assets/screenshots/wazuh-agents.png)
 
 ### Security Monitoring Modules
