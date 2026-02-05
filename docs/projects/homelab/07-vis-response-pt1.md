@@ -708,15 +708,12 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 | 44 | Win2025server                | 192.168.1.90    | Microsoft Windows Server 2025 Standard, 10.0.26100.7462 (N/A)              |
 | 45 | safeline                     | 192.168.1.89    | Debian GNU/Linux, 13 (trixie)                                              |
 
-<div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/screenshots/wazuh-agents.png" alt="Wazuh EDR Architecture">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Wazuh Agent Overview
-      </figcaption>
-    </figure>
-  </div>
-</div>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-agents.png" alt="Wazuh Agent Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh Agent Overview.
+  </figcaption>
+</figure>
 
 ### Security Monitoring Modules
 
@@ -951,6 +948,13 @@ Endpoint compromise remains one of the most common initial access vectors in mod
 - **Workflow:** Wazuh passes the username to the disable-account script, which locks the account immediately
 - **Benefit:** Prevents compromised or brute-forced accounts from being abused
 
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-ar.png" alt="Wazuh Active Response">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Active Response Events
+  </figcaption>
+</figure>
+
 ### Integrations
 
 #### Splunk
@@ -1006,15 +1010,16 @@ VirusTotal is integrated into the File Integrity Monitoring workflow through a c
   <rules_id>87105</rules_id>
 </active-response>
 ```
-<div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/screenshots/wazuh-vt.png" alt="Wazuh EDR Architecture">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Wazuh VirusTotal Integration
-      </figcaption>
-    </figure>
-  </div>
-</div>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-vt.png" alt="Wazuh EDR Architecture">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh VirusTotal Integration
+  </figcaption>
+</figure>
+
+
+
 
 #### Discord
 
@@ -1097,10 +1102,10 @@ The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:
 
 **Configuration:**
 
-**Email Alerts (Outlook):**
+**Email Alerts (Gmail):**
 
-- Wazuh configured to send alerts via local relay (msmtp/Postfix) → smtp.office365.com:587
-- Alerts delivered to recipient@outlook.com
+- Wazuh configured to send alerts via local relay (msmtp) → smtp.gmail.com:587
+- Alerts delivered to wazuh@shadowitlab.com
 
 **Discord Alerts:**
 
@@ -1130,11 +1135,12 @@ The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:
 
 - Detailed inventory information showing file and registry (Windows) actions including path/key, modification timestamp, user, file size
 
-![Wazuh FIM Overview Dashboard](/Career_Projects/assets/screenshots/wazuh-fim-overview.png)
-
-![Wazuh FIM Events Dashboard](/Career_Projects/assets/screenshots/wazuh-fim-events.png)
-
-![Wazuh FIM Inventory Dashboard](/Career_Projects/assets/screenshots/wazuh-fim-inventory.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-fim.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh File Integrity Monitoring
+  </figcaption>
+</figure>
 
 #### Configuration Management
 
@@ -1147,11 +1153,19 @@ The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:
 - Inventory information: policy, description, scan data, score
 - Events: Event count over time, detailed check and policy information
 
-![Wazuh SCA Dashboard](/Career_Projects/assets/screenshots/wazuh-sca-dashboard.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-sca.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    CIS Benchmark Results
+  </figcaption>
+</figure>
 
-![Wazuh SCA Checks](/Career_Projects/assets/screenshots/wazuh-sca-checks.png)
-
-![Wazuh SCA Events](/Career_Projects/assets/screenshots/wazuh-sca-events.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-sca2.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    CIS Benchmark Overview
+  </figcaption>
+</figure>
 
 #### Security Operations / IT Hygiene Dashboard
 
@@ -1166,11 +1180,19 @@ The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:
 - **Identity:** User and group, shell, and home directory information
 - **Services:** Running service information
 
-![Wazuh IT Hygiene Dashboard](/Career_Projects/assets/screenshots/wazuh-hygiene-dashboard.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-ith.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    IT Hygene Overview
+  </figcaption>
+</figure>
 
-![Wazuh IT Hygiene System](/Career_Projects/assets/screenshots/wazuh-hygiene-system.png)
-
-![Wazuh IT Hygiene Services](/Career_Projects/assets/screenshots/wazuh-hygiene-services.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-ith2.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    IT Hygene - System View
+  </figcaption>
+</figure>
 
 #### Threat Intelligence
 
@@ -1208,12 +1230,27 @@ data.win.eventdata.targetUserName: Administrator
 | where data.win.eventdata.subjectUserName != Administrator
 ```
 
-![Wazuh Threat Hunting Dashboard](/Career_Projects/assets/screenshots/wazuh-threat-hunting.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-th.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Thread Hunting Dashboard
+  </figcaption>
+</figure>
 
-![Wazuh Vulnerability Dashboard](/Career_Projects/assets/screenshots/wazuh-vulnerabilities.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-vul.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Vulnerability Detection Dashboard
+  </figcaption>
+</figure>
 
-![Wazuh MITRE ATT&CK Dashboard](/Career_Projects/assets/screenshots/wazuh-mitre.png)
 
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-mitre.png" alt="Wazuh MITRE ATT&CK">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    MITRE ATT&CK Dashboard
+  </figcaption>
+</figure>
 ---
 
 ## 5. Security Homelab Section Links
