@@ -447,7 +447,7 @@ SOAR workflow that automates Wazuh alert triage through TheHive case management,
   </figcaption>
 </figure>
 
-<img src="/Career_Projects/assets/screenshots/hive-alerts.png" alt="TheHive Alerts"> 
+<img src="/Career_Projects/assets/screenshots/hive-alerts1.png" alt="TheHive Alerts"> 
  
 <figure>
   <img src="/Career_Projects/assets/screenshots/hive-alerts2.png" alt="TheHive Alerts">
