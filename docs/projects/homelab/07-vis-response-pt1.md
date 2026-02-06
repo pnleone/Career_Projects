@@ -1071,18 +1071,19 @@ When an alert meets the configured severity threshold, Wazuh’s integration eng
 **Action**
 Inside Shuffle, the workflow performs the following steps:
 
-1. Parses the incoming Wazuh alert JSON  
-2. Extracts key metadata fields:
-- **Rule** → rule description and rule ID  
-- **Group** → Wazuh rule group classification  
-- **Host** → agent name or hostname  
-- **Severity** → numeric Wazuh level  
-3. Normalizes and sanitizes fields for TheHive compatibility  
-4. Creates a **TheHive Alert** using the enriched data  
-5. Routes alerts to additional automations such as:
-- Case creation  
-- Discord/email notifications  
-- Cortex analyzers  
+- Parses the incoming Wazuh alert JSON
+- Extracts key metadata fields:
+  - **Rule** → rule description and rule ID
+  - **Group** → Wazuh rule group classification
+  - **Host** → agent name or hostname
+  - **Severity** → numeric Wazuh level
+- Normalizes and sanitizes fields for TheHive compatibility
+- Creates a **TheHive Alert** using the enriched data
+- Routes alerts to additional automations such as:
+  - Case creation
+  - Discord/email notifications
+  - Cortex analyzers
+ 
 
 **Delivery**
 The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:
@@ -1095,7 +1096,7 @@ The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:
     <alert_format>json</alert_format>
 </integration>
 ```
----
+
 ### Alerting and Notifications
 
 **Purpose:** Provide immediate visibility into critical events
@@ -1208,7 +1209,7 @@ The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:
 
 - Alert evolution over time, top tactics, attacks by technique, tactics and techniques by agent
 
-##### Threat Hunting Queries
+### Threat Hunting Queries
 
 **Suspicious PowerShell Execution:**
 ```kql

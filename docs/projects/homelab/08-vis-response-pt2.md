@@ -1,4 +1,4 @@
-# Observability and Response Architecture - Part 2
+# Observability and Response Architecture, Part 2
 
 **Document Control:**   
 Version: 1.0  
@@ -11,7 +11,21 @@ Owner: Paul Leone
 
 ### Deployment Overview
 
-The SOAR platform unifies case management, automated enrichment, threat intelligence sharing, and workflow automation across the entire security stack. It integrates SIEM alerts, EDR telemetry, threat intelligence feeds, and infrastructure controls into a coordinated response ecosystem. The platform consists of four primary applications: Shuffle, TheHive, Cortex, and MISP. Each fulfills a specialized role within the incident response lifecycle.
+<div class="two-col-right">
+  <div class="text-col">
+    <p>The SOAR platform unifies case management, automated enrichment, threat intelligence sharing, and workflow automation across the entire security stack. It integrates SIEM alerts, EDR telemetry, threat intelligence feeds, and infrastructure controls into a coordinated response ecosystem.</p>
+    <p>The platform consists of four primary applications: Shuffle, TheHive, Cortex, and MISP. Each fulfills a specialized role within the incident response lifecycle. Together, they deliver automated triage, enrichment, containment, and intelligence distribution, enabling rapid, repeatable, and scalable security operations.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/soar-overview.png" alt="SOAR Platform Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        SOAR Platform Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 ### Security Impact
 
@@ -41,69 +55,101 @@ Modern SOC operations require more than detection—they require coordinated, au
 - Automated workflows enforce least-privilege actions and controlled response steps
 - Continuous verification of threat intelligence before actioning
 
-### 1.1 Shuffle - Security Automation Engine
+---
 
-#### Deployment Overview
+## 2. Shuffle - Security Automation Engine
+
+### Deployment Overview
 
 <div class="two-col-right">
   <div class="text-col">
-    <p>Shuffle is the low-code/no-code automation engine that orchestrates workflows across all SOC tools, SIEM platforms, and security infrastructure. It serves as the automation backbone of the SOAR ecosystem, enabling rapid integration, event-driven workflows, and multi-tool response actions. Shuffle processes alerts from Wazuh, Splunk, Elastic, and other sources, automatically enriching them with intelligence from Cortex, VirusTotal, Shodan, and MISP before triggering case creation or containment actions.</p>
+    <p>Shuffle is the low-code/no-code automation engine that orchestrates workflows across all SOC tools, SIEM platforms, and security infrastructure. It serves as the automation backbone of the SOAR ecosystem, enabling rapid integration, event-driven workflows, and multi-tool response actions.</p>
+    <p>Shuffle processes alerts from Wazuh, Splunk, Elastic, and other sources, automatically enriching them with intelligence from Cortex, VirusTotal, Shodan, and MISP before triggering case creation or containment actions.</p>
   </div>
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/shuffle-logo.png" alt="Shuffle Logo">
+      <img src="/Career_Projects/assets/misc/shuffle-logo.png" alt="Shuffle Logo">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Shuffle Automation Engine
+        Shuffle Security Automation Engine
       </figcaption>
     </figure>
   </div>
 </div>
 
-#### Security Impact
+### Security Impact
 
 - Automates triage, enrichment, and response actions to reduce MTTR
 - Executes containment workflows (firewall blocks, host isolation, account disablement)
 - Ensures consistent, repeatable response actions across all alerts
 - Provides real-time notifications and workflow execution logs
 
-#### Deployment Rationale
+### Deployment Rationale
 
 Shuffle demonstrates the ability to build enterprise-grade automation pipelines without requiring custom code. It integrates seamlessly with SIEM, EDR, threat intelligence, and case management systems, enabling end-to-end automated response.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Automates multi-layer response actions across EDR, firewalls, SIEM, and threat intelligence
-- **Secure by Design:** API-key isolation, encrypted communication, and controlled workflow execution
-- **Zero Trust:** Every alert is enriched and validated before action; no implicit trust in raw telemetry
+**Defense in Depth:** Automates multi-layer response actions across EDR, firewalls, SIEM, and threat intelligence
 
-#### Deployment Architecture
+**Secure by Design:** API-key isolation, encrypted communication, and controlled workflow execution
+
+**Zero Trust:** Every alert is enriched and validated before action; no implicit trust in raw telemetry
+
+### Deployment Architecture
 
 Shuffle is deployed as a multi-container microservices architecture with the following components:
 
 | Component | Image | IP Address | Purpose |
 |-----------|-------|------------|---------|
-| shuffle-frontend | shuffle-frontend:latest | 192.168.200.41 (LB) | React-based web UI for workflow design, execution monitoring, and administration |
-| shuffle-backend | shuffle-backend:latest | 10.43.xxx.xxx (ClusterIP) | Go-based backend API handling workflow execution orchestration, app management, webhook processing |
-| shuffle-opensearch | opensearch:3.2.0 | 10.43.xxx.xxx (ClusterIP) | OpenSearch database storing workflow definitions, execution history, app configurations, and audit logs |
-| shuffle-orborus | shuffle-orborus:latest | None (internal) | Worker orchestration daemon responsible for spinning up Docker containers to execute workflow app actions |
+| shuffle-frontend | shuffle-frontend:latest | 192.168.200.41 (LB) | React-based web UI for workflow design, execution monitoring, and administration. Provides drag-and-drop workflow builder with 300+ pre-built app integrations. |
+| shuffle-backend | shuffle-backend:latest | 10.43.xxx.xxx (ClusterIP) | Go-based backend API handling workflow execution orchestration, app management, webhook processing, and user authentication. Coordinates communication between frontend and execution workers. |
+| shuffle-opensearch | opensearch:3.2.0 | 10.43.xxx.xxx (ClusterIP) | OpenSearch database storing workflow definitions, execution history, app configurations, and audit logs. Provides full-text search capabilities for workflow debugging and audit trails. |
+| shuffle-orborus | shuffle-orborus:latest | None (internal) | Worker orchestration daemon responsible for spinning up Docker containers to execute workflow app actions. Manages containerized execution environment ensuring isolation and scalability. Runs on Kubernetes nodes as DaemonSet. |
 
 **External Access:**
 
-- **Web Interface:** https://192.168.200.41 (ports 80/443)
-- **Webhook Receiver:** https://192.168.200.41/api/v1/hooks/ (for external trigger integrations)
-- **API Endpoint:** https://192.168.200.41/api/v1/ (RESTful API for programmatic workflow management)
+- Web Interface: https://192.168.200.41 (ports 80/443)
+- Webhook Receiver: https://192.168.200.41/api/v1/hooks/
+- API Endpoint: https://192.168.200.41/api/v1/
 
+### Integration Points
 
-### 1.2 TheHive - Incident Response and Case Management
+Shuffle serves as the central orchestration hub connecting:
 
-#### Deployment Overview
+- **TheHive:** Automated case creation, task assignment, observable enrichment, and case closure workflows
+- **Cortex:** Trigger analysis jobs, retrieve results, execute responders based on analysis outcomes
+- **MISP:** Automatic IOC submission, threat intelligence queries, event publishing, and feed synchronization
+- **Wazuh EDR:** Alert triage, automated response actions (file quarantine, process termination), agent management
+- **pfSense Firewall:** Automatic blocklist updates, firewall rule creation, VPN configuration changes
+- **Suricata/Snort IDS:** Rule updates, signature deployment, detection tuning based on threat intelligence
+- **Discord:** Real-time notifications, alert distribution, case status updates, workflow execution reports
+- **Email:** Phishing analysis workflows, report distribution, executive summaries, alert forwarding
+- **VirusTotal/AbuseIPDB:** Automated reputation checks, malware analysis, IP/domain enrichment
 
+---
 
-TheHive provides centralized case management, investigation workflows, and collaborative incident response. It aggregates alerts from SIEM and EDR platforms into structured cases, enabling analysts to track tasks, observables, timelines, and response actions. TheHive acts as the command center for incident response, coordinating investigations across Cortex, MISP, Wazuh, and Shuffle.
+## 3. TheHive - Incident Response and Case Management
 
+### Deployment Overview
 
-#### Security Impact
+<div class="two-col-right">
+  <div class="text-col">
+    <p>TheHive provides centralized case management, investigation workflows, and collaborative incident response. It aggregates alerts from SIEM and EDR platforms into structured cases, enabling analysts to track tasks, observables, timelines, and response actions.</p>
+    <p>TheHive acts as the command center for incident response, coordinating investigations across Cortex, MISP, Wazuh, and Shuffle.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/misc/thehive-logo.png" alt="TheHive Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        TheHive Incident Response Platform
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+### Security Impact
 
 - Centralizes all incidents into structured, auditable cases
 - Enables collaborative investigations with task assignments and timelines
@@ -111,22 +157,24 @@ TheHive provides centralized case management, investigation workflows, and colla
 - Provides metrics dashboards for MTTD, MTTR, and case volume trends
 - Ensures consistent documentation for forensic and compliance requirements
 
-#### Deployment Rationale
+### Deployment Rationale
 
-TheHive mirrors enterprise SIRP (Security Incident Response Platform) capabilities, demonstrating proficiency with structured case management, workflow orchestration, and collaborative investigations. It provides the backbone for SOC processes, ensuring every incident is tracked, enriched, and resolved with full accountability.
+TheHive mirrors enterprise SIRP (Security Incident Response Platform) capabilities, demonstrating proficiency with structured case management, workflow orchestration, and collaborative investigations.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Combines SIEM, EDR, and threat intelligence alerts into multi-source cases
-- **Secure by Design:** Role-based access, audit logs, and structured workflows
-- **Zero Trust:** All observables validated through Cortex/MISP before actioning
+**Defense in Depth:** Combines SIEM, EDR, and threat intelligence alerts into multi-source cases
 
-#### Deployment Specifications
+**Secure by Design:** Role-based access, audit logs, and structured workflows
+
+**Zero Trust:** All observables validated through Cortex/MISP before actioning
+
+### Deployment Specifications
 
 - **Container Image:** strangebee/thehive:5.5.13-1
 - **Deployment Type:** Helm chart (managed deployment)
 - **Replicas:** 1 (single instance)
-- **External Access:** LoadBalancer service at **192.168.200.33**
+- **External Access:** LoadBalancer service at 192.168.200.33
   - Port 9000 (HTTP/HTTPS web interface)
   - Port 9095 (Kamon metrics for Prometheus integration)
 - **Persistent Storage:** Backed by Cassandra and Elasticsearch for data durability
@@ -135,9 +183,7 @@ TheHive mirrors enterprise SIRP (Security Incident Response Platform) capabiliti
   - Memory: 4GB
   - Storage: 20GB (application data via Cassandra)
 
-![TheHive Architecture Diagram](/Career_Projects/assets/diagrams/thehive-architecture.png)
-
-#### Key Capabilities
+### Key Capabilities
 
 - **Case Management:** Create, assign, and track security incidents with customizable workflows
 - **Task Orchestration:** Break down investigations into actionable tasks with assignments and deadlines
@@ -147,44 +193,62 @@ TheHive mirrors enterprise SIRP (Security Incident Response Platform) capabiliti
 - **Reporting:** Generate executive summaries and technical reports from case data
 - **Metrics Dashboard:** Track MTTD (Mean Time to Detect), MTTR (Mean Time to Respond), case volume trends
 
-#### Integration Points
+### Integration Points
 
 - **Cortex:** Automated observable analysis and enrichment
 - **MISP:** Bi-directional IOC sharing (export confirmed threats, import external intelligence)
-- **Wazuh:** Automated case creation from EDR alerts (via n8n workflow)
-- **Splunk:** SIEM alert ingestion and correlation
+- **Wazuh:** Automated case creation from EDR alerts (via Shuffle workflow)
 - **Shuffle:** Workflow automation for alert triage and notification distribution
 - **Discord:** Real-time notifications for high-severity cases
+- **SMTP Relay:** Gmail notifications
 
-### 1.3 Cortex - Observable Analysis and Active Response Engine
+---
 
-#### Deployment Overview
+## 4. Cortex - Observable Analysis and Active Response Engine
 
-Cortex automates the analysis of observables (IOCs) using a wide range of analyzers and responders. It enriches IPs, domains, hashes, URLs, and files with intelligence from VirusTotal, AbuseIPDB, Shodan, OTX, and internal sources. Cortex responders execute automated containment actions such as firewall rule updates, blocklist modifications, and case escalations.
+### Deployment Overview
 
-#### Security Impact
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Cortex automates the analysis of observables (IOCs) using a wide range of analyzers and responders. It enriches IPs, domains, hashes, URLs, and files with intelligence from VirusTotal, AbuseIPDB, Shodan, OTX, and internal sources.</p>
+    <p>Cortex responders execute automated containment actions such as firewall rule updates, blocklist modifications, and case escalations.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/misc/cortex-logo.png" alt="Cortex Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cortex Analysis Engine
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+### Security Impact
 
 - Provides automated, multi-engine IOC analysis
 - Executes rapid containment actions via responders
 - Enhances detection accuracy through cross-source enrichment
 - Supports dynamic malware analysis via sandbox integrations
 
-#### Deployment Rationale
+### Deployment Rationale
 
 Cortex demonstrates advanced enrichment and automated response capabilities found in enterprise SOCs. Its analyzer/responder model enables modular, scalable intelligence processing and automated containment workflows.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Multiple analyzer categories validate IOCs across independent sources
-- **Secure by Design:** Controlled responder execution; strict API authentication
-- **Zero Trust:** No IOC trusted without multi-engine validation
+**Defense in Depth:** Multiple analyzer categories validate IOCs across independent sources
 
-#### Deployment Specifications
+**Secure by Design:** Controlled responder execution; strict API authentication
+
+**Zero Trust:** No IOC trusted without multi-engine validation
+
+### Deployment Specifications
 
 - **Container Image:** thehiveproject/cortex:latest
 - **Deployment Type:** Kubernetes Deployment
-- **Replicas:** 1 (scalable to 3+ for high-volume analysis)
-- **External Access:** LoadBalancer service at **192.168.200.40**
+- **Replicas:** 1
+- **External Access:** LoadBalancer service at 192.168.200.40
   - Port 9001 (HTTP API and web interface)
 - **Backend Database:** Elasticsearch (for job history and results)
 - **Resource Allocation:**
@@ -192,30 +256,66 @@ Cortex demonstrates advanced enrichment and automated response capabilities foun
   - Memory: 4GB (increases with active jobs)
   - Storage: 10GB (job results and cache)
 
-### 1.4 MISP - Threat Intelligence Sharing Platform
+### Analyzers Enabled
 
-#### Deployment Overview
-MISP provides structured threat intelligence management, IOC sharing, and collaborative intelligence workflows. It stores, correlates, and distributes threat indicators across the SOAR ecosystem. MISP integrates with Cortex, TheHive, Shuffle, and external intelligence feeds to enrich alerts and cases with contextual threat data.</p>
-  
+- VirusTotal
+- MISP
+- AbuseIPDB
+- Malware Bazaar
+- Shodan
+- Cyberchef
+- Hybrid Analysis
 
-#### Security Impact
+### Responders Enabled
+
+- VirusTotal Downloader
+- Mailer
+- Wazuh
+- Shuffle
+- N8n
+
+---
+
+## 5. MISP - Threat Intelligence Sharing Platform
+
+### Deployment Overview
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>MISP provides structured threat intelligence management, IOC sharing, and collaborative intelligence workflows. It stores, correlates, and distributes threat indicators across the SOAR ecosystem.</p>
+    <p>MISP integrates with Cortex, TheHive, Shuffle, and external intelligence feeds to enrich alerts and cases with contextual threat data.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/misc/misp-logo.png" alt="MISP Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        MISP Threat Intelligence Platform
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+### Security Impact
 
 - Enhances detection accuracy through curated threat intelligence
 - Enables bi-directional sharing of confirmed IOCs
 - Correlates related events to identify campaigns and intrusion sets
 - Supports automated enrichment and threat scoring
 
-#### Deployment Rationale
+### Deployment Rationale
 
 MISP demonstrates proficiency with structured threat intelligence, IOC lifecycle management, and intelligence-driven detection. It mirrors enterprise CTI workflows where intelligence is continuously ingested, validated, enriched, and distributed across SOC tools.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Adds intelligence-driven detection to complement SIEM/EDR telemetry
-- **Secure by Design:** Signed events, role-based access, and controlled feed synchronization
-- **Zero Trust:** All intelligence validated before distribution; no implicit trust in external feeds
+**Defense in Depth:** Adds intelligence-driven detection to complement SIEM/EDR telemetry
 
-#### Deployment Specifications
+**Secure by Design:** Signed events, role-based access, and controlled feed synchronization
+
+**Zero Trust:** All intelligence validated before distribution; no implicit trust in external feeds
+
+### Deployment Specifications
 
 MISP is deployed as a multi-container application stack with the following components:
 
@@ -226,22 +326,45 @@ MISP is deployed as a multi-container application stack with the following compo
 | misp-redis | valkey/valkey:7.2 | 10.43.131.214 (ClusterIP) | Redis cache for session management and job queuing |
 | misp-modules | ghcr.io/misp/misp-docker/misp-modules:latest | 10.43.234.246 (ClusterIP) | Expansion and enrichment modules for automated IOC enrichment |
 | misp-guard | ghcr.io/misp/misp-docker/misp-guard:latest | 10.43.97.195 (ClusterIP) | Security proxy protecting MISP core from malicious input |
-| misp-mail | registry.gitlab.com/egos-tech/smtp:latest | 192.168.200.38 (LB) | SMTP relay for email notifications and sharing |
 
 **External Access:**
 
-- **Web Interface:** https://192.168.200.37 (ports 80/443)
-- **SMTP Server:** 192.168.200.38:25 (for receiving threat intelligence emails)
+- Web Interface: https://192.168.200.37 (ports 80/443)
 
-#### Supporting Infrastructure
+### Integration Points
 
-**Cassandra - Distributed NoSQL Database:**
+- **TheHive:** Bi-directional IOC exchange (TheHive cases → MISP events, MISP feeds → TheHive alerts)
+- **Cortex:** MISP lookup analyzer queries threat intelligence database
+- **Wazuh:** EDR threat intelligence module queries MISP for known malicious indicators
 
-- **Purpose:** Scalable, fault-tolerant data store for TheHive case data, observables, and audit logs
+---
+
+## 6. Supporting Infrastructure
+
+### Cassandra - Distributed NoSQL Database
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p><strong>Purpose:</strong> Scalable, fault-tolerant data store for TheHive case data, observables, and audit logs.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/misc/cassandra-logo.png" alt="Cassandra Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Apache Cassandra
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+**Deployment Specifications:**
+
 - **Container Image:** cassandra:4.1.7
 - **Deployment Type:** StatefulSet (ensures stable network identity and persistent storage)
 - **Replicas:** 1 (production would use 3+ node cluster for high availability)
-- **External Access:** LoadBalancer service at **192.168.200.36** (Port 9042 - CQL native protocol)
+- **External Access:** LoadBalancer service at 192.168.200.36
+  - Port 9042 (CQL native protocol)
 - **Persistent Volume:** 100GB SSD-backed storage
 - **Replication Strategy:** SimpleStrategy with replication_factor=1 (single node)
 
@@ -252,14 +375,30 @@ MISP is deployed as a multi-container application stack with the following compo
 - **Backup Strategy:** Daily snapshots via cron job, retained for 14 days
 - **Monitoring:** Exposed JMX metrics for Prometheus scraping
 
+### Elasticsearch - Search and Analytics Engine
 
-**Elasticsearch - Search and Analytics Engine:**
+<div class="two-col-right">
+  <div class="text-col">
+    <p><strong>Purpose:</strong> Full-text search, log aggregation, and analytics for TheHive cases, Cortex job results, and observables.</p>
+  </div>
 
-- **Purpose:** Full-text search, log aggregation, and analytics for TheHive cases, Cortex job results, and observables
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/misc/elasticsearch-logo.png" alt="Elasticsearch Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Elasticsearch
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+**Deployment Specifications:**
+
 - **Container Image:** docker.elastic.co/elasticsearch/elasticsearch:9.2.2
 - **Deployment Type:** StatefulSet (single-node cluster)
 - **Replicas:** 1
-- **External Access:** LoadBalancer service at **192.168.200.34** (Port 9200 - HTTP REST API)
+- **External Access:** LoadBalancer service at 192.168.200.34
+  - Port 9200 (HTTP REST API)
 - **Persistent Volume:** 200GB SSD-backed storage
 - **Cluster Name:** soc-elasticsearch
 - **Node Roles:** master, data, ingest (combined role in single-node deployment)
@@ -278,14 +417,30 @@ MISP is deployed as a multi-container application stack with the following compo
 - **Replicas:** 0 (single node, no replication)
 - **Refresh Interval:** 5 seconds (balance between real-time search and indexing performance)
 
+### OpenSearch - Shuffle Workflow Database
 
-**OpenSearch - Shuffle Workflow Database:**
+<div class="two-col-right">
+  <div class="text-col">
+    <p><strong>Purpose:</strong> Storage and retrieval of Shuffle workflow definitions, execution history, app configurations, and audit logs.</p>
+  </div>
 
-- **Purpose:** Storage and retrieval of Shuffle workflow definitions, execution history, app configurations, and audit logs
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/misc/opensearch-logo.png" alt="OpenSearch Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        OpenSearch
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+**Deployment Specifications:**
+
 - **Container Image:** opensearch:3.2.0
 - **Deployment Type:** StatefulSet (single-node cluster)
 - **Replicas:** 1
-- **External Access:** ClusterIP only (internal communication with Shuffle backend) (Port 9200 - HTTP REST API)
+- **External Access:** ClusterIP only (internal communication with Shuffle backend)
+  - Port 9200 (HTTP REST API)
 - **Persistent Volume:** 100GB SSD-backed storage
 - **Cluster Name:** shuffle-opensearch
 
@@ -302,22 +457,129 @@ MISP is deployed as a multi-container application stack with the following compo
 - **Retention:** 90-day execution history (configurable based on storage capacity)
 - **Backup Strategy:** Daily snapshots to NAS; integrated with Kubernetes backup automation
 
+---
 
-### Use Cases and Workflows
+## 7. SOAR Workflow: Automated Endpoint Threat Intelligence Pipeline
 
-**Work in Progress - Future**
+### Overview
+
+SOAR workflow that automates Wazuh alert triage through TheHive case management, Cortex-based IOC enrichment, and multi-channel notifications.
+
+**Trigger:** Wazuh webhook (Severity ≥ 7)
+
+**Tools:** Wazuh EDR, TheHive, Cortex, VirusTotal, AbuseIPDB, Discord, Gmail
+
+### Workflow Execution
+
+**1. Alert Ingestion**
+
+- **Wazuh Alert Med** (Trigger): Receives security event via webhook
+- **LogCollection** (Parser): Extracts structured alert data
+
+**2. TheHive Integration**
+
+- **CreateAlert**: Generates alert in TheHive with Wazuh event metadata
+- **Add IP to Alert**: Injects IP observables from alert
+- **Add Hash to Alert**: Injects file hash observables from alert
+- **Create Case from Alert**: Promotes alert to investigable case
+
+**3. IOC Enrichment**
+
+- **Get Case Observable**: Retrieves all observables for analysis
+- **Run Analyzer VirusTotal**: Executes VirusTotal_GetReport_3_1 via Cortex
+- **Run Analyzer AbuseIPDB**: Executes AbuseIPDB_1_1 via Cortex
+- **Get Cortex Results**: Retrieves analysis reports (JSON)
+- **Add Observable to Case**: Attaches enrichment results to case
+
+**4. Notification**
+
+- **Send Discord Alert**: Pushes case summary to #soc-alerts channel
+- **Gmail Relay Notification**: Emails SOC distribution list with case details
+
+### Use Case Example
+
+**Scenario:** Wazuh detects suspicious process execution with SHA256 hash and external IP connection.
+
+**Automated Response:**
+
+1. Case created in TheHive: [Hostname] Suspicious PowerShell Execution
+2. Cortex analysis results:
+   - VirusTotal: 45/70 detections (Trojan.Downloader)
+   - AbuseIPDB: IP flagged with 87% confidence score
+3. Discord/Email alerts sent with enrichment summary
+4. Analyst reviews case with pre-loaded context
+
+**Average Execution Time:** 45-60 seconds
+
+### Workflow Screenshots
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/shuffle-workflow-overview.png" alt="Shuffle Workflow Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Shuffle Workflow Overview
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-alert-events.png" alt="Wazuh Alert Events">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh Alert Events
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/thehive-alerts.png" alt="TheHive Alerts">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    TheHive Alerts
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/cortex-analyzers.png" alt="Cortex Analyzers">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Cortex Analyzers
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/thehive-cases.png" alt="TheHive Cases">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    TheHive Cases
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/discord-email-notifications.png" alt="Discord and Email Notifications">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Discord and Email Notifications
+  </figcaption>
+</figure>
 
 ---
 
-## 2. Monitoring and Observability Architecture
+## 8. Observability Architecture
 
 ### Deployment Overview
 
-The monitoring stack provides comprehensive visibility into the health, performance, and availability of all systems across the lab environment. Unlike SIEM platforms that focus on security events, the monitoring layer captures operational telemetry: CPU, memory, disk, network throughput, service uptime, virtualization metrics, and application-level health checks.
+<div class="two-col-right">
+  <div class="text-col">
+    <p>The monitoring stack provides comprehensive visibility into the health, performance, and availability of all systems across the lab environment. Unlike SIEM platforms that focus on security events, the monitoring layer captures operational telemetry: CPU, memory, disk, network throughput, service uptime, virtualization metrics, and application-level health checks.</p>
+    <p>This multi-tool architecture spans time-series metrics, heartbeat monitoring, deep infrastructure inspection, and hypervisor-specific analytics.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/observability-overview.png" alt="Observability Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Observability Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 ### Security Impact
 
-Monitoring is a critical component of operational security. Performance anomalies often precede or accompany security incidents: unexpected CPU spikes, abnormal network traffic, failing services, or resource exhaustion can indicate brute-force attempts, malware execution, or lateral movement. By correlating infrastructure telemetry with SIEM data, defenders gain a holistic view of system behavior.
+Monitoring is a critical component of operational security. Performance anomalies often precede or accompany security incidents—unexpected CPU spikes, abnormal network traffic, failing services, or resource exhaustion can indicate brute-force attempts, malware execution, or lateral movement. By correlating infrastructure telemetry with SIEM data, defenders gain a holistic view of system behavior.
 
 ### Deployment Rationale
 
@@ -343,43 +605,48 @@ Modern environments require more than log-based security analytics; they require
 - Continuous validation of service uptime and performance
 - Alerting pipelines enforce accountability and traceability
 
-### 2.1 Prometheus & Grafana - Infrastructure Metrics Platform
+---
 
-#### Deployment Overview
+## 9. Prometheus & Grafana - Infrastructure Metrics Platform
+
+### Deployment Overview
 
 <div class="two-col-right">
   <div class="text-col">
-    <p>Prometheus collects high-resolution time-series metrics from servers, containers, network devices, and applications. Grafana visualizes these metrics through customizable dashboards, providing real-time insights into system performance and long-term trends. This stack focuses on operational telemetry—CPU, memory, disk I/O, network throughput, container health, and service latency.</p>
+    <p>Prometheus collects high-resolution time-series metrics from servers, containers, network devices, and applications. Grafana visualizes these metrics through customizable dashboards, providing real-time insights into system performance and long-term trends.</p>
+    <p>This stack focuses on operational telemetry—CPU, memory, disk I/O, network throughput, container health, and service latency—complementing SIEM platforms by monitoring performance rather than security events.</p>
   </div>
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/prometheus-grafana.png" alt="Prometheus and Grafana Logos">
+      <img src="/Career_Projects/assets/misc/prometheus-grafana-logo.png" alt="Prometheus and Grafana">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Prometheus & Grafana Monitoring Stack
+        Prometheus and Grafana
       </figcaption>
     </figure>
   </div>
 </div>
 
-#### Security Impact
+### Security Impact
 
 - Detects resource exhaustion attacks (CPU spikes, memory leaks, disk saturation)
 - Identifies anomalous network throughput that may indicate data exfiltration
 - Monitors container and Kubernetes health for signs of compromise
 - Provides early warning when security tools (SIEM, EDR, IDS) degrade or fail
 
-#### Deployment Rationale
+### Deployment Rationale
 
 Prometheus and Grafana are industry-standard observability tools used across cloud-native and hybrid environments. Their inclusion demonstrates proficiency with metrics-driven monitoring, dashboard creation, alerting rules, and containerized instrumentation.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Metrics complement logs and endpoint telemetry for multi-layer detection
-- **Secure by Design:** TLS-secured Prometheus endpoints; role-based Grafana access
-- **Zero Trust:** Every host must expose metrics; no implicit trust in service health
+**Defense in Depth:** Metrics complement logs and endpoint telemetry for multi-layer detection
 
-#### Prometheus Configuration
+**Secure by Design:** TLS-secured Prometheus endpoints; role-based Grafana access
+
+**Zero Trust:** Every host must expose metrics; no implicit trust in service health
+
+### Prometheus Configuration
 
 **Core Prometheus:**
 
@@ -394,161 +661,249 @@ Prometheus and Grafana are industry-standard observability tools used across clo
 
 - **Node Exporter:** Linux hosts (PVE node, VMs, Docker hosts)
 - **Proxmox Exporter:** prometheus-pve-exporter hitting the PVE API
-- **Pi-hole Exporter:** Containerized exporter reading FTL metrics
-- **Traefik:** Reverse proxy details
-- **pfSense Exporter:** System-level monitoring
+- **Pi-hole Exporter:** containerized exporter reading FTL metrics
+- **Traefik:** reverse proxy details
+- **pfSense Exporter:** system-level monitoring
+- **OPNsense Exporter:** system-level monitoring
 - **Uptime-Kuma:** Service uptime monitoring
+- **CrowdSec:** Engine metrics
 
-![Prometheus Configuration Screenshot](/Career_Projects/assets/screenshots/prometheus-config.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/prometheus-targets.png" alt="Prometheus Target Health Status">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Prometheus Target Health Status
+  </figcaption>
+</figure>
 
-#### Grafana Dashboards
+<figure>
+  <img src="/Career_Projects/assets/screenshots/alertmanager-blackbox.png" alt="Alert Manager and Blackbox Alerts">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Alert Manager and Blackbox Alerts
+  </figcaption>
+</figure>
 
-**Dashboards:**
-
-- **Node/Host Overview:** CPU, memory, FS, network, load (per host)
-- **Proxmox:** Node status, VM CPU/mem/disk IO, cluster quorum
-- **Pi-hole:** Query volume, block rate, upstream latency, cache hit rate, top domains
-- **Traefik:** HTTP requests, slow services
-- **pfSense:** System monitoring, CPU, RAM, traffic
+### Grafana Dashboards
 
 **Infrastructure Dashboards:**
 
 | Dashboard Name | Data Source | Refresh Rate | Panels |
 |----------------|-------------|--------------|--------|
-| Node Exporter Full | Prometheus | 30s | CPU, RAM, Disk, Network, Load |
-| Proxmox VE Overview | Prometheus | 1m | Cluster status, VM metrics, storage |
-| Pi-hole Statistics | Prometheus | 30s | Query rate, block %, cache hits |
-| Traefik Overview | Prometheus | 15s | Request rate, latency, error rate |
-| pfSense System Metrics | Prometheus | 30s | CPU, RAM, interfaces, throughput |
-| Blackbox Exporter | Prometheus | 1m | HTTP status, TLS cert expiry, latency |
+| Node Exporter Full | Prometheus | 30s | CPU; RAM; Disk; Network; Load |
+| Proxmox VE Overview | Prometheus | 1m | Cluster status; VM metrics; storage |
+| Pi-hole Statistics | Prometheus | 30s | Query rate; block %; cache hits |
+| Traefik Overview | Prometheus | 15s | Request rate; latency; error rate |
+| pfSense System Metrics | Prometheus | 30s | CPU; RAM; interfaces; throughput |
+| Blackbox Exporter | Prometheus | 1m | HTTP status; TLS cert expiry; latency |
 
-#### Proxmox VE Dashboard
+**Proxmox VE Dashboard:**
 
-- **Exporter:** prometheus-pve-exporter as a service or container
+- **Exporter:** prometheus-pve-exporter as a service; uses least-privilege PVE API token
 - **Metrics:** Node/VM CPU, memory, storage pools, task failures, HA state
 - **Alerts:**
-  - **Node pressure:** CPU > 85% for 10m, RAM > 90% for 5m
-  - **Storage:** Datastore free < 15%
-  - **VM health:** No metrics from a VM for > 5m (down)
+  - Node pressure: CPU > 85% for 10m, RAM > 90% for 5m
+  - Storage: Datastore free < 15%
+  - VM health: No metrics from a VM for > 5m (down)
 
-![Grafana Proxmox Dashboard](/Career_Projects/assets/screenshots/grafana-proxmox.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/grafana-proxmox.png" alt="Proxmox VE Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Proxmox VE Dashboard
+  </figcaption>
+</figure>
 
-#### Pi-hole Dashboard
+**Pi-hole Dashboard:**
 
-- **Exporter:** Containerized pihole_exporter or FTL-compatible exporter
+- **Exporter:** Containerized pihole_exporter reading FTL metrics
 - **Metrics:** Query rate, block rate, cache hit %, upstream latency, gravity update age
 - **Alerts:**
-  - **FTL down:** No scrape > 2m
-  - **Block rate anomaly:** Sudden drop to near 0% or spike > 95%
-  - **Upstream failures:** SERVFAIL/timeout ratio increases
+  - FTL down: No scrape > 2m
+  - Block rate anomaly: Sudden drop to near 0% or spike > 95%
+  - Upstream failures: SERVFAIL/timeout ratio increases
 
-![Grafana Pi-hole Dashboard](/Career_Projects/assets/screenshots/grafana-pihole.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/grafana-pihole.png" alt="Pi-hole Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Pi-hole Dashboard
+  </figcaption>
+</figure>
 
-#### Traefik Dashboard
+**Traefik Dashboard:**
 
 - **Exporter:** Direct Prometheus integration
 - **Metrics:** Instances, HTTP requests per entrypoint, application and HTTP method, slow services
 
-![Grafana Traefik Dashboard](/Career_Projects/assets/screenshots/grafana-traefik.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/grafana-traefik.png" alt="Traefik Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Traefik Dashboard
+  </figcaption>
+</figure>
 
-#### pfSense Dashboard
+**pfSense Dashboard:**
 
 - **Exporter:** Direct Prometheus integration
 - **Metrics:** CPU, RAM, Disk monitoring, network packets by interface, pkt/sec, load avg, traps and system calls
 
-![Grafana pfSense Dashboard](/Career_Projects/assets/screenshots/grafana-pfsense.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/grafana-pfsense.png" alt="pfSense Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    pfSense Dashboard
+  </figcaption>
+</figure>
 
-### 2.2 Uptime Kuma - Service Availability Monitoring
+---
 
-#### Deployment Overview
+## 10. Uptime Kuma - Service Availability Monitoring
+
+### Deployment Overview
 
 <div class="two-col-right">
   <div class="text-col">
-    <p>Uptime Kuma provides heartbeat monitoring for all lab services using HTTP/S, TCP, and ICMP checks. Each monitored service is continuously probed for availability, latency, and response integrity. Any deviation triggers immediate alerts routed to dedicated Discord channels.</p>
+    <p>Uptime Kuma provides heartbeat monitoring for all lab services using HTTP/S, TCP, and ICMP checks. Each monitored service is continuously probed for availability, latency, and response integrity.</p>
+    <p>Any deviation triggers immediate alerts routed to dedicated Discord channels.</p>
   </div>
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/uptime-kuma-logo.png" alt="Uptime Kuma Logo">
+      <img src="/Career_Projects/assets/misc/uptime-kuma-logo.png" alt="Uptime Kuma">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Uptime Kuma Service Monitoring
+        Uptime Kuma
       </figcaption>
     </figure>
   </div>
 </div>
 
-#### Security Impact
+### Security Impact
 
 - Detects service outages caused by attacks, misconfigurations, or resource exhaustion
 - Identifies unstable or degraded services before they impact security tooling
 - Provides uptime baselines useful for correlating with SIEM events
 
-#### Deployment Rationale
+### Deployment Rationale
 
-Service uptime is foundational to both operational stability and security visibility. Uptime Kuma offers a lightweight, flexible, and highly responsive monitoring layer that mirrors enterprise heartbeat monitoring systems.
+Service uptime is foundational to both operational stability and security visibility. Uptime Kuma offers a lightweight, flexible, and highly responsive monitoring layer.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Adds availability monitoring to complement metrics and logs
-- **Secure by Design:** Segmented monitoring probes reduce attack surface
-- **Zero Trust:** No service is assumed healthy; continuous validation required
+**Defense in Depth:** Adds availability monitoring to complement metrics and logs
 
-![Uptime Kuma Dashboard Screenshot](/Career_Projects/assets/screenshots/uptime-kuma-dashboard.png)
+**Secure by Design:** Segmented monitoring probes reduce attack surface
 
-![Uptime Kuma Status Page Screenshot](/Career_Projects/assets/screenshots/uptime-kuma-status.png)
+**Zero Trust:** No service is assumed healthy; continuous validation required
 
-### 2.3 Checkmk - Deep Infrastructure Monitoring
+<figure>
+  <img src="/Career_Projects/assets/screenshots/uptime-kuma-dashboard.png" alt="Uptime Kuma Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Uptime Kuma Dashboard
+  </figcaption>
+</figure>
 
-#### Deployment Overview
+---
+
+## 11. Checkmk - Deep Infrastructure Monitoring
+
+### Deployment Overview
 
 <div class="two-col-right">
   <div class="text-col">
-    <p>Checkmk delivers comprehensive monitoring across servers, applications, network devices, storage systems, and containerized workloads. It provides granular visibility into multi-layer dependencies and deep host-level inspection.</p>
+    <p>Checkmk delivers comprehensive monitoring across servers, applications, network devices, storage systems, and containerized workloads.</p>
   </div>
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/checkmk-logo.png" alt="Checkmk Logo">
+      <img src="/Career_Projects/assets/misc/checkmk-logo.png" alt="Checkmk">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Checkmk Infrastructure Monitoring
+        Checkmk
       </figcaption>
     </figure>
   </div>
 </div>
 
-#### Security Impact
+### Security Impact
 
 - Detects abnormal system behavior (high load, failing disks, service crashes)
 - Monitors critical infrastructure supporting security tools
 - Provides granular visibility into multi-layer dependencies
 
-#### Deployment Rationale
+### Deployment Rationale
 
 Checkmk represents enterprise-grade monitoring with agent-based and agentless capabilities. Its inclusion demonstrates proficiency with large-scale infrastructure monitoring, rule-based alerting, and hybrid environment observability.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Adds deep host-level inspection to complement Prometheus metrics
-- **Secure by Design:** Encrypted agent communication; strict role-based access
-- **Zero Trust:** Every host must report detailed health metrics continuously
+**Defense in Depth:** Adds deep host-level inspection to complement Prometheus metrics
 
-#### High-Level Configuration
+**Secure by Design:** Encrypted agent communication; strict role-based access
 
-- **Unified Monitoring:** Deployed across physical devices, virtual machines, LXC and Docker containers
-- **Agent-Based:** Lightweight agents for Linux, Windows, FreeBSD
-- **Custom Checks & Plugins:** Extendable with shell scripts, Python, or Checkmk's plugin framework
-- **Security-Aware Monitoring:** Integrates with vulnerability scanners, SIEM platforms, and EDR tools
-- **Audit-Friendly Logging:** Every alert, metric, and change is timestamped and traceable
+**Zero Trust:** Every host must report detailed health metrics continuously
 
-![Checkmk Dashboard Screenshot](/Career_Projects/assets/screenshots/checkmk-dashboard.png)
+### High-Level Configuration
 
-![Checkmk Services Screenshot](/Career_Projects/assets/screenshots/checkmk-services.png)
+The Checkmk monitoring server runs as a Docker container on UbuntuVM1, which serves as the central monitoring engine for the entire homelab. UbuntuVM1 sits in the LAB_LAN1 VLAN and has direct or routed access to all monitored networks.
 
-![Checkmk Topology Map Screenshot](/Career_Projects/assets/screenshots/checkmk-topology.png)
+The Checkmk container communicates with monitored hosts using a mix of native Checkmk agents, SNMP, API integrations, and special agents depending on the platform.
 
-### 2.4 Pulse - Proxmox Virtual Environment and Backup Server Monitoring
+### Monitored Host Types & Integration Methods
 
-#### Deployment Overview
+**Proxmox Host and Linux VMs/LXCs (Ubuntu, Debian, CentOS, Fedora, RHEL, Kali, ParrotOS):**
+
+- **Integration:** Checkmk Agent (TCP/6556)
+- **Metrics:** CPU, memory, load, filesystem, systemd services, Docker containers, Kubernetes node metrics, application-specific checks
+- **Communication:** Routed VLANs with firewall rules allowing TCP/6556 from UbuntuVM1
+
+**Windows Hosts (Win11, Server 2022, Server 2025):**
+
+- **Integration:** Checkmk Windows Agent
+- **Metrics:** CPU, memory, disk, services, event log monitoring, Windows Update status, domain controller checks
+
+**pfSense Firewall:**
+
+- **Integration:** Checkmk Agent via xinetd (TCP/6556)
+- **Deployment:** Agent deployed manually and served through xinetd, configured to start at boot using pfSense's shellcmd mechanism
+- **Metrics:** System health (CPU, RAM, swap), interface throughput, gateway status, package health (Unbound, Suricata, Snort), filesystem usage
+
+**Cisco vIOS Routers (r1, r2):**
+
+- **Integration:** SNMP v2c
+- **Metrics:** Interface status and traffic, errors/discards, CPU and memory, routing table size, ARP table, device uptime
+
+**VMware ESXi Host:**
+
+- **Integration:** VMware Special Agent (HTTPS/443)
+- **Authentication:** Dedicated read-only user on ESXi host
+- **Metrics:** Host CPU and memory, datastore usage, VM inventory and power state, NIC and vSwitch metrics
+
+### Communication Summary
+
+| Host Type | Integration | Protocol | Notes |
+|-----------|-------------|----------|-------|
+| Linux servers | Checkmk Agent | TCP/6556 | Full OS visibility |
+| Windows servers | Checkmk Agent | TCP/6556 | Event logs, services |
+| pfSense | Checkmk Agent via xinetd | TCP/6556 | Custom deployment |
+| Cisco vIOS | SNMP v2c | UDP/161 | Interface + routing metrics |
+| ESXi | VMware Special Agent | HTTPS/443 | API-based monitoring |
+| Proxmox | Checkmk Agent | TCP/6556 | Full OS visibility |
+| Applications | Agent + HTTP checks | TCP/6556 + HTTP | Service-level monitoring |
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/checkmk-overview.png" alt="Checkmk Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Checkmk Overview
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/checkmk-topology.png" alt="Checkmk Topology Map">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Checkmk Topology Map
+  </figcaption>
+</figure>
+
+---
+
+## 12. Pulse - Proxmox Virtual Environment and Backup Server Monitoring
+
+### Deployment Overview
 
 <div class="two-col-right">
   <div class="text-col">
@@ -557,35 +912,33 @@ Checkmk represents enterprise-grade monitoring with agent-based and agentless ca
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/pulse-logo.png" alt="Pulse Logo">
+      <img src="/Career_Projects/assets/misc/pulse-logo.png" alt="Pulse">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Pulse Proxmox Monitoring
+        Pulse
       </figcaption>
     </figure>
   </div>
 </div>
 
-#### Security Impact
+### Security Impact
 
 - Detects hypervisor-level anomalies that may indicate compromise or misconfiguration
 - Monitors VM performance for signs of malicious activity
 - Ensures backup integrity and cluster stability
 
-![Pulse Architecture Diagram](/Career_Projects/assets/diagrams/pulse-architecture.png)
-
-#### Deployment Rationale
+### Deployment Rationale
 
 Virtualization is the backbone of the lab environment. Pulse provides hypervisor-specific insights that general monitoring tools cannot, mirroring enterprise virtualization monitoring platforms.
 
-#### Architecture Principles Alignment
+### Architecture Principles Alignment
 
-- **Defense in Depth:** Adds hypervisor-layer visibility beneath OS-level monitoring
-- **Secure by Design:** Dedicated monitoring channel reduces exposure of Proxmox APIs
-- **Zero Trust:** No VM or node is implicitly trusted; all must report health
+**Defense in Depth:** Adds hypervisor-layer visibility beneath OS-level monitoring
 
-![Pulse Connection Settings Screenshot](/Career_Projects/assets/screenshots/pulse-connection.png)
+**Secure by Design:** Dedicated monitoring channel reduces exposure of Proxmox APIs
 
-#### Lab Integration
+**Zero Trust:** No VM or node is implicitly trusted; all must report health
+
+### Lab Integration
 
 In this lab environment, Pulse is connected to both the Proxmox VE cluster and the PBS node. Authentication is handled via a dedicated Proxmox service account configured with an API token. This account is assigned minimal, read-only permissions required to:
 
@@ -593,9 +946,9 @@ In this lab environment, Pulse is connected to both the Proxmox VE cluster and t
 - Retrieve backup job results
 - Report on storage utilization
 
-![Pulse Service Account Configuration](/Career_Projects/assets/screenshots/pulse-service-account.png)
+This least-privilege approach ensures that Pulse can monitor and report without having the ability to modify or disrupt the environment.
 
-#### Dashboards
+### Dashboards
 
 The Pulse main dashboard provides a real-time operational view of the Proxmox environment, including:
 
@@ -604,33 +957,127 @@ The Pulse main dashboard provides a real-time operational view of the Proxmox en
 - **Visual threshold indicators:** Color-coded gauges and bars highlight when usage approaches or exceeds configured limits
 - **Interactive webhooks:** Clicking on a monitored service or resource can open its corresponding Proxmox web portal page for direct management
 
-**Example Use Cases in the Lab:**
+**Example Use Cases:**
 
 - **Proactive capacity planning:** Identify nodes nearing CPU or memory saturation before performance degrades
 - **Backup compliance:** Immediate notification if a PBS backup job fails, allowing for same-day remediation
 - **Storage health:** Early warning when datastore usage trends toward capacity, preventing unexpected outages
 
-![Pulse Main Dashboard Screenshot](/Career_Projects/assets/screenshots/pulse-dashboard.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/pulse-main-dashboard.png" alt="Pulse Main Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Pulse Main Dashboard
+  </figcaption>
+</figure>
 
-#### Backup Dashboard
+**Backup Dashboard:**
 
-Reports on the various backup methods. The first screenshot provides details on the snapshot status and the second screenshot outlines the PBS status and history of backups.
+Reports on the various backup methods. The dashboard provides details on snapshot status and PBS status and history of backups.
 
-![Pulse Backup Dashboard Screenshot](/Career_Projects/assets/screenshots/pulse-backup.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/pulse-backup-dashboard.png" alt="Pulse Backup Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Pulse Backup Dashboard
+  </figcaption>
+</figure>
 
-#### Alert Dashboard and Notifications
+**Alert Dashboard and Notifications:**
 
-Summary of current alerts, configured thresholds, notifications, schedule, and alert history.
+Summary of current alerts, configured thresholds, notifications, schedule and alert history.
 
-![Pulse Alert Dashboard Screenshot](/Career_Projects/assets/screenshots/pulse-alerts.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/pulse-alerts.png" alt="Pulse Alert Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Pulse Alert Dashboard
+  </figcaption>
+</figure>
 
 ---
 
-## 3. Alerting and Notification Architecture
+## 13. NetAlertX - Network Visibility & Asset Intelligence Framework
 
 ### Deployment Overview
 
-The alerting architecture ensures real-time visibility into operational and security events across the entire lab environment. Alerts from monitoring tools, SIEM platforms, EDR agents, and infrastructure services are routed through multiple redundant channels (Discord, SMTP relay, and Cloudflare email routing).
+<div class="two-col-right">
+  <div class="text-col">
+    <p>NetAlertX operates as a nested Docker container on a LXC host using host networking mode for comprehensive network discovery. The deployment provides continuous asset inventory, device profiling, and network topology mapping across production and lab segments (Prod_LAN, Lab_LAN1, Lab_LAN2, Ext_LAN).</p>
+    <p>The container leverages multiple NIC interfaces on the host for passive and active scanning while maintaining isolation from sensitive ISO_LAN segments.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/misc/netalertx-logo.png" alt="NetAlertX">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        NetAlertX
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+### Security Impact
+
+- Real-time asset visibility identifies rogue devices and unauthorized network connections
+- Automated device profiling detects configuration drift and shadow IT deployments
+- Network topology mapping reveals unexpected lateral movement paths
+- MAC address tracking correlates device identity across DHCP lease changes
+- Alert generation on new device detection enables rapid security response
+
+### Deployment Rationale
+
+Enterprise SOCs require accurate asset inventories for vulnerability management, incident response, and compliance reporting. NetAlertX provides continuous discovery without agent deployment, identifying IoT devices, network appliances, and ephemeral containers that evade traditional endpoint management.
+
+### Architecture Principles Alignment
+
+**Defense in Depth:** Asset visibility layer complements firewall ACLs and IDS/IPS by identifying security gaps in network segmentation
+
+**Secure by Design:** Passive discovery minimizes network impact; isolated from sensitive subnets to prevent reconnaissance against high-value targets
+
+**Zero Trust:** Continuous device enumeration validates network access aligns with authorized asset inventory; detects policy violations
+
+### High-Level Configuration
+
+- **Deployment Model:** Docker container with host networking (--network host)
+- **Discovery Methods:** ARP scanning, DHCP lease monitoring, mDNS/SSDP enumeration, SNMP polling
+- **Monitored Networks:** 192.168.1.0/24 (Prod_LAN), 192.168.100.0/24 (Lab_LAN1), 192.168.200.0/24 (Lab_LAN2), 192.168.2.0/24 (Ext_LAN)
+- **Exclusions:** 10.20.0.0/24 and 192.168.3.0/24 (ISO_LAN segments) - intentionally excluded from scanning
+- **Alert Triggers:** New device detection, unknown MAC addresses, duplicate IP assignments, offline device recovery
+- **Integration:** Webhook notifications to SOC alerting pipeline; asset data exported for vulnerability correlation
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/netalertx-connected-devices.png" alt="NetAlertX Connected Devices">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    NetAlertX Connected Devices
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/netalertx-vms.png" alt="NetAlertX Virtual Machines">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    NetAlertX Virtual Machines
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/netalertx-network-devices.png" alt="NetAlertX Network Devices">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    NetAlertX Network Devices
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/netalertx-topology.png" alt="NetAlertX Network Connectivity Map">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    NetAlertX Network Connectivity Map
+  </figcaption>
+</figure>
+
+---
+
+## 14. Alerting and Notification Architecture
+
+### Deployment Overview
+
+The alerting architecture ensures real-time visibility into operational and security events across the entire lab environment. Alerts from monitoring tools, SIEM platforms, EDR agents, and infrastructure services are routed through multiple redundant channels (Discord, SMTP relay, and Cloudflare email routing). This multi-path design ensures no critical alert is ever missed and enables granular triage through dedicated service-specific channels.
 
 ### Security Impact
 
@@ -644,13 +1091,13 @@ Modern SOC/NOC operations rely on multi-channel alerting to ensure rapid respons
 
 ### Architecture Principles Alignment
 
-- **Defense in Depth:** Multiple alerting paths ensure resilience
-- **Secure by Design:** TLS-encrypted SMTP; restricted webhook endpoints
-- **Zero Trust:** Alerts validated and routed per-service; no implicit trust in any channel
+**Defense in Depth:** Multiple alerting paths ensure resilience
 
-### 3.1 Discord Private Server - Centralized Notification Hub
+**Secure by Design:** TLS-encrypted SMTP; restricted webhook endpoints
 
-#### Deployment Overview
+**Zero Trust:** Alerts validated and routed per-service; no implicit trust in any channel
+
+### Discord Private Server - Centralized Notification Hub
 
 <div class="two-col-right">
   <div class="text-col">
@@ -659,33 +1106,33 @@ Modern SOC/NOC operations rely on multi-channel alerting to ensure rapid respons
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/discord-logo.png" alt="Discord Logo">
+      <img src="/Career_Projects/assets/misc/discord-logo.png" alt="Discord">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Discord Notification Hub
+        Discord
       </figcaption>
     </figure>
   </div>
 </div>
 
-#### Security Impact
+**Security Impact:**
 
 - Instant visibility into outages, anomalies, and security alerts
 - Channel segmentation prevents alert overload
 - Provides audit trails for incident response
 
-#### Deployment Rationale
+**Deployment Rationale:**
 
 Discord offers low-latency notifications, webhook integration, and structured channel organization—mirroring enterprise chat-ops workflows.
 
-#### Architecture Principles Alignment
+**Architecture Principles Alignment:**
 
-- **Defense in Depth:** Secondary alerting path alongside email
-- **Secure by Design:** Private server; restricted webhook tokens
-- **Zero Trust:** No alert is trusted without validation; all events logged
+**Defense in Depth:** Secondary alerting path alongside email
 
-![Discord Channel Structure Screenshot](/Career_Projects/assets/screenshots/discord-channels.png)
+**Secure by Design:** Private server; restricted webhook tokens
 
-#### Notification Flow
+**Zero Trust:** No alert is trusted without validation; all events logged
+
+**Notification Flow:**
 
 [Monitoring Source] → [Alert Trigger] → [Webhook or Script] → [Discord Channel] → [Push Notification]
 
@@ -696,9 +1143,7 @@ Discord offers low-latency notifications, webhook integration, and structured ch
   - Windows 11 desktop app
   - iPad and iPhone mobile apps
 
-![Discord Mobile Notifications Screenshot](/Career_Projects/assets/screenshots/discord-mobile.png)
-
-#### Discord Channel Structure
+**Discord Channel Structure:**
 
 | Channel Name | Source Tool | Alert Type |
 |--------------|-------------|------------|
@@ -714,49 +1159,54 @@ Discord offers low-latency notifications, webhook integration, and structured ch
 | #authentik | Authentik | Auth flow errors/alarms, auth failures |
 | #windowsupdates | Windows VMs | Python script completion |
 
-### 3.2 SMTP Relay - Gmail-Backed Email Alerting
+<figure>
+  <img src="/Career_Projects/assets/screenshots/discord-channels.png" alt="Discord Channel Structure">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Discord Channel Structure
+  </figcaption>
+</figure>
 
-#### Deployment Overview
+### SMTP Relay - Gmail-Backed Email Alerting
 
 <div class="two-col-right">
   <div class="text-col">
+    <p>Gmail relay to dedicated email address, shad0w1t1a6@gmail.com.</p>
     <p>An msmtp container provides a secure SMTP relay to Gmail using STARTTLS and application-specific passwords. Internal services send alerts via standard SMTP on port 25, and msmtp handles encrypted delivery to the dedicated alert mailbox.</p>
-    <p>Configured services include: Proxmox, pfSense, OPNsense, TheHive, Uptime Kuma, Wazuh, Grafana, n8n, Synology NAS.</p>
   </div>
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/smtp-relay-diagram.png" alt="SMTP Relay Diagram">
+      <img src="/Career_Projects/assets/misc/gmail-logo.png" alt="Gmail">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        SMTP Relay Architecture
+        Gmail SMTP Relay
       </figcaption>
     </figure>
   </div>
 </div>
 
-Gmail relay to dedicated email address: shad0w1t1a6@gmail.com
+**Configured Services:**
 
-#### Security Impact
+Proxmox, pfSense, OPNsense, TheHive, Uptime Kuma, Wazuh, Grafana, n8n, Synology NAS
+
+**Security Impact:**
 
 - Provides a reliable, encrypted alerting channel
 - Ensures alerts are preserved even if chat-ops channels fail
 - Supports forensic review through email retention
 
-#### Deployment Rationale
+**Deployment Rationale:**
 
 Email remains a universal, durable alerting mechanism. This relay demonstrates secure outbound email configuration and multi-service integration.
 
-#### Architecture Principles Alignment
+**Architecture Principles Alignment:**
 
-- **Defense in Depth:** Email complements Discord for redundancy
-- **Secure by Design:** STARTTLS encryption; app-password authentication
-- **Zero Trust:** All alerts validated and logged; no implicit trust in sender
+**Defense in Depth:** Email complements Discord for redundancy
 
-![SMTP Relay Configuration Screenshot](/Career_Projects/assets/screenshots/smtp-relay-config.png)
+**Secure by Design:** STARTTLS encryption; app-password authentication
 
-### 3.3 Cloudflare Email Routing
+**Zero Trust:** All alerts validated and logged; no implicit trust in sender
 
-#### Deployment Overview
+### Cloudflare Email Routing
 
 <div class="two-col-right">
   <div class="text-col">
@@ -765,7 +1215,7 @@ Email remains a universal, durable alerting mechanism. This relay demonstrates s
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/cloudflare-logo.png" alt="Cloudflare Logo">
+      <img src="/Career_Projects/assets/misc/cloudflare-logo.png" alt="Cloudflare">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Cloudflare Email Routing
       </figcaption>
@@ -773,82 +1223,41 @@ Email remains a universal, durable alerting mechanism. This relay demonstrates s
   </div>
 </div>
 
-#### Security Impact
+**Security Impact:**
 
 - Prevents spoofing by enforcing domain-validated routing
 - Enables per-service alert attribution
 - Provides an additional layer of redundancy
 
-#### Deployment Rationale
+**Deployment Rationale:**
 
 Cloudflare's routing service mirrors enterprise email aliasing strategies, improving traceability and reducing operational complexity.
 
-#### Architecture Principles Alignment
+**Architecture Principles Alignment:**
 
-- **Defense in Depth:** Adds routing redundancy and identity separation
-- **Secure by Design:** Domain-validated forwarding; Cloudflare-managed security
-- **Zero Trust:** Each alias treated as an independent identity; no implicit trust
+**Defense in Depth:** Adds routing redundancy and identity separation
 
-![Cloudflare Email Routing Configuration Screenshot](/Career_Projects/assets/screenshots/cloudflare-email-routing.png)
+**Secure by Design:** Domain-validated forwarding; Cloudflare-managed security
 
-![n8n Workflow Alert Triggers Screenshot](/Career_Projects/assets/screenshots/n8n-alert-workflows.png)
+**Zero Trust:** Each alias treated as an independent identity; no implicit trust
 
-### Sample Alerts
-
-#### Uptime Kuma Service Status Alerts
-
-**Discord:**
-
-![Uptime Kuma Discord Alert Screenshot](/Career_Projects/assets/screenshots/alert-uptime-kuma-discord.png)
-
-**Gmail:**
-
-![Uptime Kuma Gmail Alert Screenshot](/Career_Projects/assets/screenshots/alert-uptime-kuma-gmail.png)
-
-#### Proxmox PVE and PBS Successful Backup Job Completion Alert
-
-**Discord:**
-
-![Proxmox Backup Success Discord Alert Screenshot](/Career_Projects/assets/screenshots/alert-proxmox-backup-discord.png)
-
-**Gmail:**
-
-![Proxmox Backup Success Gmail Alert Screenshot](/Career_Projects/assets/screenshots/alert-proxmox-backup-gmail.png)
-
-#### Splunk Scheduled Weekly VPN Activity Log Notification
-
-![Splunk VPN Activity Alert Screenshot](/Career_Projects/assets/screenshots/alert-splunk-vpn.png)
-
-#### pfSense Firewall Event Alert
-
-![pfSense Alert Screenshot](/Career_Projects/assets/screenshots/alert-pfsense.png)
-
-#### Grafana pfSense Interface Status Alerts
-
-![Grafana Interface Status Alert Screenshot](/Career_Projects/assets/screenshots/alert-grafana-interface.png)
-
-![Grafana Alert Details Screenshot](/Career_Projects/assets/screenshots/alert-grafana-details.png)
-
-#### Prometheus Blackbox Alerts
-
-HTTP Get, TLS Cert expiry, Discord ping, local ICMP, TCP SSH and TCP HTTPS
-
-**Alert Manager - Endpoint Reachability Alerts:**
-
-![Prometheus Blackbox Alerts Screenshot](/Career_Projects/assets/screenshots/alert-prometheus-blackbox.png)
+<figure>
+  <img src="/Career_Projects/assets/screenshots/cloudflare-email-routing.png" alt="Cloudflare Email Routing">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Cloudflare Email Routing Configuration
+  </figcaption>
+</figure>
 
 ---
 
-## 4. Security Controls and Compliance Summary
+## 15. Security Controls Summary
 
-### Visibility and Response Security Controls
-
-**Control Framework:**
+### Control Framework
 
 | Control Domain | Implementation | Coverage |
 |----------------|----------------|----------|
 | Log Aggregation | Splunk + Elastic centralized collection | All infrastructure |
-| Endpoint Detection | Wazuh EDR on 12 hosts | Windows, Linux, MacOS |
+| Endpoint Detection | Wazuh EDR on 25+ hosts | Windows, Linux, macOS, BSD |
 | Network Monitoring | Suricata/Snort IDS on all interfaces | 100% traffic inspection |
 | File Integrity Monitoring | Wazuh FIM on critical paths | System files, configs |
 | Vulnerability Assessment | Wazuh + OpenVAS automated scanning | All hosts |
@@ -858,20 +1267,20 @@ HTTP Get, TLS Cert expiry, Discord ping, local ICMP, TCP SSH and TCP HTTPS
 | Audit Logging | 90-day retention in SIEM | Full audit trail |
 | Performance Monitoring | Prometheus + Grafana dashboards | All infrastructure |
 
-**Security Event Pipeline:**
+### Security Event Pipeline
 
-1. Collection: Agents/forwarders collect logs from sources
-2. Transport: Encrypted TLS/SSL to SIEM platforms
-3. Parsing: Field extraction and normalization
-4. Enrichment: GeoIP, threat intel, asset context
-5. Correlation: Multi-source event correlation
-6. Detection: Rule-based and ML anomaly detection
-7. Alerting: Discord webhooks + email notifications
-8. Response: Automated containment actions
-9. Investigation: Search and visualization tools
-10. Retention: 90-day storage, then archive
+1. **Collection:** Agents/forwarders collect logs from sources
+2. **Transport:** Encrypted TLS/SSL to SIEM platforms
+3. **Parsing:** Field extraction and normalization
+4. **Enrichment:** GeoIP, threat intel, asset context
+5. **Correlation:** Multi-source event correlation
+6. **Detection:** Rule-based and ML anomaly detection
+7. **Alerting:** Discord webhooks + email notifications
+8. **Response:** Automated containment actions
+9. **Investigation:** Search and visualization tools
+10. **Retention:** 90-day storage, then archive
 
-**Data Classification:**
+### Data Classification
 
 | Data Type | Sensitivity | Retention | Encryption |
 |-----------|-------------|-----------|------------|
@@ -880,64 +1289,24 @@ HTTP Get, TLS Cert expiry, Discord ping, local ICMP, TCP SSH and TCP HTTPS
 | Application Logs | Low | 30 days | In transit only |
 | Performance Metrics | Low | 90 days | None |
 
-**Access Control:**
+### Access Control
 
-- SIEM Platforms: Authentik SSO with MFA required
-- API Access: API tokens with 90-day rotation
-- Dashboard Access: Role-based permissions (admin, analyst, viewer)
-- Alert Management: Admin-only response actions
+- **SIEM Platforms:** Authentik SSO with MFA required
+- **API Access:** API tokens with 90-day rotation
+- **Dashboard Access:** Role-based permissions (admin, analyst, viewer)
+- **Alert Management:** Admin-only response actions
 
-**Encryption Standards:**
+### Encryption Standards
 
-- Log Transport: TLS 1.3 for all forwarder connections
-- At Rest: AES-256 for stored logs and backups
-- Certificates: Step-CA issued, auto-renewed
+- **Log Transport:** TLS 1.3 for all forwarder connections
+- **At Rest:** AES-256 for stored logs and backups
+- **Certificates:** Step-CA issued, auto-renewed
 
-**Detection Coverage:**
-
-| MITRE ATT&CK Technique | Detection Method | Data Source |
-|------------------------|------------------|-------------|
-| Initial Access (T1078) | Failed login correlation | Wazuh, pfSense |
-| Execution (T1059) | PowerShell command monitoring | Sysmon |
-| Persistence (T1547) | Registry/startup monitoring | Wazuh FIM |
-| Privilege Escalation (T1068) | Process creation anomalies | Sysmon, Wazuh |
-| Defense Evasion (T1070) | Log clearing detection | Windows Event Log |
-| Credential Access (T1003) | LSASS access monitoring | Sysmon Event ID 10 |
-| Discovery (T1082) | System info enumeration | Wazuh, Sysmon |
-| Lateral Movement (T1021) | RDP/SMB connection tracking | Suricata, Wazuh |
-| Collection (T1005) | Unusual file access patterns | Wazuh FIM |
-| Exfiltration (T1041) | Large outbound transfers | pfSense, Suricata |
-| Command and Control (T1071) | Beacon detection | Suricata, pfSense |
-
-### Syslog Compliance (RFC 5424)
-
-| Component | Specification | Implementation |
-|-----------|---------------|----------------|
-| Facility | USER, LOCAL0-LOCAL7 | Properly categorized |
-| Severity | 0 (Emergency) to 7 | Mapped correctly |
-| Timestamp | ISO 8601 format | NTP synchronized |
-| Hostname | FQDN or IP | FQDN preferred |
-| Message Format | Structured data | JSON where possible |
-
-### Elastic Common Schema (ECS) Compliance
-
-**ECS Version:** 8.x
-
-**Compliance:** 95%+ for integrated data sources
-
-**Benefits:**
-
-- Cross-source correlation without field mapping
-- Pre-built Kibana dashboards work out-of-box
-- Future integrations automatically compatible
-- Machine learning models use standard fields
 ---
 
-## 5. Use Cases and Scenarios
+## 16. Detection Use Cases
 
-### Practical Use Cases and Detection Scenarios
-
-#### Scenario 1: Brute Force Attack Detection and Response
+### Use Case 1: Brute Force SSH Attack Detection and Response
 
 **Objective:** Detect and automatically block SSH brute force attempts
 
@@ -963,29 +1332,26 @@ index=auth sourcetype=syslog "Failed password"
 | eval threat_level="High", action="Block IP"
 ```
 
-#### Scenario 2: Malware Execution Detection
+### Use Case 2: Wazuh Malware Detection with VirusTotal Integration
 
-**Objective:** Detect execution of malicious file on Windows endpoint
+**Objective:** Detect execution of malicious file on Windows endpoint with automated analysis and quarantine
 
 **Workflow:**
 
-1. User on Win11Pro opens malicious email attachment
-2. Malware (ransomware.exe) executes
-3. Sysmon Event ID 1 (Process Creation) logged
-4. Wazuh agent forwards event to Wazuh manager
-5. Wazuh rule matches suspicious process characteristics:
-   - Unsigned executable
-   - Launched from %TEMP% directory
-   - Network connection to unknown IP
-6. Wazuh generates Critical alert (level 15)
-7. Alert forwarded to Splunk for correlation
-8. Splunk enriches alert with threat intelligence lookup
-9. MD5 hash matches known ransomware family
-10. Discord notification: "CRITICAL: Ransomware detected on Win11Pro"
-11. Wazuh active response kills process
-12. File quarantined to secure location
-13. Host isolated from network (manual step)
-14. Incident response team engages
+1. User on Win11Pro opens email attachment
+2. File (suspicious.exe) is written to Downloads folder
+3. Wazuh FIM detects new file creation
+4. Wazuh forwards file hash to VirusTotal via integration
+5. VirusTotal returns 45/70 detections (Trojan.Downloader)
+6. Wazuh custom rule 87105 triggers on positive detections
+7. Wazuh active response executes remove-threat.sh
+8. File quarantined to secure location
+9. Wazuh generates Critical alert (level 15)
+10. Alert forwarded to Splunk for correlation
+11. Discord notification: "CRITICAL: Malware detected on Win11Pro"
+12. TheHive case created via Shuffle workflow
+13. Cortex analyzers provide additional context
+14. Security analyst reviews case with pre-loaded enrichment
 
 **Wazuh Rule:**
 ```xml
@@ -1000,7 +1366,7 @@ index=auth sourcetype=syslog "Failed password"
 </rule>
 ```
 
-#### Scenario 3: Lateral Movement Detection
+### Use Case 3: Lateral Movement via RDP
 
 **Objective:** Identify attacker moving between hosts after initial compromise
 
@@ -1027,7 +1393,7 @@ index=auth sourcetype=syslog "Failed password"
 
 **Splunk Correlation Query:**
 ```spl
-(index=wazuh-alerts rule.id="60204") OR (index=suricata-lan dest_port=3389)
+(index=wazuh-alerts rule.id="60204") OR (index=suricata-prod_lan dest_port=3389)
 | eval time_hour=strftime(_time,"%H")
 | where (time_hour < 6 OR time_hour > 22)
 | stats values(src_ip) as source_ips, values(dest_ip) as dest_hosts by user
@@ -1035,7 +1401,7 @@ index=auth sourcetype=syslog "Failed password"
 | eval threat="Lateral movement: user accessed multiple hosts outside business hours"
 ```
 
-#### Scenario 4: Configuration Drift Detection
+### Use Case 4: Configuration Drift Detection
 
 **Objective:** Detect unauthorized changes to critical system configurations
 
@@ -1070,7 +1436,7 @@ Time: 2024-11-06 14:23:45
 Severity: High (level 10)
 ```
 
-#### Scenario 5: Compliance Violation Detection
+### Use Case 5: CIS Benchmark Compliance Violation
 
 **Objective:** Identify hosts failing CIS benchmark requirements
 
@@ -1102,9 +1468,10 @@ Failed Checks: 3
 Score: 89.2%
 Risk Level: Medium
 ```
+
 ---
 
-## 6. Security Homelab Section Links
+## 17. Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)**
@@ -1114,4 +1481,3 @@ Risk Level: Medium
 - **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
 - **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
-
