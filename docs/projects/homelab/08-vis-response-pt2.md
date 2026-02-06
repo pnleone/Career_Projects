@@ -19,7 +19,7 @@ Owner: Paul Leone
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/soar-overview.png" alt="SOAR Platform Architecture">
+      <img src="/Career_Projects/assets/diagrams/shuffle-ir-workflow.png" alt="SOAR Platform Architecture">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         SOAR Platform Architecture
       </figcaption>
@@ -61,21 +61,11 @@ Modern SOC operations require more than detection—they require coordinated, au
 
 ### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>Shuffle is the low-code/no-code automation engine that orchestrates workflows across all SOC tools, SIEM platforms, and security infrastructure. It serves as the automation backbone of the SOAR ecosystem, enabling rapid integration, event-driven workflows, and multi-tool response actions.</p>
-    <p>Shuffle processes alerts from Wazuh, Splunk, Elastic, and other sources, automatically enriching them with intelligence from Cortex, VirusTotal, Shodan, and MISP before triggering case creation or containment actions.</p>
-  </div>
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/shuffle-logo.png" alt="Shuffle Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Shuffle Security Automation Engine
-      </figcaption>
-    </figure>
-  </div>
-</div>
+Shuffle is the low-code/no-code automation engine that orchestrates workflows across all SOC tools, SIEM platforms, and security infrastructure. It serves as the automation backbone of the SOAR ecosystem, enabling rapid integration, event-driven workflows, and multi-tool response actions.
+
+Shuffle processes alerts from Wazuh, Splunk, Elastic, and other sources, automatically enriching them with intelligence from Cortex, VirusTotal, Shodan, and MISP before triggering case creation or containment actions.
+  
 
 ### Security Impact
 
@@ -121,6 +111,7 @@ Shuffle serves as the central orchestration hub connecting:
 - **Cortex:** Trigger analysis jobs, retrieve results, execute responders based on analysis outcomes
 - **MISP:** Automatic IOC submission, threat intelligence queries, event publishing, and feed synchronization
 - **Wazuh EDR:** Alert triage, automated response actions (file quarantine, process termination), agent management
+- **Elastic (ELK Stack)** Network alert triage via API webhook. pfSense, OPNsense and Suricata logs.
 - **pfSense Firewall:** Automatic blocklist updates, firewall rule creation, VPN configuration changes
 - **Suricata/Snort IDS:** Rule updates, signature deployment, detection tuning based on threat intelligence
 - **Discord:** Real-time notifications, alert distribution, case status updates, workflow execution reports
@@ -133,21 +124,10 @@ Shuffle serves as the central orchestration hub connecting:
 
 ### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>TheHive provides centralized case management, investigation workflows, and collaborative incident response. It aggregates alerts from SIEM and EDR platforms into structured cases, enabling analysts to track tasks, observables, timelines, and response actions.</p>
-    <p>TheHive acts as the command center for incident response, coordinating investigations across Cortex, MISP, Wazuh, and Shuffle.</p>
-  </div>
+TheHive provides centralized case management, investigation workflows, and collaborative incident response. It aggregates alerts from SIEM and EDR platforms into structured cases, enabling analysts to track tasks, observables, timelines, and response actions.
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/thehive-logo.png" alt="TheHive Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        TheHive Incident Response Platform
-      </figcaption>
-    </figure>
-  </div>
-</div>
+TheHive acts as the command center for incident response, coordinating investigations across Cortex, MISP, Wazuh, and Shuffle.
+
 
 ### Security Impact
 
@@ -208,22 +188,10 @@ TheHive mirrors enterprise SIRP (Security Incident Response Platform) capabiliti
 
 ### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>Cortex automates the analysis of observables (IOCs) using a wide range of analyzers and responders. It enriches IPs, domains, hashes, URLs, and files with intelligence from VirusTotal, AbuseIPDB, Shodan, OTX, and internal sources.</p>
-    <p>Cortex responders execute automated containment actions such as firewall rule updates, blocklist modifications, and case escalations.</p>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/cortex-logo.png" alt="Cortex Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Cortex Analysis Engine
-      </figcaption>
-    </figure>
-  </div>
-</div>
-
+Cortex automates the analysis of observables (IOCs) using a wide range of analyzers and responders. It enriches IPs, domains, hashes, URLs, and files with intelligence from VirusTotal, AbuseIPDB, Shodan, OTX, and internal sources.
+    
+Cortex responders execute automated containment actions such as firewall rule updates, blocklist modifications, and case escalations.
+ 
 ### Security Impact
 
 - Provides automated, multi-engine IOC analysis
@@ -280,21 +248,11 @@ Cortex demonstrates advanced enrichment and automated response capabilities foun
 
 ### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>MISP provides structured threat intelligence management, IOC sharing, and collaborative intelligence workflows. It stores, correlates, and distributes threat indicators across the SOAR ecosystem.</p>
-    <p>MISP integrates with Cortex, TheHive, Shuffle, and external intelligence feeds to enrich alerts and cases with contextual threat data.</p>
-  </div>
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/misp-logo.png" alt="MISP Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        MISP Threat Intelligence Platform
-      </figcaption>
-    </figure>
-  </div>
-</div>
+ MISP provides structured threat intelligence management, IOC sharing, and collaborative intelligence workflows. It stores, correlates, and distributes threat indicators across the SOAR ecosystem.
+
+MISP integrates with Cortex, TheHive, Shuffle, and external intelligence feeds to enrich alerts and cases with contextual threat data.
+
 
 ### Security Impact
 
@@ -343,20 +301,7 @@ MISP is deployed as a multi-container application stack with the following compo
 
 ### Cassandra - Distributed NoSQL Database
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p><strong>Purpose:</strong> Scalable, fault-tolerant data store for TheHive case data, observables, and audit logs.</p>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/cassandra-logo.png" alt="Cassandra Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Apache Cassandra
-      </figcaption>
-    </figure>
-  </div>
-</div>
+Purpose: Scalable, fault-tolerant data store for TheHive case data, observables, and audit logs.
 
 **Deployment Specifications:**
 
@@ -377,20 +322,7 @@ MISP is deployed as a multi-container application stack with the following compo
 
 ### Elasticsearch - Search and Analytics Engine
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p><strong>Purpose:</strong> Full-text search, log aggregation, and analytics for TheHive cases, Cortex job results, and observables.</p>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/elasticsearch-logo.png" alt="Elasticsearch Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Elasticsearch
-      </figcaption>
-    </figure>
-  </div>
-</div>
+Purpose: Full-text search, log aggregation, and analytics for TheHive cases, Cortex job results, and observables.
 
 **Deployment Specifications:**
 
@@ -419,20 +351,8 @@ MISP is deployed as a multi-container application stack with the following compo
 
 ### OpenSearch - Shuffle Workflow Database
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p><strong>Purpose:</strong> Storage and retrieval of Shuffle workflow definitions, execution history, app configurations, and audit logs.</p>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/opensearch-logo.png" alt="OpenSearch Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        OpenSearch
-      </figcaption>
-    </figure>
-  </div>
-</div>
+Purpose: Storage and retrieval of Shuffle workflow definitions, execution history, app configurations, and audit logs.
+  
 
 **Deployment Specifications:**
 
@@ -514,28 +434,29 @@ SOAR workflow that automates Wazuh alert triage through TheHive case management,
 ### Workflow Screenshots
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/shuffle-workflow-overview.png" alt="Shuffle Workflow Overview">
+  <img src="/Career_Projects/assets/screenshots/shuffle-hive-workflow.png" alt="Shuffle Workflow Overview">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Shuffle Workflow Overview
   </figcaption>
 </figure>
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/wazuh-alert-events.png" alt="Wazuh Alert Events">
+  <img src="/Career_Projects/assets/screenshots/wazuh-events.png" alt="Wazuh Alert Events">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Wazuh Alert Events
   </figcaption>
 </figure>
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/thehive-alerts.png" alt="TheHive Alerts">
+  <img src="/Career_Projects/assets/screenshots/-alerts.png" alt="TheHive Alerts"> </br>
+  <img src="/Career_Projects/assets/screenshots/-alerts2.png" alt="TheHive Alerts">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     TheHive Alerts
   </figcaption>
 </figure>
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/cortex-analyzers.png" alt="Cortex Analyzers">
+  <img src="/Career_Projects/assets/screenshots/cortex-analyzer.png" alt="Cortex Analyzers">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Cortex Analyzers
   </figcaption>
@@ -549,7 +470,7 @@ SOAR workflow that automates Wazuh alert triage through TheHive case management,
 </figure>
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/discord-email-notifications.png" alt="Discord and Email Notifications">
+  <img src="/Career_Projects/assets/screenshots/shuffle-alerts.png" alt="Discord and Email Notifications">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Discord and Email Notifications
   </figcaption>
@@ -569,7 +490,7 @@ SOAR workflow that automates Wazuh alert triage through TheHive case management,
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/observability-overview.png" alt="Observability Architecture">
+      <img src="/Career_Projects/assets/diagrams/monitoring-overview.png" alt="Observability Architecture">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Observability Architecture
       </figcaption>
