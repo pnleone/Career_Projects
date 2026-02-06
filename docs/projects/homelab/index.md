@@ -15,7 +15,7 @@
 | :material-shield-lock: **[Automation and Infrastructure as Code (IaC)](/Career_Projects/projects/homelab/05-auto-iac/)** | Infrastructure provision with Terraform, Configuration Management with Ansible, Workflow automation with n8n, PowerShell, Bash and Python scripting |
 | :material-shield-lock: **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)** | DNS, Reverse Proxy, Web Services and Ingress Controller Architecture, Secure Shell (SSH) Access, Malware, Vulnerability and Software Patch Management |
 | :material-shield-lock: **[Observability and Response, Part 1 ](/Career_Projects/projects/homelab/07-vis-response-pt1/)** | Security Information and Event Management (SIEM) Platforms, Endpoint Detection and Response (EDR) |
-| :material-shield-lock: **[Observability and Response, Part 2 ](/Career_Projects/projects/homelab/07-vis-response-pt2/)** | Security Orchestration, Automation and Response (SOAR), Monitoring, Alerting and Notification Architecture |
+| :material-shield-lock: **[Observability and Response, Part 2 ](/Career_Projects/projects/homelab/08-vis-response-pt2/)** | Security Orchestration, Automation and Response (SOAR), Monitoring, Alerting and Notification Architecture |
 | :material-chart-box-outline: **[ Governance, Risk and Compliance Landing Page](/Career_Projects/projects/homelab/grc/grc-index/)** | Governance, Risk and Compliance Sections TBD |
 
 
