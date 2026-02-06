@@ -448,8 +448,8 @@ SOAR workflow that automates Wazuh alert triage through TheHive case management,
 </figure>
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/-alerts.png" alt="TheHive Alerts"> </br>
-  <img src="/Career_Projects/assets/screenshots/-alerts2.png" alt="TheHive Alerts">
+  <img src="/Career_Projects/assets/screenshots/hive-alerts.png" alt="TheHive Alerts"> </br>
+  <img src="/Career_Projects/assets/screenshots/hive-alerts2.png" alt="TheHive Alerts">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     TheHive Alerts
   </figcaption>
@@ -463,7 +463,7 @@ SOAR workflow that automates Wazuh alert triage through TheHive case management,
 </figure>
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/thehive-cases.png" alt="TheHive Cases">
+  <img src="/Career_Projects/assets/screenshots/hive-cases.png" alt="TheHive Cases">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     TheHive Cases
   </figcaption>
