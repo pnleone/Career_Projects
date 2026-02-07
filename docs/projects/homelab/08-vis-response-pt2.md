@@ -999,6 +999,20 @@ Enterprise SOCs require accurate asset inventories for vulnerability management,
 
 ### Deployment Overview
 
+<div class="two-col-right">
+  <div class="text-col">
+    The alerting architecture ensures real-time visibility into operational and security events across the entire lab environment. Alerts from monitoring tools, SIEM platforms, EDR agents, and infrastructure services are routed through multiple redundant channels (Discord, SMTP relay, and Cloudflare email routing). This multi-path design ensures no critical alert is ever missed and enables granular triage through dedicated service-specific channels.
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/notification-overview.png" alt="Alerting and Notification Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Alerting and Notification Overview
+      </figcaption>
+    </figure>
+  </div>
+</div>
 The alerting architecture ensures real-time visibility into operational and security events across the entire lab environment. Alerts from monitoring tools, SIEM platforms, EDR agents, and infrastructure services are routed through multiple redundant channels (Discord, SMTP relay, and Cloudflare email routing). This multi-path design ensures no critical alert is ever missed and enables granular triage through dedicated service-specific channels.
 
 ### Security Impact
