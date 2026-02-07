@@ -1,0 +1,3610 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../06-apps-service/">
+      
+      
+        <link rel="next" href="../08-vis-response-pt2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Observability and Response, part 1 - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#observability-and-response-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Observability and Response, part 1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architecture Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-technology-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Technology Stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strategic Value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-multiple-siem-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Multiple SIEM Platforms?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-splunk-enterprise-siem-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Splunk Enterprise SIEM Platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Splunk Enterprise SIEM Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#universal-forwarder-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Universal Forwarder Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Index Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-normalization-and-field-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Normalization and Field Extraction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searches-reports-and-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Searches, Reports, and Dashboards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Searches, Reports, and Dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#siem-overview-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SIEM Overview Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wazuh-alerts-for-my-windows-server-2022-domain-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wazuh alerts for my Windows Server 2022 Domain Controller
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wazuh alerts for my Windows Server 2022 Domain Controller">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intrusion-prevention-system-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intrusion Prevention System Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firewall-filter-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firewall Filter Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#brute-force-detection-multi-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brute Force Detection (Multi-Source)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-scan-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port Scan Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpn-traffic-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VPN Traffic Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alert-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alert Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-case-1-lateral-movement-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Case 1: Lateral Movement Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-2-data-exfiltration-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Case 2: Data Exfiltration Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-3-malware-execution-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Case 3: Malware Execution Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-elastic-stack-elk-observability-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Elastic Stack (ELK) Observability Platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Elastic Stack (ELK) Observability Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-elk-stack-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core ELK Stack Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed-elastic-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distributed Elastic Agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fleet-policy-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fleet Policy Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-common-schema-ecs-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Common Schema (ECS) Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kibana-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kibana Dashboards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kibana Dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingest-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingest Pipelines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-wazuh-endpoint-detection-and-response-edr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Wazuh Endpoint Detection and Response (EDR)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Wazuh Endpoint Detection and Response (EDR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-architecture_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent List
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-monitoring-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Monitoring Modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Monitoring Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-integrity-monitoring-fim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Integrity Monitoring (FIM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootkit-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rootkit Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerability Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-configuration-assessment-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Configuration Assessment (SCA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#login-monitoring-sshrdp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Login Monitoring (SSH/RDP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#active-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Active Response
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Active Response">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#firewall-drop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firewall Drop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-deny" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host Deny
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disable Account
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#splunk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Splunk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virustotal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VirusTotal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discord
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuffle-soar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shuffle SOAR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alerting-and-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alerting and Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wazuh-dashboard-analytics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wazuh Dashboard Analytics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wazuh Dashboard Analytics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-integrity-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Integrity Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-operations-it-hygiene-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Operations / IT Hygiene Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threat-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Intelligence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threat-hunting-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Hunting Queries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-security-homelab-section-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Security Homelab Section Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="observability-and-response-architecture">Observability and Response Architecture<a class="headerlink" href="#observability-and-response-architecture" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong> <br />
+Version: 1.0<br />
+Last Updated: January 30, 2026<br />
+Owner: Paul Leone </p>
+<hr />
+<h2 id="1-architecture-overview">1. Architecture Overview<a class="headerlink" href="#1-architecture-overview" title="Permanent link">&para;</a></h2>
+<p>The lab implements a comprehensive observability and security monitoring stack that provides real-time visibility across infrastructure, applications, and security events. This multi-layered approach demonstrates enterprise-grade security operations center (SOC) capabilities and incident response readiness.</p>
+<h3 id="core-technology-stack">Core Technology Stack<a class="headerlink" href="#core-technology-stack" title="Permanent link">&para;</a></h3>
+<div class="two-col-right">
+  <div class="text-col">
+    <ul>
+      <li><b>SIEM Platforms:</b> Splunk Enterprise (primary), Elastic Stack (secondary)</li>
+      <li><b>Endpoint Detection:</b> Wazuh EDR agents deployed on 25+ hosts across Windows, Linux, BSD, and macOS</li>
+      <li><b>Network Monitoring:</b> Suricata/Snort IDS, pfSense logging, NetAlertX</li>
+      <li><b>Infrastructure Monitoring:</b> Prometheus + Grafana for metrics visualization, CheckMK for system monitoring</li>
+      <li><b>Service Availability:</b> Uptime Kuma for service availability tracking, Pulse for Proxmox-specific monitoring</li>
+      <li><b>Alerting Hub:</b> Discord notifications through webhooks and email alerts through local SMTP relay</li>
+    </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/siem-edr-overview.png" alt="SIEM and EDR/XDR Architecture Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        SIEM and EDR/XDR Architecture Overview
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h3 id="deployment-rationale">Deployment Rationale<a class="headerlink" href="#deployment-rationale" title="Permanent link">&para;</a></h3>
+<p>Security visibility is foundational to detecting and responding to threats before they cause damage. This architecture demonstrates:</p>
+<ul>
+<li><strong>Correlation across multiple data sources:</strong> Network, host, and application telemetry</li>
+<li><strong>Real-time detection:</strong> Security events and anomalies identified within seconds</li>
+<li><strong>Hands-on experience:</strong> Industry-standard SIEM and monitoring tools (Splunk, Elastic, Prometheus, Wazuh)</li>
+<li><strong>Enterprise SOC patterns:</strong> Integration workflows used in production environments</li>
+<li><strong>Automated response:</strong> Incident response workflows triggered by alert conditions</li>
+</ul>
+<h3 id="architecture-principles-alignment">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment" title="Permanent link">&para;</a></h3>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Real-time SIEM correlation across multiple data sources (network, host, application)</li>
+<li>Multiple detection mechanisms reduce blind spots (SIEM, EDR)</li>
+<li>Correlation across network, application, and endpoint layers</li>
+<li>Redundant monitoring platforms (Splunk + Elastic) ensure continuity</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>Integration patterns demonstrate enterprise SOC workflows</li>
+<li>Documented playbooks and alert workflows for incident response</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>Continuous verification through comprehensive logging (100% security event coverage)</li>
+<li>Identity-aware monitoring tracks user behavior across systems</li>
+</ul>
+<h3 id="strategic-value">Strategic Value<a class="headerlink" href="#strategic-value" title="Permanent link">&para;</a></h3>
+<p><strong>Comprehensive Visibility:</strong></p>
+<ul>
+<li>360-degree view from network perimeter to application layer</li>
+<li>Unified dashboards provide single pane of glass for security posture</li>
+</ul>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Multiple detection mechanisms reduce single points of failure</li>
+<li>Overlapping coverage ensures threats are caught by at least one control</li>
+</ul>
+<p><strong>Skills Development:</strong></p>
+<ul>
+<li>Experience with commercial (Splunk) and open-source (Elastic) platforms</li>
+<li>Hands-on with tools directly transferable to SOC Analyst roles</li>
+</ul>
+<p><strong>Incident Response:</strong></p>
+<ul>
+<li>Documented playbooks and alert workflows demonstrate operational maturity</li>
+<li>Integration with TheHive enables case management and forensic tracking</li>
+</ul>
+<p><strong>Compliance Readiness:</strong></p>
+<ul>
+<li>Audit logs retained for 90 days with searchable correlation</li>
+<li>Immutable SIEM indexes support forensic investigations</li>
+<li>Comprehensive logging satisfies PCI-DSS 10.2, NIST SP 800-53 AU-2</li>
+</ul>
+<h3 id="why-multiple-siem-platforms">Why Multiple SIEM Platforms?<a class="headerlink" href="#why-multiple-siem-platforms" title="Permanent link">&para;</a></h3>
+<p><strong>Splunk (Primary):</strong></p>
+<ul>
+<li>Mature SPL query language for security event correlation</li>
+<li>Industry-standard platform used in enterprise SOCs</li>
+<li>Robust alerting and dashboard capabilities</li>
+</ul>
+<p><strong>Elastic (Secondary):</strong></p>
+<ul>
+<li>ECS (Elastic Common Schema) standardization for vendor-neutral data modeling</li>
+<li>Focus on application telemetry and infrastructure metrics</li>
+<li>Open-source alternative demonstrates platform versatility</li>
+</ul>
+<p><strong>Rationale:</strong> Dual deployment provides redundancy and learning opportunities with both commercial and open-source platforms commonly used in enterprise environments. This approach demonstrates adaptability and reduces vendor lock-in risk.</p>
+<hr />
+<h2 id="2-splunk-enterprise-siem-platform">2. Splunk Enterprise SIEM Platform<a class="headerlink" href="#2-splunk-enterprise-siem-platform" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview">Deployment Overview<a class="headerlink" href="#deployment-overview" title="Permanent link">&para;</a></h3>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Splunk Enterprise functions as the centralized Security Information and Event Management (SIEM) platform for the lab environment, providing unified log aggregation, correlation, and real-time detection across all security and infrastructure layers. The deployment uses a single-instance architecture optimized for lab-scale operations, with a clear expansion path toward distributed indexing and search head clustering as data volume grows.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/splunk-overview.png" alt="Splunk Architecture Diagram">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Splunk Enterprise SIEM Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p>Splunk ingests telemetry from firewalls, IDS/IPS sensors, EDR agents, authentication systems, and application logs, normalizing events through the Common Information Model (CIM) to enable consistent, cross-source analytics.</p>
+<h3 id="security-impact">Security Impact<a class="headerlink" href="#security-impact" title="Permanent link">&para;</a></h3>
+<p>Splunk delivers enterprise-grade detection and visibility by consolidating more than 30 data sources into a single analytical plane. Real-time alerting identifies brute-force attempts, port scans, anomalous authentication behavior, and early indicators of lateral movement. Correlation searches detect multi-stage attack patterns such as privilege escalation, internal reconnaissance, and data exfiltration.</p>
+<h3 id="deployment-rationale_1">Deployment Rationale<a class="headerlink" href="#deployment-rationale_1" title="Permanent link">&para;</a></h3>
+<p>A SIEM is the analytical backbone of any modern security program, enabling defenders to transform raw telemetry into actionable intelligence. This Splunk deployment demonstrates core SIEM competencies found in enterprise environments: CIM-based normalization, multi-source correlation, automated alerting, and integration with downstream SOAR workflows.</p>
+<h3 id="architecture-principles-alignment_1">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_1" title="Permanent link">&para;</a></h3>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Aggregates telemetry from every security layer (network, endpoint, identity, application)</li>
+<li>Correlation searches combine multiple signals to detect attacks that bypass single controls</li>
+<li>Redundant sourcetypes (pfSense, Suricata, Wazuh) ensure detection continuity</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>CIM standardization enforces consistent field structures</li>
+<li>Universal Forwarders provide authenticated, encrypted log transport</li>
+<li>Automated alerting and workflow triggers reduce human error</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>No event or data source is implicitly trusted</li>
+<li>Identity-centric analytics detect anomalous authentication</li>
+<li>Continuous monitoring ensures every action is observable</li>
+</ul>
+<h3 id="deployment-architecture">Deployment Architecture<a class="headerlink" href="#deployment-architecture" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Technology</th>
+<th>Location</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Splunk Indexer</td>
+<td>Splunk Enterprise 9.2.x</td>
+<td>Ubuntu VM</td>
+<td>Log storage and search</td>
+</tr>
+<tr>
+<td>Splunk Forwarder</td>
+<td>Universal Forwarder 9.2</td>
+<td>All monitored hosts</td>
+<td>Log collection and forwarding</td>
+</tr>
+<tr>
+<td>Data Inputs</td>
+<td>Syslog, file monitoring</td>
+<td>Various</td>
+<td>Ingestion methods</td>
+</tr>
+<tr>
+<td>Indexes</td>
+<td>Time-series buckets</td>
+<td>/opt/splunk/var/lib</td>
+<td>Segmented storage</td>
+</tr>
+</tbody>
+</table>
+<h3 id="universal-forwarder-deployment">Universal Forwarder Deployment<a class="headerlink" href="#universal-forwarder-deployment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Host Type</th>
+<th>Forwarder Count</th>
+<th>Logs Forwarded</th>
+<th>Volume/Day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pfSense Firewalls</td>
+<td>2</td>
+<td>Firewall, VPN, System, Auth</td>
+<td>500 MB</td>
+</tr>
+<tr>
+<td>OPNsense Firewall</td>
+<td>1</td>
+<td>Firewall logs</td>
+<td>100 MB</td>
+</tr>
+<tr>
+<td>Suricata IDS</td>
+<td>4 (Internal LANs (Wasuh))</td>
+<td>IDS/IPS alerts, flow data</td>
+<td>2.5 GB</td>
+</tr>
+<tr>
+<td>Snort IDS</td>
+<td>2 (VPN tunnels)</td>
+<td>IDS alerts</td>
+<td>200 MB</td>
+</tr>
+<tr>
+<td>Wazuh Manager</td>
+<td>1</td>
+<td>Security alerts, audit logs</td>
+<td>1 GB</td>
+</tr>
+<tr>
+<td>Windows Hosts</td>
+<td>1 (Sysmon), 4 (Wazuh)</td>
+<td>Sysmon XML events, Wazuh</td>
+<td>800 MB (Sysmon)</td>
+</tr>
+<tr>
+<td>Linux Hosts</td>
+<td>23 (Wazuh)</td>
+<td>Wazuh</td>
+<td></td>
+</tr>
+<tr>
+<td>MacOS Hosts</td>
+<td>1 (Wazuh)</td>
+<td>Wazuh</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="index-design">Index Design<a class="headerlink" href="#index-design" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Index Name</th>
+<th>Data Sources</th>
+<th>Retention</th>
+<th>Size/Day</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>firewall-a</td>
+<td>pfSense filterlog</td>
+<td>90 days</td>
+<td>400 MB</td>
+<td>Network traffic logs</td>
+</tr>
+<tr>
+<td>vpn</td>
+<td>pfSense VPN logs</td>
+<td>90 days</td>
+<td>50 MB</td>
+<td>VPN connection logs</td>
+</tr>
+<tr>
+<td>system</td>
+<td>pfSense system logs</td>
+<td>90 days</td>
+<td>50 MB</td>
+<td>System events</td>
+</tr>
+<tr>
+<td>auth</td>
+<td>pfSense auth logs</td>
+<td>90 days</td>
+<td>20 MB</td>
+<td>Authentication events</td>
+</tr>
+<tr>
+<td>opnsense-syslog</td>
+<td>OPNsense firewall</td>
+<td>90 days</td>
+<td>100 MB</td>
+<td>Firewall logs</td>
+</tr>
+<tr>
+<td>suricata-prod_lan</td>
+<td>Suricata Prod_LAN interface</td>
+<td>90 days</td>
+<td>1 GB</td>
+<td>IDS alerts (internal)</td>
+</tr>
+<tr>
+<td>suricata-lab_lan1</td>
+<td>Suricata Lab_LAN1 interface</td>
+<td>90 days</td>
+<td>.5 GB</td>
+<td>IDS alerts (internal)</td>
+</tr>
+<tr>
+<td>suricata-lab_lan2</td>
+<td>Suricata Lab_LAN2 interface</td>
+<td>90 days</td>
+<td>.5 GB</td>
+<td>IDS alerts (internal)</td>
+</tr>
+<tr>
+<td>suricata-ext_lan</td>
+<td>Suricata Ext_LAN interface</td>
+<td>90 days</td>
+<td>.5 GB</td>
+<td>IDS alerts (external)</td>
+</tr>
+<tr>
+<td>pia-ny</td>
+<td>Snort on PIA NY tunnel</td>
+<td>90 days</td>
+<td>100 MB</td>
+<td>VPN tunnel IDS</td>
+</tr>
+<tr>
+<td>pia-can-mont</td>
+<td>Snort on PIA Montreal</td>
+<td>90 days</td>
+<td>100 MB</td>
+<td>VPN tunnel IDS</td>
+</tr>
+<tr>
+<td>wazuh-alerts</td>
+<td>Wazuh security events</td>
+<td>90 days</td>
+<td>1 GB</td>
+<td>Endpoint security</td>
+</tr>
+<tr>
+<td>xmlwineventlog</td>
+<td>Windows Sysmon</td>
+<td>90 days</td>
+<td>800 MB</td>
+<td>Windows telemetry</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Index Optimization:</strong></p>
+<ul>
+<li>Hot/Warm/Cold Architecture: 7 days hot, 30 days warm, 53 days cold</li>
+<li>Compression: ~70% compression ratio on warm/cold buckets</li>
+<li>Frozen: Archive to NAS after 90 days (compressed tar.gz)</li>
+</ul>
+<h3 id="log-aggregation">Log Aggregation<a class="headerlink" href="#log-aggregation" title="Permanent link">&para;</a></h3>
+<p><strong>Data Inputs:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Input Type</th>
+<th>Method</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wazuh</td>
+<td>JSON over TCP</td>
+<td>Splunk Universal Forwarder</td>
+<td>Includes security alerts and audit logs</td>
+</tr>
+<tr>
+<td>pfSense</td>
+<td>Log files</td>
+<td>Splunk Universal Forwarder</td>
+<td>Firewall logs, VPN, authorization, and System</td>
+</tr>
+<tr>
+<td>Suricata</td>
+<td>JSON over File</td>
+<td>Splunk Universal Forwarder</td>
+<td>IDS/IPS alerts, flow data</td>
+</tr>
+<tr>
+<td>OPNsense</td>
+<td>Syslog (UDP)</td>
+<td>Splunk Universal Forwarder</td>
+<td>Firewall logs</td>
+</tr>
+<tr>
+<td>Sysmon</td>
+<td>XML via EventLog</td>
+<td>Splunk Universal Forwarder</td>
+<td>Windows endpoint telemetry, process tracking</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-normalization-and-field-extraction">Data Normalization and Field Extraction<a class="headerlink" href="#data-normalization-and-field-extraction" title="Permanent link">&para;</a></h3>
+<p><strong>Common Information Model (CIM) Compliance:</strong></p>
+<p>Splunk CIM provides standardized field names across data sources for correlation.</p>
+<table>
+<thead>
+<tr>
+<th>CIM Data Model</th>
+<th>Normalized Fields</th>
+<th>Source Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Network Traffic</td>
+<td>src_ip, dest_ip, src_port, dest_port</td>
+<td>pfsense:filterlog, suricata</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>user, src, dest, action</td>
+<td>pfsense:auth, wazuh-alerts</td>
+</tr>
+<tr>
+<td>Intrusion Detection</td>
+<td>signature, severity, category</td>
+<td>suricata, snort</td>
+</tr>
+<tr>
+<td>Endpoint</td>
+<td>process, parent_process, user</td>
+<td>xmlwineventlog:sysmon</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Field Extraction Example (transforms.conf):</strong>
+<div class="highlight"><pre><span></span><code><span class="k">[pfsense-filterlog-extract]</span>
+<span class="na">REGEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">^(\S+)\s+\S+\s+filterlog\[\d+\]:\s+\d+,,,(\d+),(\w+),(\d+),(\S+),(\d+),(\S+),(\d+),(\w+),(\d+),(\d+),(\d+),(\S+),(\d+),(\d+),(\d+),(\d+),(\w+)</span>
+<span class="na">FORMAT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">interface::$1 rule_number::$2 action::$3 protocol::$4 src_ip::$5 src_port::$6 dest_ip::$7 dest_port::$8</span>
+</code></pre></div></p>
+<h3 id="searches-reports-and-dashboards">Searches, Reports, and Dashboards<a class="headerlink" href="#searches-reports-and-dashboards" title="Permanent link">&para;</a></h3>
+<h4 id="siem-overview-dashboard">SIEM Overview Dashboard<a class="headerlink" href="#siem-overview-dashboard" title="Permanent link">&para;</a></h4>
+<p><strong>Panels:</strong></p>
+<ul>
+<li>Firewall Connections by Provider: A chart/table that lists network interfaces (providers) like vtnet0, vtnet1, tailscale0, etc., alongside the count of connections associated with each.</li>
+<li>Suricata Alerts by Count: Lists specific types of Suricata security alerts (alert, fileinfo, http, dns, tls, snmp, ssh, dhcp) and their frequency (count). alert has the highest count at 430,628.</li>
+<li>Wazuh Alerts by Host: A horizontal bar chart showing the count of alerts generated by specific hosts or agents (ApacheWeb-tec, DC01, KVM, etc.). ApacheWeb-tec has the highest alert count at over 40,000.</li>
+<li>Firewall Block/Pass: A status indicator showing the total count and percentage of blocked (1,675,851 / 92.20%) versus passed traffic (141,823 / 7.80%).</li>
+<li>Suricata Events by Interface: A colorful pie chart visualizing which internal IP addresses or network segments (192.168.x.x ranges) are generating the most Suricata security events.</li>
+<li>Mitre Tactic Stats: A line/area chart tracking the count of events mapped to different MITRE ATT&amp;CK Tactics over time, such as Defense Evasion, Impact, Lateral Movement, etc.</li>
+<li>Services Pie Chart: A large pie chart showing the distribution of traffic categorized by the application or service, likely derived from flow logs or firewall data.</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/splunk-overview-db.png" alt="Splunk SIEM Overview Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Splunk SIEM Overview Dashboard.
+  </figcaption>
+</figure>
+
+<h3 id="wazuh-alerts-for-my-windows-server-2022-domain-controller">Wazuh alerts for my Windows Server 2022 Domain Controller<a class="headerlink" href="#wazuh-alerts-for-my-windows-server-2022-domain-controller" title="Permanent link">&para;</a></h3>
+<p><strong>Query:</strong> <code>index=wazuh-alerts agent.name=DC01</code></p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/splunk-dc01-alerts.png" alt="DC01 Alerts">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    DC01 Alerts.
+  </figcaption>
+</figure>
+
+<h4 id="intrusion-prevention-system-alerts">Intrusion Prevention System Alerts<a class="headerlink" href="#intrusion-prevention-system-alerts" title="Permanent link">&para;</a></h4>
+<p><strong>Query:</strong> <code>index=ids sourcetype=suricata</code></p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/splunk-suricata.png" alt="Suricata IDS Alerts Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Suricata Alerts.
+  </figcaption>
+</figure>
+
+<h4 id="firewall-filter-logs">Firewall Filter Logs<a class="headerlink" href="#firewall-filter-logs" title="Permanent link">&para;</a></h4>
+<p><strong>Query:</strong> <code>index=firewall-a sourcetype=pfsense:firewall</code></p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/splunk-fw.png" alt="pfSense Firewall Filter Logs">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    pfSense Filter Log.
+  </figcaption>
+</figure>
+
+<h3 id="search-examples">Search Examples<a class="headerlink" href="#search-examples" title="Permanent link">&para;</a></h3>
+<h4 id="brute-force-detection-multi-source">Brute Force Detection (Multi-Source)<a class="headerlink" href="#brute-force-detection-multi-source" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>(index=auth sourcetype=pfsense:auth &quot;Failed password&quot;) OR
+(index=wazuh-alerts rule.description=&quot;*authentication failed*&quot;)
+| eval src_ip=coalesce(src,source_ip)
+| stats count by src_ip, dest
+| where count &gt; 10
+| eval threat_level=&quot;High&quot;
+</code></pre></div>
+<h4 id="port-scan-detection">Port Scan Detection<a class="headerlink" href="#port-scan-detection" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>index=firewall-a action=block
+| stats dc(dest_port) as unique_ports, count by src_ip, dest_ip
+| where unique_ports &gt; 50 AND count &gt; 100
+| eval description=&quot;Possible port scan: &quot;.src_ip.&quot; scanning &quot;.unique_ports.&quot; ports on &quot;.dest_ip
+</code></pre></div>
+<h4 id="vpn-traffic-analysis">VPN Traffic Analysis<a class="headerlink" href="#vpn-traffic-analysis" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>index=firewall-a sourcetype=pfsense:filterlog
+| eval interface=if(like(interface,&quot;%ovpnc%&quot;),&quot;VPN&quot;,&quot;Direct&quot;)
+| stats sum(bytes) as total_bytes by interface
+| eval total_gb=round(total_bytes/1024/1024/1024,2)
+</code></pre></div>
+<h3 id="alert-configuration">Alert Configuration<a class="headerlink" href="#alert-configuration" title="Permanent link">&para;</a></h3>
+<p><strong>Scheduled Alerts:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Alert Name</th>
+<th>Search Schedule</th>
+<th>Trigger Condition</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Failed SSH Brute Force</td>
+<td>Every 5 minutes</td>
+<td>&gt;20 failed attempts</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td>Critical Wazuh Alert</td>
+<td>Real-time</td>
+<td>rule.level &gt;= 12</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td>Suricata High Severity</td>
+<td>Every 15 minutes</td>
+<td>alert.severity = 1</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td>VPN Tunnel Down</td>
+<td>Every 1 minute</td>
+<td>No VPN traffic in 2 min</td>
+<td>Discord</td>
+</tr>
+<tr>
+<td>Anomalous Outbound Traffic</td>
+<td>Every 30 minutes</td>
+<td>Bytes &gt; 10GB in 30min</td>
+<td>Discord</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Alert Tuning and False Positive Management:</strong></p>
+<ul>
+<li>Baseline Period: 30 days to establish normal behavior</li>
+<li>Dynamic Thresholds: Adjust based on time of day, day of week</li>
+<li>Whitelist: Known benign IPs/hosts excluded from alerts</li>
+<li>Alert Suppression: Maximum 1 alert per source per hour</li>
+<li>Escalation: Critical alerts escalate after 15 minutes if unacknowledged</li>
+</ul>
+<h3 id="security-use-cases">Security Use Cases<a class="headerlink" href="#security-use-cases" title="Permanent link">&para;</a></h3>
+<h4 id="use-case-1-lateral-movement-detection">Use Case 1: Lateral Movement Detection<a class="headerlink" href="#use-case-1-lateral-movement-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Detect unauthorized account access across multiple systems</p>
+<p><strong>SPL Query:</strong>
+<div class="highlight"><pre><span></span><code>index=wazuh-alerts OR index=auth
+| eval user=coalesce(user.name,user)
+| stats dc(agent.name) as unique_hosts by user
+| where unique_hosts &gt; 5
+| eval threat=&quot;Potential lateral movement: user accessed &quot;.unique_hosts.&quot; hosts&quot;
+</code></pre></div></p>
+<h4 id="use-case-2-data-exfiltration-detection">Use Case 2: Data Exfiltration Detection<a class="headerlink" href="#use-case-2-data-exfiltration-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Identify large outbound data transfers</p>
+<p><strong>SPL Query:</strong>
+<div class="highlight"><pre><span></span><code>index=firewall-a action=pass
+| eval outbound=if(like(dest_ip,&quot;192.168.%&quot;),0,1)
+| where outbound=1
+| stats sum(bytes) as total_bytes by src_ip, dest_ip
+| where total_bytes &gt; 1073741824
+| eval total_gb=round(total_bytes/1024/1024/1024,2)
+| eval alert=&quot;Potential data exfiltration: &quot;.total_gb.&quot;GB transferred&quot;
+</code></pre></div></p>
+<h4 id="use-case-3-malware-execution-detection">Use Case 3: Malware Execution Detection<a class="headerlink" href="#use-case-3-malware-execution-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Detect execution of known malicious files</p>
+<p><strong>SPL Query:</strong>
+<div class="highlight"><pre><span></span><code>index=xmlwineventlog EventCode=1
+| eval md5=lower(Hashes)
+| lookup malware_hashes.csv md5 OUTPUT malware_name
+| where isnotnull(malware_name)
+| table _time, Computer, User, Image, malware_name, CommandLine
+</code></pre></div></p>
+<hr />
+<h2 id="3-elastic-stack-elk-observability-platform">3. Elastic Stack (ELK) Observability Platform<a class="headerlink" href="#3-elastic-stack-elk-observability-platform" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview_1">Deployment Overview<a class="headerlink" href="#deployment-overview_1" title="Permanent link">&para;</a></h3>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>The Elastic Stack provides end-to-end observability across applications, infrastructure, and security events using the Elastic Common Schema (ECS) for standardized data modeling. This deployment emphasizes application performance monitoring (APM), infrastructure telemetry, and container visibility, complementing Splunk's security-centric analytics.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/elastic-overview.png" alt="Elastic Stack Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Elastic Stack Observability Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p>Fleet Server centrally manages more than 25 distributed Elastic Agents, enforcing consistent policies across hybrid environments including VMs, Docker containers, and Kubernetes workloads. Kibana dashboards deliver real-time insights into system performance, application behavior, and operational health.</p>
+<h3 id="security-impact_1">Security Impact<a class="headerlink" href="#security-impact_1" title="Permanent link">&para;</a></h3>
+<p>Elastic enhances the security posture by delivering deep visibility into application and infrastructure behavior. ECS-compliant data modeling enables vendor-neutral threat detection and correlation across diverse telemetry sources. Infrastructure metrics expose resource exhaustion attacks, while container security monitoring identifies anomalous behavior within Docker and Kubernetes environments.</p>
+<h3 id="deployment-rationale_2">Deployment Rationale<a class="headerlink" href="#deployment-rationale_2" title="Permanent link">&para;</a></h3>
+<p>While Splunk serves as the primary SIEM for security event correlation, Elastic Stack provides complementary strengths in application-level observability, infrastructure telemetry, and open-source analytics. ECS-based normalization supports vendor-agnostic correlation and multi-SIEM workflows.</p>
+<h3 id="architecture-principles-alignment_2">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_2" title="Permanent link">&para;</a></h3>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Adds application-level and infrastructure-level visibility</li>
+<li>Container and Kubernetes monitoring provide additional layers of behavioral detection</li>
+<li>ECS normalization enables correlation across heterogeneous data sources</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>ECS enforces consistent field structures</li>
+<li>Fleet Server centralizes agent policy enforcement</li>
+<li>Scalable architecture supports high-cardinality metrics</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>No telemetry source is implicitly trusted</li>
+<li>Continuous monitoring of applications, containers, and infrastructure</li>
+<li>Segmented data pipelines prevent cross-contamination</li>
+</ul>
+<h3 id="component-architecture">Component Architecture<a class="headerlink" href="#component-architecture" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Elasticsearch:</strong> Distributed search and analytics engine that stores and indexes structured and unstructured data</li>
+<li><strong>Logstash:</strong> Data processing pipeline that ingests, transforms, and forwards logs to Elasticsearch (used selectively)</li>
+<li><strong>Kibana:</strong> Visualization and management interface for exploring data, building dashboards, and managing Fleet</li>
+<li><strong>Fleet Server:</strong> Manages Elastic Agent enrollment, policy distribution, and secure communication with Elasticsearch</li>
+</ul>
+<h3 id="core-elk-stack-configuration">Core ELK Stack Configuration<a class="headerlink" href="#core-elk-stack-configuration" title="Permanent link">&para;</a></h3>
+<p>The central Elastic Stack is deployed on a KVM virtual machine running Debian 13, hosting:</p>
+<ul>
+<li><strong>Elasticsearch</strong>, <strong>Logstash</strong>, and <strong>Kibana</strong> (ELK)</li>
+<li><strong>Fleet Server</strong> and a local <strong>Elastic Agent</strong></li>
+<li>Version: <strong>9.2.1</strong></li>
+</ul>
+<p>This VM serves as the central ingest, processing, and visualization hub for all telemetry across the lab environment.</p>
+<h3 id="distributed-elastic-agents">Distributed Elastic Agents<a class="headerlink" href="#distributed-elastic-agents" title="Permanent link">&para;</a></h3>
+<p>Elastic Agents are deployed across multiple hosts, each assigned a tailored Fleet policy with relevant integrations:</p>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>OS / Platform</th>
+<th>Agent Policy Integrations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Traefik LXC Host</td>
+<td>LXC container</td>
+<td>system, Traefik integration for access logs and metrics, network packet capture</td>
+</tr>
+<tr>
+<td>DC01</td>
+<td>Windows Server 2022 VM</td>
+<td>system, Windows, and Sysmon integrations for endpoint and process telemetry</td>
+</tr>
+<tr>
+<td>DockerVM1</td>
+<td>Ubuntu VM</td>
+<td>system, Prometheus, and OPNSense (pfSense) integrations</td>
+</tr>
+<tr>
+<td>DockerVM2</td>
+<td>Docker container running on Debian VM</td>
+<td>system, Docker, authentik integration for event and user activity logs</td>
+</tr>
+<tr>
+<td>Proxmox PVE Host</td>
+<td>Proxmox VE (Debian)</td>
+<td>system, Auditd integration for kernel-level audit logging, Cisco IOS Syslog</td>
+</tr>
+<tr>
+<td>Ubuntu-Apache LXC</td>
+<td>LXC container</td>
+<td>system, Apache HTTP Server, Suricata, and pfSense integrations for web and IDS logs</td>
+</tr>
+<tr>
+<td>K3s-control</td>
+<td>Kubernetes container</td>
+<td>System, Kubernetes metrics, network packet capture</td>
+</tr>
+<tr>
+<td>K3s-worker</td>
+<td>Kubernetes container</td>
+<td>System, Kubernetes metrics, network packet capture</td>
+</tr>
+</tbody>
+</table>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-fleet.png" alt="Elastic Agent Deployment">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Elastic Agent Deployment.
+  </figcaption>
+</figure>
+
+<p>Each agent is enrolled via Fleet and centrally managed through Kibana, enabling consistent policy updates, secure API key rotation, and streamlined observability across the lab.</p>
+<h3 id="fleet-policy-configuration">Fleet Policy Configuration<a class="headerlink" href="#fleet-policy-configuration" title="Permanent link">&para;</a></h3>
+<p><strong>Example: Windows Endpoint Policy</strong></p>
+<p><strong>Integrations:</strong></p>
+<ul>
+<li>System: CPU, memory, disk, network metrics</li>
+<li>Windows: Event logs (Security, Application, System)</li>
+<li>Sysmon: Process creation, network connections, registry changes</li>
+</ul>
+<p><strong>Data Stream Configuration:</strong></p>
+<p><code>logs-windows.sysmon-default:</code></p>
+<ul>
+<li>EventID 1: Process creation</li>
+<li>EventID 3: Network connection</li>
+<li>EventID 7: Image loaded</li>
+<li>EventID 10: Process access</li>
+<li>EventID 11: File creation</li>
+<li>EventID 13: Registry value set</li>
+</ul>
+<p><code>metrics-system.cpu-default:</code></p>
+<ul>
+<li>Metricset: cpu</li>
+<li>Period: 10s</li>
+<li>CPU percentages: user, system, idle, iowait</li>
+</ul>
+<h3 id="elastic-common-schema-ecs-mapping">Elastic Common Schema (ECS) Mapping<a class="headerlink" href="#elastic-common-schema-ecs-mapping" title="Permanent link">&para;</a></h3>
+<p><strong>ECS Field Standardization:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Integration</th>
+<th>ECS Dataset Prefix</th>
+<th>Key ECS Fields Used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System</td>
+<td>system.*</td>
+<td>host.name, process.name, user.name, event.type</td>
+</tr>
+<tr>
+<td>Windows/Sysmon</td>
+<td>windows.*</td>
+<td>event.code, process.parent.name, registry.path</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>docker.*</td>
+<td>container.id, container.image.name, host.hostname</td>
+</tr>
+<tr>
+<td>Prometheus</td>
+<td>prometheus.*</td>
+<td>metricset.name, service.name, labels.*</td>
+</tr>
+<tr>
+<td>Suricata</td>
+<td>suricata.eve</td>
+<td>network.protocol, source.ip, event.category</td>
+</tr>
+<tr>
+<td>Apache</td>
+<td>apache.access</td>
+<td>http.request.method, url.path, user_agent.name</td>
+</tr>
+<tr>
+<td>Authentik</td>
+<td>authentik.* (custom)</td>
+<td>user.name, event.action, event.dataset</td>
+</tr>
+<tr>
+<td>Auditd</td>
+<td>auditd.*</td>
+<td>process.executable, event.action, user.id</td>
+</tr>
+<tr>
+<td>pfSense/OPNSense</td>
+<td>firewall.*</td>
+<td>source.ip, destination.port, event.outcome</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ECS Benefits:</strong></p>
+<ul>
+<li>Vendor Neutrality: Same queries work across different data sources</li>
+<li>Future-Proof: Adding new integrations automatically compatible</li>
+<li>Community Standard: Widely adopted in security and observability communities</li>
+</ul>
+<h3 id="kibana-dashboards">Kibana Dashboards<a class="headerlink" href="#kibana-dashboards" title="Permanent link">&para;</a></h3>
+<h4 id="ingest-pipelines">Ingest Pipelines<a class="headerlink" href="#ingest-pipelines" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Filebeat-style inputs</strong> via Elastic Agent for eve.json, Apache logs, and custom JSON</li>
+<li><strong>Syslog inputs</strong> for pfSense and OPNSense firewall logs</li>
+<li><strong>HTTP JSON inputs</strong> for Authentik API event collection</li>
+<li><strong>Processors</strong> include:</li>
+<li>decode_json_fields for NDJSON</li>
+<li>add_fields for tagging source and dataset</li>
+<li>geoip and user_agent enrichment where applicable</li>
+</ul>
+<h4 id="dashboard-examples">Dashboard Examples<a class="headerlink" href="#dashboard-examples" title="Permanent link">&para;</a></h4>
+<p><strong>Authentik Authentication Dashboard:</strong></p>
+<p><strong>Visualizations:</strong></p>
+<ul>
+<li>Login Success Rate: Pie chart showing successful vs failed logins</li>
+<li>Login Attempts by User: Bar chart</li>
+<li>Geographic Login Distribution: Map of source.geo.location</li>
+<li>Authentication Timeline: Bar chart of login events</li>
+<li>Top Applications Accessed: Pie chart of event.dataset</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-authentik.png" alt="Authentik Authentication Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Authentik Authentication Dashboard.
+  </figcaption>
+</figure>
+
+<p><strong>Suricata IDS Dashboard:</strong></p>
+<p><strong>Visualizations:</strong></p>
+<ul>
+<li>Event Count</li>
+<li>Alert Severity Distribution: Pie chart (Critical, High, Medium, Low, Info)</li>
+<li>Activity Types Over Time: Stacked bar chart with 5-minute buckets</li>
+<li>Top Attack Signatures: Data table with alert.signature and count</li>
+<li>Protocol Breakdown: Donut chart of network.protocol</li>
+<li>Destination Ports: Heatmap of frequently targeted ports</li>
+</ul>
+<p><strong>Example Kibana Query (KQL):</strong>
+<div class="highlight"><pre><span></span><code><span class="n">event</span><span class="err">.</span><span class="n">dataset</span><span class="p">:</span><span class="w"> </span><span class="n">suricata</span><span class="err">.</span><span class="n">eve</span><span class="w"> </span><span class="n">AND</span><span class="w"> </span><span class="n">event</span><span class="err">.</span><span class="n">kind</span><span class="p">:</span><span class="w"> </span><span class="n">alert</span><span class="w"> </span><span class="n">AND</span><span class="w"> </span><span class="n">alert</span><span class="err">.</span><span class="n">severity</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="n">TO</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div></p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-suricata.png" alt="Suricata IDS Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Suricata IPS Dashboard.
+  </figcaption>
+</figure>
+
+<p><strong>pfSense Firewall Filter Log and Location Dashboard:</strong></p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-fw.png" alt="pfSense Firewall Logs">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    pfSense Firewall Logs.
+  </figcaption>
+</figure>
+
+<p><strong>Windows Overview and Security Dashboards:</strong></p>
+<p><strong>Visualizations:</strong></p>
+<ul>
+<li>Number of events</li>
+<li>Top Event IDs</li>
+<li>Number of Events Over Time by Channel: Bar chart of events by date</li>
+<li>Total Administrator and standard logins</li>
+<li>Login Event Timeline: Line graph of administrator and standard login events</li>
+<li>Administrator Users: Pie chart of logins by account</li>
+<li>Login Types: Pie chart of the login event by type</li>
+<li>Login Sources: Bar chart of the logins by source IP</li>
+<li>Login events: Table of login event by account, source IP and threads</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/elk-windows.png" alt="Windows Overview Dashboard">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Windows Overview Dashboard.
+  </figcaption>
+</figure>
+
+<hr />
+<h2 id="4-wazuh-endpoint-detection-and-response-edr">4. Wazuh Endpoint Detection and Response (EDR)<a class="headerlink" href="#4-wazuh-endpoint-detection-and-response-edr" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview_2">Deployment Overview<a class="headerlink" href="#deployment-overview_2" title="Permanent link">&para;</a></h3>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>Wazuh provides host-based security monitoring, threat detection, and compliance auditing across Windows, Linux, BSD, and macOS endpoints. The platform combines SIEM-style log analysis with EDR-grade telemetry to deliver comprehensive endpoint visibility. Wazuh Agents collect file integrity data, vulnerability information, authentication logs, and system events, forwarding them to a centralized Wazuh Manager for correlation and alerting.</p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/wazuh-overview.png" alt="Wazuh EDR Architecture">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Wazuh EDR Architecture
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h3 id="security-impact_2">Security Impact<a class="headerlink" href="#security-impact_2" title="Permanent link">&para;</a></h3>
+<p>Wazuh strengthens endpoint security by detecting unauthorized file changes, rootkits, suspicious processes, and privilege escalation attempts. File Integrity Monitoring (FIM) provides early detection of tampering with critical system files, while rootkit detection identifies hidden processes and kernel-level threats. Vulnerability assessment scans endpoints for missing patches and known CVEs, and Security Configuration Assessment (SCA) enforces CIS benchmark compliance.</p>
+<h3 id="deployment-rationale_3">Deployment Rationale<a class="headerlink" href="#deployment-rationale_3" title="Permanent link">&para;</a></h3>
+<p>Endpoint compromise remains one of the most common initial access vectors in modern attacks. Wazuh provides essential host-level visibility and automated response capabilities that complement network-based and SIEM-based detection. Its multi-OS support ensures consistent monitoring across heterogeneous environments.</p>
+<h3 id="architecture-principles-alignment_3">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_3" title="Permanent link">&para;</a></h3>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Adds endpoint-layer detection to complement network, identity, and application telemetry</li>
+<li>FIM, rootkit detection, and vulnerability scanning provide overlapping security controls</li>
+<li>Active Response automates containment to reduce dwell time</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>CIS benchmark audits enforce hardened configurations</li>
+<li>SCA policies detect deviations from approved security baselines</li>
+<li>VirusTotal integration validates suspicious artifacts</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>No endpoint activity is implicitly trusted</li>
+<li>Continuous monitoring ensures every process, file change, and authentication event is observable</li>
+<li>Automated containment actions enforce least-privilege</li>
+</ul>
+<h3 id="component-architecture_1">Component Architecture<a class="headerlink" href="#component-architecture_1" title="Permanent link">&para;</a></h3>
+<p><strong>Deployment Model:</strong> Single-node manager running on an LXC, distributed agents</p>
+<p><strong>Components:</strong></p>
+<ul>
+<li>Wazuh Manager: Core analysis and correlation engine</li>
+<li>Wazuh Indexer: Stores and indexes security events</li>
+<li>Wazuh Dashboard: Web UI for search, visualization, and alert management</li>
+<li>Agents: Installed on monitored endpoints</li>
+<li>Splunk Universal Forwarder: Log export for system-wide normalization and correlation</li>
+</ul>
+<h3 id="agent-list">Agent List<a class="headerlink" href="#agent-list" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>IP address</th>
+<th>OS Platform and Release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>wazuh</td>
+<td>127.0.0.1</td>
+<td>Debian GNU/Linux, 12 (bookworm)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Lab-Win11Pro</td>
+<td>192.168.1.200</td>
+<td>Microsoft Windows 11 Pro, 10.0.26100.4652 (N/A)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Win11-pfS</td>
+<td>192.168.2.30</td>
+<td>Microsoft Windows 11 Home, 10.0.26100.7171 (N/A)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>KaliVM</td>
+<td>192.168.1.100</td>
+<td>Kali GNU/Linux, 2025.4 (N/A)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Logans-MacBook-Air.local</td>
+<td>192.168.1.207</td>
+<td>macOS, 14.7.8 (Sonoma)</td>
+</tr>
+<tr>
+<td>14</td>
+<td>OPNsense.internal</td>
+<td>192.168.1.201</td>
+<td>FreeBSD, 14.3 (N/A)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>ApacheWeb-lxc</td>
+<td>192.168.1.108</td>
+<td>Ubuntu, 25.04 (Plucky Puffin)</td>
+</tr>
+<tr>
+<td>16</td>
+<td>stepca</td>
+<td>192.168.100.51</td>
+<td>Debian GNU/Linux, 12 (bookworm)</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Win11Pro</td>
+<td>192.168.1.111</td>
+<td>Microsoft Windows 11 Pro, 10.0.26100.7462 (N/A)</td>
+</tr>
+<tr>
+<td>18</td>
+<td>UbuntuGenVM</td>
+<td>192.168.1.126</td>
+<td>Ubuntu, 25.1 (Questing Quokka)</td>
+</tr>
+<tr>
+<td>19</td>
+<td>DC01</td>
+<td>192.168.1.152</td>
+<td>Microsoft Windows Server 2022 Standard Evaluation, 10.0.20348.4529 (N/A)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>win11pro2</td>
+<td>192.168.1.184</td>
+<td>Microsoft Windows 11 Pro for Workstations, 10.0.26200.7462 (N/A)</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Plex-lxc</td>
+<td>192.168.1.136</td>
+<td>Ubuntu, 22.04.5 LTS (Jammy Jellyfish)</td>
+</tr>
+<tr>
+<td>22</td>
+<td>redhat-control</td>
+<td>192.168.200.21</td>
+<td>Red Hat Enterprise Linux, 10 (Coughlan)</td>
+</tr>
+<tr>
+<td>23</td>
+<td>K3s-control</td>
+<td>192.168.200.22</td>
+<td>Red Hat Enterprise Linux, 10.1 (Coughlan)</td>
+</tr>
+<tr>
+<td>24</td>
+<td>pihole</td>
+<td>192.168.1.250</td>
+<td>Ubuntu, 22.04.5 LTS (Jammy Jellyfish)</td>
+</tr>
+<tr>
+<td>26</td>
+<td>dockerVM2</td>
+<td>192.168.1.166</td>
+<td>Debian GNU/Linux, 13 (trixie)</td>
+</tr>
+<tr>
+<td>27</td>
+<td>bind9</td>
+<td>192.168.1.251</td>
+<td>Ubuntu, 25.04 (Plucky Puffin)</td>
+</tr>
+<tr>
+<td>28</td>
+<td>unbound</td>
+<td>192.168.1.252</td>
+<td>Ubuntu, 22.04.5 LTS (Jammy Jellyfish)</td>
+</tr>
+<tr>
+<td>29</td>
+<td>grafana</td>
+<td>192.168.1.246</td>
+<td>Debian GNU/Linux, 12 (bookworm)</td>
+</tr>
+<tr>
+<td>30</td>
+<td>ansible</td>
+<td>192.168.1.25</td>
+<td>Debian GNU/Linux, 12 (bookworm)</td>
+</tr>
+<tr>
+<td>31</td>
+<td>centos</td>
+<td>192.168.1.93</td>
+<td>CentOS Stream, 9 (N/A)</td>
+</tr>
+<tr>
+<td>32</td>
+<td>splunk</td>
+<td>192.168.1.109</td>
+<td>Ubuntu, 24.1 (Oracular Oriole)</td>
+</tr>
+<tr>
+<td>33</td>
+<td>fedora</td>
+<td>192.168.100.5</td>
+<td>Fedora Linux, 43 (Server Edition)</td>
+</tr>
+<tr>
+<td>34</td>
+<td>elastic</td>
+<td>192.168.200.8</td>
+<td>Debian GNU/Linux, 13 (trixie)</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Ubuntu-pfLAN</td>
+<td>192.168.2.7</td>
+<td>Ubuntu, 25.1 (Questing Quokka)</td>
+</tr>
+<tr>
+<td>36</td>
+<td>ubuntu-pfs2</td>
+<td>192.168.3.5</td>
+<td>Ubuntu, 25.1 (Questing Quokka)</td>
+</tr>
+<tr>
+<td>37</td>
+<td>ubuntupfs</td>
+<td>192.168.100.4</td>
+<td>Ubuntu, 25.1 (Questing Quokka)</td>
+</tr>
+<tr>
+<td>38</td>
+<td>K3s-worker</td>
+<td>192.168.200.21</td>
+<td>Red Hat Enterprise Linux, 10.1 (Coughlan)</td>
+</tr>
+<tr>
+<td>39</td>
+<td>traefik</td>
+<td>192.168.1.247</td>
+<td>Debian GNU/Linux, 12 (bookworm)</td>
+</tr>
+<tr>
+<td>40</td>
+<td>debian-Extlan</td>
+<td>192.168.2.5</td>
+<td>Debian GNU/Linux, 12 (bookworm)</td>
+</tr>
+<tr>
+<td>41</td>
+<td>kms-iso</td>
+<td>10.20.0.1</td>
+<td>Ubuntu, 25.04 (Plucky Puffin)</td>
+</tr>
+<tr>
+<td>42</td>
+<td>parrotOS</td>
+<td>192.168.100.16</td>
+<td>Parrot Security, 7.1 (echo)</td>
+</tr>
+<tr>
+<td>43</td>
+<td>UbuntuVM1</td>
+<td>192.168.1.126</td>
+<td>Ubuntu, 25.1 (Questing Quokka)</td>
+</tr>
+<tr>
+<td>44</td>
+<td>Win2025server</td>
+<td>192.168.1.90</td>
+<td>Microsoft Windows Server 2025 Standard, 10.0.26100.7462 (N/A)</td>
+</tr>
+<tr>
+<td>45</td>
+<td>safeline</td>
+<td>192.168.1.89</td>
+<td>Debian GNU/Linux, 13 (trixie)</td>
+</tr>
+</tbody>
+</table>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-agents.png" alt="Wazuh Agent Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh Agent Overview.
+  </figcaption>
+</figure>
+
+<h3 id="security-monitoring-modules">Security Monitoring Modules<a class="headerlink" href="#security-monitoring-modules" title="Permanent link">&para;</a></h3>
+<h4 id="file-integrity-monitoring-fim">File Integrity Monitoring (FIM)<a class="headerlink" href="#file-integrity-monitoring-fim" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Detect unauthorized changes to critical system files and attacker-target directories</p>
+<p><strong>Configuration:</strong></p>
+<ul>
+<li>Real-time monitoring: Enabled for critical paths and high-risk directories</li>
+<li>Linux: /root, /tmp, /var/tmp, /home/*/Downloads</li>
+<li>Windows: C:\Users*\Downloads, C:\Windows\Temp, C:\Temp, C:\Users*\AppData\Local\Temp</li>
+<li>Scheduled scans: Every 12 hours for full filesystem baseline</li>
+<li>Hash algorithms: MD5, SHA1, SHA256</li>
+<li>Attributes tracked: Size, permissions, ownership, mtime</li>
+<li>Alert on: Creation, modification, deletion</li>
+</ul>
+<p><strong>Example FIM Alerts:</strong></p>
+<ul>
+<li>Description: New file created in /tmp</li>
+<li>File: /tmp/malicious.sh</li>
+<li>
+<p>Action: Alert + snapshot of file metadata</p>
+</li>
+<li>
+<p>Description: Integrity checksum changed</p>
+</li>
+<li>File: C:\Windows\System32\drivers\etc\hosts</li>
+<li>Old MD5: abc123...</li>
+<li>New MD5: def456...</li>
+<li>Action: Alert + snapshot of file content</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- File Integrity Monitoring --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;syscheck&gt;</span>
+<span class="w">    </span><span class="nt">&lt;disabled&gt;</span>no<span class="nt">&lt;/disabled&gt;</span>
+<span class="w">    </span><span class="nt">&lt;frequency&gt;</span>43200<span class="nt">&lt;/frequency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;scan_on_start&gt;</span>yes<span class="nt">&lt;/scan_on_start&gt;</span>
+<span class="w">    </span><span class="nt">&lt;alert_new_files&gt;</span>yes<span class="nt">&lt;/alert_new_files&gt;</span>
+<span class="w">    </span><span class="nt">&lt;auto_ignore</span><span class="w"> </span><span class="na">frequency=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">timeframe=</span><span class="s">&quot;3600&quot;</span><span class="nt">&gt;</span>no<span class="nt">&lt;/auto_ignore&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Critical system dirs --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/etc<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/usr/bin<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/usr/sbin<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/bin<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/sbin<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/boot<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>C:\Windows\System32<span class="nt">&lt;/directories&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Threat actor targets --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/root<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/var/tmp<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>/home/*/Downloads<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>C:\Users\*\Downloads<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>C:\Temp<span class="nt">&lt;/directories&gt;</span>
+<span class="w">    </span><span class="nt">&lt;directories</span><span class="w"> </span><span class="na">realtime=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>C:\Users\*\AppData\Local\Temp<span class="nt">&lt;/directories&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Ignore noise --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ignore&gt;</span>/etc/mtab<span class="nt">&lt;/ignore&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ignore</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;sregex&quot;</span><span class="nt">&gt;</span>.log$|.swp$<span class="nt">&lt;/ignore&gt;</span>
+<span class="w">    </span><span class="nt">&lt;nodiff&gt;</span>/etc/ssl/private.key<span class="nt">&lt;/nodiff&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;skip_nfs&gt;</span>yes<span class="nt">&lt;/skip_nfs&gt;</span>
+<span class="w">    </span><span class="nt">&lt;skip_dev&gt;</span>yes<span class="nt">&lt;/skip_dev&gt;</span>
+<span class="w">    </span><span class="nt">&lt;skip_proc&gt;</span>yes<span class="nt">&lt;/skip_proc&gt;</span>
+<span class="w">    </span><span class="nt">&lt;skip_sys&gt;</span>yes<span class="nt">&lt;/skip_sys&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;process_priority&gt;</span>10<span class="nt">&lt;/process_priority&gt;</span>
+<span class="w">    </span><span class="nt">&lt;max_eps&gt;</span>50<span class="nt">&lt;/max_eps&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;synchronization&gt;</span>
+<span class="w">      </span><span class="nt">&lt;enabled&gt;</span>yes<span class="nt">&lt;/enabled&gt;</span>
+<span class="w">      </span><span class="nt">&lt;interval&gt;</span>5m<span class="nt">&lt;/interval&gt;</span>
+<span class="w">      </span><span class="nt">&lt;max_eps&gt;</span>10<span class="nt">&lt;/max_eps&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/synchronization&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/syscheck&gt;</span>
+</code></pre></div>
+<h4 id="rootkit-detection">Rootkit Detection<a class="headerlink" href="#rootkit-detection" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Identify hidden processes, ports, and kernel modules</p>
+<p><strong>Checks Performed:</strong></p>
+<ul>
+<li>Hidden processes: Compare ps output with /proc</li>
+<li>Hidden ports: Netstat vs /proc/net/* comparison</li>
+<li>Kernel modules: Verify against known-good list</li>
+<li>System binaries: Check for trojaned ls, ps, netstat</li>
+<li>Registry anomalies: Windows registry rootkits</li>
+</ul>
+<h4 id="vulnerability-assessment">Vulnerability Assessment<a class="headerlink" href="#vulnerability-assessment" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Identify missing patches and known CVEs</p>
+<p><strong>Vulnerability Sources:</strong></p>
+<ul>
+<li>Windows: Microsoft Security Update Guide (MSU)</li>
+<li>Red Hat/CentOS: OVAL feeds</li>
+<li>Debian/Ubuntu: Debian Security Tracker</li>
+<li>macOS: Apple Security Updates</li>
+</ul>
+<p><strong>Example Vulnerability Alert:</strong></p>
+<ul>
+<li>CVE: CVE-2024-43451</li>
+<li>Title: NTLM Hash Disclosure Vulnerability</li>
+<li>CVSS: 8.1 (High)</li>
+<li>Affected: Windows Server 2022 DC01</li>
+<li>Package: ntlm.dll version 10.0.20348.2227</li>
+<li>Fix Available: Yes (KB5043936)</li>
+<li>Recommendation: Apply security update immediately</li>
+</ul>
+<h4 id="security-configuration-assessment-sca">Security Configuration Assessment (SCA)<a class="headerlink" href="#security-configuration-assessment-sca" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Audit compliance with security benchmarks</p>
+<p><strong>Policies Applied:</strong></p>
+<ul>
+<li>CIS Windows Server 2022 Benchmark</li>
+<li>CIS Windows 11 Benchmark</li>
+<li>CIS Debian 12 Benchmark</li>
+<li>CIS Debian 13 Benchmark</li>
+<li>CIS Ubuntu 22.04 LTS Benchmark</li>
+<li>CIS Red Hat Enterprise Linux 10 Benchmark</li>
+<li>CIS CentOS Linux 9 Benchmark</li>
+<li>CIS Distribution Independent Linux Benchmark v2.0.0</li>
+<li>CIS Apache 2.4 Benchmark</li>
+<li>PCI-DSS v4.0 requirements</li>
+<li>NIST 800-53 controls</li>
+</ul>
+<p><strong>Example SCA Finding:</strong></p>
+<ul>
+<li>Policy: CIS Windows Server 2022</li>
+<li>Check ID: 2.3.10.5</li>
+<li>Title: Network access: Do not allow storage of passwords and credentials</li>
+<li>Status: FAIL</li>
+<li>Current Value: Enabled</li>
+<li>Expected Value: Disabled</li>
+<li>Remediation: Set HKLM\SYSTEM\CurrentControlSet\Control\Lsa\DisableDomainCreds to 1</li>
+<li>Severity: High</li>
+</ul>
+<h4 id="login-monitoring-sshrdp">Login Monitoring (SSH/RDP)<a class="headerlink" href="#login-monitoring-sshrdp" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Detect brute force attempts and unauthorized remote access</p>
+<p><strong>Configuration:</strong></p>
+<ul>
+<li>Linux: Monitor /var/log/auth.log for failed SSH login attempts</li>
+<li>Windows: Monitor Security event channel for Event ID 4625 (failed RDP logins)</li>
+<li>Thresholds: Multiple failed attempts within a short timeframe trigger high-severity alerts</li>
+</ul>
+<p><strong>Example Alert:</strong></p>
+<ul>
+<li>Rule ID: 5710</li>
+<li>Description: Multiple failed SSH login attempts detected</li>
+<li>Source IP: 192.168.3.45</li>
+<li>Action: Alert + optional active response (firewall drop)</li>
+</ul>
+<h3 id="active-response">Active Response<a class="headerlink" href="#active-response" title="Permanent link">&para;</a></h3>
+<h4 id="firewall-drop">Firewall Drop<a class="headerlink" href="#firewall-drop" title="Permanent link">&para;</a></h4>
+<p><strong>Command:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>firewall-drop<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;executable&gt;</span>firewall-drop<span class="nt">&lt;/executable&gt;</span>
+<span class="w">  </span><span class="nt">&lt;expect&gt;</span>srcip<span class="nt">&lt;/expect&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeout_allowed&gt;</span>yes<span class="nt">&lt;/timeout_allowed&gt;</span>
+<span class="nt">&lt;/command&gt;</span>
+</code></pre></div></p>
+<p><strong>Active Response:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;active-response&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command&gt;</span>firewall-drop<span class="nt">&lt;/command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;location&gt;</span>any<span class="nt">&lt;/location&gt;</span>
+<span class="w">  </span><span class="nt">&lt;rules_group&gt;</span>authentication_failed,sshd<span class="nt">&lt;/rules_group&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeout&gt;</span>600<span class="nt">&lt;/timeout&gt;</span>
+<span class="nt">&lt;/active-response&gt;</span>
+</code></pre></div></p>
+<ul>
+<li><strong>Alerts/Trigger:</strong> Fires when rules in the authentication_failed or sshd groups are triggered</li>
+<li><strong>Workflow:</strong> Wazuh passes the offending source IP (srcip) to the firewall-drop script, which inserts an iptables rule to block traffic. After 600 seconds, the block is lifted.</li>
+<li><strong>Benefit:</strong> Immediate containment of brute-force attackers</li>
+</ul>
+<h4 id="host-deny">Host Deny<a class="headerlink" href="#host-deny" title="Permanent link">&para;</a></h4>
+<p><strong>Command:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>host-deny<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;executable&gt;</span>host-deny<span class="nt">&lt;/executable&gt;</span>
+<span class="w">  </span><span class="nt">&lt;expect&gt;</span>srcip<span class="nt">&lt;/expect&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeout_allowed&gt;</span>yes<span class="nt">&lt;/timeout_allowed&gt;</span>
+<span class="nt">&lt;/command&gt;</span>
+</code></pre></div></p>
+<p><strong>Active Response:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;active-response&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command&gt;</span>host-deny<span class="nt">&lt;/command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;location&gt;</span>any<span class="nt">&lt;/location&gt;</span>
+<span class="w">  </span><span class="nt">&lt;rules_group&gt;</span>authentication_failed<span class="nt">&lt;/rules_group&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeout&gt;</span>600<span class="nt">&lt;/timeout&gt;</span>
+<span class="nt">&lt;/active-response&gt;</span>
+</code></pre></div></p>
+<ul>
+<li><strong>Alerts/Trigger:</strong> Activated on authentication_failed events</li>
+<li><strong>Workflow:</strong> The offending IP is added to /etc/hosts.deny. After 600 seconds, the entry is removed.</li>
+<li><strong>Benefit:</strong> Lightweight containment using TCP wrappers</li>
+</ul>
+<h4 id="disable-account">Disable Account<a class="headerlink" href="#disable-account" title="Permanent link">&para;</a></h4>
+<p><strong>Command:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>disable-account<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;executable&gt;</span>disable-account<span class="nt">&lt;/executable&gt;</span>
+<span class="w">  </span><span class="nt">&lt;expect&gt;</span>user<span class="nt">&lt;/expect&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeout_allowed&gt;</span>no<span class="nt">&lt;/timeout_allowed&gt;</span>
+<span class="nt">&lt;/command&gt;</span>
+</code></pre></div></p>
+<p><strong>Active Response:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;active-response&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command&gt;</span>disable-account<span class="nt">&lt;/command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;location&gt;</span>local<span class="nt">&lt;/location&gt;</span>
+<span class="w">  </span><span class="nt">&lt;rules_group&gt;</span>authentication_failed<span class="nt">&lt;/rules_group&gt;</span>
+<span class="nt">&lt;/active-response&gt;</span>
+</code></pre></div></p>
+<ul>
+<li><strong>Alerts/Trigger:</strong> Fires when a local user repeatedly fails authentication</li>
+<li><strong>Workflow:</strong> Wazuh passes the username to the disable-account script, which locks the account immediately</li>
+<li><strong>Benefit:</strong> Prevents compromised or brute-forced accounts from being abused</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-ar.png" alt="Wazuh Active Response">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Active Response Events
+  </figcaption>
+</figure>
+
+<h3 id="integrations">Integrations<a class="headerlink" href="#integrations" title="Permanent link">&para;</a></h3>
+<h4 id="splunk">Splunk<a class="headerlink" href="#splunk" title="Permanent link">&para;</a></h4>
+<p><strong>Log Forwarding Configuration:</strong></p>
+<p>Wazuh Manager → Splunk Universal Forwarder → Splunk Indexer</p>
+<p><strong>Forwarder Configuration (inputs.conf):</strong>
+<div class="highlight"><pre><span></span><code><span class="k">[monitor:///var/ossec/logs/alerts/alerts.json]</span>
+<span class="na">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
+<span class="na">sourcetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">wazuh:alerts</span>
+<span class="na">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">wazuh-alerts</span>
+<span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">wazuh-manager</span>
+</code></pre></div></p>
+<p><strong>Alert Enrichment in Splunk:</strong></p>
+<ul>
+<li>MITRE ATT&amp;CK Mapping: Techniques and tactics</li>
+<li>Asset Context: Host criticality, owner, location</li>
+<li>Threat Intelligence: IOC matching from feeds</li>
+<li>User Context: AD user attributes, group membership</li>
+</ul>
+<h4 id="virustotal">VirusTotal<a class="headerlink" href="#virustotal" title="Permanent link">&para;</a></h4>
+<p>VirusTotal is integrated into the File Integrity Monitoring workflow through a custom rule that targets new or modified executable and script files.</p>
+<ul>
+<li><strong>Scope:</strong> Applies to File Integrity Monitoring events involving executable and script files in monitored directories</li>
+<li><strong>Trigger:</strong> Custom rule_id 87105 fires when VirusTotal reports multiple positive detections</li>
+<li><strong>Action:</strong> Host-level Bash script is invoked automatically to quarantine or remove the flagged file</li>
+<li><strong>Benefit:</strong> Only suspicious binaries are escalated; preserves VirusTotal API quota</li>
+</ul>
+<p><strong>Configuration:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;integration&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>virustotal<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;api_key&gt;</span>xxxxxxxxxxxxxxxxxxx<span class="nt">&lt;/api_key&gt;</span>
+<span class="w">  </span><span class="nt">&lt;rule_id&gt;</span>100003<span class="nt">&lt;/rule_id&gt;</span>
+<span class="w">  </span><span class="nt">&lt;alert_format&gt;</span>json<span class="nt">&lt;/alert_format&gt;</span>
+<span class="nt">&lt;/integration&gt;</span>
+
+<span class="nt">&lt;command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>remove-threat<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;executable&gt;</span>remove-threat.sh<span class="nt">&lt;/executable&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeout_allowed&gt;</span>no<span class="nt">&lt;/timeout_allowed&gt;</span>
+<span class="nt">&lt;/command&gt;</span>
+
+<span class="nt">&lt;active-response&gt;</span>
+<span class="w">  </span><span class="nt">&lt;disabled&gt;</span>no<span class="nt">&lt;/disabled&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command&gt;</span>remove-threat<span class="nt">&lt;/command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;location&gt;</span>local<span class="nt">&lt;/location&gt;</span>
+<span class="w">  </span><span class="nt">&lt;rules_id&gt;</span>87105<span class="nt">&lt;/rules_id&gt;</span>
+<span class="nt">&lt;/active-response&gt;</span>
+</code></pre></div></p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-vt.png" alt="Wazuh EDR Architecture">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh VirusTotal Integration
+  </figcaption>
+</figure>
+
+<h4 id="discord">Discord<a class="headerlink" href="#discord" title="Permanent link">&para;</a></h4>
+<p>External alerting to Discord has been configured for specific workflows. Alerts from the sshd, authentication_failure, or syscheck_file groups trigger a custom script that sends a message to a Discord webhook in the #wazuh channel.</p>
+<ul>
+<li><strong>Scope:</strong> Alerts generated by sshd, authentication_failure, syscheck_file groups</li>
+<li><strong>Trigger:</strong> When any of these groups fire, Wazuh's active response mechanism invokes a custom Bash script</li>
+<li><strong>Action:</strong> The script formats the alert into a Discord embed enriched with rule, group, and host metadata</li>
+<li><strong>Benefit:</strong> Real-time visibility into critical security events with actionable context</li>
+</ul>
+<p><strong>Configuration:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;integration&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>discord<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;hook_url&gt;</span>https://discord.com/api/webhooks/xxxxxxxx<span class="nt">&lt;/hook_url&gt;</span>
+<span class="w">  </span><span class="nt">&lt;group&gt;</span>multiple_drops,authentication_failed,sshd,syscheck_file<span class="nt">&lt;/group&gt;</span>
+<span class="w">  </span><span class="nt">&lt;alert_format&gt;</span>json<span class="nt">&lt;/alert_format&gt;</span>
+<span class="nt">&lt;/integration&gt;</span>
+
+<span class="nt">&lt;command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;name&gt;</span>discord<span class="nt">&lt;/name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;executable&gt;</span>discord.sh<span class="nt">&lt;/executable&gt;</span>
+<span class="w">  </span><span class="nt">&lt;expect&gt;</span>json<span class="nt">&lt;/expect&gt;</span>
+<span class="w">  </span><span class="nt">&lt;timeout_allowed&gt;</span>no<span class="nt">&lt;/timeout_allowed&gt;</span>
+<span class="nt">&lt;/command&gt;</span>
+
+<span class="nt">&lt;active-response&gt;</span>
+<span class="w">  </span><span class="nt">&lt;disabled&gt;</span>no<span class="nt">&lt;/disabled&gt;</span>
+<span class="w">  </span><span class="nt">&lt;command&gt;</span>discord<span class="nt">&lt;/command&gt;</span>
+<span class="w">  </span><span class="nt">&lt;location&gt;</span>local<span class="nt">&lt;/location&gt;</span>
+<span class="w">  </span><span class="nt">&lt;rules_group&gt;</span>sshd,authentication_failure,syscheck_file<span class="nt">&lt;/rules_group&gt;</span>
+<span class="nt">&lt;/active-response&gt;</span>
+</code></pre></div></p>
+<h4 id="shuffle-soar">Shuffle SOAR<a class="headerlink" href="#shuffle-soar" title="Permanent link">&para;</a></h4>
+<p>External alerting to Shuffle SOAR has been configured to automate case creation, enrichment, and downstream workflows. Alerts meeting the defined severity threshold are forwarded to a Shuffle webhook, where a workflow processes and routes the event for further action. Alerts are enriched with rule, agent, and metadata fields before being sent to TheHive or other SOAR components.</p>
+<p><strong>Scope</strong>
+Alerts generated by Wazuh with <strong>severity ≥ 4</strong> are forwarded to Shuffle for automated processing. This includes, but is not limited to, events from:</p>
+<ul>
+<li><code>sshd</code> — SSH authentication activity  </li>
+<li><code>authentication_failure</code> — failed login attempts  </li>
+<li><code>syscheck_file</code> — file integrity monitoring changes  </li>
+<li>Any rule group producing <strong>level 4+ alerts</strong></li>
+</ul>
+<p><strong>Trigger</strong>
+When an alert meets the configured severity threshold, Wazuh’s integration engine sends the full JSON alert payload to the Shuffle webhook.</p>
+<p><strong>Action</strong>
+Inside Shuffle, the workflow performs the following steps:</p>
+<ul>
+<li>Parses the incoming Wazuh alert JSON</li>
+<li>Extracts key metadata fields:</li>
+<li><strong>Rule</strong> → rule description and rule ID</li>
+<li><strong>Group</strong> → Wazuh rule group classification</li>
+<li><strong>Host</strong> → agent name or hostname</li>
+<li><strong>Severity</strong> → numeric Wazuh level</li>
+<li>Normalizes and sanitizes fields for TheHive compatibility</li>
+<li>Creates a <strong>TheHive Alert</strong> using the enriched data</li>
+<li>Routes alerts to additional automations such as:</li>
+<li>Case creation</li>
+<li>Discord/email notifications</li>
+<li>Cortex analyzers</li>
+</ul>
+<p><strong>Delivery</strong>
+The enriched alert is delivered to Shuffle via a webhook configured in Wazuh:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;integration&gt;</span>
+<span class="w">    </span><span class="nt">&lt;name&gt;</span>shuffle<span class="nt">&lt;/name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;hook_url&gt;</span>https://192.168.200.41/api/v1/hooks/webhook_32c000c1-3d4d-47f2-94d2-f1c76c2f8c35<span class="nt">&lt;/hook_url&gt;</span>
+<span class="w">    </span><span class="nt">&lt;level&gt;</span>4<span class="nt">&lt;/level&gt;</span>
+<span class="w">    </span><span class="nt">&lt;alert_format&gt;</span>json<span class="nt">&lt;/alert_format&gt;</span>
+<span class="nt">&lt;/integration&gt;</span>
+</code></pre></div>
+<h3 id="alerting-and-notifications">Alerting and Notifications<a class="headerlink" href="#alerting-and-notifications" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose:</strong> Provide immediate visibility into critical events</p>
+<p><strong>Configuration:</strong></p>
+<p><strong>Email Alerts (Gmail):</strong></p>
+<ul>
+<li>Wazuh configured to send alerts via local relay (msmtp) → smtp.gmail.com:587</li>
+<li>Alerts delivered to wazuh@shadowitlab.com</li>
+</ul>
+<p><strong>Discord Alerts:</strong></p>
+<ul>
+<li>Custom active response script posts alerts to Discord webhook channel</li>
+<li>Triggered on new file creation in monitored directories or multiple failed login attempts</li>
+</ul>
+<h3 id="wazuh-dashboard-analytics">Wazuh Dashboard Analytics<a class="headerlink" href="#wazuh-dashboard-analytics" title="Permanent link">&para;</a></h3>
+<h4 id="file-integrity-monitoring">File Integrity Monitoring<a class="headerlink" href="#file-integrity-monitoring" title="Permanent link">&para;</a></h4>
+<p><strong>Visualizations:</strong></p>
+<p><strong>Overview:</strong></p>
+<ul>
+<li>Alerts by action over time: Line chart showing file modifications, additions, and deletions</li>
+<li>Top 5 agents: Donut chart showing the top 5 agents by events</li>
+<li>Rule Distribution: Donut chart showing the events by rule type</li>
+<li>Actions: Donut chart showing events by modification, addition, or deletion action</li>
+<li>Top 5 Users: Table showing the number of events by agent ID</li>
+</ul>
+<p><strong>Events:</strong></p>
+<ul>
+<li>Events over time</li>
+<li>Event Summary table showing total events by agent, file, action, and rule information</li>
+</ul>
+<p><strong>Inventory:</strong></p>
+<ul>
+<li>Detailed inventory information showing file and registry (Windows) actions including path/key, modification timestamp, user, file size</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-fim.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh File Integrity Monitoring
+  </figcaption>
+</figure>
+
+<h4 id="configuration-management">Configuration Management<a class="headerlink" href="#configuration-management" title="Permanent link">&para;</a></h4>
+<p><strong>Visualizations:</strong></p>
+<p><strong>Dashboard:</strong></p>
+<ul>
+<li>Per agent SCA showing a summary of passed, failed, and N/A results and overall score</li>
+<li>Policy information, scan data, and checks</li>
+<li>Inventory information: policy, description, scan data, score</li>
+<li>Events: Event count over time, detailed check and policy information</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-sca.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    CIS Benchmark Results
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-sca2.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    CIS Benchmark Overview
+  </figcaption>
+</figure>
+
+<h4 id="security-operations-it-hygiene-dashboard">Security Operations / IT Hygiene Dashboard<a class="headerlink" href="#security-operations-it-hygiene-dashboard" title="Permanent link">&para;</a></h4>
+<p><strong>Visualizations:</strong></p>
+<p><strong>Dashboard:</strong> Overview of deployed agent hygiene showing OS, installed packages, running processes, hardware, network traffic, and identity information</p>
+<ul>
+<li><strong>System:</strong> Platform, OS, and architecture information</li>
+<li><strong>Software:</strong> Package, KB, Browser extension, and vendor information</li>
+<li><strong>Processes:</strong> Process name, start, PID, PPID, and command line information</li>
+<li><strong>Network:</strong> IP address, interface, protocol, listener, and traffic information</li>
+<li><strong>Identity:</strong> User and group, shell, and home directory information</li>
+<li><strong>Services:</strong> Running service information</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-ith.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    IT Hygene Overview
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-ith2.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    IT Hygene - System View
+  </figcaption>
+</figure>
+
+<h4 id="threat-intelligence">Threat Intelligence<a class="headerlink" href="#threat-intelligence" title="Permanent link">&para;</a></h4>
+<p><strong>Threat Hunting:</strong></p>
+<ul>
+<li>Total threats detected, alert level, authentication failures/successes, attacks by MITRE tactic/technique, alerts by agent</li>
+</ul>
+<p><strong>Vulnerability Detection:</strong></p>
+<ul>
+<li>Severity level counts, top 5 CVEs, vulnerabilities by OS, agent, package, and year</li>
+</ul>
+<p><strong>MITRE ATT&amp;CK:</strong></p>
+<ul>
+<li>Alert evolution over time, top tactics, attacks by technique, tactics and techniques by agent</li>
+</ul>
+<h3 id="threat-hunting-queries">Threat Hunting Queries<a class="headerlink" href="#threat-hunting-queries" title="Permanent link">&para;</a></h3>
+<p><strong>Suspicious PowerShell Execution:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">rule</span><span class="err">.</span><span class="n">groups</span><span class="p">:</span><span class="w"> </span><span class="n">windows</span><span class="w"> </span><span class="n">AND</span><span class="w"> </span><span class="n">data</span><span class="err">.</span><span class="n">win</span><span class="err">.</span><span class="n">eventdata</span><span class="err">.</span><span class="n">image</span><span class="p">:</span><span class="w"> </span><span class="p">*</span><span class="n">powershell</span><span class="err">.</span><span class="n">exe</span>
+<span class="n">AND</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="err">.</span><span class="n">win</span><span class="err">.</span><span class="n">eventdata</span><span class="err">.</span><span class="n">commandLine</span><span class="p">:</span><span class="w"> </span><span class="p">*-</span><span class="n">encodedcommand</span><span class="p">*</span>
+<span class="n">OR</span><span class="w"> </span><span class="n">data</span><span class="err">.</span><span class="n">win</span><span class="err">.</span><span class="n">eventdata</span><span class="err">.</span><span class="n">commandLine</span><span class="p">:</span><span class="w"> </span><span class="p">*</span><span class="n">bypass</span><span class="p">*)</span>
+</code></pre></div></p>
+<p><strong>Lateral Movement Detection:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">rule</span><span class="err">.</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="mi">60204</span><span class="w"> </span><span class="n">AND</span><span class="w"> </span><span class="n">rule</span><span class="err">.</span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Windows: User logon with explicit credentials&quot;</span>
+<span class="p">|</span><span class="w"> </span><span class="n">stats</span><span class="w"> </span><span class="k">count</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">data</span><span class="err">.</span><span class="n">win</span><span class="err">.</span><span class="n">eventdata</span><span class="err">.</span><span class="n">subjectUserName</span><span class="p">,</span><span class="w"> </span><span class="n">agent</span><span class="err">.</span><span class="n">name</span>
+</code></pre></div></p>
+<p><strong>Privilege Escalation Attempts:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">rule</span><span class="err">.</span><span class="n">groups</span><span class="p">:</span><span class="w"> </span><span class="n">authentication_success</span><span class="w"> </span><span class="n">AND</span>
+<span class="n">data</span><span class="err">.</span><span class="n">win</span><span class="err">.</span><span class="n">eventdata</span><span class="err">.</span><span class="n">targetUserName</span><span class="p">:</span><span class="w"> </span><span class="n">Administrator</span>
+<span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">data</span><span class="err">.</span><span class="n">win</span><span class="err">.</span><span class="n">eventdata</span><span class="err">.</span><span class="n">subjectUserName</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="n">Administrator</span>
+</code></pre></div></p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-th.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Thread Hunting Dashboard
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-vul.png" alt="Wazuh File Integrity Monitoring">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Vulnerability Detection Dashboard
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/wazuh-mitre.png" alt="Wazuh MITRE ATT&CK">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    MITRE ATT&CK Dashboard
+  </figcaption>
+</figure>
+<hr />
+<h2 id="5-security-homelab-section-links">5. Security Homelab Section Links<a class="headerlink" href="#5-security-homelab-section-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="/Career_Projects/projects/homelab/01-exec-summary/">Executive Summary and Security Posture</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/02-platform/">Infrastructure Platform, Virtualization Stack and Hardware</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/03-network/">Network Security, Privacy and Remote Access</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/04-iam-secrets/">Identity, Access, Secrets and Trust Management</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/05-auto-iac/">Automation and IaC</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/06-apps-service/">Applications and Services</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/07-vis-response-pt1/">Observability and Response, Part 1</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/08-vis-response-pt2/">Observability and Response, Part 2</a></strong></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
