@@ -591,14 +591,14 @@ Prometheus and Grafana are industry-standard observability tools used across clo
 - **CrowdSec:** Engine metrics
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/prometheus-targets.png" alt="Prometheus Target Health Status">
+  <img src="/Career_Projects/assets/screenshots/prom-targets.png" alt="Prometheus Target Health Status">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Prometheus Target Health Status
   </figcaption>
 </figure>
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/alertmanager-blackbox.png" alt="Alert Manager and Blackbox Alerts">
+  <img src="/Career_Projects/assets/screenshots/prom-alerts.png" alt="Alert Manager and Blackbox Alerts">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Alert Manager and Blackbox Alerts
   </figcaption>
@@ -679,21 +679,9 @@ Prometheus and Grafana are industry-standard observability tools used across clo
 
 ### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>Uptime Kuma provides heartbeat monitoring for all lab services using HTTP/S, TCP, and ICMP checks. Each monitored service is continuously probed for availability, latency, and response integrity.</p>
-    <p>Any deviation triggers immediate alerts routed to dedicated Discord channels.</p>
-  </div>
+Uptime Kuma provides heartbeat monitoring for all lab services using HTTP/S, TCP, and ICMP checks. Each monitored service is continuously probed for availability, latency, and response integrity.
+Any deviation triggers immediate alerts routed to dedicated Discord channels.
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/uptime-kuma-logo.png" alt="Uptime Kuma">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Uptime Kuma
-      </figcaption>
-    </figure>
-  </div>
-</div>
 
 ### Security Impact
 
@@ -726,20 +714,8 @@ Service uptime is foundational to both operational stability and security visibi
 
 ### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>Checkmk delivers comprehensive monitoring across servers, applications, network devices, storage systems, and containerized workloads.</p>
-  </div>
+Checkmk delivers comprehensive monitoring across servers, applications, network devices, storage systems, and containerized workloads.
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/checkmk-logo.png" alt="Checkmk">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Checkmk
-      </figcaption>
-    </figure>
-  </div>
-</div>
 
 ### Security Impact
 

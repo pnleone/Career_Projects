@@ -67,7 +67,7 @@ This service architecture mirrors production enterprise environments, providing 
 <div class="two-col-right">
   <div class="text-col">
     <p>
-      A layered, defense-in-depth DNS architecture provides secure, privacy-preserving name resolution across the entire lab environment. This three-tier design separates ad-blocking, recursive resolution, and authoritative services into independent, specialized components with high-availability failover and comprehensive security controls.
+      A layered DNS setup balances local authority, recursive privacy, and high-performance ad-blocking. Pi-hole (`192.168.1.250`) acts as the primary resolver for network clients, forwarding standard queries to Unbound (`.252`) with `1.1.1.1` as fallback, and sending all `home.com` queries to BIND9 (`.251`) for authoritative local resolution. BIND9 serves as the master of the `home.com` zone with security hardening via `recursion yes`, `forward only`, and `deny-answer-addresses` to prevent DNS loops. Unbound communicates directly with root servers for maximum privacy from third-party DNS logging. The network path is: Client → Pi-hole → BIND9 (Authoritative Answer) → Traefik (Step-CA HTTPS) → Backend VM
     </p>
   </div>
 
@@ -103,10 +103,10 @@ DNS is a foundational service that impacts every network connection. Compromise 
 
 | Tier | Component | IP Address | Primary Function | Secondary Function |
 |------|-----------|------------|------------------|-------------------|
-| Edge/Filtering | Pi-hole Primary | 192.168.1.250 | Ad-blocking, DNS caching | Conditional forwarding to internal/external resolvers |
+| Edge/Filtering | Pi-hole Primary | 192.168.1.250 | Primary Resolver for all network clients; Forwards standard queries to Unbound (`.252`); Upstreams to `1.1.1.1` as fallback | Conditional Forwarding: Sends all `home.com` queries to BIND9 (`.251`) for authoritative resolution |
 | Edge/Filtering | Pi-hole Backup | 192.168.1.126 | High-availability failover | Synchronized blocklists and configuration |
-| Recursive Resolution | Unbound | 192.168.1.252 | DNSSEC-validated root server queries | Privacy-preserving external resolution |
-| Authoritative | Bind9 | 192.168.1.251 | Internal zone authority (home.com) | Reverse DNS (192.168.x.x PTR records) |
+| Recursive Resolution | Unbound | 192.168.1.252 | Recursive Resolver: Communicates directly with root servers for external domains, providing maximum privacy from third-party DNS logging | Access Control: Configured to trust and respond to queries from specific local subnets. Privacy-preserving external resolution |
+| Authoritative | Bind9 | 192.168.1.251 | Authoritative Source for the `home.com` zone with exact IP mappings for entire homelab  | Security Hardening: Fixed with `recursion yes`, `forward only`, and `deny-answer-addresses` to prevent DNS loops and ensure local queries never leak to public internet |
 
 **Design Rationale:**
 
@@ -467,13 +467,16 @@ Exposing multiple web services on different ports creates management complexity 
 
 **Architecture Overview:**
 
-Traefik acts as the edge router for all HTTP/HTTPS services in the lab, providing:
+Traefik acts as the edge router for all HTTP/HTTPS services in the lab, providing dynamic service discovery, automatic TLS certificate management, centralized authentication, load balancing, health checks, and observability. 
 
-- Dynamic service discovery via Docker labels or via local static file
-- Automatic TLS certificate management (Step-CA)
-- Centralized authentication (Authentik forward auth)
-- Load balancing and health checks
-- Observability (Prometheus metrics, access logs)
+Traefik Container:
+- DNS Resolution: Hard-coded to Pi-hole (`.250`) and BIND9 (`.251`) to prevent internal Docker DNS timeouts
+- Certificate Handling: Configured with the `stepca` resolver, using Smallstep ACME protocol to automatically issue certificates to services
+- Prometheus Metrics: Enabled with specialized labels to allow Grafana to scrape per-service traffic data
+
+Step-CA:
+- Provisioner: Updated with an X.509 template that correctly handles IP SANs and uses `.Insecure.CR` variables for ACME compatibility
+- Validity: Hard-coded to 30-day (720h) durations to override default short-lived ACME certificates
 
 **Deployment Architecture:**
 
@@ -548,31 +551,48 @@ https://portainer.home.com → https://192.168.1.126:9443
 
 **Example Router Configuration:**
 ```yaml
-portainer-router:
-  rule: "Host(`portainer.home.com`)"
-  service: portainer-service
-  entryPoints: [websecure]
-  tls: true
+http:
+  routers:
+    portainer-router:
+      rule: "Host(`portainer.home.com`)"
+      service: portainer-service
+      entryPoints: [websecure]
+      tls:
+        certResolver: stepca
+      middlewares:
+        - authentik
+        - secure-headers
 
-portainer-service:
-  loadBalancer:
-    serversTransport: portainer-tls
-    servers:
-      - url: "https://192.168.1.126:9443"
-    passHostHeader: true
-    healthCheck:
-      path: "/"
-      interval: "30s"
-
-portainer-tls:
-  rootCAs:
-    - /certs/root_ca.crt
-  serverName: portainer.home.com
-
-tls:
-  certificates:
-    - certFile: /certs/fullchain_portainer.crt
-      keyFile: /certs/portainer.key
+  services:
+    portainer-service:
+      loadBalancer:
+        serversTransport: portainer-tls
+        servers:
+          - url: "https://192.168.1.126:9443"
+        passHostHeader: true
+        healthCheck:
+          path: "/"
+          interval: "30s"
+  
+  middlewares:
+    authentik:
+      forwardAuth:
+        address: "http://authentik_proxy:9000/outpost.goauthentik.io/auth/traefik"
+        trustForwardHeader: true
+        authResponseHeadersRegex: "^X-Authentik-"
+        authResponseHeaders:
+          - X-Authentik-Username
+          - X-Authentik-Groups
+          - X-Authentik-Entitlements
+          - X-Authentik-Email
+          - X-Authentik-Name
+          - X-Authentik-Uid
+          - X-Authentik-Jwt
+          - X-Authentik-Meta-Jwks
+          - X-Authentik-Meta-Outpost
+          - X-Authentik-Meta-Provider
+          - X-Authentik-Meta-App
+          - X-Authentik-Meta-Version
 ```
 
 This allows services to be accessed via clean FQDNs without exposing backend ports.
