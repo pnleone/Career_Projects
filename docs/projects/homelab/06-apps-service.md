@@ -73,7 +73,7 @@ This service architecture mirrors production enterprise environments, providing 
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/dns.png" alt="DNS Architecture Diagram">
+      <img src="/Career_Projects/assets/diagrams/dns-overview.png" alt="DNS Architecture Diagram">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Three-Tier DNS Architecture
       </figcaption>
