@@ -130,7 +130,6 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 
 Centralized management solution to oversee and manage multiple nodes and clusters of Proxmox-based virtual environments.
 
-![Proxmox Datacenter Manager Screenshot](/Career_Projects/assets/screenshots/dcm.png)
 <figure>
       <img src="/Career_Projects/assets/screenshots/dcm.png" alt="Proxmox Datacenter Manager Screenshot">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
@@ -1054,7 +1053,7 @@ spec:
   storageClassName: local-path
 ```
 
-##### Postgres Deployment
+#### Postgres Deployment
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -1469,5 +1468,5 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 - **[Automation and IaC](/Career_Projects/projects/homelab/05-auto-iac/)**
 - **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
-- **[Observability and Response, Part 2](/Career_Projects/projects/homelab/07-vis-response-pt2/)**
+- **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
 

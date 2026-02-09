@@ -909,5 +909,5 @@ Total Recovery Time: <2 hours (automated after initial setup)
 - **[Automation and IaC](/Career_Projects/projects/homelab/05-auto-iac/)**
 - **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
-- **[Observability and Response, Part 2](/Career_Projects/projects/homelab/07-vis-response-pt2/)**
+- **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
 
