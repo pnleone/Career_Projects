@@ -810,7 +810,7 @@ The Checkmk container communicates with monitored hosts using a mix of native Ch
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/misc/pulse-logo.png" alt="Pulse">
+      <img src="/Career_Projects/assets/diagrams/pulse.png" alt="Pulse">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Pulse
       </figcaption>
@@ -896,21 +896,8 @@ Summary of current alerts, configured thresholds, notifications, schedule and al
 
 ### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>NetAlertX operates as a nested Docker container on a LXC host using host networking mode for comprehensive network discovery. The deployment provides continuous asset inventory, device profiling, and network topology mapping across production and lab segments (Prod_LAN, Lab_LAN1, Lab_LAN2, Ext_LAN).</p>
-    <p>The container leverages multiple NIC interfaces on the host for passive and active scanning while maintaining isolation from sensitive ISO_LAN segments.</p>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/netalertx-logo.png" alt="NetAlertX">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        NetAlertX
-      </figcaption>
-    </figure>
-  </div>
-</div>
+<p>NetAlertX operates as a nested Docker container on a LXC host using host networking mode for comprehensive network discovery. The deployment provides continuous asset inventory, device profiling, and network topology mapping across production and lab segments (Prod_LAN, Lab_LAN1, Lab_LAN2, Ext_LAN).</p>
+<p>The container leverages multiple NIC interfaces on the host for passive and active scanning while maintaining isolation from sensitive ISO_LAN segments.</p>
 
 ### Security Impact
 
@@ -940,13 +927,6 @@ Enterprise SOCs require accurate asset inventories for vulnerability management,
 - **Exclusions:** 10.20.0.0/24 and 192.168.3.0/24 (ISO_LAN segments) - intentionally excluded from scanning
 - **Alert Triggers:** New device detection, unknown MAC addresses, duplicate IP assignments, offline device recovery
 - **Integration:** Webhook notifications to SOC alerting pipeline; asset data exported for vulnerability correlation
-
-<figure>
-  <img src="/Career_Projects/assets/screenshots/netalertx-connected-devices.png" alt="NetAlertX Connected Devices">
-  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-    NetAlertX Connected Devices
-  </figcaption>
-</figure>
 
 <figure>
   <img src="/Career_Projects/assets/screenshots/netalertx-vms.png" alt="NetAlertX Virtual Machines">
@@ -1011,21 +991,8 @@ Modern SOC/NOC operations rely on multi-channel alerting to ensure rapid respons
 
 ### Discord Private Server - Centralized Notification Hub
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>A private Discord server acts as the real-time alerting hub for the entire environment. Each monitored service has its own dedicated channel, enabling noise isolation, targeted triage, and clear operational separation.</p>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/discord-logo.png" alt="Discord">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Discord
-      </figcaption>
-    </figure>
-  </div>
-</div>
-
+A private Discord server acts as the real-time alerting hub for the entire environment. Each monitored service has its own dedicated channel, enabling noise isolation, targeted triage, and clear operational separation.
+  
 **Security Impact:**
 
 - Instant visibility into outages, anomalies, and security alerts
@@ -1071,30 +1038,11 @@ Discord offers low-latency notifications, webhook integration, and structured ch
 | #authentik | Authentik | Auth flow errors/alarms, auth failures |
 | #windowsupdates | Windows VMs | Python script completion |
 
-<figure>
-  <img src="/Career_Projects/assets/screenshots/discord-channels.png" alt="Discord Channel Structure">
-  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-    Discord Channel Structure
-  </figcaption>
-</figure>
-
 ### SMTP Relay - Gmail-Backed Email Alerting
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>Gmail relay to dedicated email address, shad0w1t1a6@gmail.com.</p>
-    <p>An msmtp container provides a secure SMTP relay to Gmail using STARTTLS and application-specific passwords. Internal services send alerts via standard SMTP on port 25, and msmtp handles encrypted delivery to the dedicated alert mailbox.</p>
-  </div>
 
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/gmail-logo.png" alt="Gmail">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Gmail SMTP Relay
-      </figcaption>
-    </figure>
-  </div>
-</div>
+<p>Gmail relay to dedicated email address, shad0w1t1a6@gmail.com.</p>
+<p>An msmtp container provides a secure SMTP relay to Gmail using STARTTLS and application-specific passwords. Internal services send alerts via standard SMTP on port 25, and msmtp handles encrypted delivery to the dedicated alert mailbox.</p>
 
 **Configured Services:**
 
@@ -1120,20 +1068,7 @@ Email remains a universal, durable alerting mechanism. This relay demonstrates s
 
 ### Cloudflare Email Routing
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>Cloudflare Email Routing provides alias-based forwarding for individual services, enabling clean separation of alert sources and simplified identity management. Each service is assigned a unique alias for traceability.</p>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/misc/cloudflare-logo.png" alt="Cloudflare">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Cloudflare Email Routing
-      </figcaption>
-    </figure>
-  </div>
-</div>
+<p>Cloudflare Email Routing provides alias-based forwarding for individual services, enabling clean separation of alert sources and simplified identity management. Each service is assigned a unique alias for traceability.</p>
 
 **Security Impact:**
 
