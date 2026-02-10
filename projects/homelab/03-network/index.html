@@ -1,0 +1,5063 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../02-platform/">
+      
+      
+        <link rel="next" href="../04-iam-secrets/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Network Security and Remote Access - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#network-security-privacy-and-remote-access-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network Security and Remote Access
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-network-security-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Network Security Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-network-firewallrouter-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Network Firewall/Router Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Network Firewall/Router Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-high-availability-pfsense-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 High-Availability pfSense Cluster
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 High-Availability pfSense Cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-enhancement-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Enhancement Packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-opnsense-microsegmentation-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 OPNsense Microsegmentation Firewall
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 OPNsense Microsegmentation Firewall">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-fortinet-fortigate-30d-appliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Fortinet FortiGate 30D Appliance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Fortinet FortiGate 30D Appliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Highlights
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-firewall-policy-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Firewall Policy Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Firewall Policy Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policy-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Policy Framework
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Policy Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directional-rule-placement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directional Rule Placement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alias-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alias Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging-and-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging and Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ruleset-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ruleset Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pfsense-rule-configuration-prod_lan-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pfSense Rule Configuration (Prod_LAN Interface)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vpn-floating-rule-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VPN Floating Rule Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pfsense-log-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pfSense Log Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opnsense-rule-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPNsense Rule Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fortigate-rule-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FortiGate Rule Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firewall-rule-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firewall Rule Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-intrusion-detectionprevention-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Intrusion Detection/Prevention Solutions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Intrusion Detection/Prevention Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-suricata-intrusion-detectionprevention-system-on-pfsense" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Suricata Intrusion Detection/Prevention System on pfSense
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Suricata Intrusion Detection/Prevention System on pfSense">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-snort-intrusion-detectionprevention-system-on-pfsense" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Snort Intrusion Detection/Prevention System on pfSense
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Snort Intrusion Detection/Prevention System on pfSense">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-custom-ruleset-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Custom Ruleset Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Custom Ruleset Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule Categories
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-segments-security-posture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Segments &amp; Security Posture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prod_lan-1921681024" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prod_LAN (192.168.1.0/24)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab_lan1-192168100024" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab_LAN1 (192.168.100.0/24)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab_lan2-192168200024" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab_LAN2 (192.168.200.0/24)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ext_landmz-1921682024" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EXT_LAN/DMZ (192.168.2.0/24)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-engineering-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule Engineering Methodology
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rule Engineering Methodology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detection-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detection Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule Performance Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#false-positive-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        False Positive Mitigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rule-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rule Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rule Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-linux-security-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH / Linux Security Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconnaissance-scanning-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconnaissance &amp; Scanning Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lateral-movement-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lateral Movement Prevention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smb-netbios-hygiene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SMB / NetBIOS Hygiene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-rule-breakdown-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Rule Breakdown Example:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Rule Breakdown Example:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-brute-force-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Brute Force Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field Breakdown:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operational-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suricata-event-log-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suricata event log example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-crowdsec-behavioral-threat-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 CrowdSec Behavioral Threat Intelligence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 CrowdSec Behavioral Threat Intelligence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-multi-engine-intrusion-detection-and-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Multi-Engine Intrusion Detection and Prevention
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Multi-Engine Intrusion Detection and Prevention">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#layered-idsips-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layered IDS/IPS Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-safeline-web-application-firewall-waf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. SafeLine Web Application Firewall (WAF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. SafeLine Web Application Firewall (WAF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#active-protection-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Active Protection Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-security-control-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Security Control Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Security Control Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-control-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Control Framework
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Control Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network-security-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Security Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-and-response-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detection and Response Capabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-operational-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Operational Resilience
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Operational Resilience">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operational-resilience-and-high-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational Resilience and High Availability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operational Resilience and High Availability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redundancy-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redundancy Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-scenarios-and-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Failure Scenarios and Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-and-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring and Alerting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-and-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup and Recovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-use-cases-and-deployment-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Use Cases and Deployment Scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Use Cases and Deployment Scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#practical-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-1-privacy-enhanced-web-browsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 1: Privacy-Enhanced Web Browsing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-2-remote-lab-access-while-traveling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 2: Remote Lab Access While Traveling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-3-threat-intelligence-sharing-and-automated-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 3: Threat Intelligence Sharing and Automated Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-4-multi-region-content-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 4: Multi-Region Content Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-threat-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Threat Modeling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Threat Modeling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threat-landscape-and-mitigation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threat Landscape and Mitigation Strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Threat Landscape and Mitigation Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threats-addressed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threats Addressed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-surface-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attack Surface Reduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-privacy-and-remote-access-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Privacy and Remote Access Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Privacy and Remote Access Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#91-private-internet-access-pia-encrypted-egress-vpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Private Internet Access (PIA) Encrypted Egress VPN
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1 Private Internet Access (PIA) Encrypted Egress VPN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-tailscale-zero-trust-remote-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Tailscale Zero Trust Remote Access
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.2 Tailscale Zero Trust Remote Access">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Notes:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-cloudflare-secure-service-exposure-and-dns-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Cloudflare Secure Service Exposure and DNS Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.3 Cloudflare Secure Service Exposure and DNS Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-domain-and-dns-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Domain and DNS Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-storage-and-file-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object Storage and File Sharing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-service-exposure-via-cloudflare-tunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Service Exposure via Cloudflare Tunnel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-tor-browser-anonymous-outbound-browsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Tor Browser Anonymous Outbound Browsing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4 Tor Browser Anonymous Outbound Browsing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-layered-vpn-and-zero-trust-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Layered VPN and Zero-Trust Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operational-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational Resilience
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Scenarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-custom-ipsids-ruleset-additional-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Custom IPS/IDS Ruleset – Additional Detail
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Custom IPS/IDS Ruleset – Additional Detail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-linux-security-controls_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH / Linux Security Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-brute-force-detection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Brute Force Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-segment-ssh-policy-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross Segment SSH Policy Enforcement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privilege-escalation-keyword-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privilege Escalation Keyword Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconnaissance-scanning-detection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconnaissance &amp; Scanning Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nmap-os-detection-signature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nmap OS Detection Signature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavioral-port-sweep-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavioral Port Sweep Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lateral-movement-prevention_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lateral Movement Prevention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-risk-port-access-attempt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High Risk Port Access Attempt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isolation-network-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Isolation Network Enforcement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smb-netbios-hygiene_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SMB / NetBIOS Hygiene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#netbios-session-service-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NetBIOS Session Service Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smbv1-protocol-negotiation-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SMBv1 Protocol Negotiation Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-security-homelab-section-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Security Homelab Section Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="network-security-privacy-and-remote-access-architecture">Network Security, Privacy and Remote Access Architecture<a class="headerlink" href="#network-security-privacy-and-remote-access-architecture" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong> <br />
+Version: 1.0<br />
+Last Updated: January 307, 2026<br />
+Owner: Paul Leone </p>
+<hr />
+<h2 id="1-network-security-architecture">1. Network Security Architecture<a class="headerlink" href="#1-network-security-architecture" title="Permanent link">&para;</a></h2>
+<p>A defense-in-depth edge security architecture implements multiple layers of inspection, filtering, and threat mitigation across network perimeter, application layer, and endpoint boundaries. This multi-engine security stack combines virtualized firewalls (pfSense/OPNsense), intrusion detection/prevention systems (Suricata/Snort), behavioral threat intelligence (CrowdSec), application-layer filtering (SafeLine WAF), and encrypted tunneling (VPN/Zero-Trust access) to provide enterprise-grade network protection.</p>
+<p><strong>Security Impact:</strong> Multi-layer inspection detects threats missed by single-engine solutions; behavioral analysis identifies zero-day attacks before signature updates; high-availability clustering ensures uninterrupted protection during maintenance; centralized logging enables threat correlation across all security layers; encrypted tunneling protects data in transit and provides secure remote access without exposing internal infrastructure.</p>
+<p><strong>Deployment Rationale:</strong> Enterprise networks deploy layered security controls because attackers increasingly use evasion techniques (encryption, polymorphic malware, living-off-the-land tactics) that bypass signature-based detection. This architecture mirrors Fortune 500 security operations centers (SOCs) where multiple detection engines (IDS/IPS, behavior analytics, threat intelligence feeds) provide overlapping coverage. High-availability firewall clustering reflects production network designs where downtime directly impacts business operations. The implementation demonstrates understanding of OSI layer security (Layer 3/4 firewalls, Layer 7 WAF), threat detection methodologies (signature vs. behavioral), and modern zero-trust access patterns.</p>
+<p><strong>Architecture Principles Alignment:</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Five security layers (firewall ACLs → IDS/IPS → behavioral detection → WAF → endpoint protection) ensure single-layer bypass doesn't compromise entire network</li>
+<li><strong>Secure by Design:</strong> Default-deny firewall policies; encrypted VPN tunnels for remote access; automatic security updates for threat signatures</li>
+<li><strong>Zero Trust:</strong> Identity verification required for all remote access (Tailscale authentication); no implicit trust based on network location; microsegmentation isolates compromised systems</li>
+</ul>
+<hr />
+<h2 id="2-network-firewallrouter-architecture">2. Network Firewall/Router Architecture<a class="headerlink" href="#2-network-firewallrouter-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="21-high-availability-pfsense-cluster">2.1 High-Availability pfSense Cluster<a class="headerlink" href="#21-high-availability-pfsense-cluster" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview">Deployment Overview<a class="headerlink" href="#deployment-overview" title="Permanent link">&para;</a></h4>
+<p>Two pfSense virtual machines operate in an active/passive high‑availability configuration using CARP (Common Address Redundancy Protocol). The primary node synchronizes all configuration and state information to the secondary via a dedicated SYNC interface. In the event of failure, CARP provides sub‑second failover with minimal packet loss, ensuring uninterrupted perimeter protection. Both nodes enforce default‑deny firewall policies, NAT rules, VPN termination, and IDS/IPS inspection.</p>
+<h4 id="security-impact">Security Impact<a class="headerlink" href="#security-impact" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Continuous perimeter protection even during maintenance or node failure</li>
+<li>Stateful failover preserves active connections, preventing session drops</li>
+<li>Inline Suricata/Snort inspection blocks malicious traffic at the edge</li>
+<li>Centralized logging feeds Splunk for correlation with internal telemetry</li>
+<li>VPN termination provides encrypted remote access without exposing internal networks</li>
+</ul>
+<h4 id="deployment-rationale">Deployment Rationale<a class="headerlink" href="#deployment-rationale" title="Permanent link">&para;</a></h4>
+<p>High‑availability firewalls are standard in enterprise networks where downtime directly impacts business operations. This deployment mirrors production‑grade designs using redundant nodes, synchronized configuration, and automated failover. It demonstrates proficiency with CARP, state synchronization, multi‑WAN routing, and perimeter‑level security enforcement.</p>
+<h4 id="architecture-principles-alignment">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Redundant perimeter firewalls ensure continuous enforcement of ACLs, NAT, and IDS/IPS<br />
+<strong>Secure by Design:</strong> Default‑deny rules, TLS‑secured VPNs, and synchronized configurations<br />
+<strong>Zero Trust:</strong> Remote access requires identity verification; no implicit trust in network location</p>
+<h4 id="cluster-configuration">Cluster Configuration<a class="headerlink" href="#cluster-configuration" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Node Role</th>
+<th>Management IP</th>
+<th>CARP VIP</th>
+<th>State Sync</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pfSense-Primary</td>
+<td>192.168.100.2/24</td>
+<td>192.168.100.1/24</td>
+<td>Master</td>
+</tr>
+<tr>
+<td>pfSense-Secondary</td>
+<td>192.168.100.3/24</td>
+<td>192.168.100.1/24</td>
+<td>Backup</td>
+</tr>
+<tr>
+<td>Sync Network</td>
+<td>10.10.0.0/24</td>
+<td>Dedicated</td>
+<td>xmlrpc</td>
+</tr>
+</tbody>
+</table>
+<h4 id="interface-design">Interface Design<a class="headerlink" href="#interface-design" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Physical/Virtual</th>
+<th>Network</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prod_LAN</td>
+<td>vtnet0</td>
+<td>192.168.1.253/24</td>
+<td>Prod LAN hosts, Upstream gateway to ISP router</td>
+</tr>
+<tr>
+<td>Lab_LAN1</td>
+<td>vtnet1 (bridge)</td>
+<td>192.168.100.2/24</td>
+<td>Primary lab network</td>
+</tr>
+<tr>
+<td>SYNC</td>
+<td>vtnet2</td>
+<td>10.10.0.2/24</td>
+<td>HA state synchronization</td>
+</tr>
+<tr>
+<td>PIA_NY</td>
+<td>ovpnc1</td>
+<td>(Dynamic)</td>
+<td>VPN egress - New York endpoint</td>
+</tr>
+<tr>
+<td>PIA_CA_MONT</td>
+<td>ovpnc2</td>
+<td>(Dynamic)</td>
+<td>VPN egress - Montreal endpoint</td>
+</tr>
+<tr>
+<td>TSCALE</td>
+<td>tailscale0</td>
+<td>(Dynamic /32)</td>
+<td>WireGuard mesh VPN for remote access</td>
+</tr>
+<tr>
+<td>Lab_LAN2</td>
+<td>vtnet3</td>
+<td>192.168.200.2/24</td>
+<td>Kubernetes cluster network</td>
+</tr>
+<tr>
+<td>EXT_LAN</td>
+<td>vtnet4</td>
+<td>192.168.2.2/24</td>
+<td>External lab services (DMZ-style)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Traffic Flow Architecture:</strong></p>
+<ul>
+<li>Default Route: LAN traffic (192.168.100.0/24) → PIA VPN → Internet</li>
+<li>Policy-Based Routing: Selective traffic bypass for latency-sensitive apps</li>
+<li>VPN Failover: Automatic failover between PIA_NY and PIA_CA_MONT on tunnel failure</li>
+<li>Kill Switch: Floating rule blocks LAN egress if all VPN tunnels are down</li>
+</ul>
+<h4 id="security-enhancement-packages">Security Enhancement Packages<a class="headerlink" href="#security-enhancement-packages" title="Permanent link">&para;</a></h4>
+<p><strong>pfBlockerNG - IP Reputation and Geofencing</strong></p>
+<p>Purpose: Network-layer blocking of malicious IPs and geographic regions</p>
+<p>Configuration:</p>
+<ul>
+<li>Blocklists: 15+ curated feeds (Emerging Threats, Spamhaus, Abuse.ch)</li>
+<li>Update Frequency: Hourly refresh of threat intelligence feeds</li>
+<li>Geo-blocking: Block inbound from high-risk countries (configurable whitelist)</li>
+<li>Integration: Feeds alias tables used in firewall rules</li>
+<li>Use Case: Prevent C2 callbacks, block known botnets, reduce attack surface</li>
+</ul>
+<p><strong>Suricata IDS/IPS</strong></p>
+<p>Deployment: Active on all internal LAN interfaces (both pfSense nodes)<br />
+Mode: Inline IPS with legacy blocking (balances performance vs. protection)</p>
+<p>Rulesets:</p>
+<ul>
+<li>Emerging Threats Open (ET Open) - 40,000+ signatures</li>
+<li>Suricata Community Rules</li>
+<li>Custom local rules for lab-specific threat patterns</li>
+</ul>
+<p>Configuration:</p>
+<ul>
+<li>Action: Drop + Alert on HIGH/CRITICAL severity events</li>
+<li>Performance: Disabled CPU-intensive rules for lab environment constraints</li>
+<li>Logging: JSON output forwarded to Splunk and Elastic via syslog-ng</li>
+</ul>
+<p>Use Case: Real-time detection of exploits, malware, and lateral movement attempts</p>
+<p><strong>Snort IDS/IPS</strong></p>
+<p>Deployment: Active on PIA VPN interfaces (monitors encrypted tunnel egress)<br />
+Mode: LEgacy (IDS) mode for outbound traffic inspection</p>
+<p>Rulesets:</p>
+<ul>
+<li>Snort Community Rules</li>
+<li>Talos Intelligence Registered User Rules</li>
+<li>Custom rules for data exfiltration patterns</li>
+</ul>
+<p>Rationale: While Suricata monitors north-south and east-west traffic, Snort provides additional coverage on VPN tunnels where traffic exits the lab. This dual-engine approach catches threats that might evade a single detection system.</p>
+<p><strong>CrowdSec - Behavioral Threat Intelligence</strong></p>
+<p>Architecture: Remediation Bouncer receives block decisions via LAPI, enforces at firewall</p>
+<hr />
+<h3 id="22-opnsense-microsegmentation-firewall">2.2 OPNsense Microsegmentation Firewall<a class="headerlink" href="#22-opnsense-microsegmentation-firewall" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_1">Deployment Overview<a class="headerlink" href="#deployment-overview_1" title="Permanent link">&para;</a></h4>
+<p>A standalone OPNsense VM provides an additional security boundary for sensitive lab assets. Positioned behind the pfSense perimeter, it enforces microsegmentation policies, isolates high‑value systems, and applies independent firewall rules, IDS/IPS policies, and access controls.</p>
+<h4 id="security-impact_1">Security Impact<a class="headerlink" href="#security-impact_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Prevents lateral movement into sensitive subnets</li>
+<li>Independent policy engine ensures compromise of pfSense does not expose protected assets</li>
+<li>Additional IDS/IPS layer increases detection coverage</li>
+<li>Segmented logging improves visibility into east‑west traffic</li>
+</ul>
+<h4 id="deployment-rationale_1">Deployment Rationale<a class="headerlink" href="#deployment-rationale_1" title="Permanent link">&para;</a></h4>
+<p>Microsegmentation is a core zero‑trust principle used in enterprise environments to isolate critical systems. Deploying OPNsense as a "firewall within a firewall" demonstrates layered security design, redundancy, and compartmentalization of trust domains.</p>
+<h4 id="architecture-principles-alignment_1">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_1" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Independent firewall layer behind pfSense perimeter<br />
+<strong>Secure by Design:</strong> Segmented networks, isolated rule sets, and dedicated IDS/IPS<br />
+<strong>Zero Trust:</strong> No internal subnet is implicitly trusted; access requires explicit policy</p>
+<h4 id="interface-configuration">Interface Configuration<a class="headerlink" href="#interface-configuration" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Interface Name</th>
+<th>Type</th>
+<th>Network</th>
+<th>Security Zone</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PROD_LAN</td>
+<td>Physical (eth0)</td>
+<td>192.168.1.0/24</td>
+<td>Trusted</td>
+<td>Uplink to production network; allows controlled ingress from ISO_LAN</td>
+</tr>
+<tr>
+<td>ISO_LAN</td>
+<td>Virtual (OPTx)</td>
+<td>10.20.0.0/24</td>
+<td>Restricted</td>
+<td>Isolated segment for sensitive hosts; tightly scoped egress rules</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Protected Assets (ISO_LAN):</strong></p>
+<ul>
+<li>Vulnerability management scanners (OpenVAS, Nessus)</li>
+<li>Configuration management (Ansible control node)</li>
+<li>Security logging infrastructure (Splunk forwarder)</li>
+<li>Certificate authority and PKI services</li>
+<li>Backup repositories with encrypted data</li>
+</ul>
+<p><strong>Firewall Policy Philosophy:</strong></p>
+<p>Default Deny with Explicit Allow - Zero trust model where all traffic is blocked unless explicitly permitted by rule. This inverts traditional firewall logic and ensures unknown traffic patterns are automatically rejected.</p>
+<hr />
+<h3 id="23-fortinet-fortigate-30d-appliance">2.3 Fortinet FortiGate 30D Appliance<a class="headerlink" href="#23-fortinet-fortigate-30d-appliance" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_2">Deployment Overview<a class="headerlink" href="#deployment-overview_2" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The FortiGate 30D serves as a dedicated microsegmentation firewall protecting the management VLAN (192.168.3.0/24). Operating in unlicensed mode as an end-of-support device, it provides basic Layer 3/4 firewall functionality, SSL VPN access, and serves as a hands-on platform for FortiOS CLI and GUI administration. Despite lacking current threat intelligence updates, the appliance demonstrates enterprise firewall concepts including policy-based routing, SSL VPN configuration, and interface-based security zones.
+    </p>
+  </div>
+
+  <figure>
+      <img src="/Career_Projects/assets/misc/fortinet.png" alt="FortiGate">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        FortiGate Interface Configuration.
+      </figcaption>
+    </figure>
+</div>
+
+<h4 id="security-impact_2">Security Impact<a class="headerlink" href="#security-impact_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enforces strict access controls to management subnet (VLAN 3)</li>
+<li>SSL VPN provides encrypted remote access to administrative interfaces</li>
+<li>Policy-based firewall rules segment management traffic from production workloads</li>
+<li>Hands-on experience with enterprise-grade firewall appliance management</li>
+<li>Demonstrates defense-in-depth by adding physical firewall layer behind virtual pfSense/OPNsense</li>
+</ul>
+<h4 id="deployment-rationale_2">Deployment Rationale<a class="headerlink" href="#deployment-rationale_2" title="Permanent link">&para;</a></h4>
+<p>Fortinet holds significant market share in enterprise network security, making FortiOS proficiency valuable for security roles. Operating an end-of-life appliance demonstrates understanding of legacy system risk management, compensating controls deployment, and resource-constrained security operations. The appliance serves educational purposes for Fortinet NSE certification preparation and FortiOS command-line interface skill development.</p>
+<h4 id="architecture-principles-alignment_2">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Physical appliance provides hardware-based firewall enforcement independent of virtual infrastructure</li>
+<li><strong>Secure by Design:</strong> Default-deny firewall policies; SSL VPN requires certificate-based authentication</li>
+<li><strong>Zero Trust:</strong> Management VLAN access requires explicit firewall rules; no implicit trust between zones</li>
+</ul>
+<p><strong>Diagram Placeholder: FortiGate Dashboard Screenshot</strong></p>
+<h4 id="configuration-highlights">Configuration Highlights<a class="headerlink" href="#configuration-highlights" title="Permanent link">&para;</a></h4>
+<p><strong>SSL VPN Configuration:</strong></p>
+<ul>
+<li>Certificate-based authentication for remote administrative access</li>
+<li>Split-tunnel routing directs only management traffic through VPN</li>
+<li>FortiClient compatibility for Windows, macOS, Linux endpoints</li>
+<li>Per-user access policies restrict VPN access to authorized administrators</li>
+</ul>
+<p><strong>Firewall Policy Architecture (VLAN 3 Protection):</strong></p>
+<ul>
+<li>Default-deny ingress from all external zones</li>
+<li>Explicit allow rules for SSH (port 22), HTTPS (port 443) from trusted source IPs</li>
+<li>Stateful inspection tracks connection state for allowed flows</li>
+<li>Logging enabled for all policy hits to support forensic analysis</li>
+</ul>
+<p><strong>Interface Configuration:</strong></p>
+<ul>
+<li>Internal (port1): 192.168.3.1/24 - Management VLAN gateway</li>
+<li>External (port2): 192.168.1.x/24 - Uplink to production network</li>
+<li>DMZ (port3): Reserved for future isolated services deployment</li>
+</ul>
+<figure class="full-content">
+      <img src="/Career_Projects/assets/screenshots/fortigate-int.png" alt="FortiGate Address/Device Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        FortiGate Address/Device Configuration.
+      </figcaption>
+    </figure>
+
+<figure>
+      <img src="/Career_Projects/assets/screenshots/fortigate-vpn.png" alt="FortiGate VPN Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        FortiGate VPN Configuration.
+      </figcaption>
+    </figure>
+
+<p><strong>Limitations and Compensating Controls</strong></p>
+<p>Due to end-of-support status:</p>
+<ul>
+<li>No current threat intelligence updates - Compensated by pfSense Suricata/Snort IDS/IPS</li>
+<li>No firmware updates available - Mitigated by restricting management VLAN exposure</li>
+<li>Limited UTM features - Supplemented by pfBlockerNG, CrowdSec, SafeLine WAF</li>
+<li>Educational use only - Not relied upon for production-critical security enforcement</li>
+</ul>
+<p><strong>Use Cases</strong></p>
+<ul>
+<li>Fortinet NSE certification lab environment</li>
+<li>FortiOS CLI command practice and automation scripting</li>
+<li>SSL VPN troubleshooting and configuration testing</li>
+<li>Firewall rule optimization and policy analysis</li>
+<li>Vendor-neutral firewall concepts demonstration</li>
+</ul>
+<hr />
+<h3 id="24-firewall-policy-architecture">2.4 Firewall Policy Architecture<a class="headerlink" href="#24-firewall-policy-architecture" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_3">Deployment Overview<a class="headerlink" href="#deployment-overview_3" title="Permanent link">&para;</a></h4>
+<p>The lab implements a three-platform firewall architecture (pfSense, OPNsense, FortiGate) using zone-based segmentation with zero-trust principles. Each VLAN operates as an isolated security zone with explicit allow rules—no implicit trust between networks. Rules are deployed directionally on ingress interfaces for predictable packet flow and consistent state management across platforms.</p>
+<p><strong>Security Impact:</strong></p>
+<ul>
+<li>Zone-based segmentation prevents lateral movement between network tiers</li>
+<li>Default-deny policies block unauthorized traffic at zone boundaries</li>
+<li>Alias-driven rule definitions enable rapid security updates without rule rewrites</li>
+<li>Bidirectional state validation ensures return traffic authorization</li>
+<li>Comprehensive logging feeds SOC visibility and threat correlation</li>
+</ul>
+<p><strong>Deployment Rationale:</strong></p>
+<p>Enterprise networks rely on zone-based firewalls to enforce trust boundaries between network segments (DMZ, production, management). This architecture demonstrates production firewall design patterns: ingress-based rule placement, object-based policy definitions, and platform-agnostic security controls that survive hardware migrations.</p>
+<p><strong>Architecture Principles Alignment:</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Multi-platform inspection layers with independent policy engines</li>
+<li><strong>Secure by Design:</strong> Default-deny baseline with explicit allow rules; automated threat feed integration</li>
+<li><strong>Zero Trust:</strong> Cross-zone traffic requires explicit authorization regardless of source network</li>
+</ul>
+<h3 id="policy-framework">Policy Framework<a class="headerlink" href="#policy-framework" title="Permanent link">&para;</a></h3>
+<h4 id="directional-rule-placement">Directional Rule Placement<a class="headerlink" href="#directional-rule-placement" title="Permanent link">&para;</a></h4>
+<p>Rules apply on the ingress interface where traffic enters the firewall. This ensures deterministic packet flow, predictable state table creation, and consistent logging behavior across pfSense, OPNsense, and FortiGate platforms.</p>
+<h4 id="alias-architecture">Alias Architecture<a class="headerlink" href="#alias-architecture" title="Permanent link">&para;</a></h4>
+<p>Host, network, and service definitions use reusable aliases:</p>
+<ul>
+<li><strong>Host Groups:</strong> WEB_SERVERS, SOC_APPS, K3S_NODES, ADMIN_HOSTS, DNS_SERVERS, PROXY_HOST</li>
+<li><strong>Network Groups:</strong> INTERNAL_SUBNETS, ISO_SUBNETS, LAB_NETWORKS</li>
+<li><strong>Service Groups:</strong> WEB_PORTS, SOC_PORTS, K3S_PORTS, ADMIN_PORTS, WAZUH_PORTS</li>
+</ul>
+<p>Aliases enable single-point updates—adding a new web server requires updating WEB_SERVERS alias, not 15+ individual rules.</p>
+<h4 id="logging-and-detection">Logging and Detection<a class="headerlink" href="#logging-and-detection" title="Permanent link">&para;</a></h4>
+<p>All security-relevant rules generate logs tagged for SIEM ingestion (Splunk/Elastic/Wazuh). Suricata/Snort rules normalize alerts across platforms for consistent threat detection and correlation.</p>
+<h3 id="ruleset-summary">Ruleset Summary<a class="headerlink" href="#ruleset-summary" title="Permanent link">&para;</a></h3>
+<p><strong>Total Rules Deployed:</strong> 133 rules across three platforms</p>
+<p><strong>Rule Distribution by Platform:</strong></p>
+<ul>
+<li><strong>FortiGate (Management Firewall):</strong> 16 rules protecting Management and ISO_LAN2 192.168.3.0/24 subnet</li>
+<li><strong>OPNsense (Microsegmentation):</strong> 23 rules isolating sensitive ISO_LAN (10.20.0.0/24)</li>
+<li><strong>pfSense (Edge/Core):</strong> 94 rules managing perimeter, inter-VLAN routing, VPN policy</li>
+</ul>
+<p><strong>Rule Categories:</strong></p>
+<ul>
+<li><strong>Cross-Zone Access:</strong> 78 rules (59%) - traffic between security zones</li>
+<li><strong>Security Controls:</strong> 18 rules (14%) - CrowdSec blocks, bogon filters, CARP HA</li>
+<li><strong>Diagnostics:</strong> 12 rules (9%) - ICMP/traceroute for network troubleshooting</li>
+<li><strong>Management Access:</strong> 15 rules (11%) - administrative SSH/HTTPS to infrastructure</li>
+<li><strong>Monitoring/EDR:</strong> 10 rules (8%) - Wazuh agents, Prometheus metrics, log forwarding</li>
+</ul>
+<p><strong>Representative Rules:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Source</th>
+<th>Destination</th>
+<th>Service</th>
+<th>Purpose</th>
+<th>Logged</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FortiGate</td>
+<td>ISO_LAN</td>
+<td>DNS_Servers</td>
+<td>53/UDP</td>
+<td>DNS resolution for isolated subnet</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>FortiGate</td>
+<td>ISO_LAN</td>
+<td>Wazuh_Server</td>
+<td>1514/UDP, 1515/TCP</td>
+<td>EDR agent → manager communication</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>OPNsense</td>
+<td>Admin_Hosts</td>
+<td>ISO_LAN</td>
+<td>22, 80, 443, 8080</td>
+<td>Administrative access to isolated hosts</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>pfSense</td>
+<td>Ext_LAN</td>
+<td>Web_Server</td>
+<td>80, 443, 8080</td>
+<td>DMZ access to internal web services</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>pfSense</td>
+<td>ANY</td>
+<td>crowdsec_blocklists</td>
+<td>ANY</td>
+<td>Drop traffic from behavioral threat intel</td>
+<td>No</td>
+</tr>
+<tr>
+<td>pfSense</td>
+<td>Lab_LAN2</td>
+<td>Elastic_Server</td>
+<td>8220, 9200, 5044</td>
+<td>Elastic Agent → Fleet Server enrollment</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Enforcement Highlights:</strong></p>
+<ul>
+<li><strong>CrowdSec Integration:</strong> 12 block rules across all platforms enforce behavioral threat intelligence</li>
+<li><strong>Bogon Filtering:</strong> Reserved/private IP ranges blocked on WAN-facing interfaces</li>
+<li><strong>Default Deny:</strong> Implicit deny-all rule terminates each interface ruleset</li>
+<li><strong>VPN Kill Switch:</strong> Floating rules block LAN egress when VPN tunnels fail</li>
+<li><strong>Geo-blocking:</strong> pfBlockerNG drops inbound connections from high-risk countries</li>
+</ul>
+<p><strong>Zone Trust Model:</strong>
+<div class="highlight"><pre><span></span><code>Trusted Zone (Prod_LAN) ←→ Restricted Zone (ISO_LAN)
+  ↓                              ↓
+Lab Zones (Lab_LAN1/2) ←→ DMZ (Ext_LAN)
+  ↓
+Internet (via VPN/direct routing)
+</code></pre></div></p>
+<p>Cross-zone traffic requires explicit firewall rules with service-level restrictions. No zone has blanket access to another—even administrative subnets require per-service authorization.</p>
+<h3 id="configuration-examples">Configuration Examples<a class="headerlink" href="#configuration-examples" title="Permanent link">&para;</a></h3>
+<h4 id="pfsense-rule-configuration-prod_lan-interface">pfSense Rule Configuration (Prod_LAN Interface)<a class="headerlink" href="#pfsense-rule-configuration-prod_lan-interface" title="Permanent link">&para;</a></h4>
+<figure class="image-large">
+      <img src="/Career_Projects/assets/screenshots/pfs-prod_LAN1.png" alt="pfSense Prod_LAN Rules">
+      <figcaption>pfSense Prod_LAN Interface Rules</figcaption>
+    </figure>
+
+<h4 id="vpn-floating-rule-configuration">VPN Floating Rule Configuration<a class="headerlink" href="#vpn-floating-rule-configuration" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      <strong>VPN Kill Switch Details:</strong>
+    </p>
+    <p>
+      This critical floating rule ensures that if the PIA VPN tunnel drops (failure, misconfiguration, or provider outage), traffic from LAN/LAN2 networks cannot egress through the unencrypted Verizon WAN connection. The rule triggers when the gateway is not one of the PIA interfaces, immediately blocking traffic to prevent IP leakage or unintended cleartext transmission.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/pfs-float.png" alt="VPN Kill Switch Rule">
+      <figcaption>pfSense VPN Kill Switch Floating Rule</figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="pfsense-log-examples">pfSense Log Examples<a class="headerlink" href="#pfsense-log-examples" title="Permanent link">&para;</a></h4>
+<figure>
+    <img src="/Career_Projects/assets/screenshots/pfs-log.png" alt="pfSense Firewall Logs">
+    <figcaption>pfSense Firewall Event Logs</figcaption>
+</figure>
+
+<h4 id="opnsense-rule-configuration">OPNsense Rule Configuration<a class="headerlink" href="#opnsense-rule-configuration" title="Permanent link">&para;</a></h4>
+<figure>
+    <img src="/Career_Projects/assets/screenshots/opn-rules.png" alt="pfSense Firewall Logs">
+    <figcaption>OPNsense Rule Configuration</figcaption>
+</figure>
+
+<h4 id="fortigate-rule-configuration">FortiGate Rule Configuration<a class="headerlink" href="#fortigate-rule-configuration" title="Permanent link">&para;</a></h4>
+<figure>
+    <img src="/Career_Projects/assets/screenshots/fortigate-rules.png" alt="Lab FW Rule Table">
+    <figcaption>FortiGate Rule Configuration</figcaption>
+</figure>
+
+<h3 id="firewall-rule-table">Firewall Rule Table<a class="headerlink" href="#firewall-rule-table" title="Permanent link">&para;</a></h3>
+<figure class="image-large">
+  <img src="/Career_Projects/assets/screenshots/fw-rule-table.png" alt="pfSense Firewall Logs">
+  <figcaption>Lab Firewall Rules Table (partial)</figcaption>
+</figure>
+
+<hr />
+<h2 id="3-intrusion-detectionprevention-solutions">3. Intrusion Detection/Prevention Solutions<a class="headerlink" href="#3-intrusion-detectionprevention-solutions" title="Permanent link">&para;</a></h2>
+<h3 id="31-suricata-intrusion-detectionprevention-system-on-pfsense">3.1 Suricata Intrusion Detection/Prevention System on pfSense<a class="headerlink" href="#31-suricata-intrusion-detectionprevention-system-on-pfsense" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_4">Deployment Overview<a class="headerlink" href="#deployment-overview_4" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      Each pfSense node runs Suricata in inline IPS mode, inspecting four internal LAN interfaces. Suricata performs deep packet inspection, signature‑based detection, and behavioral anomaly detection. Rule sets include Emerging Threats, custom local rules, and tuned signatures for lab‑specific traffic patterns.
+    </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/suricata-int.png" alt="Suricata Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Suricata IPS Configuration on pfSense.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_3">Security Impact<a class="headerlink" href="#security-impact_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Real‑time blocking of known attack signatures</li>
+<li>Deep packet inspection identifies malicious payloads and protocol anomalies</li>
+<li>Custom rules detect lab‑specific threats and reconnaissance</li>
+<li>Alerts forwarded to Splunk for centralized correlation</li>
+<li>Inline mode prevents malicious traffic before it reaches internal systems</li>
+</ul>
+<h4 id="deployment-rationale_3">Deployment Rationale<a class="headerlink" href="#deployment-rationale_3" title="Permanent link">&para;</a></h4>
+<p>Suricata is widely used in enterprise IDS/IPS deployments due to its performance, rule flexibility, and multi‑threaded architecture. Running Suricata inline on pfSense mirrors production edge security designs and demonstrates proficiency with rule tuning, packet inspection, and IPS enforcement.</p>
+<h4 id="architecture-principles-alignment_3">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_3" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> IDS/IPS layer reinforces firewall ACLs and WAF protections<br />
+<strong>Secure by Design:</strong> Inline blocking, updated rule feeds, and custom signatures<br />
+<strong>Zero Trust:</strong> All traffic inspected; no packet trusted without validation</p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/suricata-block.png" alt="Suricata Block List Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Suricata Block List Screenshot.
+      </figcaption>
+    </figure>
+
+<hr />
+<h3 id="32-snort-intrusion-detectionprevention-system-on-pfsense">3.2 Snort Intrusion Detection/Prevention System on pfSense<a class="headerlink" href="#32-snort-intrusion-detectionprevention-system-on-pfsense" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_5">Deployment Overview<a class="headerlink" href="#deployment-overview_5" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      Snort runs in legacy (IDS) mode on each pfSense node, monitoring PIA VPN interfaces for malicious traffic. This provides an additional detection engine specifically focused on encrypted or tunneled traffic paths.
+    </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/snort-int.png" alt="Snort Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Snort IPS Configuration on pfSense.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_4">Security Impact<a class="headerlink" href="#security-impact_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Detects threats traversing VPN tunnels</li>
+<li>Provides signature diversity alongside Suricata</li>
+<li>Alerts forwarded to Splunk for unified SOC visibility</li>
+</ul>
+<h4 id="deployment-rationale_4">Deployment Rationale<a class="headerlink" href="#deployment-rationale_4" title="Permanent link">&para;</a></h4>
+<p>Running both Suricata and Snort mirrors enterprise SOC environments where multiple IDS engines provide overlapping detection coverage. This reduces blind spots and increases detection accuracy across encrypted or obfuscated traffic.</p>
+<h4 id="architecture-principles-alignment_4">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_4" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Dual IDS engines reduce reliance on a single detection method<br />
+<strong>Secure by Design:</strong> Custom updated rule sets<br />
+<strong>Zero Trust:</strong> VPN traffic inspected and validated; no implicit trust in encrypted tunnel</p>
+<h3 id="33-custom-ruleset-architecture">3.3 Custom Ruleset Architecture<a class="headerlink" href="#33-custom-ruleset-architecture" title="Permanent link">&para;</a></h3>
+<h4 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h4>
+<p>Interface-specific Suricata and Snort rulesets deployed per subnet. Each ruleset addresses the security requirements of its associated network segment.</p>
+<h4 id="rule-categories">Rule Categories<a class="headerlink" href="#rule-categories" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Linux/SSH Security Controls</li>
+<li>Reconnaissance &amp; Scanning Detection</li>
+<li>Lateral Movement Prevention</li>
+<li>SMB/NetBIOS Hygiene</li>
+<li>Test &amp; Validation Rules</li>
+</ul>
+<hr />
+<h3 id="network-segments-security-posture">Network Segments &amp; Security Posture<a class="headerlink" href="#network-segments-security-posture" title="Permanent link">&para;</a></h3>
+<h3 id="prod_lan-1921681024">Prod_LAN (192.168.1.0/24)<a class="headerlink" href="#prod_lan-1921681024" title="Permanent link">&para;</a></h3>
+<p><strong>Role:</strong> Primary production network</p>
+<p><strong>Security Objectives:</strong></p>
+<ul>
+<li>Block LAB/ISO → PROD lateral movement</li>
+<li>Detect reconnaissance and SSH abuse</li>
+<li>Enforce SMB protocol hygiene</li>
+</ul>
+<p><strong>Detection Coverage:</strong></p>
+<ul>
+<li>SSH brute-force attacks (threshold-based)</li>
+<li>Privilege escalation keywords (sudo detection)</li>
+<li>Nmap OS fingerprinting</li>
+<li>Cross-segment port access (LAB→PROD high-risk ports)</li>
+<li>ISO network isolation violations</li>
+<li>SMBv1/NetBIOS legacy protocol usage</li>
+<li>Rule validation traffic</li>
+</ul>
+<hr />
+<h3 id="lab_lan1-192168100024">Lab_LAN1 (192.168.100.0/24)<a class="headerlink" href="#lab_lan1-192168100024" title="Permanent link">&para;</a></h3>
+<p><strong>Role:</strong> Primary development and testing environment</p>
+<p><strong>Security Objectives:</strong></p>
+<ul>
+<li>Prevent LAB1 → PROD unauthorized access</li>
+<li>Detect internal reconnaissance activity</li>
+<li>Maintain ISO network isolation</li>
+</ul>
+<p><strong>Detection Coverage:</strong></p>
+<ul>
+<li>SSH authentication abuse</li>
+<li>Privilege escalation indicators</li>
+<li>Network scanning (Nmap signatures)</li>
+<li>Cross-segment violations (LAB1→PROD)</li>
+<li>ISO→LAB1 boundary violations</li>
+<li>SMB/NetBIOS misuse</li>
+</ul>
+<hr />
+<h3 id="lab_lan2-192168200024">Lab_LAN2 (192.168.200.0/24)<a class="headerlink" href="#lab_lan2-192168200024" title="Permanent link">&para;</a></h3>
+<p><strong>Role:</strong> Isolated sandbox for malware analysis and adversary simulation</p>
+<p><strong>Security Objectives:</strong></p>
+<ul>
+<li>Prevent LAB2 → PROD compromise</li>
+<li>Detect malicious reconnaissance patterns</li>
+<li>Enforce strict ISO network containment</li>
+</ul>
+<p><strong>Detection Coverage:</strong></p>
+<ul>
+<li>SSH attack patterns</li>
+<li>Command execution monitoring</li>
+<li>Active scanning detection</li>
+<li>LAB2→PROD isolation enforcement</li>
+<li>ISO→LAB2 traffic violations</li>
+<li>Protocol security controls</li>
+</ul>
+<hr />
+<h3 id="ext_landmz-1921682024">EXT_LAN/DMZ (192.168.2.0/24)<a class="headerlink" href="#ext_landmz-1921682024" title="Permanent link">&para;</a></h3>
+<p><strong>Role:</strong> DMZ for external-facing and semi-trusted services</p>
+<p><strong>Security Objectives:</strong></p>
+<ul>
+<li>Prevent DMZ → Internal lateral movement</li>
+<li>Detect DMZ-originated reconnaissance</li>
+<li>Protect HA Sync and ISO infrastructure</li>
+</ul>
+<p><strong>Detection Coverage:</strong></p>
+<ul>
+<li>DMZ→Internal SSH blocking</li>
+<li>Brute-force detection</li>
+<li>DMZ→Internal scan attempts</li>
+<li>DMZ→ISO isolation enforcement</li>
+<li>DMZ→HA Sync protection</li>
+<li>SMB protocol controls</li>
+</ul>
+<hr />
+<h2 id="rule-engineering-methodology">Rule Engineering Methodology<a class="headerlink" href="#rule-engineering-methodology" title="Permanent link">&para;</a></h2>
+<h3 id="detection-logic">Detection Logic<a class="headerlink" href="#detection-logic" title="Permanent link">&para;</a></h3>
+<p>Rules implement defense-in-depth through:</p>
+<ul>
+<li><strong>Signature-based detection:</strong> Pattern matching (content, pcre)</li>
+<li><strong>Behavioral analysis:</strong> Statistical thresholds (detection_filter, threshold)</li>
+<li><strong>Policy enforcement:</strong> Network segmentation violations</li>
+<li><strong>Anomaly detection:</strong> Protocol abuse and legacy service usage</li>
+</ul>
+<h3 id="rule-performance-optimization">Rule Performance Optimization<a class="headerlink" href="#rule-performance-optimization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Interface-specific deployment reduces ruleset overhead</li>
+<li>Fast-pattern matching on content rules</li>
+<li>Stateful tracking (by_src, by_dst) for threshold efficiency</li>
+<li>Tuned thresholds based on network baseline (e.g., count 5 in 60s for SSH)</li>
+</ul>
+<h3 id="false-positive-mitigation">False Positive Mitigation<a class="headerlink" href="#false-positive-mitigation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Environment-specific tuning per network segment</li>
+<li>Stateful detection (detection_filter vs. threshold)</li>
+<li>Protocol-aware inspection (flags, content depth)</li>
+<li>Contextual alerting (source/destination network awareness)</li>
+</ul>
+<hr />
+<h2 id="rule-examples">Rule Examples<a class="headerlink" href="#rule-examples" title="Permanent link">&para;</a></h2>
+<h3 id="ssh-linux-security-controls">SSH / Linux Security Controls<a class="headerlink" href="#ssh-linux-security-controls" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code># Brute-force detection with stateful tracking
+alert tcp any any -&gt; 192.168.100.0/24 22 \
+(msg:&quot;LAB1: SSH Brute Force Attempt&quot;; flags:S; detection_filter:track by_src, count 5, seconds 60; sid:910001; rev:2;)
+
+# Cross-segment SSH policy enforcement
+alert tcp 192.168.2.0/24 any -&gt; 192.168.100.0/24 22 \
+(msg:&quot;LAB1: SSH Attempt from EXT_LAN&quot;; sid:910002; rev:1;)
+
+# Privilege escalation keyword monitoring
+alert tcp any any -&gt; 192.168.100.0/24 22 \
+(msg:&quot;LAB1: sudo Keyword in SSH Session&quot;; content:&quot;sudo&quot;; sid:910003; rev:1;)
+</code></pre></div>
+<h3 id="reconnaissance-scanning-detection">Reconnaissance &amp; Scanning Detection<a class="headerlink" href="#reconnaissance-scanning-detection" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code># Tool-specific signature detection
+alert tcp any any -&gt; 192.168.100.0/24 any \
+(msg:&quot;LAB1: Nmap OS Detection Scan&quot;; content:&quot;|4E 4D 41 50|&quot;; sid:910004; rev:1;)
+
+# Behavioral scan detection via port sweep threshold
+alert tcp 192.168.100.0/24 any -&gt; 192.168.1.0/24 any \
+(msg:&quot;LAB1: LAB → PROD Port Scan&quot;; flags:S; threshold:type both, track by_src, count 20, seconds 10; sid:900008; rev:1;)
+</code></pre></div>
+<h3 id="lateral-movement-prevention">Lateral Movement Prevention<a class="headerlink" href="#lateral-movement-prevention" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code># High-risk port blocking across trust boundaries
+alert tcp 192.168.200.0/24 any -&gt; 192.168.1.0/24 [22,135,139,445,3389] \
+(msg:&quot;LAB2: LAB → PROD Unauthorized High-Risk Port&quot;; sid:920005; rev:3;)
+
+# Isolation network policy enforcement
+alert ip [10.20.0.0/24,192.168.3.0/24] any -&gt; 192.168.200.0/24 any \
+(msg:&quot;LAB2: ISO → LAB2 Traffic (Policy Violation)&quot;; sid:920006; rev:1;)
+</code></pre></div>
+<h3 id="smb-netbios-hygiene">SMB / NetBIOS Hygiene<a class="headerlink" href="#smb-netbios-hygiene" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code># Legacy protocol detection
+alert tcp any any -&gt; any 139 \
+(msg:&quot;NetBIOS Session Service Detected&quot;; sid:9xxxxx; rev:1;)
+
+# SMBv1 usage monitoring
+alert tcp any any -&gt; any 445 \
+(msg:&quot;SMBv1 Protocol Negotiation&quot;; content:&quot;|ff|SMB&quot;; depth:8; sid:9xxxxx; rev:1;)
+</code></pre></div>
+<h3 id="custom-rule-breakdown-example">Custom Rule Breakdown Example:<a class="headerlink" href="#custom-rule-breakdown-example" title="Permanent link">&para;</a></h3>
+<h4 id="ssh-brute-force-detection">SSH Brute Force Detection<a class="headerlink" href="#ssh-brute-force-detection" title="Permanent link">&para;</a></h4>
+<p>Rule
+<div class="highlight"><pre><span></span><code>alert tcp any any -&gt; 192.168.100.0/24 22 \
+(msg:&quot;LAB1: SSH Brute Force Attempt&quot;; flags:S; detection_filter:track by_src, count 5, seconds 60; sid:910001; rev:2;)
+</code></pre></div></p>
+<h4 id="field-breakdown">Field Breakdown:<a class="headerlink" href="#field-breakdown" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alert</code></td>
+<td>Generate an alert when matched</td>
+<td>Visible in Suricata → Elastic/Wazuh</td>
+</tr>
+<tr>
+<td><code>tcp</code></td>
+<td>Match only TCP traffic</td>
+<td>SSH is TCP‑based</td>
+</tr>
+<tr>
+<td><code>any any</code></td>
+<td>Any source IP, any source port</td>
+<td>Detects brute force from anywhere</td>
+</tr>
+<tr>
+<td><code>-&gt;</code></td>
+<td>Direction operator</td>
+<td>Only inbound SSH attempts</td>
+</tr>
+<tr>
+<td><code>192.168.100.0/24 22</code></td>
+<td>Destination network + port</td>
+<td>LAB1 SSH servers</td>
+</tr>
+<tr>
+<td><code>flags:S</code></td>
+<td>Match SYN packets only</td>
+<td>Prevents noisy alerts from full SSH sessions</td>
+</tr>
+<tr>
+<td><code>detection_filter: track by_src, count 5, seconds 60</code></td>
+<td>Threshold: 5 SYNs in 60 seconds from same IP</td>
+<td>Classic brute‑force pattern</td>
+</tr>
+<tr>
+<td><code>sid:910001</code></td>
+<td>Unique rule ID</td>
+<td>Required for management</td>
+</tr>
+<tr>
+<td><code>rev:2</code></td>
+<td>Revision number</td>
+<td>Tracks rule updates</td>
+</tr>
+</tbody>
+</table>
+<h4 id="operational-impact">Operational Impact<a class="headerlink" href="#operational-impact" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Detects brute force attempts before authentication begins</li>
+<li>Low noise due to SYN only matching</li>
+<li>Helps identify compromised hosts or bots scanning SSH</li>
+<li>Works across VLAN boundaries</li>
+</ul>
+<h3 id="suricata-event-log-example">Suricata event log example<a class="headerlink" href="#suricata-event-log-example" title="Permanent link">&para;</a></h3>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/suricata-events.png" alt="Snort Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Custom Rule Events.
+      </figcaption>
+    </figure>
+<hr />
+<h3 id="34-crowdsec-behavioral-threat-intelligence">3.4 CrowdSec Behavioral Threat Intelligence<a class="headerlink" href="#34-crowdsec-behavioral-threat-intelligence" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_6">Deployment Overview<a class="headerlink" href="#deployment-overview_6" title="Permanent link">&para;</a></h4>
+<p>CrowdSec analyzes logs from firewalls, web servers, containers, and authentication systems to detect behavioral anomalies. It identifies brute‑force attempts, scanning activity, credential stuffing, and distributed attacks using a community‑driven threat intelligence model. Remediation actions are applied via bouncers across firewalls and services.</p>
+<h4 id="security-impact_5">Security Impact<a class="headerlink" href="#security-impact_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Detects zero‑day and behavioral attacks missed by signature‑based IDS</li>
+<li>Community‑driven blocklists provide real‑time global threat intelligence</li>
+<li>Automated remediation reduces response time</li>
+<li>Integrates with pfSense, NGINX, and container workloads</li>
+</ul>
+<h4 id="deployment-rationale_5">Deployment Rationale<a class="headerlink" href="#deployment-rationale_5" title="Permanent link">&para;</a></h4>
+<p>Behavior‑based detection is essential in modern environments where attackers use evasion techniques to bypass signature‑based systems. CrowdSec mirrors enterprise UEBA (User and Entity Behavior Analytics) platforms and demonstrates proficiency with log‑driven threat detection.</p>
+<h4 id="architecture-principles-alignment_5">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_5" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Behavioral analytics complements IDS/IPS and WAF layers<br />
+<strong>Secure by Design:</strong> Automated remediation and continuous log analysis<br />
+<strong>Zero Trust:</strong> No IP or user trusted without behavioral validation</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Location</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CrowdSec Engine</td>
+<td>Debian LXC</td>
+<td>Log parsing, scenario evaluation, decision making</td>
+</tr>
+<tr>
+<td>CrowdSec Logger</td>
+<td>Debian LXC</td>
+<td>Structured log collection from pfSense, Suricata, SSH</td>
+</tr>
+<tr>
+<td>Remediation Bouncer</td>
+<td>pfSense Firewall</td>
+<td>Receives block decisions via LAPI, enforces at firewall</td>
+</tr>
+<tr>
+<td>Hub Collections</td>
+<td>CrowdSec Hub</td>
+<td>Pre-configured parsers and scenarios for common attack patterns</td>
+</tr>
+</tbody>
+</table>
+<div class="two-col-right">
+  <div class="text-col">
+    <ul>
+      <li><strong>Engine + Logger in LXC:</strong> The CrowdSec engine is running in a lightweight container. The logger component ensures structured log delivery and supports future expansion to additional sources like Wazuh or OpenVAS.</li>
+      <li><strong>pfSense Remediation:</strong> The firewall bouncer on pfSense receives decisions from the LAPI and applies real-time blocks at the network edge. This setup ensures low-latency response to threats and keeps enforcement close to ingress points.</li>
+      <li><strong>Hub Collections:</strong> Deployment of curated collections from the CrowdSec Hub, including:
+        <ul>
+          <li>Blocklists</li>
+          <li>Scenarios (SSH brute force, port scans)</li>
+          <li>Parsers for pfSense</li>
+        </ul>
+      </li>
+      <li><strong>LAPI Connectivity:</strong> The pfSense bouncer is authenticated via API key and successfully pulling decisions from the LAPI endpoint. The engine is streaming decisions and community intelligence in near real-time.</li>
+    </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/crowdsec-config.png" alt="CrowdSec Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        CrowdSec Engine and Bouncer Configuration.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p><strong>Scenarios Enabled:</strong></p>
+<ul>
+<li>SSH brute force detection (10 failed attempts in 60s)</li>
+<li>HTTP scanning and enumeration</li>
+<li>Port scan detection</li>
+<li>CVE-specific exploit attempts</li>
+</ul>
+<p><strong>Community Intelligence:</strong></p>
+<ul>
+<li>Shares anonymized attack signatures to global CrowdSec network</li>
+<li>Receives proactive blocks for IPs flagged by other CrowdSec users</li>
+<li>Real-time threat feed updates (&gt;1M malicious IPs maintained)</li>
+</ul>
+<p><strong>Integration Points:</strong></p>
+<ul>
+<li>Log Sources: pfSense (firewall logs), Suricata (IDS alerts), SSH (auth logs)</li>
+<li>Enforcement: Dynamic firewall rules via pfSense bouncer API</li>
+<li>Visibility: Decision stream visible in CrowdSec dashboard</li>
+</ul>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/crowdsec-setup.png" alt="CrowdSec Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        CrowdSec Engine and Remediation Setup.
+      </figcaption>
+    </figure>
+
+<hr />
+<h3 id="35-multi-engine-intrusion-detection-and-prevention">3.5 Multi-Engine Intrusion Detection and Prevention<a class="headerlink" href="#35-multi-engine-intrusion-detection-and-prevention" title="Permanent link">&para;</a></h3>
+<h4 id="layered-idsips-strategy">Layered IDS/IPS Strategy<a class="headerlink" href="#layered-idsips-strategy" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Engine</th>
+<th>Vendor</th>
+<th>Deployment Location</th>
+<th>Detection Method</th>
+<th>Rule Sets</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Suricata</td>
+<td>OISF</td>
+<td>pfSense LAN interfaces</td>
+<td>Signature + Protocol Anomaly</td>
+<td>Emerging Threats, ET Pro</td>
+<td>Primary IPS (inline blocking)</td>
+</tr>
+<tr>
+<td>Snort</td>
+<td>Cisco/Talos</td>
+<td>pfSense VLAN interfaces</td>
+<td>Signature-based</td>
+<td>Snort Community, VRT</td>
+<td>Secondary IDS (monitoring)</td>
+</tr>
+<tr>
+<td>CrowdSec</td>
+<td>CrowdSec SAS</td>
+<td>Dedicated Debian LXC</td>
+<td>Behavioral Analytics</td>
+<td>Community scenarios + custom</td>
+<td>Brute-force/scan detection</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why Multiple IDS/IPS Engines?</strong></p>
+<ul>
+<li><strong>Evasion Resistance:</strong> Attackers design exploits to bypass specific IDS engines; multiple engines provide redundancy</li>
+<li><strong>Complementary Coverage:</strong> Suricata excels at protocol analysis (HTTP, TLS, DNS deep inspection); Snort strong on signature matching; CrowdSec detects behavioral patterns (brute force, port scans)</li>
+<li><strong>Reduced False Negatives:</strong> Single engine misses ~15-20% of threats; dual engines reduce miss rate to &lt;5%</li>
+<li><strong>Signature Diversity:</strong> Different rule sets (Emerging Threats vs. Snort VRT) cover different threat landscapes</li>
+</ul>
+<hr />
+<h2 id="4-safeline-web-application-firewall-waf">4. SafeLine Web Application Firewall (WAF)<a class="headerlink" href="#4-safeline-web-application-firewall-waf" title="Permanent link">&para;</a></h2>
+<h4 id="deployment-overview_7">Deployment Overview<a class="headerlink" href="#deployment-overview_7" title="Permanent link">&para;</a></h4>
+<p>SafeLine (SafePoint) is an open‑source, enterprise‑grade WAF protecting multiple web portals, including the Apache external dashboard and NGINX workloads in K3s. It provides real‑time threat detection, automated blocking, and protection against OWASP Top 10 vulnerabilities. SafeLine also includes bot mitigation, HTTP‑flood DDoS protection, and machine‑learning‑based anomaly detection.</p>
+<h4 id="security-impact_6">Security Impact<a class="headerlink" href="#security-impact_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Protects against SQL injection, XSS, command injection, and path traversal</li>
+<li>Blocks malicious bots, credential stuffing, and scraping attempts</li>
+<li>Mitigates HTTP flood and application‑layer DDoS attacks</li>
+<li>Detects zero‑day patterns via behavioral analysis</li>
+<li>Adds a dedicated Layer‑7 security boundary before backend services</li>
+</ul>
+<h4 id="deployment-rationale_6">Deployment Rationale<a class="headerlink" href="#deployment-rationale_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Application Layer Protection</strong>: Provides granular inspection and filtering of HTTP/HTTPS traffic that network firewalls and IDS/IPS cannot effectively analyze</li>
+<li><strong>OWASP Top 10 Coverage</strong>: Protects against SQL injection, cross-site scripting (XSS), command injection, path traversal, and other common web application vulnerabilities</li>
+<li><strong>Bot Mitigation</strong>: Distinguishes between legitimate users and malicious bots, preventing automated attacks, credential stuffing, and web scraping</li>
+<li><strong>DDoS Protection</strong>: Mitigates HTTP flood attacks and application-layer DDoS attempts that bypass network-level protections</li>
+<li><strong>Zero-Day Defense</strong>: Utilizes machine learning and behavioral analysis to detect novel attack patterns not covered by signature-based systems</li>
+<li><strong>Defense in Depth</strong>: Adds an additional security layer between the reverse proxy (Traefik) and backend applications, implementing the principle of layered security</li>
+<li><strong>Compliance Requirements</strong>: Meets regulatory requirements for web application security controls (PCI DSS 6.6, HIPAA, SOC 2)</li>
+<li><strong>Centralized Security Policy</strong>: Provides unified protection for multiple web applications with consistent security policies and centralized management</li>
+</ul>
+<h4 id="architecture-principles-alignment_6">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_6" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Adds a Layer‑7 security layer above firewall and IDS/IPS<br />
+<strong>Secure by Design:</strong> OWASP Top 10 protections, bot filtering, and DDoS mitigation<br />
+<strong>Zero Trust:</strong> Every HTTP request inspected; no implicit trust in client behavior</p>
+<h3 id="component-architecture">Component Architecture<a class="headerlink" href="#component-architecture" title="Permanent link">&para;</a></h3>
+<p>Deployed on a Debian 13 host with an embedded Docker engine, the solution follows a microservices architecture pattern with specialized containers handling distinct security and operational functions. The platform operates on a dedicated Docker bridge network (172.22.222.0/24) with internal service-to-service communication.</p>
+<table>
+<thead>
+<tr>
+<th>Container Name</th>
+<th>Image</th>
+<th>IP</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>safeline-chaos</td>
+<td>chaitin/safeline-chaos-g:latest</td>
+<td>172.22.222.10</td>
+<td>Chaos testing container used to simulate faults, stress, and unexpected conditions in the system to validate resilience and recovery strategies.</td>
+</tr>
+<tr>
+<td>safeline-detector</td>
+<td>chaitin/safeline-detector-g:latest</td>
+<td>172.22.222.5</td>
+<td>Detector service container responsible for monitoring traffic, analyzing patterns, and identifying potential threats or anomalies in real time.</td>
+</tr>
+<tr>
+<td>safeline-fvm</td>
+<td>chaitin/safeline-fvm-g:latest</td>
+<td>172.22.222.8</td>
+<td>FVM execution container that runs sandboxed function evaluations, often used for analyzing payloads or executing detection logic safely.</td>
+</tr>
+<tr>
+<td>safeline-luigi</td>
+<td>chaitin/safeline-luigi-g:latest</td>
+<td>172.22.222.7</td>
+<td>Luigi workflow container orchestrating background jobs, pipelines, and task dependencies for data processing and system automation.</td>
+</tr>
+<tr>
+<td>safeline-mgt</td>
+<td>chaitin/safeline-mgt-g:latest</td>
+<td>172.22.222.4</td>
+<td>Management interface container providing the admin dashboard, APIs, and configuration endpoints for controlling and monitoring the Safeline system.</td>
+</tr>
+<tr>
+<td>safeline-pg</td>
+<td>chaitin/safeline-postgres:15.2</td>
+<td>172.22.222.2</td>
+<td>Postgres database container storing persistent data such as configurations, detection logs, and case metadata for the Safeline platform.</td>
+</tr>
+<tr>
+<td>safeline-tengine</td>
+<td>chaitin/safeline-tengine-g:latest</td>
+<td></td>
+<td>Tengine web server container acting as the reverse proxy and load balancer, handling inbound traffic and routing requests to the appropriate backend services.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-overview">Configuration Overview<a class="headerlink" href="#configuration-overview" title="Permanent link">&para;</a></h3>
+<p>SafeLine WAF currently protects four separate web portals:</p>
+<ul>
+<li>Heimdall main lab dashboard</li>
+<li>Apache external lab dashboard</li>
+<li>Nginx web server in K3s</li>
+<li>Proxmox PVE admin portal</li>
+</ul>
+<p>Active protections include Intelligent web threat detection, bot and HTTP flood DDoS protection. Additional authorization via Authentik/OIDC provided where required.</p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-config.png" alt="Safeline WAF Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Safeline WAF Configuration.
+      </figcaption>
+    </figure>
+
+<h3 id="active-protection-modules">Active Protection Modules<a class="headerlink" href="#active-protection-modules" title="Permanent link">&para;</a></h3>
+<p><strong>1. Intelligent Web Threat Detection</strong></p>
+<ul>
+<li><strong>SQL Injection Protection</strong>: Pattern matching and syntax analysis detecting SQL injection attempts across GET/POST parameters, headers, and cookies</li>
+<li><strong>Cross-Site Scripting (XSS) Prevention</strong>: Context-aware detection of reflected, stored, and DOM-based XSS attacks</li>
+<li><strong>Command Injection Defense</strong>: Identifies attempts to execute operating system commands through web application vulnerabilities</li>
+<li><strong>Path Traversal Detection</strong>: Blocks directory traversal attacks attempting to access files outside the web root</li>
+<li><strong>Remote File Inclusion (RFI/LFI)</strong>: Prevents inclusion of malicious remote or local files</li>
+<li><strong>XML External Entity (XXE) Prevention</strong>: Detects and blocks XXE injection attempts in XML parsers</li>
+<li><strong>Server-Side Request Forgery (SSRF)</strong>: Identifies attempts to make the server perform unintended requests</li>
+<li><strong>Machine Learning Anomaly Detection</strong>: Behavioral analysis identifying zero-day attacks and novel exploitation techniques</li>
+</ul>
+<p><strong>2. Bot and Automated Attack Protection</strong></p>
+<ul>
+<li><strong>Bot Classification Engine</strong>: Distinguishes between legitimate bots (search engines, monitoring tools) and malicious bots</li>
+<li><strong>Credential Stuffing Prevention</strong>: Detects and blocks automated login attempts using compromised credential lists</li>
+<li><strong>Account Takeover Protection</strong>: Behavioral analysis identifying suspicious authentication patterns</li>
+<li><strong>Web Scraping Mitigation</strong>: Rate limiting and fingerprinting to prevent data extraction attacks</li>
+<li><strong>CAPTCHA Integration</strong>: Challenge-response mechanism for suspicious sessions (future roadmap)</li>
+<li><strong>JavaScript Challenge</strong>: Browser validation ensuring requests originate from legitimate browsers</li>
+</ul>
+<p><strong>3. HTTP Flood DDoS Protection</strong></p>
+<ul>
+<li><strong>Connection Rate Limiting</strong>: Per-IP connection limits preventing resource exhaustion (default: 100 connections/IP)</li>
+<li><strong>Request Rate Limiting</strong>: Application-level rate limiting (30-100 requests/minute depending on endpoint sensitivity)</li>
+<li><strong>Slowloris Protection</strong>: Timeouts for slow HTTP attacks attempting to exhaust server connections</li>
+<li><strong>HTTP GET/POST Flood Mitigation</strong>: Detects and blocks high-volume application-layer DDoS attacks</li>
+<li><strong>Burst Handling</strong>: Allows legitimate traffic spikes while blocking sustained flood attacks</li>
+<li><strong>Geo-Rate Limiting</strong>: Stricter rate limits for high-risk geographic regions</li>
+</ul>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-flood.png" alt="Safeline Flood/Bot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        HTTP Flood and Anti-Bot Protection.
+      </figcaption>
+    </figure>
+
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-protections.png" alt="Safeline Flood/Bot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        SQLi, Code Injection, File Inclusion, Path Traversal, XSS Protections.
+      </figcaption>
+    </figure>
+
+<p><strong>Offline Mode:</strong></p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-offline.png" alt="Safeline Offline">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Offline Mode.
+      </figcaption>
+    </figure>
+
+<p><strong>Password and OIDC Authorization:</strong></p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/safeline-pwd.png" alt="Safeline Offline">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Password and OIDC Authorization.
+      </figcaption>
+    </figure>
+
+<hr />
+<h2 id="5-security-control-summary">5. Security Control Summary<a class="headerlink" href="#5-security-control-summary" title="Permanent link">&para;</a></h2>
+<h3 id="security-control-framework">Security Control Framework<a class="headerlink" href="#security-control-framework" title="Permanent link">&para;</a></h3>
+<h4 id="network-security-controls">Network Security Controls<a class="headerlink" href="#network-security-controls" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Control Type</th>
+<th>Implementation</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perimeter Defense</td>
+<td>pfSense HA cluster with IDS/IPS</td>
+<td>100% inbound/outbound</td>
+</tr>
+<tr>
+<td>Microsegmentation</td>
+<td>OPNsense and FortiGate isolated zones</td>
+<td>Critical assets only</td>
+</tr>
+<tr>
+<td>Threat Intelligence</td>
+<td>CrowdSec + pfBlockerNG</td>
+<td>1M+ malicious IPs blocked</td>
+</tr>
+<tr>
+<td>Intrusion Detection</td>
+<td>Suricata + Snort (dual-engine)</td>
+<td>WAN; LAN; VPN interfaces</td>
+</tr>
+<tr>
+<td>Geographic Blocking</td>
+<td>pfBlockerNG GeoIP</td>
+<td>15+ high-risk countries</td>
+</tr>
+<tr>
+<td>VPN Privacy</td>
+<td>PIA multi-region tunnels, FortiGate VPN</td>
+<td>192.168.100.0/24; 192.168.2.0/24</td>
+</tr>
+<tr>
+<td>Zero Trust Access</td>
+<td>Tailscale mesh VPN + ACLs</td>
+<td>Remote administrative access</td>
+</tr>
+<tr>
+<td>Data Loss Prevention</td>
+<td>VPN kill switch floating rule</td>
+<td>Prevents cleartext fallback</td>
+</tr>
+</tbody>
+</table>
+<h4 id="detection-and-response-capabilities">Detection and Response Capabilities<a class="headerlink" href="#detection-and-response-capabilities" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Real-Time Alerting: Suricata/Snort alerts forwarded to Splunk within seconds</li>
+<li>Automated Blocking: CrowdSec decisions enforced at firewall in &lt;5 seconds</li>
+<li>Signature Coverage: 40,000+ IDS rules across Suricata and Snort</li>
+<li>Community Intelligence: CrowdSec shares threat data with global network</li>
+<li>Logging Retention: 90 days in Splunk/Elastic, 30 days on firewall local storage</li>
+<li>Incident Response: Playbooks for common scenarios (DDoS, brute force, scanning)</li>
+</ul>
+<hr />
+<h2 id="6-operational-resilience">6. Operational Resilience<a class="headerlink" href="#6-operational-resilience" title="Permanent link">&para;</a></h2>
+<h3 id="operational-resilience-and-high-availability">Operational Resilience and High Availability<a class="headerlink" href="#operational-resilience-and-high-availability" title="Permanent link">&para;</a></h3>
+<h4 id="redundancy-architecture">Redundancy Architecture<a class="headerlink" href="#redundancy-architecture" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Primary Node</th>
+<th>Secondary Node</th>
+<th>Failover Time</th>
+<th>Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pfSense Firewall</td>
+<td>pfSense-01</td>
+<td>pfSense-02</td>
+<td>&lt;5 seconds</td>
+<td>CARP + pfsync</td>
+</tr>
+<tr>
+<td>PIA VPN Tunnels</td>
+<td>PIA_NY</td>
+<td>PIA_CA_MONT</td>
+<td>&lt;10 seconds</td>
+<td>Gateway monitoring</td>
+</tr>
+<tr>
+<td>Suricata IDS</td>
+<td>Active</td>
+<td>Active</td>
+<td>N/A</td>
+<td>Distributed</td>
+</tr>
+<tr>
+<td>CrowdSec LAPI</td>
+<td>LXC-Primary</td>
+<td>Manual failover</td>
+<td>&lt;1 minute</td>
+<td>API endpoint change</td>
+</tr>
+</tbody>
+</table>
+<h4 id="failure-scenarios-and-response">Failure Scenarios and Response<a class="headerlink" href="#failure-scenarios-and-response" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Detection Method</th>
+<th>Automated Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pfSense primary failure</td>
+<td>CARP heartbeat timeout</td>
+<td>Secondary assumes VIP; routing continues</td>
+</tr>
+<tr>
+<td>PIA VPN tunnel down</td>
+<td>Gateway ping monitoring</td>
+<td>Failover to alternate tunnel or kill switch</td>
+</tr>
+<tr>
+<td>Suricata process crash</td>
+<td>Service Watchdog package</td>
+<td>Automatic restart within 30s</td>
+</tr>
+<tr>
+<td>CrowdSec engine failure</td>
+<td>Systemd watchdog</td>
+<td>Service restart; alert to monitoring</td>
+</tr>
+<tr>
+<td>Network interface failure</td>
+<td>Link state monitoring</td>
+<td>Traffic reroutes to alternate interface</td>
+</tr>
+</tbody>
+</table>
+<h4 id="monitoring-and-alerting">Monitoring and Alerting<a class="headerlink" href="#monitoring-and-alerting" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Prometheus Node Exporter: Collects firewall metrics (CPU, memory, connection count)</li>
+<li>Splunk/Elastic Dashboards: Real-time visibility into blocked threats, VPN status, rule hits</li>
+<li>Service Watchdog: Monitors critical services (OpenVPN, Suricata, Snort, CrowdSec)</li>
+<li>Uptime Kuma: External health checks on firewall management interfaces</li>
+<li>Discord Alerts: Triggered on VPN failure, IPS signature hits (HIGH severity)</li>
+</ul>
+<h4 id="backup-and-recovery">Backup and Recovery<a class="headerlink" href="#backup-and-recovery" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Configuration Backups: Weekly to Proxmox Backup Server and Synology NAS</li>
+<li>Disaster Recovery: Restore from backup to new VM in &lt;15 minutes</li>
+<li>Change Management: Version control for rule sets via Git repository</li>
+</ul>
+<hr />
+<h2 id="7-use-cases-and-deployment-scenarios">7. Use Cases and Deployment Scenarios<a class="headerlink" href="#7-use-cases-and-deployment-scenarios" title="Permanent link">&para;</a></h2>
+<h3 id="practical-use-cases">Practical Use Cases<a class="headerlink" href="#practical-use-cases" title="Permanent link">&para;</a></h3>
+<h4 id="scenario-1-privacy-enhanced-web-browsing">Scenario 1: Privacy-Enhanced Web Browsing<a class="headerlink" href="#scenario-1-privacy-enhanced-web-browsing" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Anonymize lab traffic and prevent ISP tracking</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>User traffic from 192.168.100.0/24 → pfSense LAN → PIA VPN → Internet</li>
+<li>Policy-based routing ensures all HTTP/HTTPS uses encrypted tunnel</li>
+<li>Kill switch prevents accidental cleartext transmission</li>
+<li>Geolocation appears as VPN endpoint (New York or Montreal)</li>
+</ul>
+<p><strong>Result:</strong> ISP sees only encrypted VPN tunnel, not individual browsing sessions</p>
+<h4 id="scenario-2-remote-lab-access-while-traveling">Scenario 2: Remote Lab Access While Traveling<a class="headerlink" href="#scenario-2-remote-lab-access-while-traveling" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Securely access lab infrastructure from untrusted networks</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Laptop connects to Tailscale mesh VPN (WireGuard)</li>
+<li>Traffic routed through pfSense TSCALE interface</li>
+<li>ACLs restrict access to management subnets only</li>
+</ul>
+<p><strong>Result:</strong> Zero-trust remote access without exposed public IPs or open firewall ports</p>
+<h4 id="scenario-3-threat-intelligence-sharing-and-automated-response">Scenario 3: Threat Intelligence Sharing and Automated Response<a class="headerlink" href="#scenario-3-threat-intelligence-sharing-and-automated-response" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Leverage community threat data for proactive blocking</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>CrowdSec engine analyzes logs from pfSense, Suricata, SSH</li>
+<li>Detects brute force attempt on SSH (10 failed logins in 60s)</li>
+<li>Decision sent to pfSense bouncer via LAPI</li>
+<li>IP immediately blocked at firewall, shared with CrowdSec community</li>
+</ul>
+<p><strong>Result:</strong> Lab benefits from global threat intelligence; contributes to community defense</p>
+<h4 id="scenario-4-multi-region-content-testing">Scenario 4: Multi-Region Content Testing<a class="headerlink" href="#scenario-4-multi-region-content-testing" title="Permanent link">&para;</a></h4>
+<p><strong>Objective:</strong> Test geo-restricted services from different regions</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Policy-based routing sends test traffic to PIA_NY or PIA_CA_MONT</li>
+<li>Applications see requests originating from US or Canada</li>
+<li>Used for CDN behavior testing, regional service validation</li>
+</ul>
+<p><strong>Result:</strong> Simulates distributed user base without physical infrastructure in multiple regions</p>
+<hr />
+<h2 id="8-threat-modeling">8. Threat Modeling<a class="headerlink" href="#8-threat-modeling" title="Permanent link">&para;</a></h2>
+<h3 id="threat-landscape-and-mitigation-strategy">Threat Landscape and Mitigation Strategy<a class="headerlink" href="#threat-landscape-and-mitigation-strategy" title="Permanent link">&para;</a></h3>
+<h4 id="threats-addressed">Threats Addressed<a class="headerlink" href="#threats-addressed" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Threat Category</th>
+<th>Attack Vectors</th>
+<th>Mitigation Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Network Reconnaissance</td>
+<td>Port scans; host enumeration</td>
+<td>Suricata port scan detection; pfBlockerNG</td>
+</tr>
+<tr>
+<td>Brute Force Attacks</td>
+<td>SSH; web panel login abuse</td>
+<td>CrowdSec behavioral detection; fail2ban integration; Key-based authentication for endpoints; WAF bot-credential stuffing prevention</td>
+</tr>
+<tr>
+<td>Malware C2 Communication</td>
+<td>Botnet callbacks</td>
+<td>pfBlockerNG IP reputation; IDS signatures</td>
+</tr>
+<tr>
+<td>Data Exfiltration</td>
+<td>Unauthorized outbound traffic</td>
+<td>Egress filtering; VPN kill switch</td>
+</tr>
+<tr>
+<td>Man-in-the-Middle</td>
+<td>ARP spoofing; SSL stripping</td>
+<td>Encrypted tunnels (VPN; Tailscale)</td>
+</tr>
+<tr>
+<td>DDoS / Resource Exhaustion</td>
+<td>High-volume flood attacks</td>
+<td>Connection limits; SYN flood protection; WAF HTTP flood prevention</td>
+</tr>
+<tr>
+<td>Lateral Movement</td>
+<td>Post-compromise pivoting</td>
+<td>Microsegmentation (OPNsense); VLAN isolation</td>
+</tr>
+<tr>
+<td>Zero-Day Exploits</td>
+<td>Unknown vulnerabilities</td>
+<td>Multi-engine IDS (overlapping signatures)</td>
+</tr>
+<tr>
+<td>Web Application Exploits</td>
+<td>SQL injection, XSS, XXE, command injection, LDAP injection, template injection</td>
+<td>OWASP ModSecurity CRS rules; ML-based anomaly detection; input validation enforcement; output encoding verification</td>
+</tr>
+<tr>
+<td>Bot Attacks</td>
+<td>Web scraping, automated account creation, inventory hoarding, content theft, fake account registration</td>
+<td>Bot fingerprinting; JavaScript challenge; CAPTCHA integration; behavioral analysis; rate limiting per user-agent pattern</td>
+</tr>
+<tr>
+<td>Server-Side Request Forgery (SSRF)</td>
+<td>Internal network reconnaissance, cloud metadata access, backend service exploitation</td>
+<td>URL validation; whitelist of allowed domains; blocking private IP ranges; DNS rebinding protection</td>
+</tr>
+<tr>
+<td>Directory Traversal</td>
+<td>Path manipulation, file system access, configuration file disclosure</td>
+<td>Path normalization; restricted file access; chroot enforcement; symbolic link traversal prevention</td>
+</tr>
+<tr>
+<td>XML/JSON Attacks</td>
+<td>Billion Laughs attack, entity expansion, JSON injection, XML bomb</td>
+<td>Entity expansion limits; recursive depth restrictions; parser hardening; size limits</td>
+</tr>
+<tr>
+<td>Protocol Manipulation</td>
+<td>HTTP request smuggling, header injection, response splitting, HTTP/2 desync</td>
+<td>HTTP protocol validation; header sanitization; request/response consistency checks</td>
+</tr>
+</tbody>
+</table>
+<h4 id="attack-surface-reduction">Attack Surface Reduction<a class="headerlink" href="#attack-surface-reduction" title="Permanent link">&para;</a></h4>
+<ul>
+<li>No exposed public services (all ingress via Cloudflare Tunnel or Tailscale)</li>
+<li>Default-deny firewall/WAF posture on all interfaces</li>
+<li>Geo-blocking of high-risk countries</li>
+<li>Regular vulnerability scanning of exposed services</li>
+<li>Minimal services running on hosts</li>
+</ul>
+<hr />
+<h2 id="9-privacy-and-remote-access-architecture">9. Privacy and Remote Access Architecture<a class="headerlink" href="#9-privacy-and-remote-access-architecture" title="Permanent link">&para;</a></h2>
+<h4 id="deployment-overview_8">Deployment Overview<a class="headerlink" href="#deployment-overview_8" title="Permanent link">&para;</a></h4>
+<p>The privacy and remote access architecture implements layered VPN, zero‑trust access, and anonymization technologies to protect outbound traffic, secure inbound access, and preserve user privacy. Private Internet Access (PIA) provides encrypted egress and IP obfuscation, Tailscale delivers authenticated zero‑trust remote access, Cloudflare Tunnels expose internal services securely without opening firewall ports, and Tor enables anonymous outbound browsing. Together, these systems create a defense‑in‑depth privacy model that maintains operational visibility while preventing unauthorized access or data exposure.</p>
+<h4 id="security-impact_7">Security Impact<a class="headerlink" href="#security-impact_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Encrypted outbound traffic prevents ISP monitoring and metadata collection</li>
+<li>Zero‑trust remote access ensures only authenticated devices and identities can reach internal services</li>
+<li>Cloudflare Tunnels eliminate the need for public IP exposure or port forwarding</li>
+<li>Tor provides anonymized browsing for research and threat intelligence</li>
+<li>Centralized DNS, tunneling, and identity enforcement reduce attack surface</li>
+<li>Policy‑based routing ensures sensitive applications always use encrypted egress</li>
+</ul>
+<h4 id="deployment-rationale_7">Deployment Rationale<a class="headerlink" href="#deployment-rationale_7" title="Permanent link">&para;</a></h4>
+<p>Modern environments require privacy‑preserving egress, secure remote access, and controlled service exposure. This architecture mirrors enterprise zero‑trust designs where VPNs, identity‑aware proxies, and encrypted tunnels work together to protect both inbound and outbound traffic. The combination of PIA, Tailscale, Cloudflare, and Tor demonstrates proficiency with encrypted transport, NAT traversal, identity‑based access control, and anonymization technologies.</p>
+<h4 id="architecture-principles-alignment_7">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_7" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Multiple privacy layers (VPN → Zero‑Trust → Tunnel → Anonymization)<br />
+<strong>Secure by Design:</strong> Encrypted tunnels, identity‑based access, no exposed ports<br />
+<strong>Zero Trust:</strong> Every remote connection authenticated; no implicit trust in network location</p>
+<hr />
+<h3 id="91-private-internet-access-pia-encrypted-egress-vpn">9.1 Private Internet Access (PIA) Encrypted Egress VPN<a class="headerlink" href="#91-private-internet-access-pia-encrypted-egress-vpn" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_9">Deployment Overview<a class="headerlink" href="#deployment-overview_9" title="Permanent link">&para;</a></h4>
+<p>PIA provides encrypted outbound VPN tunneling using OpenVPN with AES‑256 encryption and SHA256 authentication. It masks the lab's public‑facing identity, supports multi‑hop routing, and enables region‑based egress selection. PIA is configured directly on the pfSense firewalls and serves as the default outbound path for the 192.168.100.0/24 and 192.168.2.0/24 networks. Policy‑based routing ensures selected applications always use the VPN tunnel.</p>
+<h4 id="security-impact_8">Security Impact<a class="headerlink" href="#security-impact_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Prevents ISP logging of DNS queries, browsing history, and outbound traffic</li>
+<li>Obfuscates public IP, reducing exposure to targeted attacks</li>
+<li>Multi‑hop routing increases anonymity and complicates traffic correlation</li>
+<li>Encrypted tunnels protect data in transit from interception</li>
+</ul>
+<h4 id="deployment-rationale_8">Deployment Rationale<a class="headerlink" href="#deployment-rationale_8" title="Permanent link">&para;</a></h4>
+<p>Encrypted egress is essential for privacy‑sensitive environments and aligns with enterprise practices where outbound traffic is anonymized or routed through secure gateways. PIA provides a stable, commercial‑grade VPN solution with strong encryption and global exit nodes.</p>
+<h4 id="architecture-principles-alignment_8">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_8" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Adds encrypted egress beneath firewall and IDS/IPS layers<br />
+<strong>Secure by Design:</strong> AES‑256 encryption, SHA256 authentication, OpenVPN tunneling<br />
+<strong>Zero Trust:</strong> No outbound traffic trusted without encryption and policy enforcement</p>
+<p><strong>Use Case:</strong></p>
+<ul>
+<li><strong>ISP Privacy:</strong> Prevents ISP from logging DNS queries, browsing history, torrent activity</li>
+<li><strong>Geolocation Obfuscation:</strong> Appears to originate from VPN exit node location (useful for testing geolocation-based access controls)</li>
+</ul>
+<p><strong>Integration Notes:</strong></p>
+<ul>
+<li>PIA is configured on the pfSense firewalls and configured as the default egress for 192.168.100.0/24 and 192.168.2.0/24 traffic.</li>
+<li>Traffic from selected applications is routed through PIA using policy-based routing.</li>
+<li>Encryption protocols: AES-256 and SHA256 authentication</li>
+</ul>
+<hr />
+<h3 id="92-tailscale-zero-trust-remote-access">9.2 Tailscale Zero Trust Remote Access<a class="headerlink" href="#92-tailscale-zero-trust-remote-access" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_10">Deployment Overview<a class="headerlink" href="#deployment-overview_10" title="Permanent link">&para;</a></h4>
+<p>Tailscale provides secure, identity‑based remote access using a WireGuard mesh VPN. It enables seamless NAT traversal, device‑level ACLs, and OAuth/OIDC authentication. MagicDNS provides internal name resolution across the Tailscale network. Tailscale is deployed on key lab VMs and used for remote SSH, dashboard access, and secure file transfers.</p>
+<h4 id="security-impact_9">Security Impact<a class="headerlink" href="#security-impact_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Identity‑based access ensures only authorized users and devices can connect</li>
+<li>WireGuard (ChaCha20‑Poly1305) provides high‑performance encrypted tunnels</li>
+<li>NAT traversal eliminates the need for exposed ports</li>
+<li>Audit logs track session activity for governance and incident response</li>
+</ul>
+<h4 id="integration-notes">Integration Notes:<a class="headerlink" href="#integration-notes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Tailscale is deployed on key lab VMs</li>
+<li>Used for remote SSH, dashboard access, and secure file transfers.</li>
+<li>WireGuard / ChaCha20-Poly1305 encryption</li>
+</ul>
+<h4 id="deployment-rationale_9">Deployment Rationale<a class="headerlink" href="#deployment-rationale_9" title="Permanent link">&para;</a></h4>
+<p>Tailscale mirrors enterprise zero‑trust remote access solutions by replacing traditional VPN concentrators with identity‑aware, device‑bound tunnels. It simplifies remote connectivity while enforcing strong authentication and granular access control.</p>
+<h4 id="architecture-principles-alignment_9">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_9" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Adds identity‑based access on top of encrypted tunnels<br />
+<strong>Secure by Design:</strong> WireGuard encryption, OAuth/OIDC authentication, device ACLs<br />
+<strong>Zero Trust:</strong> Every connection authenticated; no implicit trust in IP or location</p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/tailscale.png" alt="Tailscale">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Tailscale Configured Devices.
+      </figcaption>
+    </figure>
+
+<p><strong>Tailscale Use Cases:</strong></p>
+<ul>
+<li><strong>Remote Lab Access:</strong> Securely access Grafana, Portainer, SSH from anywhere without exposing ports</li>
+<li><strong>Site-to-Site Connectivity:</strong> Connect home lab to cloud VMs for hybrid deployments</li>
+<li><strong>Ephemeral Access:</strong> Generate one-time-use keys for contractors/guests</li>
+</ul>
+<hr />
+<h3 id="93-cloudflare-secure-service-exposure-and-dns-management">9.3 Cloudflare Secure Service Exposure and DNS Management<a class="headerlink" href="#93-cloudflare-secure-service-exposure-and-dns-management" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_11">Deployment Overview<a class="headerlink" href="#deployment-overview_11" title="Permanent link">&para;</a></h4>
+<p>Cloudflare Tunnels provide secure, authenticated inbound access to internal services without exposing public IPs or opening firewall ports. Cloudflare acts as a reverse proxy with TLS termination, identity‑aware access control, and automatic failover. Cloudflare also manages public DNS for shadowitlab.com, dynamic DNS updates, and S3‑compatible object storage via R2.</p>
+<h4 id="security-impact_10">Security Impact<a class="headerlink" href="#security-impact_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Eliminates need for inbound port forwarding</li>
+<li>TLS‑encrypted tunnels protect dashboards, APIs, and UIs</li>
+<li>Cloudflare Access enforces identity‑based service gating</li>
+<li>Dynamic DNS ensures stable service resolution despite WAN IP changes</li>
+<li>R2 object storage provides secure, globally accessible file hosting</li>
+</ul>
+<h4 id="deployment-rationale_10">Deployment Rationale<a class="headerlink" href="#deployment-rationale_10" title="Permanent link">&para;</a></h4>
+<p>Cloudflare Tunnels mirror enterprise zero‑trust access patterns where applications are published through identity‑aware proxies rather than exposed directly. DNS centralization and automated DDNS updates ensure reliable service access.</p>
+<h4 id="architecture-principles-alignment_10">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_10" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Tunnel layer sits above firewall and VPN protections<br />
+<strong>Secure by Design:</strong> TLS termination, identity‑aware access, no open ports<br />
+<strong>Zero Trust:</strong> Every inbound request authenticated and authorized</p>
+<h4 id="public-domain-and-dns-management">Public Domain and DNS Management<a class="headerlink" href="#public-domain-and-dns-management" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Primary Domain</strong>: shadowitlab.com is registered and managed via <strong>Cloudflare</strong>, enabling centralized control over DNS, security policies, and tunneling endpoints.</li>
+<li><strong>Dynamic DNS Resilience</strong>:</li>
+<li>A <strong>Dockerized Cloudflare DDNS client</strong> monitors the WAN IP assigned by Verizon Fios.</li>
+<li>On IP change, the client automatically updates the A record in Cloudflare using API integration.</li>
+<li>This ensures persistent domain resolution despite dynamic IP churn, enabling stable access to exposed services.</li>
+</ul>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/cloudflare.png" alt="Cloudflare">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cloudflare DNS Management.
+      </figcaption>
+    </figure>
+
+<h4 id="object-storage-and-file-sharing">Object Storage and File Sharing<a class="headerlink" href="#object-storage-and-file-sharing" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Cloudflare R2 Bucket</strong>: Used for lightweight, S3-compatible object storage.</li>
+<li><strong>Public Access Endpoint</strong>: files.shadowitlab.com</li>
+</ul>
+<h4 id="secure-service-exposure-via-cloudflare-tunnel">Secure Service Exposure via Cloudflare Tunnel<a class="headerlink" href="#secure-service-exposure-via-cloudflare-tunnel" title="Permanent link">&para;</a></h4>
+<p>Each internal service is mapped to a dedicated Cloudflare Tunnel endpoint under the shadowitlab.com domain. TLS termination, routing, and access control are handled by Cloudflare's Argo Tunnel technology. This enables secure, high‑availability access to internal dashboards, APIs, and management interfaces.</p>
+<p><strong>Webserver Tunnel</strong></p>
+<ul>
+<li><strong>Endpoint</strong>: web.shadowitlab.com</li>
+<li><strong>Purpose</strong>: Hosts static and dynamic content for lab documentation and dashboards.</li>
+</ul>
+<p><strong>Traefik Tunnel</strong></p>
+<ul>
+<li><strong>Endpoint</strong>: trfk.shadowitlab.com</li>
+<li><strong>Purpose</strong>: Acts as a reverse proxy and ingress controller for DockerVM1 services.</li>
+<li><strong>Features</strong>: TLS passthrough, service routing, and dashboard access.</li>
+</ul>
+<p><strong>Proxmox Tunnel</strong></p>
+<ul>
+<li><strong>Endpoint</strong>: pve.shadowitlab.com</li>
+<li><strong>Purpose</strong>: Provides secure access to the Proxmox VE UI for VM and container orchestration.</li>
+</ul>
+<p><strong>DockerVM1 Tunnel</strong></p>
+<p>This tunnel multiplexes several key services hosted on DockerVM1:</p>
+<table>
+<thead>
+<tr>
+<th>Subdomain</th>
+<th>Service Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>portainer.shadowitlab.com</td>
+<td>Portainer UI for container and K3s workload management</td>
+</tr>
+<tr>
+<td>pulse.shadowitlab.com</td>
+<td>Uptime monitoring and alerting dashboard</td>
+</tr>
+<tr>
+<td>checkmk.shadowitlab.com</td>
+<td>Infrastructure monitoring and metrics aggregation</td>
+</tr>
+<tr>
+<td>piholebk.shadowitlab.com</td>
+<td>Backup Pi-hole instance for DNS filtering</td>
+</tr>
+<tr>
+<td>prom.shadowitlab.com</td>
+<td>Prometheus metrics endpoint</td>
+</tr>
+<tr>
+<td>wud.shadowitlab.com</td>
+<td>Watchtower UI for Docker image update visibility</td>
+</tr>
+</tbody>
+</table>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/cloudflared.png" alt="Cloudflare">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cloudflared Tunnel Configuration.
+      </figcaption>
+    </figure>
+
+<p><strong>Use Case:</strong></p>
+<ul>
+<li><strong>Public Demo:</strong> Showcase Grafana dashboards to potential employers without exposing lab IP</li>
+<li><strong>API Access:</strong> Provide external services (webhooks, monitoring checks) access to internal APIs</li>
+<li><strong>Failover Access:</strong> If Tailscale fails, Cloudflare Tunnels provide backup remote access</li>
+</ul>
+<hr />
+<h3 id="94-tor-browser-anonymous-outbound-browsing">9.4 Tor Browser Anonymous Outbound Browsing<a class="headerlink" href="#94-tor-browser-anonymous-outbound-browsing" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_12">Deployment Overview<a class="headerlink" href="#deployment-overview_12" title="Permanent link">&para;</a></h4>
+<p>Tor provides anonymized web browsing by routing traffic through a decentralized network of volunteer‑operated nodes. It is installed on a sandboxed VM with no persistent storage and used exclusively for outbound browsing. No inbound Tor services (hidden services) are hosted.</p>
+<h4 id="security-impact_11">Security Impact<a class="headerlink" href="#security-impact_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Prevents tracking, fingerprinting, and metadata collection</li>
+<li>Enables privacy‑sensitive research and threat intelligence gathering</li>
+<li>Bypasses geo‑restrictions and censorship</li>
+<li>Sandboxed VM prevents persistence or cross‑system contamination</li>
+</ul>
+<h4 id="deployment-rationale_11">Deployment Rationale<a class="headerlink" href="#deployment-rationale_11" title="Permanent link">&para;</a></h4>
+<p>Tor is widely used in security research, OSINT, and threat intelligence workflows. Running it in a disposable VM mirrors enterprise practices for isolating high‑risk browsing environments.</p>
+<h4 id="architecture-principles-alignment_11">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_11" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Sandboxed VM isolates Tor from production systems<br />
+<strong>Secure by Design:</strong> No persistent storage; outbound‑only usage<br />
+<strong>Zero Trust:</strong> No trust in external nodes; isolation prevents lateral movement</p>
+<hr />
+<h2 id="10-summary">10. Summary<a class="headerlink" href="#10-summary" title="Permanent link">&para;</a></h2>
+<h3 id="multi-layered-vpn-and-zero-trust-access">Multi-Layered VPN and Zero-Trust Access<a class="headerlink" href="#multi-layered-vpn-and-zero-trust-access" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Use Case</th>
+<th>Protocol</th>
+<th>Encryption</th>
+<th>Trust Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Private Internet Access (PIA)</td>
+<td>Egress privacy (hide ISP visibility)</td>
+<td>OpenVPN</td>
+<td>AES-256</td>
+<td>Commercial VPN provider</td>
+</tr>
+<tr>
+<td>Tailscale</td>
+<td>Remote access to lab (peer-to-peer)</td>
+<td>WireGuard</td>
+<td>ChaCha20-Poly1305</td>
+<td>Zero-trust mesh VPN</td>
+</tr>
+<tr>
+<td>Cloudflare Tunnels</td>
+<td>Inbound service access (no open ports)</td>
+<td>QUIC (HTTP/3)</td>
+<td>TLS 1.3</td>
+<td>Cloudflare edge network</td>
+</tr>
+<tr>
+<td>Tor Browser</td>
+<td>Anonymous browsing (threat research)</td>
+<td>Tor (onion routing)</td>
+<td>Multi-layer encryption</td>
+<td>Tor network</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-controls">Security Controls<a class="headerlink" href="#security-controls" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Split-tunnel policy prevents VPN leakage</li>
+<li>Tailscale ACLs enforce least-privilege access per device/user</li>
+<li>Cloudflare Access policies require MFA for administrative endpoints</li>
+<li>Tor VM operates in ephemeral mode with no disk persistence</li>
+<li>DNS queries flow through Pi-hole for ad-blocking and threat intelligence</li>
+</ul>
+<h3 id="operational-resilience">Operational Resilience<a class="headerlink" href="#operational-resilience" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cloudflare DDNS automation ensures 99.9% domain availability</li>
+<li>Prometheus + CheckMK provide real-time health monitoring</li>
+<li>Uptime Kuma alerts on tunnel/service degradation</li>
+<li>Automated container updates via Watchtower with rollback capability</li>
+</ul>
+<h3 id="deployment-scenarios">Deployment Scenarios<a class="headerlink" href="#deployment-scenarios" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remote administration: Tailscale → SSH/Proxmox access from mobile devices</li>
+<li>Public service hosting: Cloudflare Tunnel → web.shadowitlab.com (no exposed ports)</li>
+<li>Threat research: Tor Browser on isolated VM → anonymous OSINT gathering</li>
+<li>Content access: PIA multi-hop → region-specific service testing</li>
+</ul>
+<hr />
+<h2 id="11-custom-ipsids-ruleset-additional-detail">11. Custom IPS/IDS Ruleset – Additional Detail<a class="headerlink" href="#11-custom-ipsids-ruleset-additional-detail" title="Permanent link">&para;</a></h2>
+<h3 id="ssh-linux-security-controls_1">SSH / Linux Security Controls<a class="headerlink" href="#ssh-linux-security-controls_1" title="Permanent link">&para;</a></h3>
+<h3 id="ssh-brute-force-detection_1">SSH Brute Force Detection<a class="headerlink" href="#ssh-brute-force-detection_1" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp any any -&gt; 192.168.100.0/24 22 \
+(msg:&quot;LAB1: SSH Brute Force Attempt&quot;; flags:S; detection_filter:track by_src, count 5, seconds 60; sid:910001; rev:2;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alert</code></td>
+<td>Generate an alert when matched</td>
+<td>Visible in Suricata → Elastic/Wazuh</td>
+</tr>
+<tr>
+<td><code>tcp</code></td>
+<td>Match only TCP traffic</td>
+<td>SSH is TCP based</td>
+</tr>
+<tr>
+<td><code>any any</code></td>
+<td>Any source IP, any source port</td>
+<td>Detects brute force from anywhere</td>
+</tr>
+<tr>
+<td><code>-&gt;</code></td>
+<td>Direction operator</td>
+<td>Only inbound SSH attempts</td>
+</tr>
+<tr>
+<td><code>192.168.100.0/24 22</code></td>
+<td>Destination network + port</td>
+<td>LAB1 SSH servers</td>
+</tr>
+<tr>
+<td><code>flags:S</code></td>
+<td>Match SYN packets only</td>
+<td>Prevents noisy alerts from full SSH sessions</td>
+</tr>
+<tr>
+<td><code>detection_filter: track by_src, count 5, seconds 60</code></td>
+<td>Threshold: 5 SYNs in 60 seconds from same IP</td>
+<td>Classic brute force pattern</td>
+</tr>
+<tr>
+<td><code>sid:910001</code></td>
+<td>Unique rule ID</td>
+<td>Required for management</td>
+</tr>
+<tr>
+<td><code>rev:2</code></td>
+<td>Revision number</td>
+<td>Tracks rule updates</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects brute force attempts before authentication begins</li>
+<li>Low noise due to SYN only matching</li>
+<li>Helps identify compromised hosts or bots scanning SSH</li>
+<li>Works across VLAN boundaries</li>
+</ul>
+<h3 id="cross-segment-ssh-policy-enforcement">Cross Segment SSH Policy Enforcement<a class="headerlink" href="#cross-segment-ssh-policy-enforcement" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp 192.168.2.0/24 any -&gt; 192.168.100.0/24 22 \
+(msg:&quot;LAB1: SSH Attempt from EXT_LAN&quot;; sid:910002; rev:1;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>192.168.2.0/24</code></td>
+<td>EXT_LAN source</td>
+<td>DMZ/External facing internal network</td>
+</tr>
+<tr>
+<td><code>-&gt; 192.168.100.0/24 22</code></td>
+<td>SSH into LAB1</td>
+<td>Not allowed by segmentation policy</td>
+</tr>
+<tr>
+<td><code>msg</code></td>
+<td>Alert message</td>
+<td>Clear policy violation</td>
+</tr>
+<tr>
+<td><code>sid</code></td>
+<td>Rule ID</td>
+<td>Tracking</td>
+</tr>
+<tr>
+<td><code>rev</code></td>
+<td>Revision</td>
+<td>Versioning</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects lateral movement attempts from DMZ → LAB</li>
+<li>Enforces segmentation boundaries</li>
+<li>Helps identify compromised DMZ hosts attempting privilege escalation</li>
+</ul>
+<h3 id="privilege-escalation-keyword-monitoring">Privilege Escalation Keyword Monitoring<a class="headerlink" href="#privilege-escalation-keyword-monitoring" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp any any -&gt; 192.168.100.0/24 22 \
+(msg:&quot;LAB1: sudo Keyword in SSH Session&quot;; content:&quot;sudo&quot;; sid:910003; rev:1;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content:"sudo"</code></td>
+<td>Look for the string "sudo" in SSH payload</td>
+<td>Detects privilege escalation attempts</td>
+</tr>
+<tr>
+<td><code>tcp</code></td>
+<td>SSH is TCP</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><code>any any</code></td>
+<td>Any source</td>
+<td>Global monitoring</td>
+</tr>
+<tr>
+<td><code>-&gt; 192.168.100.0/24 22</code></td>
+<td>SSH into LAB1</td>
+<td>Target zone</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects sudo usage inside SSH sessions</li>
+<li>Useful for insider threat monitoring</li>
+<li>Helps identify suspicious privilege escalation attempts</li>
+<li>Works best when SSH is not encrypted (lab/testing only)</li>
+</ul>
+<h3 id="reconnaissance-scanning-detection_1">Reconnaissance &amp; Scanning Detection<a class="headerlink" href="#reconnaissance-scanning-detection_1" title="Permanent link">&para;</a></h3>
+<h3 id="nmap-os-detection-signature">Nmap OS Detection Signature<a class="headerlink" href="#nmap-os-detection-signature" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp any any -&gt; 192.168.100.0/24 any \
+(msg:&quot;LAB1: Nmap OS Detection Scan&quot;; content:&quot;|4E 4D 41 50|&quot;; sid:910004; rev:1;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content:"\|4E 4D 41 50\|"</code></td>
+<td>Hex for "NMAP"</td>
+<td>Matches Nmap OS detection probes</td>
+</tr>
+<tr>
+<td><code>any any</code></td>
+<td>Any source</td>
+<td>Detects internal or external recon</td>
+</tr>
+<tr>
+<td><code>-&gt; 192.168.100.0/24 any</code></td>
+<td>Any port</td>
+<td>OS detection uses multiple ports</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects active reconnaissance</li>
+<li>Identifies compromised hosts performing mapping</li>
+<li>Useful for early stage intrusion detection</li>
+</ul>
+<h3 id="behavioral-port-sweep-detection">Behavioral Port Sweep Detection<a class="headerlink" href="#behavioral-port-sweep-detection" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp 192.168.100.0/24 any -&gt; 192.168.1.0/24 any \
+(msg:&quot;LAB1: LAB → PROD Port Scan&quot;; flags:S; threshold:type both, track by_src, count 20, seconds 10; sid:900008; rev:1;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flags:S</code></td>
+<td>SYN packets only</td>
+<td>Detects scan attempts, not full sessions</td>
+</tr>
+<tr>
+<td><code>threshold:type both</code></td>
+<td>Count both directions</td>
+<td>More accurate scan detection</td>
+</tr>
+<tr>
+<td><code>track by_src</code></td>
+<td>Track per source IP</td>
+<td>Identifies scanning host</td>
+</tr>
+<tr>
+<td><code>count 20 seconds 10</code></td>
+<td>20 SYNs in 10 seconds</td>
+<td>Classic port sweep behavior</td>
+</tr>
+<tr>
+<td><code>192.168.100.0/24 -&gt; 192.168.1.0/24</code></td>
+<td>LAB → PROD</td>
+<td>Enforces segmentation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects port sweeps from LAB → PROD</li>
+<li>Helps identify malware propagation attempts</li>
+<li>Low false positives due to SYN only matching</li>
+</ul>
+<h3 id="lateral-movement-prevention_1">Lateral Movement Prevention<a class="headerlink" href="#lateral-movement-prevention_1" title="Permanent link">&para;</a></h3>
+<h3 id="high-risk-port-access-attempt">High Risk Port Access Attempt<a class="headerlink" href="#high-risk-port-access-attempt" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp 192.168.200.0/24 any -&gt; 192.168.1.0/24 [22,135,139,445,3389] \
+(msg:&quot;LAB2: LAB → PROD Unauthorized High-Risk Port&quot;; sid:920005; rev:3;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>192.168.200.0/24</code></td>
+<td>LAB2</td>
+<td>Lower trust zone</td>
+</tr>
+<tr>
+<td><code>-&gt; 192.168.1.0/24</code></td>
+<td>PROD</td>
+<td>High trust zone</td>
+</tr>
+<tr>
+<td><code>[22,135,139,445,3389]</code></td>
+<td>SSH, RPC, NetBIOS, SMB, RDP</td>
+<td>Classic lateral movement ports</td>
+</tr>
+<tr>
+<td><code>msg</code></td>
+<td>Clear violation message</td>
+<td>SOC visibility</td>
+</tr>
+<tr>
+<td><code>sid</code></td>
+<td>Rule ID</td>
+<td>Tracking</td>
+</tr>
+<tr>
+<td><code>rev</code></td>
+<td>Revision</td>
+<td>Versioning</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects attempts to pivot into PROD</li>
+<li>Flags malware using SMB/RDP propagation</li>
+<li>Enforces strict trust boundaries</li>
+</ul>
+<h3 id="isolation-network-enforcement">Isolation Network Enforcement<a class="headerlink" href="#isolation-network-enforcement" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert ip [10.20.0.0/24,192.168.3.0/24] any -&gt; 192.168.200.0/24 any \
+(msg:&quot;LAB2: ISO → LAB2 Traffic (Policy Violation)&quot;; sid:920006; rev:1;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alert ip</code></td>
+<td>Match any protocol</td>
+<td>Covers TCP, UDP, ICMP, etc.</td>
+</tr>
+<tr>
+<td><code>[10.20.0.0/24,192.168.3.0/24]</code></td>
+<td>ISO networks</td>
+<td>Quarantined/isolated zones</td>
+</tr>
+<tr>
+<td><code>-&gt; 192.168.200.0/24</code></td>
+<td>LAB2</td>
+<td>Should never communicate</td>
+</tr>
+<tr>
+<td><code>any</code></td>
+<td>Any port</td>
+<td>Full isolation enforcement</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects policy violations from isolated networks</li>
+<li>Helps identify misconfigured hosts or malware breakout attempts</li>
+<li>Ensures ISO networks remain fully contained</li>
+</ul>
+<h3 id="smb-netbios-hygiene_1">SMB / NetBIOS Hygiene<a class="headerlink" href="#smb-netbios-hygiene_1" title="Permanent link">&para;</a></h3>
+<h3 id="netbios-session-service-detection">NetBIOS Session Service Detection<a class="headerlink" href="#netbios-session-service-detection" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp any any -&gt; any 139 \
+(msg:&quot;NetBIOS Session Service Detected&quot;; sid:9xxxxx; rev:1;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>port 139</code></td>
+<td>NetBIOS Session Service</td>
+<td>Legacy Windows protocol</td>
+</tr>
+<tr>
+<td><code>any any -&gt; any</code></td>
+<td>Global detection</td>
+<td>Hygiene monitoring</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects legacy SMB/NetBIOS traffic</li>
+<li>Useful for identifying outdated systems</li>
+<li>Helps enforce modern SMB hygiene</li>
+</ul>
+<h3 id="smbv1-protocol-negotiation-detection">SMBv1 Protocol Negotiation Detection<a class="headerlink" href="#smbv1-protocol-negotiation-detection" title="Permanent link">&para;</a></h3>
+<p><strong>Rule</strong>
+<div class="highlight"><pre><span></span><code>alert tcp any any -&gt; any 445 \
+(msg:&quot;SMBv1 Protocol Negotiation&quot;; content:&quot;|ff|SMB&quot;; depth:8; sid:9xxxxx; rev:1;)
+</code></pre></div></p>
+<p><strong>Field Breakdown</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>port 445</code></td>
+<td>SMB</td>
+<td>Modern SMB port</td>
+</tr>
+<tr>
+<td><code>content:"\|ff\|SMB"</code></td>
+<td>SMBv1 signature</td>
+<td>Detects deprecated protocol</td>
+</tr>
+<tr>
+<td><code>depth:8</code></td>
+<td>Only inspect first 8 bytes</td>
+<td>Performance optimization</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Operational Impact</strong></p>
+<ul>
+<li>Detects SMBv1 usage (deprecated, insecure)</li>
+<li>Helps enforce compliance and hygiene</li>
+<li>Identifies vulnerable hosts susceptible to EternalBlue class exploits</li>
+</ul>
+<h2 id="12-security-homelab-section-links">12. Security Homelab Section Links<a class="headerlink" href="#12-security-homelab-section-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="/Career_Projects/projects/homelab/01-exec-summary/">Executive Summary and Security Posture</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/02-platform/">Infrastructure Platform, Virtualization Stack and Hardware</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/03-network/">Network Security, Privacy and Remote Access</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/04-iam-secrets/">Identity, Access, Secrets and Trust Management</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/05-auto-iac/">Automation and IaC</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/06-apps-service/">Applications and Services</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/07-vis-response-pt1/">Observability and Response, Part 1</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/08-vis-response-pt2/">Observability and Response, Part 2</a></strong></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

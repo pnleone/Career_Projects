@@ -1,0 +1,2759 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../business-intelligence/">
+      
+      
+        <link rel="next" href="../homelab/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Threat Intelligence Brief & SOC Improvement Plan - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#threat-intelligence-brief-and-soc-enhancement-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Threat Intelligence Brief & SOC Improvement Plan
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-threat-intelligence-brief" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Threat Intelligence Brief
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Threat Intelligence Brief">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-overview-of-unc5221-threat-landscape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Overview of UNC5221 Threat Landscape
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Overview of UNC5221 Threat Landscape">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1 Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-related-campaigns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2 Related Campaigns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-threat-analysis-ivanti-connect-secure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Threat Analysis – Ivanti Connect Secure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Threat Analysis – Ivanti Connect Secure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-vulnerabilities-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1 Vulnerabilities Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.1 Vulnerabilities Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cve-2023-46805-ivanti-connect-secure-policy-secure-authentication-bypass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CVE-2023-46805 – Ivanti Connect Secure / Policy Secure Authentication Bypass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cve-2024-21887-ivanti-command-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CVE-2024-21887 – Ivanti Command Injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cve-2025-22457-ivanti-stack-based-buffer-overflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CVE-2025-22457 - Ivanti Stack-Based Buffer Overflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-related-toolset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2 Related Toolset
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.2 Related Toolset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trailblaze" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TRAILBLAZE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brushfire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BRUSHFIRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spawnsloth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPAWNSLOTH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spawnwave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPAWNWAVE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zipline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ZIPLINE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brickstorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BRICKSTORM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthworm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EARTHWORM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lightwire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LIGHTWIRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neo-regeorg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NEO-reGEORG
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-mitre-attck-mapping-for-ivanti-cves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.3 MITRE ATT&amp;CK Mapping for Ivanti CVEs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-risk-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.4 Risk Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#135-recommendations-for-mitigation-and-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.5 Recommendations for Mitigation and Detection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.5 Recommendations for Mitigation and Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1351-mitigation-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.5.1 Mitigation Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1352-detection-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.5.2 Detection Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1353-additional-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.5.3 Additional Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-security-operations-center-detection-strategy-and-rule-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Security Operations Center - Detection Strategy and Rule Deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Security Operations Center - Detection Strategy and Rule Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-critical-log-sources-and-telemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Critical Log Sources and Telemetry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Critical Log Sources and Telemetry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-critical-log-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1 Critical Log Sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-mitre-technique-telemetry-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2 MITRE Technique Telemetry Coverage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-detection-rule-suggestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Detection Rule Suggestions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Detection Rule Suggestions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-yara-rules-for-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1 YARA Rules for Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-suricata-intrusion-prevention-system-detection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2 Suricata Intrusion Prevention System Detection Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-sentinelone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3 SentinelOne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234-crowdsec-detection-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.4 CrowdSec Detection Scenarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#235-firewall-filter-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.5 Firewall Filter Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#236-file-integrity-monitoring-fim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.6 File Integrity Monitoring (FIM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#238-sigma-rules-and-splunk-correlation-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.8 Sigma Rules and Splunk Correlation Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-workflow-and-feature-enhancements-to-existing-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Workflow and Feature Enhancements to Existing Solutions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Workflow and Feature Enhancements to Existing Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-sentinelone-singularity-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1 SentinelOne Singularity Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-soar-playbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2 SOAR Playbooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-threat-intelligence-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3 Threat Intelligence Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244-passive-dns-and-proxy-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.4 Passive DNS and Proxy Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-integration-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.5 Integration Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-new-platform-and-technology-acquisitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 New Platform and Technology Acquisitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 New Platform and Technology Acquisitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-crowdsec-threat-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.1 CrowdSec Threat Intelligence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-splunk-soar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.2 Splunk SOAR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-dlp-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.3 DLP Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-detection-rule-summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Detection Rule Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="threat-intelligence-brief-and-soc-enhancement-plan">Threat Intelligence Brief and SOC Enhancement Plan<a class="headerlink" href="#threat-intelligence-brief-and-soc-enhancement-plan" title="Permanent link">&para;</a></h1>
+<p><img alt="PMG Medical Centre" src="../../assets/misc/pmg.png" /></p>
+<p><strong>Created By:</strong> Paul Leone<br />
+<strong>Date:</strong> October 6, 2025<br />
+<strong>Organization:</strong> Piedmont Medical Group (PMG)</p>
+<hr />
+<h2 id="1-threat-intelligence-brief">1. Threat Intelligence Brief<a class="headerlink" href="#1-threat-intelligence-brief" title="Permanent link">&para;</a></h2>
+<h3 id="11-purpose">1.1 Purpose<a class="headerlink" href="#11-purpose" title="Permanent link">&para;</a></h3>
+<p>This brief delivers a focused overview of UNC5221, a threat actor that presents significant risks to Piedmont Medical Group (PMG) and the broader healthcare sector. The purpose of this document is to inform PMG's IT team and healthcare staff by providing context, analysis, and tailored recommendations based on PMG's specific IT environment and operational needs.</p>
+<p>To begin, the background summary will contextualize UNC5221's activities and objectives in the healthcare industry. Following the background summary, the threat analysis will detail how UNC5221's tactics, techniques, and procedures (TTPs) align with the MITRE ATT&amp;CK framework. The MITRE ATT&amp;CK framework is a globally recognized knowledge base that categorizes adversary tactics and techniques observed in real-world incidents.</p>
+<p>After the threat analysis, the report will summarize the vulnerabilities most relevant to PMG, with a focus on those affecting the organization's technology stack and network. This section will make clear how these vulnerabilities could impact PMG's infrastructure.</p>
+<p>Building on the vulnerabilities discussion, the document will address the malware toolkits deployed by UNC5221, explaining their potential effects on PMG's systems. The report will then conclude with actionable recommendations for detection and mitigation, all of which are customized to address the unique IT infrastructure and operational requirements of Piedmont Medical Group.</p>
+<p>As a follow-up, a Security Operations Center (SOC) detection strategy and rule deployment document will be provided to the IT team for further review. This accompanying document will include: an inventory of critical log sources and telemetry for PMG's assets; detection rule suggestions mapped to the observed TTPs; and proposed enhancements for dashboards and SOC workflows, ensuring that all guidance is directly relevant to PMG's environment.</p>
+<hr />
+<h3 id="12-overview-of-unc5221-threat-landscape">1.2 Overview of UNC5221 Threat Landscape<a class="headerlink" href="#12-overview-of-unc5221-threat-landscape" title="Permanent link">&para;</a></h3>
+<h4 id="121-background">1.2.1 Background<a class="headerlink" href="#121-background" title="Permanent link">&para;</a></h4>
+<p>UNC5221 is a China-nexus espionage threat actor that the PMG CTI team has been actively tracking since October 2023. This group has increasingly focused its operations on the healthcare sector, targeting critical infrastructure and sensitive patient data within hospitals, clinics, and healthcare service providers.</p>
+<p>Their primary initial access vector remains the exploitation of vulnerabilities in widely deployed enterprise-grade Virtual Private Network (VPN) appliances, such as Ivanti Connect Secure. After gaining a foothold, UNC5221 leverages a custom malware toolset designed for stealth and persistent presence within healthcare IT systems.</p>
+<h4 id="122-related-campaigns">1.2.2 Related Campaigns<a class="headerlink" href="#122-related-campaigns" title="Permanent link">&para;</a></h4>
+<ul>
+<li>In April 2025, UNC5221 exploited a critical buffer overflow vulnerability, CVE-2025-22457, in Ivanti Connect Secure VPN appliances.</li>
+<li>Since April 2024, UNC5221 has been observed exploiting vulnerabilities in edge devices, used compromised credentials, and deployed the BRICKSTORM backdoor in a campaign targeting the legal and software industries in the United States (CAMP.25.044).</li>
+</ul>
+<hr />
+<h3 id="13-threat-analysis-ivanti-connect-secure">1.3 Threat Analysis – Ivanti Connect Secure<a class="headerlink" href="#13-threat-analysis-ivanti-connect-secure" title="Permanent link">&para;</a></h3>
+<p>This report focuses specifically on PMG and its current VPN infrastructure. At present, PMG's attack surface includes only Ivanti VPN endpoints; Fortinet and Citrix VPN solutions are not deployed within the organization. Accordingly, the analysis will address only Ivanti-specific CVEs and related recommendations.</p>
+<h4 id="131-vulnerabilities-overview">1.3.1 Vulnerabilities Overview<a class="headerlink" href="#131-vulnerabilities-overview" title="Permanent link">&para;</a></h4>
+<h5 id="cve-2023-46805-ivanti-connect-secure-policy-secure-authentication-bypass">CVE-2023-46805 – Ivanti Connect Secure / Policy Secure Authentication Bypass<a class="headerlink" href="#cve-2023-46805-ivanti-connect-secure-policy-secure-authentication-bypass" title="Permanent link">&para;</a></h5>
+<p><strong>Overview:</strong> An authentication bypass vulnerability in the web component of Ivanti Connect Secure (ICS) and Ivanti Policy Secure gateways. Allows unauthenticated attackers to access restricted resources by bypassing control checks.</p>
+<p><strong>Affected Products:</strong>
+- Ivanti Connect Secure
+- Ivanti Policy Secure
+- Ivanti ZTA Gateways</p>
+<p><strong>Impacted Versions:</strong>
+- Ivanti Connect Secure: 9.x and 22.x (e.g., 9.1R18.3)
+- Ivanti Policy Secure: Same versions</p>
+<p><strong>Attack Vector:</strong>
+- Remote unauthenticated access via crafted HTTP requests to Ivanti VPN endpoints</p>
+<p><strong>Exploitation:</strong>
+- Often chained with CVE-2024-21887 for unauthenticated remote code execution
+- Used by threat actors like UNC5221 and UTA0178 to deploy webshells</p>
+<p><strong>Impact:</strong>
+- Severity: CVSS 9.8 (Critical)
+- Effect: Full remote code execution without authentication
+- Scope: Allows attackers to deploy malware, establish persistence, and pivot laterally into internal networks</p>
+<p><strong>Mitigations:</strong>
+- Patch to versions: 9.1R18.4, 9.1R17.3, 22.6R2.2, etc.
+- A patch was released for ICS 22.2R3 on June 4, 2024. Previous releases were patched on February 8th for Ivanti Connect Secure (versions 9.1R14.5, 9.1R17.3, 9.1R18.4, 22.4R2.3, 22.5R1.2, 22.5R2.3 and 22.6R2.2), Ivanti Policy Secure (versions 9.1R17.3, 9.1R18.4 and 22.5R1.2) and ZTA gateways (versions 22.5R1.6, 22.6R1.5 and 22.6R1.7)) and 14th (for Ivanti Connect Secure (versions 9.1R15.3, 9.1R16.3, 22.1R6.1, 22.2R4.1, 22.3R1.1 and 22.4R1.1) and Ivanti Policy Secure (versions 9.1R16.3, 22.4R1.1 and 22.6R1.1) respectively
+- Ivanti released mitigation scripts for unpatched systems
+- CISA added this to its Known Exploited Vulnerabilities (KEV) catalog</p>
+<h5 id="cve-2024-21887-ivanti-command-injection">CVE-2024-21887 – Ivanti Command Injection<a class="headerlink" href="#cve-2024-21887-ivanti-command-injection" title="Permanent link">&para;</a></h5>
+<p><strong>Overview:</strong> A command injection vulnerability in Ivanti ICS and Policy Secure allowing authenticated administrators to execute arbitrary commands.</p>
+<p><strong>Affected Products:</strong>
+- Ivanti Connect Secure
+- Ivanti Policy Secure</p>
+<p><strong>Impacted Versions:</strong>
+- Ivanti Connect Secure: 9.x and 22.x (e.g., 9.1R18.3)
+- Ivanti Policy Secure: Same versions</p>
+<p><strong>Exploitation:</strong>
+- Often chained with CVE-2023-46805 for unauthenticated RCE
+- Used by UNC5221 and other actors to deploy malware and webshells</p>
+<p><strong>Mitigations:</strong>
+- Patch to 9.1R18.4 and other listed versions
+- Apply Ivanti's mitigation script if patching is delayed</p>
+<h5 id="cve-2025-22457-ivanti-stack-based-buffer-overflow">CVE-2025-22457 - Ivanti Stack-Based Buffer Overflow<a class="headerlink" href="#cve-2025-22457-ivanti-stack-based-buffer-overflow" title="Permanent link">&para;</a></h5>
+<p><strong>Overview:</strong> Stack-based buffer overflow in Ivanti Connect Secure, Policy Secure, and ZTA Gateways.</p>
+<p><strong>Affected Products:</strong>
+- Ivanti Connect Secure
+- Ivanti Policy Secure
+- Ivanti ZTA Gateways</p>
+<p><strong>Impacted Versions:</strong>
+- Ivanti Connect Secure: 9.x and 22.x (e.g., 9.1R18.3)
+- Ivanti Policy Secure: Same versions</p>
+<p><strong>Impact:</strong>
+- Remote unauthenticated code execution
+- CVSS: 9.8 (Critical)
+- Exploited In Wild: Yes — attributed to UNC5221 (China-nexus actor)</p>
+<p><strong>Malware Dropped:</strong>
+- TRAILBLAZE (in-memory dropper)
+- BRUSHFIRE (passive backdoor)
+- SPAWN ecosystem (previously linked to UNC5221)</p>
+<p><strong>Mitigations:</strong>
+- Patch to 9.1R18.4 and other listed versions
+- A patch for CVE-2025-22457 was released in ICS 22.7R2.6 on February 11, 2025. The vulnerability is a buffer overflow with a limited character space, and therefore it was initially believed to be a low-risk denial-of-service vulnerability. We assess it's likely the threat actor studied the patch for the vulnerability in ICS 22.7R2.6 and uncovered through a complicated process, it was possible to exploit 22.7R2.5 and earlier to achieve remote code execution</p>
+<hr />
+<h4 id="132-related-toolset">1.3.2 Related Toolset<a class="headerlink" href="#132-related-toolset" title="Permanent link">&para;</a></h4>
+<h5 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>Directly Associated:</strong> 3 tools (TRAILBLAZE, BRUSHFIRE, SPAWNSLOTH)</li>
+<li><strong>Possibly Associated:</strong> 6 tools (SPAWNWAVE, ZIPLINE, Brickstorm, Earthworm, Lightwire, Neo-reGeorg)</li>
+</ul>
+<h5 id="trailblaze">TRAILBLAZE<a class="headerlink" href="#trailblaze" title="Permanent link">&para;</a></h5>
+<p>TRAILBLAZE is an in-memory only dropper written in bare C that uses raw syscalls and is designed to be as minimal as possible, likely to ensure it can fit within the shell script as Base64. TRAILBLAZE injects a hook into the identified /home/bin/web process. It will then inject the BRUSHFIRE passive backdoor into a code cave inside that process.</p>
+<p><strong>Threat Correlation:</strong> In-memory dropper deployed via shell injection; fits within login.cgi exploit chain.</p>
+<h5 id="brushfire">BRUSHFIRE<a class="headerlink" href="#brushfire" title="Permanent link">&para;</a></h5>
+<p>BRUSHFIRE is a passive backdoor written in bare C that acts as an SSL_read hook. It first executes the original SSL_read function, and checks to see if the returned data begins with a specific string. If the data begins with the string, it will XOR decrypt then execute shellcode contained in the data. If the received shellcode returns a value, the backdoor will call SSL_write to send the value back.</p>
+<p><strong>Threat Correlation:</strong> Passive backdoor injected by TRAILBLAZE into /home/bin/web; core persistence mechanism.</p>
+<h5 id="spawnsloth">SPAWNSLOTH<a class="headerlink" href="#spawnsloth" title="Permanent link">&para;</a></h5>
+<p>As detailed in our previous blog post, SPAWNSLOTH acts as a log tampering component tied to the SPAWNSNAIL backdoor. It targets the dslogserver process to disable both local logging and remote syslog forwarding.</p>
+<p><strong>Threat Correlation:</strong> Log tampering component used post-exploitation to disable dslogserver and evade detection.</p>
+<h5 id="spawnwave">SPAWNWAVE<a class="headerlink" href="#spawnwave" title="Permanent link">&para;</a></h5>
+<p>SPAWNWAVE is an evolved version of SPAWNANT that combines capabilities from other members of the SPAWN* malware ecosystem. SPAWNWAVE overlaps with the publicly reported SPAWNCHIMERA and RESURGE malware families.</p>
+<p><strong>Threat Correlation:</strong> Part of SPAWN ecosystem; overlaps with malware families used by UNC5221 in Ivanti campaigns.</p>
+<h5 id="zipline">ZIPLINE<a class="headerlink" href="#zipline" title="Permanent link">&para;</a></h5>
+<p>ZIPLINE is a passive backdoor that was used during Cutting Edge on compromised Secure Connect VPNs for reverse shell and proxy functionality.</p>
+<p><strong>Threat Correlation:</strong> Passive backdoor used in Secure Connect VPN exploitation; may overlap with Ivanti tooling.</p>
+<h5 id="brickstorm">BRICKSTORM<a class="headerlink" href="#brickstorm" title="Permanent link">&para;</a></h5>
+<p>Brickstorm is a sophisticated and highly evasive cyberespionage backdoor tool, primarily associated with the China-aligned threat group UNC5221. The malware has been used in long-term espionage campaigns to infiltrate and steal intellectual property and other sensitive information from high-value targets, particularly in Europe.</p>
+<p><strong>Threat Correlation:</strong> UNC5221-linked espionage tool; may be deployed post-access for long-term persistence.</p>
+<h5 id="earthworm">EARTHWORM<a class="headerlink" href="#earthworm" title="Permanent link">&para;</a></h5>
+<p>A simple network tunnel with SOCKS v5 server and port transfer. It works well in various situations. It supports "forward", "backward" and "multi-transfer" modes and can penetrate deeply into the intranet. It supports various OS such as Linux, Windows, MacOS, Arm-Linux. Adversaries may tunnel network communications to and from a victim system within a separate protocol to avoid detection and network filtering, or to enable access to otherwise unreachable systems.</p>
+<p><strong>Threat Correlation:</strong> Network tunneling tool; useful for C2 or lateral movement post-Ivanti compromise.</p>
+<h5 id="lightwire">LIGHTWIRE<a class="headerlink" href="#lightwire" title="Permanent link">&para;</a></h5>
+<p>LIGHTWIRE is a web shell written in Perl that was used during Cutting Edge to maintain access and enable command execution by embedding into the legitimate compcheckresult.cgi component of Ivanti Secure Connect VPNs.</p>
+<p><strong>Threat Correlation:</strong> Web shell embedded in Ivanti CGI component; aligns with CVE-2024-21887 exploitation.</p>
+<h5 id="neo-regeorg">NEO-reGEORG<a class="headerlink" href="#neo-regeorg" title="Permanent link">&para;</a></h5>
+<p>Neo-reGeorg is an open-source web shell designed as a restructuring of reGeorg with improved usability, security, and fixes for existing reGeorg bugs.</p>
+<p><strong>Threat Correlation:</strong> Open-source web shell; commonly used in VPN appliance exploitation scenarios.</p>
+<hr />
+<h4 id="133-mitre-attck-mapping-for-ivanti-cves">1.3.3 MITRE ATT&amp;CK Mapping for Ivanti CVEs<a class="headerlink" href="#133-mitre-attck-mapping-for-ivanti-cves" title="Permanent link">&para;</a></h4>
+<p><img alt="MITRE ATT&amp;CK Framework Visualization" src="../../assets/misc/mitre.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Tactic</th>
+<th>Technique ID</th>
+<th>Technique Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial Access</td>
+<td>T1190</td>
+<td>Exploit Public-Facing Application</td>
+<td>Attackers exploit Ivanti VPN endpoints to gain unauthenticated access</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>T1059.004</td>
+<td>Command and Scripting Interpreter: Unix Shell</td>
+<td>Shell commands injected via login.cgi to execute payloads like TRAILBLAZE</td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td>T1505.003</td>
+<td>Server Software Component: Webshell</td>
+<td>BRUSHFIRE backdoor embedded in /home/bin/web for long-term access</td>
+</tr>
+<tr>
+<td>Defense Evasion</td>
+<td>T1562.001</td>
+<td>Impair Defenses: Disable or Modify Tools</td>
+<td>Ivanti's integrity checker tool (ICT) is tampered to avoid detection</td>
+</tr>
+<tr>
+<td>Command &amp; Control</td>
+<td>T1071.001</td>
+<td>Application Layer Protocol: Web</td>
+<td>BRUSHFIRE uses passive HTTP/S beaconing for stealthy C2 communication</td>
+</tr>
+<tr>
+<td>Credential Access</td>
+<td>T1003</td>
+<td>OS Credential Dumping</td>
+<td>VPN session tokens and credentials are harvested post-exploitation</td>
+</tr>
+<tr>
+<td>Exfiltration</td>
+<td>T1041</td>
+<td>Exfiltration Over C2 Channel</td>
+<td>Data exfiltrated via encrypted channels from compromised appliances</td>
+</tr>
+<tr>
+<td>Lateral Movement</td>
+<td>T1021.004</td>
+<td>Remote Services: SSH</td>
+<td>SPAWN toolkit used to pivot across systems using SSH and remote shells</td>
+</tr>
+<tr>
+<td>Defense Evasion</td>
+<td>T1027</td>
+<td>Obfuscated Files or Information</td>
+<td>TRAILBLAZE is packed and Base64-encoded in shell scripts</td>
+</tr>
+<tr>
+<td>Defense Evasion</td>
+<td>T1036</td>
+<td>Masquerading</td>
+<td>BRUSHFIRE masquerades as legitimate SSL_read hook</td>
+</tr>
+<tr>
+<td>Defense Evasion</td>
+<td>T1222</td>
+<td>File and Directory Permissions Modification</td>
+<td>Used to persist implants in /home/bin/web with modified perms</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>T1016</td>
+<td>System Network Configuration Discovery</td>
+<td>SPAWN tools perform network recon for lateral movement</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>T1033</td>
+<td>System Owner/User Discovery</td>
+<td>Used to identify privileged accounts post-access</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>T1057</td>
+<td>Process Discovery</td>
+<td>TRAILBLAZE targets running processes for injection</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>T1082</td>
+<td>System Information Discovery</td>
+<td>Recon phase includes OS fingerprinting</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>T1083</td>
+<td>File and Directory Discovery</td>
+<td>SPAWN tools enumerate file paths for implant placement</td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>T1518</td>
+<td>Software Discovery</td>
+<td>SPAWNSLOTH disables dslogserver and remote syslog</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>T1047</td>
+<td>Windows Management Instrumentation</td>
+<td>Used in lateral movement and remote command execution (especially in hybrid Windows environments)</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="MITRE ATT&amp;CK Framework Visualization" src="../../assets/screenshots/mitre_ivanti.svg" /></p>
+<hr />
+<h4 id="134-risk-assessment">1.3.4 Risk Assessment<a class="headerlink" href="#134-risk-assessment" title="Permanent link">&para;</a></h4>
+<p>The following table outlines the potential risk and impact to PMG.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Risk / Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remote Access Compromise</td>
+<td>VPN gateway exploitation allows attackers to bypass authentication and gain full access to internal systems</td>
+</tr>
+<tr>
+<td>Patient Data Exposure</td>
+<td>Attackers can exfiltrate PHI (Protected Health Information), violating HIPAA and triggering breach notifications</td>
+</tr>
+<tr>
+<td>Malware Deployment</td>
+<td>TRAILBLAZE and BRUSHFIRE enable stealthy persistence and remote control, often undetected by traditional AV</td>
+</tr>
+<tr>
+<td>Credential Theft</td>
+<td>VPN session tokens and cached credentials can be harvested, enabling lateral movement and privilege escalation</td>
+</tr>
+<tr>
+<td>Operational Disruption</td>
+<td>Attackers may disable logging (via SPAWNSLOTH), tamper with integrity tools, or crash services, impacting care delivery</td>
+</tr>
+<tr>
+<td>Compliance Violations</td>
+<td>Failure to patch or detect exploitation could result in regulatory penalties and loss of accreditation</td>
+</tr>
+<tr>
+<td>Third-Party Risk</td>
+<td>Compromised VPNs may be used to pivot into EHR systems, billing platforms, or partner networks</td>
+</tr>
+<tr>
+<td>Reputation Damage</td>
+<td>Public disclosure of a breach tied to known CVEs can erode patient trust and damage institutional credibility</td>
+</tr>
+<tr>
+<td>Incident Response Overload</td>
+<td>Without automation or SOAR playbooks, even a single compromise can overwhelm IT and compliance teams</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="135-recommendations-for-mitigation-and-detection">1.3.5 Recommendations for Mitigation and Detection<a class="headerlink" href="#135-recommendations-for-mitigation-and-detection" title="Permanent link">&para;</a></h4>
+<p>This section outlines high-level mitigation and detection strategies for Ivanti-related CVEs exploited by UNC5221. Detailed configuration guidance and workflow enhancements are provided in the accompanying solution document. Note that these recommendations include potential additions to the existing toolset.</p>
+<p>These recommendations are intended for organizations currently using Ivanti products and may require adaptation based on individual infrastructure and security policies. For step-by-step implementation details and workflow integration, please refer to the accompanying solution document before making any changes.</p>
+<h5 id="1351-mitigation-recommendations">1.3.5.1 Mitigation Recommendations<a class="headerlink" href="#1351-mitigation-recommendations" title="Permanent link">&para;</a></h5>
+<p><strong>Patch Validation and Software Hygiene</strong></p>
+<ul>
+<li>Validate all deployed Ivanti Connect Secure appliances against the latest vendor advisories</li>
+<li>Ensure software versions meet or exceed the patch levels specified in the mitigation sections of CVE-2025-22457, CVE-2023-46805, and CVE-2024-21887</li>
+<li>Monitor for out-of-band firmware updates and emergency hotfixes from Ivanti and CISA</li>
+</ul>
+<p><strong>Asset Management and Attack Surface Reduction</strong></p>
+<ul>
+<li>Use SentinelOne Ranger or equivalent tools to discover unmanaged or rogue VPN appliances, IoT devices, and remote endpoints</li>
+<li>Maintain a centralized asset inventory that includes:</li>
+<li>Network infrastructure (firewalls, switches, VPNs)</li>
+<li>Server Compute</li>
+<li>Medical devices and embedded systems</li>
+<li>End-user workstations and mobile devices</li>
+<li>Cloud workloads and virtual appliances</li>
+<li>Tag critical assets (VPN gateways, EHR systems) for prioritized alerting and patch enforcement</li>
+</ul>
+<p><strong>Network Segmentation and Access Control</strong></p>
+<ul>
+<li>Isolate Ivanti appliances from direct internet exposure where possible</li>
+<li>Enforce strict ACLs and firewall rules to limit access to endpoints</li>
+<li>Require MFA for all VPN access</li>
+</ul>
+<h5 id="1352-detection-enhancements">1.3.5.2 Detection Enhancements<a class="headerlink" href="#1352-detection-enhancements" title="Permanent link">&para;</a></h5>
+<p><strong>Sigma Rule Deployment</strong></p>
+<p>Deployment of Sigma rules related to the CVEs. Sigma rules enhance log-based detection across multiple platforms. Recommended log sources include:</p>
+<ul>
+<li><strong>Windows Sysmon / Event Logs:</strong> Detect shell execution, credential access, and process injection (e.g., TRAILBLAZE behavior)</li>
+<li><strong>Suricata IPS:</strong> Match exploit signatures for login.cgi and welcome.cgi injection attempts. Use Sid 22457 for CVE-2025-22457</li>
+<li><strong>Firewall Logs:</strong> Adapt Sigma rules to detect anomalous outbound traffic, reverse shells, and passive beaconing</li>
+<li><strong>Azure Security Center / Defender XDR:</strong> Translate Sigma logic into KQL queries to detect command injection, webshell activity, and lateral movement</li>
+<li><strong>Ivanti Connect Secure Logs:</strong> Monitor HTTP access logs for exploit chains involving login.cgi, welcome.cgi, and suspicious POST bodies</li>
+<li><strong>Splunk SIEM / SOAR:</strong> Use Sigma2Splunk converters to build correlation searches, risk-based alerts, and automated playbooks</li>
+<li><strong>SentinelOne Singularity Endpoint:</strong> While Sigma is not natively supported, logic can be translated into Storyline Active Response (STAR) rules or hunting queries</li>
+<li><strong>CrowdSec:</strong> Convert Sigma rules into YAML-based scenarios. CrowdSec supports behavioral detection and can trigger bouncer actions (e.g., IP blocking, Discord alerts)</li>
+</ul>
+<p><strong>YARA Rule Deployment</strong></p>
+<p>YARA rules support malware identification, endpoint detection, and forensic triage. Recommended integrations:</p>
+<ul>
+<li><strong>SentinelOne Deep Visibility:</strong> Scan memory and file artifacts for BRUSHFIRE, TRAILBLAZE, and SPAWN variants. Supports custom indicators</li>
+<li><strong>Ivanti Connect Secure Appliance:</strong> Use YARA to scan /home/bin/web and other implant paths if file access is available via SSH or forensic imaging</li>
+<li><strong>Splunk:</strong> Integrate YARA via scripted inputs or sandbox connectors (e.g., Cuckoo, VMRay) for malware analysis</li>
+<li><strong>Microsoft Defender for Office 365:</strong> Apply YARA in sandboxed email attachment analysis and phishing lure detection</li>
+<li><strong>Azure Security Center / Defender for Endpoint:</strong> Use YARA for file scanning and memory inspection across cloud workloads and hybrid endpoints</li>
+<li><strong>DLP Solutions:</strong> Apply YARA to scan outbound files for sensitive content (e.g., PHI, PII, credentials) before transmission</li>
+</ul>
+<h5 id="1353-additional-recommendations">1.3.5.3 Additional Recommendations<a class="headerlink" href="#1353-additional-recommendations" title="Permanent link">&para;</a></h5>
+<ul>
+<li>File Integrity Monitoring (FIM)</li>
+<li>SentinelOne enhancements</li>
+<li>Ranger</li>
+<li>STAR</li>
+<li>Passive DNS and Proxy Analysis</li>
+<li>Threat Intelligence enhancements, integration of existing tools and CrowdSec into current workflows</li>
+<li>Deployment of Splunk SOAR as an enhancement to the existing toolset</li>
+<li>Automate response actions such as:<ul>
+<li>Endpoint isolation</li>
+<li>Ticket creation</li>
+<li>Threat enrichment</li>
+<li>SOC notification</li>
+</ul>
+</li>
+<li>Deployment of a Data Loss Prevention (DLP) solution to add additional internal controls geared towards protecting sensitive data (HIPAA/PHI/PII)</li>
+</ul>
+<hr />
+<h2 id="2-security-operations-center-detection-strategy-and-rule-deployment">2. Security Operations Center - Detection Strategy and Rule Deployment<a class="headerlink" href="#2-security-operations-center-detection-strategy-and-rule-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="21-purpose">2.1 Purpose<a class="headerlink" href="#21-purpose" title="Permanent link">&para;</a></h3>
+<p>This section outlines the detection logic, rule formats, and platform-specific integrations designed to identify exploitation attempts and post-compromise activity related to CVE-2025-22457, CVE-2023-46805, and CVE-2024-21887. The rules can be deployed across a multi-platform SOC environment, including SentinelOne, Splunk, CrowdSec, Suricata, and DLP solutions. Each rule is mapped to MITRE ATT&amp;CK techniques and aligned with the threat intelligence findings in Section 1. The goal is to provide reproducible detection logic that supports both automated response and forensic triage.</p>
+<hr />
+<h3 id="22-critical-log-sources-and-telemetry">2.2 Critical Log Sources and Telemetry<a class="headerlink" href="#22-critical-log-sources-and-telemetry" title="Permanent link">&para;</a></h3>
+<h4 id="221-critical-log-sources">2.2.1 Critical Log Sources<a class="headerlink" href="#221-critical-log-sources" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Source</th>
+<th>Why It's Critical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VPN Gateway Logs</td>
+<td>Ivanti Connect Secure HTTP access logs (welcome.cgi, login.cgi, DSID cookies)</td>
+<td>Detects initial access, exploit attempts, and webshell injection (T1190, T1059.004)</td>
+</tr>
+<tr>
+<td>Web Server Logs</td>
+<td>Webserver(s) logs on Ivanti appliance or reverse proxy</td>
+<td>Captures command injection, unusual POSTs, and shell payloads</td>
+</tr>
+<tr>
+<td>Process Creation</td>
+<td>Sysmon (Windows), auditd (Linux), SentinelOne Deep Visibility</td>
+<td>Detects TRAILBLAZE execution, shell spawns, and BRUSHFIRE injection (T1059.004, T1057)</td>
+</tr>
+<tr>
+<td>File Integrity Monitoring</td>
+<td>SentinelOne</td>
+<td>Flags changes to /home/bin/web, dropped implants, or tampered ICT binaries (T1505.003, T1222)</td>
+</tr>
+<tr>
+<td>Network Traffic</td>
+<td>Suricata/Snort, firewall logs, CrowdSec decisions</td>
+<td>Identifies passive beaconing, reverse shells, and lateral movement (T1071.001, T1021.002)</td>
+</tr>
+<tr>
+<td>Authentication Logs</td>
+<td>VPN login events, AD/LDAP logs, MFA failures</td>
+<td>Detects credential harvesting, session hijacking, and brute force attempts (T1003, T1033)</td>
+</tr>
+<tr>
+<td>Endpoint Telemetry</td>
+<td>SentinelOne, Defender for Endpoint, CrowdSec agent</td>
+<td>Tracks shell execution, memory-only payloads, and suspicious child processes</td>
+</tr>
+<tr>
+<td>DNS &amp; Proxy Logs</td>
+<td>Internal DNS, web proxy, Secure Web Gateway</td>
+<td>Reveals C2 domains, encoded payloads, and exfiltration attempts (T1041)</td>
+</tr>
+<tr>
+<td>Email Security Logs</td>
+<td>Defender for O365</td>
+<td>Detects phishing lures targeting VPN credentials or fake Ivanti updates</td>
+</tr>
+<tr>
+<td>Asset Inventory &amp; Vulnerability Scans</td>
+<td>Qualys, SentinelOne Ranger</td>
+<td>Identifies vulnerable Ivanti appliances and unmanaged VPN endpoints</td>
+</tr>
+<tr>
+<td>Cloud App Logs</td>
+<td>Azure App Service, Defender for Cloud</td>
+<td>Detects command injection patterns (cmd=, ;, &amp;) in cloud-exposed Ivanti services</td>
+</tr>
+</tbody>
+</table>
+<h4 id="222-mitre-technique-telemetry-coverage">2.2.2 MITRE Technique Telemetry Coverage<a class="headerlink" href="#222-mitre-technique-telemetry-coverage" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>MITRE Technique</th>
+<th>Required Telemetry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1190 – Exploit Public-Facing App</td>
+<td>VPN logs, web server logs</td>
+</tr>
+<tr>
+<td>T1059.004 – Unix Shell</td>
+<td>Process creation, shell history</td>
+</tr>
+<tr>
+<td>T1505.003 – Webshell</td>
+<td>File integrity, process injection</td>
+</tr>
+<tr>
+<td>T1562.001 – Disable Security Tools</td>
+<td>ICT tampering, log suppression</td>
+</tr>
+<tr>
+<td>T1071.001 – Web C2</td>
+<td>Firewall / IPS (Suricata) logs</td>
+</tr>
+<tr>
+<td>T1003 – Credential Dumping</td>
+<td>EDR/Auth logs, memory inspection</td>
+</tr>
+<tr>
+<td>T1041 – Exfiltration</td>
+<td>DNS, firewall logs</td>
+</tr>
+<tr>
+<td>T1021.004 – SSH</td>
+<td>Network traffic, process logs</td>
+</tr>
+<tr>
+<td>T1033 – User Discovery</td>
+<td>Endpoint telemetry, shell history</td>
+</tr>
+<tr>
+<td>T1222 – File Permissions</td>
+<td>FIM, auditd, SentinelOne</td>
+</tr>
+<tr>
+<td>T1518.001 – Security Software Discovery</td>
+<td>Process logs, endpoint scans</td>
+</tr>
+<tr>
+<td>T1027 – Obfuscated Files or Information</td>
+<td>File content inspection, script decoding, memory analysis</td>
+</tr>
+<tr>
+<td>T1036 – Masquerading</td>
+<td>Process lineage, binary metadata, DLL loading anomalies</td>
+</tr>
+<tr>
+<td>T1016 – System Network Configuration Discovery</td>
+<td>Network interface logs, shell commands (ip, ifconfig)</td>
+</tr>
+<tr>
+<td>T1057 – Process Discovery</td>
+<td>Process listings, auditd</td>
+</tr>
+<tr>
+<td>T1082 – System Information Discovery</td>
+<td>OS fingerprinting, hostname queries, system metadata</td>
+</tr>
+<tr>
+<td>T1083 – File and Directory Discovery</td>
+<td>File access logs, shell history, auditd</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="23-detection-rule-suggestions">2.3 Detection Rule Suggestions<a class="headerlink" href="#23-detection-rule-suggestions" title="Permanent link">&para;</a></h3>
+<h4 id="231-yara-rules-for-detection">2.3.1 YARA Rules for Detection<a class="headerlink" href="#231-yara-rules-for-detection" title="Permanent link">&para;</a></h4>
+<div style="background: white; padding: 1rem; border-radius: 12px; max-width: 350px; margin: 2rem auto;">
+  <img src="/Career_Projects/assets/misc/yara.svg"
+       alt="Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+</div>
+
+<p>This section outlines YARA-based detection logic for identifying memory-resident implants and file-based indicators. These rules can be applied across the security stack, SentinelOne, Microsoft Defender, DLP solutions and forensic platforms.</p>
+<p><strong>BRUSHFIRE Backdoor</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">rule</span><span class="w"> </span>BRUSHFIRE<span class="n">_Backdoor</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">meta</span><span class="p">:</span>
+<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Detects BRUSHFIRE passive backdoor&quot;</span>
+<span class="w">        </span><span class="n">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Paul Leone&quot;</span>
+<span class="w">        </span><span class="n">cve</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;CVE-2025-22457&quot;</span>
+
+<span class="w">    </span><span class="k">strings</span><span class="p">:</span>
+<span class="w">        </span><span class="nv">$s1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;BRUSHFIRE::init&quot;</span>
+<span class="w">        </span><span class="nv">$s2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;/home/bin/web&quot;</span>
+<span class="w">        </span><span class="nv">$s3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;passive_beacon_mode&quot;</span>
+
+<span class="w">    </span><span class="k">condition</span><span class="p">:</span>
+<span class="w">        </span><span class="ow">all</span><span class="w"> </span><span class="nb">of</span><span class="w"> </span><span class="nb">them</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>SPAWN Toolset Detection Rules</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">rule</span><span class="w"> </span>M<span class="n">_APT_Installer_SPAWNANT_1</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">meta</span><span class="p">:</span>
+<span class="w">        </span><span class="n">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Mandiant&quot;</span>
+<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Detects SPAWNANT. SPAWNANT is an Installer targeting Ivanti devices. Its purpose is to persistently install other malware from the SPAWN family (SPAWNSNAIL, SPAWNMOLE) as well as drop additional webshells on the box.&quot;</span>
+
+<span class="w">    </span><span class="k">strings</span><span class="p">:</span>
+<span class="w">        </span><span class="nv">$s1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;dspkginstall&quot;</span><span class="w"> </span><span class="nb">ascii</span><span class="w"> </span><span class="nb">fullword</span>
+<span class="w">        </span><span class="nv">$s2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;vsnprintf&quot;</span><span class="w"> </span><span class="nb">ascii</span><span class="w"> </span><span class="nb">fullword</span>
+<span class="w">        </span><span class="nv">$s3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;bom_files&quot;</span><span class="w"> </span><span class="nb">ascii</span><span class="w"> </span><span class="nb">fullword</span>
+<span class="w">        </span><span class="nv">$s4</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;do-install&quot;</span><span class="w"> </span><span class="nb">ascii</span>
+<span class="w">        </span><span class="nv">$s5</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;ld.so.preload&quot;</span><span class="w"> </span><span class="nb">ascii</span>
+<span class="w">        </span><span class="nv">$s6</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;LD_PRELOAD&quot;</span><span class="w"> </span><span class="nb">ascii</span>
+<span class="w">        </span><span class="nv">$s7</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;scanner.py&quot;</span><span class="w"> </span><span class="nb">ascii</span>
+
+<span class="w">    </span><span class="k">condition</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">uint32</span><span class="p">(</span>0<span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span>0<span class="n">x464c457f</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span>5<span class="w"> </span><span class="nb">of</span><span class="w"> </span><span class="p">(</span><span class="nv">$s</span><span class="p">*)</span>
+<span class="p">}</span>
+
+<span class="kd">rule</span><span class="w"> </span>M<span class="n">_Utility_SPAWNSNARE_1</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">meta</span><span class="p">:</span>
+<span class="w">        </span><span class="n">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Mandiant&quot;</span>
+<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;SPAWNSNARE is a utility written in C that targets Linux systems by extracting the uncompressed Linux kernel image into a file and encrypting it with AES.&quot;</span>
+
+<span class="w">    </span><span class="k">strings</span><span class="p">:</span>
+<span class="w">        </span><span class="nv">$s1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;\x00extract_vmlinux\x00&quot;</span>
+<span class="w">        </span><span class="nv">$s2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;\x00encrypt_file\x00&quot;</span>
+<span class="w">        </span><span class="nv">$s3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;\x00decrypt_file\x00&quot;</span>
+<span class="w">        </span><span class="nv">$s4</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;\x00lbb_main\x00&quot;</span>
+<span class="w">        </span><span class="nv">$s5</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;\x00busybox\x00&quot;</span>
+<span class="w">        </span><span class="nv">$s6</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;\x00/etc/busybox.conf\x00&quot;</span>
+
+<span class="w">    </span><span class="k">condition</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">uint32</span><span class="p">(</span>0<span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span>0<span class="n">x464c457f</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="nb">of</span><span class="w"> </span><span class="nb">them</span>
+<span class="p">}</span>
+
+<span class="kd">rule</span><span class="w"> </span>M<span class="n">_APT_Utility_SPAWNSLOTH_2</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">meta</span><span class="p">:</span>
+<span class="w">        </span><span class="n">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Mandiant&quot;</span>
+<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Hunting rule to identify strings found in SPAWNSLOTH&quot;</span>
+
+<span class="w">    </span><span class="k">strings</span><span class="p">:</span>
+<span class="w">        </span><span class="nv">$dslog</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;dslogserver&quot;</span><span class="w"> </span><span class="nb">ascii</span><span class="w"> </span><span class="nb">fullword</span>
+<span class="w">        </span><span class="nv">$hook1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;g_do_syslog_servers_exist&quot;</span><span class="w"> </span><span class="nb">ascii</span><span class="w"> </span><span class="nb">fullword</span>
+<span class="w">        </span><span class="nv">$hook2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;ZN5DSLog4File3addEPKci&quot;</span><span class="w"> </span><span class="nb">ascii</span><span class="w"> </span><span class="nb">fullword</span>
+<span class="w">        </span><span class="nv">$hook3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;funchook&quot;</span><span class="w"> </span><span class="nb">ascii</span><span class="w"> </span><span class="nb">fullword</span>
+
+<span class="w">    </span><span class="k">condition</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">uint32</span><span class="p">(</span>0<span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span>0<span class="n">x464c457f</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="nb">of</span><span class="w"> </span><span class="nb">them</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h4 id="232-suricata-intrusion-prevention-system-detection-rules">2.3.2 Suricata Intrusion Prevention System Detection Rules<a class="headerlink" href="#232-suricata-intrusion-prevention-system-detection-rules" title="Permanent link">&para;</a></h4>
+<p><strong>Exploit Attempt Detection</strong>
+<div class="highlight"><pre><span></span><code>alert http $EXTERNAL_NET any -&gt; $HOME_NET any (msg:&quot;Ivanti CVE-2025-22457 Exploit Attempt&quot;; flow:to_server,established; content:&quot;/dana-na/auth/url_default/welcome.cgi&quot;; http_uri; content:&quot;TRAILBLAZE&quot;; http_client_body; classtype:attempted-admin; sid:22457; rev:1;)
+</code></pre></div></p>
+<p><strong>Shell Dropper Detection</strong>
+<div class="highlight"><pre><span></span><code>alert tcp $EXTERNAL_NET any -&gt; $HOME_NET 443 (msg:&quot;Ivanti CVE-2025-22457 Shell Dropper&quot;; flow:to_server,established; content:&quot;#!/bin/sh&quot;; content:&quot;TRAILBLAZE&quot;; content:&quot;BRUSHFIRE&quot;; sid:224572025; rev:1;)
+</code></pre></div></p>
+<hr />
+<h4 id="233-sentinelone">2.3.3 SentinelOne<a class="headerlink" href="#233-sentinelone" title="Permanent link">&para;</a></h4>
+<p>Recommended enhancements to SentinelOne Singularity Endpoint that strengthen detection and response for Ivanti-related threats:</p>
+<p><strong>Deep Visibility</strong></p>
+<p>Enables granular telemetry across endpoints, capturing process execution, memory artifacts, and file operations — essential for detecting in-memory payloads like TRAILBLAZE and stealthy implants like BRUSHFIRE.</p>
+<hr />
+<h4 id="234-crowdsec-detection-scenarios">2.3.4 CrowdSec Detection Scenarios<a class="headerlink" href="#234-crowdsec-detection-scenarios" title="Permanent link">&para;</a></h4>
+<p>CrowdSec scenarios use YAML rules to analyze logs and trigger actions. They work with web, VPN, and optionally Suricata logs to spot brute force and exploit attempts. You can also set up remediation nodes for automatic rule updates with known C2 IPs.</p>
+<p><strong>Scenario: Ivanti Auth Bypass via DSID Cookie</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crowdsecurity/ivanti-auth-bypass</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detects suspicious DSID cookie usage targeting Ivanti welcome.cgi</span>
+<span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">evt.Meta.log_type == &#39;http_access-log&#39; &amp;&amp;</span>
+<span class="w">  </span><span class="no">Lower(evt.Meta.http_path) contains &quot;/dana-na/auth/url_default/welcome.cgi&quot; &amp;&amp;</span>
+<span class="w">  </span><span class="no">Lower(evt.Meta.http_cookie) contains &quot;dsid=&quot;</span>
+<span class="nt">groupby</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evt.Meta.source_ip</span>
+<span class="nt">distinct</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evt.Meta.http_cookie</span>
+<span class="nt">capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="nt">leakspeed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10m</span>
+<span class="nt">labels</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exploit</span>
+<span class="w">  </span><span class="nt">remediation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">classification</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attack.initial_access</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cve.CVE-2023-46805</span>
+</code></pre></div>
+<strong>Scenario: Ivanti Command Injection via login.cgi</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crowdsecurity/ivanti-command-injection</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detects suspicious cmd= injection attempts in Ivanti login.cgi</span>
+<span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">evt.Meta.log_type == &#39;http_access-log&#39; &amp;&amp;</span>
+<span class="w">  </span><span class="no">Lower(evt.Meta.http_path) contains &quot;/dana-na/auth/url_default/login.cgi&quot; &amp;&amp;</span>
+<span class="w">  </span><span class="no">Lower(evt.Meta.http_body) contains &quot;cmd=&quot; &amp;&amp;</span>
+<span class="w">  </span><span class="no">(</span>
+<span class="w">    </span><span class="no">Lower(evt.Meta.http_body) contains &quot;%3b&quot; or</span>
+<span class="w">    </span><span class="no">Lower(evt.Meta.http_body) contains &quot;%26&quot; or</span>
+<span class="w">    </span><span class="no">Lower(evt.Meta.http_body) contains &quot;%2f&quot;</span>
+<span class="w">  </span><span class="no">)</span>
+<span class="nt">groupby</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evt.Meta.source_ip</span>
+<span class="nt">distinct</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evt.Meta.http_body</span>
+<span class="nt">capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">leakspeed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<span class="nt">labels</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exploit</span>
+<span class="w">  </span><span class="nt">remediation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">classification</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attack.execution</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cve.CVE-2024-21887</span>
+</code></pre></div>
+<strong>Scenario: Ivanti Custom Detection for CVE-2025-22457 / TRAILBLAZE</strong><br />
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crowdsec/ivanti_cve_2025_22457</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detects exploitation attempts of CVE-2025-22457</span>
+<span class="nt">filter</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">evt.Meta.service == &quot;http&quot; &amp;&amp;</span>
+<span class="w">  </span><span class="no">evt.Meta.http_path contains &quot;/dana-na/auth/url_default/welcome.cgi&quot; &amp;&amp;</span>
+<span class="w">  </span><span class="no">evt.Meta.http_body contains &quot;TRAILBLAZE&quot;</span>
+<span class="nt">groupby</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evt.Meta.source_ip</span>
+<span class="nt">blackhole</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<span class="nt">labels</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exploit</span>
+<span class="w">  </span><span class="nt">remediation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">classification</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CVE-2025-22457</span>
+</code></pre></div></p>
+<h4 id="235-firewall-filter-rules">2.3.5 Firewall Filter Rules<a class="headerlink" href="#235-firewall-filter-rules" title="Permanent link">&para;</a></h4>
+<p>CrowdSec remediation service deployed on the NG Firewall can ingest firewall rules via packages or block lists.</p>
+<p><img src="/Career_Projects/assets/screenshots/fw_rules.svg"
+     alt="CrowdSec Deployed Scenarios"
+     style="max-width: 90%; height: auto;"></p>
+<p>Example of deployed Scenarios:</p>
+<!-- <img src="/Career_Projects/assets/screenshots/fw_deployed.svg" alt="CrowdSec Deployed Scenarios" width="800"> -->
+
+<p><img src="/Career_Projects/assets/screenshots/fw_deployed.svg"
+     alt="CrowdSec Deployed Scenarios"
+     style="max-width: 90%; height: auto;"></p>
+<h4 id="236-file-integrity-monitoring-fim">2.3.6 File Integrity Monitoring (FIM)<a class="headerlink" href="#236-file-integrity-monitoring-fim" title="Permanent link">&para;</a></h4>
+<p>Monitor critical paths such as /home/bin/web, /tmp/, and /var/log/ for unauthorized changes, implant drops, and log tampering.</p>
+<p>Use cases:</p>
+<ul>
+<li>SentinelOne for kernel-level monitoring and behavioral detection of file modifications</li>
+<li>CrowdSec to detect suspicious file access patterns and correlate with behavioral scenarios (e.g., unexpected shell activity or log suppression)</li>
+<li>Splunk SOAR to ingest FIM alerts and trigger automated playbooks (e.g., isolate asset, enrich with threat intel, notify SOC)</li>
+</ul>
+<p>2.3.7 Passive DNS and Proxy Analysis
+Track outbound connections to known C2 domains used by BRUSHFIRE, ZIPLINE, and other UNC5221 tooling.</p>
+<p>Flag:</p>
+<ul>
+<li>Encoded payloads (e.g., Base64 in HTTP POST bodies)</li>
+<li>Suspicious user agents (e.g., curl, wget, custom implants)</li>
+</ul>
+<h4 id="238-sigma-rules-and-splunk-correlation-logic">2.3.8 Sigma Rules and Splunk Correlation Logic<a class="headerlink" href="#238-sigma-rules-and-splunk-correlation-logic" title="Permanent link">&para;</a></h4>
+<div style="background: white; padding: 1rem; border-radius: 12px; max-width: 350px; margin: 2rem auto;">
+  <img src="/Career_Projects/assets/misc/sigma.svg"
+       alt="Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+</div>
+<p>These queries and rules are designed to detect Ivanti exploitation activity across multiple stages of the kill chain, from initial access to post-exploitation. They correlate logs from:</p>
+<ul>
+<li>Ivanti VPN appliances (e.g., login.cgi, welcome.cgi)</li>
+<li>Suricata alerts (network-based IDS signatures)</li>
+<li>System audit logs (Windows Sysmon, Linux auditd)</li>
+</ul>
+<p>Each Search Processing Language (SPL) query or rule targets specific behaviors:</p>
+<ul>
+<li>Webshell drop detection (e.g., TRAILBLAZE payloads)</li>
+<li>Suricata alert correlation for CVE-specific signatures</li>
+<li>Post-exploitation activity like file creation and beaconing</li>
+</ul>
+<p><strong>Sigma Rule: Webshell Drop via Ivanti Exploit</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ivanti Connect Secure Webshell Drop</span>
+<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9e8b3c3e-4685-4c87-9f3e-ivanti-webshell</span>
+<span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">experimental</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detects suspicious file creation in Ivanti Connect Secure directories</span>
+<span class="nt">logsource</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">product</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows</span>
+<span class="w">  </span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file_create</span>
+<span class="nt">detection</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">selection</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">TargetFilename|contains</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;\temp\&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;\htdocs\&#39;</span>
+<span class="w">    </span><span class="nt">Image|contains</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;cmd.exe&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;powershell.exe&#39;</span>
+<span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">selection</span>
+<span class="nt">fields</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TargetFilename</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Image</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">User</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CommandLine</span>
+<span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">high</span>
+<span class="nt">tags</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attack.initial_access</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attack.persistence</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cve.CVE-2023-46805</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cve.CVE-2024-21887</span>
+</code></pre></div>
+<p><strong>Splunk Alert and Query Translations</strong></p>
+<p><div class="highlight"><pre><span></span><code><span class="k">[Ivanti Connect Secure Webshell Drop]</span>
+<span class="na">alert.severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4</span>
+<span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Detects suspicious file creation in Ivanti Connect Secure directories (Rule ID: 9e8b3c3e-4685-4c87-9f3e-ivanti-webshell) Reference: https://tdm.socprime.com/tdm/info/</span>
+<span class="na">cron_schedule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0 * * * *</span>
+<span class="na">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">is_scheduled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">is_visible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">dispatch.earliest_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">-60m@m</span>
+<span class="na">dispatch.latest_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">now</span>
+<span class="na">search = index=* source</span><span class="o">=</span><span class="s">&quot;WinEventLog:*&quot;</span><span class="w"> </span><span class="na">AND ((TargetFilename</span><span class="o">=</span><span class="s">&quot;*\\temp\\*&quot;</span><span class="w"> </span><span class="na">OR TargetFilename</span><span class="o">=</span><span class="s">&quot;*\\htdocs\\*&quot;</span><span class="na">) AND (NewProcessName</span><span class="o">=</span><span class="s">&quot;*cmd.exe*&quot;</span><span class="w"> </span><span class="na">OR NewProcessName</span><span class="o">=</span><span class="s">&quot;*powershell.exe*&quot;</span><span class="na">)) | table TargetFilename,NewProcessName,User,CommandLine</span>
+<span class="na">alert.suppress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<span class="na">alert.track</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">risk,notable</span>
+<span class="na">action.risk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">action.risk.param._risk_object_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">user</span>
+<span class="na">action.risk.param._risk_score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">75</span>
+<span class="na">action.correlationsearch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+<span class="na">action.correlationsearch.enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">action.notable.param.rule_title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Ivanti Connect Secure Webshell Drop</span>
+<span class="na">action.notable.param.rule_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Detects suspicious file creation in Ivanti Connect Secure directories (Rule ID: 9e8b3c3e-4685-4c87-9f3e-ivanti-webshell)</span>
+</code></pre></div>
+<strong>Ivanti Exploit Chain Detection (Webshell Drop)</strong></p>
+<p><div class="highlight"><pre><span></span><code>index=web_logs sourcetype=ivanti_http_logs
+| search uri=&quot;/dana-na/auth/url_default/welcome.cgi&quot; AND cookie=&quot;DSID=&quot;
+| join source_ip [ search index=web_logs uri=&quot;/dana-na/auth/url_default/login.cgi&quot; body=&quot;cmd=&quot; OR body=&quot;TRAILBLAZE&quot; ]
+| stats count by source_ip, uri, user_agent, body
+| where count &gt; 2
+</code></pre></div>
+<strong>Suricata Alert Correlation (Sid 468051 + 218871 + 22457)</strong></p>
+<p><div class="highlight"><pre><span></span><code>index=suricata sourcetype=suricata_eve
+| search alert.signature IN (
+    &quot;EXPLOIT – Ivanti Connect Secure Authentication Bypass&quot;,
+    &quot;EXPLOIT – Ivanti Connect Secure Command Injection&quot;,
+    &quot;EXPLOIT – Ivanti Connect Secure Buffer Overflow CVE-2025-22457&quot;
+)
+| stats count by src_ip, dest_ip, alert.signature, timestamp
+| where count &gt; 1
+</code></pre></div>
+<strong>File Creation + Network Beaconing (Post-Exploitation)</strong>
+<div class="highlight"><pre><span></span><code>index=os_logs sourcetype=linux_audit OR sourcetype=windows_sysmon
+| search process_name=&quot;cmd.exe&quot; OR process_name=&quot;powershell.exe&quot; OR process_name=&quot;TRAILBLAZE&quot;
+| join host [ search index=network_logs dest_port=443 OR dest_port=8443 ]
+| stats count by host, process_name, dest_ip, uri
+| where count &gt; 3
+</code></pre></div></p>
+<h3 id="24-workflow-and-feature-enhancements-to-existing-solutions">2.4 Workflow and Feature Enhancements to Existing Solutions<a class="headerlink" href="#24-workflow-and-feature-enhancements-to-existing-solutions" title="Permanent link">&para;</a></h3>
+<h4 id="241-sentinelone-singularity-endpoint">2.4.1 SentinelOne Singularity Endpoint<a class="headerlink" href="#241-sentinelone-singularity-endpoint" title="Permanent link">&para;</a></h4>
+<p>Recommended enhancements to SentinelOne that provide increased asset visibility and streamline workflows for Ivanti-related threats:</p>
+<p><strong>Device Inventory</strong></p>
+<p>Automatically discovers and tracks all endpoints, including Windows, Linux, macOS and cloud workloads. Displays hostname, OS, IP, MAC address, agent status and more. Tag assets by site, group, policy, and criticality level for triage and prioritization.</p>
+<p><strong>Ranger</strong></p>
+<p>Performs passive network discovery to identify unmanaged or rogue devices, including vulnerable Ivanti VPN appliances. Helps map the full attack surface and flag assets missing endpoint protection. Supports agentless visibility using passive network scanning.</p>
+<p><strong>STAR (Storyline Active Response)</strong></p>
+<p>SentinelOne's custom detection engine that correlates process chains, flags suspicious behavior (shell spawn from web process), and automates response actions like isolation, alerting, and enrichment.</p>
+<ul>
+<li>Create custom STAR detection rules for suspicious behaviors linked to these CVEs</li>
+<li>Storyline Correlation Logic:</li>
+<li>Web process spawning shell interpreters</li>
+<li>Encoded payloads (e.g., base64, PowerShell) from web-facing services</li>
+<li>Outbound HTTPS connections from non-browser processes</li>
+</ul>
+<p><strong>Example Detection Rules:</strong>
+<div class="highlight"><pre><span></span><code>Rule: Suspicious Webshell Drop
+ProcessName: powershell.exe OR cmd.exe
+CommandLine: contains &quot;echo&quot; AND contains &quot;.aspx&quot; OR &quot;.jsp&quot;
+ParentProcess: httpd.exe OR nginx.exe OR unknown
+Tags: [&quot;ivanti&quot;, &quot;webshell&quot;, &quot;CVE-2023-46805&quot;]
+
+Rule: Command Injection via login.cgi
+ProcessName: bash OR sh OR python
+CommandLine: contains &quot;cmd=&quot; AND contains &quot;;&quot;
+ParentProcess: httpd OR nginx OR unknown
+Tags: [&quot;ivanti&quot;, &quot;command-injection&quot;, &quot;CVE-2024-21887&quot;]
+
+Rule: Buffer Overflow Dropper
+ProcessName: cmd.exe OR powershell.exe OR TRAILBLAZE
+CommandLine: contains &quot;BRUSHFIRE&quot; OR &quot;/home/bin/web&quot;
+ParentProcess: httpd OR nginx OR unknown
+Tags: [&quot;ivanti&quot;, &quot;dropper&quot;, &quot;CVE-2025-22457&quot;]
+</code></pre></div></p>
+<p><strong>Storyline Correlation Examples:</strong></p>
+<ul>
+<li>httpd.exe → powershell.exe → curl.exe → remote IP</li>
+<li>Flag this as suspicious lateral movement or C2 beaconing</li>
+<li>httpd.exe → TRAILBLAZE → BRUSHFIRE → outbound HTTPS</li>
+<li>Memory-only execution with no file artifacts</li>
+<li>Reverse shell or passive beaconing from /home/bin/web</li>
+</ul>
+<hr />
+<h4 id="242-soar-playbooks">2.4.2 SOAR Playbooks<a class="headerlink" href="#242-soar-playbooks" title="Permanent link">&para;</a></h4>
+<p>Integrating a SOAR platform into the current SOC toolset will facilitate the automation of response actions across multiple platforms.</p>
+<p><strong>Endpoint Isolation</strong></p>
+<ul>
+<li>Trigger via SentinelOne or Defender for Endpoint</li>
+<li>Use Splunk SOAR to orchestrate across hybrid environments</li>
+</ul>
+<p><strong>Ticket Creation</strong></p>
+<ul>
+<li>Auto-generate tickets in ITSM platforms (ServiceNow, Jira) with full context from CrowdSec, SentinelOne, and Splunk</li>
+</ul>
+<p><strong>Threat Enrichment</strong></p>
+<ul>
+<li>Pull CVE metadata, MITRE mappings, and malware family details into alert context</li>
+<li>Use Splunk SOAR to enrich alerts with Sigma/YARA matches and IOC overlays</li>
+</ul>
+<p><strong>SOC Notification</strong></p>
+<ul>
+<li>Send real-time alerts to Slack, Teams, or email with full triage context</li>
+<li>Include asset tags, exploit chain stage, and recommended response actions</li>
+</ul>
+<p><strong>Ivanti-Specific Logic</strong></p>
+<ul>
+<li>Detect access to /dana-na/auth/url_default/login.cgi with cmd= or TRAILBLAZE payloads</li>
+<li>Flag modifications to /home/bin/web and disablement of dslogserver</li>
+<li>Correlate with Suricata Sid 22457 and CrowdSec exploit scenarios</li>
+</ul>
+<hr />
+<h4 id="243-threat-intelligence-integration">2.4.3 Threat Intelligence Integration<a class="headerlink" href="#243-threat-intelligence-integration" title="Permanent link">&para;</a></h4>
+<p>Enrich detections with IOCs from:</p>
+<ul>
+<li>CISA AA25-22457</li>
+<li>Health-ISAC</li>
+<li>Commercial feeds (Recorded Future, Proofpoint, SentinelOne Threat Intel)</li>
+</ul>
+<p><strong>Use cases:</strong></p>
+<ul>
+<li><strong>Splunk SOAR</strong> to ingest threat intel feeds and correlate with asset criticality, MITRE techniques, and recent alerts</li>
+<li><strong>SentinelOne STAR</strong> to tag assets and apply custom detection logic based on threat indicators</li>
+<li><strong>CrowdSec</strong> to ingest IOCs into its decision engine and trigger bouncer actions (e.g., IP block, Discord alert)</li>
+<li><strong>DLP solution</strong> to apply threat intel to outbound file scanning and block transmission of known malware or sensitive content</li>
+</ul>
+<hr />
+<h4 id="244-passive-dns-and-proxy-analysis">2.4.4 Passive DNS and Proxy Analysis<a class="headerlink" href="#244-passive-dns-and-proxy-analysis" title="Permanent link">&para;</a></h4>
+<p><strong>Workflow use cases:</strong></p>
+<ul>
+<li><strong>CrowdSec</strong> to detect repeated outbound attempts, DNS tunneling, or proxy evasion. CrowdSec scenarios can block IPs and log decisions for SOC review</li>
+<li><strong>Splunk SOAR</strong> to correlate proxy anomalies with endpoint behavior (e.g., shell spawn → outbound HTTPS → C2 domain)</li>
+<li><strong>DLP solution</strong> to inspect outbound traffic for sensitive data exfiltration (e.g., PHI, credentials) and enforce transmission policies</li>
+</ul>
+<hr />
+<h4 id="245-integration-notes">2.4.5 Integration Notes<a class="headerlink" href="#245-integration-notes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Splunk SOAR</strong> can ingest alerts from Sigma, Suricata, CrowdSec, and YARA-based sandboxing tools to automate triage, ticketing, and endpoint isolation. SOAR playbooks can trigger based on Sigma-matched alerts</li>
+<li><strong>SentinelOne STAR</strong> can be enriched with YARA hits and CrowdSec decisions to trigger behavioral response actions</li>
+<li><strong>CrowdSec</strong> scenarios can be mapped to MITRE techniques and used to block IPs, trigger alerts, or forward decisions to SIEM/SOAR platforms</li>
+<li><strong>DLP solutions</strong> (Microsoft Purview, CoSoSys, Forcepoint) can apply YARA rules to scan outbound files for implants or sensitive content</li>
+</ul>
+<hr />
+<h3 id="25-new-platform-and-technology-acquisitions">2.5 New Platform and Technology Acquisitions<a class="headerlink" href="#25-new-platform-and-technology-acquisitions" title="Permanent link">&para;</a></h3>
+<h4 id="251-crowdsec-threat-intelligence">2.5.1 CrowdSec Threat Intelligence<a class="headerlink" href="#251-crowdsec-threat-intelligence" title="Permanent link">&para;</a></h4>
+<p>Deploying CrowdSec introduces a collaborative, behavior-based defense layer that strengthens detection and response across network and system activity. It's especially valuable for small healthcare organizations seeking lightweight, scalable protection against exploitation attempts, credential abuse, and lateral movement, including those tied to CVE-2025-22457, CVE-2023-46805, and CVE-2024-21887.</p>
+<p><strong>Options include:</strong> CrowdSec Community Edition (free), CrowdSec Premium (with extended telemetry and support)</p>
+<p><strong>Key Capabilities to Prioritize:</strong></p>
+<p><strong>Behavioral Detection</strong></p>
+<p>Detect brute force, command injection, and suspicious shell activity using YAML-based scenarios mapped to MITRE techniques.</p>
+<p><strong>Log Source Integration</strong></p>
+<p>Ingest logs from firewalls, VPNs, Suricata, SSH, and systemd to monitor for Ivanti-specific exploit chains and post-exploitation behavior.</p>
+<p><strong>Bouncer Actions</strong></p>
+<p>Automatically block malicious IPs, disable user accounts, or trigger alerts based on real-time decisions.</p>
+<p><strong>Community Threat Intelligence</strong></p>
+<p>Leverage global signals from other CrowdSec users to enrich local detections and prioritize emerging threats.</p>
+<p><strong>Sigma Rule Conversion</strong></p>
+<p>Translate Sigma rules into CrowdSec scenarios to detect known attack patterns and anomalies.</p>
+<p><strong>SOAR Integration</strong></p>
+<p>Forward CrowdSec decisions to Splunk SOAR for automated triage, ticketing, and enrichment alongside SentinelOne and DLP alerts.</p>
+<p><strong>Strategic Benefits:</strong></p>
+<ul>
+<li>Adds real-time behavioral detection to VPN and endpoint telemetry</li>
+<li>Enables automated blocking of known malicious IPs and exploit attempts</li>
+<li>Provides community-driven threat intelligence without heavy infrastructure</li>
+<li>Enhances visibility into Ivanti-related attack flows with minimal overhead</li>
+</ul>
+<hr />
+<h4 id="252-splunk-soar">2.5.2 Splunk SOAR<a class="headerlink" href="#252-splunk-soar" title="Permanent link">&para;</a></h4>
+<p>Deploying Splunk SOAR enables automated, scalable incident response tailored to healthcare environments. It's especially critical when facing multi-stage attacks like those exploiting Ivanti VPN infrastructure, where rapid triage and coordinated response are essential.</p>
+<p><strong>Options include:</strong> Splunk SOAR Cloud, Splunk SOAR On-Prem, or Splunk SOAR Lite for smaller teams</p>
+<p><strong>Key Capabilities to Prioritize:</strong></p>
+<p><strong>Playbook Automation</strong></p>
+<p>Build workflows to isolate endpoints, enrich alerts, notify SOC teams, and escalate incidents based on severity and asset criticality.</p>
+<p><strong>Threat Intelligence Correlation</strong></p>
+<p>Integrate feeds from CISA, Health-ISAC, SentinelOne, CrowdSec, and DLP tools to enrich alerts with CVE, malware, and MITRE context.</p>
+<p><strong>Asset-Aware Response</strong></p>
+<p>Tag critical assets (VPN gateways, EHR systems) and prioritize response actions accordingly.</p>
+<p><strong>IOC Matching and Enrichment</strong></p>
+<p>Automatically match incoming alerts against known indicators (BRUSHFIRE domains, ZIPLINE hashes) and enrich with MITRE technique mappings.</p>
+<p><strong>Cross-Platform Integration</strong></p>
+<p>Connect with SentinelOne, Microsoft Defender, CrowdSec, Qualys, and DLP tools to orchestrate unified response.</p>
+<p><strong>Case Management and Reporting</strong></p>
+<p>Track incident lifecycle, generate audit-ready reports, and support HIPAA compliance documentation.</p>
+<p><strong>Strategic Benefits:</strong></p>
+<ul>
+<li>Enables rapid containment of Ivanti-related threats across endpoints, networks, and cloud</li>
+<li>Reduces SOC fatigue through automated triage and enrichment</li>
+<li>Ensures consistent, policy-driven response across all security tools</li>
+<li>Supports forensic investigation and compliance reporting for PHI/PII incidents</li>
+</ul>
+<hr />
+<h4 id="253-dlp-solution">2.5.3 DLP Solution<a class="headerlink" href="#253-dlp-solution" title="Permanent link">&para;</a></h4>
+<p>Implementing a DLP solution introduces critical internal controls designed to protect sensitive healthcare data, including HIPAA-regulated PHI, PII, and financial records. This is especially vital in the context of Ivanti exploitation, where attackers may gain access to VPN-connected endpoints and attempt data exfiltration.</p>
+<p><strong>Options include:</strong> Microsoft Purview, CoSoSys and Forcepoint DLP for small organizations</p>
+<p><strong>Key Capabilities to Prioritize:</strong></p>
+<p><strong>Content Inspection</strong></p>
+<p>Deep scanning of files, emails, and web uploads for sensitive data.</p>
+<p><strong>Policy Enforcement</strong></p>
+<p>Block or quarantine outbound transmissions that violate data handling policies, especially from compromised endpoints or VPN sessions.</p>
+<p><strong>Endpoint Integration</strong></p>
+<p>Monitor clipboard activity, USB transfers, and file access on workstations and mobile devices. Detect attempts to move PHI outside approved channels.</p>
+<p><strong>Network DLP</strong></p>
+<p>Inspect outbound traffic for encrypted payloads, ZIPLINE-style reverse shells, or BRUSHFIRE beaconing that may contain exfiltrated data.</p>
+<p><strong>YARA Rule Support</strong></p>
+<p>Apply custom YARA rules to scan for malware-laced documents or implants attempting to masquerade as legitimate healthcare files.</p>
+<p><strong>SOAR Integration</strong></p>
+<p>Forward DLP alerts to Splunk SOAR for automated triage, ticketing, and endpoint isolation. Include context from CrowdSec decisions and SentinelOne Deep Visibility.</p>
+<p><strong>Strategic Benefits:</strong></p>
+<ul>
+<li>Prevents unauthorized transmission of PHI/PII during or after exploitation of VPN infrastructure</li>
+<li>Adds a compensating control for organizations with limited segmentation or endpoint hardening</li>
+<li>Enables forensic triage of suspected data theft attempts tied to CVE-2025-22457, CVE-2023-46805, and CVE-2024-21887</li>
+</ul>
+<hr />
+<h3 id="26-detection-rule-summary-table">2.6 Detection Rule Summary Table<a class="headerlink" href="#26-detection-rule-summary-table" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Type</th>
+<th>Target Platform(s)</th>
+<th>CVE Coverage</th>
+<th>MITRE Technique(s)</th>
+<th>Detection Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YARA</td>
+<td>SentinelOne, Defender, DLP</td>
+<td>CVE-2025-22457</td>
+<td>T1059.004, T1505.003</td>
+<td>Detect BRUSHFIRE and SPAWN implants</td>
+</tr>
+<tr>
+<td>Sigma</td>
+<td>Splunk, CrowdSec</td>
+<td>CVE-2023-46805, 2024-21887</td>
+<td>T1190, T1071.001</td>
+<td>Detect Ivanti exploit chains and webshells</td>
+</tr>
+<tr>
+<td>Suricata</td>
+<td>Suricata, CrowdSec</td>
+<td>CVE-2025-22457</td>
+<td>T1190, T1059.004</td>
+<td>Detect buffer overflow and shell dropper</td>
+</tr>
+<tr>
+<td>CrowdSec</td>
+<td>CrowdSec, Splunk SOAR</td>
+<td>All three CVEs</td>
+<td>T1190, T1059.004</td>
+<td>Detect command injection and auth bypass</td>
+</tr>
+</tbody>
+</table>
+<p>This table supports SOC onboarding, dashboard filtering, and cross-platform rule deployment.</p>
+<hr />
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>This comprehensive threat intelligence brief and SOC enhancement plan provides Piedmont Medical Group with actionable strategies to defend against UNC5221 exploitation of Ivanti Connect Secure infrastructure. The detection rules, workflow enhancements, and platform recommendations are designed to integrate seamlessly with existing security tools while providing layered defense against sophisticated threat actors targeting the healthcare sector.</p>
+<p><strong>Key Takeaways:</strong></p>
+<ul>
+<li>Immediate patching of CVE-2025-22457, CVE-2023-46805, and CVE-2024-21887 is critical</li>
+<li>Multi-layer detection through YARA, Sigma, Suricata, and CrowdSec rules provides comprehensive coverage</li>
+<li>SOAR automation reduces response times and analyst fatigue</li>
+<li>DLP controls protect PHI/PII from exfiltration during or after compromise</li>
+<li>Threat intelligence integration enriches detection fidelity and contextual awareness</li>
+</ul>
+<p><strong>Next Steps:</strong></p>
+<ol>
+<li>Review and validate current Ivanti patch levels</li>
+<li>Deploy detection rules to appropriate platforms (Splunk, SentinelOne, Suricata, CrowdSec)</li>
+<li>Configure SOAR playbooks for automated response</li>
+<li>Enable SentinelOne Ranger for asset discovery</li>
+<li>Implement FIM monitoring on critical paths</li>
+<li>Integrate threat intelligence feeds</li>
+<li>Conduct tabletop exercises to validate detection and response workflows</li>
+</ol>
+<hr />
+<p><strong>Document Version:</strong> 1.0<br />
+<strong>Last Updated:</strong> October 6, 2025<br />
+<strong>Classification:</strong> Internal Use Only<br />
+<strong>Distribution:</strong> PMG IT Security Team, SOC Analysts, Incident Response Team</p>
+<hr />
+<p><em>For questions or clarifications regarding this document, contact Paul Leone at <a href="mailto:pnleone@outlook.com"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 8-8 5-8-5V6l8 5 8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg></span> pnleone@outlook.com</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

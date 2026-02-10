@@ -1,0 +1,246 @@
+/* Float helpers */
+.float-right {
+  float: right;
+  width: 40%;
+  max-width: 420px;
+  margin: 0 0 1rem 1rem;
+}
+.float-left {
+  float: left;
+  width: 40%;
+  max-width: 420px;
+  margin: 0 1rem 1rem 0;
+}
+
+/* Clearfix utility */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive fallback for floats */
+@media (max-width: 720px) {
+  .float-right,
+  .float-left {
+    float: none;
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+}
+
+/* Two-column flex layout */
+.two-col {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+.two-col .image-col {
+  flex: 0 0 60%;
+  max-width: 420px;
+}
+.two-col .text-col {
+  flex: 1 1 40%;
+}
+.two-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 720px) {
+  .two-col {
+    flex-direction: column;
+  }
+}
+
+/* Two-column: text left, image right */
+.two-col-right {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+
+/* Image column controls how much width the image takes.
+   Set flex-basis to 60% or 75% depending on desired size. */
+.two-col-right .image-col {
+  flex: 0 0 70%; /* change to desired % */
+  max-width: 80%;
+}
+.two-col-right .text-col {
+  flex: 1 1 30%;
+  min-width: 220px; /* prevents text column from collapsing */
+}
+
+/* Ensure image scales and preserves aspect ratio */
+.two-col-right img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .two-col-right {
+    flex-direction: column-reverse; /* text first on narrow screens */
+  }
+  .two-col-right .image-col,
+  .two-col-right .text-col {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+/* Two-column: text left, image right */
+.two-col-right-narrow {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+
+/* Image column controls how much width the image takes.
+   Set flex-basis to 60% or 75% depending on desired size. */
+.two-col-right-narrow .image-col {
+  flex: 0 0 75%; /* change to desired % */
+  max-width: 75%;
+}
+.two-col-right-narrow .text-col {
+  flex: 1 1 25%;
+  min-width: 200px; /* prevents text column from collapsing */
+}
+
+/* Ensure image scales and preserves aspect ratio */
+.two-col-right-narrow img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .two-col-right-narrow {
+    flex-direction: column-reverse; /* text first on narrow screens */
+  }
+  .two-col-right-narrow .image-col,
+  .two-col-right-narrow .text-col {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+/* Two-image row: keep images side-by-side */
+.two-image-row {
+  display: flex !important; /* Ensure flex is active */
+  flex-direction: row;      /* Force horizontal */
+  gap: 1rem;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: nowrap;        /* Prevent wrapping to a new line */
+  margin: 1.25rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Wrapper: Ensure it shares the width */
+.two-image-row .img-wrap {
+  flex: 1 1 50%;            /* Allow them to take up equal half-width */
+  min-width: 0;             /* Critical for flex children with images */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 500px; 
+  background: var(--md-default-bg-color);
+  border-radius: 8px;
+  padding: 0.25rem;
+  box-sizing: border-box;
+  margin: 0;                /* Remove default figure margins */
+}
+
+/* Separate image box */
+.two-image-row .img-box {
+  flex: 1;                  /* Fill vertical space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Image behavior */
+.two-image-row .img-box img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;              /* Keep aspect ratio */
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Caption */
+.two-image-row .img-wrap figcaption {
+  flex: 0 0 auto;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Responsive: stack only on mobile */
+@media (max-width: 600px) {
+  .two-image-row {
+    flex-wrap: wrap;        /* Allow stacking on tiny screens */
+  }
+  .two-image-row .img-wrap {
+    flex: 1 1 100%;
+    height: 300px;
+  }
+}
+}
+.image-large {
+  width: 80%;
+  max-width: 1200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.image-small {
+  width: 20%;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+/* Two equal text columns, side by side */
+.two-col-text-even {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+
+/* Left column */
+.two-col-text-even .text-left {
+  flex: 1 1 50%;
+  min-width: 220px;
+}
+
+/* Right column */
+.two-col-text-even .text-right {
+  flex: 1 1 50%;
+  min-width: 220px;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .two-col-text-even {
+    flex-direction: column;
+  }
+
+  .two-col-text-even .text-left,
+  .two-col-text-even .text-right {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,3414 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../03-network/">
+      
+      
+        <link rel="next" href="../05-auto-iac/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Identity, Access and Secrets - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#identity-access-secrets-and-trust-management" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Identity, Access and Secrets
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architecture Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pkicertificate-authority-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. PKI/Certificate Authority Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. PKI/Certificate Authority Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-overview-and-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Overview and Hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-pki-architecture-and-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 PKI Architecture and Roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-trust-chain-and-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Trust Chain and Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-x509-certificate-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 X.509 Certificate Profile
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 X.509 Certificate Profile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subject-public-key-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subject Public Key Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x509v3-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X.509v3 Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-operational-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Operational Considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-active-directory-certificate-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Active Directory Certificate Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-identity-and-access-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Identity and Access Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Identity and Access Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-authentik-identity-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Authentik Identity Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Authentik Identity Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Flows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-factor-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Factor Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-microsoft-active-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Microsoft Active Directory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Microsoft Active Directory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#active-directory-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Active Directory Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organizational-units-ous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organizational Units (OUs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-user-and-group-policy-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 User and Group Policy Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 User and Group Policy Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group Policies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group Policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computer-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computer Policies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Policies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-preferences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Preferences
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assigned-policiespreferences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigned Policies/Preferences
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-secrets-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Secrets Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Secrets Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-vaultwarden-password-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Vaultwarden Password Manager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Vaultwarden Password Manager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-security-controls-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Security Controls Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Security Controls Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identity-and-access-security-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity and Access Security Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-operational-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Operational Resilience
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Operational Resilience">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identity-service-continuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity Service Continuity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disaster-recovery-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disaster Recovery Procedures
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-and-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring and Alerting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-use-cases-deployment-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Use Cases &amp; Deployment Scenarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Use Cases &amp; Deployment Scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-1-automated-certificate-renewal-for-web-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 1: Automated Certificate Renewal for Web Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-2-centralized-credential-management-for-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 2: Centralized Credential Management for Team
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-3-windows-client-provisioning-with-group-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 3: Windows Client Provisioning with Group Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-4-certificate-based-service-authentication-mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 4: Certificate-Based Service Authentication (mTLS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-standards-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Standards Alignment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Standards Alignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#industry-framework-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Industry Framework Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nist-800-63b-authentication-assurance-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NIST 800-63B Authentication Assurance Levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zero-trust-principles-nist-800-207" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero Trust Principles (NIST 800-207)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cis-controls-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIS Controls Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pki-standards-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PKI Standards Compliance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#password-policy-alignment-nist-800-63b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Password Policy Alignment (NIST 800-63B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-integration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Integration Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Integration Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-integration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service Integration Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-homelab-section-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Homelab Section Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="identity-access-secrets-and-trust-management">Identity, Access, Secrets and Trust Management<a class="headerlink" href="#identity-access-secrets-and-trust-management" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong> <br />
+Version: 1.0<br />
+Last Updated: January 30, 2026<br />
+Owner: Paul Leone </p>
+<hr />
+<h2 id="1-architecture-overview">1. Architecture Overview<a class="headerlink" href="#1-architecture-overview" title="Permanent link">&para;</a></h2>
+<p>A comprehensive zero-trust identity architecture combines hierarchical Public Key Infrastructure (PKI), centralized authentication (SSO/MFA), enterprise directory services (Active Directory), and encrypted secrets management (Vaultwarden) to provide defense-in-depth identity controls. This multi-layered approach ensures every user, device, and service is continuously authenticated, authorized, and audited across the entire infrastructure stack.</p>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Centralized identity eliminates password sprawl and reduces credential-stuffing risk</li>
+<li>MFA enforcement prevents compromised passwords from granting unauthorized access</li>
+<li>Hierarchical PKI provides cryptographic trust anchors for TLS/mTLS</li>
+<li>Offline root CA protects high-value signing keys from online attacks</li>
+<li>Automated certificate lifecycle management prevents outages caused by expired certificates</li>
+<li>Encrypted secrets vault centralizes sensitive data with zero-knowledge encryption</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>Enterprise environments deploy similar architectures where Active Directory manages Windows domain authentication, OAuth2/OIDC provides SSO for web applications, PKI issues certificates for TLS encryption, and password managers centralize secrets. This lab demonstrates hands-on proficiency with protocols used in Fortune 500 identity stacks (LDAP, Kerberos, OAuth2, OIDC, SAML, ACME) and modern zero-trust patterns (continuous verification, least-privilege access, encrypted communications). The separation of concerns (PKI, SSO, directory, secrets) provides defense-in-depth where compromise of one system doesn't expose all identity data.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Multiple authentication factors (password + TOTP), separate trust domains (AD for Windows, Authentik for web), offline root CA isolation</li>
+<li><strong>Secure by Design:</strong> Mandatory TLS via PKI, MFA enforced by default, secrets encrypted at rest with zero-knowledge encryption</li>
+<li><strong>Zero Trust:</strong> Every request authenticated (SSO/MFA); certificates verify service identity (mutual TLS); no implicit trust based on network location</li>
+</ul>
+<p><strong>Diagram Placeholder: Identity Architecture Overview (2 images)</strong></p>
+<hr />
+<h2 id="2-pkicertificate-authority-configuration">2. PKI/Certificate Authority Configuration<a class="headerlink" href="#2-pkicertificate-authority-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="21-overview-and-hierarchy">2.1 Overview and Hierarchy<a class="headerlink" href="#21-overview-and-hierarchy" title="Permanent link">&para;</a></h3>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The lab PKI follows a two-tier architecture with an offline root CA and an online intermediate CA powered by StepCA. The offline root CA acts as the long-term trust anchor, while the intermediate CA handles day-to-day certificate issuance for internal services, Kubernetes workloads, web applications, and mTLS-enabled components.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/pki-stepca.png" alt="StepCA Certificate Flow">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Lab PKI Overview / StepCA Chain of Trust
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Offline root CA prevents exposure of high-value signing keys</li>
+<li>Intermediate CA enables automated certificate issuance and rotation</li>
+<li>TLS/mTLS ensures encrypted communication and service identity validation</li>
+<li>PKI-backed trust anchors support zero-trust service-to-service authentication</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>A two-tier PKI mirrors enterprise best practices by separating long-term trust from operational issuance. This design minimizes root CA exposure, simplifies certificate lifecycle management, and supports automated issuance through ACME/StepCA for Kubernetes, web services, and internal APIs.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Root and intermediate CAs form layered trust boundaries</li>
+<li><strong>Secure by Design:</strong> Automated certificate rotation prevents outages and stale credentials</li>
+<li><strong>Zero Trust:</strong> Certificates validate every service identity; no implicit trust in network location</li>
+</ul>
+<hr />
+<h3 id="22-pki-architecture-and-roles">2.2 PKI Architecture and Roles<a class="headerlink" href="#22-pki-architecture-and-roles" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Host/IP</th>
+<th>Role</th>
+<th>Key Functions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Offline Root CA</td>
+<td>192.168.100.50</td>
+<td>Trust Anchor</td>
+<td>Signs Intermediate CA certificate; stored offline</td>
+</tr>
+<tr>
+<td>StepCA (Intermediate CA)</td>
+<td>192.168.100.51</td>
+<td>Online Issuer</td>
+<td>Issues leaf certificates via ACME or manual process; enforces policy</td>
+</tr>
+<tr>
+<td>ACME Clients</td>
+<td>Various</td>
+<td>Certificate Consumers</td>
+<td>Request certificates via ACME protocol (e.g., Traefik, Vaultwarden, NGINX)</td>
+</tr>
+<tr>
+<td>Active Directory Certificate Services</td>
+<td>192.168.1.142</td>
+<td>AD Auto-enroll</td>
+<td>Computer and User auto-enroll domain services. Isolated RootCA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Root CA Configuration</strong></p>
+<ul>
+<li>Platform: Debian 12 LXC container (stopped when not in use)</li>
+<li>Software: OpenSSL 3.0.x</li>
+<li>Key Type: ECC P-384 (modern alternative)</li>
+<li>Storage: Private key encrypted with AES-256</li>
+<li>Access Control: Root key file permissions set to 0400 (read-only by owner)</li>
+<li>Lifecycle: Used only for signing intermediate CA cert and CRL generation</li>
+<li>Validity: 20 years (root), 10 years (intermediate)</li>
+</ul>
+<p><strong>Security Hardening</strong></p>
+<ul>
+<li>Root CA container only powered on during signing operations</li>
+<li>Private key passphrase stored in Vaultwarden, never saved to disk</li>
+<li>Regular backups</li>
+</ul>
+<p><strong>StepCA Intermediate CA</strong></p>
+<ul>
+<li>Platform: Debian 12 LXC container (always online)</li>
+<li>Software: Smallstep Step-CA v0.25.x</li>
+<li>Endpoints:</li>
+<li>ACME: https://stepca.home.com/acme/acme/directory</li>
+<li>Admin API: https://stepca.home.com (mTLS authentication)</li>
+<li>Key Type: ECC P-256 (default for leaf certificates)</li>
+<li>Validity Periods:</li>
+<li>Default: 24 hours (short-lived for automated rotation)</li>
+<li>Max: 1 year (for services requiring longer validity)</li>
+</ul>
+<p><strong>Certificate Lifecycle Management</strong></p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Automation</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial Request</td>
+<td>ACME client (Traefik, certbot)</td>
+<td>On-demand</td>
+</tr>
+<tr>
+<td>Issuance</td>
+<td>StepCA auto-validates domain</td>
+<td>&lt;5 seconds</td>
+</tr>
+<tr>
+<td>Renewal</td>
+<td>Traefik automatic renewal</td>
+<td>30 days before expiry</td>
+</tr>
+<tr>
+<td>Revocation</td>
+<td>Manual via step-ca CLI</td>
+<td>As needed</td>
+</tr>
+<tr>
+<td>CRL Updates</td>
+<td>StepCA generates CRL</td>
+<td>Daily</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="23-trust-chain-and-workflow">2.3 Trust Chain and Workflow<a class="headerlink" href="#23-trust-chain-and-workflow" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Root CA</strong> is created offline and used to sign the Intermediate CA certificate. The RootCA was configured as an LXC running Debian Linux, Certificate was created using OpenSSL.</li>
+<li><strong>StepCA</strong> runs online and handles certificate requests via ACME. StepCA is also running in a Debian-based LXC.</li>
+<li><strong>ACME Clients</strong> authenticate and request certificates for their FQDNs.</li>
+<li><strong>Leaf certificates</strong> are issued with appropriate X.509 extensions and validity periods.</li>
+<li><strong>Clients and services</strong> trust the Intermediate CA, which chains up to the RootCA.</li>
+</ol>
+<hr />
+<h3 id="24-x509-certificate-profile">2.4 X.509 Certificate Profile<a class="headerlink" href="#24-x509-certificate-profile" title="Permanent link">&para;</a></h3>
+<h4 id="general-attributes">General Attributes<a class="headerlink" href="#general-attributes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version</td>
+<td>X.509 v3</td>
+</tr>
+<tr>
+<td>Signature Algorithm</td>
+<td>ecdsa-with-SHA256</td>
+</tr>
+<tr>
+<td>Issuer</td>
+<td>O=Intermediate CA - Leone Lab, CN=Intermediate CA - Leone Lab Intermediate CA</td>
+</tr>
+<tr>
+<td>Subject</td>
+<td>CN=[servername].home.com</td>
+</tr>
+<tr>
+<td>Validity</td>
+<td>1 year</td>
+</tr>
+<tr>
+<td>Public Key Algorithm</td>
+<td>id-ecPublicKey (Elliptic Curve Cryptography)</td>
+</tr>
+<tr>
+<td>Key Size</td>
+<td>256-bit</td>
+</tr>
+<tr>
+<td>Curve</td>
+<td>prime256v1 (NIST P-256)</td>
+</tr>
+<tr>
+<td>Key Usage</td>
+<td>Digital Signature (critical)</td>
+</tr>
+<tr>
+<td>Extended Key Usage</td>
+<td>TLS Web Server Authentication; TLS Web Client Authentication</td>
+</tr>
+<tr>
+<td>Subject Alternative Name (SAN)</td>
+<td>DNS:servername.home.com</td>
+</tr>
+</tbody>
+</table>
+<h4 id="subject-public-key-info">Subject Public Key Info<a class="headerlink" href="#subject-public-key-info" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Algorithm</strong>: id-ecPublicKey (Elliptic Curve Cryptography)</li>
+<li><strong>Key Size</strong>: 256-bit</li>
+<li><strong>Curve</strong>: prime256v1 (NIST P-256)</li>
+</ul>
+<h4 id="x509v3-extensions">X.509v3 Extensions<a class="headerlink" href="#x509v3-extensions" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key Usage</td>
+<td>Digital Signature (critical)</td>
+</tr>
+<tr>
+<td>Extended Key Usage</td>
+<td>TLS Web Server Authentication, TLS Web Client Authentication</td>
+</tr>
+<tr>
+<td>Subject Alternative Name (SAN)</td>
+<td>DNS:[servername].home.com, home.com</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="25-operational-considerations">2.5 Operational Considerations<a class="headerlink" href="#25-operational-considerations" title="Permanent link">&para;</a></h3>
+<p><strong>Diagram Placeholder: Root CA Security Screenshot</strong></p>
+<p><strong>Root CA Security</strong></p>
+<ul>
+<li>Stored offline (air-gapped)</li>
+<li>Used only to sign Intermediate CA</li>
+<li>Private key protected with strong passphrase</li>
+</ul>
+<p><strong>StepCA Configuration</strong></p>
+<ul>
+<li>Runs as a systemd service on 192.168.100.51</li>
+<li>ACME endpoint exposed to internal clients</li>
+<li>Policy templates enforce:</li>
+<li>Allowed domains (*.home.com)</li>
+<li>Validity periods</li>
+<li>Key types (ECC and RSA)</li>
+</ul>
+<hr />
+<h3 id="26-active-directory-certificate-services">2.6 Active Directory Certificate Services<a class="headerlink" href="#26-active-directory-certificate-services" title="Permanent link">&para;</a></h3>
+<p>Windows 2025 Server, dc02.home.com configured as the domain enterpriseCA supporting local AD auto-enrollment.</p>
+<p>User and Computer home.com templates supporting domain auto-enrollment. Computer/policies/Windows settings/security settings/public key policies/certificate services client-auto-enrollment/Enabled in the default domain policy.</p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/ad-cert1.png" alt="Safeline WAF Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Issued Certificates / Template Information.
+      </figcaption>
+    </figure>
+
+<p><strong>Certificate Details</strong>
+Trusted Root Certificate: Win2025-CA</p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/ad-cert1.png" alt="Safeline WAF Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Win2025-CA Trust.
+      </figcaption>
+    </figure>
+
+<hr />
+<h2 id="3-identity-and-access-management">3. Identity and Access Management<a class="headerlink" href="#3-identity-and-access-management" title="Permanent link">&para;</a></h2>
+<p>Identity services are split between Authentik for modern SSO/OIDC-based authentication and Microsoft Active Directory for Windows domain services. This dual-stack approach mirrors hybrid enterprise environments where Linux, containerized workloads, and Windows systems coexist.</p>
+<hr />
+<h3 id="31-authentik-identity-stack">3.1 Authentik Identity Stack<a class="headerlink" href="#31-authentik-identity-stack" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview">Deployment Overview<a class="headerlink" href="#deployment-overview" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      Authentik provides centralized identity and access management using OAuth2, OIDC, and proxy-forwarding protocols. It acts as the primary identity provider for web applications, Kubernetes workloads, dashboards, and internal services. Policy-driven access control enforces MFA, group-based authorization, and conditional access rules.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/authentik.png" alt="Authentik Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Authentik Identity Provider Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Consolidates authentication across VMs, containers, and web apps</li>
+<li>Enforces MFA and policy-based access control</li>
+<li>Provides OIDC/OAuth2 SSO for dashboards, WAF-protected portals, and internal services</li>
+<li>Reduces password reuse and improves auditability</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>Authentik mirrors enterprise SSO platforms (Azure AD, Okta, Ping) and demonstrates proficiency with modern identity protocols. It centralizes authentication for Linux-based and containerized workloads while integrating cleanly with reverse proxies, WAFs, and Kubernetes ingress controllers.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Separate trust domain for web and application authentication</li>
+<li><strong>Secure by Design:</strong> MFA, OIDC/OAuth2, and policy-driven access</li>
+<li><strong>Zero Trust:</strong> Every request authenticated; no implicit trust in session or network</li>
+</ul>
+<h4 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h4>
+<p>The Authentik identity stack is deployed within a Docker environment and comprises four core containers:</p>
+<ul>
+<li><strong>Authentik Server</strong> -- main application interface and API layer</li>
+<li><strong>Authentik Worker</strong> -- handles background tasks, flows, and integrations</li>
+<li><strong>PostgreSQL</strong> -- primary relational database for Authentik</li>
+<li><strong>Redis</strong> -- caching and session management for performance optimization</li>
+<li><strong>Outpost for Traefik and various services</strong></li>
+</ul>
+<p>The Authentik interface is secured using TLS certificates issued by Step CA, ensuring encrypted communication across all services. Multi-Factor Authentication (MFA) is enforced using the Microsoft Authenticator app, adding a layer of security for user logins and administrative access.</p>
+<p>Authentik acts as the unified identity provider for multiple services in the lab, streamlining authentication and access control through OAuth2 and reverse proxy integration:</p>
+<p><strong>Diagram Placeholder: Proxmox OAuth2 Login Screenshot</strong></p>
+<ul>
+<li><strong>Proxmox VE</strong> - Web-based virtualization management protected via OAuth2/OpenID Connect (OIDC), allowing users to log in through Authentik via federated identity and benefit from centralized governance.</li>
+</ul>
+<p><strong>Diagram Placeholder: Portainer OAuth2 Login Screenshot</strong></p>
+<ul>
+<li>
+<p><strong>Portainer</strong> - Container orchestration and Docker management secured using OAuth2 authorization framework, enabling SSO and role-based access control.</p>
+</li>
+<li>
+<p><strong>pfSense</strong> - Firewall and network management access connected to Authentik's LDAP interface, validating username/passwords against the LDAP directory.</p>
+</li>
+<li>
+<p><strong>Webservers</strong> - Apache and Nginx websites protected via OAuth2/OpenID Connect (OIDC), allowing users to log in through Authentik via federated identity and benefit from centralized governance.</p>
+</li>
+<li>
+<p><strong>Traefik and Services</strong> - Reverse proxy and ingress controller secured via proxy forwarding, with Authentik injecting identity headers and managing session-based access to backend services.</p>
+</li>
+<li><strong>Services:</strong> Checkmk, Pi-hole, Pulse, WUD, Uptime Kuma, Changedetection.io, Heimdall, Elastic and Safeline admin UI</li>
+</ul>
+<h4 id="authentication-flows">Authentication Flows<a class="headerlink" href="#authentication-flows" title="Permanent link">&para;</a></h4>
+<ol>
+<li>User Access Request: User navigates to protected service (e.g., Portainer)</li>
+<li>Redirect to Authentik: Service redirects to Authentik login page</li>
+<li>Primary Authentication: User provides username/password</li>
+<li>MFA Challenge: Microsoft Authenticator TOTP code required</li>
+<li>Consent Screen: User authorizes service access (if first time)</li>
+<li>Token Issuance: Authentik issues JWT access token</li>
+<li>Service Access: User redirected back with token, gains access</li>
+</ol>
+<h4 id="multi-factor-authentication">Multi-Factor Authentication<a class="headerlink" href="#multi-factor-authentication" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Primary: Microsoft Authenticator (TOTP)</li>
+<li>Backup: WebAuthn (FIDO2 security keys)</li>
+<li>Recovery: One-time backup codes (10 codes, single-use)</li>
+<li>Enrollment: Required on first login, cannot be bypassed</li>
+<li>Policy: MFA mandatory for all roles</li>
+</ul>
+<h4 id="security-features">Security Features<a class="headerlink" href="#security-features" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Account Lockout: 5 failed attempts, 15-minute lockout</li>
+<li>Session Management: 12-hour session timeout, refresh token rotation</li>
+<li>Audit Logging: All authentication events logged to PostgreSQL, forwarded to Elastic SIEM</li>
+<li>Reputation: IP-based rate limiting and geo-blocking</li>
+</ul>
+<h4 id="tls-configuration">TLS Configuration<a class="headerlink" href="#tls-configuration" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Certificate: Issued by StepCA Intermediate CA</li>
+<li>Validity: 365 days with automated renewal via ACME</li>
+<li>Protocol: TLS 1.3/1.2 only (TLS 1.1 disabled)</li>
+<li>Cipher Suites: Modern ECDHE+AES-GCM only</li>
+</ul>
+<p><strong>Diagram Placeholder: Authentik Screenshots (3 images)</strong></p>
+<hr />
+<h3 id="32-microsoft-active-directory">3.2 Microsoft Active Directory<a class="headerlink" href="#32-microsoft-active-directory" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_1">Deployment Overview<a class="headerlink" href="#deployment-overview_1" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      Active Directory provides enterprise-grade identity services for Windows-based infrastructure. A subset of Windows 11 Pro VMs are joined to a centralized domain hosted on Windows Server 2022 (dc01) and Windows Server 2025 (dc02). AD manages Kerberos authentication, Group Policy enforcement, and domain-joined machine trust.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/MS_AD.png" alt="Active Directory Logo">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Microsoft Active Directory Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Centralized Windows authentication reduces credential sprawl</li>
+<li>Kerberos provides secure, ticket-based authentication</li>
+<li>Group Policy enforces security baselines and configuration hardening</li>
+<li>Domain-joined systems support certificate auto-enrollment via PKI</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>AD remains the backbone of enterprise Windows identity. This deployment simulates production domain environments and demonstrates understanding of Kerberos, LDAP, GPOs, and domain trust relationships.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Windows trust domain isolated from web identity domain</li>
+<li><strong>Secure by Design:</strong> Kerberos authentication and GPO-based hardening</li>
+<li><strong>Zero Trust:</strong> Domain authentication required for all Windows systems</li>
+</ul>
+<h4 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h4>
+<p>The domain controllers are configured with the following roles:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Active Directory Domain Services (AD DS)</td>
+<td>Centralized identity, authentication, and directory management</td>
+</tr>
+<tr>
+<td>Active Directory Lightweight Directory Services (AD LDS)</td>
+<td>Lightweight directory for app-specific identity needs</td>
+</tr>
+<tr>
+<td>DNS Server</td>
+<td>Authoritative DNS Service for the AD Domain. Kerberos, LDAP, GPO, Login and General Client Requests</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>File and Storage Services</td>
+<td>Network shares and storage provisioning</td>
+</tr>
+<tr>
+<td>Active Directory Certificate Services</td>
+<td>EnterpriseCA supporting the domain</td>
+</tr>
+<tr>
+<td>IIS Web Services</td>
+<td>WSUS Admin Portal</td>
+</tr>
+<tr>
+<td>Windows Server Update Services (WSUS)</td>
+<td>Centralized patch management for Windows clients</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diagram Placeholder: Domain Controller Screenshots (2 images)</strong></p>
+<h4 id="active-directory-configuration">Active Directory Configuration<a class="headerlink" href="#active-directory-configuration" title="Permanent link">&para;</a></h4>
+<p><strong>Diagram Placeholder: AD Configuration Screenshot</strong></p>
+<p><strong>Domain Name</strong></p>
+<ul>
+<li><strong>Domain</strong>: home.com</li>
+<li><strong>Domain Controllers</strong>: dc01.home.com, dc02.home.com</li>
+<li><strong>Forest Functional Level</strong>: Windows Server 2016</li>
+<li><strong>Domain Functional Level</strong>: Windows Server 2016</li>
+<li>Single forest, single domain design</li>
+<li>Future expansion: Child domains for lab segmentation</li>
+<li>Trust relationships: None (isolated lab environment)</li>
+</ul>
+<p><strong>DNS Server</strong></p>
+<ul>
+<li>Authoritative for the Active Directory Domain. Name resolution and SRV record support.</li>
+</ul>
+<p><strong>Certificate Authority</strong></p>
+<ul>
+<li>Isolated EnterpriseCA supporting local services, running on dc02.</li>
+</ul>
+<h4 id="organizational-units-ous">Organizational Units (OUs)<a class="headerlink" href="#organizational-units-ous" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>OU</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users</td>
+<td>Contains all domain user accounts</td>
+</tr>
+<tr>
+<td>Server/Domain Admins</td>
+<td>Contains privileged accounts</td>
+</tr>
+<tr>
+<td>Desktop PCs</td>
+<td>Contains domain-joined Windows 11 clients</td>
+</tr>
+<tr>
+<td>Servers</td>
+<td>Contains domain-joined Windows Servers</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33-user-and-group-policy-management">3.3 User and Group Policy Management<a class="headerlink" href="#33-user-and-group-policy-management" title="Permanent link">&para;</a></h3>
+<p><strong>Diagram Placeholder: User and Group Policy Screenshots (2 images)</strong></p>
+<h4 id="user-accounts">User Accounts<a class="headerlink" href="#user-accounts" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Standard domain users created under the Users OU</li>
+<li>Naming convention: first initial+lastname</li>
+</ul>
+<h4 id="security-groups">Security Groups<a class="headerlink" href="#security-groups" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Group Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain_Admins</td>
+<td>Full administrative privileges</td>
+</tr>
+<tr>
+<td>Server Admins</td>
+<td>Select server privileges</td>
+</tr>
+<tr>
+<td>PowerUsers</td>
+<td>Elevated access to specific systems</td>
+</tr>
+<tr>
+<td>StandardUsers</td>
+<td>Default access level for lab participants</td>
+</tr>
+<tr>
+<td>NAS_Access</td>
+<td>Mapped drive access to NAS shares</td>
+</tr>
+</tbody>
+</table>
+<p>Groups are used to assign permissions, drive mappings, and GPO filtering.</p>
+<h4 id="group-policies">Group Policies<a class="headerlink" href="#group-policies" title="Permanent link">&para;</a></h4>
+<p>Group Policies are applied via GPOs linked to the appropriate OUs. Policies are divided into <strong>Computer Configuration</strong> and <strong>User Configuration</strong>.</p>
+<h5 id="computer-policies">Computer Policies<a class="headerlink" href="#computer-policies" title="Permanent link">&para;</a></h5>
+<p><strong>Diagram Placeholder: Password Complexity Screenshot</strong></p>
+<p><strong>Password Complexity</strong></p>
+<ul>
+<li>Minimum Age: 30 days</li>
+<li>Maximum Age: 60 days</li>
+<li>Minimum Password Length: 8</li>
+<li>Windows Complexity Requirements: Enabled</li>
+<li>Password History: 3 Remembered</li>
+</ul>
+<p><strong>Diagram Placeholder: Account Lockout Screenshot</strong></p>
+<p><strong>Account Lockout Policy</strong></p>
+<ul>
+<li>Account Lockout Duration: 10 mins</li>
+<li>Threshold: 5 Attempts</li>
+<li>Allow Admin Lockout: Enabled</li>
+<li>Reset: 10 mins</li>
+</ul>
+<h5 id="user-policies">User Policies<a class="headerlink" href="#user-policies" title="Permanent link">&para;</a></h5>
+<p><strong>Diagram Placeholder: Desktop/System Settings Screenshot</strong></p>
+<p><strong>Desktop/System Settings</strong></p>
+<ul>
+<li>Custom Desktop Wallpaper: Enabled</li>
+<li>Prohibit Changes: Enabled</li>
+<li>Prohibit adding, closing, deleting, editing items: Disabled</li>
+<li>Power Management</li>
+<li>Prompt for Password on Resume from Hibernation/Suspend: Enabled</li>
+<li>Removable Storage Access</li>
+<li>All Removable Storage classes: Deny all Access: Enabled</li>
+</ul>
+<p><strong>Diagram Placeholder: Personalization Screenshot</strong></p>
+<p><strong>Personalization</strong></p>
+<ul>
+<li>Password Protect the Screen Saver: Enabled</li>
+<li>Screen Saver Timeout: Enabled</li>
+<li>Force a Specific Screen Saver: Enabled</li>
+</ul>
+<h4 id="user-preferences">User Preferences<a class="headerlink" href="#user-preferences" title="Permanent link">&para;</a></h4>
+<p><strong>Drive Mapping</strong></p>
+<ul>
+<li>Drive mapping to local NAS folders.</li>
+<li>\DS\Backups, \DS\Software, \dc01\Documents</li>
+</ul>
+<p><strong>Diagram Placeholder: Drive Mapping Screenshot</strong></p>
+<h4 id="assigned-policiespreferences">Assigned Policies/Preferences<a class="headerlink" href="#assigned-policiespreferences" title="Permanent link">&para;</a></h4>
+<p><strong>Diagram Placeholder: Assigned Policies Screenshot</strong></p>
+<p><strong>GPO User Configuration Policies</strong></p>
+<table>
+<thead>
+<tr>
+<th>Policy Category</th>
+<th>Setting</th>
+<th>Value/Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Desktop Personalization</td>
+<td>Custom wallpaper</td>
+<td>\dc01\NETLOGON\wallpaper.jpg</td>
+</tr>
+<tr>
+<td>Desktop Personalization</td>
+<td>Prohibit wallpaper changes</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Desktop Personalization</td>
+<td>Force specific screensaver</td>
+<td>Enabled (Blank.scr)</td>
+</tr>
+<tr>
+<td>Desktop Personalization</td>
+<td>Screensaver timeout</td>
+<td>10 minutes</td>
+</tr>
+<tr>
+<td>Desktop Personalization</td>
+<td>Password-protect screensaver</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Power Management</td>
+<td>Require password on resume</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Power Management</td>
+<td>Sleep timeout (on battery)</td>
+<td>15 minutes</td>
+</tr>
+<tr>
+<td>Power Management</td>
+<td>Sleep timeout (plugged in)</td>
+<td>30 minutes</td>
+</tr>
+<tr>
+<td>Removable Storage</td>
+<td>All removable storage classes</td>
+<td>Read-only (not full deny)</td>
+</tr>
+<tr>
+<td>Removable Storage</td>
+<td>Exceptions</td>
+<td>IT Admin group</td>
+</tr>
+<tr>
+<td>Start Menu &amp; Taskbar</td>
+<td>Remove Run command</td>
+<td>Enabled (Standard Users only)</td>
+</tr>
+<tr>
+<td>Start Menu &amp; Taskbar</td>
+<td>Disable Command Prompt</td>
+<td>Enabled (Standard Users only)</td>
+</tr>
+<tr>
+<td>Drive Mappings</td>
+<td>H: drive</td>
+<td>\dc01\Users\%USERNAME%</td>
+</tr>
+<tr>
+<td>Drive Mappings</td>
+<td>S: drive</td>
+<td>\DS\Software (read-only)</td>
+</tr>
+<tr>
+<td>Drive Mappings</td>
+<td>B: drive</td>
+<td>\DS\Backups (NAS_Access group)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GPO Computer Configuration Policies</strong></p>
+<table>
+<thead>
+<tr>
+<th>Policy Category</th>
+<th>Setting</th>
+<th>Value/Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Password Complexity</td>
+<td>Minimum length</td>
+<td>8 characters</td>
+</tr>
+<tr>
+<td>Password Complexity</td>
+<td>Complexity requirements</td>
+<td>Enabled (upper; lower; number; symbol)</td>
+</tr>
+<tr>
+<td>Password Complexity</td>
+<td>Password history</td>
+<td>3 passwords remembered</td>
+</tr>
+<tr>
+<td>Password Complexity</td>
+<td>Minimum age</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td>Password Complexity</td>
+<td>Maximum age</td>
+<td>60 days</td>
+</tr>
+<tr>
+<td>Account Lockout</td>
+<td>Lockout threshold</td>
+<td>5 invalid attempts</td>
+</tr>
+<tr>
+<td>Account Lockout</td>
+<td>Lockout duration</td>
+<td>10 minutes</td>
+</tr>
+<tr>
+<td>Account Lockout</td>
+<td>Reset counter after</td>
+<td>10 minutes</td>
+</tr>
+<tr>
+<td>Account Lockout</td>
+<td>Administrator lockout</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Windows Firewall</td>
+<td>Domain profile</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Windows Firewall</td>
+<td>Block inbound (default)</td>
+<td>Enabled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Hardening</strong></p>
+<ul>
+<li>Kerberos Authentication: AES256 encryption enforced</li>
+<li>LDAPS: Enabled on port 636 with Step-CA issued certificate</li>
+<li>SMB Signing: Required for all domain communications</li>
+<li>NTLM: Restricted, Kerberos preferred</li>
+<li>Admin Accounts: Separate accounts for daily use vs. privileged access</li>
+</ul>
+<p><strong>DNS Integration</strong></p>
+<ul>
+<li>Authoritative for home.com zone</li>
+<li>SRV records for Kerberos (_kerberos._tcp.home.com)</li>
+<li>Isolated DNS: no integration to Pi-hole</li>
+</ul>
+<hr />
+<h2 id="4-secrets-management">4. Secrets Management<a class="headerlink" href="#4-secrets-management" title="Permanent link">&para;</a></h2>
+<p>Secrets management is centralized through Vaultwarden, which provides encrypted storage for passwords, SSH keys, API tokens, and sensitive notes. This eliminates reliance on commercial password managers while maintaining enterprise-grade encryption and cross-platform access.</p>
+<hr />
+<h3 id="41-vaultwarden-password-manager">4.1 Vaultwarden Password Manager<a class="headerlink" href="#41-vaultwarden-password-manager" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_2">Deployment Overview<a class="headerlink" href="#deployment-overview_2" title="Permanent link">&para;</a></h4>
+<p>Vaultwarden is a lightweight, self-hosted implementation of the Bitwarden protocol. All data is encrypted client-side before transmission, ensuring zero-knowledge storage. Vaultwarden is accessible via web, desktop, mobile, and browser extensions. Automated backups store encrypted vault data on the NAS and Proxmox Backup Server.</p>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Zero-knowledge encryption protects credentials even if the server is compromised</li>
+<li>Centralized secrets reduce password reuse and unmanaged credentials</li>
+<li>Multi-platform access ensures secure credential availability across devices</li>
+<li>Automated backups protect against data loss</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>Vaultwarden mirrors enterprise password managers (Bitwarden, 1Password, Keeper) and demonstrates secure secrets management without relying on third-party cloud services. It supports SSH key storage, API token management, and secure note handling.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Centralized secrets reduce unmanaged credentials</li>
+<li><strong>Secure by Design:</strong> Client-side encryption and automated backups</li>
+<li><strong>Zero Trust:</strong> Secrets never stored or transmitted unencrypted</li>
+</ul>
+<h4 id="configuration_2">Configuration<a class="headerlink" href="#configuration_2" title="Permanent link">&para;</a></h4>
+<p>Vaultwarden is deployed as a self-hosted password manager to secure credentials, SSH keys, and sensitive notes across the lab. Key features include:</p>
+<ul>
+<li>End-to-End Encryption: All data is encrypted client-side before transmission, ensuring zero-knowledge storage</li>
+<li>Multi-Platform Access: Web interface, desktop apps, mobile apps, and browser extensions</li>
+<li>Automated Backups: Vault data is backed up to the NAS and Proxmox Backup Server via scheduled backup jobs</li>
+</ul>
+<p><strong>Architecture</strong></p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Technology</th>
+<th>Location</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vaultwarden</td>
+<td>LXC Container</td>
+<td>192.168.1.4</td>
+<td>Password vault server</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>SQLite (embedded)</td>
+<td>Persistent volume</td>
+<td>Vault data storage</td>
+</tr>
+<tr>
+<td>Reverse Proxy</td>
+<td>Traefik</td>
+<td>192.168.1.247</td>
+<td>TLS termination; auth</td>
+</tr>
+<tr>
+<td>Backup Job</td>
+<td>Cron + rsync</td>
+<td>NAS + PBS</td>
+<td>Automated vault backup</td>
+</tr>
+</tbody>
+</table>
+<h4 id="security-architecture">Security Architecture<a class="headerlink" href="#security-architecture" title="Permanent link">&para;</a></h4>
+<p><strong>Encryption Model: Zero-Knowledge Architecture</strong></p>
+<ul>
+<li>Client-Side Encryption: All vault data encrypted in browser/app before transmission</li>
+<li>Master Password: Never transmitted to server, used to derive encryption key</li>
+<li>Encryption Algorithm: AES-256-CBC for vault items</li>
+<li>End-to-End: Server stores only encrypted blobs, cannot decrypt vault contents</li>
+</ul>
+<p><strong>Access Control</strong></p>
+<ul>
+<li>Master Password: Required for vault unlock</li>
+<li>Two-Factor Authentication: TOTP via Microsoft Authenticator</li>
+<li>Session Timeout: 15 minutes of inactivity</li>
+<li>Vault Timeout Action: Lock (not logout, prevents re-sync delay)</li>
+</ul>
+<p><strong>TLS Configuration</strong></p>
+<ul>
+<li>Certificate: Step-CA issued, 365-day validity</li>
+</ul>
+<p><strong>Integration Points</strong></p>
+<ul>
+<li>CLI Access: Bitwarden CLI (bw) for automation and scripts</li>
+<li>Browser Extensions: Chrome for autofill</li>
+<li>SSH Agent: SSH key stored in vault, agent integration via CLI</li>
+</ul>
+<p><strong>Backup Strategy</strong></p>
+<ul>
+<li>Frequency: Weekly automated backup at 1 AM</li>
+<li>Method: SQLite database file + attachments folder</li>
+<li>Destinations:</li>
+<li>Synology NAS (\DS\Backups\Vaultwarden)</li>
+<li>Proxmox Backup Server (deduplicated, encrypted)</li>
+<li>Retention: 6 versions plus 1 monthly</li>
+</ul>
+<p><strong>Diagram Placeholder: Vaultwarden Screenshot</strong></p>
+<hr />
+<h2 id="5-security-controls-summary">5. Security Controls Summary<a class="headerlink" href="#5-security-controls-summary" title="Permanent link">&para;</a></h2>
+<h3 id="identity-and-access-security-controls">Identity and Access Security Controls<a class="headerlink" href="#identity-and-access-security-controls" title="Permanent link">&para;</a></h3>
+<p><strong>Control Framework</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control Domain</th>
+<th>Implementation</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentication</td>
+<td>Multi-factor (password + TOTP/FIDO2)</td>
+<td>All critical services</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>OAuth2/OIDC with RBAC</td>
+<td>12 integrated services</td>
+</tr>
+<tr>
+<td>Certificate Management</td>
+<td>Automated ACME with Step-CA</td>
+<td>All internal TLS</td>
+</tr>
+<tr>
+<td>Secrets Storage</td>
+<td>Vaultwarden zero-knowledge vault</td>
+<td>100+ credentials</td>
+</tr>
+<tr>
+<td>Directory Services</td>
+<td>Active Directory + Authentik</td>
+<td>Hybrid Windows/Linux</td>
+</tr>
+<tr>
+<td>Session Management</td>
+<td>JWT tokens with refresh rotation</td>
+<td>Authentik SSO</td>
+</tr>
+<tr>
+<td>Policy Enforcement</td>
+<td>GPO + Authentik policies</td>
+<td>Windows clients + web services</td>
+</tr>
+<tr>
+<td>Audit Logging</td>
+<td>Authentik events + AD logs → Elastic</td>
+<td>Centralized visibility</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication Controls</strong></p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Strength</th>
+<th>Use Cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Password + TOTP</td>
+<td>Medium-High</td>
+<td>Standard user accounts</td>
+</tr>
+<tr>
+<td>Password + FIDO2</td>
+<td>High</td>
+<td>Admin accounts (WebAuthn keys)</td>
+</tr>
+<tr>
+<td>Certificate-based mTLS</td>
+<td>Very High</td>
+<td>Service-to-service auth</td>
+</tr>
+<tr>
+<td>Kerberos</td>
+<td>High</td>
+<td>Windows domain authentication</td>
+</tr>
+<tr>
+<td>LDAP Bind</td>
+<td>Medium</td>
+<td>pfSense; legacy services</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Access Control Matrix</strong></p>
+<table>
+<thead>
+<tr>
+<th>User Role</th>
+<th>Proxmox</th>
+<th>Portainer</th>
+<th>pfSense</th>
+<th>CheckMK</th>
+<th>AD Admin</th>
+<th>Vaultwarden</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard User</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>View</td>
+<td>No</td>
+<td>Personal vault</td>
+</tr>
+<tr>
+<td>Power User</td>
+<td>View</td>
+<td>Manage</td>
+<td>No</td>
+<td>View</td>
+<td>No</td>
+<td>Shared vault</td>
+</tr>
+<tr>
+<td>Server Admin</td>
+<td>Manage</td>
+<td>Manage</td>
+<td>View</td>
+<td>Manage</td>
+<td>No</td>
+<td>Admin vault</td>
+</tr>
+<tr>
+<td>Domain Admin</td>
+<td>Full</td>
+<td>Full</td>
+<td>Manage</td>
+<td>Full</td>
+<td>Full</td>
+<td>Full access</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Certificate Lifecycle Security</strong></p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Security Control</th>
+<th>Risk Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generation</td>
+<td>Root CA air-gapped; passphrase-protected</td>
+<td>Prevents root key compromise</td>
+</tr>
+<tr>
+<td>Issuance</td>
+<td>ACME challenge validation (DNS/HTTP)</td>
+<td>Prevents unauthorized cert issuance</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Private keys in file system (0600 perms)</td>
+<td>Limits key exposure</td>
+</tr>
+<tr>
+<td>Renewal</td>
+<td>Automated 30 days before expiry</td>
+<td>Prevents service outages</td>
+</tr>
+<tr>
+<td>Revocation</td>
+<td>CRL + OCSP responder</td>
+<td>Timely invalidation of compromised certs</td>
+</tr>
+<tr>
+<td>Distribution</td>
+<td>Trusted CA bundles in OS/container</td>
+<td>Ensures chain validation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-operational-resilience">6. Operational Resilience<a class="headerlink" href="#6-operational-resilience" title="Permanent link">&para;</a></h2>
+<h3 id="identity-service-continuity">Identity Service Continuity<a class="headerlink" href="#identity-service-continuity" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Service Component</th>
+<th>Failure Mode</th>
+<th>Recovery Mechanism</th>
+<th>RTO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentik Server</td>
+<td>Container crash</td>
+<td>Docker restart policy</td>
+<td>&lt;30s</td>
+</tr>
+<tr>
+<td>PostgreSQL Database</td>
+<td>Database corruption</td>
+<td>Restore from daily backup</td>
+<td>&lt;10 min</td>
+</tr>
+<tr>
+<td>Step-CA Intermediate</td>
+<td>Service failure</td>
+<td>Systemd auto-restart</td>
+<td>&lt;15s</td>
+</tr>
+<tr>
+<td>Active Directory DC</td>
+<td>VM failure</td>
+<td>Restore from Proxmox backup</td>
+<td>&lt;20 min</td>
+</tr>
+<tr>
+<td>Vaultwarden</td>
+<td>Container crash</td>
+<td>Docker restart policy</td>
+<td>&lt;30s</td>
+</tr>
+<tr>
+<td>Redis Cache</td>
+<td>Cache loss</td>
+<td>Session re-authentication</td>
+<td>&lt;5s (graceful)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backup-strategy">Backup Strategy<a class="headerlink" href="#backup-strategy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Frequency</th>
+<th>Method</th>
+<th>Retention</th>
+<th>Encryption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentik DB</td>
+<td>Weekly</td>
+<td>PostgreSQL dump</td>
+<td>6 months</td>
+<td>At rest (NAS)</td>
+</tr>
+<tr>
+<td>Step-CA Config</td>
+<td>Weekly</td>
+<td>File-level backup</td>
+<td>6 months</td>
+<td>At rest (NAS)</td>
+</tr>
+<tr>
+<td>AD Domain Controller</td>
+<td>Weekly</td>
+<td>System State backup</td>
+<td>6 months</td>
+<td>Windows backup encryption</td>
+</tr>
+<tr>
+<td>Vaultwarden Vault</td>
+<td>Weekly</td>
+<td>SQLite + attachments</td>
+<td>6 months</td>
+<td>AES-256 at rest</td>
+</tr>
+<tr>
+<td>Root CA Private Key</td>
+<td>One-time</td>
+<td>Encrypted USB drive</td>
+<td>Offline storage</td>
+<td>Passphrase protected</td>
+</tr>
+</tbody>
+</table>
+<h3 id="disaster-recovery-procedures">Disaster Recovery Procedures<a class="headerlink" href="#disaster-recovery-procedures" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario: Complete Authentik Failure</strong></p>
+<ol>
+<li>Deploy fresh Docker containers from compose file (2 min)</li>
+<li>Restore PostgreSQL database from last backup (5 min)</li>
+<li>Restart Authentik server and worker containers (1 min)</li>
+<li>Verify SSO functionality across test services (2 min)</li>
+</ol>
+<p>Total Recovery Time: &lt;10 minutes</p>
+<p><strong>Scenario: Active Directory Domain Controller Failure</strong></p>
+<ol>
+<li>Restore DC VM from Proxmox Backup Server (15 min)</li>
+<li>Verify DNS and Kerberos functionality (2 min)</li>
+<li>Test user authentication and GPO application (3 min)</li>
+</ol>
+<p>Total Recovery Time: &lt;20 minutes</p>
+<p><strong>Scenario: Step-CA Certificate Authority Compromise</strong></p>
+<ol>
+<li>Revoke compromised intermediate CA certificate (immediate)</li>
+<li>Generate new intermediate CA from offline root (15 min)</li>
+<li>Update trust stores across all systems (30 min)</li>
+<li>Re-issue all leaf certificates via ACME (automated, 1 hour)</li>
+</ol>
+<p>Total Recovery Time: &lt;2 hours (automated after initial setup)</p>
+<h3 id="monitoring-and-alerting">Monitoring and Alerting<a class="headerlink" href="#monitoring-and-alerting" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric Monitored</th>
+<th>Tool</th>
+<th>Alert Threshold</th>
+<th>Notification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentik login failures</td>
+<td>Prometheus</td>
+<td>&gt;10 failures in 5 min</td>
+<td>Discord webhook</td>
+</tr>
+<tr>
+<td>Step-CA cert issuance</td>
+<td>Prometheus</td>
+<td>Failed ACME challenge</td>
+<td>Discord webhook</td>
+</tr>
+<tr>
+<td>AD DC availability</td>
+<td>Uptime Kuma</td>
+<td>HTTP 5xx or timeout</td>
+<td>Discord webhook</td>
+</tr>
+<tr>
+<td>Vaultwarden API</td>
+<td>Uptime Kuma</td>
+<td>HTTP error or 5s latency</td>
+<td>Discord webhook</td>
+</tr>
+<tr>
+<td>Certificate expiry</td>
+<td>Uptime Kuma</td>
+<td>&lt;30 days to expiry</td>
+<td>Discord webhook</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-use-cases-deployment-scenarios">7. Use Cases &amp; Deployment Scenarios<a class="headerlink" href="#7-use-cases-deployment-scenarios" title="Permanent link">&para;</a></h2>
+<h3 id="scenario-1-automated-certificate-renewal-for-web-services">Scenario 1: Automated Certificate Renewal for Web Services<a class="headerlink" href="#scenario-1-automated-certificate-renewal-for-web-services" title="Permanent link">&para;</a></h3>
+<p><strong>Objective:</strong> Eliminate manual certificate management</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Traefik configured with Step-CA ACME endpoint</li>
+<li>Service deployment includes ACME labels (service.home.com)</li>
+<li>Traefik requests certificate via ACME protocol</li>
+<li>Step-CA validates domain ownership (DNS challenge)</li>
+<li>Certificate issued with 365-day validity</li>
+<li>Traefik auto-renews 30 days before expiry</li>
+</ul>
+<p><strong>Result:</strong> Zero-touch certificate management, no expired cert outages</p>
+<h3 id="scenario-2-centralized-credential-management-for-team">Scenario 2: Centralized Credential Management for Team<a class="headerlink" href="#scenario-2-centralized-credential-management-for-team" title="Permanent link">&para;</a></h3>
+<p><strong>Objective:</strong> Share admin credentials securely across lab users</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Admin credentials stored in Vaultwarden shared collection</li>
+<li>Collection access limited to Server_Admins group</li>
+<li>Team members access vault via browser extension</li>
+<li>Credentials auto-filled on login pages</li>
+<li>All access logged with user ID and timestamp</li>
+</ul>
+<p><strong>Result:</strong> No plaintext credentials in wikis/spreadsheets, full audit trail</p>
+<h3 id="scenario-3-windows-client-provisioning-with-group-policy">Scenario 3: Windows Client Provisioning with Group Policy<a class="headerlink" href="#scenario-3-windows-client-provisioning-with-group-policy" title="Permanent link">&para;</a></h3>
+<p><strong>Objective:</strong> Deploy new Windows 11 client with hardened baseline</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Join new VM to home.com domain</li>
+<li>Computer object auto-placed in "Desktop PCs" OU</li>
+<li>GPOs automatically applied within 90 seconds</li>
+<li>User logs in, receives drive mappings and desktop wallpaper</li>
+<li>WSUS policy applies, begins downloading patches</li>
+</ul>
+<p><strong>Result:</strong> Consistent, policy-driven configuration without manual intervention</p>
+<h3 id="scenario-4-certificate-based-service-authentication-mtls">Scenario 4: Certificate-Based Service Authentication (mTLS)<a class="headerlink" href="#scenario-4-certificate-based-service-authentication-mtls" title="Permanent link">&para;</a></h3>
+<p><strong>Objective:</strong> Secure API communication between services</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Service A requests client certificate from Step-CA</li>
+<li>Certificate includes Extended Key Usage: clientAuth</li>
+<li>Service B configured to require client certificate</li>
+<li>TLS handshake validates Service A cert against Step-CA chain</li>
+<li>Mutual authentication established, API call succeeds</li>
+</ul>
+<p><strong>Result:</strong> Service-to-service authentication without shared secrets</p>
+<hr />
+<h2 id="8-standards-alignment">8. Standards Alignment<a class="headerlink" href="#8-standards-alignment" title="Permanent link">&para;</a></h2>
+<h3 id="industry-framework-alignment">Industry Framework Alignment<a class="headerlink" href="#industry-framework-alignment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Framework/Standard</th>
+<th>Alignment</th>
+<th>Implementation Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NIST 800-63B (Digital Identity)</td>
+<td>High</td>
+<td>MFA enforcement; password complexity</td>
+</tr>
+<tr>
+<td>NIST 800-207 (Zero Trust)</td>
+<td>Moderate</td>
+<td>OAuth2/OIDC; microsegmentation</td>
+</tr>
+<tr>
+<td>CIS Controls v8</td>
+<td>High</td>
+<td>IAM controls (5.x; 6.x)</td>
+</tr>
+<tr>
+<td>ISO 27001 (A.9 Access Control)</td>
+<td>Moderate</td>
+<td>RBAC; MFA; audit logging</td>
+</tr>
+<tr>
+<td>FIPS 140-2</td>
+<td>Partial</td>
+<td>AES-256; SHA-256; ECC P-256</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nist-800-63b-authentication-assurance-levels">NIST 800-63B Authentication Assurance Levels<a class="headerlink" href="#nist-800-63b-authentication-assurance-levels" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>AAL Level</th>
+<th>Requirements</th>
+<th>Lab Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAL1</td>
+<td>Single-factor</td>
+<td>Standard user accounts (fallback)</td>
+</tr>
+<tr>
+<td>AAL2</td>
+<td>Two-factor (MFA)</td>
+<td>Password + TOTP (default for admins)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="zero-trust-principles-nist-800-207">Zero Trust Principles (NIST 800-207)<a class="headerlink" href="#zero-trust-principles-nist-800-207" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verify explicitly</td>
+<td>OAuth2 tokens with claims validation</td>
+</tr>
+<tr>
+<td>Least privilege access</td>
+<td>RBAC in Authentik; AD security groups</td>
+</tr>
+<tr>
+<td>Assume breach</td>
+<td>Microsegmentation; certificate-based auth</td>
+</tr>
+<tr>
+<td>Continuous verification</td>
+<td>Session timeouts; token refresh rotation</td>
+</tr>
+<tr>
+<td>Network segmentation</td>
+<td>OPNsense firewall isolates services</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cis-controls-implementation">CIS Controls Implementation<a class="headerlink" href="#cis-controls-implementation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Description</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.1</td>
+<td>Establish secure configs</td>
+<td>GPO baseline; Authentik policies</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>Maintain secure configs</td>
+<td>Configuration backup; version control</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>Documented config standards</td>
+<td>This documentation</td>
+</tr>
+<tr>
+<td>6.1</td>
+<td>Centralized account mgmt</td>
+<td>Active Directory; Authentik</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>Use unique passwords</td>
+<td>Vaultwarden enforced</td>
+</tr>
+<tr>
+<td>6.3</td>
+<td>Disable dormant accounts</td>
+<td>AD account expiration policies</td>
+</tr>
+<tr>
+<td>6.4</td>
+<td>Restrict admin privileges</td>
+<td>Separate admin accounts; RBAC</td>
+</tr>
+<tr>
+<td>6.5</td>
+<td>Centralized authentication</td>
+<td>Authentik SSO; AD Kerberos</td>
+</tr>
+<tr>
+<td>6.6</td>
+<td>Multi-factor authentication</td>
+<td>TOTP + FIDO2 for admin access</td>
+</tr>
+<tr>
+<td>6.7</td>
+<td>Centralized access control</td>
+<td>OAuth2/OIDC; group-based permissions</td>
+</tr>
+<tr>
+<td>6.8</td>
+<td>Define and maintain RBAC</td>
+<td>AD security groups; Authentik roles</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pki-standards-compliance">PKI Standards Compliance<a class="headerlink" href="#pki-standards-compliance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Standard</th>
+<th>Requirement</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RFC 5280</td>
+<td>X.509 certificate format</td>
+<td>Step-CA compliant certificates</td>
+</tr>
+<tr>
+<td>RFC 8555</td>
+<td>ACME protocol</td>
+<td>Automated cert issuance</td>
+</tr>
+<tr>
+<td>NIST FIPS 186-4</td>
+<td>Digital signature algorithms</td>
+<td>ECDSA with SHA-256</td>
+</tr>
+<tr>
+<td>CA/Browser Forum</td>
+<td>Baseline requirements</td>
+<td>398-day max validity (browsers)</td>
+</tr>
+<tr>
+<td>NIST SP 800-57</td>
+<td>Key management</td>
+<td>ECC P-256 (128-bit security)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="password-policy-alignment-nist-800-63b">Password Policy Alignment (NIST 800-63B)<a class="headerlink" href="#password-policy-alignment-nist-800-63b" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>NIST Recommendation</th>
+<th>Lab Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minimum 8 characters</td>
+<td>8 chars (AD); 12 chars (Authentik)</td>
+</tr>
+<tr>
+<td>No complexity requirements</td>
+<td>Complexity required (legacy AD constraint)</td>
+</tr>
+<tr>
+<td>No mandatory rotation</td>
+<td>60-day rotation (AD); no rotation (Authentik)</td>
+</tr>
+<tr>
+<td>Check against breached passwords</td>
+<td>Planned: HaveIBeenPwned integration</td>
+</tr>
+<tr>
+<td>Rate limiting</td>
+<td>5 attempts; 10-minute lockout</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-integration-architecture">9. Integration Architecture<a class="headerlink" href="#9-integration-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="service-integration-architecture">Service Integration Architecture<a class="headerlink" href="#service-integration-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Identity Provider Mappings</strong></p>
+<table>
+<thead>
+<tr>
+<th>Service Category</th>
+<th>Services (Count)</th>
+<th>Auth Method</th>
+<th>Provider</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Virtualization</td>
+<td>Proxmox PVE, PBS (2)</td>
+<td>OAuth2/OIDC</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Container Mgmt</td>
+<td>Portainer (1)</td>
+<td>OAuth2</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Network Security</td>
+<td>pfSense (2)</td>
+<td>LDAP</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>CheckMK (1); Uptime Kuma (1); Pulse (1)</td>
+<td>Proxy Auth</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Network Services</td>
+<td>Pi-hole (2)</td>
+<td>Proxy Auth</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>WUD (1); Changedetect (1)</td>
+<td>Proxy Auth</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Media</td>
+<td>Plex (1)</td>
+<td>Proxy Auth</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Dashboards</td>
+<td>Heimdall (1)</td>
+<td>Proxy Auth</td>
+<td>Authentik</td>
+</tr>
+<tr>
+<td>Windows Systems</td>
+<td>Domain PCs (2)</td>
+<td>Kerberos</td>
+<td>Active Directory</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="security-homelab-section-links">Security Homelab Section Links<a class="headerlink" href="#security-homelab-section-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="/Career_Projects/projects/homelab/01-exec-summary/">Executive Summary and Security Posture</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/02-platform/">Infrastructure Platform, Virtualization Stack and Hardware</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/03-network/">Network Security, Privacy and Remote Access</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/04-iam-secrets/">Identity, Access, Secrets and Trust Management</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/05-auto-iac/">Automation and IaC</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/06-apps-service/">Applications and Services</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/07-vis-response-pt1/">Observability and Response, Part 1</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/08-vis-response-pt2/">Observability and Response, Part 2</a></strong></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

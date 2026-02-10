@@ -1,0 +1,1336 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>NIST SP 800-207 Zero Trust Architecture - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nist-sp-800-207-zero-trust-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NIST SP 800-207 Zero Trust Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="nist-sp-800-207-zero-trust-architecture">NIST SP 800-207 Zero Trust Architecture<a class="headerlink" href="#nist-sp-800-207-zero-trust-architecture" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong><br />
+Version: 1.0<br />
+Last Updated: January 2026<br />
+Owner: Paul Leone  </p>
+<p><strong>Framework Version:</strong> </p>
+<hr />
+<h2 id="zero-trust-architecture-implementation-overview">Zero Trust Architecture Implementation Overview<a class="headerlink" href="#zero-trust-architecture-implementation-overview" title="Permanent link">&para;</a></h2>
+<p>This cybersecurity lab demonstrates comprehensive Zero Trust Architecture (ZTA) principles aligned with <strong>NIST SP 800-207</strong> and <strong>CISA Zero Trust Maturity Model v2.0</strong>. The implementation achieves <strong>Advanced maturity</strong> (Stage 3 of 4) across core Zero Trust pillars through explicit verification of every access request, least-privilege enforcement via RBAC, assume-breach mentality with continuous monitoring, and encrypt-everything policies using modern cryptographic standards.</p>
+<hr />
+<h2 id="zero-trust-tenets-implementation">Zero Trust Tenets Implementation<a class="headerlink" href="#zero-trust-tenets-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="tenet-1-all-data-sources-and-computing-services-as-resources">Tenet 1: All Data Sources and Computing Services as Resources<a class="headerlink" href="#tenet-1-all-data-sources-and-computing-services-as-resources" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation Status: Advanced</strong></p>
+<p>Lab treats all assets as resources requiring explicit authentication/authorization. 25+ physical hosts, 50+ containers, 30+ VMs, network devices (pfSense, OPNsense, Pi-hole), storage systems, and cloud-hosted services (Authentik planning) all subject to access controls. BYOD consideration planned via Authentik device flow and Wazuh compliance validation. Small footprint devices (IoT sensors, network monitors) send data through authenticated channels to aggregators.</p>
+<p><strong>Evidence:</strong> Proxmox inventory tracking, Docker container registry, Wazuh agent deployment across endpoints, NetalertX network discovery, Checkmk infrastructure monitoring.</p>
+<p><strong>Gap to Optimal:</strong> Limited IoT device integration, incomplete BYOD policy enforcement, need automated asset classification with dynamic policy application.</p>
+<hr />
+<h3 id="tenet-2-all-communication-secured-regardless-of-network-location">Tenet 2: All Communication Secured Regardless of Network Location<a class="headerlink" href="#tenet-2-all-communication-secured-regardless-of-network-location" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation Status: Advanced</strong></p>
+<p>Network location provides no implicit trust. TLS 1.3 mandatory for all web services (Traefik enforcement), SSH encrypted with Ed25519 certificates, VPN encryption via WireGuard/OpenVPN, syslog-ng TLS for log transmission. Internal traffic treated identically to external—Authentik ForwardAuth validates all requests regardless of source VLAN. Step-CA PKI provides certificate-based authentication for service-to-service communication.</p>
+<p><strong>Evidence:</strong> Traefik middleware configuration requiring authentication on all VLANs, syslog-ng TLS certificates, Step-CA certificate issuance logs, VPN encryption audit logs.</p>
+<p><strong>Gap to Optimal:</strong> Mutual TLS (mTLS) not fully deployed for all service-to-service communication, some legacy applications lack modern encryption, need encrypted DNS (DoH/DoT) enterprise-wide.</p>
+<hr />
+<h3 id="tenet-3-per-session-resource-access-with-least-privilege">Tenet 3: Per-Session Resource Access with Least Privilege<a class="headerlink" href="#tenet-3-per-session-resource-access-with-least-privilege" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation Status: Advanced</strong></p>
+<p>Access granted per-session via Authentik OAuth2/OIDC with 30-minute session timeouts requiring re-authentication. OAuth2 scopes limit permissions to minimum operations. SSH sessions use temporary sudo elevation with explicit justification. No persistent elevated privileges—all access time-limited and activity-specific. Traefik ForwardAuth validates each request independently.</p>
+<p><strong>Evidence:</strong> Authentik session timeout logs, OAuth2 scope configurations, sudo elevation audit logs, Traefik access validation per-request.</p>
+<p><strong>Gap to Optimal:</strong> Need just-in-time (JIT) access provisioning with automated expiration, dynamic privilege elevation based on real-time risk assessment, continuous session validation beyond timeout intervals.</p>
+<hr />
+<h3 id="tenet-4-dynamic-policy-based-on-observable-state">Tenet 4: Dynamic Policy Based on Observable State<a class="headerlink" href="#tenet-4-dynamic-policy-based-on-observable-state" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation Status: Advanced</strong></p>
+<p>Policy engine (Authentik) evaluates user identity, group membership, device compliance (Wazuh status), source IP reputation, time-of-day restrictions, MFA verification, and behavioral patterns. Policies adapt based on threat intelligence (MISP correlation), failed authentication patterns, geoIP anomalies. Environmental attributes include network location, reported active attacks, device patch level.</p>
+<p><strong>Evidence:</strong> Authentik policy configurations incorporating Wazuh compliance data, Splunk behavioral analytics dashboards, MISP threat correlation logs, time-based access restrictions.</p>
+<p><strong>Gap to Optimal:</strong> Need real-time continuous risk scoring with dynamic policy updates without manual intervention, automated behavioral baselines with deviation-triggered policy changes, comprehensive environmental telemetry integration.</p>
+<hr />
+<h3 id="tenet-5-monitor-and-measure-all-asset-integrity">Tenet 5: Monitor and Measure All Asset Integrity<a class="headerlink" href="#tenet-5-monitor-and-measure-all-asset-integrity" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation Status: Advanced</strong></p>
+<p>Wazuh agents on 25+ endpoints provide real-time compliance validation against CIS Benchmarks (92-98% compliance). Nessus authenticated scans monthly, Ansible drift detection, container health checks, VM monitoring via Proxmox. Non-compliant devices quarantined to remediation VLAN. CDM-like capabilities via PatchMon (5,000+ packages tracked), vulnerability correlation to NVD, automated patch workflows.</p>
+<p><strong>Evidence:</strong> Wazuh SCA reports, Nessus scan results, PatchMon vulnerability tracking, Ansible compliance playbooks, automated quarantine workflows in firewall logs.</p>
+<p><strong>Gap to Optimal:</strong> Need real-time asset risk scoring, automated remediation without manual approval for non-critical systems, comprehensive SBOM tracking (Trivy/Grype deployment Q1 2026), continuous hardware/firmware integrity validation.</p>
+<hr />
+<h3 id="tenet-6-dynamic-authentication-and-authorization">Tenet 6: Dynamic Authentication and Authorization<a class="headerlink" href="#tenet-6-dynamic-authentication-and-authorization" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation Status: Advanced</strong></p>
+<p>Authentik provides dynamic ICAM with MFA (TOTP, FIDO2/WebAuthn planning), OAuth2/OIDC integration, LDAP/SAML support. Continuous evaluation via session timeouts, behavioral monitoring (Splunk analytics), threat-triggered re-authentication. Asset management via Wazuh, NetalertX, Checkmk. Policy-based re-authentication on resource changes, time-based intervals, anomalous activity detection.</p>
+<p><strong>Evidence:</strong> Authentik MFA enforcement logs, re-authentication triggers in SIEM, behavioral anomaly detection alerts, dynamic policy application based on threat intelligence.</p>
+<p><strong>Gap to Optimal:</strong> Full passwordless authentication via FIDO2/WebAuthn, continuous authentication beyond session-based model, automated privilege adjustment based on real-time risk, biometric MFA integration.</p>
+<hr />
+<h3 id="tenet-7-collect-and-use-security-posture-data">Tenet 7: Collect and Use Security Posture Data<a class="headerlink" href="#tenet-7-collect-and-use-security-posture-data" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation Status: Advanced</strong></p>
+<p>Comprehensive telemetry: Wazuh endpoint data, Suricata/Snort network IDS, pfSense flow logs, Traefik access logs, Pi-hole DNS queries, Prometheus metrics, application logs. Data processed in dual SIEM (Splunk + Elastic) with correlation, behavioral analytics, threat hunting. Insights improve policy via monthly reviews, automated IOC blocking, vulnerability-driven patching.</p>
+<p><strong>Evidence:</strong> SIEM ingestion rates (100% security events), correlation rule effectiveness, policy updates based on SIEM analytics, threat intelligence integration (MISP), automated IOC blocking.</p>
+<p><strong>Gap to Optimal:</strong> Machine learning/UEBA for predictive analytics, comprehensive data lake for long-term analysis, automated policy generation from threat intelligence, real-time feedback loop for policy optimization.</p>
+<hr />
+<h2 id="nist-sp-800-207-logical-components">NIST SP 800-207 Logical Components<a class="headerlink" href="#nist-sp-800-207-logical-components" title="Permanent link">&para;</a></h2>
+<h3 id="policy-engine-pe">Policy Engine (PE)<a class="headerlink" href="#policy-engine-pe" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Authentik serves as primary PE, evaluating access requests against enterprise policy, user attributes, device compliance (Wazuh integration), threat intelligence (MISP), behavioral baselines (Splunk), and environmental factors. Trust algorithm considers identity confidence, device posture, request context, historical behavior, current threat landscape.</p>
+<p><strong>Trust Algorithm Type:</strong> Hybrid score-based and criteria-based, contextual evaluation considering subject history, access patterns, anomaly detection.</p>
+<p><strong>Evidence:</strong> Authentik policy logs, access decision audit trails, Wazuh compliance integration, Splunk behavioral correlation.</p>
+<p><strong>Gap:</strong> Need fully automated trust scoring, real-time ML-based risk calculation, comprehensive external data source integration.</p>
+<hr />
+<h3 id="policy-administrator-pa">Policy Administrator (PA)<a class="headerlink" href="#policy-administrator-pa" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Authentik PA configures communication paths via Traefik middleware, generates OAuth2 tokens, manages session lifecycles, coordinates with Step-CA for certificate-based authentication. Controls session establishment/termination based on PE decisions and ongoing monitoring.</p>
+<p><strong>Evidence:</strong> OAuth2 token generation logs, session establishment/teardown events, Traefik dynamic configuration updates, Step-CA certificate issuance coordination.</p>
+<p><strong>Gap:</strong> Need automated PEP configuration at scale, service mesh integration for microservice communication paths, dynamic network path creation.</p>
+<hr />
+<h3 id="policy-enforcement-point-pep">Policy Enforcement Point (PEP)<a class="headerlink" href="#policy-enforcement-point-pep" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Multi-component PEP architecture:</p>
+<p><strong>Client-side:</strong> Authentik ForwardAuth integration in browsers, SSH certificate-based authentication, Wazuh agent compliance reporting, VPN device authentication</p>
+<p><strong>Resource-side:</strong> Traefik reverse proxy, pfSense/OPNsense firewalls, SafeLine WAF, service-specific gateways</p>
+<p><strong>Control Plane:</strong> Isolated management network for PE/PA/PEP communication</p>
+<p><strong>Data Plane:</strong> Application traffic on segregated VLANs</p>
+<p><strong>Deployment Model:</strong> Hybrid agent/gateway (Authentik + Traefik), enclave gateway (DMZ services), resource portal (web applications).</p>
+<p><strong>Evidence:</strong> Traefik ForwardAuth logs, firewall rule enforcement, WAF block rates, SSH certificate validation, VLAN isolation configs.</p>
+<p><strong>Gap:</strong> Need device agents for comprehensive endpoint coverage, unified PEP management interface, automated PEP deployment for new resources.</p>
+<hr />
+<h2 id="data-sources-for-policy-decisions">Data Sources for Policy Decisions<a class="headerlink" href="#data-sources-for-policy-decisions" title="Permanent link">&para;</a></h2>
+<h3 id="continuous-diagnostics-and-mitigation-cdm">Continuous Diagnostics and Mitigation (CDM)<a class="headerlink" href="#continuous-diagnostics-and-mitigation-cdm" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Wazuh provides CDM capabilities: vulnerability assessment, FIM, rootkit detection, CIS Benchmark compliance (SCA), patch management via PatchMon integration. Nessus authenticated scans complement. Ansible enforces configurations, detects drift. Container/VM monitoring via Proxmox and Docker health checks.</p>
+<p><strong>Evidence:</strong> Wazuh vulnerability reports, compliance scan results (92-98%), PatchMon package tracking (5,000+ packages), Ansible drift detection alerts.</p>
+<p><strong>Gap:</strong> Need comprehensive CDM platform integration, automated non-enterprise device policy enforcement, real-time software inventory with SBOM.</p>
+<hr />
+<h3 id="industry-compliance-system">Industry Compliance System<a class="headerlink" href="#industry-compliance-system" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Policy framework aligned with CIS Benchmarks, NIST 800-53 controls, PCI-DSS requirements (where applicable), ISO 27001 standards. Wazuh SCA enforces CIS policies, vulnerability remediation follows NIST guidelines, encryption standards per NIST/PCI-DSS.</p>
+<p><strong>Evidence:</strong> CIS Benchmark compliance reports, control mapping documentation, policy version control (Git), quarterly compliance reviews.</p>
+<p><strong>Gap:</strong> Automated compliance validation across all frameworks, dynamic policy updates based on regulatory changes, comprehensive audit trail integration.</p>
+<hr />
+<h3 id="threat-intelligence-feeds">Threat Intelligence Feeds<a class="headerlink" href="#threat-intelligence-feeds" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> MISP threat intelligence platform correlates IOCs across network logs, endpoint telemetry, application data. Splunk integrates feeds for correlation. Suricata/Snort use threat signatures. GeoIP databases identify suspicious locations. Cortex analyzers (VirusTotal, Hybrid Analysis) provide malware analysis.</p>
+<p><strong>Evidence:</strong> MISP IOC correlation logs, automated IOC blocking (Wazuh Active Response), threat intelligence-driven alerts, malware analysis reports.</p>
+<p><strong>Gap:</strong> Need additional commercial threat feeds, automated STIX/TAXII integration, predictive threat modeling, insider threat detection feeds.</p>
+<hr />
+<h3 id="network-and-system-activity-logs">Network and System Activity Logs<a class="headerlink" href="#network-and-system-activity-logs" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Dual SIEM architecture (Splunk + Elastic) aggregates 100% security events: authentication logs, firewall traffic, DNS queries (Pi-hole), web access (Traefik), endpoint events (Wazuh), network IDS (Suricata), infrastructure metrics (Prometheus). Real-time correlation detects multi-stage attacks, lateral movement, data exfiltration patterns.</p>
+<p><strong>Evidence:</strong> SIEM ingestion statistics, correlation rule effectiveness, alert volumes, retention compliance (90-day hot, 1-year cold), multi-source event correlation.</p>
+<p><strong>Gap:</strong> Need unified logging schema, comprehensive cloud service log integration, enhanced UEBA capabilities, longer retention with efficient archival.</p>
+<hr />
+<h3 id="data-access-policies">Data Access Policies<a class="headerlink" href="#data-access-policies" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> RBAC via Authentik groups mapped to resource permissions. Filesystem ACLs, database role-based permissions, application-level authorization. Policies encoded in Authentik, enforced via Traefik middleware, validated quarterly. Sensitivity-based policies (Public, Internal, Confidential, Restricted) with handling requirements.</p>
+<p><strong>Evidence:</strong> Authentik RBAC configurations, quarterly access reviews, policy documentation (version-controlled), filesystem/database ACL audits.</p>
+<p><strong>Gap:</strong> Need attribute-based access control (ABAC), automated policy generation from data classification, dynamic policies based on data sensitivity changes.</p>
+<hr />
+<h3 id="enterprise-pki">Enterprise PKI<a class="headerlink" href="#enterprise-pki" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Step-CA provides automated certificate lifecycle: issuance, renewal, rotation (90-day lifetimes). SSH certificate-based authentication, TLS certificates for services, mutual TLS planning. Integration with Authentik for identity certificates. No reliance on external CA for internal services.</p>
+<p><strong>Evidence:</strong> Step-CA issuance logs, certificate rotation compliance, SSH cert validation logs, TLS certificate inventory, cryptographic algorithm compliance (TLS 1.3, Ed25519).</p>
+<p><strong>Gap:</strong> Need Federal PKI integration for inter-agency collaboration, hardware security module (HSM) for root CA protection, comprehensive certificate transparency monitoring.</p>
+<hr />
+<h3 id="id-management-system">ID Management System<a class="headerlink" href="#id-management-system" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Authentik serves as authoritative identity source: user accounts, attributes, group memberships, device identities, service accounts. LDAP/OAuth2/OIDC/SAML support for federated identity. Integration with Step-CA for certificate binding. Account lifecycle management with automated provisioning/deprovisioning (standard users), manual approval for privileged accounts.</p>
+<p><strong>Evidence:</strong> Authentik user database, group assignment logs, federated identity configurations, account lifecycle audit trails, integration logs with downstream systems.</p>
+<p><strong>Gap:</strong> Need full automation of privileged account lifecycle, federated identity with external partners, comprehensive identity governance platform, automated role mining.</p>
+<hr />
+<h3 id="siem-system">SIEM System<a class="headerlink" href="#siem-system" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Dual architecture—Splunk (primary analytics) and Elastic (secondary/redundancy) collect security-centric data for policy refinement, attack detection, forensics. 90-day hot retention, 1-year cold storage. Dashboards track vulnerabilities, patch compliance, authentication patterns, threat indicators. Alerts feed TheHive case management, Shuffle SOAR orchestration.</p>
+<p><strong>Evidence:</strong> SIEM correlation rules (100+ active), dashboard usage, alert-to-incident conversion rates, retention compliance, SOAR integration workflows.</p>
+<p><strong>Gap:</strong> Need automated playbook optimization, comprehensive use case coverage, advanced analytics (UEBA/ML), threat hunting automation, extended retention for regulatory compliance.</p>
+<hr />
+<h2 id="zta-deployment-model-assessment">ZTA Deployment Model Assessment<a class="headerlink" href="#zta-deployment-model-assessment" title="Permanent link">&para;</a></h2>
+<h3 id="primary-model-device-agentgateway-hybrid">Primary Model: Device Agent/Gateway (Hybrid)<a class="headerlink" href="#primary-model-device-agentgateway-hybrid" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Authentik acts as central policy administrator. Client-side enforcement via browser-based ForwardAuth (no installed agent for web resources), SSH certificate agents for terminal access. Resource-side gateways include Traefik (web services), pfSense/OPNsense (network perimeter), SafeLine WAF (application layer).</p>
+<p><strong>Strengths:</strong> No required client software for web access (BYOD-friendly), centralized policy management, defense-in-depth with multiple gateway layers.</p>
+<p><strong>Weaknesses:</strong> Limited endpoint visibility for non-enterprise devices, cannot enforce compliance before web access attempts, relies on network controls for non-web protocols.</p>
+<p><strong>Evidence:</strong> Traefik ForwardAuth integration across 50+ services, SSH certificate distribution via Ansible, gateway configuration management.</p>
+<hr />
+<h3 id="secondary-model-enclave-based">Secondary Model: Enclave-Based<a class="headerlink" href="#secondary-model-enclave-based" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> DMZ services protected by enclave gateway (pfSense), application tier isolated behind Traefik, backend services (databases, SIEM, PKI) on dedicated VLANs with restricted access. Cloud services will use cloud-provider gateways when Authentik cloud deployment occurs.</p>
+<p><strong>Evidence:</strong> 3-tier architecture (DMZ, application, backend), VLAN isolation with firewall enforcement, gateway placement protecting service enclaves.</p>
+<hr />
+<h3 id="tertiary-model-resource-portal">Tertiary Model: Resource Portal<a class="headerlink" href="#tertiary-model-resource-portal" title="Permanent link">&para;</a></h3>
+<p><strong>Implementation:</strong> Web-based access to services via Traefik reverse proxy acting as portal. No client agents required. Authentication/authorization at portal before proxying to resources. Used for contractor access, cross-organization collaboration, public-facing authenticated services.</p>
+<p><strong>Evidence:</strong> Traefik portal configurations, authentication workflows, contractor access logs, session management.</p>
+<hr />
+<h2 id="zta-use-case-alignment">ZTA Use Case Alignment<a class="headerlink" href="#zta-use-case-alignment" title="Permanent link">&para;</a></h2>
+<h3 id="use-case-1-enterprise-with-satellite-facilities-remote-workers">Use Case 1: Enterprise with Satellite Facilities (Remote Workers)<a class="headerlink" href="#use-case-1-enterprise-with-satellite-facilities-remote-workers" title="Permanent link">&para;</a></h3>
+<p><strong>Applicability:</strong> High—supports remote administration, off-site monitoring, telecommuting scenarios.</p>
+<p><strong>Implementation:</strong> Tailscale mesh VPN provides secure remote access without traditional VPN concentrator. Authentik authenticates remote users, validates device compliance via Wazuh remote agent data. Cloud-ready architecture (Authentik cloud planning) enables direct cloud resource access without hairpinning through on-premises infrastructure.</p>
+<p><strong>Evidence:</strong> Tailscale deployment, remote Wazuh agent reporting, Authentik MFA enforcement for remote sessions, direct cloud access configurations.</p>
+<hr />
+<h3 id="use-case-2-multi-cloudcloud-to-cloud">Use Case 2: Multi-Cloud/Cloud-to-Cloud<a class="headerlink" href="#use-case-2-multi-cloudcloud-to-cloud" title="Permanent link">&para;</a></h3>
+<p><strong>Applicability:</strong> Medium—current cloud usage limited but growing.</p>
+<p><strong>Implementation:</strong> Planning for Authentik cloud deployment enables policy enforcement for cloud resources. Current cloudflare Tunnels provide secure cloud ingress without port forwarding. Future cloud-hosted services will authenticate via Authentik OAuth2/OIDC, enforce same policies as on-premises.</p>
+<p><strong>Evidence:</strong> Cloudflare Tunnel configurations, cloud service authentication planning, policy portability across environments.</p>
+<p><strong>Gap:</strong> Need comprehensive multi-cloud policy orchestration, cloud workload protection platform (CWPP), cloud access security broker (CASB) capabilities.</p>
+<hr />
+<h3 id="use-case-3-contracted-servicesnonemployee-access">Use Case 3: Contracted Services/Nonemployee Access<a class="headerlink" href="#use-case-3-contracted-servicesnonemployee-access" title="Permanent link">&para;</a></h3>
+<p><strong>Applicability:</strong> High—supports guest network, contractor access, IoT device isolation.</p>
+<p><strong>Implementation:</strong> Open guest network with internet access but no enterprise resource visibility. Authentik provides time-limited contractor accounts with restricted resource access. Smart building systems isolated on dedicated VLAN, accessible only to vendor service accounts with MFA. Visitor devices cannot discover internal resources (SDP principles).</p>
+<p><strong>Evidence:</strong> Guest VLAN isolation, contractor account lifecycle (creation, time limits, deactivation), vendor MFA enforcement, network segmentation preventing reconnaissance.</p>
+<hr />
+<h3 id="use-case-4-cross-enterprise-collaboration">Use Case 4: Cross-Enterprise Collaboration<a class="headerlink" href="#use-case-4-cross-enterprise-collaboration" title="Permanent link">&para;</a></h3>
+<p><strong>Applicability:</strong> Medium—prepared for federated scenarios.</p>
+<p><strong>Implementation:</strong> Authentik supports OAuth2/OIDC/SAML federation, enabling cross-organization collaboration. Can establish federated trust with partner identity providers. Resource-specific policies grant external user access to designated collaboration resources (shared databases, project management tools) while denying access to other systems.</p>
+<p><strong>Evidence:</strong> Authentik federation capabilities, external identity source configurations, resource-specific policy enforcement.</p>
+<p><strong>Gap:</strong> Need formal federated identity agreements, cross-domain trust establishment, collaborative security posture sharing.</p>
+<hr />
+<h3 id="use-case-5-publiccustomer-facing-services">Use Case 5: Public/Customer-Facing Services<a class="headerlink" href="#use-case-5-publiccustomer-facing-services" title="Permanent link">&para;</a></h3>
+<p><strong>Applicability:</strong> Low—limited public-facing services currently.</p>
+<p><strong>Implementation:</strong> Public web services (if deployed) would use Traefik with optional authentication. No enforcement of device posture for anonymous public access. Registered user portals (future) could enforce password policies, optional MFA, browser type validation. Metadata collection for attack detection (rate limiting, browser fingerprinting, bot detection).</p>
+<p><strong>Evidence:</strong> Traefik rate limiting, WAF rules blocking automated attacks, access pattern analysis.</p>
+<hr />
+<h2 id="threats-and-mitigations">Threats and Mitigations<a class="headerlink" href="#threats-and-mitigations" title="Permanent link">&para;</a></h2>
+<h3 id="threat-1-subversion-of-zta-decision-process">Threat 1: Subversion of ZTA Decision Process<a class="headerlink" href="#threat-1-subversion-of-zta-decision-process" title="Permanent link">&para;</a></h3>
+<p><strong>Risk Level:</strong> High—PE/PA compromise undermines entire architecture.</p>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>Authentik access restricted to dedicated administrator accounts with MFA</li>
+<li>All configuration changes logged to SIEM with alerting</li>
+<li>Git version control for policy configurations with approval workflow</li>
+<li>Quarterly access reviews for administrative privileges</li>
+<li>Authentik deployed on hardened, isolated systems with minimal attack surface</li>
+</ul>
+<p><strong>Evidence:</strong> Admin account audit logs, SIEM alerting on policy changes, Git commit history, privilege review documentation.</p>
+<p><strong>Gap:</strong> Need HSM-backed key material, multi-person approval for critical policy changes, immutable audit logging with tamper detection.</p>
+<hr />
+<h3 id="threat-2-denial-of-service-or-network-disruption">Threat 2: Denial-of-Service or Network Disruption<a class="headerlink" href="#threat-2-denial-of-service-or-network-disruption" title="Permanent link">&para;</a></h3>
+<p><strong>Risk Level:</strong> Medium—disruption impacts business continuity.</p>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>HA firewall cluster (pfSense CARP) with &lt;5-second failover</li>
+<li>Dual DNS (Pi-hole) with automatic failover</li>
+<li>Dual SIEM architecture (Splunk + Elastic) for resilience</li>
+<li>Redundant internet connections with automatic failover</li>
+<li>Load balancing via Traefik across multiple backends</li>
+</ul>
+<p><strong>Evidence:</strong> Failover testing logs, uptime statistics (99.9% DNS availability), redundant service configurations, load balancer health checks.</p>
+<p><strong>Gap:</strong> Need distributed PEP deployment across geographic locations, DDoS mitigation service, automated failover testing, comprehensive disaster recovery testing.</p>
+<hr />
+<h3 id="threat-3-stolen-credentialsinsider-threat">Threat 3: Stolen Credentials/Insider Threat<a class="headerlink" href="#threat-3-stolen-credentialsinsider-threat" title="Permanent link">&para;</a></h3>
+<p><strong>Risk Level:</strong> Medium—valid credentials bypass many controls.</p>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>MFA enforcement (TOTP current, FIDO2/WebAuthn planned) reduces credential theft impact</li>
+<li>Contextual trust algorithm detects anomalous behavior (unusual times, locations, access patterns)</li>
+<li>Session timeouts (30 minutes) limit exposure window</li>
+<li>Behavioral analytics (Splunk) identify compromised account indicators</li>
+<li>Least privilege limits blast radius—stolen HR credentials cannot access financial systems</li>
+<li>Lateral movement prevention via network segmentation, least privilege</li>
+</ul>
+<p><strong>Evidence:</strong> MFA enforcement logs, behavioral anomaly alerts, session timeout enforcement, privilege restriction audit logs, lateral movement detection in SIEM.</p>
+<p><strong>Gap:</strong> Need continuous authentication beyond session-based, risk-based step-up authentication, automated account suspension on high-risk activity, comprehensive insider threat program.</p>
+<hr />
+<h3 id="threat-4-visibility-limitations-on-encrypted-traffic">Threat 4: Visibility Limitations on Encrypted Traffic<a class="headerlink" href="#threat-4-visibility-limitations-on-encrypted-traffic" title="Permanent link">&para;</a></h3>
+<p><strong>Risk Level:</strong> Low to Medium—cannot inspect all traffic.</p>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>Metadata collection from encrypted sessions (source, destination, timing, volume)</li>
+<li>Certificate inspection for TLS connections (Step-CA issued certificates trusted, external certificates scrutinized)</li>
+<li>DNS query logging (Pi-hole) identifies suspicious domains even with encrypted payloads</li>
+<li>Endpoint visibility via Wazuh agents provides process-level context</li>
+<li>Network behavior analysis detects anomalies without decryption</li>
+</ul>
+<p><strong>Evidence:</strong> Flow log analysis, DNS-based threat detection, endpoint telemetry correlation, encrypted traffic metadata dashboards.</p>
+<p><strong>Gap:</strong> Need TLS inspection capabilities with appropriate privacy controls, DNS over HTTPS (DoH) traffic handling, encrypted malware detection capabilities.</p>
+<hr />
+<h3 id="threat-5-stored-data-compromise">Threat 5: Stored Data Compromise<a class="headerlink" href="#threat-5-stored-data-compromise" title="Permanent link">&para;</a></h3>
+<p><strong>Risk Level:</strong> Medium—reconnaissance data valuable to attackers.</p>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>SIEM data, network diagrams, configuration files stored with encryption at rest (AES-256)</li>
+<li>Access to security data repositories restricted to security team with MFA</li>
+<li>Configuration management tools (Ansible, Terraform) protected with vault encryption</li>
+<li>Most restrictive access policies on security infrastructure components</li>
+<li>Regular access reviews for security data access</li>
+</ul>
+<p><strong>Evidence:</strong> Encryption-at-rest configurations, access restriction logs, security data access audit trails, vault usage logs.</p>
+<p><strong>Gap:</strong> Need data loss prevention (DLP) for security data, comprehensive data classification, automated security data access reviews, honeypot/deception technology.</p>
+<hr />
+<h3 id="threat-6-vendor-lock-inproprietary-formats">Threat 6: Vendor Lock-in/Proprietary Formats<a class="headerlink" href="#threat-6-vendor-lock-inproprietary-formats" title="Permanent link">&para;</a></h3>
+<p><strong>Risk Level:</strong> Medium—impacts flexibility and resilience.</p>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>Open-source focus (Authentik, Wazuh, Traefik, Suricata) reduces vendor lock-in</li>
+<li>Standard protocols (OAuth2, OIDC, SAML, LDAP) enable interoperability</li>
+<li>Infrastructure-as-code (Terraform, Ansible) allows migration to alternative platforms</li>
+<li>Multi-vendor approach for critical functions (dual SIEM, multiple authentication methods)</li>
+<li>Regular evaluation of alternative solutions</li>
+</ul>
+<p><strong>Evidence:</strong> Open-source tool selection, standard protocol usage, IaC repositories, vendor diversity in architecture.</p>
+<p><strong>Gap:</strong> Need formal vendor evaluation framework, migration plans for critical dependencies, comprehensive data portability validation.</p>
+<hr />
+<h3 id="threat-7-automated-agentnpe-compromise">Threat 7: Automated Agent/NPE Compromise<a class="headerlink" href="#threat-7-automated-agentnpe-compromise" title="Permanent link">&para;</a></h3>
+<p><strong>Risk Level:</strong> Medium—service accounts have elevated privileges.</p>
+<p><strong>Mitigations:</strong></p>
+<ul>
+<li>Service account credentials stored in Vaultwarden with automated retrieval</li>
+<li>API keys rotated quarterly with automated expiration</li>
+<li>Service account activity logged and monitored for anomalies</li>
+<li>Principle of least privilege for automation accounts (read-only where possible)</li>
+<li>Automated agent authentication via certificate-based methods (Step-CA)</li>
+</ul>
+<p><strong>Evidence:</strong> Service account activity logs, API key rotation schedules, certificate-based automation authentication, anomaly detection for NPE accounts.</p>
+<p><strong>Gap:</strong> Need just-in-time service account provisioning, short-lived credentials for all automation, comprehensive NPE behavior baselines, automated agent attestation.</p>
+<hr />
+<h2 id="deployment-maturity-assessment">Deployment Maturity Assessment<a class="headerlink" href="#deployment-maturity-assessment" title="Permanent link">&para;</a></h2>
+<p><strong>Overall NIST ZTA Maturity: Advanced</strong></p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>Comprehensive implementation of ZT tenets 1-7</li>
+<li>Mature logical component deployment (PE, PA, PEP)</li>
+<li>Rich data sources for policy decisions (CDM, threat intel, SIEM, PKI, IAM)</li>
+<li>Hybrid deployment model supporting diverse use cases</li>
+<li>Strong threat mitigation posture</li>
+<li>Open standards and interoperability focus</li>
+</ul>
+<p><strong>Gaps to Optimal:</strong></p>
+<ul>
+<li>Device agents for comprehensive endpoint coverage</li>
+<li>Full passwordless authentication (FIDO2/WebAuthn)</li>
+<li>Continuous authentication beyond session-based model</li>
+<li>Machine learning/UEBA for predictive analytics</li>
+<li>Comprehensive cloud security integration</li>
+<li>Automated policy generation from threat intelligence</li>
+<li>Just-in-time access provisioning enterprise-wide</li>
+<li>Hardware security modules for critical key material</li>
+</ul>
+<p><strong>Recommended Priorities Q1-Q2 2026:</strong></p>
+<ul>
+<li>FIDO2/WebAuthn deployment for passwordless MFA</li>
+<li>Trivy/Grype for comprehensive SBOM tracking</li>
+<li>UEBA capabilities in SIEM platforms</li>
+<li>Mutual TLS for all service-to-service communication</li>
+<li>Comprehensive DLP implementation</li>
+<li>Formal federated identity program</li>
+</ul>
+<p><strong>Framework Alignment:</strong></p>
+<ul>
+<li>NIST SP 800-207: Advanced maturity, comprehensive tenet implementation</li>
+<li>NIST RMF: Access policies risk-based, continuous monitoring aligned</li>
+<li>NIST Privacy Framework: Privacy controls for monitoring data, user consent mechanisms</li>
+<li>FICAM: Strong identity governance, MFA enforcement, lifecycle management</li>
+<li>TIC 3.0: Network security capabilities aligned, PEP-based enforcement</li>
+<li>EINSTEIN/NCPS: Telemetry compatible, incident response integration ready</li>
+<li>CDM: Mature diagnostics and mitigation capabilities via Wazuh/PatchMon</li>
+<li>Cloud Smart: Cloud-ready architecture, hybrid deployment support</li>
+</ul>
+<p>This Zero Trust implementation demonstrates advanced alignment with NIST SP 800-207 principles, providing production-ready capabilities for federal civilian executive branch agencies and enterprise environments pursuing comprehensive ZTA adoption.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

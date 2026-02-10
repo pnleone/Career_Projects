@@ -1,0 +1,124 @@
+graph TB
+
+%% =========================
+%% INTERNET
+%% =========================
+Internet["fa:fa-globe Internet / ISP"]
+
+%% =========================
+%% ASUS ROUTER
+%% =========================
+subgraph ASUS["ASUS Router"]
+    ASUS_header["**ASUS Router**<br/>192.168.1.1<br/>Primary Gateway"]
+    ASUS_IF["VLAN 10<br/>192.168.1.0/24"]
+end
+
+%% =========================
+%% PFSENSE CLUSTER
+%% =========================
+subgraph pfSense["pfSense HA Cluster"]
+    pfSense_header["**pfSense HA Cluster**<br/>192.168.1.254 VIP<br/>Core Router"]
+    pfSense_PROD["VLAN 10<br/>192.168.1.0/24"]
+    pfSense_LAB1["VLAN 100<br/>192.168.100.0/24"]
+    pfSense_LAB2["VLAN 200<br/>192.168.200.0/24"]
+    pfSense_EXT["VLAN 20<br/>192.168.2.0/24"]
+    pfSense_INT["VLAN 110<br/>10.10.0.0/24"]
+end
+
+%% =========================
+%% OPNSENSE
+%% =========================
+subgraph OPNsense["OPNsense"]
+    OPNsense_header["**OPNsense**<br/>192.168.1.201<br/>ISO Router #1"]
+    OPN_PROD["192.168.1.0/24"]
+    OPN_ISO["VLAN 120<br/>10.20.0.0/24"]
+end
+
+%% =========================
+%% FORTIGATE
+%% =========================
+subgraph FortiGate["FortiGate"]
+    FortiGate_header["**FortiGate**<br/>192.168.1.99<br/>ISO Router #2"]
+    FG_PROD["192.168.1.0/24"]
+    FG_ISO["VLAN 30<br/>192.168.3.0/24"]
+end
+
+%% =========================
+%% CISCO R1
+%% =========================
+subgraph CiscoR1["Cisco R1"]
+    CiscoR1_header["**Cisco R1**<br/>192.168.1.6<br/>Core Router"]
+    R1_PROD["192.168.1.0/24"]
+    R1_LAB1["192.168.100.0/24"]
+    R1_LAB2["192.168.200.0/24"]
+    R1_PTP["10.30.0.1/30"]
+end
+
+%% =========================
+%% CISCO R2
+%% =========================
+subgraph CiscoR2["Cisco R2"]
+    CiscoR2_header["**Cisco R2**<br/>192.168.3.9<br/>Edge Router"]
+    R2_PTP["10.30.0.2/30"]
+    R2_ISO["192.168.3.0/24"]
+    R2_EXT["192.168.2.0/24"]
+end
+
+%% =========================
+%% WORKLOADS
+%% =========================
+subgraph Workloads["Network Workloads"]
+    Workloads_header["**Network Workloads**"]
+    PROD_WL["Prod_LAN<br/>192.168.1.0/24"]
+    LAB1_WL["Lab_LAN1<br/>192.168.100.0/24"]
+    LAB2_WL["Lab_LAN2<br/>192.168.200.0/24"]
+    EXT_WL["Ext_LAN/DMZ<br/>192.168.2.0/24"]
+    ISO1_WL["ISO_LAN1<br/>10.20.0.0/24"]
+    ISO2_WL["ISO_LAN2<br/>192.168.3.0/24"]
+end
+
+%% =========================
+%% CONNECTIONS
+%% =========================
+
+Internet -->|Default Route| ASUS
+
+ASUS -->|Prod| PROD_WL
+ASUS -->|Next Hop .254| pfSense
+ASUS -->|Next Hop .201| OPNsense
+ASUS -->|Next Hop .99| FortiGate
+ASUS -->|Next Hop .6| CiscoR1
+
+pfSense --> PROD_WL
+pfSense --> LAB1_WL
+pfSense --> LAB2_WL
+pfSense --> EXT_WL
+pfSense -.->|Route via .201| OPNsense
+pfSense -.->|Route via .99| FortiGate
+pfSense -.->|Route via .6| CiscoR1
+
+OPNsense --> ISO1_WL
+OPNsense -.->|Route via .254| pfSense
+
+FortiGate --> ISO2_WL
+FortiGate -.->|Route via .254| pfSense
+
+CiscoR1 <-->|OSPF 10.30.0.0/30| CiscoR2
+CiscoR1 --> LAB1_WL
+CiscoR1 --> LAB2_WL
+CiscoR2 -->|OSPF via R1| LAB1_WL
+CiscoR2 -->|OSPF via R1| LAB2_WL
+CiscoR2 --> EXT_WL
+CiscoR2 --> ISO2_WL
+
+%% =========================
+%% COLORS
+%% =========================
+style Internet fill:#e1f5ff,color:#000
+style ASUS fill:#fff4e6,color:#000
+style pfSense fill:#e8f5e9,color:#000
+style OPNsense fill:#f3e5f5,color:#000
+style FortiGate fill:#fce4ec,color:#000
+style CiscoR1 fill:#e3f2fd,color:#000
+style CiscoR2 fill:#e3f2fd,color:#000
+style Workloads fill:#f5f5f5,color:#000

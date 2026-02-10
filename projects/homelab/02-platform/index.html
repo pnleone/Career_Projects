@@ -1,0 +1,4329 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../01-exec-summary/">
+      
+      
+        <link rel="next" href="../03-network/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Platform and Virtualization - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#infrastructure-platform-and-hardware-summary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Platform and Virtualization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-virtualization-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Core Virtualization Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Core Virtualization Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-proxmox-virtual-environment-ve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Proxmox Virtual Environment (VE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Proxmox Virtual Environment (VE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-capabilities-demonstrated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Capabilities Demonstrated
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-proxmox-backup-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Proxmox Backup Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proxmox-datacenter-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Proxmox Datacenter Manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-physical-network-attached-storage-nas-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Physical Network Attached Storage (NAS) Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-virtual-network-attached-storage-nas-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Virtual Network Attached Storage (NAS) Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-proxmox-host-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 Proxmox Host Hardware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Proxmox Host Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network-interface-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Interface Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-lab-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 Lab Switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-proxmox-workload-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.8 Proxmox Workload Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.8 Proxmox Workload Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#virtual-machines-vms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🖥️ Virtual Machines (VMs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-containers-lxc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Linux Containers (LXC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-infrastructure-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 Infrastructure Visualization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.9 Infrastructure Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powerbi-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PowerBI Dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#110-os-platform-and-distributionedition-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.10 OS Platform and Distribution/Edition Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-vmware-vsphere-r8-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. VMware vSphere r8 Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. VMware vSphere r8 Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-cisco-virtual-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Cisco Virtual Infrastructure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Cisco Virtual Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31-network-topology-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Network Topology and Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#router-r1-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Router R1 Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Router R1 Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ospf-routing-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSPF Routing Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-host-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Host Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-technical-capabilities-demonstrated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Technical Capabilities Demonstrated
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Technical Capabilities Demonstrated">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-routing-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dynamic Routing Protocols
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-container-orchestration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Container Orchestration Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Container Orchestration Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#41-multi-engine-docker-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Multi-Engine Docker Deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Multi-Engine Docker Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Compose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cloud-native-kubernetes-cluster-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Cloud-Native Kubernetes Cluster Deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Cloud-Native Kubernetes Cluster Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-impact_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-rationale_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-principles-alignment_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Principles Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-infrastructure-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Infrastructure Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx-namespace-web-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nginx Namespace - Web Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-namespaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure Namespaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Infrastructure Namespaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-rationale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Rationale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soc-namespace-security-operations-center" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOC Namespace - Security Operations Center
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-admin-namespace-infrastructure-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-Admin Namespace - Infrastructure Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-network-services-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Network Services Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loadbalancer-services-externally-accessible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LoadBalancer Services (Externally Accessible)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clusterip-services-internal-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ClusterIP Services (Internal Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-example-workload-patchmon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Example Workload PatchMon
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 Example Workload PatchMon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#namespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Namespace
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresredis-pvcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres/Redis PVCs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redis Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apiversion-v1-kind-service-metadata-name-patchmon-frontend-namespace-server-admin-spec-type-loadbalancer-loadbalancerip-19216820035-selector-app-patchmon-frontend-ports-port-3000-targetport-3000-apiversion-v1-kind-service-metadata-name-patchmon-backend-namespace-server-admin-spec-type-loadbalancer-loadbalancerip-19216820039-selector-app-patchmon-backend-ports-port-3001-targetport-3001-apiversion-v1-kind-service-metadata-name-patchmon-database-namespace-server-admin-spec-selector-app-patchmon-database-ports-port-5432-targetport-5432-apiversion-v1-kind-service-metadata-name-patchmon-redis-namespace-server-admin-spec-selector-app-patchmon-redis-ports-port-6379-targetport-6379" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apiVersion: v1 kind: Service metadata: name: patchmon-frontend namespace: server-admin spec: type: LoadBalancer loadBalancerIP: 192.168.200.35 selector: app: patchmon-frontend ports: - port: 3000 targetPort: 3000 --- apiVersion: v1 kind: Service metadata: name: patchmon-backend namespace: server-admin spec: type: LoadBalancer loadBalancerIP: 192.168.200.39 selector: app: patchmon-backend ports: - port: 3001 targetPort: 3001 --- apiVersion: v1 kind: Service metadata: name: patchmon-database namespace: server-admin spec: selector: app: patchmon-database ports: - port: 5432 targetPort: 5432 --- apiVersion: v1 kind: Service metadata: name: patchmon-redis namespace: server-admin spec: selector: app: patchmon-redis ports: - port: 6379 targetPort: 6379
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="apiVersion: v1 kind: Service metadata: name: patchmon-frontend namespace: server-admin spec: type: LoadBalancer loadBalancerIP: 192.168.200.35 selector: app: patchmon-frontend ports: - port: 3000 targetPort: 3000 --- apiVersion: v1 kind: Service metadata: name: patchmon-backend namespace: server-admin spec: type: LoadBalancer loadBalancerIP: 192.168.200.39 selector: app: patchmon-backend ports: - port: 3001 targetPort: 3001 --- apiVersion: v1 kind: Service metadata: name: patchmon-database namespace: server-admin spec: selector: app: patchmon-database ports: - port: 5432 targetPort: 5432 --- apiVersion: v1 kind: Service metadata: name: patchmon-redis namespace: server-admin spec: selector: app: patchmon-redis ports: - port: 6379 targetPort: 6379">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#45-version-control-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Version Control Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-lab-network-topology-routing-and-domain-namespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Lab Network Topology, Routing and Domain Namespace
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Lab Network Topology, Routing and Domain Namespace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ipv4-addressing-vlan-and-subnet-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IPv4 Addressing, VLAN and Subnet Allocation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Routing Tables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Routing Tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asus-router-19216811" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ASUS Router (192.168.1.1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pfsense-ha-firewalls-1921681254-vip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pfSense HA Firewalls (192.168.1.254 VIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opnsense-1921681201" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPNsense (192.168.1.201)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fortigate-192168199" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FortiGate (192.168.1.99)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cisco-r1-vrouter-19216816" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cisco r1 vRouter (192.168.1.6)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cisco-r2-vrouter-19216839" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cisco r2 vRouter (192.168.3.9)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-namespace-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain Namespace Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OWASP 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/zero-trust.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA & NIST Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="infrastructure-platform-and-hardware-summary">Infrastructure, Platform and Hardware Summary<a class="headerlink" href="#infrastructure-platform-and-hardware-summary" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong> <br />
+Version: 1.0<br />
+Last Updated: January 30, 2026<br />
+Owner: Paul Leone </p>
+<hr />
+<h2 id="1-core-virtualization-stack">1. Core Virtualization Stack<a class="headerlink" href="#1-core-virtualization-stack" title="Permanent link">&para;</a></h2>
+<h3 id="11-proxmox-virtual-environment-ve">1.1 Proxmox Virtual Environment (VE)<a class="headerlink" href="#11-proxmox-virtual-environment-ve" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview">Deployment Overview<a class="headerlink" href="#deployment-overview" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The lab's foundation is a single-node Proxmox Virtual Environment (VE) cluster running on enterprise-class bare-metal hardware, serving as the Type-1 hypervisor for the entire security operations platform. Proxmox provides KVM-based full virtualization for operating systems (Windows, BSD, Linux, MacOS) and LXC containerization for lightweight Linux workloads. The platform hosts approximately 30+ concurrent virtual machines and containers, supporting everything from high-availability pfSense firewalls to Kubernetes clusters, SIEM platforms, and malware analysis environments. Automated backup infrastructure via Proxmox Backup Server ensures rapid disaster recovery, while Proxmox Datacenter Manager provides centralized orchestration and monitoring.
+    </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/proxmox.png" alt="Proxmox VE single-node cluster diagram">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Proxmox VE single-node cluster and hosted services.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+<!-- ![Proxmox overview](../../assets/diagrams/proxmox.png){.float-right width=60%}
+The lab's foundation is a single-node Proxmox Virtual Environment (VE) cluster running on enterprise-class bare-metal hardware, serving as the Type-1 hypervisor for the entire security operations platform. Proxmox provides KVM-based full virtualization for operating systems (Windows, BSD, Linux, MacOS) and LXC containerization for lightweight Linux workloads. The platform hosts approximately 30+ concurrent virtual machines and containers, supporting everything from high-availability pfSense firewalls to Kubernetes clusters, SIEM platforms, and malware analysis environments. Automated backup infrastructure via Proxmox Backup Server ensures rapid disaster recovery, while Proxmox Datacenter Manager provides centralized orchestration and monitoring. -->
+
+<h4 id="security-impact">Security Impact<a class="headerlink" href="#security-impact" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Bare-metal Type-1 hypervisor minimizes attack surface compared to Type-2 hosted solutions</li>
+<li>KVM hardware-assisted virtualization provides strong isolation between tenant workloads</li>
+<li>LXC containerization delivers near-native performance for network services with reduced overhead</li>
+<li>Snapshot and backup capabilities enable rapid rollback after security testing or compromise</li>
+<li>Centralized management reduces configuration drift and unauthorized system modifications</li>
+<li>ZFS storage backend provides data integrity verification and encryption at rest</li>
+<li>Network segmentation via virtual bridges isolates security zones (management, production, DMZ)</li>
+</ul>
+<h4 id="deployment-rationale">Deployment Rationale<a class="headerlink" href="#deployment-rationale" title="Permanent link">&para;</a></h4>
+<p>Proxmox VE mirrors enterprise virtualization platforms (VMware vSphere, Microsoft Hyper-V, Red Hat Virtualization) while providing open-source flexibility and zero licensing costs. This enables building an enterprise-scale lab environment demonstrating production-grade infrastructure without commercial hypervisor expenses. Proxmox's integrated backup solution, clustering capabilities, and API-driven automation align with modern Infrastructure as Code (IaC) practices used in DevSecOps environments. The platform supports Docker and Kubernetes workloads alongside traditional VMs, demonstrating hybrid cloud architecture patterns increasingly common in enterprise security operations.</p>
+<h4 id="architecture-principles-alignment">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Hypervisor layer enforces hardware-based isolation between security zones</li>
+<li>Virtual network bridges segment traffic flows with firewall enforcement at each boundary</li>
+<li>Backup infrastructure resides on separate physical hosts (VMware Workstation, Synology NAS)</li>
+<li>Multiple authentication layers (Proxmox RBAC, Authentik SSO/OAuth2, VM-level access controls, application SSO)</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>Default-deny network policies on all virtual bridges</li>
+<li>Mandatory TLS encryption for Proxmox web UI and API access</li>
+<li>Automated security updates via unattended-upgrades on Debian base OS</li>
+<li>PKI integration for certificate-based authentication across all services</li>
+<li>Immutable infrastructure through snapshot-based deployments</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>No implicit trust between VMs or containers; all inter-service communication authenticated</li>
+<li>API access requires token-based authentication with scoped permissions</li>
+<li>Network policies enforce explicit allow rules; no "trusted" VLANs</li>
+<li>User access governed by role-based permissions (PVEAdmin, PVEAuditor, etc.)</li>
+</ul>
+<h4 id="key-capabilities-demonstrated">Key Capabilities Demonstrated<a class="headerlink" href="#key-capabilities-demonstrated" title="Permanent link">&para;</a></h4>
+<p><strong>Enterprise Infrastructure Operations:</strong></p>
+<ul>
+<li>High-density virtualization supporting 30+ concurrent workloads on single node</li>
+<li>Mixed workload management (full VMs, containers, nested hypervisors and containers)</li>
+<li>Automated provisioning via Terraform and Ansible integration</li>
+</ul>
+<p><strong>Security Operations Platform:</strong></p>
+<ul>
+<li>Isolated security tool deployment (SIEM, SOAR, threat intelligence, vulnerability scanners)</li>
+<li>Forensic analysis environments with snapshot-based evidence preservation</li>
+<li>Purple team infrastructure supporting both red and blue team operations</li>
+</ul>
+<p><strong>Disaster Recovery &amp; Business Continuity:</strong></p>
+<ul>
+<li>Automated weekly backups to Proxmox Backup Server with deduplication</li>
+<li>Off-host backup replication to Synology NAS for redundancy</li>
+<li>Rapid VM restoration (sub-15-minute RTO for critical services)</li>
+<li>Configuration-as-code enables full infrastructure rebuild from Git repository</li>
+</ul>
+<p><strong>Advanced Storage &amp; Networking:</strong></p>
+<ul>
+<li>ZFS mirrored storage pools providing data integrity and high IOPS</li>
+<li>NVMe-based VM storage for database and container workloads</li>
+<li>Link Aggregation (LAG) with 802.3ad for high-throughput data transfers</li>
+<li>VLAN segmentation supporting isolated testing environments</li>
+</ul>
+<hr />
+<h3 id="12-proxmox-backup-server">1.2 Proxmox Backup Server<a class="headerlink" href="#12-proxmox-backup-server" title="Permanent link">&para;</a></h3>
+<p>Integrated for automated, deduplicated backups of all virtual machines and containers. Backup jobs are scheduled to run weekly, with retention policies aligned to provide redundancies without taking up a lot of space since the server has been deployed within VMware Workstation running on my main production PC.</p>
+<div class="two-col-right">
+  <div class="text-col">
+    <ul>
+      <li>Proxmox Backup Server deployed as nested VM within VMware Workstation</li>
+      <li>Host: Production workstation (separate from lab infrastructure)</li>
+      <li>Purpose: Off-host backup target with deduplication and compression</li>
+      <li>Rationale: Leverages existing production hardware for cost-effective DR solution</li>
+    </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/pbs.png" alt="Proxmox Backup Server Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Proxmox Backup Server Dashboard.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<hr />
+<h3 id="13-proxmox-datacenter-manager">1.3 Proxmox Datacenter Manager<a class="headerlink" href="#13-proxmox-datacenter-manager" title="Permanent link">&para;</a></h3>
+<p>Centralized management solution to oversee and manage multiple nodes and clusters of Proxmox-based virtual environments.</p>
+<figure>
+      <img src="/Career_Projects/assets/screenshots/dcm.png" alt="Proxmox Datacenter Manager Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Proxmox Datacenter Manager Screenshot.
+      </figcaption>
+    </figure>
+<hr />
+<h3 id="14-physical-network-attached-storage-nas-integration">1.4 Physical Network Attached Storage (NAS) Integration<a class="headerlink" href="#14-physical-network-attached-storage-nas-integration" title="Permanent link">&para;</a></h3>
+<p>A shared Synology NAS is configured to receive automated backups from the Proxmox Backup Server. This ensures off-host redundancy and supports rapid restoration in case of lab-wide failure or rollback testing.</p>
+<ul>
+<li>Target: Synology NAS (DSM 6.x) via SMB/NFS mount</li>
+<li>Encryption: AES-256 at rest, TLS in transit</li>
+<li>Purpose: rapid VM restoration, long-term archival, K3s off-host PVCs</li>
+</ul>
+<!-- ![NAS Backups Screenshot](/Career_Projects/assets/screenshots/nas-backups.png) -->
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/nas-backups.png" alt="NAS Backups Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Synology NAS Backups Screenshot.
+      </figcaption>
+    </figure>
+
+<hr />
+<h3 id="15-virtual-network-attached-storage-nas-integration">1.5 Virtual Network Attached Storage (NAS) Integration<a class="headerlink" href="#15-virtual-network-attached-storage-nas-integration" title="Permanent link">&para;</a></h3>
+<p>Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS) mounts for data sharing and redundancy. The single storage pool is configured for mirroring across the two NVMe drives.</p>
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/truenas.png" alt="TrueNAS Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        TrueNAS Screenshots.
+      </figcaption>
+    </figure>
+<hr />
+<h3 id="16-proxmox-host-hardware">1.6 Proxmox Host Hardware<a class="headerlink" href="#16-proxmox-host-hardware" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Specification</th>
+<th>Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>Intel Core Ultra 9 285K (24c)</td>
+<td>Performance/efficiency cores for mixed workloads</td>
+</tr>
+<tr>
+<td>Cooling</td>
+<td>AIO liquid cooling</td>
+<td>Sustained thermal management under load</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>G.Skill 96 GB DDR5-6400 CL32</td>
+<td>High-density RAM for ~50 concurrent VMs/containers</td>
+</tr>
+<tr>
+<td>OS Storage</td>
+<td>Samsung 990 PRO 2TB (PCIe 4.0)</td>
+<td>Low-latency boot and snapshot operations</td>
+</tr>
+<tr>
+<td>VM Storage</td>
+<td>Samsung 9100 PRO 4TB (PCIe 5.0)</td>
+<td>High IOPS for database and container workloads</td>
+</tr>
+<tr>
+<td>Network Interfaces</td>
+<td>3× 2.5GbE + WiFi 7</td>
+<td>Redundant connectivity and traffic segregation</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>Intel Arc A770 (16GB)</td>
+<td>PCIe passthrough for transcoding</td>
+</tr>
+<tr>
+<td>Motherboard</td>
+<td>ASUS ROG Strix Z890-I (mITX)</td>
+<td>Compact form factor with enterprise features</td>
+</tr>
+</tbody>
+</table>
+<h4 id="network-interface-design">Network Interface Design<a class="headerlink" href="#network-interface-design" title="Permanent link">&para;</a></h4>
+<p><strong>Physical Interfaces:</strong></p>
+<ul>
+<li>eth0 (2.5GbE): Proxmox management network (192.168.1.x)</li>
+<li>eth1 (2.5GbE): LAG member - VLAN3 trunk (192.168.3.x)</li>
+<li>eth2 (2.5GbE): LAG member - VLAN3 trunk (192.168.3.x)</li>
+<li>wlan0 (WiFi 7): Bridged to Lab_LAN1 virtual network</li>
+</ul>
+<p><strong>Virtual Bridges:</strong></p>
+<ul>
+<li>vmbr0: Management and Prod_LAN workloads (192.168.1.x) (default gateway)</li>
+<li>vmbr1: Lab_LAN1 network workloads (192.168.100.x)</li>
+<li>vmbr2: LAG bond0 ISO_LAN2 network workloads (192.168.3.x)</li>
+<li>vmbr3: Lab_LAN2 network workloads (192.168.200.x)</li>
+<li>vmbr4: Ext_LAN2 network workloads (192.168.2.x)</li>
+<li>vmbr5: Ext_LAN network workloads (10.20.0.x)</li>
+<li>vmbr7: pfSense HA Sync (10.10.0.x)</li>
+<li>vmbr8: Cisco Point-to-Point Network (10.30.0.x)</li>
+</ul>
+<p><strong>Diagram Placeholder: Network Interface Configuration Screenshot</strong></p>
+<hr />
+<h3 id="17-lab-switch">1.7 Lab Switch<a class="headerlink" href="#17-lab-switch" title="Permanent link">&para;</a></h3>
+<p>TP-Link TL-SG108E Smart Switch</p>
+<p>Used for VLAN and Link Aggregation (LAG) testing between The Proxmox host server and a Windows 11 Pro workstation.</p>
+<div class="two-col-right">
+  <div class="text-col">
+    <b>Configuration:</B>
+    <ul>
+      <li>Link Aggregation: Static LAG (802.3ad equivalent) on ports 2-3</li>
+      <li>Lab server NICs 1-2 bonded (LACP mode balance-rr)</li>
+      <li>Aggregate bandwidth: 2 Gbps</li>
+    </ul>
+    <b>VLAN Segmentation:</B>
+    <ul>
+      <li>VLAN 3 (192.168.3.0/24): Isolated testing subnet</li>
+      <li>Ports 2, 3, 7: Tagged VLAN3 members</li>
+      <li>Purpose: Dedicated high-speed link between office PC and lab server</li>
+      <li>Use case: Large file transfers, iSCSI testing, backup replication</li>
+    </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/tp-link.png" alt="TP-Link VLAN/LAG Settings">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        tp-link VLAN and LAG Settings.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+<hr />
+<h3 id="18-proxmox-workload-overview">1.8 Proxmox Workload Overview<a class="headerlink" href="#18-proxmox-workload-overview" title="Permanent link">&para;</a></h3>
+<p>The majority of hosts and services run within the Proxmox environment and run within one of the two integrated technologies supported:</p>
+<div style="background: white; padding: 1rem; border-radius: 12px; max-width: 350px; margin: 2rem auto;">
+  <img src="/Career_Projects/assets/misc/kvm-lxc.png"
+       alt="Diagram"
+       style="width: 100%; height: auto; display: block; margin: 0 auto;">
+</div>
+
+<h4 id="virtual-machines-vms">🖥️ Virtual Machines (VMs)<a class="headerlink" href="#virtual-machines-vms" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Tech Stack</strong>: KVM (Kernel-based Virtual Machine) + QEMU</li>
+<li><strong>Use Case</strong>: Full OS virtualization—ideal for Windows, BSD, or isolated Linux environments</li>
+</ul>
+<h4 id="linux-containers-lxc">📦 Linux Containers (LXC)<a class="headerlink" href="#linux-containers-lxc" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Tech Stack</strong>: LXC (Linux Containers)</li>
+<li><strong>Use Case</strong>: Lightweight virtualization for Linux apps with near-native performance</li>
+</ul>
+<hr />
+<h3 id="19-infrastructure-visualization">1.9 Infrastructure Visualization<a class="headerlink" href="#19-infrastructure-visualization" title="Permanent link">&para;</a></h3>
+<h4 id="powerbi-dashboards">PowerBI Dashboards<a class="headerlink" href="#powerbi-dashboards" title="Permanent link">&para;</a></h4>
+<p>Custom-built Power BI reports provide real-time visibility into lab operations</p>
+<p>Application Inventory: Per-host service mapping with version tracking</p>
+<ul>
+<li>Resource Utilization: CPU/memory/storage trends across Proxmox</li>
+<li>IP Address Management: Assigned IP addresses by subnet and assignment type</li>
+<li>OS Distribution Analysis: Platform breakdown (RHEL, Ubuntu, Debian, Windows)</li>
+</ul>
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-overview2.png" alt="Platform Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Platform Overview.
+      </figcaption>
+    </figure>
+  </div>
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-hosts2.png" alt="Host/Asset Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Host/Asset Summary.
+      </figcaption>
+    </figure>
+  </div>
+
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-apps2.png" alt="Application Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Application Overview.
+      </figcaption>
+    </figure>
+  </div>
+
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-ipam2.png" alt="IPAM Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        IP Address Overview.
+      </figcaption>
+    </figure>
+  </div>
+
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-fw-rules.png" alt="FW Rules Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Firewall Rules Overview.
+      </figcaption>
+    </figure>
+  </div>
+
+<h3 id="110-os-platform-and-distributionedition-summary">1.10 OS Platform and Distribution/Edition Summary<a class="headerlink" href="#110-os-platform-and-distributionedition-summary" title="Permanent link">&para;</a></h3>
+<div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/powerbi-os2.png" alt="OS Platform and Distribution/Edition Summary">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Host OS Overview.
+      </figcaption>
+    </figure>
+  </div>
+
+<hr />
+<h2 id="2-vmware-vsphere-r8-environment">2. VMware vSphere r8 Environment<a class="headerlink" href="#2-vmware-vsphere-r8-environment" title="Permanent link">&para;</a></h2>
+<h4 id="deployment-overview_1">Deployment Overview<a class="headerlink" href="#deployment-overview_1" title="Permanent link">&para;</a></h4>
+<p>The lab operates a hybrid virtualization architecture combining Proxmox as the primary Type-1 hypervisor with VMware vSphere r8 for specialized workloads. VMware Workstation Pro 25H2 runs on the production workstation, hosting critical backup infrastructure (Proxmox Backup Server, Datacenter Manager, Mail Gateway) and malware analysis environments (REMnux). ESXi r8 hypervisor provides enterprise-grade virtualization for Windows Server 2019 Hyper-V nested environments and Debian Live systems.</p>
+<h4 id="security-impact_1">Security Impact<a class="headerlink" href="#security-impact_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Isolated backup infrastructure prevents contamination of production Proxmox environment</li>
+<li>REMnux sandbox provides safe malware analysis without risking lab infrastructure</li>
+<li>Hyper-V nested virtualization enables Windows-specific security testing (AD exploitation, PowerShell analysis)</li>
+<li>Multi-hypervisor architecture reduces vendor lock-in risk and single-point-of-failure scenarios</li>
+</ul>
+<h4 id="deployment-rationale_1">Deployment Rationale<a class="headerlink" href="#deployment-rationale_1" title="Permanent link">&para;</a></h4>
+<p>Enterprise environments frequently operate multiple virtualization platforms where VMware handles legacy workloads, specific compliance requirements, or vendor-mandated infrastructure. This deployment demonstrates proficiency with multi-vendor hypervisor management, cross-platform migration strategies, and vendor-neutral infrastructure design. Running Proxmox Backup Server on VMware Workstation mirrors enterprise DR architectures where backup infrastructure resides on separate physical hosts or geographic locations.</p>
+<h4 id="architecture-principles-alignment_1">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Defense in Depth:</strong> Backup infrastructure physically separated from production hypervisor; malware analysis isolated in disposable VMs</li>
+<li><strong>Secure by Design:</strong> Nested virtualization enforces additional isolation layers; backup encryption at rest and in transit</li>
+<li><strong>Zero Trust:</strong> No implicit trust between hypervisor platforms; each VM authenticated independently</li>
+</ul>
+<h4 id="configuration-details">Configuration Details<a class="headerlink" href="#configuration-details" title="Permanent link">&para;</a></h4>
+<p><strong>VMware Workstation Pro 25H2 (Build 24995812):</strong></p>
+<div class="two-col-right">
+  <div class="text-col">
+    <ul>
+      <li>Proxmox Backup Server v4.1.0 - Deduplicated backup target with AES-256 encryption</li>
+      <li>Proxmox Datacenter Manager v1.0.1 - Centralized multi-cluster orchestration</li>
+      <li>Proxmox Mail Gateway - Email security gateway testing</li>
+      <li>REMnux Linux - Malware analysis and reverse engineering toolkit</li>
+    </ul>
+    <b>ESXi r8 (Build 24677879-standard):</B>
+    <ul>
+      <li>Windows Server 2019 Hyper-V - Nested hypervisor for AD security research</li>
+      <li>Debian Live r13 - Ephemeral forensics and incident response platform</li>
+   </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/vmware.png" alt="VMware ESXi and Workstation Pro Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        VMware ESXi and Workstation Pro Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/vmware-esxi.png" alt="ESXi Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        VMware ESXi Screenshots.
+      </figcaption>
+    </figure>
+<hr />
+<h2 id="3-cisco-virtual-infrastructure">3. Cisco Virtual Infrastructure<a class="headerlink" href="#3-cisco-virtual-infrastructure" title="Permanent link">&para;</a></h2>
+<h4 id="deployment-overview_2">Deployment Overview<a class="headerlink" href="#deployment-overview_2" title="Permanent link">&para;</a></h4>
+<p>The lab operates a three-node Cisco virtual network infrastructure providing enterprise-grade routing and switching simulation. Two vRouters (R1 and R2) running Cisco IOS Software Version 15.9(3)M6 (VIOS-ADVENTERPRISEK9-M) implement dynamic routing via OSPF, while a vSwitch operates experimental Version 15.2 (vios_l2-ADVENTERPRISEK9-M) for Layer 2 operations. All instances run as KVM virtual machines within the Proxmox environment, enabling full-featured network protocol testing, routing policy validation, and security hardening without physical hardware dependencies.</p>
+<p>The topology implements a hub-and-spoke design where R1 and R2 connect via a dedicated point-to-point link (10.30.0.0/30) and exchange routing information through OSPF Area 0. R1 serves as the primary gateway for production lab networks (192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24), while R2 handles isolated test networks (192.168.2.0/24, 192.168.3.0/24). Two Ubuntu 25.10 LXC containers (cisco-host1 and cisco-host2) validate routing functionality by using their respective local routers as default gateways.</p>
+<figure>
+      <img class="image-large" src="/Career_Projects/assets/screenshots/cisco-r1-r2.png" alt="Cisco Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Cisco r1 and r2 Configuration.
+      </figcaption>
+    </figure>
+
+<h4 id="security-impact_2">Security Impact<a class="headerlink" href="#security-impact_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Isolated Routing Domain:</strong> Virtual infrastructure creates air-gapped routing environment preventing production network disruption during protocol testing and failure scenario simulation</li>
+<li><strong>Policy Validation Sandbox:</strong> Enables safe testing of ACLs, prefix lists, route maps, and firewall rules before pfSense/OPNsense deployment</li>
+<li><strong>Attack Path Analysis:</strong> Simulates multi-hop routing scenarios for lateral movement detection and network segmentation validation</li>
+<li><strong>Protocol Security Research:</strong> Provides hands-on environment for OSPF authentication, routing protocol poisoning prevention, and neighbor relationship hardening</li>
+<li><strong>Network Forensics Training:</strong> Supports packet capture analysis, routing loop detection, and convergence behavior observation during security incidents</li>
+</ul>
+<h4 id="deployment-rationale_2">Deployment Rationale<a class="headerlink" href="#deployment-rationale_2" title="Permanent link">&para;</a></h4>
+<p>Cisco IOS powers the majority of enterprise routers and Layer 3 switches globally. Virtual IOS infrastructure demonstrates production-ready proficiency with Cisco CLI, dynamic routing protocols, and network automation while avoiding physical hardware costs. This deployment mirrors enterprise network engineering labs where virtual routers support CI/CD pipelines for network configuration validation, automated testing workflows, and infrastructure-as-code development. Running vIOS in KVM enables integration with Ansible network modules, Terraform providers, and Python network automation libraries (Netmiko, NAPALM) used in DevOps-driven network operations.</p>
+<h4 id="architecture-principles-alignment_2">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_2" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong></p>
+<ul>
+<li>Virtual network infrastructure physically isolated from production routing</li>
+<li>OSPF authentication prevents route injection attacks (future enhancement)</li>
+<li>ACLs on router interfaces enforce inter-subnet access control</li>
+<li>Separate routing domain enables secure testing of dangerous configurations</li>
+</ul>
+<p><strong>Secure by Design:</strong></p>
+<ul>
+<li>SSH-only access enforced on all routers (Telnet disabled)</li>
+<li>Enable secret passwords hashed with SHA256 (Type 9)</li>
+<li>Console and VTY lines require authentication</li>
+<li>Logging enabled for all configuration changes and security events</li>
+</ul>
+<p><strong>Zero Trust:</strong></p>
+<ul>
+<li>No implicit routing trust between subnets; OSPF neighbors explicitly configured</li>
+<li>Inter-VLAN routing requires explicit permit statements</li>
+<li>Default-deny ACLs block unauthorized cross-subnet traffic</li>
+<li>Each router authenticates independently to management infrastructure</li>
+</ul>
+<hr />
+<h3 id="31-network-topology-and-configuration">3.1 Network Topology and Configuration<a class="headerlink" href="#31-network-topology-and-configuration" title="Permanent link">&para;</a></h3>
+<div class="two-col-text-even">
+  <div class="text-left">
+   <h3>R1 (192.168.200.6) - Primary Router</h3>
+    <ul>
+      <li><strong>G0/0:</strong> 192.168.1.6/24 — Production network uplink</li>
+      <li><strong>G0/1:</strong> 192.168.100.6/24 — Primary lab network (K3s cluster, Docker hosts)</li>
+      <li><strong>G0/2:</strong> 192.168.200.6/24 — Secondary lab network (SOC namespace, server-admin)</li>
+      <li><strong>G0/3:</strong> 10.30.0.1/30 — Point-to-point link to R2</li>
+    </ul>
+  </div>
+
+  <div class="text-right">
+   <h3>R2 (192.168.3.9) - Secondary Router</h3>
+   <ul>
+      <li><strong>G0/0:</strong> 10.30.0.2/30 — Point-to-point link to R1</li>
+      <li><strong>G0/1:</strong> 192.168.3.9/24 — Management VLAN (FortiGate protected)</li>
+      <li><strong>G0/2:</strong> 192.168.2.9/24 — External lab network</li>
+   </ul>
+  </div>
+</div>
+
+<h3 id="router-r1-configuration">Router R1 Configuration<a class="headerlink" href="#router-r1-configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>      R1#show ip int br
+      Interface                  IP-Address      OK? Method Status                Protocol
+      GigabitEthernet0/0         192.168.1.6     YES NVRAM  up                    up
+      GigabitEthernet0/1         192.168.100.6   YES NVRAM  up                    up
+      GigabitEthernet0/2         192.168.200.6   YES NVRAM  up                    up
+      GigabitEthernet0/3         10.30.0.1       YES manual up                    up
+      R1#show ip route
+      Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+            D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+            N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+            E1 - OSPF external type 1, E2 - OSPF external type 2
+            i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+            ia - IS-IS inter area, * - candidate default, U - per-user static route
+            o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+            a - application route
+            + - replicated route, % - next hop override, p - overrides from PfR
+
+      Gateway of last resort is not set
+
+            10.0.0.0/8 is variably subnetted, 3 subnets, 3 masks
+      S        10.20.0.0/24 [1/0] via 192.168.1.1
+      C        10.30.0.0/30 is directly connected, GigabitEthernet0/3
+      L        10.30.0.1/32 is directly connected, GigabitEthernet0/3
+            192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
+      C        192.168.1.0/24 is directly connected, GigabitEthernet0/0
+      L        192.168.1.6/32 is directly connected, GigabitEthernet0/0
+      O     192.168.2.0/24 [110/2] via 10.30.0.2, 6d22h, GigabitEthernet0/3
+      O     192.168.3.0/24 [110/2] via 10.30.0.2, 6d22h, GigabitEthernet0/3
+            192.168.100.0/24 is variably subnetted, 2 subnets, 2 masks
+      C        192.168.100.0/24 is directly connected, GigabitEthernet0/1
+      L        192.168.100.6/32 is directly connected, GigabitEthernet0/1
+            192.168.200.0/24 is variably subnetted, 2 subnets, 2 masks
+      C        192.168.200.0/24 is directly connected, GigabitEthernet0/2
+      L        192.168.200.6/32 is directly connected, GigabitEthernet0/2
+      R1#show ip proto
+      *** IP Routing is NSF aware ***
+
+      Routing Protocol is &quot;application&quot;
+      Sending updates every 0 seconds
+      Invalid after 0 seconds, hold down 0, flushed after 0
+      Outgoing update filter list for all interfaces is not set
+      Incoming update filter list for all interfaces is not set
+      Maximum path: 32
+      Routing for Networks:
+      Routing Information Sources:
+         Gateway         Distance      Last Update
+      Distance: (default is 4)
+
+      Routing Protocol is &quot;ospf 1&quot;
+      Outgoing update filter list for all interfaces is not set
+      Incoming update filter list for all interfaces is not set
+      Router ID 192.168.200.6
+      It is an autonomous system boundary router
+      Redistributing External Routes from,
+      Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+      Maximum path: 4
+      Routing for Networks:
+         192.168.1.0 0.0.0.255 area 0
+         192.168.100.0 0.0.0.255 area 0
+         192.168.200.0 0.0.0.255 area 0
+      Routing on Interfaces Configured Explicitly (Area 0):
+         GigabitEthernet0/3
+      Passive Interface(s):
+         GigabitEthernet0/0
+         GigabitEthernet0/1
+         GigabitEthernet0/2
+      Routing Information Sources:
+         Gateway         Distance      Last Update
+         192.168.3.9          110      6d22h
+      Distance: (default is 110)
+</code></pre></div>
+<h4 id="ospf-routing-configuration">OSPF Routing Configuration<a class="headerlink" href="#ospf-routing-configuration" title="Permanent link">&para;</a></h4>
+<p><strong>Protocol:</strong> OSPF Version 2 (OSPFv2 for IPv4)<br />
+<strong>Process ID:</strong> 1<br />
+<strong>Area:</strong> 0 (Backbone area - single-area design)<br />
+<strong>Network Type:</strong> Point-to-point (10.30.0.0/30 link)</p>
+<p><strong>R1 OSPF Configuration:</strong>
+<div class="highlight"><pre><span></span><code>router ospf 1
+router-id 192.168.200.6
+network 192.168.1.0 0.0.0.255 area 0
+network 192.168.100.0 0.0.0.255 area 0
+network 192.168.200.0 0.0.0.255 area 0
+</code></pre></div></p>
+<p><strong>R2 OSPF Configuration:</strong>
+<div class="highlight"><pre><span></span><code>router ospf 1
+router-id 192.168.3.9
+network 192.168.2.0 0.0.0.255 area 0
+network 192.168.3.0 0.0.0.255 area 0
+</code></pre></div>
+<strong>Routing Table Verification:</strong></p>
+<ul>
+<li>R1 learns routes to 192.168.2.0/24 and 192.168.3.0/24 via OSPF (Administrative Distance 110)</li>
+<li>R2 learns routes to 192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24 via OSPF</li>
+<li>OSPF neighbor adjacency established (Full state) on G0/3 (R1) and G0/0 (R2)</li>
+</ul>
+<div class="two-col-right">
+  <div class="text-col">
+    <h3>vSwitch (Layer 2):</h3>
+    <ul>
+      <li>Provides VLAN trunking and access port simulation</li>
+      <li>Supports STP testing and loop prevention validation</li>
+      <li>Enables port security and MAC address filtering research</li>
+    </ul>
+
+   </ul>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/cisco-switch.png" alt="vSwitch Config screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        vSwitch VLAN and Interface Configuration.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+<h4 id="test-host-configuration">Test Host Configuration<a class="headerlink" href="#test-host-configuration" title="Permanent link">&para;</a></h4>
+<p><strong>cisco-host1 (192.168.100.4):</strong></p>
+<ul>
+<li>Platform: Ubuntu 25.10 LXC container</li>
+<li>Default Gateway: 192.168.100.6 (R1 G0/1)</li>
+<li>Purpose: Validate R1 routing to R2-connected subnets</li>
+<li>Test: ping 192.168.3.5 should route via R1 → 10.30.0.0/30 → R2</li>
+</ul>
+<p><strong>cisco-host2 (192.168.3.5):</strong></p>
+<ul>
+<li>Platform: Ubuntu 25.10 LXC container</li>
+<li>Default Gateway: 192.168.3.9 (R2 G0/1)</li>
+<li>Purpose: Validate R2 routing to R1-connected subnets</li>
+<li>Test: ping 192.168.100.4 should route via R2 → 10.30.0.0/30 → R1</li>
+</ul>
+<hr />
+<h3 id="32-technical-capabilities-demonstrated">3.2 Technical Capabilities Demonstrated<a class="headerlink" href="#32-technical-capabilities-demonstrated" title="Permanent link">&para;</a></h3>
+<h4 id="dynamic-routing-protocols">Dynamic Routing Protocols<a class="headerlink" href="#dynamic-routing-protocols" title="Permanent link">&para;</a></h4>
+<p><strong>OSPF (Open Shortest Path First):</strong></p>
+<ul>
+<li>Single-area design (Area 0 backbone)</li>
+<li>Point-to-point network type for optimal convergence</li>
+<li>Router ID assignment using loopback or highest IP</li>
+<li>LSA flooding and LSDB synchronization</li>
+<li>SPF algorithm execution and route calculation</li>
+<li>Neighbor adjacency management (Hello/Dead timers)</li>
+</ul>
+<hr />
+<h2 id="4-container-orchestration-architecture">4. Container Orchestration Architecture<a class="headerlink" href="#4-container-orchestration-architecture" title="Permanent link">&para;</a></h2>
+<h4 id="deployment-overview_3">Deployment Overview<a class="headerlink" href="#deployment-overview_3" title="Permanent link">&para;</a></h4>
+<p>The container orchestration layer consists of two complementary platforms: a multi‑engine Docker deployment for lightweight, isolated workloads and a dual‑node K3s Kubernetes cluster for cloud‑native, scalable applications. Docker engines provide simple, isolated runtime environments ideal for single‑purpose services, while K3s delivers a fully compliant Kubernetes distribution optimized for low‑resource environments. Portainer provides centralized management across both platforms, enabling unified visibility, lifecycle control, and operational consistency. Together, these systems form a hybrid container ecosystem that mirrors modern enterprise architectures where Docker and Kubernetes coexist to support diverse workloads.</p>
+<h4 id="security-impact_3">Security Impact<a class="headerlink" href="#security-impact_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Workload isolation across six independent Docker engines reduces blast radius</li>
+<li>Kubernetes network policies and ingress controls enforce strict east‑west and north‑south traffic boundaries</li>
+<li>Portainer centralizes access control and auditability across all container platforms</li>
+<li>K3s certificate automation ensures secure service‑to‑service communication</li>
+<li>Segmented runtimes prevent cross‑container compromise</li>
+<li>MetalLB and NGINX Ingress enforce controlled exposure of internal services</li>
+</ul>
+<h4 id="deployment-rationale_3">Deployment Rationale<a class="headerlink" href="#deployment-rationale_3" title="Permanent link">&para;</a></h4>
+<p>Enterprises frequently operate hybrid container environments where Docker supports lightweight services and Kubernetes orchestrates scalable, distributed applications. This architecture demonstrates proficiency with both paradigms—multi‑engine Docker for simplicity and K3s for cloud‑native orchestration. The deployment mirrors real‑world operational patterns including ingress management, persistent storage provisioning, network policy enforcement, and centralized container lifecycle management.</p>
+<h4 id="architecture-principles-alignment_3">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_3" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Multiple container runtimes, isolated engines, Kubernetes network policies, and ingress controls</p>
+<p><strong>Secure by Design:</strong> TLS‑enabled Kubernetes control plane, Portainer RBAC, minimal host dependencies</p>
+<p><strong>Zero Trust:</strong> No container or service implicitly trusted; identity, ingress, and network policies enforced continuously</p>
+<hr />
+<h3 id="41-multi-engine-docker-deployment">4.1 Multi-Engine Docker Deployment<a class="headerlink" href="#41-multi-engine-docker-deployment" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_4">Deployment Overview<a class="headerlink" href="#deployment-overview_4" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+   <p>
+      The lab operates five independent Docker engines, each hosting isolated workloads to minimize cross‑service impact. Portainer Community Edition provides a centralized GUI for managing all engines, while Portainer Agents enable secure API communication with remote hosts. 
+   </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/docker.png" alt="Docker Deployment Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Docker Deployment Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<h4 id="security-impact_4">Security Impact<a class="headerlink" href="#security-impact_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Independent Docker engines prevent lateral movement between workloads</li>
+<li>Portainer RBAC restricts administrative access to container hosts</li>
+<li>Engine‑level isolation reduces the impact of misconfigurations or compromised containers</li>
+<li>Minimal shared dependencies reduce systemic risk</li>
+</ul>
+<h4 id="deployment-rationale_4">Deployment Rationale<a class="headerlink" href="#deployment-rationale_4" title="Permanent link">&para;</a></h4>
+<p>Multi‑engine Docker deployments mirror enterprise environments where isolated runtimes support operational segmentation, compliance boundaries, or workload separation. This design demonstrates proficiency with distributed container management, remote engine control, and secure API‑driven orchestration.</p>
+<h4 id="architecture-principles-alignment_4">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_4" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Multiple engines create natural segmentation boundaries</p>
+<p><strong>Secure by Design:</strong> Portainer Agents use secure API channels; Home Assistant isolated for safety</p>
+<p><strong>Zero Trust:</strong> No container shares trust with another engine; all access controlled centrally</p>
+<h4 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Engine Location</th>
+<th>Purpose</th>
+<th>Key Containers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu VM (DockerVM1)</td>
+<td>Central management &amp; monitoring</td>
+<td>Portainer; Prometheus; Checkmk; WUD; Pulse; Cloudflared</td>
+</tr>
+<tr>
+<td>Debian VM (DockerVM2)</td>
+<td>Identity &amp; security services</td>
+<td>Authentik; OpenVAS; PostgreSQL; Elastic Agent; n8n</td>
+</tr>
+<tr>
+<td>LXC-1 (Primary DNS)</td>
+<td>Network infrastructure</td>
+<td>Pi-hole; prometheus-exporter</td>
+</tr>
+<tr>
+<td>LXC-2 (Ingress)</td>
+<td>Reverse proxy &amp; SSO</td>
+<td>Traefik; Authentik outpost</td>
+</tr>
+<tr>
+<td>Safeline-WAF</td>
+<td>Web Application Firewall and Gmail notifications</td>
+<td>Safeline stack, SMTP relay</td>
+</tr>
+</tbody>
+</table>
+<h4 id="docker-compose">Docker Compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h4>
+<p>Compose files are created in VS Code and stored in a Github repository for version control.
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgresql</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.io/library/postgres:16-alpine</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;pg_isready</span><span class="nv"> </span><span class="s">-d</span><span class="nv"> </span><span class="s">$${POSTGRES_DB}</span><span class="nv"> </span><span class="s">-U</span><span class="nv"> </span><span class="s">$${POSTGRES_USER}&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">start_period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20s</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database:/var/lib/postgresql/data</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="c1">#######</span>
+<span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="c1">#######</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">authentik-db</span>
+
+<span class="w">  </span><span class="nt">redis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker.io/library/redis:alpine</span>
+
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--save 60 1 --loglevel warning</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;redis-cli</span><span class="nv"> </span><span class="s">ping</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">grep</span><span class="nv"> </span><span class="s">PONG&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">start_period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20s</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3s</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:/data</span>
+<span class="w">  </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.3}</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="c1">########</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_REDIS__HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__USER</span><span class="p">:</span><span class="w"> </span><span class="c1">######</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">authentik-db</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="c1">######</span>
+
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./media:/media</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./custom-templates:/templates</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/authentik/certs/:/certs/</span>
+
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:9000&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:9443&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">postgresql</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+<span class="w">      </span><span class="nt">redis</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+<span class="w">  </span><span class="nt">worker</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.10.3}</span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
+
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="c1">#######</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_REDIS__HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__USER</span><span class="p">:</span><span class="w"> </span><span class="c1">######</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">authentik-db</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_POSTGRESQL__PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="c1">#######</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_ERROR_REPORTING__ENABLED</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_EMAIL__HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.89</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_EMAIL__PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+<span class="w">      </span><span class="nt">AUTHENTIK_EMAIL__FROM</span><span class="p">:</span><span class="w"> </span><span class="c1">#########</span>
+
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="c1">######</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/docker.sock:/var/run/docker.sock</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./media:/media</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./custom-templates:/templates</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/opt/authentik/certs/:/certs/</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">postgresql</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+<span class="w">      </span><span class="nt">redis</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">database</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="w">  </span><span class="nt">redis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+</code></pre></div></p>
+<hr />
+<h3 id="42-cloud-native-kubernetes-cluster-deployment">4.2 Cloud-Native Kubernetes Cluster Deployment<a class="headerlink" href="#42-cloud-native-kubernetes-cluster-deployment" title="Permanent link">&para;</a></h3>
+<h4 id="deployment-overview_5">Deployment Overview<a class="headerlink" href="#deployment-overview_5" title="Permanent link">&para;</a></h4>
+<div class="two-col-right">
+  <div class="text-col">
+   <p>
+      The lab runs a dual‑node K3s cluster (one control plane, one worker) on Red Hat Enterprise Linux 10 VMs within the 192.168.200.0/24 subnet. K3s is a fully compliant Kubernetes distribution packaged as a single binary, minimizing external dependencies and simplifying cluster operations. It includes a batteries‑included stack: containerd runtime, Flannel CNI, CoreDNS, Kube‑router, Local‑path‑provisioner, and Spegel registry mirror.
+   </p>
+   <p>
+      The embedded Traefik ingress controller and ServiceLB load balancer have been intentionally disabled and replaced with NGINX Ingress and MetalLB, providing enterprise‑grade ingress routing and Layer‑2 external IP allocation. Portainer integrates with the cluster via a DaemonSet‑based Portainer Agent for full lifecycle management.
+   </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/k3s.png" alt="K3s Cluster Deployment Overview">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        K3s Cluster Deployment Overview.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+<h4 id="security-impact_5">Security Impact<a class="headerlink" href="#security-impact_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>K3s certificate automation secures all control plane and node communications</li>
+<li>NGINX Ingress enforces controlled north‑south traffic with TLS termination</li>
+<li>MetalLB provides predictable, controlled external IP allocation</li>
+<li>Flannel CNI and Kube‑router enforce network segmentation and policy enforcement</li>
+<li>Minimal external dependencies reduce attack surface</li>
+<li>Local‑path‑provisioner isolates persistent volumes per workload</li>
+</ul>
+<h4 id="deployment-rationale_5">Deployment Rationale<a class="headerlink" href="#deployment-rationale_5" title="Permanent link">&para;</a></h4>
+<p>K3s is ideal for homelab and edge environments requiring full Kubernetes functionality with reduced operational overhead. This deployment demonstrates proficiency with Kubernetes networking, ingress management, persistent storage provisioning, and cluster lifecycle operations. Replacing Traefik and ServiceLB with NGINX Ingress and MetalLB mirrors enterprise‑grade ingress and load‑balancing patterns.</p>
+<h4 id="architecture-principles-alignment_5">Architecture Principles Alignment<a class="headerlink" href="#architecture-principles-alignment_5" title="Permanent link">&para;</a></h4>
+<p><strong>Defense in Depth:</strong> Network policies, ingress controls, and runtime isolation across pods and namespaces</p>
+<p><strong>Secure by Design:</strong> TLS‑secured control plane, minimal dependencies, automated certificate rotation</p>
+<p><strong>Zero Trust:</strong> Every pod, service, and ingress request authenticated and authorized; no implicit trust between namespaces</p>
+<p><img alt="K3s Node COnfiguration" src="/Career_Projects/assets/screenshots/k3s-nodes.png" /></p>
+<h4 id="core-infrastructure-services">Core Infrastructure Services<a class="headerlink" href="#core-infrastructure-services" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Namespace</th>
+<th>Purpose</th>
+<th>Deployment Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MetalLB Controller</td>
+<td>metallb-system</td>
+<td>Layer 2/BGP load balancer controller for bare-metal Kubernetes</td>
+<td>Deployment (1 replica)</td>
+</tr>
+<tr>
+<td>MetalLB Speaker</td>
+<td>metallb-system</td>
+<td>Announces LoadBalancer IPs via ARP/BGP</td>
+<td>DaemonSet (runs on all nodes)</td>
+</tr>
+<tr>
+<td>Nginx Ingress Controller</td>
+<td>nginx-ingress</td>
+<td>HTTP/HTTPS ingress traffic routing and SSL termination</td>
+<td>Helm chart (1 replica)</td>
+</tr>
+<tr>
+<td>Portainer Agent</td>
+<td>portainer-agent</td>
+<td>Cluster management and monitoring via Portainer UI</td>
+<td>DaemonSet (runs on all nodes)</td>
+</tr>
+<tr>
+<td>Cert-Manager</td>
+<td>cert-manager</td>
+<td>StepCA/ACME client for nginx-ingress SSL termination</td>
+<td>Helm Chart Deployment</td>
+</tr>
+</tbody>
+</table>
+<p><strong>MetalLB Load Balancer Configuration:</strong></p>
+<ul>
+<li><strong>Address Pool:</strong> 192.168.200.30-192.168.200.49 (20 available IPs)</li>
+<li><strong>Mode:</strong> Layer 2 (ARP-based)</li>
+<li><strong>Purpose:</strong> Provides external IPs for LoadBalancer-type services in bare-metal environment</li>
+</ul>
+<p><strong>Ingress Architecture:</strong></p>
+<ul>
+<li><strong>Controller:</strong> Nginx Ingress Controller (official Kubernetes ingress-nginx)</li>
+<li><strong>External Access:</strong> LoadBalancer service at 192.168.200.31 (HTTP: 80, HTTPS: 443)</li>
+<li><strong>Use Case:</strong> Centralized ingress point for HTTP-based services with path-based routing. Provides rate limiting, IP allow list and TLS/HTTPS connectivity to the NGINX Webserver. Certificates are delivered via Cert-Manager service that is auto-generated from StepCA/ACME.  </li>
+</ul>
+<h4 id="nginx-namespace-web-services">Nginx Namespace - Web Services<a class="headerlink" href="#nginx-namespace-web-services" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Type</th>
+<th>Image</th>
+<th>Replicas</th>
+<th>External IP</th>
+<th>Ports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx</td>
+<td>Deployment</td>
+<td>linuxserver/nginx:latest</td>
+<td>2/2</td>
+<td>192.168.200.32</td>
+<td>80 (HTTP)</td>
+<td>Static web server for lab documentation and demos</td>
+</tr>
+</tbody>
+</table>
+<h4 id="infrastructure-namespaces">Infrastructure Namespaces<a class="headerlink" href="#infrastructure-namespaces" title="Permanent link">&para;</a></h4>
+<p><strong>metallb-system Namespace:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Type</th>
+<th>Replicas</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>controller</td>
+<td>Deployment</td>
+<td>1/1</td>
+<td>MetalLB controller managing IP address allocation</td>
+</tr>
+<tr>
+<td>speaker</td>
+<td>DaemonSet</td>
+<td>2/2</td>
+<td>MetalLB speaker announcing IPs via Layer 2 (ARP)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>nginx-ingress Namespace:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Type</th>
+<th>Replicas</th>
+<th>External IP</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx-ingress-controller</td>
+<td>Helm/DaemonSet</td>
+<td>2/2</td>
+<td>192.168.200.31</td>
+<td>HTTP/HTTPS ingress controller for path-based routing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>portainer-agent Namespace:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Type</th>
+<th>Replicas</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>portainer-agent</td>
+<td>DaemonSet</td>
+<td>2/2</td>
+<td>Portainer agent for cluster management via Portainer UI</td>
+</tr>
+</tbody>
+</table>
+<p><strong>cert-manager Namespace:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Type</th>
+<th>Replicas</th>
+<th>External IP</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cert-Manager</td>
+<td>Helm</td>
+<td>1/1</td>
+<td>-</td>
+<td>StepCA/ACME client for nginx-ingress SSL termination</td>
+</tr>
+<tr>
+<td>Cert-Manager-cainjector</td>
+<td>Helm</td>
+<td>1/1</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Cert-Manager-webhook</td>
+<td>Helm</td>
+<td>1/1</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>#### SOC Namespace - Security Operations Center Platform</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The SOC namespace hosts the lab's comprehensive Security Operations Center platform, implementing a modern threat intelligence, incident response, and security orchestration architecture. Integrating threat intelligence sharing (MISP), automated analysis (Cortex), workflow automation (Shuffle), and case management (TheHive).</p>
+<h5 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h5>
+<p><strong>Namespace Purpose:</strong> Centralized security operations platform providing end-to-end incident response capabilities from threat intelligence ingestion through automated workflow execution, observable analysis, case resolution, and IOC sharing.</p>
+<h5 id="design-rationale">Design Rationale<a class="headerlink" href="#design-rationale" title="Permanent link">&para;</a></h5>
+<p><strong>Unified Security Platform:</strong> Single namespace for all SOC functions enables tight integration and simplified network policies</p>
+<p><strong>Workflow Automation:</strong> Shuffle SOAR orchestrates complex multi-tool workflows without requiring custom code development</p>
+<p><strong>Scalability:</strong> Kubernetes orchestration allows horizontal scaling of analysis workers (Cortex, Shuffle Orborus) during high-volume incident periods</p>
+<p><strong>Resilience:</strong> StatefulSets ensure data persistence for critical components (Cassandra, Elasticsearch, OpenSearch)</p>
+<p><strong>Integration:</strong> Native Kubernetes networking facilitates service-to-service communication with other lab security tools</p>
+<h5 id="soc-namespace-security-operations-center">SOC Namespace - Security Operations Center<a class="headerlink" href="#soc-namespace-security-operations-center" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Type</th>
+<th>Image</th>
+<th>Replicas</th>
+<th>External IP</th>
+<th>Ports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>thehive</td>
+<td>Helm</td>
+<td>strangebee/thehive:5.5.13-1</td>
+<td>1/1</td>
+<td>192.168.200.33</td>
+<td>9000 (HTTP), 9095 (metrics)</td>
+<td>Security incident response platform and case management</td>
+</tr>
+<tr>
+<td>cortex</td>
+<td>Deployment</td>
+<td>thehiveproject/cortex:latest</td>
+<td>1/1</td>
+<td>192.168.200.40</td>
+<td>9001 (HTTP)</td>
+<td>Observable analysis engine with automated responders</td>
+</tr>
+<tr>
+<td>cassandra</td>
+<td>StatefulSet</td>
+<td>cassandra:4.1.7</td>
+<td>1/1</td>
+<td>192.168.200.36</td>
+<td>9042 (CQL)</td>
+<td>Distributed database for TheHive persistent storage</td>
+</tr>
+<tr>
+<td>elasticsearch</td>
+<td>StatefulSet</td>
+<td>elasticsearch:9.2.2</td>
+<td>1/1</td>
+<td>192.168.200.34</td>
+<td>9200 (HTTP)</td>
+<td>Search and analytics engine for cases and observables</td>
+</tr>
+<tr>
+<td>misp-core</td>
+<td>Deployment</td>
+<td>misp-docker/misp-core:latest</td>
+<td>1/1</td>
+<td>192.168.200.37</td>
+<td>80/443 (HTTP/HTTPS)</td>
+<td>Threat intelligence platform and IOC management</td>
+</tr>
+<tr>
+<td>misp-db</td>
+<td>Deployment</td>
+<td>mariadb:10.11</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>3306 (MySQL)</td>
+<td>MySQL database for MISP data</td>
+</tr>
+<tr>
+<td>misp-redis</td>
+<td>Deployment</td>
+<td>valkey/valkey:7.2</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>6379 (Redis)</td>
+<td>Redis cache for MISP sessions and jobs</td>
+</tr>
+<tr>
+<td>misp-modules</td>
+<td>Deployment</td>
+<td>misp-docker/misp-modules:latest</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>6666 (HTTP)</td>
+<td>MISP enrichment and expansion modules</td>
+</tr>
+<tr>
+<td>misp-guard</td>
+<td>Deployment</td>
+<td>misp-docker/misp-guard:latest</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>8888 (HTTP)</td>
+<td>Security proxy for MISP core protection</td>
+</tr>
+<tr>
+<td>misp-mail</td>
+<td>Deployment</td>
+<td>egos-tech/smtp:latest</td>
+<td>1/1</td>
+<td>192.168.200.38</td>
+<td>25 (SMTP)</td>
+<td>SMTP relay for threat intelligence email sharing</td>
+</tr>
+<tr>
+<td>msmtp-relay</td>
+<td>Deployment</td>
+<td>alpine:latest</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>N/A</td>
+<td>Lightweight SMTP relay for internal notifications</td>
+</tr>
+<tr>
+<td>shuffle-frontend</td>
+<td>Deployment</td>
+<td>shuffle-frontend:latest</td>
+<td>1/1</td>
+<td>192.168.200.41</td>
+<td>80/443 (HTTP/HTTPS)</td>
+<td>React-based web UI for visual workflow design, execution monitoring, and SOAR administration</td>
+</tr>
+<tr>
+<td>shuffle-backend</td>
+<td>Deployment</td>
+<td>shuffle-backend:latest</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>5001</td>
+<td>Go-based backend API handling workflow orchestration, webhook processing, and app management</td>
+</tr>
+<tr>
+<td>shuffle-opensearch</td>
+<td>StatefulSet</td>
+<td>opensearch:3.2.0</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>9200 (HTTP)</td>
+<td>Search and analytics engine for workflow definitions, execution history, and audit logs</td>
+</tr>
+<tr>
+<td>shuffle-orborus</td>
+<td>Deployment</td>
+<td>shuffle-orborus:latest</td>
+<td>1/1</td>
+<td>none</td>
+<td></td>
+<td>Worker orchestration daemon managing Docker containers for workflow app execution</td>
+</tr>
+</tbody>
+</table>
+<h4 id="server-admin-namespace-infrastructure-management">Server-Admin Namespace - Infrastructure Management<a class="headerlink" href="#server-admin-namespace-infrastructure-management" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Type</th>
+<th>Image</th>
+<th>Replicas</th>
+<th>External IP</th>
+<th>Ports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>patchmon-frontend</td>
+<td>Deployment</td>
+<td>patchmon-frontend:latest</td>
+<td>1/1</td>
+<td>192.168.200.35</td>
+<td>3000 (HTTP)</td>
+<td>Web UI for Windows patch management dashboard</td>
+</tr>
+<tr>
+<td>patchmon-backend</td>
+<td>Deployment</td>
+<td>patchmon-backend:latest</td>
+<td>1/1</td>
+<td>192.168.200.39</td>
+<td>3001 (HTTP API)</td>
+<td>Backend API for patch compliance tracking</td>
+</tr>
+<tr>
+<td>patchmon-database</td>
+<td>Deployment</td>
+<td>postgres:17-alpine</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>5432 (PostgreSQL)</td>
+<td>PostgreSQL database for patch status data</td>
+</tr>
+<tr>
+<td>patchmon-redis</td>
+<td>Deployment</td>
+<td>redis:7-alpine</td>
+<td>1/1</td>
+<td>ClusterIP only</td>
+<td>6379 (Redis)</td>
+<td>Redis cache for session management</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="43-network-services-summary">4.3 Network Services Summary<a class="headerlink" href="#43-network-services-summary" title="Permanent link">&para;</a></h3>
+<h3 id="loadbalancer-services-externally-accessible">LoadBalancer Services (Externally Accessible)<a class="headerlink" href="#loadbalancer-services-externally-accessible" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Service Name</th>
+<th>Namespace</th>
+<th>Type</th>
+<th>External IP</th>
+<th>Ports</th>
+<th>Application</th>
+<th>Access Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx-ingress-controller</td>
+<td>nginx-ingress</td>
+<td>LoadBalancer</td>
+<td>192.168.200.31</td>
+<td>80, 443</td>
+<td>Ingress Controller</td>
+<td>Primary HTTP/HTTPS ingress point</td>
+</tr>
+<tr>
+<td>nginx</td>
+<td>nginx</td>
+<td>LoadBalancer</td>
+<td>192.168.200.32</td>
+<td>80</td>
+<td>Nginx Web Server</td>
+<td>Static web content hosting</td>
+</tr>
+<tr>
+<td>thehive</td>
+<td>soc</td>
+<td>LoadBalancer</td>
+<td>192.168.200.33</td>
+<td>9000, 9095</td>
+<td>TheHive SIRP</td>
+<td>Case management UI</td>
+</tr>
+<tr>
+<td>elasticsearch</td>
+<td>soc</td>
+<td>LoadBalancer</td>
+<td>192.168.200.34</td>
+<td>9200</td>
+<td>Elasticsearch</td>
+<td>Search API (admin only)</td>
+</tr>
+<tr>
+<td>patchmon-frontend</td>
+<td>server-admin</td>
+<td>LoadBalancer</td>
+<td>192.168.200.35</td>
+<td>3000</td>
+<td>PatchMon UI</td>
+<td>Patch management dashboard</td>
+</tr>
+<tr>
+<td>cassandra</td>
+<td>soc</td>
+<td>LoadBalancer</td>
+<td>192.168.200.36</td>
+<td>9042</td>
+<td>Cassandra DB</td>
+<td>Database access (admin only)</td>
+</tr>
+<tr>
+<td>misp-core</td>
+<td>soc</td>
+<td>LoadBalancer</td>
+<td>192.168.200.37</td>
+<td>80, 443</td>
+<td>MISP Platform</td>
+<td>Threat intelligence portal</td>
+</tr>
+<tr>
+<td>misp-mail</td>
+<td>soc</td>
+<td>LoadBalancer</td>
+<td>192.168.200.38</td>
+<td>25</td>
+<td>SMTP Relay</td>
+<td>Email-based threat sharing</td>
+</tr>
+<tr>
+<td>patchmon-backend</td>
+<td>server-admin</td>
+<td>LoadBalancer</td>
+<td>192.168.200.39</td>
+<td>3001</td>
+<td>PatchMon API</td>
+<td>Backend API (internal)</td>
+</tr>
+<tr>
+<td>cortex</td>
+<td>soc</td>
+<td>LoadBalancer</td>
+<td>192.168.200.40</td>
+<td>9001</td>
+<td>Cortex Engine</td>
+<td>Observable analysis API</td>
+</tr>
+<tr>
+<td>shuffle</td>
+<td>soc</td>
+<td>LoadBalancer</td>
+<td>192.168.200.41</td>
+<td>80/443</td>
+<td>Shuffle</td>
+<td>Automation UI</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Access Control:</strong></p>
+<ul>
+<li>All services accessible only via Tailscale VPN (no direct internet exposure)</li>
+<li>Administrative services (Elasticsearch, Cassandra) require Authentik SSO + MFA</li>
+<li>Network policies enforce namespace isolation and least-privilege access</li>
+<li>pfSense firewall rules restrict access by source IP and service port</li>
+</ul>
+<h3 id="clusterip-services-internal-only">ClusterIP Services (Internal Only)<a class="headerlink" href="#clusterip-services-internal-only" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Service Name</th>
+<th>Namespace</th>
+<th>Cluster IP</th>
+<th>Ports</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kubernetes</td>
+<td>default</td>
+<td>10.43.0.1</td>
+<td>6443</td>
+<td>Kubernetes API server</td>
+</tr>
+<tr>
+<td>patchmon-database</td>
+<td>server-admin</td>
+<td>10.43.3.202</td>
+<td>5432</td>
+<td>PostgreSQL backend for PatchMon</td>
+</tr>
+<tr>
+<td>misp-db</td>
+<td>soc</td>
+<td>10.43.151.59</td>
+<td>3306</td>
+<td>MariaDB backend for MISP</td>
+</tr>
+<tr>
+<td>misp-redis</td>
+<td>soc</td>
+<td>10.43.131.214</td>
+<td>6379</td>
+<td>Redis cache for MISP</td>
+</tr>
+<tr>
+<td>misp-modules</td>
+<td>soc</td>
+<td>10.43.234.246</td>
+<td>6666</td>
+<td>MISP enrichment modules</td>
+</tr>
+<tr>
+<td>misp-guard</td>
+<td>soc</td>
+<td>10.43.97.195</td>
+<td>8888</td>
+<td>MISP security proxy</td>
+</tr>
+<tr>
+<td>patchmon-backend</td>
+<td>server-admin</td>
+<td>10.43.99.91</td>
+<td>3001</td>
+<td>PatchMon API (internal routing)</td>
+</tr>
+<tr>
+<td>patchmon-redis</td>
+<td>server-admin</td>
+<td>10.43.126.102</td>
+<td>6379</td>
+<td>Redis cache for PatchMon</td>
+</tr>
+<tr>
+<td>metallb-webhook-service</td>
+<td>metallb-system</td>
+<td>10.43.122.116</td>
+<td>9443</td>
+<td>MetalLB webhook validation</td>
+</tr>
+<tr>
+<td>shuffle-backend</td>
+<td>soc</td>
+<td>10.43.189.138</td>
+<td>5001</td>
+<td>Shuffle backend integration</td>
+</tr>
+<tr>
+<td>shuffle-opensearch</td>
+<td>soc</td>
+<td>10.43.137.30</td>
+<td>9200</td>
+<td>Shuffle database</td>
+</tr>
+<tr>
+<td>nginx-ingress-admission</td>
+<td>nginx-ingress</td>
+<td>10.43.241.54</td>
+<td>443</td>
+<td>Ingress admission webhook</td>
+</tr>
+<tr>
+<td>cert-manager-webhook</td>
+<td>cert-manager</td>
+<td>10.43.150.38</td>
+<td>443</td>
+<td>SSL termination for nginx-ingress</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Network Policies:</strong></p>
+<ul>
+<li>Default deny all ingress/egress traffic</li>
+<li>Explicit allow rules for required service-to-service communication</li>
+<li>Database services (PostgreSQL, MariaDB, Redis) accessible only from their respective application pods</li>
+<li>Rate limiting for Ingress HTTP services</li>
+<li>SSL termination for all ingress HTTP services</li>
+</ul>
+<hr />
+<h3 id="44-example-workload-patchmon">4.4 Example Workload PatchMon<a class="headerlink" href="#44-example-workload-patchmon" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Namspace: server-admin</li>
+<li>Deployments: 1 replica per deployment with anti-affinity rules</li>
+<li>Persistent Storage: local-path-provisioner (hostPath-based PVCs)</li>
+<li>Exposure: MetalLB LoadBalancer with external IPs</li>
+<li>Persistent Volume Claims / Volumes: patchmon-postgres-pvc &amp; patchmon-redis-pvc</li>
+</ul>
+<h4 id="namespace">Namespace<a class="headerlink" href="#namespace" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Namespace</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+</code></pre></div>
+<h4 id="postgresredis-pvcs">Postgres/Redis PVCs<a class="headerlink" href="#postgresredis-pvcs" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolumeClaim</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-postgres-pvc</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
+<span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
+<span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local-path</span>
+<span class="nn">---</span>
+<span class="c1"># Redis PVC</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PersistentVolumeClaim</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis-pvc</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReadWriteOnce</span>
+<span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5Gi</span>
+<span class="w">  </span><span class="nt">storageClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local-path</span>
+</code></pre></div>
+<h4 id="postgres-deployment">Postgres Deployment<a class="headerlink" href="#postgres-deployment" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-database</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-database</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-database</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">initContainers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">init-chown</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">busybox</span>
+<span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sh&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;chown</span><span class="nv"> </span><span class="s">-R</span><span class="nv"> </span><span class="s">999:999</span><span class="nv"> </span><span class="s">/var/lib/postgresql/data&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-storage</span>
+<span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/postgresql/data</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:17-alpine</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_DB</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon_db</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_USER</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon_user</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWORD</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="c1">######</span>
+<span class="w">        </span><span class="nt">livenessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">exec</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;pg_isready&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-U&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;patchmon_user&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-d&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;patchmon_db&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">readinessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">exec</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;pg_isready&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-U&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;patchmon_user&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-d&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;patchmon_db&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-storage</span>
+<span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/postgresql/data</span>
+<span class="w">          </span><span class="nt">subPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data</span>
+<span class="w">      </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-storage</span>
+<span class="w">        </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-postgres-pvc</span>
+</code></pre></div>
+<h4 id="redis-deployment">Redis Deployment<a class="headerlink" href="#redis-deployment" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:7-alpine</span>
+<span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;redis-server&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;--requirepass&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;#####&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;--appendonly&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;yes&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">livenessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">exec</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;redis-cli&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-a&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;#####&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;ping&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">readinessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">exec</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;redis-cli&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;-a&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;#####&quot;</span><span class="p p-Indicator">,</span><span class="s">&quot;ping&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">        </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis-storage</span>
+<span class="w">          </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data</span>
+<span class="w">      </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis-storage</span>
+<span class="w">        </span><span class="nt">persistentVolumeClaim</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">claimName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis-pvc</span>
+</code></pre></div>
+<h4 id="backend-deployment">Backend Deployment<a class="headerlink" href="#backend-deployment" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-backend</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-backend</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-backend</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/patchmon/patchmon-backend:latest</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LOG_LEVEL</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql://patchmon_user:#######</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">JWT_SECRET</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_PORT</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3001&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CORS_ORIGIN</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://192.168.200.35:3000&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REDIS_HOST</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REDIS_PORT</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6379&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REDIS_PASSWORD</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="c1">####### </span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REDIS_DB</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0&quot;</span>
+<span class="w">        </span><span class="nt">livenessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/health</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3001</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">readinessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/health</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3001</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</code></pre></div>
+<h4 id="frontend-deployment">Frontend Deployment<a class="headerlink" href="#frontend-deployment" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-frontend</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-frontend</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-frontend</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/patchmon/patchmon-frontend:latest</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BACKEND_HOST</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-backend</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BACKEND_PORT</span>
+<span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3001&quot;</span>
+<span class="w">        </span><span class="nt">livenessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/index.html</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">readinessProbe</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/index.html</span>
+<span class="w">            </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000</span>
+<span class="w">          </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">          </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</code></pre></div>
+<h4 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h4>
+<h2 id="apiversion-v1-kind-service-metadata-name-patchmon-frontend-namespace-server-admin-spec-type-loadbalancer-loadbalancerip-19216820035-selector-app-patchmon-frontend-ports-port-3000-targetport-3000-apiversion-v1-kind-service-metadata-name-patchmon-backend-namespace-server-admin-spec-type-loadbalancer-loadbalancerip-19216820039-selector-app-patchmon-backend-ports-port-3001-targetport-3001-apiversion-v1-kind-service-metadata-name-patchmon-database-namespace-server-admin-spec-selector-app-patchmon-database-ports-port-5432-targetport-5432-apiversion-v1-kind-service-metadata-name-patchmon-redis-namespace-server-admin-spec-selector-app-patchmon-redis-ports-port-6379-targetport-6379"><div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-frontend</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+<span class="w">  </span><span class="nt">loadBalancerIP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.200.35</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-frontend</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-backend</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+<span class="w">  </span><span class="nt">loadBalancerIP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.200.39</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-backend</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3001</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3001</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-database</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-database</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server-admin</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patchmon-redis</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6379</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6379</span>
+</code></pre></div><a class="headerlink" href="#apiversion-v1-kind-service-metadata-name-patchmon-frontend-namespace-server-admin-spec-type-loadbalancer-loadbalancerip-19216820035-selector-app-patchmon-frontend-ports-port-3000-targetport-3000-apiversion-v1-kind-service-metadata-name-patchmon-backend-namespace-server-admin-spec-type-loadbalancer-loadbalancerip-19216820039-selector-app-patchmon-backend-ports-port-3001-targetport-3001-apiversion-v1-kind-service-metadata-name-patchmon-database-namespace-server-admin-spec-selector-app-patchmon-database-ports-port-5432-targetport-5432-apiversion-v1-kind-service-metadata-name-patchmon-redis-namespace-server-admin-spec-selector-app-patchmon-redis-ports-port-6379-targetport-6379" title="Permanent link">&para;</a></h2>
+<h3 id="45-version-control-strategy">4.5 Version Control Strategy<a class="headerlink" href="#45-version-control-strategy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Repository: GitHub repo (infrastructure-as-code)</li>
+<li>Structure: Organized by service (docker-compose/, k8s-manifests/, terraform/Ansible)</li>
+<li>Tooling: VS Code with Docker, Kubernetes, SSH, Ansible, Terraform extensions</li>
+<li>Automation: Watchtower monitors container images, WUD provides update alerts</li>
+</ul>
+<hr />
+<hr />
+<h2 id="5-lab-network-topology-routing-and-domain-namespace">5. Lab Network Topology, Routing and Domain Namespace<a class="headerlink" href="#5-lab-network-topology-routing-and-domain-namespace" title="Permanent link">&para;</a></h2>
+<p>This section outlines the IP addressing scheme, subnet allocations, and internal domain naming conventions used across the Lab infrastructure. It supports modular service deployment, secure DNS resolution, and PKI integration.</p>
+<h3 id="ipv4-addressing-vlan-and-subnet-allocation">IPv4 Addressing, VLAN and Subnet Allocation<a class="headerlink" href="#ipv4-addressing-vlan-and-subnet-allocation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Subnet</th>
+<th>CIDR</th>
+<th>VID</th>
+<th>Purpose</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.1.0</td>
+<td>/24</td>
+<td>10</td>
+<td>Production Network</td>
+<td>Hosts my production environment. Note: lab services were initially deployed in this subnet, working to migrate everything into the lab subnets.</td>
+</tr>
+<tr>
+<td>192.168.2.0</td>
+<td>/24</td>
+<td>20</td>
+<td>External LAN Network/DMZ</td>
+<td>Test network for segmentation and FW rules.</td>
+</tr>
+<tr>
+<td>192.168.3.0</td>
+<td>/24</td>
+<td>30</td>
+<td>Isolated Link</td>
+<td>Test port-based VLAN between FortiGate, OfficePC and Proxmox host</td>
+</tr>
+<tr>
+<td>192.168.100.0</td>
+<td>/24</td>
+<td>100</td>
+<td>Primary Lab LAN</td>
+<td>Hosts lab containers, virtual machines and services.</td>
+</tr>
+<tr>
+<td>192.168.200.0</td>
+<td>/24</td>
+<td>200</td>
+<td>Secondary Lab LAN</td>
+<td>Isolated test environments, ephemeral services</td>
+</tr>
+<tr>
+<td>10.20.0.0</td>
+<td>/24</td>
+<td>120</td>
+<td>Isolated LAN</td>
+<td>Test network for sensitive data</td>
+</tr>
+<tr>
+<td>10.10.0.0</td>
+<td>/24</td>
+<td>110</td>
+<td>HA Sync</td>
+<td>Isolated subnet for pfSense HA sync/CARP</td>
+</tr>
+<tr>
+<td>10.30.0.0</td>
+<td>/30</td>
+<td>N/A</td>
+<td>Router PTP</td>
+<td>Point to Point router link between Cisco R1 and R2</td>
+</tr>
+</tbody>
+</table>
+<p>All subnets are routed internally and firewalled to enforce least privilege access between zones.</p>
+<h3 id="routing-tables">Routing Tables<a class="headerlink" href="#routing-tables" title="Permanent link">&para;</a></h3>
+<h4 id="asus-router-19216811">ASUS Router (192.168.1.1)<a class="headerlink" href="#asus-router-19216811" title="Permanent link">&para;</a></h4>
+<p><strong>Role:</strong> Primary gateway for the entire network<br />
+<strong>Directly connected:</strong> 192.168.1.0/24</p>
+<table>
+<thead>
+<tr>
+<th>Destination Subnet</th>
+<th>Next Hop</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.100.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>LAB_LAN1</td>
+</tr>
+<tr>
+<td>192.168.200.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>LAB_LAN2</td>
+</tr>
+<tr>
+<td>192.168.2.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>EXT_LAN</td>
+</tr>
+<tr>
+<td>10.10.0.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>Internal VLAN</td>
+</tr>
+<tr>
+<td>10.20.0.0/24</td>
+<td>192.168.1.201 (OPNsense)</td>
+<td>ISO segment #1</td>
+</tr>
+<tr>
+<td>192.168.3.0/24</td>
+<td>192.168.1.99 (FortiGate)</td>
+<td>ISO segment #2</td>
+</tr>
+<tr>
+<td>10.30.0.0/24</td>
+<td>192.168.1.6 (Cisco vRouter)</td>
+<td>ISO segment #3</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>ISP</td>
+<td>Internet</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pfsense-ha-firewalls-1921681254-vip">pfSense HA Firewalls (192.168.1.254 VIP)<a class="headerlink" href="#pfsense-ha-firewalls-1921681254-vip" title="Permanent link">&para;</a></h4>
+<p><strong>Role:</strong> Core routers for all internal VLANs</p>
+<p><strong>Directly connected:</strong>
+- 192.168.1.0/24 (Prod_LAN)
+- 192.168.100.0/24 (LAB_LAN1)
+- 192.168.200.0/24 (LAB_LAN2)
+- 192.168.2.0/24 (EXT_LAN)
+- 10.10.0.0/24 (Internal VLAN)</p>
+<table>
+<thead>
+<tr>
+<th>Destination Subnet</th>
+<th>Next Hop</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.1.0/24</td>
+<td>Direct</td>
+<td>Prod_LAN</td>
+</tr>
+<tr>
+<td>192.168.100.0/24</td>
+<td>Direct</td>
+<td>LAB_LAN1</td>
+</tr>
+<tr>
+<td>192.168.200.0/24</td>
+<td>Direct</td>
+<td>LAB_LAN2</td>
+</tr>
+<tr>
+<td>192.168.2.0/24</td>
+<td>Direct</td>
+<td>EXT_LAN</td>
+</tr>
+<tr>
+<td>10.10.0.0/24</td>
+<td>Direct</td>
+<td>Internal VLAN</td>
+</tr>
+<tr>
+<td>10.20.0.0/24</td>
+<td>192.168.1.201 (OPNsense)</td>
+<td>ISO #1</td>
+</tr>
+<tr>
+<td>192.168.3.0/24</td>
+<td>192.168.1.99 (FortiGate)</td>
+<td>ISO #2</td>
+</tr>
+<tr>
+<td>10.30.0.0/24</td>
+<td>192.168.1.6 (Cisco vRouter)</td>
+<td>ISO #3</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>192.168.1.1 (ASUS)</td>
+<td>Internet</td>
+</tr>
+</tbody>
+</table>
+<h4 id="opnsense-1921681201">OPNsense (192.168.1.201)<a class="headerlink" href="#opnsense-1921681201" title="Permanent link">&para;</a></h4>
+<p><strong>Role:</strong> ISO router for 10.20.0.0/24</p>
+<p><strong>Directly connected:</strong>
+- 10.20.0.0/24 (ISO_LAN)
+- 192.168.1.0/24 (Prod_LAN)</p>
+<table>
+<thead>
+<tr>
+<th>Destination Subnet</th>
+<th>Next Hop</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.20.0.0/24</td>
+<td>Direct</td>
+<td>ISO_LAN</td>
+</tr>
+<tr>
+<td>192.168.1.0/24</td>
+<td>Direct</td>
+<td>Prod_LAN</td>
+</tr>
+<tr>
+<td>192.168.100.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>LAB_LAN1</td>
+</tr>
+<tr>
+<td>192.168.200.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>LAB_LAN2</td>
+</tr>
+<tr>
+<td>192.168.2.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>EXT_LAN</td>
+</tr>
+<tr>
+<td>10.10.0.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>Internal VLAN</td>
+</tr>
+<tr>
+<td>192.168.3.0/24</td>
+<td>192.168.1.99 (FortiGate)</td>
+<td>ISO #2</td>
+</tr>
+<tr>
+<td>10.30.0.0/24</td>
+<td>192.168.1.6 (Cisco vRouter)</td>
+<td>ISO #3</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>192.168.1.1 (ASUS)</td>
+<td>Internet</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fortigate-192168199">FortiGate (192.168.1.99)<a class="headerlink" href="#fortigate-192168199" title="Permanent link">&para;</a></h4>
+<p><strong>Role:</strong> ISO router for 192.168.3.0/24</p>
+<p><strong>Directly connected:</strong>
+- 192.168.3.0/24 (ISO_LAN)
+- 192.168.1.0/24 (Prod_LAN)</p>
+<table>
+<thead>
+<tr>
+<th>Destination Subnet</th>
+<th>Next Hop</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.3.0/24</td>
+<td>Direct</td>
+<td>ISO_LAN</td>
+</tr>
+<tr>
+<td>192.168.1.0/24</td>
+<td>Direct</td>
+<td>Prod_LAN</td>
+</tr>
+<tr>
+<td>192.168.100.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>LAB_LAN1</td>
+</tr>
+<tr>
+<td>192.168.200.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>LAB_LAN2</td>
+</tr>
+<tr>
+<td>192.168.2.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>EXT_LAN</td>
+</tr>
+<tr>
+<td>10.10.0.0/24</td>
+<td>192.168.1.254 (pfSense)</td>
+<td>Internal VLAN</td>
+</tr>
+<tr>
+<td>10.20.0.0/24</td>
+<td>192.168.1.201 (OPNsense)</td>
+<td>ISO #1</td>
+</tr>
+<tr>
+<td>10.30.0.0/24</td>
+<td>192.168.1.6 (Cisco vRouter)</td>
+<td>ISO #3</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>192.168.1.1 (ASUS)</td>
+<td>Internet</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cisco-r1-vrouter-19216816">Cisco r1 vRouter (192.168.1.6)<a class="headerlink" href="#cisco-r1-vrouter-19216816" title="Permanent link">&para;</a></h4>
+<p><strong>Hostname:</strong> R1.home.com<br />
+<strong>Role:</strong> Core router for PROD, LAB1, LAB2</p>
+<p><strong>Directly connected:</strong>
+- 192.168.1.0/24 (Prod_LAN)
+- 192.168.100.0/24 (LAB_LAN1)
+- 192.168.200.0/24 (LAB_LAN2)
+- 10.30.0.0/30 (PTP link to R2)</p>
+<table>
+<thead>
+<tr>
+<th>Destination Subnet</th>
+<th>Next Hop</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.1.0/24</td>
+<td>Direct</td>
+<td>Prod_LAN</td>
+</tr>
+<tr>
+<td>192.168.100.0/24</td>
+<td>Direct</td>
+<td>LAB_LAN1</td>
+</tr>
+<tr>
+<td>192.168.200.0/24</td>
+<td>Direct</td>
+<td>LAB_LAN2</td>
+</tr>
+<tr>
+<td>10.30.0.0/30</td>
+<td>Direct</td>
+<td>PTP to R2</td>
+</tr>
+<tr>
+<td>192.168.2.0/24</td>
+<td>10.30.0.2</td>
+<td>OSPF via R2</td>
+</tr>
+<tr>
+<td>192.168.3.0/24</td>
+<td>10.30.0.2</td>
+<td>OSPF via R2</td>
+</tr>
+<tr>
+<td>10.20.0.0/24</td>
+<td>192.168.1.1</td>
+<td>Static route to ISO #1 (via ASUS)</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>Not set</td>
+<td>No default route configured</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cisco-r2-vrouter-19216839">Cisco r2 vRouter (192.168.3.9)<a class="headerlink" href="#cisco-r2-vrouter-19216839" title="Permanent link">&para;</a></h4>
+<p><strong>Hostname:</strong> R2.home.com<br />
+<strong>Role:</strong> Edge router for EXT and ISO</p>
+<p><strong>Directly connected:</strong>
+- 10.30.0.0/30 (PTP to R1)
+- 192.168.3.0/24 (ISO_LAN2)
+- 192.168.2.0/24 (EXT_LAN)</p>
+<table>
+<thead>
+<tr>
+<th>Destination Subnet</th>
+<th>Next Hop</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.30.0.0/30</td>
+<td>Direct</td>
+<td>PTP link to R1</td>
+</tr>
+<tr>
+<td>192.168.3.0/24</td>
+<td>Direct</td>
+<td>ISO_LAN2</td>
+</tr>
+<tr>
+<td>192.168.2.0/24</td>
+<td>Direct</td>
+<td>EXT_LAN</td>
+</tr>
+<tr>
+<td>192.168.1.0/24</td>
+<td>10.30.0.1</td>
+<td>OSPF via R1 (Prod_LAN)</td>
+</tr>
+<tr>
+<td>192.168.100.0/24</td>
+<td>10.30.0.1</td>
+<td>OSPF via R1 (LAB_LAN1)</td>
+</tr>
+<tr>
+<td>192.168.200.0/24</td>
+<td>10.30.0.1</td>
+<td>OSPF via R1 (LAB_LAN2)</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>Not set</td>
+<td>No default route configured</td>
+</tr>
+</tbody>
+</table>
+<figure>
+      <img src="/Career_Projects/assets/diagrams/routing-flow.png" alt="Routing">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Lab Routing Flowchart.
+      </figcaption>
+    </figure>
+
+<h3 id="domain-namespace-design">Domain Namespace Design<a class="headerlink" href="#domain-namespace-design" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Purpose</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>home.com</td>
+<td>Production / Lab services</td>
+<td>Current state: Production, lab and AD environments. Future State: migration of domain to shadowitlab.com, AD will remain on home.com.</td>
+</tr>
+<tr>
+<td>shadowitlab.com</td>
+<td>Public DNS</td>
+<td>Used to expose services externally through Cloudflare tunnels. Future migration to all internal DNS FQDNs.</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>## 6. Security Homelab Section Links</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><a href="/Career_Projects/projects/homelab/01-exec-summary/">Executive Summary and Security Posture</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/02-platform/">Infrastructure Platform, Virtualzation Stack and Hardware</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/03-network/">Network Security, Pirvacy and Remote Access</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/04-iam-secrets/">Identity, Access, Secrets and Trust Management</a></strong> </li>
+<li><strong><a href="/Career_Projects/projects/homelab/05-auto-iac/">Automation and IaC</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/06-apps-service/">Applications and Services</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/07-vis-response-pt1/">Observability and Response, Part 1</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/08-vis-response-pt2/">Observability and Response, Part 2</a></strong></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
