@@ -129,9 +129,47 @@ DNS is a foundational service that impacts every network connection. Compromise 
 **Synchronization Strategy:**
 
 - Nebula-Sync: Replicates Pi-hole settings and blocklists every 15 minutes
-- Database Sync: SQLite gravity.db copied from primary to secondary
 - Custom DNS Records: Manually synchronized via Ansible playbook
 - Blocklist Updates: Both instances independently update from upstream sources
+
+### Bind9 `named.conf.options` configuration
+
+```text
+acl "internal_networks" {
+    127.0.0.1;
+    192.168.1.0/24;
+    192.168.2.0/24;
+    192.168.3.0/24;
+    192.168.100.0/24;
+    192.168.200.0/24;
+};
+
+options {
+    directory "/var/cache/bind";
+
+    recursion yes;
+    allow-query { "internal_networks"; };
+    allow-recursion { "internal_networks"; };
+
+    listen-on { any; };
+
+    forwarders {
+        192.168.1.252 port 5335;
+    };
+    forward only;
+   
+    // Stop local reverse lookups (PTR) for private IPs from leaking to Unbound
+    empty-zones-enable yes;
+
+    // DNS Rebinding protection: Prevents external domains from resolving
+    // to internal IP addresses.
+    deny-answer-addresses { 192.168.0.0/16; };
+
+    dnssec-validation auto;
+    
+    version "none";
+};
+```
 
 ### Detailed DNS Query Flows
 
@@ -162,36 +200,49 @@ DNS is a foundational service that impacts every network connection. Compromise 
 6. Pi-hole caches answer and returns to client
 
 **Example Query for www.example.com:**
-```
+
 Client → Pi-hole → Unbound → Root (.) → .com TLD → example.com NS → IP
-Query Time: ~50ms (first query), ~1ms (cached)
-```
+
+**Query Time:** ~50ms (first query), ~1ms (cached)
 
 #### DNS Query Flow - Internal Domains
 
 **Client Request Flow for *.home.com:**
 
 1. Client (192.168.1.31) → Pi-hole (192.168.1.250:53)
-2. Pi-hole identifies conditional forwarding rule:
-   - Domain: home.com
-   - Target: 192.168.1.251:53 (Bind9)
-3. Pi-hole forwards query to Bind9
-4. Bind9 processes query:
-   - Check if zone is authoritative (db.home.com)
-   - Lookup A/AAAA record in zone file
-   - Return answer with authoritative flag set
-5. Bind9 returns answer to Pi-hole
-6. Pi-hole caches and returns to client
+2. Pi-hole Rule Matching:
+   - Pi-hole identifies home.com as a Conditional Forwarding target
+   - Target: 192.168.1.251 (BIND9)
+3. Pi-hole → BIND9:
+   - Pi-hole sends a recursive query to BIND9
+4. BIND9 Processing:
+   - **Authority Check:** BIND9 confirms it is the Master for home.com
+   - **Record Lookup:** Pulls the IP from db.home.com (e.g., uptimek → 192.168.1.247)
+   - **Security Check:** BIND9 verifies the requesting IP (Pi-hole) is in its allow-query ACL
+5. BIND9 → Pi-hole → Client:
+   - **Loop Prevention:** BIND9 returns the answer directly. Because BIND9's forwarder is set to Unbound (not Pi-hole), no DNS loop occurs
 
-**Reverse DNS Query Flow (PTR Lookup):**
+#### Reverse DNS Query Flow (PTR Lookup)
 
-1. Client queries 31.1.168.192.in-addr.arpa
-2. Pi-hole conditional forwarding matches 1.168.192.in-addr.arpa
-3. Forwarded to Bind9 (192.168.1.251)
-4. Bind9 consults db.192.168.1 zone file
-5. Returns PTR record (hostname)
+1. **Client/Service Queries:** e.g., "Who is 192.168.100.51?" (51.100.168.192.in-addr.arpa)
+2. **Pi-hole Forwarding:**
+   - Pi-hole sees the query for the 100.168.192 range
+   - Conditional forwarding sends this to BIND9 (.251)
+3. **BIND9 Zone Selection:**
+   - BIND9 matches the query to zone "100.168.192.in-addr.arpa" in named.conf.local
+   - It consults the specific reverse zone file: db.192.168.100
+4. **Result:** BIND9 returns stepca.home.com
+5. **Outcome:** Pi-hole and Traefik logs now display stepca.home.com instead of the raw IP address
 
-**Example:** 192.168.1.250 → pihole.home.com
+#### The "Security Gate" Flow (DNS Rebinding)
+
+1. Client requests malicious-site.com
+2. Pi-hole (not on blocklist) → Unbound → Public Internet
+3. **Upstream Response:** The malicious DNS returns 192.168.1.254 (your pfSense IP)
+4. **BIND9 Inspection:**
+   - The answer passes through BIND9 (if BIND9 is the primary upstream) or is evaluated via the deny-answer-addresses rule
+5. **Action:** BIND9 sees a private IP address in a public response and drops the answer
+6. **Result:** The client receives no answer, preventing the malicious website from "talking" to your firewall
 
 **Conditional Forwarding Rules:**
 
@@ -210,48 +261,49 @@ Query Time: ~50ms (first query), ~1ms (cached)
 
 ### DNS Security Controls
 
-**DNSSEC Validation (Unbound):**
+#### DNSSEC Validation (Unbound)
 
 - **Purpose:** Cryptographically verify DNS responses haven't been tampered with in transit
-- **Implementation:** Unbound validates DNSSEC signatures for all domains supporting it
+- **Implementation:** Unbound (.252) performs full DNSSEC validation. Pi-hole (.250) and BIND9 (.251) are configured to trust Unbound's validation status (via the ad flag)
 - **Validation Behavior:**
-  - Valid signature → Cache and return answer
-  - Invalid signature → Return SERVFAIL (query fails rather than risk poisoning)
-  - No DNSSEC support → Process query normally (unsigned but not rejected)
-- **Security Impact:** Prevents DNS cache poisoning attacks
+  - Valid signature: Cache and return answer with AUTHENTICATED DATA status
+  - Invalid signature: Return SERVFAIL (blocks potentially poisoned records)
+  - No DNSSEC support: Process query normally (unsigned but not rejected)
+- **Security Impact:** Prevents DNS cache poisoning and "Man-in-the-Middle" attacks for external lookups
 
-**Query Logging & Privacy:**
+#### Query Logging & Privacy (Pi-hole & BIND9)
 
-- **Retention:** 24 hours (Pi-hole logs all queries with client IP, query type, response)
-- **Privacy Mode:** Client IP addresses anonymized in long-term statistics (last octet masked: 192.168.1.xxx)
-- **Use Case:** Threat hunting (identify clients querying known C2 domains), troubleshooting
+- **Retention:** 24 hours in Pi-hole's FTL database for real-time visibility
+- **Implementation:** Pi-hole logs the "Front-Door" request from the client; BIND9 logs are restricted to internal zone transfers and errors to minimize disk I/O
 
-**Rate Limiting:**
+#### Rate Limiting & Memory Protection
 
-- **Threshold:** 1000 queries/minute per client IP
-- **Action:** Temporary block (60-second cooldown) with Discord alert
-- **Purpose:** Prevents DNS amplification attacks, detects compromised clients performing DNS tunneling
+- **Threshold:** 1000 queries/minute per client IP (Pi-hole default)
+- **Memory Safeguard:** Shared Memory (/dev/shm) expanded to 256MB to prevent FTL engine crashes and database locks during high-volume bursts
+- **Action:** Temporary block (60-second cooldown)
+- **Purpose:** Prevents DNS amplification attacks and detects DNS tunneling attempts by internal malware
 
-**DNS Rebinding Protection:**
+#### DNS Rebinding Protection (The "BIND9 Guard")
 
-- **Rule:** Responses containing RFC1918 private addresses (192.168.x.x, 10.x.x.x) from external queries blocked
-- **Example:** Attacker's malicious site (evil.com) returns 192.168.1.1 → Pi-hole blocks response
-- **Security Impact:** Prevents attackers from using DNS to access internal services
+- **Rule:** deny-answer-addresses enabled in BIND9 for the 192.168.0.0/16 range
+- **Implementation:** If an external forwarder (like Cloudflare or Unbound) returns a private IP for a public domain (e.g., attacker.com → 192.168.1.1), BIND9 explicitly drops the answer
+- **Security Impact:** Prevents "Browser-as-a-Proxy" attacks where a malicious website tries to interact with your pfSense, Step-CA, or Traefik management interfaces
 
-**DNS-Based Ad Blocking & Threat Intelligence:**
+#### DNS-Based Ad Blocking & Threat Intelligence
 
-- **Blocklists:** 2M+ domains from curated feeds (StevenBlack, OISD, Firebog)
-- **Categories Blocked:** Advertising, tracking, telemetry, known malware C2 domains, cryptomining scripts, phishing sites
-- **Action:** Blocked domains return 0.0.0.0 (connection fails immediately)
-- **Update Frequency:** Daily at 3 AM (Gravity database update from upstream sources)
+- **Blocklists:** 2M+ domains from curated feeds (StevenBlack, OISD, Firebog) via Pi-hole
+- **Local Overrides:** Authoritative home.com records in BIND9 take precedence over any external blocklists
+- **Action:** Blocked domains return 0.0.0.0 (null routing), causing connections to fail instantly without generating outbound traffic
+- **Update Frequency:** Daily at 3 AM (Gravity update); BIND9 records are static and updated manually via db.home.com
 
-**DNSSEC Hardening (Unbound):**
+#### DNSSEC Hardening (Unbound)
 
 - **Configuration:**
   - harden-dnssec-stripped: yes (reject responses with DNSSEC signatures removed)
   - val-clean-additional: yes (validate additional section of DNS responses)
   - val-permissive-mode: no (strict validation, fail on invalid signatures)
 - **Security Impact:** Prevents sophisticated attacks where attackers strip DNSSEC signatures to bypass validation
+
 
 ### Monitoring & Observability
 

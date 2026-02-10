@@ -367,7 +367,8 @@ The domain controllers are configured with the following roles:
 |------|---------|
 | Active Directory Domain Services (AD DS) | Centralized identity, authentication, and directory management |
 | Active Directory Lightweight Directory Services (AD LDS) | Lightweight directory for app-specific identity needs |
-| DNS Server | Internal name resolution and SRV record support for AD |
+| DNS Server | Authoritative DNS Service for the AD Domain. Kerberos, LDAP, GPO, Login and General Client Requests 
+ |
 | File and Storage Services | Network shares and storage provisioning |
 | Active Directory Certificate Services | EnterpriseCA supporting the domain |
 | IIS Web Services | WSUS Admin Portal |
@@ -551,21 +552,8 @@ Secrets management is centralized through Vaultwarden, which provides encrypted 
 
 #### Deployment Overview
 
-<div class="two-col-right">
-  <div class="text-col">
-    <p>
-      Vaultwarden is a lightweight, self-hosted implementation of the Bitwarden protocol. All data is encrypted client-side before transmission, ensuring zero-knowledge storage. Vaultwarden is accessible via web, desktop, mobile, and browser extensions. Automated backups store encrypted vault data on the NAS and Proxmox Backup Server.
-    </p>
-  </div>
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/logos/vaultwarden.png" alt="Vaultwarden Logo">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Vaultwarden Password Manager
-      </figcaption>
-    </figure>
-  </div>
-</div>
+Vaultwarden is a lightweight, self-hosted implementation of the Bitwarden protocol. All data is encrypted client-side before transmission, ensuring zero-knowledge storage. Vaultwarden is accessible via web, desktop, mobile, and browser extensions. Automated backups store encrypted vault data on the NAS and Proxmox Backup Server.
+   
 
 **Security Impact**
 
