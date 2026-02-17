@@ -385,23 +385,24 @@ terraform apply \
 
 ### 3.1 Architecture Overview
 
-Ansible provides agentless configuration management through SSH-based automation, enforcing consistent baselines across all Linux hosts, managing secrets securely, and orchestrating complex multi-host operations using declarative playbooks.
+Ansible provides agentless configuration management through SSH-based automation, enforcing consistent baselines across all managed hosts (Linux, Windows, Cisco, VMware, FreeBSD), managing secrets securely via Ansible Vault, and orchestrating complex multi-host operations using declarative playbooks and Galaxy roles.
 
 **Security Impact**
 
-- Configuration drift eliminated through automated enforcement
-- SSH hardening applied consistently across all managed hosts
-- Credential exposure prevented through Ansible Vault encryption
-- Audit trail established via Git‑based version control
-- Manual errors eliminated through idempotent playbooks
+- Configuration drift eliminated through automated enforcement across 40+ hosts
+- SSH hardening applied consistently via dedicated playbooks (PermitRootLogin no, key-only auth)
+- Credential exposure prevented through Ansible Vault encryption (AES-256) and vault_* variable pattern
+- Audit trail established via Git-based version control
+- Manual errors eliminated through playbooks and connectivity pre-tasks
+- Multi-platform coverage: Linux, Windows, Cisco IOS, VMware ESXi, FreeBSD (pfSense/OPNsense)
 
-**Deployment Rationale:** In enterprise environments with 30+ Linux hosts, manual configuration becomes error-prone and time-consuming. Ansible demonstrates infrastructure-as-code principles where security baselines (CIS Benchmarks) are codified, version-controlled, and automatically enforced. This approach reduces configuration time from hours to minutes while ensuring 100% consistency across systems—critical for maintaining security posture at scale.
+**Deployment Rationale:** In enterprise environments with 40+ mixed-platform hosts, manual configuration becomes error-prone and time-consuming. This approach reduces configuration time from hours to minutes while ensuring 100% consistency across systems. The lab implementation covers Linux (Debian/RHEL families), Windows Server, Cisco IOS devices, VMware ESXi, and FreeBSD firewalls, demonstrating cross-platform automation capabilities.
 
 **Architecture Principles Alignment**
 
-- **Defense in Depth:** SSH hardening playbooks disable weak ciphers and enforce key-based auth; firewall rules deployed uniformly; fail2ban configured consistently across all systems
-- **Secure by Design:** Ansible Vault encrypts sensitive variables; no plaintext credentials in playbooks; SSH keys distributed securely via initial bootstrap
-- **Zero Trust:** Every configuration change logged to Git; no implicit trust of system state; playbooks verify current configuration before making changes
+- **Defense in Depth:** SSH hardening playbooks disable weak ciphers and enforce key-based auth; firewall rules (UFW/firewalld) deployed uniformly; fail2ban configured consistently; kernel hardening via sysctl parameters; multi-platform audit playbooks provide visibility across the entire infrastructure stack
+- **Secure by Design:** Ansible Vault encrypts sensitive variables (vault_ansible_password, vault_root_password); no plaintext credentials in playbooks; SSH keys distributed securely via cloud-init; vault.yml encrypted with AES-256
+- **Zero Trust:** Every configuration change logged to Git; playbooks verify current configuration before making changes; connectivity pre-tasks skip unreachable hosts gracefully; password rotation workflow requires explicit vault updates
 
 ---
 
@@ -426,262 +427,460 @@ Ansible provides agentless configuration management through SSH-based automation
 | Inventory | Dynamic (Proxmox API) + static YAML |
 | Vault Encryption | ansible-vault with AES-256 |
 
-### SSH Key Architecture
-
-- Key Type: ed25519 (modern, secure, performant)
-- Key Location: /home/ansible/.ssh/id_ed25519
-- Passphrase: Stored in Vaultwarden, loaded to ssh-agent
-- Distribution: Public key deployed via cloud-init or initial playbook
-- Rotation: Annual key rotation with documented rollover procedure
-
-### Ansible User Configuration
-
-The "ansible" service account is created on all managed hosts with these attributes:
-
-- Username: ansible
-- Shell: /bin/bash
-- Groups: ansible, sudo (or wheel on RHEL)
-- Sudo Access: NOPASSWD for all commands (required for automation)
-- Home Directory: /home/ansible
-- SSH AuthorizedKeys: Controller public key only
-
-**Security Considerations:**
-
-Sudo Without Password: Required for unattended automation. Mitigated by:
-
-- ansible user cannot authenticate via password (PasswordAuthentication no)
-- SSH key private key is passphrase-protected
-- Access limited to Ansible controller IP via SSH config
-- All actions logged via auditd and forwarded to Splunk
-
 ---
 
-### 3.3 Playbook Architecture
+### 3.3 Inventory and Variable Structure
 
-#### Bootstrap Playbook (new_install.yaml)
-```yaml
----
--  name: Freah install of Linux VM/LXC, add ansible user and SSH access
-   hosts: all
-   tags: always
-   become: true
-   
-   handlers:
-    - name: Restart systemd-resolved (if needed)
-      ansible.builtin.systemd:
-        name: systemd-resolved
-        state: restarted
-        enabled: yes
-      when:
-        - ansible_service_mgr == "systemd"
-        - "'systemd-resolved.service' in ansible_facts.services | default({})"
+**Inventory Design Principles**
 
-   pre_tasks:
-    
-    - name: Update all packages on RedHat family
-      dnf:
-        name: "*"
-        state: latest
-        update_cache: yes
-      when: ansible_os_family == "RedHat"
+The inventory uses a hierarchical group structure with NO host duplication. Each host appears exactly once in a platform-specific group, then aggregated via [group:children] declarations for flexible targeting.
 
-    - name: Update all packages on Debian family
-      apt:
-        upgrade: dist
-        update_cache: yes
-        cache_valid_time: 3600
-      when: ansible_os_family == "Debian"
+- Host Type Groups: [lxc], [vm], [new]
+- OS Family Groups: [debian_lxc], [debian_vm], [redhat_lxc], [redhat_vm]
+- OS Aggregate Groups: [debian], [redhat] (children of lxc+vm OS groups)
+- Platform Groups: [windows], [cisco], [vmware], [freebsd], [fortigate]
+- Function Groups: [monitoring], [dns], [proxy], [pki], [docker], [k3s]
+- Meta Groups: [linux] (all managed Linux hosts – excludes [new])
 
-   tasks:
-    - name: add new user
-      become: true
-      tags: always
-      ansible.builtin.user:
-        name: ansible
-        group: root
-        shell: /bin/bash
-        password:  "{{ '-----' | password_hash('sha512') }}"
+**Inventory Code Snippets (hosts.ini)**
+```ini
+##################################################################
+# DEBIAN LXC HOSTS
+##################################################################
+[debian_lxc]
+192.168.1.108       # webserver          web.home.com
+192.168.1.136       # Plex               plex.home.com
+192.168.1.250       # Pi-hole            pihole.home.com     (Docker)
+192.168.1.219       # Wazuh manager      wazuh.home.com
 
-    - name: Ensure OpenSSH server is installed
-      package:
-        name: openssh-server
-        state: present
+[debian_lxc:vars]
+ansible_user=ansible
+ansible_password="{{ vault_ansible_password }}"
+is_lxc=true
 
-    - name: Backup existing sshd_config
-      become: true
-      copy:
-        src: /etc/ssh/sshd_config
-        dest: /etc/ssh/sshd_config.bak
-        remote_src: yes
-      when: ansible_facts['os_family'] != 'Windows'
+##################################################################
+# WINDOWS HOSTS
+##################################################################
+[windows]
+192.168.1.152       # WinServer 2022 / DC    dc01.home.com
+192.168.1.142       # WinServer 2025 / DC    dc02.home.com
 
-    - name: Set SSH configuration options
-      become: true
-      lineinfile:
-        path: /etc/ssh/sshd_config
-        regexp: '^#?{{ item.key }}'
-        line: '{{ item.key }} {{ item.value }}'
-        state: present
-        create: yes
-        backup: yes
-      loop:
-        - { key: 'PermitRootLogin', value: 'no' }
-        - { key: 'PasswordAuthentication', value: 'no' }
-        - { key: 'PubkeyAuthentication', value: 'yes' }
-        - { key: 'AuthorizedKeysFile', value: '.ssh/authorized_keys' }
-        - { key: 'PermitEmptyPasswords', value: 'no' }
-        - { key: 'ChallengeResponseAuthentication', value: 'no' }
-        - { key: 'UsePAM', value: 'yes' }
+[windows:vars]
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_port=5985
+ansible_password="{{ vault_ansible_windows_password }}"
 
-    - name: Ensure SSH service is enabled and restarted
-      become: true
-      service:
-        name: "{{ item  }}"
-        state: restarted
-        enabled: yes
-      loop:
-        - ssh
-        - sshd
+##################################################################
+# OS AGGREGATE GROUPS – children only
+##################################################################
+[debian:children]
+debian_lxc
+debian_vm
 
+[linux:children]
+debian
+redhat
 
-    - name: Ensure .ssh directory exists for ansible user
-      become: true
-      file:
-        path: /home/ansible/.ssh
-        state: directory
-        owner: ansible
-        group: root
-        mode: '0700'
+##################################################################
+# FUNCTION GROUPS
+##################################################################
+[monitoring]
+192.168.1.181       # Uptime Kuma
+192.168.1.219       # Wazuh
+192.168.1.246       # Grafana
 
-    - name: add SSH key for ansible host
-      become: true
-      tags: always
-      ansible.posix.authorized_key:
-        user: ansible
-        key: "ssh-ed25519 ------------ root@ansible"
-        state: present
-
-    - name: Ensure sudo is installed
-      package:
-        name: sudo
-        state: present
-
-    - name: Ensure /etc/sudoers.d exists
-      become: true
-      file:
-        path: /etc/sudoers.d
-        state: directory
-        owner: root
-        group: root
-        mode: '0750'
-
-    - name: add sudoers file to ansible
-      become: true
-      ansible.builtin.copy:
-        src: sudoer_ansible
-        dest: /etc/sudoers.d/ansible
-        owner: root
-        group: root
-        mode: '0440'
-        validate: '/usr/sbin/visudo -cf %s'
-      
-    - name: Replace /etc/resolv.conf with specified nameservers
-      copy:
-        dest: /etc/resolv.conf
-        content: |
-          nameserver 192.168.1.250
-          nameserver 192.168.1.126
-        owner: root
-        group: root
-        mode: '0644'
-        backup: yes
-      notify: Restart systemd-resolved (if needed)
-
-  
--  name: add a new user and enable remote access via SSH
-   hosts: all
-   become: true
-
-   handlers:
-    - name: Restart systemd-resolved (if needed)
-      ansible.builtin.systemd:
-        name: systemd-resolved
-        state: restarted
-        enabled: yes
-      when:
-        - ansible_service_mgr == "systemd"
-        - "'systemd-resolved.service' in ansible_facts.services | default({})"
-
-
-    # Debian reboot check
-    - name: Check if reboot is required (Debian/Ubuntu)
-      stat:
-        path: /var/run/reboot-required
-      register: reboot_required
-      when: ansible_os_family == "Debian"
-
-    # RedHat reboot check
-    - name: Check if reboot is required (RedHat family)
-      command: needs-restarting -r
-      register: needs_reboot
-      failed_when: false
-      changed_when: false
-      when: ansible_os_family == "RedHat"
-
-    - name: Reboot if required (Debian)
-      reboot:
-      when: reboot_required.stat.exists
-
-    - name: Reboot if required (RedHat)
-      reboot:
-      when: needs_reboot.rc == 1
 ```
 
-**Purpose:** Initial host configuration to establish Ansible management capability.
+**Targeting Examples:**
+```bash
+ansible-playbook playbook.yml --limit linux          # All Linux hosts
+ansible-playbook playbook.yml --limit lxc            # All LXCs
+ansible-playbook playbook.yml --limit debian         # All Debian (LXC + VM)
+ansible-playbook playbook.yml --limit debian_lxc     # Debian LXCs only
+ansible-playbook playbook.yml --limit lxc --skip-tags reboot  # Skip reboot on LXCs
+```
 
-**Execution:** Run once after Terraform provisions new host.
+**Variable Structure**
+```ini
+Variables follow a strict hierarchy: group_vars/all.yml (global defaults) → group_vars/vault.yml (encrypted secrets) → group-specific vars → host_vars/ (host-specific overrides).
+Global Variables (group_vars/all.yml)
+# Ansible connection
+ansible_python_interpreter: auto_silent
+ansible_user: ansible
+ansible_password: "{{ vault_ansible_password }}"
+ansible_become: true
+ansible_become_method: sudo
+ansible_become_password: "{{ vault_ansible_password }}"
 
-**What it does:**
+# SSH public keys
+ansible_ssh_pubkey: "ssh-ed25519 AAAAC3..."
+officepc_ssh_pubkey: "ssh-ed25519 AAAAC3..."
 
-- Updates the repositories, applies any software updates
-- Creates the "ansible" user with a login shell and hashed password
-- Ensures OpenSSH server is installed
-- Backs up /etc/ssh/sshd_config and sets key options:
-  - PermitRootLogin no
-  - PasswordAuthentication no
-  - PubkeyAuthentication yes
-  - AuthorizedKeysFile .ssh/authorized_keys
-  - PermitEmptyPasswords no
-  - ChallengeResponseAuthentication no
-  - UsePAM yes
-- Restarts and enables the SSH service (service name differs by distro: "ssh" on Debian/Ubuntu, "sshd" on RHEL/CentOS)
-- Creates /home/ansible/.ssh with strict permissions
-- Adds the control node's public key to ansible's authorized_keys
-- Installs sudo, ensures /etc/sudoers.d exists (0750), and drops a validated sudoers entry for "ansible" (via visudo -cf)
-- Restart SSH only when the config changes (handler) to reduce risk during provisioning
-- Configures the lab DNS nameservers in the resolv.conf file
+# Wazuh agent configuration
+wazuh_manager_ip: "192.168.1.219"
+wazuh_manager_port: 1514
+wazuh_version: "4.14.2-1"
 
-### Additional Playbooks
+# CheckMK agent configuration
+checkmk_server: "http://192.168.1.126:5000"
+checkmk_site: "cmk"
+checkmk_version: "2.4.0p20-1
 
-**Hardening Playbook (security_baseline.yaml):**
+```
 
-- Configures firewall rules (ufw/firewalld)
-- Installs fail2ban for brute force protection
-- Enables automatic security updates
-- Configures auditd for system logging
-- Deploys CrowdSec agent for threat intelligence
+**Vault Structure (group_vars/vault.yml - Encrypted)**
+```ini
+vault_ansible_password: "<32-char-random-token>"
+vault_root_password: "<complex-password>"
+vault_paul_password: "<user-password>"
+vault_ansible_windows_password: "<windows-password>"
+vault_user_paul_password: "<cisco-password>"
+vault_enable_password: "<cisco-enable-password>
 
-**PKI Certificate Deployment (deploy_certificates.yaml):**
+```
 
-- Distributes Step-CA root certificate to trust store
-- Configures automatic cert renewal via ACME client
-- Updates TLS configurations for services
+**Galaxy Roles and Collections**
 
-**User Management (manage_users.yaml):**
+Ansible Galaxy provides pre-built roles and collections for common tasks. The lab uses officially maintained roles for Wazuh, CheckMK agent deployment, plus support for Windows, VMware, and Cisco hosts.
 
-- Creates standard user accounts across hosts
-- Deploys SSH keys from centralized source
-- Configures user-specific sudo permissions
+---
+
+### 3.4 Core Playbooks - Detailed Overview
+
+#### Playbook 1: Multi-Platform System Audit (sys_audit_n8n.yml)
+
+**Purpose:** Comprehensive infrastructure audit across Linux, Windows, and FreeBSD hosts with JSON output for n8n workflow processing.
+
+**Key Features:**
+
+- Single-play design for all platforms (Linux/Windows/FreeBSD)
+- Connectivity pre-checks skip unreachable hosts gracefully
+- Platform-specific data collection with conditional blocks
+- Consolidated JSON output to /tmp/audit_report.json
+- Integration with n8n for HTML report generation and alerting
+
+**Data Collected:**
+
+- System: CPU cores, memory, disk usage %, memory usage %, uptime
+- Network: Default gateway, nameservers, listening ports count
+- Security: SSH keys count, Windows Defender status, running services
+- Software: Kernel version, available updates count
+
+**Code Snippet - Connectivity Pre-Tasks**
+```yaml
+pre_tasks:
+  - name: Check if host is reachable
+    ansible.builtin.wait_for_connection:
+      timeout: 5
+    ignore_unreachable: true
+    ignore_errors: true
+    register: connection_check
+
+  - name: Gather facts only for reachable hosts
+    ansible.builtin.setup:
+    when: connection_check is success
+
+  - name: Skip unreachable host
+    ansible.builtin.meta: end_host
+    when: connection_check is failed or connection_check is unreachable
+
+```
+
+**Code Snippet - Linux Data Collection**
+```yaml
+- name: Collect disk usage (Linux)
+  shell: df -h / | tail -n 1 | awk '{print $5}' | sed 's/%//'
+  register: disk_usage_pct
+  changed_when: false
+
+- name: Collect memory usage (Linux)
+  shell: free | grep Mem | awk '{printf "%.0f", ($3/$2) * 100}'
+  register: mem_usage_pct
+  changed_when: false
+
+- name: Collect package updates (Linux)
+  shell: |
+    if command -v apt &> /dev/null; then
+      apt list --upgradable 2>/dev/null | grep -c upgradable || echo "0"
+    elif command -v dnf &> /dev/null; then
+      dnf check-update -q 2>/dev/null | grep -v "^$" | wc -l || echo "0"
+    fi
+  register: updates_available
+  changed_when: false
+
+```
+
+**Code Snippet - Windows Data Collection**
+```yaml
+- name: Collect disk usage (Windows)
+  win_shell: |
+    $disk = Get-PSDrive C | Select-Object Used,Free
+    [math]::Round(($disk.Used / ($disk.Used + $disk.Free)) * 100, 0)
+  register: win_disk_usage
+
+- name: Collect Windows Defender status
+  win_shell: (Get-MpComputerStatus).AntivirusEnabled
+  register: win_defender_status
+  ignore_errors: true
+
+```
+
+**Code Snippet - JSON Consolidation**
+```yaml
+- name: Write consolidated JSON report
+  copy:
+    content: |
+      {
+        "report_generated": "{{ ansible_date_time.iso8601 }}",
+        "report_date": "{{ ansible_date_time.date }}",
+        "total_hosts": {{ collected_audit_data | length }},
+        "hosts": {{ collected_audit_data | to_nice_json }}
+      }
+    dest: "/tmp/audit_report.json"
+  delegate_to: localhost
+  run_once: true
+
+```
+
+**Use Cases:**
+
+- Weekly infrastructure audits via n8n automation
+- Pre-maintenance compliance checks
+- Capacity planning via disk/memory trending
+- Security baseline validation (SSH keys, services, updates)
+
+---
+
+#### Playbook 2: User Management (user_mgmt.yml)
+
+**Purpose:** Centralized user account and credential management across all Linux hosts with Ansible Vault integration.
+
+**Key Features:**
+
+- Sets ansible user password from vault_ansible_password
+- Sets root password from vault_root_password
+- Manages paul user with sudo access (password-based)
+- Deploys SSH keys for authorized users
+- Verifies ansible key-based auth after password rotation
+
+**Code Snippet - Ansible User Password Management**
+```yaml
+- name: Set ansible user password from vault
+  tags: ansible_user
+  ansible.builtin.user:
+    name: ansible
+    password: "{{ vault_ansible_password | password_hash('sha512') }}"
+    update_password: always
+ 
+
+- name: Verify ansible SSH key is still present
+  tags: ansible_user, verify
+  ansible.posix.authorized_key:
+    user: ansible
+    key: "{{ ansible_ssh_pubkey }}"
+    state: present
+
+```
+
+**Code Snippet - Paul User with Sudo Configuration**
+```yaml
+- name: Ensure paul user exists
+  ansible.builtin.user:
+    name: paul
+    shell: /bin/bash
+    groups: "{{ 'sudo' if ansible_os_family == 'Debian' else 'wheel' }}"
+    append: true
+    password: "{{ vault_paul_password | password_hash('sha512') }}"
+
+- name: Deploy sudoers file for paul
+  ansible.builtin.copy:
+    content: |
+      Defaults:paul rootpw
+      paul ALL=(ALL) ALL, !/usr/bin/su
+    dest: /etc/sudoers.d/paul
+    owner: root
+    group: root
+    mode: '0440'
+    validate: '/usr/sbin/visudo -cf %s'
+
+```
+
+**Password Rotation Workflow:**
+
+- Generate 32-char token: `openssl rand -base64 24`
+- Update vault_ansible_password in vault.yml: `ansible-vault edit group_vars/vault.yml`
+- Run playbook: `ansible-playbook user_mgmt.yml --tags ansible_user`
+- Test connectivity: `ansible linux -m ping`
+
+**Use Cases:**
+
+- Quarterly credential rotation (automated via n8n)
+- Emergency password resets
+- New host bootstrap user provisioning
+- SSH key distribution after key rotation
+
+---
+
+#### Playbook 3: Linux Package Updates (update_linux_hosts.yml)
+
+**Purpose:** Update all Linux hosts with dist-upgrade/dnf update and reboot detection.
+
+**Key Features:**
+
+- Debian: apt dist-upgrade with autoremove/autoclean
+- RedHat: dnf update with latest packages
+- Reboot detection for kernel updates
+- Free strategy for parallel execution
+- Update summary with reboot status
+
+**Code Snippet - Debian Package Updates & Reboot Detection**
+```yaml
+- name: Update all packages (Debian)
+  tags: packages, update
+  apt:
+    upgrade: dist
+    update_cache: true
+    cache_valid_time: 3600
+    autoremove: true
+    autoclean: true
+  when: ansible_os_family == "Debian"
+  register: apt_update
+
+- name: Check if reboot required (Debian)
+  tags: reboot
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_deb
+  when: ansible_os_family == "Debian"
+
+```
+
+**Use Cases:**
+
+- Weekly package updates (n8n automation)
+- Security patch deployment
+- Post-vulnerability scanning remediation
+- Compliance maintenance (keep systems current)
+
+---
+
+#### Playbook 4: Linux Hardening (linux_hardening.yml)
+
+**Purpose:** Docker-aware SSH and system hardening with automatic Docker detection.
+
+**Key Features:**
+
+- SSH hardening: disable root login, enforce key-only auth
+- TCP/Agent forwarding enabled for Docker/DevOps workflows
+- Automatic Docker detection preserves IP forwarding
+- Safe kernel parameters (sysctl hardening)
+- Login banner deployment
+
+**Code Snippet - Docker Detection**
+```yaml
+- name: Detect if Docker is installed
+  stat:
+    path: /usr/bin/docker
+  register: docker_check
+
+- name: Set Docker presence fact
+  set_fact:
+    has_docker: "{{ docker_check.stat.exists }}"
+    
+- name: Configure sysctl for Docker hosts
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    state: present
+    sysctl_set: true
+  when: has_docker | bool
+
+```
+
+**Code Snippet - SSH Hardening**
+```yaml
+- name: Configure SSH hardening options
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?{{ item.key }}\s'
+    line: '{{ item.key }} {{ item.value }}'
+    state: present
+  loop:
+    - { key: 'PermitRootLogin', value: 'no' }
+    - { key: 'PasswordAuthentication', value: 'no' }
+    - { key: 'PubkeyAuthentication', value: 'yes' }
+    - { key: 'AllowAgentForwarding', value: 'yes' }
+    - { key: 'AllowTcpForwarding', value: 'yes' }
+  notify: restart sshd
+
+```
+
+**Use Cases:**
+
+- New host security baseline
+- Docker host specialized hardening
+- Compliance enforcement (CIS benchmarks)
+- Post-compromise hardening
+
+---
+
+#### Playbook 5: New Install Baseline (new_install_baseline_roles.yml)
+
+**Purpose:** Bootstrap new hosts with baseline configuration using Galaxy roles.
+
+**Roles Used:**
+
+- wazuh.wazuh_agent (version: 4.14.2)
+- Custom bootstrap tasks (user creation, SSH, sudo)
+
+**Key Features:**
+
+- Creates ansible service account with passwordless sudo
+- Deploys SSH keys for ansible and paul users
+- Configures sudoers with validation
+- Installs Wazuh agent and registers with manager
+- Installs utility packages (curl, nano, dig, traceroute)
+- Enables qemu-guest-agent for Proxmox integration
+
+**Code Snippet - User Creation**
+```yaml
+- name: Create ansible user
+  ansible.builtin.user:
+    name: ansible
+    shell: /bin/bash
+    password: "{{ vault_ansible_password | password_hash('sha512') }}"
+    comment: "Ansible Automation Service Account"
+
+- name: Ensure .ssh directory exists
+  file:
+    path: /home/ansible/.ssh
+    state: directory
+    owner: ansible
+    group: ansible
+    mode: '0700'
+
+- name: Add SSH key for ansible user
+  ansible.posix.authorized_key:
+    user: ansible
+    key: "{{ ansible_ssh_pubkey }}"
+    state: present
+
+- name: Deploy sudoers file for ansible user (passwordless)
+  ansible.builtin.copy:
+    content: "ansible ALL=(ALL) NOPASSWD:ALL\n"
+    dest: /etc/sudoers.d/ansible
+    mode: '0440'
+    validate: '/usr/sbin/visudo -cf %s'
+
+```
+
+**Use Cases:**
+
+- Fresh install bootstrap (first playbook to run)
+- Wazuh agent deployment across new hosts
+- Monitoring stack integration
+- Standardized user/SSH configuration
 
 ---
 
@@ -715,7 +914,7 @@ n8n is a self-hosted, low-code workflow automation platform enabling visual work
 
 - Security operations accelerated through automated SOAR workflows
 - Manual triage eliminated via automated alert enrichment
-- MTTR reduced through auto‑generated remediation playbooks
+- MTTR reduced through auto-generated remediation playbooks
 - Alert fatigue minimized through intelligent deduplication and correlation
 - Compliance audit trails automatically documented throughout the incident lifecycle
 
@@ -729,268 +928,402 @@ n8n is a self-hosted, low-code workflow automation platform enabling visual work
 
 ### n8n Configuration
 
-- Version: n8n v1.x (latest stable)
+- Version: n8n v2.7.5 (latest stable)
 - Execution Mode: Main process (not queue mode for simplicity)
 - Webhook URL: https://n8n.home.com
 - TLS Certificate: Step-CA issued, auto-renewed
 - Authentication: SSO via Authentik (no local passwords)
 - Monitoring: Uptime Kuma
-- Notifications: Discord webhooks
+- Notifications: Discord webhooks, SMTP relay
 
 ### Security Controls
 
-- Credential Encryption: All API tokens encrypted at rest
+- Credential Encryption: All API tokens encrypted at rest, Ansible automated (ansible-vault)
 - Webhook Security: HMAC signature validation on inbound webhooks
 - Audit Trail: All workflow executions logged with timestamp and user
 
-### Lab Use Cases
-
-- Daily threat Intelligence Alerts
-- Ansible Playbook automation
-
 ---
 
-### 5.2 Workflow 1: Ansible Playbook Automation
+### 5.2 Workflow 1: Lab Infrastructure Audit
 
-**Purpose:** Automated weekly configuration audit and system updates across lab infrastructure.
+**Purpose:** Automated weekly configuration audit and system updates across lab infrastructure with HTML reporting and dual alerting (Discord + Email).
 
-This automated workflow runs two playbooks, a weekly schedule and performs a configuration audit across lab hosts and a Linux repository update and upgrade cycle. It collects key system metadata and securely publishes the results for review and alerting.
+This workflow runs weekly on Sunday at 2 AM, executes the Ansible sys_audit_n8n.yml playbook, transforms the JSON output into a styled HTML report, deploys it to the Apache webserver, and sends notifications via Discord and email.
 
 **Workflow Summary:**
 
-- **Scheduled Execution**: Triggered weekly via n8n's Cron node
-- **Ansible Playbook**:
-  - Gathers hostnames, nameservers, SSH keys, and other configuration details across all Linux hosts
-  - (sudo) apt update && apt upgrade -y / (sudo) dnf check-update && (sudo) dnf update -y
-- **GitHub Upload**: Converts playbook output to a structured JSON file and commits it to the n8n-Ansible-playbook-results/ folder in the lab GitHub repository
-- **Discord Alert**: Sends a formatted notification to a private Discord channel upon successful upload, including timestamp and file reference
+- **Scheduled Execution:** Triggered weekly via n8n's Cron node (Sunday 2 AM)
+- **Ansible Playbook:** Executes sys_audit_n8n.yml via SSH to collect system metrics
+- **Data Transformation:** Parses JSON and generates HTML report with CSS styling
+- **Apache Upload:** Deploys HTML to /var/www/html/ and updates index page
+- **Discord Alert:** Sends formatted notification with report link and summary stats
+- **Email Alert:** Sends HTML email template with audit summary
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/n8n-ansible-wf1.png" alt="Lab Infrastructure Audit Workflow">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Lab Infrastructure Audit Workflow
+  </figcaption>
+</figure>
 
 ### Workflow Nodes
 
 | Node Type | Configuration | Purpose |
 |-----------|---------------|---------|
-| Schedule Trigger | Cron: 0 2 * * 6 (Saturday 2 AM) | Weekly execution |
-| SSH Node 1 | Host: ansible-controller.home.com; Command: ansible-playbook config_audit.yml | Run audit playbook |
-| SSH Node 2 | Host: ansible-controller.home.com; Command: ansible-playbook linux_updates.yml | Run update playbook |
-| Function Node | Parse JSON output from playbooks | Extract results |
-| HTTP Request | GitHub API: Create file in repo | Upload results JSON |
-| Discord Webhook | Send formatted message | Alert on completion |
-| Error Handler | Catch failures; send alert | Notify on errors |
+| Schedule Trigger | Cron: 0 2 * * 0 (Sunday 2 AM) | Weekly execution |
+| SSH Node 1 | ansible-playbook sys_audit_n8n.yml | Run audit playbook |
+| SSH Node 2 | cat /tmp/audit_report.json | Read JSON output |
+| Code Node 1 | Parse JSON from stdout | Extract audit data |
+| Code Node 2 | Generate HTML with CSS | Create styled report |
+| SSH Node 3 | Write HTML to webserver | Deploy to Apache |
+| SSH Node 4 | Update index.html | Add report to index |
+| Code Node 3 | Generate Discord markdown | Format alert message |
+| Discord Webhook | POST to webhook URL | Send Discord notification |
+| Code Node 4 | Generate email HTML | Format email template |
+| Email Node | SMTP send | Send email notification |
 
-<figure class=image-large>
-      <img src="/Career_Projects/assets/screenshots/n8n-ansible.png" alt="n8n Ansible Playbook Workflow">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        n8n Ansible Playbook Workflow.
-      </figcaption>
-    </figure>
+**HTML Report Features:**
 
-**Audit Playbook Output (JSON):**
-```json
-{
-  "timestamp": "2024-11-06T02:00:00Z",
-  "hosts_scanned": 25,
-  "findings": {
-    "ssh_keys": "All hosts have valid keys",
-    "dns_config": "Correct nameservers on 23/25 hosts",
-    "failed_updates": []
-  }
-}
-```
+- Responsive grid layout with host cards
+- Platform-specific color coding (Linux/Windows/FreeBSD)
+- Visual metrics with progress bars for disk/memory usage
+- Warning/critical thresholds highlighted (>75% yellow, >90% red)
+- Summary statistics cards (total hosts, high disk/memory usage counts)
+- Timestamp and audit metadata in footer
 
-**Update Playbook Execution:**
-
-- Debian/Ubuntu: apt update && apt upgrade -y
-- RHEL/Fedora: dnf check-update && dnf update -y
-- Success Rate: Tracked in Discord notification
-- Failed Updates: Logged for manual review
-
-**Workflow Benefits:**
-
-- Eliminates manual audit tasks (saves ~2 hours/week)
-- Ensures timely security updates across all hosts
-- Provides audit trail via GitHub commits
-- Immediate notification of issues via Discord
-
-<div class="no-toc">
-<figure class="image-large">
-  <img src="/Career_Projects/assets/screenshots/n8n-ansible-results.png" alt="n8n Ansible Results">
+<figure>
+  <img src="/Career_Projects/assets/screenshots/webserver-audit-landing.png" alt="Lab Infrastructure Audit Workflow">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-    n8n Ansible Playbook Results/Notification.
+    Lab Infrastructure Audit Landing Page
   </figcaption>
 </figure>
-</div>
 
-### JSON Output Example
+<figure>
+  <img src="/Career_Projects/assets/screenshots/webserver-audit-report.png" alt="Lab Infrastructure Audit Workflow">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Lab Infrastructure Audit Report
+  </figcaption>
+</figure>
 
-```json
-PLAY [Audit system info] *******************************************************
+<figure>
+  <img src="/Career_Projects/assets/screenshots/n8n-wf1-alerts.png" alt="Lab Infrastructure Audit Workflow">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Discord and Email Audit Completion Alerts
+  </figcaption>
+</figure>
 
-TASK [Gathering Facts] *********************************************************
-ok: [web.home.com]
-ok: [192.168.1.136]
-ok: [unbound.home.com]
-ok: [bind.home.com]
-ok: [192.168.1.250]
-ok: [uptimek.home.com]
-ok: [192.168.1.4]
-ok: [stepca.home.com]
-ok: [trfk.home.com]
-ok: [wazuh.home.com]
-ok: [192.168.1.93]
-ok: [192.168.100.15]
-ok: [192.168.1.246]
-ok: [192.168.1.33]
-ok: [192.168.2.6]
-ok: [192.168.200.8]
-ok: [192.168.200.7]
-ok: [192.168.1.126]
-ok: [192.168.1.109]
-ok: [192.168.1.166]
-ok: [192.168.100.5]
-
-TASK [Show disk usage] *********************************************************
-ok: [web.home.com] => {
-    "disk_usage.stdout_lines": [
-        "Filesystem      Size  Used Avail Use% Mounted on",
-        "/dev/loop0       16G   12G  3.2G  79% /",
-        "none            492K  4.0K  488K   1% /dev",
-        "efivarfs        192K  180K  7.6K  96% /sys/firmware/efi/efivars",
-        "tmpfs            47G     0   47G   0% /dev/shm",
-        "tmpfs            19G  156K   19G   1% /run",
-        "tmpfs           5.0M     0  5.0M   0% /run/lock",
-        "tmpfs            47G  124K   47G   1% /tmp",
-        "tmpfs           9.4G  8.0K  9.4G   1% /run/user/0",
-        "tmpfs           9.4G  8.0K  9.4G   1% /run/user/1001"
-    ]
-}
-TASK [Show IP address info] ****************************************************
-ok: [web.home.com] => {
-    "ip_info.stdout_lines": [
-        "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000",
-        "    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00",
-        "    inet 127.0.0.1/8 scope host lo",
-        "       valid_lft forever preferred_lft forever",
-        "    inet6 ::1/128 scope host noprefixroute ",
-        "       valid_lft forever preferred_lft forever",
-        "2: eth0@if76: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000",
-        "    link/ether bc:24:11:f9:a0:8c brd ff:ff:ff:ff:ff:ff link-netnsid 0",
-        "    inet 192.168.1.108/24 brd 192.168.1.255 scope global eth0",
-        "       valid_lft forever preferred_lft forever",
-        "    inet6 fe80::be24:11ff:fef9:a08c/64 scope link proto kernel_ll ",
-        "       valid_lft forever preferred_lft forever"
-    ]
-}
-TASK [Show routing table] ******************************************************
-ok: [web.home.com] => {
-    "route_info.stdout_lines": [
-        "default via 192.168.1.1 dev eth0 proto static ",
-        "192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.108 "
-    ]
-}
-TASK [Show hostname] ***********************************************************
-ok: [web.home.com] => {
-    "host_name.stdout": "apache-ubuntu"
-}
-TASK [Show nameservers] ********************************************************
-ok: [web.home.com] => {
-    "resolv_conf.stdout_lines": [
-        "# --- BEGIN PVE ---",
-        "search home.com",
-        "nameserver 192.168.1.250",
-        "# --- END PVE ---"
-    ]
-}
-TASK [Show authorized SSH keys] ************************************************
-ok: [web.home.com] => {
-    "msg": [
-        "ssh-ed25519 --------- root@ansible",
-        ""
-    ]
-}
-PLAY RECAP *********************************************************************
-192.168.1.109              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.126              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.136              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.166              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.246              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.250              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.33               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.4                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.1.93               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.100.15             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.100.5              : ok=12   changed=5    unreachable=0    failed=0    skipped=1    rescued=0    ignored=1   
-192.168.2.6                : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.200.7              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-192.168.200.8              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-bind.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-stepca.home.com            : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-trfk.home.com              : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-unbound.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-uptimek.home.com           : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-wazuh.home.com             : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web.home.com               : ok=13   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-```
 ---
 
 ### 5.3 Workflow 2: Threat Intelligence Aggregation
 
-**Purpose:** Daily ingestion and distribution of curated cybersecurity threat intelligence.
+**Purpose:** Daily ingestion and distribution of curated cybersecurity threat intelligence with AI-powered summarization.
 
-This workflow runs daily to ingest and distribute curated threat intelligence from multiple cybersecurity RSS feeds. It supports situational awareness and IOC enrichment across the lab environment.
+This workflow runs daily at 8 AM to ingest and distribute curated threat intelligence from multiple cybersecurity RSS feeds. It supports situational awareness and IOC enrichment across the lab environment.
 
 **Workflow Summary:**
 
-- Scheduled Execution: Triggered daily via n8n's Cron node
-- RSS Feed Polling: Pulls entries from a curated list of cybersecurity sources
-- Feed Limiting: Filters each feed to the 5 most recent entries to reduce noise and maintain relevance
-- Discord Notification: Formats and sends the aggregated feed summary to a dedicated Discord channel on the private lab server for daily review
-- The NIST RSS feed is also fed through ChatGPT for a summary notification in Discord
+- **Scheduled Execution:** Triggered daily via n8n's Cron node (6 AM)
+- **RSS Feed Polling:** Pulls entries from curated list of cybersecurity sources
+- **Feed Limiting:** Filters each feed to articles added in the last 24 hours to reduce noise
+- **ChatGPT Integration:** NIST feed summarized via OpenAI API
+- **Discord Notification:** Formatted aggregated feed summary to #threat-intel channel
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/n8n-wf2-feeds.png" alt="Lab Infrastructure Audit Workflow">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Threat Intelligence Aggregation Workflow
+  </figcaption>
+</figure>
+
+**RSS Feeds:**
+
+- Darknet Diaries (https://podcast.darknetdiaries.com/)
+- NIST (https://www.nist.gov/blogs/cybersecurity-insights/rss.xml)
+- Krebs on Security (https://krebsonsecurity.com/feed/)
+- Threat Post (https://threatpost.com/feed/)
+- BleepingComputer (https://www.bleepingcomputer.com/feed/)
+- CIS (https://www.cisecurity.org/feed/advisories)
+- NAO SEC (https://nao-sec.org/feed)
 
 ### Workflow Nodes
 
 | Node Type | Configuration | Purpose |
 |-----------|---------------|---------|
-| Schedule Trigger | Cron: 0 8 * * * (Daily 8 AM) | Daily execution |
-| RSS Feed Reader | URLs: CISA Alerts; NIST NVD; Krebs on Security; Threat Post; BleepingComputer | Ingest threat intel |
-| Filter Node | Limit each feed to 5 most recent | Reduce noise |
+| Schedule Trigger | Cron: 0 8 * * * (Daily 6 AM) | Daily execution |
+| RSS Feed Reader | URLs: CIS, NIST, Krebs, ThreatPost, BleepingComputer, etc | Ingest threat intel |
+| Filter Node | Limit each feed to the last 24 hours | Reduce noise |
 | Merge Node | Combine all feeds | Aggregate data |
 | OpenAI Node | Summarize NIST feed with ChatGPT | AI-powered summary |
 | Format Node | Create Discord embed message | Visual formatting |
-| Discord Webhook | Post to #threat-intel channel | Distribute to team |
-
-<figure class=image-large>
-      <img src="/Career_Projects/assets/screenshots/n8n-feed.png" alt="n8n TI Workflow">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        n8n Threat Intelligence Workflow.
-      </figcaption>
-    </figure>
-
-**ChatGPT Integration:**
-
-**Prompt:** "Summarize the following NIST vulnerability in 2-3 sentences suitable for a security team. Focus on severity, affected systems, and recommended actions: {{ $json.content }}"
-
-**Response Example:** "CVE-2024-12345: Critical remote code execution vulnerability in Apache Log4j 2.x. Affects versions 2.0-2.17.0. Immediate patching recommended; workaround available via environment variable. CVSS 9.8/10."
+| Discord Webhook | POST to #threat-intel channel | Distribute to team |
 
 **Workflow Benefits:**
 
-- Centralized threat intelligence (15 sources → 1 channel)
+- Centralized threat intelligence (7 sources → 1 channel)
 - AI-powered summarization reduces information overload
 - Daily cadence ensures timely awareness of emerging threats
 - Supports incident response and vulnerability management
 
-**Workflow Error Handling:**
+<figure>
+  <img src="/Career_Projects/assets/screenshots/n8n-feeds-alerts.png" alt="Lab Infrastructure Audit Workflow">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Discord Aggregated Feed
+  </figcaption>
+</figure>
 
-- RSS Feed Timeout: Skip feed, log error, continue
-- Discord Webhook Failure: Send email fallback alert
-- All Errors: Logged to n8n execution history
+---
 
-<figure class=image-large>
-      <img src="/Career_Projects/assets/screenshots/n8n-nist.png" alt="OSINT Feed">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Discord Threat Intel Feed and ChatGPT Summary.
-      </figcaption>
-    </figure>
+### 5.4 Workflow 3: Weekly Package Updates with Alerting
 
+**Purpose:** Automated weekly package manager updates across all Linux hosts with Discord and email alerting.
+
+This workflow runs weekly on Friday at 3 AM, executes the update_linux_hosts.yml Ansible playbook, parses the output to categorize update results, and sends formatted notifications via Discord and email.
+
+**Workflow Summary:**
+
+- **Scheduled Execution:** Weekly trigger (Friday 3 AM)
+- **Ansible Playbook:** Executes update_linux_hosts.yml for apt/dnf updates
+- **Data Parsing:** Converts raw Ansible stdout to structured JSON
+- **Update Categorization:** Hosts grouped by status (no updates, updated, reboot required, errors)
+- **Markdown Generation:** Creates formatted summary for Discord
+- **HTML Generation:** Creates formatted report for email
+- **Discord Alert:** Sends markdown summary with status counts
+- **Email Alert:** Sends HTML email with detailed update report
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/n8n-wf3-updates.png" alt="Lab Infrastructure Audit Workflow">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Linux Package Manager Update Workflow
+  </figcaption>
+</figure>
+
+### Workflow Nodes
+
+| Node Type | Configuration | Purpose |
+|-----------|---------------|---------|
+| Schedule Trigger | Cron: 0 3 * * 5 (Friday 3 AM) | Weekly execution |
+| SSH Node | ansible-playbook update_linux_hosts.yml | Run package updates |
+| Code Node 1 | Parse stdout: extract reachable/unreachable hosts, summaries, recap | Convert to structured JSON |
+| Code Node 2 | Generate markdown and HTML summaries with categorization | Format alert content |
+| Discord Node | POST markdown summary | Send Discord notification |
+| Email Node | SMTP send HTML report | Send email notification |
+
+**Data Flow and Parsing Logic**
+
+The workflow parses Ansible's stdout output to extract comprehensive update information:
+
+- Reachable Hosts: Extracted from 'ok: [hostname]' lines
+- Unreachable Hosts: Extracted from 'fatal: [hostname]' lines
+- Update Summaries: Parsed from 'msg' fields containing platform, packages updated, reboot status
+- Play Recap: Structured data showing ok/changed/failed/skipped counts per host
+
+**Host Categorization**
+
+Hosts are automatically categorized based on update results:
+
+- No Updates Required: Hosts with packages_updated = False
+- Updates Applied: Hosts with packages_updated = True and reboot_required = False
+- Reboot Required: Hosts with reboot_required = True
+- Errors Detected: Hosts with empty/null platform, packages_updated, reboot_required
+- Unreachable: Hosts that failed connectivity checks
+
+**Code Snippet - Stdout to JSON Parsing**
+```js
+// Parse Ansible stdout into structured data
+const stdout = $input.first().json.stdout;
+const lines = stdout.split('\n');
+
+// Extract reachable and unreachable hosts
+let reachable = [];
+let unreachable = [];
+
+for (const line of lines) {
+  const okMatch = line.match(/^ok:\s+\[(.*?)\]/);
+  if (okMatch) reachable.push(okMatch[1]);
+
+  const fatalMatch = line.match(/^fatal:\s+\[(.*?)\]/);
+  if (fatalMatch) unreachable.push(fatalMatch[1]);
+}
+
+// Parse update summaries from msg fields
+let summaries = [];
+let currentHost = null;
+
+for (const line of lines) {
+  const hostMatch = line.match(/^ok:\s+\[(.*?)\]\s+=>/);
+  if (hostMatch) currentHost = hostMatch[1];
+
+  if (line.includes('"msg":')) {
+    const msg = line.replace(/.*"msg":\s+"|",?$/g, "");
+    const platform = (msg.match(/Platform:\s+(.*)/) || [])[1];
+    const updated = (msg.match(/Packages updated:\s+(.*)/) || [])[1];
+    const reboot = (msg.match(/Reboot required:\s+(.*)/) || [])[1];
+
+    summaries.push({
+      host: currentHost,
+      platform,
+      packages_updated: updated,
+      reboot_required: reboot
+    });
+  }
+}
+
+return [{ json: { total_hosts, reachable_hosts, unreachable_hosts, update_summaries, recap } }];
+
+```
+
+**Code Snippet - Categorization and Formatting**
+```js
+// Categorize hosts by update status
+const noUpdates = [];
+const updatesApplied = [];
+const rebootRequired = [];
+const errorsDetected = [];
+
+for (const s of normalized) {
+  if (s.error) {
+    errorsDetected.push(s.host);
+  } else if (s.reboot) {
+    rebootRequired.push(s.host);
+  } else if (s.updated) {
+    updatesApplied.push(s.host);
+  } else {
+    noUpdates.push(s.host);
+  }
+}
+
+// Generate markdown for Discord
+const md = `
+## Linux Update Summary
+
+**Total Hosts:** ${total}
+**Reachable:** ${reachable.length}
+**Unreachable:** ${unreachable.length}
+
+🟢 No Updates Required (${noUpdates.length})
+${noUpdates.map(h => \`- ${h}\`).join("\n")}
+
+🔵 Updates Applied (${updatesApplied.length})
+${updatesApplied.map(h => \`- ${h}\`).join("\n")}
+
+🟠 Reboot Required (${rebootRequired.length})
+${rebootRequired.map(h => \`- ${h}\`).join("\n")}
+
+🔴 Errors Detected (${errorsDetected.length})
+${errorsDetected.map(h => \`- ${h}\`).join("\n")}
+`;
+
+return [{ json: { markdown: md, html: html } }];
+
+```
+
+**Workflow Benefits:**
+
+- Automated weekly package updates reduce manual maintenance
+- Categorized results prioritize attention (errors and reboots first)
+- Dual alerting ensures visibility across communication channels
+- Structured parsing enables trend analysis over time
+- Unreachable host detection prevents silent failures
+
+**Use Cases:**
+
+- Weekly security patch deployment
+- Compliance maintenance (systems up-to-date)
+- Post-vulnerability scanning remediation
+- Reboot planning based on kernel updates
+- Infrastructure health monitoring
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/n8n-update-alerts.png" alt="Lab Infrastructure Audit Workflow">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Linux Package Manager Update Workflow
+  </figcaption>
+</figure>
+
+---
+
+### 5.5 Workflow 4: Monthly Automated Ansible Token Rotation
+
+**[PLACEHOLDER - Implementation Pending]**
+
+**Purpose:** Automated monthly credential rotation for Ansible vault with random token generation, vault file update, user management playbook execution, and dual alerting.
+
+**Planned Workflow Summary:**
+
+- **Scheduled Execution:** Monthly trigger (1st of month at 4 AM)
+- **Token Generation:** Create cryptographically random 32-char token (base64)
+- **Vault Update:** SSH to Ansible controller and update vault_ansible_password in vault.yml
+- **Playbook Execution:** Run user_mgmt.yml --tags ansible_user to propagate new password
+- **Connectivity Test:** Verify Ansible can still connect to all hosts via ping
+- **Discord Alert:** Send success/failure notification with rotation summary
+- **Email Alert:** Send HTML email confirming rotation and test results
+
+### Planned Workflow Nodes
+
+| Node Type | Configuration | Purpose |
+|-----------|---------------|---------|
+| Schedule Trigger | Cron: 0 4 1 * * (1st of month 4 AM) | Monthly execution |
+| Code Node 1 | Generate token: crypto.randomBytes(24).toString('base64') | Create new password |
+| SSH Node 1 | Backup current vault.yml | Create vault backup |
+| SSH Node 2 | ansible-vault edit vault.yml (update vault_ansible_password) | Update vault variable |
+| SSH Node 3 | ansible-playbook user_mgmt.yml --tags ansible_user | Propagate new password |
+| SSH Node 4 | ansible linux -m ping | Test connectivity |
+| Code Node 2 | Parse ping results for success count | Verify all hosts accessible |
+| IF Node | Check if ping success == total hosts | Route to success/failure |
+| Code Node 3 | Generate Discord success message | Format success alert |
+| Discord Webhook | POST rotation success to Discord | Send Discord notification |
+| Code Node 4 | Generate HTML email template | Format email report |
+| Email Node | SMTP send with rotation details | Send email notification |
+| Error Handler | Rollback vault.yml and alert on failure | Handle rotation errors |
+
+**Security Considerations for Token Rotation:**
+
+- Token generation uses crypto.randomBytes (cryptographically secure)
+- Vault backup created before each rotation for rollback capability
+- Connectivity test verifies all hosts accessible before confirming rotation
+- Error handler automatically reverts to backup vault on failure
+- Credentials never logged or displayed in workflow execution history
+- n8n credential vault stores vault password with AES-256 encryption
+
+**Expected Alert Content:**
+
+- Rotation timestamp
+- Token generation success
+- Vault update status
+- User management playbook execution result
+- Connectivity test results (hosts reachable/unreachable)
+- Rollback status (if applicable)
+
+---
+
+### 5.6 Best Practices and Lessons Learned
+
+**Error Handling and Resilience:**
+
+- All SSH nodes include timeout settings (30-60 seconds)
+- Workflow execution logs retained for 30 days in n8n database
+
+**Credential Management:**
+
+- All credentials stored in n8n vault (never hardcoded)
+- SSH credentials use key-based auth where possible
+- Webhook URLs stored as environment variables
+- SMTP credentials encrypted with AES-256 at rest
+
+**Notification Design:**
+
+- Discord: Concise markdown with key metrics and report links
+- Email: Detailed HTML templates with embedded CSS for compatibility
+- Critical alerts include @ mentions for immediate attention
+- All notifications include timestamp and workflow execution ID
+
+**Integration Patterns:**
+
+- Ansible workflows use SSH node for remote execution
+- JSON output from playbooks parsed in Code nodes
+- HTML and Markdown generation via JavaScript templates
+- Apache webserver deployment via SSH file write operations
+- Multi-platform support handled through conditional Ansible blocks
 ---
 
 ## 6. Scripting for Advanced Automation
