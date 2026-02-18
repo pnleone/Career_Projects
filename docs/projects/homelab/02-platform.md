@@ -402,9 +402,9 @@ The lab operates a three-node Cisco virtual network infrastructure providing ent
 The topology implements a hub-and-spoke design where R1 and R2 connect via a dedicated point-to-point link (10.30.0.0/30) and exchange routing information through OSPF Area 0. R1 serves as the primary gateway for production lab networks (192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24), while R2 handles isolated test networks (192.168.2.0/24, 192.168.3.0/24). Two Ubuntu 25.10 LXC containers (cisco-host1 and cisco-host2) validate routing functionality by using their respective local routers as default gateways.
 
 <figure>
-      <img class="image-large" src="/Career_Projects/assets/screenshots/cisco-r1-r2.png" alt="Cisco Screenshot">
+      <img class="image-large" src="/Career_Projects/assets/diagrams/cisco.png" alt="Cisco">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        Cisco r1 and r2 Configuration.
+        Cisco Network Topology.
       </figcaption>
     </figure>
 
