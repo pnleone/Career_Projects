@@ -1585,74 +1585,260 @@ This Bash script performs a distribution-aware system upgrade, logging all outpu
 #### PowerShell Script Example: Windows Update Automation
 
 ```powershell
+
+[CmdletBinding()]
+param(
+    [switch]$SkipReboot,
+    [string]$WebhookUrl = "https://discord.com/api/webhooks/1435986566647644201/S1Lb6UFEBs_cLzGK9dl70WZpifZpbTp2_2inFN20Q8jg9D4rTkMOAmtjXNd7US5Q6RkT"
+)
+
 $ErrorActionPreference = "Continue"
+$LogPath               = "C:\Logs\Windows-Updates"
+$LogFile               = Join-Path $LogPath "update_$(Get-Date -Format 'yyyy-MM-dd').log"
+$MaxEventLogMsgLength  = 30000
+$FailureCount          = 0
 
-# Start logging
-$logPath = "C:\Logs\update_log.txt"
-Start-Transcript -Path $logPath -Append
-
-# Log header with host and user info
-$hostname = $env:COMPUTERNAME
-$username = $env:USERNAME
-Write-Host "`n==================== UPDATE SCRIPT START ===================="
-Write-Host "Host: $hostname"
-Write-Host "User: $username"
-Write-Host "Start Time: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-Write-Host "=============================================================`n"
-
-# Timestamp helper
-function Write-Timestamped {
-    param ([string]$message)
-    Write-Host "`n[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $message"
+if (-not (Test-Path $LogPath)) {
+    New-Item -ItemType Directory -Path $LogPath -Force | Out-Null
+    Write-Host "[BOOTSTRAP] Created log directory: $LogPath"
+} else {
+    Write-Host "[BOOTSTRAP] Log directory exists: $LogPath"
 }
 
-# Update Windows Store apps
+Start-Transcript -Path $LogFile -Append
+Write-Host "[BOOTSTRAP] Transcript started: $LogFile"
+
+Write-Host "[BOOTSTRAP] Checking NuGet provider..."
+$nuget = Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue
+if (-not $nuget -or $nuget.Version -lt [Version]"2.8.5.201") {
+    Write-Host "[BOOTSTRAP] Installing NuGet provider..."
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope AllUsers | Out-Null
+    Write-Host "[BOOTSTRAP] NuGet provider installed."
+} else {
+    Write-Host "[BOOTSTRAP] NuGet provider OK (version $($nuget.Version))."
+}
+
+function Write-Log {
+    param(
+        [string]$Message,
+        [string]$Level = "INFO"
+    )
+    $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    Write-Output "[$Timestamp] [$Level] $Message"
+
+    $EventMessage = if ($Message.Length -gt $MaxEventLogMsgLength) {
+        $Message.Substring(0, $MaxEventLogMsgLength) + "`n[TRUNCATED - see log file]"
+    } else {
+        $Message
+    }
+    $EventId = switch ($Level) { "ERROR" { 3 } "WARNING" { 2 } default { 1 } }
+    Write-EventLog -LogName Application -Source "WindowsUpdate" `
+        -EntryType Information -EventId $EventId -Message $EventMessage `
+        -ErrorAction SilentlyContinue
+}
+
 function Update-WindowsStoreApps {
-    Write-Timestamped "Starting Windows Store App updates..."
-    Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
-    Write-Timestamped "Completed Windows Store App updates."
-}
-Update-WindowsStoreApps
-
-# Update Chocolatey packages
-function Update-ChocoApps {
-    Write-Timestamped "Checking for Chocolatey..."
-    if (Get-Command choco -ErrorAction SilentlyContinue) {
-        Write-Timestamped "Updating Chocolatey packages..."
-        choco upgrade all -y
-        Write-Timestamped "Completed Chocolatey updates."
-    } else {
-        Write-Timestamped "Chocolatey is not installed. Skipping."
+    Write-Log "--- BEGIN: Windows Store App Updates ---"
+    $Session = $null
+    try {
+        Write-Log "Opening CIM session..."
+        $Session  = New-CimSession
+        Write-Log "Querying MDM AppManagement class..."
+        $Instance = Get-CimInstance -Namespace "root\cimv2\mdm\dmmap" `
+            -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01"
+        Write-Log "Invoking Store update scan..."
+        $Result = Invoke-CimMethod -CimInstance $Instance -MethodName UpdateScanMethod
+        Write-Log "Scan result: $($Result | Out-String)"
+        Write-Log "--- END: Windows Store App Updates [SUCCESS] ---"
+        return $true
+    }
+    catch {
+        Write-Log "Store update failed: $($_.Exception.Message)" -Level "ERROR"
+        Write-Log "--- END: Windows Store App Updates [FAILED] ---" -Level "ERROR"
+        return $false
+    }
+    finally {
+        if ($Session) {
+            Remove-CimSession $Session
+            Write-Log "CIM session closed."
+        }
     }
 }
-Update-ChocoApps
 
-# Update Winget packages
-function Update-WingetApps {
-    Write-Timestamped "Checking for Winget..."
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-        Write-Timestamped "Updating Winget packages..."
-        winget upgrade --all
-        Write-Timestamped "Completed Winget updates."
-    } else {
-        Write-Timestamped "Winget is not installed. Skipping."
+function Update-ChocolateyPackages {
+    Write-Log "--- BEGIN: Chocolatey Package Updates ---"
+    if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+        Write-Log "Chocolatey not found - skipping." -Level "WARNING"
+        Write-Log "--- END: Chocolatey Package Updates [SKIPPED] ---" -Level "WARNING"
+        return $true
+    }
+    Write-Log "Chocolatey version: $(choco --version 2>&1)"
+    Write-Log "Running: choco upgrade all -y"
+    try {
+        $OutputStr = (choco upgrade all -y 2>&1) -join "`n"
+        Write-Log "Chocolatey output:`n$OutputStr"
+        if ($LASTEXITCODE -eq 0) {
+            Write-Log "--- END: Chocolatey Package Updates [SUCCESS] ---"
+            return $true
+        } else {
+            Write-Log "Chocolatey exited with code $LASTEXITCODE" -Level "ERROR"
+            Write-Log "--- END: Chocolatey Package Updates [FAILED] ---" -Level "ERROR"
+            return $false
+        }
+    }
+    catch {
+        Write-Log "Chocolatey exception: $($_.Exception.Message)" -Level "ERROR"
+        Write-Log "--- END: Chocolatey Package Updates [FAILED] ---" -Level "ERROR"
+        return $false
     }
 }
-Update-WingetApps
 
-# Windows OS Updates
-Write-Timestamped "Starting Windows OS updates..."
-Import-Module PSWindowsUpdate
-Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
-Write-Timestamped "Completed Windows OS updates."
+function Update-WingetPackages {
+    Write-Log "--- BEGIN: Winget Package Updates ---"
+    if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+        Write-Log "Winget not found - skipping." -Level "WARNING"
+        Write-Log "--- END: Winget Package Updates [SKIPPED] ---" -Level "WARNING"
+        return $true
+    }
+    Write-Log "Winget version: $(winget --version 2>&1)"
+    Write-Log "Running: winget upgrade --all"
+    try {
+        $OutputStr = (winget upgrade --all --accept-source-agreements --accept-package-agreements 2>&1) -join "`n"
+        Write-Log "Winget output:`n$OutputStr"
+        if ($LASTEXITCODE -ne 0) {
+            Write-Log "Winget exited with code $LASTEXITCODE - some packages may have failed." -Level "WARNING"
+        }
+        Write-Log "--- END: Winget Package Updates [SUCCESS] ---"
+        return $true
+    }
+    catch {
+        Write-Log "Winget exception: $($_.Exception.Message)" -Level "ERROR"
+        Write-Log "--- END: Winget Package Updates [FAILED] ---" -Level "ERROR"
+        return $false
+    }
+}
 
-# Log footer
-Write-Host "`n==================== UPDATE SCRIPT END ====================="
-Write-Host "End Time: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-Write-Host "============================================================="
+function Update-WindowsOS {
+    Write-Log "--- BEGIN: Windows OS Updates ---"
+    if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
+        Write-Log "PSWindowsUpdate not found - installing..."
+        Install-Module -Name PSWindowsUpdate -Force -Scope AllUsers -Confirm:$false
+        Write-Log "PSWindowsUpdate installed."
+    } else {
+        $modVer = (Get-Module -ListAvailable -Name PSWindowsUpdate | Select-Object -First 1).Version
+        Write-Log "PSWindowsUpdate already installed (version $modVer)."
+    }
+    try {
+        Write-Log "Importing PSWindowsUpdate..."
+        Import-Module PSWindowsUpdate -ErrorAction Stop
+        Write-Log "Checking for available updates..."
+        $Updates = Get-WindowsUpdate -MicrosoftUpdate -AcceptAll
+        Write-Log "Update check complete."
+        if ($Updates -and $Updates.Count -gt 0) {
+            Write-Log "Found $($Updates.Count) update(s):"
+            foreach ($u in $Updates) {
+                Write-Log "  KB$($u.KBArticleIDs) | $($u.Title) | $([math]::Round($u.Size/1MB,2)) MB"
+            }
+            Write-Log "Installing (AutoReboot: $(-not $SkipReboot))..."
+            Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot:(-not $SkipReboot)
+            Write-Log "--- END: Windows OS Updates [SUCCESS] ---"
+        } else {
+            Write-Log "No updates available - system is current."
+            Write-Log "--- END: Windows OS Updates [SUCCESS - NONE NEEDED] ---"
+        }
+        return $true
+    }
+    catch {
+        Write-Log "Windows update exception: $($_.Exception.Message)" -Level "ERROR"
+        Write-Log "Stack trace: $($_.ScriptStackTrace)" -Level "ERROR"
+        Write-Log "--- END: Windows OS Updates [FAILED] ---" -Level "ERROR"
+        return $false
+    }
+}
 
-# End logging
+function Send-DiscordNotification {
+    param([bool]$Success, [int]$FailureCount)
+    if (-not $WebhookUrl) {
+        Write-Log "No webhook configured - skipping Discord notification." -Level "WARNING"
+        return
+    }
+    Write-Log "Building Discord payload..."
+    $Color  = if ($Success) { 3066993 } else { 15158332 }
+    $Status = if ($Success) { "SUCCESS" } else { "FAILED" }
+    $Payload = [PSCustomObject]@{
+        embeds = @(
+            [PSCustomObject]@{
+                title       = "Windows Update Report: $env:COMPUTERNAME"
+                description = "Status: $Status`nFailures: $FailureCount`nUser: $env:USERNAME"
+                color       = $Color
+                timestamp   = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+                fields      = @(
+                    [PSCustomObject]@{ name = "Log File"; value = $LogFile; inline = $false },
+                    [PSCustomObject]@{ name = "Reboot Skipped"; value = "$SkipReboot"; inline = $true }
+                )
+            }
+        )
+    } | ConvertTo-Json -Depth 10 -Compress
+    try {
+        Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Payload `
+            -ContentType "application/json; charset=utf-8" | Out-Null
+        Write-Log "Discord notification sent."
+    }
+    catch {
+        Write-Log "Discord notification failed: $($_.Exception.Message)" -Level "ERROR"
+        Write-Log "Response: $($_.ErrorDetails.Message)" -Level "ERROR"
+    }
+}
+
+Write-Log "=========================================="
+Write-Log "===== Windows Update Script Started ====="
+Write-Log "=========================================="
+Write-Log "Computer  : $env:COMPUTERNAME"
+Write-Log "User      : $env:USERNAME"
+Write-Log "OS        : $((Get-CimInstance Win32_OperatingSystem).Caption)"
+Write-Log "PS Version: $($PSVersionTable.PSVersion)"
+Write-Log "Log File  : $LogFile"
+Write-Log "SkipReboot: $SkipReboot"
+Write-Log "=========================================="
+
+Write-Log "Step 1 of 4: Windows Store Apps"
+if (-not (Update-WindowsStoreApps)) {
+    $FailureCount++
+    Write-Log "Step 1 FAILED. Failure count: $FailureCount" -Level "ERROR"
+}
+
+Write-Log "Step 2 of 4: Chocolatey Packages"
+if (-not (Update-ChocolateyPackages)) {
+    $FailureCount++
+    Write-Log "Step 2 FAILED. Failure count: $FailureCount" -Level "ERROR"
+}
+
+Write-Log "Step 3 of 4: Winget Packages"
+if (-not (Update-WingetPackages)) {
+    $FailureCount++
+    Write-Log "Step 3 FAILED. Failure count: $FailureCount" -Level "ERROR"
+}
+
+Write-Log "Step 4 of 4: Windows OS Updates"
+if (-not (Update-WindowsOS)) {
+    $FailureCount++
+    Write-Log "Step 4 FAILED. Failure count: $FailureCount" -Level "ERROR"
+}
+
+$Success = ($FailureCount -eq 0)
+Write-Log "=========================================="
+Write-Log "===== Update Script Completed ====="
+Write-Log "Total Failures : $FailureCount"
+Write-Log "Overall Status : $(if ($Success) { 'SUCCESS' } else { 'PARTIAL/FAILED' })"
+Write-Log "=========================================="
+
+Send-DiscordNotification -Success $Success -FailureCount $FailureCount
+
 Stop-Transcript
+
+if ($FailureCount -eq 0)     { exit 0 }
+elseif ($FailureCount -le 2) { exit 1 }
+else                         { exit 2 }
 ```
 
 This script performs a comprehensive update sweep across a Windows system, covering:
@@ -1662,27 +1848,104 @@ This script performs a comprehensive update sweep across a Windows system, cover
 - Winget packages
 - Windows OS updates
 
-It logs all output to a transcript file and timestamps each operation for auditability and runtime tracking.
+All output is captured to a transcript file with timestamps for auditability and runtime tracking. The script handles missing tools gracefully (skip vs fail), fixes the EventLog 32,766-char limit, silently pre-installs NuGet, and sends a Discord webhook summary on completion.
 
 **Script:** C:\Scripts\Update-System.ps1
 
 **Purpose:** Comprehensive Windows update across multiple package managers
 
-| Line(s) | Purpose | Explanation |
-|---------|---------|-------------|
-| $ErrorActionPreference = "Continue" | Error handling | Ensures the script continues execution even if a command fails |
-| $logPath = "C:\Logs\update_log.txt" | Log file path | Defines where the transcript will be saved |
-| Start-Transcript -Path $logPath -Append | Start logging | Begins capturing all console output to the log file |
-| function Write-Timestamped { ... } | Timestamp helper | Prints messages with a timestamp prefix for clarity and tracking |
-| function Update-WindowsStoreApps { ... } | Windows Store updates | Uses CIM to trigger an update scan for Store apps via MDM interface |
-| Update-WindowsStoreApps | Execute function | Runs the Store app update function |
-| function Update-ChocoApps { ... } | Chocolatey updates | Checks if choco is installed, then upgrades all packages with -y. Logs start, completion, or skip |
-| Update-ChocoApps | Execute function | Runs the Chocolatey update function |
-| function Update-WingetApps { ... } | Winget updates | Checks if winget is installed, then upgrades all packages. Logs start, completion, or skip |
-| Update-WingetApps | Execute function | Runs the Winget update function |
-| Import-Module PSWindowsUpdate | OS update module | Loads the PSWindowsUpdate module for managing Windows updates |
-| Install-WindowsUpdate -MicrosoftUpdate -AcceptAll | OS updates | Installs all available Microsoft updates silently |
-| Stop-Transcript | End logging | Stops the transcript and finalizes the log file |
+### PowerShell Update Script — Component Breakdown
+
+| Line / Block | Purpose | Explanation |
+|--------------|---------|-------------|
+| `$ErrorActionPreference = "Continue"` | Error handling | Script continues if a command fails. Individual functions return `false` to increment `$FailureCount`. |
+| `$LogFile = Join-Path ...` | Log file path | Defines daily‑named log file under `C:\Logs\Windows-Updates\`. |
+| `Start-Transcript / Stop-Transcript` | Full session capture | Records all console output to the log file including command output and errors. |
+| `function Write-Log { ... }` | Timestamped logging | Prefixes every message with timestamp and level tag. Truncates to 30,000 chars before writing to EventLog (hard limit: 32,766). |
+| `Get-PackageProvider (NuGet)` | NuGet bootstrap | Pre‑installs NuGet silently before PSWindowsUpdate install. Prevents interactive Y/N prompt that blocks automated runs. |
+| `function Update-WindowsStoreApps { }` | Store updates | Uses CIM to call `UpdateScanMethod` on the `MDM_EnterpriseModernAppManagement` class. Triggers background Store refresh. |
+| `function Update-ChocolateyPackages { }` | Chocolatey updates | Checks for `choco` in PATH. If found, runs `choco upgrade all -y` and logs full output. Returns `true` on exit 0. |
+| `function Update-WingetPackages { }` | Winget updates | Checks for `winget` in PATH. Runs `winget upgrade --all` with agreements accepted. Non‑zero exit logs WARNING but does not fail. |
+| `function Update-WindowsOS { }` | OS patch management | Installs PSWindowsUpdate if missing. Lists each KB/title/size before installing. Respects `-SkipReboot` flag. |
+| `function Send-DiscordNotification { }` | Webhook alert | Builds Discord embed payload. Uses `ConvertTo-Json -Depth 10 -Compress` to fix nested hashtable serialization (Discord error 50109). |
+| `if ($FailureCount -eq 0) { exit 0 }` | Exit codes | `0 = all passed`, `1 = 1–2 failures (partial)`, `2 = 3+ failures (mostly failed)`. Used by schedulers to detect failure. |
+
+### Code and Output Examples
+
+**Write-Log - Timestamped Logging with EventLog Truncation**
+
+```powershell
+function Write-Log {
+    param([string]$Message, [string]$Level = "INFO")
+
+    $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    Write-Output "[$Timestamp] [$Level] $Message"
+
+    # Truncate to 30,000 chars - EventLog hard limit is 32,766
+    $EventMsg = if ($Message.Length -gt $MaxEventLogMsgLength) {
+        $Message.Substring(0, $MaxEventLogMsgLength) + "`n[TRUNCATED - see log file]"
+    } else { $Message }
+
+    $EventId = switch ($Level) { "ERROR" { 3 } "WARNING" { 2 } default { 1 } }
+    Write-EventLog -LogName Application -Source "WindowsUpdate" \
+        -EntryType Information -EventId $EventId -Message $EventMsg \
+        -ErrorAction SilentlyContinue
+}
+```
+Sample Output:
+```text
+[2026-02-20 07:33:08] [INFO]    ==========================================
+[2026-02-20 07:33:08] [INFO]    ===== Windows Update Script Started =====
+[2026-02-20 07:33:08] [INFO]    Computer  : OFFICEPC2023
+[2026-02-20 07:33:08] [INFO]    User      : pnleo
+[2026-02-20 07:33:08] [INFO]    OS        : Windows 11 Pro
+[2026-02-20 07:33:08] [INFO]    PS Version: 5.1.26100.7705
+```
+**Update-WindowsOS - PSWindowsUpdate Module**
+
+```powershell
+function Update-WindowsOS {
+    Write-Log "--- BEGIN: Windows OS Updates ---"
+    if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
+        Write-Log "PSWindowsUpdate not found - installing..."
+        Install-Module -Name PSWindowsUpdate -Force -Scope AllUsers -Confirm:$false
+    }
+    try {
+        Import-Module PSWindowsUpdate -ErrorAction Stop
+        Write-Log "Checking for available updates..."
+        $Updates = Get-WindowsUpdate -MicrosoftUpdate -AcceptAll
+        if ($Updates -and $Updates.Count -gt 0) {
+            Write-Log "Found $($Updates.Count) update(s):"
+            foreach ($u in $Updates) {
+                Write-Log "  KB$($u.KBArticleIDs) | $($u.Title) | $([math]::Round($u.Size/1MB,2)) MB"
+            }
+            Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot:(-not $SkipReboot)
+            Write-Log "--- END: Windows OS Updates [SUCCESS] ---"
+        } else {
+            Write-Log "No updates available - system is current."
+        }
+        return $true
+    }
+    catch {
+        Write-Log $_.Exception.Message -Level "ERROR"
+        return $false
+    }
+}
+```
+
+Sample Output:
+```text
+[2026-02-20 07:34:56] [INFO]    Step 4 of 4: Windows OS Updates
+[2026-02-20 07:34:56] [INFO]    --- BEGIN: Windows OS Updates ---
+[2026-02-20 07:34:56] [INFO]    PSWindowsUpdate already installed (version 2.2.1.4).
+[2026-02-20 07:34:56] [INFO]    Importing PSWindowsUpdate...
+[2026-02-20 07:34:58] [INFO]    Checking for available updates...
+[2026-02-20 07:36:10] [INFO]    Found 2 update(s):
+[2026-02-20 07:36:10] [INFO]      KB5034441 | 2026-02 Cumulative Update for Windows 11 | 312.45 MB
+[2026-02-20 07:36:10] [INFO]      KB890830  | Windows Malicious Software Removal Tool  | 4.12 MB
+[2026-02-20 07:36:10] [INFO]    Installing (AutoReboot: False)...
+[2026-02-20 08:11:32] [INFO]    --- END: Windows OS Updates [SUCCESS] ---
+```
 
 ---
 
