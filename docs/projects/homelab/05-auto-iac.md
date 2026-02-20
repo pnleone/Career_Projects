@@ -1589,7 +1589,7 @@ This Bash script performs a distribution-aware system upgrade, logging all outpu
 [CmdletBinding()]
 param(
     [switch]$SkipReboot,
-    [string]$WebhookUrl = "https://discord.com/api/webhooks/1435986566647644201/S1Lb6UFEBs_cLzGK9dl70WZpifZpbTp2_2inFN20Q8jg9D4rTkMOAmtjXNd7US5Q6RkT"
+    [string]$WebhookUrl = "windows_update_url"
 )
 
 $ErrorActionPreference = "Continue"
