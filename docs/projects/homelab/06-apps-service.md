@@ -67,13 +67,19 @@ This service architecture mirrors production enterprise environments, providing 
 <div class="two-col-right">
   <div class="text-col">
     <p>
-      A layered DNS setup balances local authority, recursive privacy, and high-performance ad-blocking. Pi-hole (`192.168.1.250`) acts as the primary resolver for network clients, forwarding standard queries to Unbound (`.252`) with `1.1.1.1` as fallback, and sending all `home.com` queries to BIND9 (`.251`) for authoritative local resolution. BIND9 serves as the master of the `home.com` zone with security hardening via `recursion yes`, `forward only`, and `deny-answer-addresses` to prevent DNS loops. Unbound communicates directly with root servers for maximum privacy from third-party DNS logging. The network path is: Client → Pi-hole → BIND9 (Authoritative Answer) → Traefik (Step-CA HTTPS) → Backend VM
+      A fully redundant, four-host deployment separates recursive resolution, authoritative authority, and ad-blocking into discrete, independently resilient layers. Ad-blocking is integrated directly into Unbound. Technitium DNS provides a web-managed authoritative server with native zone-transfer support.
+    </p>
+    <p>
+      End-to-end query path: Client → Unbound (recursive + filtered) → Technitium (home.com authoritative) → Traefik / Backend VM
+    </p>
+    <p>
+      External queries: Client → Unbound → Root servers (iterative resolution from root hints)
     </p>
   </div>
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/diagrams/dns-overview.png" alt="DNS Architecture Diagram">
+      <img src="/Career_Projects/assets/diagrams/dns-overview-new.png" alt="DNS Architecture Diagram">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Three-Tier DNS Architecture
       </figcaption>
@@ -83,263 +89,167 @@ This service architecture mirrors production enterprise environments, providing 
 
 **Security Impact**
 
-- Malware C2 communication blocked at the DNS layer before outbound connections can be established
-- DNSSEC validation prevents DNS spoofing and poisoning attacks
-- Privacy-preserving recursive resolution eliminates third-party visibility into DNS queries
-- Conditional forwarding isolates the internal namespace from external resolvers
-- DNS query logging enables threat hunting, anomaly detection, and forensic analysis
+- Malware C2 communication blocked at the DNS layer via integrated Unbound blocklists before outbound connections are established
+- DNSSEC validation (`harden-dnssec-stripped`, `val-permissive-mode: no`) prevents DNS spoofing and cache poisoning
+- Root-recursive resolution eliminates third-party visibility into DNS query metadata; no upstream resolver logs or processes query data
+- CNAME cloaking and DoH/DoT egress blocking close common tracker-evasion and policy-bypass techniques
+- Authoritative zone isolation (Technitium) prevents internal namespace leakage to external resolvers
+- DNS query logging across both Unbound nodes enables threat hunting, anomaly detection, and forensic correlation
 
-**Deployment Rationale:**
-
-DNS is a foundational service that impacts every network connection. Compromise or disruption of DNS services can paralyze entire networks. Enterprise environments deploy layered DNS architectures for resilience, security, and performance. This implementation demonstrates understanding of DNS security best practices including split-horizon DNS (internal vs. external), DNSSEC validation, DNS-based threat blocking, and high-availability design patterns.
+**Deployment Rationale:** DNS underpins every network connection in the lab. Compromising or disrupting DNS can neutralize monitoring, certificate issuance, service discovery, and authentication. This layered architecture separates concerns across four dedicated hosts, ensuring no single failure disables DNS services. Unbound handles both recursive resolution and ad-blocking in a single process, eliminating intermediary hops. Technitium provides GUI-managed authoritative DNS with AXFR/IXFR zone transfers, mirroring enterprise appliance capabilities.
 
 **Architecture Principles Alignment:**
 
-- **Defense in Depth:** Three-tier architecture ensures single component compromise doesn't expose entire DNS infrastructure; ad-blocking, DNSSEC validation, and authoritative services provide overlapping security controls
-- **Secure by Design:** DNSSEC validation enabled by default; DNS rebinding protection prevents internal IP exposure; rate limiting blocks DNS amplification attacks
-- **Zero Trust:** Every DNS query validated and logged; no implicit trust of external resolvers; conditional forwarding segregates internal namespace
+- **Defense in Depth:** Four-host, three-tier design ensures single-component failure or compromise does not disable DNS services; DNSSEC validation, root-recursive resolution, and ad-blocking provide overlapping controls at different layers
+- **Secure by Design:** DNSSEC validation enabled by default; blocklists deployed atomically with syntax validation before reload; systemd watchdog provides self-healing; no upstream resolver dependency
+- **Zero Trust:** Every DNS query is validated and logged; no implicit trust of external resolvers; internal zone forwarding is explicitly scoped; CNAME cloaking and DoH/DoT egress blocking prevent policy bypass
 
-**Three-Tier DNS Architecture:**
+### Architecture Overview
 
-| Tier | Component | IP Address | Primary Function | Secondary Function |
-|------|-----------|------------|------------------|-------------------|
-| Edge/Filtering | Pi-hole Primary | 192.168.1.250 | Primary Resolver for all network clients; Forwards standard queries to Unbound (`.252`); Upstreams to `1.1.1.1` as fallback | Conditional Forwarding: Sends all `home.com` queries to BIND9 (`.251`) for authoritative resolution |
-| Edge/Filtering | Pi-hole Backup | 192.168.1.126 | High-availability failover | Synchronized blocklists and configuration |
-| Recursive Resolution | Unbound | 192.168.1.252 | Recursive Resolver: Communicates directly with root servers for external domains, providing maximum privacy from third-party DNS logging | Access Control: Configured to trust and respond to queries from specific local subnets. Privacy-preserving external resolution |
-| Authoritative | Bind9 | 192.168.1.251 | Authoritative Source for the `home.com` zone with exact IP mappings for entire homelab  | Security Hardening: Fixed with `recursion yes`, `forward only`, and `deny-answer-addresses` to prevent DNS loops and ensure local queries never leak to public internet |
+| Tier | Component | Host / IP | Primary Function | Secondary Function |
+|------|-----------|-----------|------------------|-------------------|
+| Recursive + Filtering | Unbound-01 | 192.168.1.153 | Primary recursive resolver; root-recursive; DNSSEC validation; ad-blocking | Forward `home.com` queries to Technitium |
+| Recursive + Filtering | Unbound-02 | 192.168.1.154 | Secondary recursive resolver; independent cache | HA failover; load-sharing |
+| Authoritative | Technitium DNS01 | 192.168.1.150 | Primary authoritative for `home.com`; zone master | AXFR source to DNS02 |
+| Authoritative | Technitium DNS02 | 192.168.1.151 | Secondary authoritative; zone replica | Read-only failover for internal resolution |
 
-**Design Rationale:**
+#### Component Detail: Unbound (Recursive Resolvers)
 
-**Why Separate Components?**
+Unbound-01 (`192.168.1.153`) is the primary recursive resolver. Unbound-02 (`192.168.1.154`) is a clone with node-specific TLS keys and SSH host keys, providing an independent cache for load-sharing and automatic failover. Clients configure both IPs as DNS servers; failover is handled by the client resolver with a 5-second timeout.
 
-- **Performance Isolation:** Blocking logic (Pi-hole) separated from recursive resolution (Unbound) prevents query processing bottlenecks
-- **Independent Scaling:** Each tier can be scaled independently based on load
-- **Fault Isolation:** Unbound failure doesn't impact internal domain resolution via Bind9
-- **Security Segmentation:** Authoritative server (Bind9) not directly exposed to internet queries
-- **Audit Trail Granularity:** Each tier logs independently, enabling precise troubleshooting
-
-**High Availability Configuration:**
-
-**Client Configuration:**
-
-- Primary DNS: 192.168.1.250 (Pi-hole Primary)
-- Secondary DNS: 192.168.1.126 (Pi-hole Backup)
-- Failover: Automatic via client DNS resolver (5-second timeout)
-
-**Synchronization Strategy:**
-
-- Nebula-Sync: Replicates Pi-hole settings and blocklists every 15 minutes
-- Custom DNS Records: Manually synchronized via Ansible playbook
-- Blocklist Updates: Both instances independently update from upstream sources
-
-### Bind9 `named.conf.options` configuration
-
+**Recursive resolution (external domains):** Root-recursive — Unbound queries root servers directly; no upstream forwarder.
 ```text
-acl "internal_networks" {
-    127.0.0.1;
-    192.168.1.0/24;
-    192.168.2.0/24;
-    192.168.3.0/24;
-    192.168.100.0/24;
-    192.168.200.0/24;
-};
-
-options {
-    directory "/var/cache/bind";
-
-    recursion yes;
-    allow-query { "internal_networks"; };
-    allow-recursion { "internal_networks"; };
-
-    listen-on { any; };
-
-    forwarders {
-        192.168.1.252 port 5335;
-    };
-    forward only;
-   
-    // Stop local reverse lookups (PTR) for private IPs from leaking to Unbound
-    empty-zones-enable yes;
-
-    // DNS Rebinding protection: Prevents external domains from resolving
-    // to internal IP addresses.
-    deny-answer-addresses { 192.168.0.0/16; };
-
-    dnssec-validation auto;
-    
-    version "none";
-};
+# No forward-zone for "." --- Unbound resolves from root
+root-hints: "/var/lib/unbound/root.hints"
 ```
 
-### Detailed DNS Query Flows
+**Internal zone forwarding:**
+```text
+forward-zone:
+  name: "home.com"
+  forward-addr: 192.168.1.150
+  forward-addr: 192.168.1.151
+```
 
-#### DNS Query Flow - External Domains
+**DNSSEC:**
+```text
+auto-trust-anchor-file: "/var/lib/unbound/root.key"
+harden-dnssec-stripped: yes
+val-clean-additional: yes
+val-permissive-mode: no
+```
 
-**Client Request Flow:**
+**Ad-blocking (generated config includes):**
+```text
+include: "/etc/unbound/blocklists/*.conf"
+```
 
-1. Client (192.168.1.31) → Pi-hole (192.168.1.250:53)
-2. Pi-hole checks:
-   - **Blocklist:** Is domain in ad/tracker blocklist?
-     - If YES: Return 0.0.0.0 or NXDOMAIN (blocked)
-     - If NO: Continue
-   - **Local Cache:** Is answer cached?
-     - If YES: Return cached answer (TTL-aware)
-     - If NO: Continue
-   - **Local DNS Records:** Manual override configured?
-     - If YES: Return configured IP
-     - If NO: Continue
-3. Pi-hole forwards to Unbound (192.168.1.252:5335)
-4. Unbound performs recursive resolution:
-   - Check Unbound cache (separate from Pi-hole cache)
-   - If not cached, query root servers (.) for TLD nameservers
-   - Query TLD nameservers for authoritative nameservers
-   - Query authoritative nameservers for final answer
-   - Validate DNSSEC signatures (if enabled for domain)
-   - Cache result (default TTL: as specified by authoritative server)
-5. Unbound returns answer to Pi-hole
-6. Pi-hole caches answer and returns to client
+**Systemd watchdog:**
+```text
+systemd-enable: yes
 
-**Example Query for www.example.com:**
+[Service]
+WatchdogSec=30s
+Restart=on-failure
+RestartSec=5s
+```
 
-Client → Pi-hole → Unbound → Root (.) → .com TLD → example.com NS → IP
+#### Component Detail: Technitium DNS (Authoritative Servers)
 
-**Query Time:** ~50ms (first query), ~1ms (cached)
+Technitium DNS01 (`192.168.1.150`) is the zone master for `home.com`. DNS02 (`192.168.1.151`) receives zone transfers and serves as a read-only secondary. Unbound forwards all `home.com` queries to both IPs with automatic failover.
 
-#### DNS Query Flow - Internal Domains
+**Zone Configuration**
 
-**Client Request Flow for *.home.com:**
+| Record Type | Value |
+|-------------|-------|
+| SOA | `dns01.home.com.` `<serial>` 900 300 604800 900 |
+| NS | `dns01.home.com.` / `dns02.home.com.` |
+| Glue A (dns01) | `dns01.home.com. IN A 192.168.1.150` |
+| Glue A (dns02) | `dns02.home.com. IN A 192.168.1.151` |
+| Zone Transfer ACL | AXFR allowed from: `192.168.1.151` |
+| DNSSEC Signing | Optional — currently off |
 
-1. Client (192.168.1.31) → Pi-hole (192.168.1.250:53)
-2. Pi-hole Rule Matching:
-   - Pi-hole identifies home.com as a Conditional Forwarding target
-   - Target: 192.168.1.251 (BIND9)
-3. Pi-hole → BIND9:
-   - Pi-hole sends a recursive query to BIND9
-4. BIND9 Processing:
-   - **Authority Check:** BIND9 confirms it is the Master for home.com
-   - **Record Lookup:** Pulls the IP from db.home.com (e.g., uptimek → 192.168.1.247)
-   - **Security Check:** BIND9 verifies the requesting IP (Pi-hole) is in its allow-query ACL
-5. BIND9 → Pi-hole → Client:
-   - **Loop Prevention:** BIND9 returns the answer directly. Because BIND9's forwarder is set to Unbound (not Pi-hole), no DNS loop occurs
+#### Component Detail: Blocklist Automation (Integrated into Unbound)
 
-#### Reverse DNS Query Flow (PTR Lookup)
+Ad-blocking is integrated directly into Unbound via nightly-automated blocklists. An automation script runs identically on both Unbound nodes, ingesting curated domain lists, generating Unbound-compatible `local-data` blocks, and atomically deploying them after syntax validation. Blocked domains return `NXDOMAIN`.
 
-1. **Client/Service Queries:** e.g., "Who is 192.168.100.51?" (51.100.168.192.in-addr.arpa)
-2. **Pi-hole Forwarding:**
-   - Pi-hole sees the query for the 100.168.192 range
-   - Conditional forwarding sends this to BIND9 (.251)
-3. **BIND9 Zone Selection:**
-   - BIND9 matches the query to zone "100.168.192.in-addr.arpa" in named.conf.local
-   - It consults the specific reverse zone file: db.192.168.100
-4. **Result:** BIND9 returns stepca.home.com
-5. **Outcome:** Pi-hole and Traefik logs now display stepca.home.com instead of the raw IP address
+**Blocklist Sources:** Hagezi PRO, DoH/DoT blockers, CNAME cloaking list, SmartTV tracking, TikTok tracking, Windows telemetry, Amazon / Apple native tracking
 
-#### The "Security Gate" Flow (DNS Rebinding)
+### DNS Query Flows
 
-1. Client requests malicious-site.com
-2. Pi-hole (not on blocklist) → Unbound → Public Internet
-3. **Upstream Response:** The malicious DNS returns 192.168.1.254 (your pfSense IP)
-4. **BIND9 Inspection:**
-   - The answer passes through BIND9 (if BIND9 is the primary upstream) or is evaluated via the deny-answer-addresses rule
-5. **Action:** BIND9 sees a private IP address in a public response and drops the answer
-6. **Result:** The client receives no answer, preventing the malicious website from "talking" to your firewall
+**External Domain Resolution**
 
-**Conditional Forwarding Rules:**
+1. Client → Unbound-01 or Unbound-02 (`:53`)
+2. Unbound checks: local blocklist → local cache → recursive resolution
+3. If blocked: return `NXDOMAIN` (no outbound traffic generated)
+4. If not blocked or cached: Unbound initiates iterative resolution from root servers (`root.hints`)
+5. Unbound queries root → TLD nameservers → authoritative nameservers for final answer
+6. DNSSEC signatures validated; poisoned or stripped records return `SERVFAIL`
+7. Answer cached per authoritative TTL; returned to client
 
-| Domain Pattern | Target Server | Purpose | Use Case |
-|----------------|---------------|---------|----------|
-| home.com | 192.168.1.251:53 | Internal zone authority | All lab services (*.home.com) |
-| 1.168.192.in-addr.arpa | 192.168.1.251:53 | Reverse DNS (192.168.1.0/24) | Production network PTR records |
-| 2.168.192.in-addr.arpa | 192.168.1.251:53 | Reverse DNS (192.168.2.0/24) | DMZ services PTR records |
-| 100.168.192.in-addr.arpa | 192.168.1.251:53 | Reverse DNS (192.168.100.0/24) | Lab infrastructure PTR records |
-| 200.168.192.in-addr.arpa | 192.168.1.251:53 | Reverse DNS (192.168.200.0/24) | Kubernetes cluster PTR records |
+Example: `www.example.com` — query time ~50ms (first), ~1ms (cached)
 
-**Upstream DNS:**
+**Internal Domain Resolution (`*.home.com`)**
 
-- Primary: 192.168.1.252:5335 (Unbound)
-- Secondary: 1.1.1.1 (Cloudflare, fallback only)
+1. Client → Unbound (`:53`)
+2. Unbound matches `home.com` against `forward-zone` rule
+3. Query forwarded to Technitium DNS01 (`192.168.1.150`) with DNS02 as failover
+4. Technitium confirms authority for `home.com`; returns A/PTR record from zone
+5. Unbound caches and returns answer to client
+
+Example: `portainer.home.com` → `192.168.1.247` → Traefik → backend container
+
+**Reverse DNS (PTR Lookup)**
+
+1. Client or service queries: e.g., `51.100.168.192.in-addr.arpa`
+2. Unbound matches subnet against `forward-zone` for `home.com` / internal ranges
+3. Query forwarded to Technitium
+4. Technitium returns PTR record (e.g., `stepca.home.com`)
+
+### High Availability Configuration
+
+| Layer | Redundancy Mechanism | Failover Behavior |
+|-------|---------------------|-------------------|
+| Recursive | Two independent Unbound nodes; client configures both IPs | Client DNS resolver fails over in <5 seconds |
+| Authoritative | DNS02 holds full zone replica via AXFR/IXFR from DNS01 | Unbound `forward-zone` includes both IPs; automatic failover |
+| Ad-blocking | Blocklists deployed identically on both Unbound nodes; independent caches | Blocking remains active regardless of which node handles the query |
+| Watchdog | Systemd watchdog on both Unbound nodes; `WatchdogSec=30s` | Unbound auto-restarted if process hangs or stops sending heartbeats |
 
 ### DNS Security Controls
 
-#### DNSSEC Validation (Unbound)
-
-- **Purpose:** Cryptographically verify DNS responses haven't been tampered with in transit
-- **Implementation:** Unbound (.252) performs full DNSSEC validation. Pi-hole (.250) and BIND9 (.251) are configured to trust Unbound's validation status (via the ad flag)
-- **Validation Behavior:**
-  - Valid signature: Cache and return answer with AUTHENTICATED DATA status
-  - Invalid signature: Return SERVFAIL (blocks potentially poisoned records)
-  - No DNSSEC support: Process query normally (unsigned but not rejected)
-- **Security Impact:** Prevents DNS cache poisoning and "Man-in-the-Middle" attacks for external lookups
-
-#### Query Logging & Privacy (Pi-hole & BIND9)
-
-- **Retention:** 24 hours in Pi-hole's FTL database for real-time visibility
-- **Implementation:** Pi-hole logs the "Front-Door" request from the client; BIND9 logs are restricted to internal zone transfers and errors to minimize disk I/O
-
-#### Rate Limiting & Memory Protection
-
-- **Threshold:** 1000 queries/minute per client IP (Pi-hole default)
-- **Memory Safeguard:** Shared Memory (/dev/shm) expanded to 256MB to prevent FTL engine crashes and database locks during high-volume bursts
-- **Action:** Temporary block (60-second cooldown)
-- **Purpose:** Prevents DNS amplification attacks and detects DNS tunneling attempts by internal malware
-
-#### DNS Rebinding Protection (The "BIND9 Guard")
-
-- **Rule:** deny-answer-addresses enabled in BIND9 for the 192.168.0.0/16 range
-- **Implementation:** If an external forwarder (like Cloudflare or Unbound) returns a private IP for a public domain (e.g., attacker.com → 192.168.1.1), BIND9 explicitly drops the answer
-- **Security Impact:** Prevents "Browser-as-a-Proxy" attacks where a malicious website tries to interact with your pfSense, Step-CA, or Traefik management interfaces
-
-#### DNS-Based Ad Blocking & Threat Intelligence
-
-- **Blocklists:** 2M+ domains from curated feeds (StevenBlack, OISD, Firebog) via Pi-hole
-- **Local Overrides:** Authoritative home.com records in BIND9 take precedence over any external blocklists
-- **Action:** Blocked domains return 0.0.0.0 (null routing), causing connections to fail instantly without generating outbound traffic
-- **Update Frequency:** Daily at 3 AM (Gravity update); BIND9 records are static and updated manually via db.home.com
-
-#### DNSSEC Hardening (Unbound)
-
-- **Configuration:**
-  - harden-dnssec-stripped: yes (reject responses with DNSSEC signatures removed)
-  - val-clean-additional: yes (validate additional section of DNS responses)
-  - val-permissive-mode: no (strict validation, fail on invalid signatures)
-- **Security Impact:** Prevents sophisticated attacks where attackers strip DNSSEC signatures to bypass validation
-
+| Control | Implementation | Security Impact |
+|---------|---------------|-----------------|
+| Root-Recursive Resolution | Unbound queries root servers directly; no upstream forwarder configured | Eliminates third-party DNS metadata exposure; no resolver dependency |
+| DNSSEC Validation | `harden-dnssec-stripped: yes`; `val-permissive-mode: no` | Blocks cache poisoning; rejects stripped signatures |
+| Ad/Malware Blocking | Nightly blocklist ingestion; atomic deployment; Unbound-native | C2 and tracker domains blocked before outbound connection |
+| CNAME Cloaking Block | Dedicated blocklist targeting CNAME-based tracker evasion | Closes evasion path used by sophisticated ad networks |
+| DoH/DoT Egress Block | Blocklist entries for known DoH/DoT resolvers | Prevents clients from bypassing Unbound filtering via alternate resolvers |
+| Authoritative Zone Isolation | Technitium responds only to queries forwarded from Unbound ACL | Internal namespace not exposed to external or unauthenticated resolvers |
+| Query Logging | Full query logging on both Unbound nodes; forwarded to SIEM | Threat hunting, anomaly detection, DGA identification, tunneling detection |
+| Self-Healing | Systemd watchdog; `Restart=on-failure`; `RestartSec=5s` | Service restored automatically; no manual intervention required |
 
 ### Monitoring & Observability
 
-**Pi-hole Dashboard:**
+**Prometheus Metrics (Unbound)**
 
-- **Real-Time Metrics:**
-  - Queries per second (current load)
-  - Percentage blocked (ad-blocking effectiveness)
-  - Top queried domains (most frequently accessed)
-  - Top blocked domains (what's being filtered)
-  - Client activity breakdown (which devices query most)
-- **Access:** https://pihole.home.com/admin/ (protected by Authentik SSO)
+- `unbound_queries_total` — cumulative query count per node
+- `unbound_cache_hits_total` / `unbound_cache_misses_total` — cache efficiency
+- `unbound_blocked_queries_total` — blocklist hit rate
+- `unbound_query_duration_seconds` — resolution latency
+- Scrape interval: 15 seconds; Grafana dashboard: DNS query trends, block rates, cache hit ratios
 
-**Prometheus Metrics Exporter:**
+**Uptime Kuma Health Checks**
 
-- **Metrics Exposed:**
-  - pihole_queries_total (cumulative query count)
-  - pihole_blocked_queries_total (cumulative blocks)
-  - pihole_query_types (A vs AAAA vs PTR distribution)
-  - pihole_cache_size (DNS cache entries)
-  - pihole_upstream_queries (queries forwarded to Unbound)
-- **Scrape Interval:** 15 seconds (Prometheus)
-- **Grafana Dashboard:** DNS query trends, block rates, cache hit ratios
+- DNS resolution test: resolve `test.home.com` via `192.168.1.153` and `192.168.1.154` (every 30 seconds)
+- Technitium web UI: `https://dns01.home.com` and `https://dns02.home.com` (every 60 seconds)
+- Alert trigger: 3 consecutive failures → Discord webhook
 
-**Uptime Kuma Health Checks:**
+**Discord Alerts**
 
-- **HTTP Check:** https://pihole.home.com/admin/ (every 60 seconds)
-- **DNS Check:** Resolve test.home.com via 192.168.1.250 (every 30 seconds)
-- **Alert Trigger:** 3 consecutive failures → Discord webhook
-
-**Discord Alerts:**
-
-- **Service Failure:** Pi-hole container down (Uptime Kuma)
-- **High Query Rate:** >10,000 queries/minute (potential DNS tunneling or amplification)
-- **Upstream DNS Failure:** Unbound unreachable (Pi-hole fallback to Cloudflare 1.1.1.1)
-- **Sync Failure:** Nebula-Sync unable to replicate to backup
+- Unbound service failure (Uptime Kuma / systemd watchdog)
+- High query rate: >10,000 queries/minute (potential DNS tunneling or amplification)
+- Blocklist update failure: nightly script exits non-zero
+- Zone transfer failure: AXFR from DNS01 to DNS02 unsuccessful
 
 ---
 
