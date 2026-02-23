@@ -494,7 +494,24 @@ Multiple failed SSH login attempts in Wazuh will trigger an alert notification t
 
 ### Architecture Overview
 
-To enable secure, centralized access to internal services and simplify URL structures across the lab, reverse proxies were deployed in front of several web-facing applications. This eliminates the need to remember non-standard ports or paths, allowing services to be accessed via top-level FQDNs.
+
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      To enable secure, centralized access to internal services and simplify URL structures across the lab, reverse proxies were deployed in front of several web-facing applications. This eliminates the need to remember non-standard ports or paths, allowing services to be accessed via top-level FQDNs.
+    </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/proxy-ingress.png" alt="Heimdall Dashboard Screenshot">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Traefik / Nginx-Ingress Overview
+      </figcaption>
+    </figure>
+  </div>
+</div>
 
 **Security Impact**
 
