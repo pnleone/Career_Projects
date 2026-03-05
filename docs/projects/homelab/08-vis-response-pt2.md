@@ -1129,12 +1129,32 @@ interface GigabitEthernet0/1-3
  ip flow monitor ntop-monitor output
 ```
 
-**Diagram Placeholder: ntopng Interface — Prod_LAN Captures**
+<figure>
+  <img src="/Career_Projects/assets/screenshots/ntopng1.png" alt="ntopng">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    ntopng: Interface – Prod_LAN Capture 
+  </figcaption>
+</figure>
 
-**Diagram Placeholder: nProbe1 — Cisco Device Flows**
+<figure>
+  <img src="/Career_Projects/assets/screenshots/ntopng2.png" alt="ntopng">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    ntopng: Cisco Device Flow Capture 
+  </figcaption>
+</figure>
 
-**Diagram Placeholder: Brim/ZUI Queries**
-
+<figure>
+  <img src="/Career_Projects/assets/screenshots/brim1.png" alt="Brim">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Brim/ZUI Query Example 
+  </figcaption>
+</figure>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/brim2.png" alt="Brim">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Brim/ZUI Query Example 2
+  </figcaption>
+</figure>
 ---
 
 ## NetAlertX - Network Visibility & Asset Intelligence Framework
