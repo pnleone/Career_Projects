@@ -873,7 +873,7 @@ The Pulse main dashboard provides a real-time operational view of the Proxmox en
 Reports on the various backup methods. The dashboard provides details on snapshot status and PBS status and history of backups.
 
 <figure>
-  <img src="/Career_Projects/assets/screenshots/pulse-backup-dashboard.png" alt="Pulse Backup Dashboard">
+  <img src="/Career_Projects/assets/diagrams/nsm-overview.png" alt="Pulse Backup Dashboard">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Pulse Backup Dashboard
   </figcaption>
@@ -891,7 +891,7 @@ Summary of current alerts, configured thresholds, notifications, schedule and al
 </figure>
 
 ---
-### Network Security Monitoring Sensor — Zeek and ntopng
+## Network Security Monitoring Sensor — Zeek and ntopng
 
 **Deployment Overview**
 
