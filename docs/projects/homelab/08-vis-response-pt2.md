@@ -1,13 +1,13 @@
 # Observability and Response Architecture, Part 2
 
 **Document Control:**   
-Version: 1.0  
-Last Updated: January 30, 2026  
+Version: 1.1  
+Last Updated: March 05, 2026  
 Owner: Paul Leone 
 
 ---
 
-## 1. Security Orchestration, Automation and Response (SOAR) Platform
+## Security Orchestration, Automation and Response (SOAR) Platform
 
 ### Deployment Overview
 
@@ -57,7 +57,7 @@ Modern SOC operations require more than detection—they require coordinated, au
 
 ---
 
-## 2. Shuffle - Security Automation Engine
+## Shuffle - Security Automation Engine
 
 ### Deployment Overview
 
@@ -120,7 +120,7 @@ Shuffle serves as the central orchestration hub connecting:
 
 ---
 
-## 3. TheHive - Incident Response and Case Management
+## TheHive - Incident Response and Case Management
 
 ### Deployment Overview
 
@@ -184,7 +184,7 @@ TheHive mirrors enterprise SIRP (Security Incident Response Platform) capabiliti
 
 ---
 
-## 4. Cortex - Observable Analysis and Active Response Engine
+## Cortex - Observable Analysis and Active Response Engine
 
 ### Deployment Overview
 
@@ -244,7 +244,7 @@ Cortex demonstrates advanced enrichment and automated response capabilities foun
 
 ---
 
-## 5. MISP - Threat Intelligence Sharing Platform
+## MISP - Threat Intelligence Sharing Platform
 
 ### Deployment Overview
 
@@ -297,7 +297,7 @@ MISP is deployed as a multi-container application stack with the following compo
 
 ---
 
-## 6. Supporting Infrastructure
+## Supporting Infrastructure
 
 ### Cassandra - Distributed NoSQL Database
 
@@ -379,7 +379,7 @@ Purpose: Storage and retrieval of Shuffle workflow definitions, execution histor
 
 ---
 
-## 7. SOAR Workflow: Automated Endpoint Threat Intelligence Pipeline
+## SOAR Workflow: Automated Endpoint Threat Intelligence Pipeline
 
 ### Overview
 
@@ -479,7 +479,7 @@ SOAR workflow that automates Wazuh alert triage through TheHive case management,
 
 ---
 
-## 8. Observability Architecture
+## Observability Architecture
 
 ### Deployment Overview
 
@@ -529,7 +529,7 @@ Modern environments require more than log-based security analytics; they require
 
 ---
 
-## 9. Prometheus & Grafana - Infrastructure Metrics Platform
+## Prometheus & Grafana - Infrastructure Metrics Platform
 
 ### Deployment Overview
 
@@ -675,7 +675,7 @@ Prometheus and Grafana are industry-standard observability tools used across clo
 
 ---
 
-## 10. Uptime Kuma - Service Availability Monitoring
+## Uptime Kuma - Service Availability Monitoring
 
 ### Deployment Overview
 
@@ -710,7 +710,7 @@ Service uptime is foundational to both operational stability and security visibi
 
 ---
 
-## 11. Checkmk - Deep Infrastructure Monitoring
+## Checkmk - Deep Infrastructure Monitoring
 
 ### Deployment Overview
 
@@ -799,7 +799,7 @@ The Checkmk container communicates with monitored hosts using a mix of native Ch
 
 ---
 
-## 12. Pulse - Proxmox Virtual Environment and Backup Server Monitoring
+## Pulse - Proxmox Virtual Environment and Backup Server Monitoring
 
 ### Deployment Overview
 
@@ -891,8 +891,253 @@ Summary of current alerts, configured thresholds, notifications, schedule and al
 </figure>
 
 ---
+### Network Security Monitoring Sensor — Zeek and ntopng
 
-## 13. NetAlertX - Network Visibility & Asset Intelligence Framework
+**Deployment Overview**
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The NSM host is a dedicated Ubuntu-based sensor VM running on Proxmox, purpose-built for deep packet inspection, network flow collection, and protocol metadata extraction. It operates as a passive, observe-only node — no traffic is routed through it. Zeek provides full protocol metadata logging across all monitored segments; ntopng provides flow-level visibility via NetFlow v9 ingestion from Cisco infrastructure. Log output feeds both the Elastic stack for long-term retention and Brim/Zui for local forensic analysis.
+    </p>
+  </div>
+
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/screenshots/nsm-sensor.png" alt="NSM Sensor — Zeek and ntopng">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        NSM Sensor — Zeek and ntopng.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+**Security Impact**
+
+- Full protocol metadata across all monitored network segments (DNS, HTTP, SSL/TLS, SSH, SMB, RDP, DCE-RPC)
+- NetFlow-based east-west and north-south traffic visibility
+- File hashing and Notice/Intel/Weird framework detections from Zeek
+- Passive-only design eliminates sensor as an attack vector or pivot point
+- SOC-grade log output available for correlation, alerting, and forensic review
+
+**Deployment Rationale**
+
+General infrastructure monitoring tools provide host and service metrics but no network-layer visibility. The NSM host fills this gap with dedicated packet capture and flow analysis capability, mirroring enterprise SOC sensor architectures. Zeek and ntopng together provide both metadata-level detail and flow-level aggregation, enabling detection use cases that SIEM and EDR alone cannot cover.
+
+**Architecture Principles Alignment**
+
+- **Defense in Depth:** Network metadata layer complements host-based EDR (Wazuh), IDS/IPS (Suricata/Snort), and firewall logging; detects lateral movement and protocol anomalies not visible at the endpoint
+- **Secure by Design:** Capture NICs are isolated from the management interface; the host never routes or forwards traffic
+- **Zero Trust:** All traffic is treated as potentially malicious; full metadata logging supports continuous verification and retroactive investigation
+
+---
+
+### Zeek — Protocol Metadata Engine
+
+Zeek runs in a cluster layout to maximize throughput across three capture interfaces. All log output is JSON-formatted for direct ingestion by Elastic and Brim/Zui.
+
+**Cluster Layout**
+
+| Role | Host | Interface | AF_PACKET Fanout ID |
+|------|------|-----------|---------------------|
+| Manager | localhost | — | — |
+| Proxy | localhost | — | — |
+| worker-1 | localhost | enp6s19 | 20 |
+| worker-2 | localhost | enp6s20 | 21 |
+| worker-3 | localhost | enp6s21 | 22 |
+
+**Monitored Networks**
+
+| Subnet | Label |
+|--------|-------|
+| 192.168.1.0/24 | prod_lan |
+| 192.168.100.0/24 | lab_lan1 |
+| 192.168.200.0/24 | lab_lan2 |
+
+**Enabled Frameworks and Analyzers**
+
+- Protocol analyzers: DNS, HTTP, SSL/TLS, SSH, SMB, RDP, DCE-RPC
+- Notice framework
+- Intel framework
+- Weird framework
+- File hashing
+
+**Directory Layout**
+```
+/opt/monitoring/zeek/
+  site/      # local.zeek, JSON logging policy, tuning
+  logs/      # timestamped logs + current/ symlink
+  spool/     # cluster runtime state
+```
+
+**Configuration — node.cfg**
+```
+[zeek]
+Type=manager
+host=localhost
+
+[proxy]
+type=proxy
+host=localhost
+
+[worker-1]
+type=worker
+host=localhost
+interface=enp6s19
+lb_method=af_packet
+lb_procs=1
+af_packet_fanout_id=20
+
+[worker-2]
+type=worker
+host=localhost
+interface=enp6s20
+lb_method=af_packet
+lb_procs=1
+af_packet_fanout_id=21
+
+[worker-3]
+type=worker
+host=localhost
+interface=enp6s21
+lb_method=af_packet
+lb_procs=1
+af_packet_fanout_id=22
+```
+
+**Configuration — networks.cfg**
+```
+192.168.1.0/24     prod_lan
+192.168.100.0/24   lab_lan1
+192.168.200.0/24   lab_lan2
+```
+
+**Configuration — local.zeek (relevant additions)**
+```zeek
+@load policy/tuning/json-logs
+@load json-streaming-logs
+
+redef JSONStreaming::disable_default_logs = T;
+redef LogAscii::json_timestamps = JSON::TS_ISO8601;
+```
+
+**Sample Output — conn.log (JSON)**
+```json
+{
+  "_path": "conn",
+  "_write_ts": "2026-03-03T16:26:18.414917Z",
+  "ts": "2026-03-03T16:25:48.414242Z",
+  "uid": "C2eBK5DVFxx8BBe81",
+  "id.orig_h": "192.168.3.31",
+  "id.orig_p": 137,
+  "id.resp_h": "192.168.3.255",
+  "id.resp_p": 137,
+  "proto": "udp",
+  "service": "dns",
+  "duration": 13.967844,
+  "orig_bytes": 450,
+  "resp_bytes": 0,
+  "conn_state": "S0",
+  "local_orig": true,
+  "local_resp": true,
+  "missed_bytes": 0,
+  "history": "D",
+  "orig_pkts": 9,
+  "orig_ip_bytes": 702,
+  "resp_pkts": 0,
+  "resp_ip_bytes": 0,
+  "ip_proto": 17
+}
+```
+### ntopng — Flow Visibility
+
+ntopng ingests NetFlow v9 exports from pfSense, OPNsense, and Cisco infrastructure (r1, r2, r3) and provides real-time and historical flow analysis via a web UI. It complements Zeek's per-connection metadata with aggregated flow-level visibility across the network.
+
+Two nProbe instances are configured to avoid the community edition limitation of 5,000 flows. nProbe1 collects live flows from Cisco devices; nProbe2 collects from the firewalls.
+
+**Configuration — ntopng.conf**
+```
+--http-port=3000
+--local-networks="192.168.3.0/24,192.168.100.0/24,192.168.200.0/24"
+--data-dir=/opt/monitoring/ntopng/data
+--community
+-i=tcp://127.0.0.1:5556
+-i=tcp://127.0.0.1:5557
+-i=enp6s18
+-i=enp6s19
+-i=enp6s20
+-i=enp6s21
+```
+
+**Configuration — nprobe.conf (Cisco devices)**
+```
+--ntopng=zmq://127.0.0.1:5556
+--collector-port=2055
+-n=none
+-i=none
+-T="@NTOPNG@"
+--lifetime-timeout 60
+--idle-timeout 15
+```
+
+**Configuration — nprobe-firewalls.conf**
+```
+--ntopng=zmq://127.0.0.1:5557
+--collector-port=2056
+-n=none
+-i=none
+-T="@NTOPNG@"
+--lifetime-timeout 60
+--idle-timeout 15
+```
+
+### NetFlow Export — Cisco Configuration
+
+Cisco vIOS routers export Flexible NetFlow v9 to the NSM host at 192.168.1.48 UDP/2055. Source is a stable SVI or loopback interface; active/inactive timeouts are tuned for the ntopng collector.
+```
+flow record ntop-record
+ description NetFlow record for ntopng
+ match ipv4 source address
+ match ipv4 destination address
+ match transport source-port
+ match transport destination-port
+ match interface input
+ match interface output
+ match ipv4 tos
+ match flow direction
+ match ipv4 protocol
+ collect counter bytes long
+ collect counter packets long
+ collect timestamp sys-uptime first
+ collect timestamp sys-uptime last
+
+flow exporter ntop-exporter
+ description Export to ntopng
+ destination 192.168.1.48
+ source Loopback1
+ transport udp 2055
+ template data timeout 60
+
+flow monitor ntop-monitor
+ description Monitor for ntopng
+ exporter ntop-exporter
+ cache timeout active 60
+ record ntop-record
+
+interface GigabitEthernet0/1-3
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+```
+
+**Diagram Placeholder: ntopng Interface — Prod_LAN Captures**
+
+**Diagram Placeholder: nProbe1 — Cisco Device Flows**
+
+**Diagram Placeholder: Brim/ZUI Queries**
+
+---
+
+## NetAlertX - Network Visibility & Asset Intelligence Framework
 
 ### Deployment Overview
 
@@ -951,7 +1196,7 @@ Enterprise SOCs require accurate asset inventories for vulnerability management,
 
 ---
 
-## 14. Alerting and Notification Architecture
+## Alerting and Notification Architecture
 
 ### Deployment Overview
 
@@ -1097,7 +1342,7 @@ Cloudflare's routing service mirrors enterprise email aliasing strategies, impro
 
 ---
 
-## 15. Security Controls Summary
+## Security Controls Summary
 
 ### Control Framework
 
@@ -1151,7 +1396,7 @@ Cloudflare's routing service mirrors enterprise email aliasing strategies, impro
 
 ---
 
-## 16. Detection Use Cases
+## Detection Use Cases
 
 ### Use Case 1: Brute Force SSH Attack Detection and Response
 
@@ -1318,7 +1563,7 @@ Risk Level: Medium
 
 ---
 
-## 17. Security Homelab Section Links
+## Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)**

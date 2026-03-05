@@ -1,8 +1,8 @@
 # Infrastructure, Platform and Hardware Summary
 
 **Document Control:**   
-Version: 1.0  
-Last Updated: January 30, 2026  
+Version: 1.1  
+Last Updated: March 05, 2026  
 Owner: Paul Leone 
 
 ---
@@ -397,12 +397,10 @@ Enterprise environments frequently operate multiple virtualization platforms whe
 
 #### Deployment Overview
 
-The lab operates a three-node Cisco virtual network infrastructure providing enterprise-grade routing and switching simulation. Two vRouters (R1 and R2) running Cisco IOS Software Version 15.9(3)M6 (VIOS-ADVENTERPRISEK9-M) implement dynamic routing via OSPF, while a vSwitch operates experimental Version 15.2 (vios_l2-ADVENTERPRISEK9-M) for Layer 2 operations. All instances run as KVM virtual machines within the Proxmox environment, enabling full-featured network protocol testing, routing policy validation, and security hardening without physical hardware dependencies.
-
-The topology implements a hub-and-spoke design where R1 and R2 connect via a dedicated point-to-point link (10.30.0.0/30) and exchange routing information through OSPF Area 0. R1 serves as the primary gateway for production lab networks (192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24), while R2 handles isolated test networks (192.168.2.0/24, 192.168.3.0/24). Two Ubuntu 25.10 LXC containers (cisco-host1 and cisco-host2) validate routing functionality by using their respective local routers as default gateways.
+The lab operates a mixed Cisco infrastructure consisting of three virtual IOS XE/IOS routers running as KVM guests in Proxmox and one physical Catalyst 3560X Layer 3 switch. R1 and R2 are vIOS instances (IOS 15.9(3)M6), R3 is a CSR1000V running IOS XE 16.12.5, and the WS-C3560X-24T-S runs IOS 15.0(2)SE. All devices participate in OSPF Area 0 for dynamic route distribution.
 
 <figure>
-      <img class="image-large" src="/Career_Projects/assets/diagrams/cisco.png" alt="Cisco">
+      <img class="image-large" src="/Career_Projects/assets/diagrams/cisco.png" alt="Cisco Network Topology">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Cisco Network Topology.
       </figcaption>
@@ -410,221 +408,535 @@ The topology implements a hub-and-spoke design where R1 and R2 connect via a ded
 
 #### Security Impact
 
-- **Isolated Routing Domain:** Virtual infrastructure creates air-gapped routing environment preventing production network disruption during protocol testing and failure scenario simulation
-- **Policy Validation Sandbox:** Enables safe testing of ACLs, prefix lists, route maps, and firewall rules before pfSense/OPNsense deployment
-- **Attack Path Analysis:** Simulates multi-hop routing scenarios for lateral movement detection and network segmentation validation
-- **Protocol Security Research:** Provides hands-on environment for OSPF authentication, routing protocol poisoning prevention, and neighbor relationship hardening
-- **Network Forensics Training:** Supports packet capture analysis, routing loop detection, and convergence behavior observation during security incidents
+- **Isolated Routing Domain:** Virtual and physical Cisco infrastructure creates a contained routing environment; protocol testing, ACL validation, and failure scenario simulation do not impact production networks
+- **Policy Sandbox:** Tests ACLs, prefix lists, route maps, and firewall rules before deployment to pfSense/OPNsense/FortiGate
+- **Attack Path Analysis:** Multi-hop topology enables lateral movement detection and network segmentation validation
+- **Layer 2 Hardening:** DHCP snooping, BPDU guard, port-security, and sticky MACs on the physical switch prevent common L2 attacks (ARP spoofing, rogue DHCP, MAC flooding)
+- **Telemetry Coverage:** NetFlow export from three devices to ntopng provides flow-level visibility across all major lab segments
+- **OSPF MD5 Authentication:** Prevents route injection from unauthorized neighbors
 
 #### Deployment Rationale
 
-Cisco IOS powers the majority of enterprise routers and Layer 3 switches globally. Virtual IOS infrastructure demonstrates production-ready proficiency with Cisco CLI, dynamic routing protocols, and network automation while avoiding physical hardware costs. This deployment mirrors enterprise network engineering labs where virtual routers support CI/CD pipelines for network configuration validation, automated testing workflows, and infrastructure-as-code development. Running vIOS in KVM enables integration with Ansible network modules, Terraform providers, and Python network automation libraries (Netmiko, NAPALM) used in DevOps-driven network operations.
+Cisco IOS and IOS XE power the majority of enterprise routers and Layer 3 switches globally. The mixed virtual/physical deployment demonstrates CLI proficiency, dynamic routing protocol implementation, and network security hardening across multiple IOS generations. The physical 3560X replaces the decommissioned vSwitch, adding real L2 port-density, hardware-based spanning tree, and physical port-security capabilities that virtual switches cannot fully replicate. Running vIOS (R1, R2) and a CSR1000V (R3) within Proxmox KVM enables integration with Ansible network modules, Netmiko, and NAPALM for network automation workflows.
 
 #### Architecture Principles Alignment
 
 **Defense in Depth:**
 
-- Virtual network infrastructure physically isolated from production routing
-- OSPF authentication prevents route injection attacks (future enhancement)
-- ACLs on router interfaces enforce inter-subnet access control
-- Separate routing domain enables secure testing of dangerous configurations
+- Virtual routing domain physically isolated from production routing
+- OSPF MD5 authentication on all peering interfaces
+- ACLs enforced at VTY lines; management restricted to Prod_LAN subnet
+- Physical switch DHCP snooping and BPDU guard enforce L2 boundary integrity
 
 **Secure by Design:**
 
-- SSH-only access enforced on all routers (Telnet disabled)
-- Enable secret passwords hashed with SHA256 (Type 9)
-- Console and VTY lines require authentication
-- Logging enabled for all configuration changes and security events
+- SSH v2 only across all four devices; cipher and MAC algorithms explicitly hardened
+- Type 9 (SCRYPT) secrets on IOS XE devices; service password-encryption on all
+- HTTP management disabled; no passive management plane exposure
+- Unused switch ports shut down and assigned to a dead VLAN
 
 **Zero Trust:**
 
-- No implicit routing trust between subnets; OSPF neighbors explicitly configured
-- Inter-VLAN routing requires explicit permit statements
-- Default-deny ACLs block unauthorized cross-subnet traffic
-- Each router authenticates independently to management infrastructure
+- No implicit routing trust; all OSPF neighbors explicitly configured with authentication
+- Each device authenticates independently to management infrastructure via local user database
+- Inter-VLAN routing on the 3560X requires explicit SVI configuration — no implicit transit
 
 ---
 
-### 3.1 Network Topology and Configuration
-<div class="two-col-text-even">
-  <div class="text-left">
-   <h3>R1 (192.168.200.6) - Primary Router</h3>
-    <ul>
-      <li><strong>G0/0:</strong> 192.168.1.6/24 — Production network uplink</li>
-      <li><strong>G0/1:</strong> 192.168.100.6/24 — Primary lab network (K3s cluster, Docker hosts)</li>
-      <li><strong>G0/2:</strong> 192.168.200.6/24 — Secondary lab network (SOC namespace, server-admin)</li>
-      <li><strong>G0/3:</strong> 10.30.0.1/30 — Point-to-point link to R2</li>
-    </ul>
-  </div>
+### 3.1 Device Inventory
 
-  <div class="text-right">
-   <h3>R2 (192.168.3.9) - Secondary Router</h3>
-   <ul>
-      <li><strong>G0/0:</strong> 10.30.0.2/30 — Point-to-point link to R1</li>
-      <li><strong>G0/1:</strong> 192.168.3.9/24 — Management VLAN (FortiGate protected)</li>
-      <li><strong>G0/2:</strong> 192.168.2.9/24 — External lab network</li>
-   </ul>
-  </div>
-</div>
- 
-### Router R1 Configuration
+| Hostname | Model / Platform | IOS Version | Role | Management IP |
+|----------|-----------------|-------------|------|---------------|
+| r1 | Cisco vIOS (KVM/Proxmox) | IOS 15.9(3)M6 | Primary router — gateway & NetFlow export | 192.168.1.6 |
+| r2 | Cisco vIOS (KVM/Proxmox) | IOS 15.9(3)M6 | Secondary router — isolated test network & NetFlow export | 192.168.3.9 |
+| r3 | CSR1000V (KVM/Proxmox) | IOS XE 16.12.5 | Edge router — DMZ/Ext & NetFlow export | 192.168.2.9 |
+| cisco-3560 | WS-C3560X-24T-S (Physical) | IOS 15.0(2)SE | Core L2/L3 switch — VLAN trunking, port security | 192.168.1.130 |
 
+---
+
+### 3.2 Network Topology
+
+R1 serves as the primary gateway and default route originator for production lab networks. R2 handles isolated test networks and peers with R1 over a dedicated link. R3 provides routing from the DMZ 192.168.2.0/24 segment. The 3560X connects physical hosts, trunks VLANs to the Proxmox host, and provides Layer 3 inter-VLAN routing across six VLANs.
+
+All three routers form OSPF adjacencies over 10.30.0.0/29 using MD5 authentication. Passive-interface is set by default on R1; only G0/3 participates in OSPF hellos. R2 and R3 follow the same passive-interface pattern.
+
+| Device | Interface | IP Address | Network / Role |
+|--------|-----------|------------|----------------|
+| r1 | G0/0 | 192.168.1.6/24 | Prod_LAN — upstream gateway |
+| r1 | G0/1 | 192.168.100.6/24 | Lab_LAN1 — K3s cluster, Docker hosts |
+| r1 | G0/2 | 192.168.200.6/24 | Lab_LAN2 — SOC namespace, server-admin |
+| r1 | G0/3 | 10.30.0.1/29 | P2P link to R2/R3 — OSPF Area 0 |
+| r1 | Loopback1 | 192.168.255.1/32 | OSPF router-id / management |
+| r2 | G0/0 | 10.30.0.2/29 | P2P uplink to R1 — OSPF Area 0 |
+| r2 | G0/1 | 192.168.3.9/24 | Isolated test network |
+| r2 | Loopback1 | 192.168.255.2/32 | OSPF router-id / management |
+| r3 | G1 | 192.168.2.9/24 | Lab_Ext / DMZ segment |
+| r3 | G3 | 10.30.0.3/29 | P2P uplink to R1 — OSPF Area 0 |
+| r3 | Loopback1 | 192.168.255.3/32 | OSPF router-id / management |
+| cisco-3560 | Vlan10 (Prod_LAN) | 192.168.1.130/24 | L3 SVI — Prod_LAN |
+| cisco-3560 | Vlan20 (DMZ) | 192.168.2.130/24 | L3 SVI — DMZ |
+| cisco-3560 | Vlan30 | 192.168.3.130/24 | L3 SVI — Lab segment |
+| cisco-3560 | Vlan100 (Lab_LAN1) | 192.168.100.130/24 | L3 SVI — Lab_LAN1 |
+| cisco-3560 | Vlan120 (ISO_LAN) | 10.20.0.130/24 | L3 SVI — Isolated LAN |
+| cisco-3560 | Vlan200 (Lab_LAN2) | 192.168.200.130/24 | L3 SVI — Lab_LAN2 |
+
+---
+
+### 3.3 Security Configuration
+
+**Access Control:**
+
+- SSH v2 only — Telnet disabled on all devices (`transport input ssh`)
+- VTY lines restricted to 192.168.1.0/24 via MGMT_ACCESS ACL
+- Enable and user secrets hashed with Type 9 (SCRYPT) on all routers; Type 4 on 3560X (IOS 15.0 limitation)
+- `service password-encryption` enabled on all devices
+- HTTP/HTTPS management interface disabled (`no ip http server` / `no ip http secure-server`)
+
+**OSPF Authentication:**
+
+- MD5 authentication on all OSPF-enabled interfaces (`ip ospf authentication message-digest`)
+- Shared key configured per interface; `passive-interface default` prevents OSPF hellos on end-host segments
+- R3 uses uRPF (`ip verify unicast source reachable-via rx`) on uplink interfaces for anti-spoofing
+
+**3560X Layer 2 Hardening:**
+
+- DHCP snooping enabled on VLANs 10, 20, 30, 100, 120, 200
+- Rapid-PVST spanning tree with `portfast bpduguard default` on all access ports
+- Port security with sticky MACs on physical device ports (G0/13, G0/17)
+- Unused ports assigned to VLAN 999, port-security enabled, administratively shut down
+- LACP port-channel (Po1) bonding Proxmox host uplinks (G0/14, G0/16) — DHCP snooping trust on LAG members
+
+**Banners:** All devices enforce login, exec, and incoming banners identifying the lab domain (shadowitlab.com) and prohibiting unauthorized access.
+
+---
+
+### 3.4 NetFlow / Flexible NetFlow Configuration
+
+R1, R3, and the 3560X export Flexible NetFlow v9 to ntopng at 192.168.1.48 UDP/2055. R2 does not have NetFlow configured in the current template. Flow records capture source/destination IP, ports, protocol, ToS, direction, and byte/packet counters with 60-second active cache timeouts.
+
+---
+
+### 3.5 Device Specifications
+
+**Physical Switch — WS-C3560X-24T-S**
+
+| Attribute | Value |
+|-----------|-------|
+| Model | WS-C3560X-24T-S |
+| IOS Version | 15.0(2)SE (C3560E-UNIVERSALK9-M) |
+| License Level | IP Services (Permanent) |
+| Ports | 24x GigabitEthernet + 2x Ten GigabitEthernet + 1x FastEthernet (mgmt) |
+| Memory | 262144K DRAM |
+| Serial Number | FDO1637P0KD |
+| MAC Address | 6C:20:56:9B:81:80 |
+| Uplink to Proxmox | LACP Port-Channel (G0/14 + G0/16) |
+| Spanning Tree | Rapid-PVST |
+
+**Virtual Router — R1 (IOSv 15.9(3)M6)**
+
+| Attribute | Value |
+|-----------|-------|
+| Platform | Cisco IOSv (VIOS-ADVENTERPRISEK9-M) — KVM guest in Proxmox |
+| IOS Version | 15.9(3)M6 RELEASE SOFTWARE (fc1) |
+| Interfaces | 4x GigabitEthernet |
+| Memory | 2032873K / 62464K bytes |
+
+**Virtual Router — R2 (IOSv 15.9(3)M6)**
+
+| Attribute | Value |
+|-----------|-------|
+| Platform | Cisco IOSv (VIOS-ADVENTERPRISEK9-M) — KVM guest in Proxmox |
+| IOS Version | 15.9(3)M6 RELEASE SOFTWARE (fc1) |
+| Interfaces | 3x GigabitEthernet |
+| Memory | 2045161K / 50176K bytes |
+
+**Virtual Router — R3 (CSR1000V)**
+
+| Attribute | Value |
+|-----------|-------|
+| Platform | CSR1000V (VXE) — KVM guest in Proxmox |
+| IOS XE Version | 16.12.5 (Gibraltar) |
+| License Level | AX (Smart License — Unregistered) |
+| Interfaces | 3x GigabitEthernet |
+| Memory | 1531082K / 3075K bytes |
+
+---
+
+### 3.6 Configuration Templates
+
+#### R1 — Primary Router (vIOS 15.9(3)M6)
 ```
-      R1#show ip int br
-      Interface                  IP-Address      OK? Method Status                Protocol
-      GigabitEthernet0/0         192.168.1.6     YES NVRAM  up                    up
-      GigabitEthernet0/1         192.168.100.6   YES NVRAM  up                    up
-      GigabitEthernet0/2         192.168.200.6   YES NVRAM  up                    up
-      GigabitEthernet0/3         10.30.0.1       YES manual up                    up
-      R1#show ip route
-      Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
-            D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
-            N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
-            E1 - OSPF external type 1, E2 - OSPF external type 2
-            i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
-            ia - IS-IS inter area, * - candidate default, U - per-user static route
-            o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
-            a - application route
-            + - replicated route, % - next hop override, p - overrides from PfR
-
-      Gateway of last resort is not set
-
-            10.0.0.0/8 is variably subnetted, 3 subnets, 3 masks
-      S        10.20.0.0/24 [1/0] via 192.168.1.1
-      C        10.30.0.0/30 is directly connected, GigabitEthernet0/3
-      L        10.30.0.1/32 is directly connected, GigabitEthernet0/3
-            192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
-      C        192.168.1.0/24 is directly connected, GigabitEthernet0/0
-      L        192.168.1.6/32 is directly connected, GigabitEthernet0/0
-      O     192.168.2.0/24 [110/2] via 10.30.0.2, 6d22h, GigabitEthernet0/3
-      O     192.168.3.0/24 [110/2] via 10.30.0.2, 6d22h, GigabitEthernet0/3
-            192.168.100.0/24 is variably subnetted, 2 subnets, 2 masks
-      C        192.168.100.0/24 is directly connected, GigabitEthernet0/1
-      L        192.168.100.6/32 is directly connected, GigabitEthernet0/1
-            192.168.200.0/24 is variably subnetted, 2 subnets, 2 masks
-      C        192.168.200.0/24 is directly connected, GigabitEthernet0/2
-      L        192.168.200.6/32 is directly connected, GigabitEthernet0/2
-      R1#show ip proto
-      *** IP Routing is NSF aware ***
-
-      Routing Protocol is "application"
-      Sending updates every 0 seconds
-      Invalid after 0 seconds, hold down 0, flushed after 0
-      Outgoing update filter list for all interfaces is not set
-      Incoming update filter list for all interfaces is not set
-      Maximum path: 32
-      Routing for Networks:
-      Routing Information Sources:
-         Gateway         Distance      Last Update
-      Distance: (default is 4)
-
-      Routing Protocol is "ospf 1"
-      Outgoing update filter list for all interfaces is not set
-      Incoming update filter list for all interfaces is not set
-      Router ID 192.168.200.6
-      It is an autonomous system boundary router
-      Redistributing External Routes from,
-      Number of areas in this router is 1. 1 normal 0 stub 0 nssa
-      Maximum path: 4
-      Routing for Networks:
-         192.168.1.0 0.0.0.255 area 0
-         192.168.100.0 0.0.0.255 area 0
-         192.168.200.0 0.0.0.255 area 0
-      Routing on Interfaces Configured Explicitly (Area 0):
-         GigabitEthernet0/3
-      Passive Interface(s):
-         GigabitEthernet0/0
-         GigabitEthernet0/1
-         GigabitEthernet0/2
-      Routing Information Sources:
-         Gateway         Distance      Last Update
-         192.168.3.9          110      6d22h
-      Distance: (default is 110)
-```
-
-#### OSPF Routing Configuration
-
-**Protocol:** OSPF Version 2 (OSPFv2 for IPv4)  
-**Process ID:** 1  
-**Area:** 0 (Backbone area - single-area design)  
-**Network Type:** Point-to-point (10.30.0.0/30 link)
-
-**R1 OSPF Configuration:**
-```
+hostname r1
+ip domain name home.com
+cdp run
+ntp server time.google.com
+ntp server time.cloudflare.com
+no ip http server
+no ip http secure-server
+ip name-server 192.168.1.154
+ip name-server 192.168.1.153
+logging host 192.168.1.178
+logging trap informational
+logging origin-id hostname
+service password-encryption
+no ip finger
+no ip source-route
+!
+username paul privilege 15 secret 9 <hash>
+enable secret 9 <hash>
+!
+ip ssh version 2
+ip ssh server algorithm mac hmac-sha2-256
+ip ssh server algorithm encryption aes256-cbc
+ip ssh time-out 60
+ip ssh authentication-retries 5
+!
+ip access-list standard MGMT_ACCESS
+ permit 192.168.1.0 0.0.0.255
+!
+line vty 0 4
+ login local
+ transport input ssh
+ access-class MGMT_ACCESS in
+!
+interface Loopback1
+ ip address 192.168.255.1 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 192.168.1.6 255.255.255.0
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+ duplex full
+!
+interface GigabitEthernet0/1
+ ip address 192.168.100.6 255.255.255.0
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+!
+interface GigabitEthernet0/2
+ ip address 192.168.200.6 255.255.255.0
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+!
+interface GigabitEthernet0/3
+ ip address 10.30.0.1 255.255.255.248
+ ip ospf 1 area 0
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 <key>
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+!
 router ospf 1
-router-id 192.168.200.6
-network 192.168.1.0 0.0.0.255 area 0
-network 192.168.100.0 0.0.0.255 area 0
-network 192.168.200.0 0.0.0.255 area 0
+ area 0 authentication message-digest
+ passive-interface default
+ no passive-interface GigabitEthernet0/3
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.100.0 0.0.0.255 area 0
+ network 192.168.200.0 0.0.0.255 area 0
+ network 10.30.0.0 0.0.0.7 area 0
+ network 192.168.255.1 0.0.0.0 area 0
+ default-information originate
+!
+ip route 10.20.0.0 255.255.255.0 192.168.1.1
+!
+snmp-server community sh4d0wi7l4b RO
+snmp-server location Lab
+snmp-server host 192.168.1.178 version 2c sh4d0wi7l4b
 ```
 
-**R2 OSPF Configuration:**
+#### R2 — Secondary Router (vIOS 15.9(3)M6)
 ```
+hostname r2
+ip domain name home.com
+cdp run
+ntp server time.google.com
+ntp server time.cloudflare.com
+no ip http server
+no ip http secure-server
+ip name-server 192.168.1.154
+ip name-server 192.168.1.153
+logging host 192.168.1.178
+logging trap informational
+service password-encryption
+no ip source-route
+!
+username paul privilege 15 secret 9 <hash>
+enable secret 9 <hash>
+!
+ip ssh version 2
+ip ssh server algorithm mac hmac-sha2-256
+ip ssh server algorithm encryption aes256-cbc
+ip ssh time-out 60
+ip ssh authentication-retries 5
+!
+ip access-list standard MGMT_ACCESS
+ permit 192.168.1.0 0.0.0.255
+!
+line vty 0 4
+ login local
+ transport input ssh
+ access-class MGMT_ACCESS in
+!
+interface Loopback1
+ ip address 192.168.255.2 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 10.30.0.2 255.255.255.248
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 <key>
+ duplex full
+!
+interface GigabitEthernet0/1
+ ip address 192.168.3.9 255.255.255.0
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+!
 router ospf 1
-router-id 192.168.3.9
-network 192.168.2.0 0.0.0.255 area 0
-network 192.168.3.0 0.0.0.255 area 0
+ passive-interface GigabitEthernet0/1
+ network 192.168.3.0 0.0.0.255 area 0
+ network 10.30.0.0 0.0.0.7 area 0
+ network 192.168.255.2 0.0.0.0 area 0
 ```
-**Routing Table Verification:**
 
-- R1 learns routes to 192.168.2.0/24 and 192.168.3.0/24 via OSPF (Administrative Distance 110)
-- R2 learns routes to 192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24 via OSPF
-- OSPF neighbor adjacency established (Full state) on G0/3 (R1) and G0/0 (R2)
+#### R3 — CSR1000V (IOS XE 16.12.5)
+```
+hostname r3
+ip domain name home.com
+cdp run
+ntp server time.google.com
+ntp server time.cloudflare.com
+no ip http server
+no ip http secure-server
+ip name-server 192.168.1.154
+ip name-server 192.168.1.153
+logging host 192.168.1.178
+logging trap informational
+no ip source-route
+!
+username paul secret 9 <hash>
+enable secret 9 <hash>
+!
+ip ssh version 2
+ip ssh server algorithm mac hmac-sha2-512
+ip ssh server algorithm encryption aes256-ctr
+ip ssh time-out 60
+ip ssh authentication-retries 5
+!
+ip access-list standard MGMT_ACCESS
+ permit 192.168.1.0 0.0.0.255
+!
+line con 0
+ transport preferred ssh
+ logging synchronous
+line vty 0 4
+ login local
+ transport input ssh
+ access-class MGMT_ACCESS in
+!
+interface Loopback1
+ ip address 192.168.255.3 255.255.255.255
+!
+interface GigabitEthernet1
+ ip address 192.168.2.9 255.255.255.0
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+ ip verify unicast source reachable-via rx
+ negotiation auto
+ cdp enable
+!
+interface GigabitEthernet3
+ ip address 10.30.0.3 255.255.255.248
+ ip ospf 1 area 0
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 <key>
+ ip flow monitor ntop-monitor input
+ ip flow monitor ntop-monitor output
+ negotiation auto
+ cdp enable
+!
+router ospf 1
+ passive-interface GigabitEthernet1
+ network 10.30.0.0 0.0.0.7 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 192.168.255.3 0.0.0.0 area 0
+```
 
-
-<div class="two-col-right">
-  <div class="text-col">
-    <h3>vSwitch (Layer 2):</h3>
-    <ul>
-      <li>Provides VLAN trunking and access port simulation</li>
-      <li>Supports STP testing and loop prevention validation</li>
-      <li>Enables port security and MAC address filtering research</li>
-    </ul>
-
-   </ul>
-  </div>
-
-  <div class="image-col">
-    <figure>
-      <img src="/Career_Projects/assets/screenshots/cisco-switch.png" alt="vSwitch Config screenshot">
-      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-        vSwitch VLAN and Interface Configuration.
-      </figcaption>
-    </figure>
-  </div>
-</div>
-#### Test Host Configuration
-
-**cisco-host1 (192.168.100.4):**
-
-- Platform: Ubuntu 25.10 LXC container
-- Default Gateway: 192.168.100.6 (R1 G0/1)
-- Purpose: Validate R1 routing to R2-connected subnets
-- Test: ping 192.168.3.5 should route via R1 → 10.30.0.0/30 → R2
-
-**cisco-host2 (192.168.3.5):**
-
-- Platform: Ubuntu 25.10 LXC container
-- Default Gateway: 192.168.3.9 (R2 G0/1)
-- Purpose: Validate R2 routing to R1-connected subnets
-- Test: ping 192.168.100.4 should route via R2 → 10.30.0.0/30 → R1
+#### Cisco-3560 — WS-C3560X-24T-S (IOS 15.0(2)SE)
+```
+hostname cisco-3560
+ip routing
+ip domain-name home.com
+no ip http server
+no ip http secure-server
+ip name-server 192.168.1.154
+ip name-server 192.168.1.153
+logging host 192.168.1.178
+logging console informational
+logging origin-id hostname
+logging source-interface Vlan10
+ntp server time.google.com
+ntp server time.cloudflare.com
+service password-encryption
+spanning-tree mode rapid-pvst
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+!
+username paul secret 4 <hash>
+enable password 7 <hash>
+!
+ip ssh version 2
+ip ssh dh min size 2048
+ip ssh time-out 60
+ip ssh authentication-retries 5
+!
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,30,100,120,200
+!
+ip access-list standard MGMT_ACCESS
+ permit 192.168.1.0 0.0.0.255
+!
+line vty 0 4
+ login local
+ transport input ssh
+ access-class MGMT_ACCESS in
+line vty 5 15
+ login local
+ transport input ssh
+ access-class MGMT_ACCESS in
+!
+! --- Port Assignments ---
+interface GigabitEthernet0/1
+ description Fortigate Prod_LAN intf
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 10
+ switchport trunk allowed vlan 10,20,30,100,120,200
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ description Proxmox host Prod_LAN intf
+ switchport access vlan 10
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface range GigabitEthernet0/3 - 12
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree bpduguard enable
+ spanning-tree portfast
+ shutdown
+!
+interface GigabitEthernet0/13
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security
+ switchport port-security violation restrict
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 04d9.f580.fd66
+!
+interface GigabitEthernet0/14
+ description LACP to Proxmox host
+ switchport access vlan 30
+ switchport mode access
+ channel-group 1 mode active
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/15
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 30
+ switchport trunk allowed vlan 10,20,30,100,120,200
+ switchport mode trunk
+!
+interface GigabitEthernet0/16
+ description LACP to Proxmox host
+ switchport access vlan 30
+ switchport mode access
+ channel-group 1 mode active
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/17
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security violation restrict
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 705a.b662.e41a
+!
+interface GigabitEthernet0/21
+ description to Fortigate LAN2 intf (Lab_LAN1)
+ switchport access vlan 100
+ switchport mode access
+!
+interface GigabitEthernet0/24
+ description Uplink to Prod_LAN and Asus Router
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 10
+ switchport trunk allowed vlan 10,20,30,100,120,200
+ switchport mode trunk
+ switchport nonegotiate
+ ip dhcp snooping trust
+!
+interface Port-channel1
+ description Proxmox host LAG
+ switchport access vlan 30
+ switchport mode access
+ ip dhcp snooping trust
+!
+! --- SVIs ---
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ description Prod_LAN
+ ip address 192.168.1.130 255.255.255.0
+ ip flow monitor ntop-monitor input
+!
+interface Vlan20
+ description DMZ
+ ip address 192.168.2.130 255.255.255.0
+!
+interface Vlan30
+ ip address 192.168.3.130 255.255.255.0
+ ip flow monitor ntop-monitor input
+!
+interface Vlan100
+ description Lab_LAN1
+ ip address 192.168.100.130 255.255.255.0
+!
+interface Vlan120
+ description ISO_LAN
+ ip address 10.20.0.130 255.255.255.0
+!
+interface Vlan200
+ description Lab_LAN2
+ ip address 192.168.200.130 255.255.255.0
+```
 
 ---
 
-### 3.2 Technical Capabilities Demonstrated
+### 3.7 Technical Capabilities Demonstrated
 
-#### Dynamic Routing Protocols
+**Dynamic Routing Protocols — OSPF:**
 
-**OSPF (Open Shortest Path First):**
+- Multi-router OSPF Area 0 with MD5 authentication
+- Point-to-point P2P network type over 10.30.0.0/29
+- Passive-interface default with selective OSPF peering
+- uRPF anti-spoofing enforcement on R3 uplinks
+- Default route origination from R1
 
-- Single-area design (Area 0 backbone)
-- Point-to-point network type for optimal convergence
-- Router ID assignment using loopback or highest IP
-- LSA flooding and LSDB synchronization
-- SPF algorithm execution and route calculation
-- Neighbor adjacency management (Hello/Dead timers)
+**Network Telemetry:**
 
----
+- Flexible NetFlow v9 export to ntopng (R1, R3, 3560X)
+- Flow-level visibility across Prod_LAN, Lab segment, and DMZ
+- SNMP v2c export to Checkmk and Wazuh SIEM
+
+**Network Automation:**
+
+- SSH-accessible via Ansible network modules (ios_command, ios_config)
+- Netmiko/NAPALM compatible for Python-based automation workflows
+- CDP enabled for topology discovery
+
 
 ## 4. Container Orchestration Architecture
 
@@ -1403,7 +1715,7 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 | 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO #3 |
 | 0.0.0.0/0 | 192.168.1.1 (ASUS) | Internet |
 
-#### Cisco r1 vRouter (192.168.1.6)
+#### Cisco R1 vRouter (192.168.1.6)
 
 **Hostname:** R1.home.com  
 **Role:** Core router for PROD, LAB1, LAB2
@@ -1412,41 +1724,71 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 - 192.168.1.0/24 (Prod_LAN)
 - 192.168.100.0/24 (LAB_LAN1)
 - 192.168.200.0/24 (LAB_LAN2)
-- 10.30.0.0/30 (PTP link to R2)
+- 10.30.0.0/29 (link to R2, R3)
+- 192.168.255.1 (Lo1)
 
 | Destination Subnet | Next Hop | Notes |
 |-------------------|----------|-------|
 | 192.168.1.0/24 | Direct | Prod_LAN |
 | 192.168.100.0/24 | Direct | LAB_LAN1 |
 | 192.168.200.0/24 | Direct | LAB_LAN2 |
-| 10.30.0.0/30 | Direct | PTP to R2 |
-| 192.168.2.0/24 | 10.30.0.2 | OSPF via R2 |
+| 10.30.0.0/29 | Direct | to R2, R3 |
+| 192.168.255.1 | Direct | Lo1 |
+| 192.168.2.0/24 | 10.30.0.3 | OSPF via R3 |
 | 192.168.3.0/24 | 10.30.0.2 | OSPF via R2 |
+| 192.168.255.2 | 10.30.0.2 | OSPF via R2 |
+| 192.168.255.3 | 10.30.0.3 | OSPF via R3 |
 | 10.20.0.0/24 | 192.168.1.1 | Static route to ISO #1 (via ASUS) |
 | 0.0.0.0/0 | Not set | No default route configured |
 
-#### Cisco r2 vRouter (192.168.3.9)
+#### Cisco R2 vRouter (192.168.3.9)
 
 **Hostname:** R2.home.com  
-**Role:** Edge router for EXT and ISO
+**Role:** Edge router for ISO_LAN2
 
 **Directly connected:**
-- 10.30.0.0/30 (PTP to R1)
+- 10.30.0.0/29 (to R1, R3)
 - 192.168.3.0/24 (ISO_LAN2)
-- 192.168.2.0/24 (EXT_LAN)
+- 192.168.255.2 (Lo1)
 
 | Destination Subnet | Next Hop | Notes |
 |-------------------|----------|-------|
-| 10.30.0.0/30 | Direct | PTP link to R1 |
+| 10.30.0.0/29 | Direct | PTP link to R1 |
 | 192.168.3.0/24 | Direct | ISO_LAN2 |
-| 192.168.2.0/24 | Direct | EXT_LAN |
+| 192.168.255.2 | Direct | Lo1 |
 | 192.168.1.0/24 | 10.30.0.1 | OSPF via R1 (Prod_LAN) |
 | 192.168.100.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN1) |
 | 192.168.200.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN2) |
+| 192.168.2.0/24 | 10.30.0.3 | OSPF via R3 |
+| 192.168.255.1 | 10.30.0.1 | OSPF via R1 |
+| 192.168.255.3 | 10.30.0.3 | OSPF via R3 |
+| 0.0.0.0/0 | Not set | No default route configured |
+
+#### Cisco R3 vRouter (192.168.2.9)
+
+**Hostname:** R3.home.com  
+**Role:** Edge router for DMZ
+
+**Directly connected:**
+- 10.30.0.0/29 (to R1, R2)
+- 192.168.2.0/24 (DMZ)
+- 192.168.255.3 (Lo1)
+
+| Destination Subnet | Next Hop | Notes |
+|-------------------|----------|-------|
+| 10.30.0.0/29 | Direct | PTP link to R1 |
+| 192.168.2.0/24 | Direct | DMZ |
+| 192.168.255.3 | Direct | Lo1 |
+| 192.168.1.0/24 | 10.30.0.1 | OSPF via R1 (Prod_LAN) |
+| 192.168.100.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN1) |
+| 192.168.200.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN2) |
+| 192.168.3.0/24 | 10.30.0.3 | OSPF via R2 |
+| 192.168.255.1 | 10.30.0.1 | OSPF via R1 |
+| 192.168.255.2 | 10.30.0.3 | OSPF via R2 |
 | 0.0.0.0/0 | Not set | No default route configured |
 
 <figure>
-      <img src="/Career_Projects/assets/diagrams/routing-flow.png" alt="Routing">
+      <img src="/Career_Projects/assets/diagrams/routing-flow-new.png" alt="Routing">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Lab Routing Flowchart.
       </figcaption>
