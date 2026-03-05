@@ -873,7 +873,7 @@ The Pulse main dashboard provides a real-time operational view of the Proxmox en
 Reports on the various backup methods. The dashboard provides details on snapshot status and PBS status and history of backups.
 
 <figure>
-  <img src="/Career_Projects/assets/diagrams/nsm-overview.png" alt="Pulse Backup Dashboard">
+  <img src="/Career_Projects/assets/screenshots/pulse-backup-dashboard.png" alt="Pulse Backup Dashboard">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     Pulse Backup Dashboard
   </figcaption>
@@ -898,13 +898,13 @@ Summary of current alerts, configured thresholds, notifications, schedule and al
 <div class="two-col-right">
   <div class="text-col">
     <p>
-      The NSM host is a dedicated Ubuntu-based sensor VM running on Proxmox, purpose-built for deep packet inspection, network flow collection, and protocol metadata extraction. It operates as a passive, observe-only node — no traffic is routed through it. Zeek provides full protocol metadata logging across all monitored segments; ntopng provides flow-level visibility via NetFlow v9 ingestion from Cisco infrastructure. Log output feeds both the Elastic stack for long-term retention and Brim/Zui for local forensic analysis.
+      The NSM host is a dedicated Ubuntu-based sensor VM running on Proxmox, purpose-built for deep packet inspection, network flow collection, and protocol metadata extraction. It operates as a passive, observe-only node — no traffic is routed through it. Zeek provides full protocol metadata logging across all monitored segments; ntopng provides flow-level visibility via NetFlow v9 ingestion from network firewalls and Cisco devices. Log output feeds both the Elastic stack for long-term retention and Brim/Zui for local forensic analysis.
     </p>
   </div>
 
   <div class="image-col">
     <figure>
-      <img src="/Career_Projects/assets/screenshots/nsm-sensor.png" alt="NSM Sensor — Zeek and ntopng">
+      <img src="/Career_Projects/assets/diagrams/nsm-overview.png" alt="NSM Sensor — Zeek and ntopng">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         NSM Sensor — Zeek and ntopng.
       </figcaption>
