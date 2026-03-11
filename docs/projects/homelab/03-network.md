@@ -1,13 +1,13 @@
 # Network Security, Privacy and Remote Access Architecture
 
 **Document Control:**   
-Version: 1.0  
-Last Updated: January 307, 2026  
+Version: 1.1  
+Last Updated: March 11, 2026  
 Owner: Paul Leone 
 
 ---
 
-## 1. Network Security Architecture
+## Network Security Architecture
 
 A defense-in-depth edge security architecture implements multiple layers of inspection, filtering, and threat mitigation across network perimeter, application layer, and endpoint boundaries. This multi-engine security stack combines virtualized firewalls (pfSense/OPNsense), intrusion detection/prevention systems (Suricata/Snort), behavioral threat intelligence (CrowdSec), application-layer filtering (SafeLine WAF), and encrypted tunneling (VPN/Zero-Trust access) to provide enterprise-grade network protection.
 
@@ -23,9 +23,9 @@ A defense-in-depth edge security architecture implements multiple layers of insp
 
 ---
 
-## 2. Network Firewall/Router Architecture
+## Network Firewall/Router Architecture
 
-### 2.1 High-Availability pfSense Cluster
+### High-Availability pfSense Cluster
 
 #### Deployment Overview
 
@@ -130,7 +130,7 @@ Architecture: Remediation Bouncer receives block decisions via LAPI, enforces at
 
 ---
 
-### 2.2 OPNsense Microsegmentation Firewall
+### OPNsense Microsegmentation Firewall
 
 #### Deployment Overview
 
@@ -174,7 +174,7 @@ Default Deny with Explicit Allow - Zero trust model where all traffic is blocked
 
 ---
 
-### 2.3 Fortinet FortiGate 30D Appliance
+### Fortinet FortiGate 30D Appliance
 
 #### Deployment Overview
 
@@ -267,36 +267,124 @@ Due to end-of-support status:
 - Vendor-neutral firewall concepts demonstration
 
 ---
-
-### 2.4 Firewall Policy Architecture
+### Palo Alto PAN-OS KVM Virtual Firewalls
 
 #### Deployment Overview
 
-The lab implements a three-platform firewall architecture (pfSense, OPNsense, FortiGate) using zone-based segmentation with zero-trust principles. Each VLAN operates as an isolated security zone with explicit allow rules—no implicit trust between networks. Rules are deployed directionally on ingress interfaces for predictable packet flow and consistent state management across platforms.
+Two Palo Alto VM-Series firewalls deployed as KVM guests extend the security architecture with next-generation firewall (NGFW) capabilities including App-ID, User-ID, and advanced threat prevention. The first instance (PA-FW DMZ-ISO, mgmt: 192.168.99.138) functions as the primary NGFW, providing zone enforcement across the DMZ (192.168.2.0/24), isolated LAN segment ISO_LAN1 (10.20.0.0/24), and the production network (Prod_LAN, 192.168.1.0/24). The second instance (PA-FW Site2, mgmt: 192.168.99.139) simulates a remote branch site (10.40.0.0/24) connected to the primary firewall via an IPSec site-to-site tunnel. Both VMs operate within the ISO-DMZ virtual router and integrate with the home.com Active Directory domain for identity-based policy enforcement.
+
+#### Security Impact
+
+- App-ID inspects traffic at Layer 7, blocking disallowed applications regardless of port or protocol
+- User-ID maps Active Directory group membership to firewall policy, enabling identity-aware access control without per-host rules
+- IPSec site-to-site tunnel (AES-256/SHA-1) simulates branch office connectivity and validates encrypted inter-site traffic flows
+- NAT policies enforce strict address translation boundaries between DMZ, internal, and external zones
+- Security profiles (AV, anti-spyware, URL filtering, WildFire) applied per-policy provide multi-layer inline threat inspection
+- OSPF adjacencies with Cisco lab routers (R1, R2, R3) over a dedicated OSPF zone (10.30.0.4/29) validate dynamic routing in a mixed-vendor environment
+- Netflow export to NSM (192.168.1.48:2056) feeds network traffic visibility into the observability stack
+
+#### Deployment Rationale
+
+Palo Alto Networks holds a leading position in enterprise NGFW deployments. Operating VM-Series on KVM demonstrates platform-agnostic deployment and validates key NGFW differentiators: application-layer enforcement, identity integration, and advanced threat prevention. The dual-VM topology with IPSec interconnect mirrors hub-and-spoke branch architectures. Active Directory User-ID integration reflects production policy models where enforcement follows the user rather than the IP address.
+
+#### Architecture Principles Alignment
+
+- **Zero Trust:** Identity-based policies require explicit AD group membership for access; zone membership alone grants no implicit trust
+- **Defense in Depth:** PA-FW sits inline between Prod_LAN, ISO_LAN1, and DMZ, adding a dedicated NGFW inspection layer independent of the pfSense/OPNsense perimeter
+- **Least Privilege:** Differentiated group policies (VIPUserGroup, RestrictedUserGroup, Domain Users) enforce tiered access to internet resources, applications, and server segments
+
+#### Interface and Zone Architecture
+
+PA-FW DMZ-ISO operates with four routed Layer 3 interfaces plus virtual wire, loopback, and tunnel interfaces — all within the ISO-DMZ virtual router:
+
+| Interface | Zone | Address | Function |
+|-----------|------|---------|----------|
+| ethernet1/1 | ISO_LAN1 | 10.20.0.138/24 | Isolated LAN (inside) |
+| ethernet1/2 | DMZ | 192.168.2.138/24 | DMZ segment |
+| ethernet1/3 | Prod_LAN | 192.168.1.138/24 | Production LAN (outside/uplink) |
+| ethernet1/4 | OSPF | 10.30.0.4/29 | OSPF peering with lab routers |
+| ethernet1/10-11 | Prod-vWire | N/A | Virtual wire — transparent L2 inspection |
+| ethernet1/24.10/20/30 | L2-wired | N/A | L2 subinterfaces for VLAN switching |
+| loopback.1 | Site2-tunnel | 192.168.255.138/32 | IPSec tunnel source / OSPF router-ID |
+| tunnel.1 | GlobalProtect | N/A | GlobalProtect VPN termination |
+| tunnel.40 | Site2-tunnel | N/A | IPSec tunnel to Site2 |
+
+PA-FW Site2 uses a two-interface topology:
+
+| Interface | Zone | Address | Function |
+|-----------|------|---------|----------|
+| ethernet1/1 | site2-local | 10.40.0.2/24 | Local site network |
+| ethernet1/2 | Prod_LAN | 192.168.1.139/24 | Uplink / tunnel source |
+| loopback.1 | Site1-tunnel | 192.168.255.139/32 | IPSec tunnel source |
+| tunnel.40 | Site1-tunnel | N/A | IPSec tunnel to DMZ-ISO |
+
+#### IPSec Site-to-Site Tunnel
+
+A site-to-site IPSec tunnel connects ISO_LAN1 (10.20.0.0/24) on PA-FW DMZ-ISO to the Site2 local network (10.40.0.0/24) on PA-FW Site2. The tunnel is sourced from loopback.1 on each device (192.168.255.138 and 192.168.255.139), decoupling the IKE endpoint from physical interface addressing.
+
+- **Phase 1 (IKEv1 Main Mode):** AES-256-CBC, SHA-1, DH Group 2, 8-hour lifetime, pre-shared key authentication
+- **Phase 2 (ESP tunnel):** AES-256-CBC, SHA-1, no PFS, 8-hour lifetime, proxy IDs 10.20.0.0/24 ↔ 10.40.0.0/24. Security policies on both devices permit bidirectional IPSec traffic between protected subnets. Loopback keepalive rules maintain health monitoring between the 192.168.255.x endpoints.
+
+#### NAT Configuration
+
+- **Destination NAT — Outside-Access-to-BentoPDF:** Inbound traffic from Prod_LAN destined to 192.168.1.138 is translated to DMZ server 192.168.2.12. WildFire, AV (Custom1), and strict anti-spyware profiles applied.
+- **Source NAT — DMZ-to-Outside-NAT:** Outbound traffic from the DMZ zone is dynamically translated to the PA-FW Prod_LAN interface address (192.168.1.138) using dynamic IP-and-port (NAPT), providing DMZ hosts internet access while blocking direct inbound connections.
+
+#### Active Directory Integration (User-ID)
+
+PA-FW DMZ-ISO integrates with the home.com Active Directory domain (dc01.home.com, 192.168.1.152) via LDAP on port 389. User-ID maps authenticated domain users and group memberships to source-user fields in security policy, enabling identity-based enforcement independent of IP address.
+
+AD global security groups defined for policy assignment:
+
+- **VIPUserGroup** — Permits expanded application set including streaming media and executive internet access
+- **RestrictedUserGroup** — Explicitly denies netflix and youtube; URL filtering enforced
+- **VPNGroup** — Controls GlobalProtect VPN access via allow-list
+- **FirewallAdmins** — Controls who can administer the Palo Alto VMs
+- **ServerAdmins** — Controls access to various Microsoft servers
+- **Monitoring-Server-Admins** — Controls access to various monitoring servers
+
+User identification is enabled on ISO_LAN1, DMZ, Prod_LAN, and OSPF zones.
+
+<figure>
+      <img src="/Career_Projects/assets/screenshots/PA-Config-misc.png" alt="Palo Alto Configuration">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        OSPF, Forwarding, IPsec and DoS Config details.
+      </figcaption>
+    </figure>
+
+---
+
+### Firewall Policy Architecture
+
+#### Deployment Overview
+
+The lab implements a four-platform firewall architecture (pfSense, OPNsense, FortiGate, Palo Alto PAN-OS) using zone-based segmentation with zero-trust principles. Each VLAN and network segment operates as an isolated security zone with explicit allow rules — no implicit trust between networks. pfSense/OPNsense and FortiGate rules are deployed directionally on ingress interfaces. Palo Alto policies are enforced via vsys1 rulebase with bidirectional zone-pair matching augmented by App-ID application identification and User-ID AD group membership.
 
 **Security Impact:**
 
 - Zone-based segmentation prevents lateral movement between network tiers
-- Default-deny policies block unauthorized traffic at zone boundaries
-- Alias-driven rule definitions enable rapid security updates without rule rewrites
-- Bidirectional state validation ensures return traffic authorization
-- Comprehensive logging feeds SOC visibility and threat correlation
+- Default-deny policies block unauthorized traffic at all zone boundaries
+- Palo Alto App-ID enforces application control at Layer 7 independent of port or protocol
+- User-ID group policies ensure access decisions follow the identity, not the IP address
+- IPSec tunnel policies on PA-FW enforce encrypted path enforcement between sites at the firewall policy layer
+- Alias-driven rule definitions on pfSense/OPNsense/FortiGate enable rapid updates without rule rewrites
+- Comprehensive logging across all platforms feeds SOC visibility and threat correlation
 
 **Deployment Rationale:**
 
-Enterprise networks rely on zone-based firewalls to enforce trust boundaries between network segments (DMZ, production, management). This architecture demonstrates production firewall design patterns: ingress-based rule placement, object-based policy definitions, and platform-agnostic security controls that survive hardware migrations.
+Enterprise networks rely on zone-based firewalls to enforce trust boundaries between segments (DMZ, production, management). The addition of Palo Alto NGFW introduces application-layer and identity-layer controls that traditional stateful firewalls cannot replicate — App-ID replaces port-based rules, User-ID eliminates the need for IP-to-user mapping tables, and security profiles apply inline threat inspection consistently across all permitted flows.
 
 **Architecture Principles Alignment:**
 
-- **Defense in Depth:** Multi-platform inspection layers with independent policy engines
-- **Secure by Design:** Default-deny baseline with explicit allow rules; automated threat feed integration
-- **Zero Trust:** Cross-zone traffic requires explicit authorization regardless of source network
+- **Defense in Depth:** Four independent policy engines with overlapping enforcement; Palo Alto adds App-ID and User-ID layers on top of pfSense/OPNsense stateful inspection
+- **Secure by Design:** Default-deny baseline with explicit allow rules across all platforms; automated threat feed integration
+- **Zero Trust:** Cross-zone traffic requires explicit authorization; Palo Alto policies additionally require AD group membership for identity-sensitive rules
 
 ### Policy Framework
 
 #### Directional Rule Placement
 
-Rules apply on the ingress interface where traffic enters the firewall. This ensures deterministic packet flow, predictable state table creation, and consistent logging behavior across pfSense, OPNsense, and FortiGate platforms.
+Rules apply on the ingress interface where traffic enters the firewall, ensuring deterministic packet flow, predictable state table creation, and consistent logging. Palo Alto zone-pair matching operates bidirectionally on source zone, destination zone, source address, destination address, source-user (AD group), and application (App-ID).
 
 #### Alias Architecture
 
@@ -306,7 +394,7 @@ Host, network, and service definitions use reusable aliases:
 - **Network Groups:** INTERNAL_SUBNETS, ISO_SUBNETS, LAB_NETWORKS
 - **Service Groups:** WEB_PORTS, SOC_PORTS, K3S_PORTS, ADMIN_PORTS, WAZUH_PORTS
 
-Aliases enable single-point updates—adding a new web server requires updating WEB_SERVERS alias, not 15+ individual rules.
+Aliases enable single-point updates — adding a new web server requires updating WEB_SERVERS alias, not 15+ individual rules.
 
 #### Logging and Detection
 
@@ -324,30 +412,37 @@ All security-relevant rules generate logs tagged for SIEM ingestion (Splunk/Elas
 
 **Rule Categories:**
 
-- **Cross-Zone Access:** 78 rules (59%) - traffic between security zones
-- **Security Controls:** 18 rules (14%) - CrowdSec blocks, bogon filters, CARP HA
-- **Diagnostics:** 12 rules (9%) - ICMP/traceroute for network troubleshooting
-- **Management Access:** 15 rules (11%) - administrative SSH/HTTPS to infrastructure
-- **Monitoring/EDR:** 10 rules (8%) - Wazuh agents, Prometheus metrics, log forwarding
+- **Cross-Zone Access:** 78 rules (59%) — traffic between security zones
+- **Security Controls:** 18 rules (14%) — CrowdSec blocks, bogon filters, CARP HA
+- **Diagnostics:** 12 rules (9%) — ICMP/traceroute for network troubleshooting
+- **Management Access:** 15 rules (11%) — administrative SSH/HTTPS to infrastructure
+- **Monitoring/EDR:** 10 rules (8%) — Wazuh agents, Prometheus metrics, log forwarding
 
 **Representative Rules:**
 
-| Platform | Source | Destination | Service | Purpose | Logged |
-|----------|--------|-------------|---------|---------|--------|
-| FortiGate | ISO_LAN | DNS_Servers | 53/UDP | DNS resolution for isolated subnet | Yes |
-| FortiGate | ISO_LAN | Wazuh_Server | 1514/UDP, 1515/TCP | EDR agent → manager communication | Yes |
-| OPNsense | Admin_Hosts | ISO_LAN | 22, 80, 443, 8080 | Administrative access to isolated hosts | Yes |
-| pfSense | Ext_LAN | Web_Server | 80, 443, 8080 | DMZ access to internal web services | Yes |
-| pfSense | ANY | crowdsec_blocklists | ANY | Drop traffic from behavioral threat intel | No |
-| pfSense | Lab_LAN2 | Elastic_Server | 8220, 9200, 5044 | Elastic Agent → Fleet Server enrollment | Yes |
+| Platform | Source | Destination | Application / Service | Source User | Action | Logged |
+|----------|--------|-------------|----------------------|-------------|--------|--------|
+| pfSense | Ext_LAN | Web_Server | TCP 80, 443, 8080 | — | Allow | Yes |
+| pfSense | ANY | crowdsec_blocklists | ANY | — | Drop | No |
+| pfSense | Lab_LAN2 | Elastic_Server | TCP 8220, 9200, 5044 | — | Allow | Yes |
+| FortiGate | ISO_LAN | DNS_Servers | UDP 53 | — | Allow | Yes |
+| FortiGate | ISO_LAN | Wazuh_Server | UDP 1514, TCP 1515 | — | Allow | Yes |
+| OPNsense | Admin_Hosts | ISO_LAN | TCP 22, 80, 443, 8080 | — | Allow | Yes |
+| Palo Alto | ISO_LAN1 | Site2-tunnel | Any (IPSec proxy: 10.20.0.0/24 → 10.40.0.0/24) | Any | Allow | Yes |
+| Palo Alto | Site2-tunnel | ISO_LAN1 | Any (IPSec proxy: 10.40.0.0/24 → 10.20.0.0/24) | Any | Allow | Yes |
+| Palo Alto | ISO_LAN1 | DMZ, Prod_LAN | netflix, youtube | RestrictedUserGroup (AD) | Deny | Yes |
+| Palo Alto | ISO_LAN1 | DMZ, Prod_LAN | google-base, http-video, web-browsing | VIPUserGroup (AD) | Allow + Profiles | Yes |
+| Palo Alto | Any | Any | ms-teams, O365, SharePoint, ssl | Domain Users (AD) | Allow + File Block | Yes |
+| Palo Alto | Prod_LAN | DMZ | Any → DNAT 192.168.2.12 | Any | Allow + WildFire/AV | Yes |
 
 **Security Enforcement Highlights:**
 
-- **CrowdSec Integration:** 12 block rules across all platforms enforce behavioral threat intelligence
+- **CrowdSec Integration:** 12 block rules across pfSense/OPNsense/FortiGate enforce behavioral threat intelligence
 - **Bogon Filtering:** Reserved/private IP ranges blocked on WAN-facing interfaces
-- **Default Deny:** Implicit deny-all rule terminates each interface ruleset
-- **VPN Kill Switch:** Floating rules block LAN egress when VPN tunnels fail
-- **Geo-blocking:** pfBlockerNG drops inbound connections from high-risk countries
+- **Default Deny:** Implicit deny-all terminates each interface ruleset and Palo Alto zone-pair rulebase
+- **VPN Kill Switch:** pfSense floating rules block LAN egress when VPN tunnels fail
+- **Palo Alto IPSec Enforcement:** Tunnel security policies enforce that inter-site traffic traverses the encrypted path; direct routing between 10.20.0.0/24 and 10.40.0.0/24 outside the tunnel is denied
+- **Identity-Driven Deny:** Palo Alto RestrictedUserGroup rules enforce application-level restrictions based on AD group membership at the firewall layer, independent of endpoint controls
 
 **Zone Trust Model:**
 ```
@@ -408,6 +503,12 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
     <figcaption>FortiGate Rule Configuration</figcaption>
 </figure>
 
+#### Palo Alto Security Policies
+<figure>
+    <img src="/Career_Projects/assets/screenshots/pa-security-policies.png" alt="Palo Alto Security Policies">
+    <figcaption>Palo Alto Security Policies</figcaption>
+</figure>
+
 ### Firewall Rule Table 
 <figure class="image-large">
   <img src="/Career_Projects/assets/screenshots/fw-rule-table.png" alt="pfSense Firewall Logs">
@@ -416,9 +517,9 @@ Cross-zone traffic requires explicit firewall rules with service-level restricti
 
 ---
 
-## 3. Intrusion Detection/Prevention Solutions
+## Intrusion Detection/Prevention Solutions
 
-### 3.1 Suricata Intrusion Detection/Prevention System on pfSense
+### Suricata Intrusion Detection/Prevention System on pfSense
 
 #### Deployment Overview
 
@@ -466,7 +567,7 @@ Suricata is widely used in enterprise IDS/IPS deployments due to its performance
 
 ---
 
-### 3.2 Snort Intrusion Detection/Prevention System on pfSense
+### Snort Intrusion Detection/Prevention System on pfSense
 
 #### Deployment Overview
 
@@ -503,7 +604,7 @@ Running both Suricata and Snort mirrors enterprise SOC environments where multip
 **Secure by Design:** Custom updated rule sets  
 **Zero Trust:** VPN traffic inspected and validated; no implicit trust in encrypted tunnel
 
-### 3.3 Custom Ruleset Architecture
+### Custom Ruleset Architecture
 
 #### Overview
 
@@ -718,7 +819,7 @@ alert tcp any any -> 192.168.100.0/24 22 \
     </figure>
 ---
 
-### 3.4 CrowdSec Behavioral Threat Intelligence
+### CrowdSec Behavioral Threat Intelligence
 
 #### Deployment Overview
 
@@ -802,7 +903,7 @@ Behavior‑based detection is essential in modern environments where attackers u
 
 ---
 
-### 3.5 Multi-Engine Intrusion Detection and Prevention
+### Multi-Engine Intrusion Detection and Prevention
 
 #### Layered IDS/IPS Strategy
 
@@ -820,7 +921,7 @@ Behavior‑based detection is essential in modern environments where attackers u
 - **Signature Diversity:** Different rule sets (Emerging Threats vs. Snort VRT) cover different threat landscapes
 
 ---
-## 4. SafeLine Web Application Firewall (WAF)
+## SafeLine Web Application Firewall (WAF)
 
 #### Deployment Overview
 
@@ -949,7 +1050,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ---
 
-## 5. Security Control Summary
+## Security Control Summary
 
 ### Security Control Framework
 
@@ -977,7 +1078,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ---
 
-## 6. Operational Resilience
+## Operational Resilience
 
 ### Operational Resilience and High Availability
 
@@ -1016,7 +1117,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ---
 
-## 7. Use Cases and Deployment Scenarios
+## Use Cases and Deployment Scenarios
 
 ### Practical Use Cases
 
@@ -1072,7 +1173,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ---
 
-## 8. Threat Modeling
+## Threat Modeling
 
 ### Threat Landscape and Mitigation Strategy
 
@@ -1105,7 +1206,7 @@ Active protections include Intelligent web threat detection, bot and HTTP flood 
 
 ---
 
-## 9. Privacy and Remote Access Architecture
+## Privacy and Remote Access Architecture
 
 #### Deployment Overview
 
@@ -1132,7 +1233,7 @@ Modern environments require privacy‑preserving egress, secure remote access, a
 
 ---
 
-### 9.1 Private Internet Access (PIA) Encrypted Egress VPN
+### Private Internet Access (PIA) Encrypted Egress VPN
 
 #### Deployment Overview
 
@@ -1169,7 +1270,7 @@ Encrypted egress is essential for privacy‑sensitive environments and aligns wi
 
 ---
 
-### 9.2 Tailscale Zero Trust Remote Access
+### Tailscale Zero Trust Remote Access
 
 #### Deployment Overview
 
@@ -1214,7 +1315,7 @@ Tailscale mirrors enterprise zero‑trust remote access solutions by replacing t
 
 ---
 
-### 9.3 Cloudflare Secure Service Exposure and DNS Management
+### Cloudflare Secure Service Exposure and DNS Management
 
 #### Deployment Overview
 
@@ -1308,7 +1409,7 @@ This tunnel multiplexes several key services hosted on DockerVM1:
 
 ---
 
-### 9.4 Tor Browser Anonymous Outbound Browsing
+### Tor Browser Anonymous Outbound Browsing
 
 #### Deployment Overview
 
@@ -1333,7 +1434,7 @@ Tor is widely used in security research, OSINT, and threat intelligence workflow
 
 ---
 
-## 10. Summary
+## Summary
 
 ### Multi-Layered VPN and Zero-Trust Access
 
@@ -1367,7 +1468,7 @@ Tor is widely used in security research, OSINT, and threat intelligence workflow
 - Content access: PIA multi-hop → region-specific service testing
 
 ---
-## 11. Custom IPS/IDS Ruleset – Additional Detail
+## Custom IPS/IDS Ruleset – Additional Detail
 
 ### SSH / Linux Security Controls
 
@@ -1591,7 +1692,7 @@ alert tcp any any -> any 445 \
 - Helps enforce compliance and hygiene
 - Identifies vulnerable hosts susceptible to EternalBlue class exploits
 
-## 12. Security Homelab Section Links
+## Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 

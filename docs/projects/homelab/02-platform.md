@@ -1,14 +1,14 @@
 # Infrastructure, Platform and Hardware Summary
 
 **Document Control:**   
-Version: 1.1  
-Last Updated: March 05, 2026  
+Version: 1.2  
+Last Updated: March 11, 2026  
 Owner: Paul Leone 
 
 ---
-## 1. Core Virtualization Stack
+## Core Virtualization Stack
 
-### 1.1 Proxmox Virtual Environment (VE)
+### Proxmox Virtual Environment (VE)
 
 #### Deployment Overview
 
@@ -99,7 +99,7 @@ Proxmox VE mirrors enterprise virtualization platforms (VMware vSphere, Microsof
 
 ---
 
-### 1.2 Proxmox Backup Server
+### Proxmox Backup Server
 
 Integrated for automated, deduplicated backups of all virtual machines and containers. Backup jobs are scheduled to run weekly, with retention policies aligned to provide redundancies without taking up a lot of space since the server has been deployed within VMware Workstation running on my main production PC.
 
@@ -126,7 +126,7 @@ Integrated for automated, deduplicated backups of all virtual machines and conta
 
 ---
 
-### 1.3 Proxmox Datacenter Manager
+### Proxmox Datacenter Manager
 
 Centralized management solution to oversee and manage multiple nodes and clusters of Proxmox-based virtual environments.
 
@@ -138,7 +138,7 @@ Centralized management solution to oversee and manage multiple nodes and cluster
     </figure>
 ---
 
-### 1.4 Physical Network Attached Storage (NAS) Integration
+### Physical Network Attached Storage (NAS) Integration
 
 A shared Synology NAS is configured to receive automated backups from the Proxmox Backup Server. This ensures off-host redundancy and supports rapid restoration in case of lab-wide failure or rollback testing.
 
@@ -156,7 +156,7 @@ A shared Synology NAS is configured to receive automated backups from the Proxmo
 
 ---
 
-### 1.5 Virtual Network Attached Storage (NAS) Integration
+### Virtual Network Attached Storage (NAS) Integration
 
 Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS) mounts for data sharing and redundancy. The single storage pool is configured for mirroring across the two NVMe drives.
 
@@ -168,7 +168,7 @@ Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS)
     </figure>
 ---
 
-### 1.6 Proxmox Host Hardware
+### Proxmox Host Hardware
 
 | Component | Specification | Justification |
 |-----------|---------------|---------------|
@@ -205,7 +205,7 @@ Proxmox virtual machine running TrueNAS to support Windows (SMB) and Linux (NFS)
 
 ---
 
-### 1.7 Lab Switch
+### Lab Switch
 
 TP-Link TL-SG108E Smart Switch
 
@@ -239,7 +239,7 @@ Used for VLAN and Link Aggregation (LAG) testing between The Proxmox host server
 </div>
 ---
 
-### 1.8 Proxmox Workload Overview
+### Proxmox Workload Overview
 
 The majority of hosts and services run within the Proxmox environment and run within one of the two integrated technologies supported:
 
@@ -262,7 +262,7 @@ The majority of hosts and services run within the Proxmox environment and run wi
 
 ---
 
-### 1.9 Infrastructure Visualization
+### Infrastructure Visualization
 
 #### PowerBI Dashboards
 
@@ -319,7 +319,7 @@ Application Inventory: Per-host service mapping with version tracking
     </figure>
   </div>
 
-### 1.10 OS Platform and Distribution/Edition Summary
+### OS Platform and Distribution/Edition Summary
 
 <div class="image-col">
     <figure>
@@ -332,7 +332,7 @@ Application Inventory: Per-host service mapping with version tracking
 
 ---
 
-## 2. VMware vSphere r8 Environment
+## VMware vSphere r8 Environment
 
 #### Deployment Overview
 
@@ -393,7 +393,7 @@ Enterprise environments frequently operate multiple virtualization platforms whe
     </figure>
 ---
 
-## 3. Cisco Virtual Infrastructure
+## Cisco Virtual Infrastructure
 
 #### Deployment Overview
 
@@ -443,7 +443,7 @@ Cisco IOS and IOS XE power the majority of enterprise routers and Layer 3 switch
 
 ---
 
-### 3.1 Device Inventory
+### Device Inventory
 
 | Hostname | Model / Platform | IOS Version | Role | Management IP |
 |----------|-----------------|-------------|------|---------------|
@@ -454,7 +454,7 @@ Cisco IOS and IOS XE power the majority of enterprise routers and Layer 3 switch
 
 ---
 
-### 3.2 Network Topology
+### Network Topology
 
 R1 serves as the primary gateway and default route originator for production lab networks. R2 handles isolated test networks and peers with R1 over a dedicated link. R3 provides routing from the DMZ 192.168.2.0/24 segment. The 3560X connects physical hosts, trunks VLANs to the Proxmox host, and provides Layer 3 inter-VLAN routing across six VLANs.
 
@@ -482,7 +482,7 @@ All three routers form OSPF adjacencies over 10.30.0.0/29 using MD5 authenticati
 
 ---
 
-### 3.3 Security Configuration
+### Security Configuration
 
 **Access Control:**
 
@@ -508,15 +508,23 @@ All three routers form OSPF adjacencies over 10.30.0.0/29 using MD5 authenticati
 
 **Banners:** All devices enforce login, exec, and incoming banners identifying the lab domain (shadowitlab.com) and prohibiting unauthorized access.
 
+```text
+***************************************************
+* Homelab, shadowitlab.com                        *
+* AUTHORIZED ACCESS ONLY                          *
+* Unauthorized access is prohibited and will be   *
+* monitored, logged, and reported.                *
+***************************************************
+```
 ---
 
-### 3.4 NetFlow / Flexible NetFlow Configuration
+### NetFlow / Flexible NetFlow Configuration
 
-R1, R3, and the 3560X export Flexible NetFlow v9 to ntopng at 192.168.1.48 UDP/2055. R2 does not have NetFlow configured in the current template. Flow records capture source/destination IP, ports, protocol, ToS, direction, and byte/packet counters with 60-second active cache timeouts.
+R1, R2 and R3 export Flexible NetFlow v9 to ntopng at 192.168.1.48 UDP/2055. The C3560-X does not have NetFlow configured in the current template. Flow records capture source/destination IP, ports, protocol, ToS, direction, and byte/packet counters with 60-second active cache timeouts.
 
 ---
 
-### 3.5 Device Specifications
+### Device Specifications
 
 **Physical Switch — WS-C3560X-24T-S**
 
@@ -556,13 +564,13 @@ R1, R3, and the 3560X export Flexible NetFlow v9 to ntopng at 192.168.1.48 UDP/2
 |-----------|-------|
 | Platform | CSR1000V (VXE) — KVM guest in Proxmox |
 | IOS XE Version | 16.12.5 (Gibraltar) |
-| License Level | AX (Smart License — Unregistered) |
+| License Level | AX (Smart Licensed) |
 | Interfaces | 3x GigabitEthernet |
 | Memory | 1531082K / 3075K bytes |
 
 ---
 
-### 3.6 Configuration Templates
+### Configuration Templates
 
 #### R1 — Primary Router (vIOS 15.9(3)M6)
 ```
@@ -915,7 +923,7 @@ interface Vlan200
 
 ---
 
-### 3.7 Technical Capabilities Demonstrated
+### Technical Capabilities Demonstrated
 
 **Dynamic Routing Protocols — OSPF:**
 
@@ -938,7 +946,7 @@ interface Vlan200
 - CDP enabled for topology discovery
 
 
-## 4. Container Orchestration Architecture
+## Container Orchestration Architecture
 
 #### Deployment Overview
 
@@ -967,7 +975,7 @@ Enterprises frequently operate hybrid container environments where Docker suppor
 
 ---
 
-### 4.1 Multi-Engine Docker Deployment
+### Multi-Engine Docker Deployment
 
 #### Deployment Overview
 
@@ -1114,7 +1122,7 @@ volumes:
 ```
 ---
 
-### 4.2 Cloud-Native Kubernetes Cluster Deployment
+### Cloud-Native Kubernetes Cluster Deployment
 
 #### Deployment Overview
 
@@ -1216,6 +1224,7 @@ K3s is ideal for homelab and edge environments requiring full Kubernetes functio
 | Cert-Manager | Helm | 1/1 | - | StepCA/ACME client for nginx-ingress SSL termination |
 | Cert-Manager-cainjector | Helm | 1/1 | - | - |
 | Cert-Manager-webhook | Helm | 1/1 | - | - |
+
 #### SOC Namespace - Security Operations Center Platform
 
 The SOC namespace hosts the lab's comprehensive Security Operations Center platform, implementing a modern threat intelligence, incident response, and security orchestration architecture. Integrating threat intelligence sharing (MISP), automated analysis (Cortex), workflow automation (Shuffle), and case management (TheHive).
@@ -1267,7 +1276,7 @@ The SOC namespace hosts the lab's comprehensive Security Operations Center platf
 
 ---
 
-### 4.3 Network Services Summary
+### Network Services Summary
 
 ### LoadBalancer Services (Externally Accessible)
 
@@ -1320,7 +1329,7 @@ The SOC namespace hosts the lab's comprehensive Security Operations Center platf
 
 ---
 
-### 4.4 Example Workload PatchMon
+### Example Workload PatchMon
 - Namspace: server-admin
 - Deployments: 1 replica per deployment with anti-affinity rules
 - Persistent Storage: local-path-provisioner (hostPath-based PVCs)
@@ -1607,7 +1616,7 @@ spec:
 
 ```
 ---
-### 4.5 Version Control Strategy
+### Version Control Strategy
 
 - Repository: GitHub repo (infrastructure-as-code)
 - Structure: Organized by service (docker-compose/, k8s-manifests/, terraform/Ansible)
@@ -1615,7 +1624,7 @@ spec:
 - Automation: Watchtower monitors container images, WUD provides update alerts
 ---
 ---
-## 5. Lab Network Topology, Routing and Domain Namespace
+## Lab Network Topology, Routing and Domain Namespace
 
 This section outlines the IP addressing scheme, subnet allocations, and internal domain naming conventions used across the Lab infrastructure. It supports modular service deployment, secure DNS resolution, and PKI integration.
 
@@ -1623,14 +1632,17 @@ This section outlines the IP addressing scheme, subnet allocations, and internal
 
 | Subnet | CIDR | VID | Purpose | Notes |
 |--------|------|-----|---------|-------|
-| 192.168.1.0 | /24 | 10 | Production Network | Hosts my production environment. Note: lab services were initially deployed in this subnet, working to migrate everything into the lab subnets. |
-| 192.168.2.0 | /24 | 20 | External LAN Network/DMZ | Test network for segmentation and FW rules. |
-| 192.168.3.0 | /24 | 30 | Isolated Link | Test port-based VLAN between FortiGate, OfficePC and Proxmox host |
-| 192.168.100.0 | /24 | 100 | Primary Lab LAN | Hosts lab containers, virtual machines and services. |
-| 192.168.200.0 | /24 | 200 | Secondary Lab LAN | Isolated test environments, ephemeral services |
-| 10.20.0.0 | /24 | 120 | Isolated LAN | Test network for sensitive data |
-| 10.10.0.0 | /24 | 110 | HA Sync | Isolated subnet for pfSense HA sync/CARP |
-| 10.30.0.0 | /30 | N/A | Router PTP | Point to Point router link between Cisco R1 and R2 |
+| 192.168.1.0 | /24 | 10 | Production Network | Hosts production environment. Lab services being migrated to lab subnets. |
+| 192.168.2.0 | /24 | 20 | External LAN / DMZ | DMZ segment. PA-FW DMZ-ISO ethernet1/2 (192.168.2.138) is the NGFW gateway for this segment. |
+| 192.168.3.0 | /24 | 30 | Isolated Link / MGMT | Port-based VLAN between FortiGate, OfficePC, and Proxmox host. |
+| 192.168.100.0 | /24 | 100 | Primary Lab LAN | Hosts lab containers, VMs, and services. |
+| 192.168.200.0 | /24 | 200 | Secondary Lab LAN | Isolated test environments, ephemeral services. |
+| 10.20.0.0 | /24 | 120 | Isolated LAN (ISO_LAN1) | PA-FW DMZ-ISO inside interface (ethernet1/1, 10.20.0.138). NGFW-enforced segment. |
+| 10.30.0.0 | /29 | 130 | Cisco Router P2P + PA OSPF | Router links between Cisco R1/R2/R3 and PA-FW DMZ-ISO OSPF interface (10.30.0.4/29). |
+| 10.40.0.0 | /24 | 140 | PA Site2 Local LAN | Simulated remote branch site. PA-FW Site2 inside interface (ethernet1/1, 10.40.0.2/24). Reachable via IPSec tunnel from ISO_LAN1. |
+| 10.10.0.0 | /24 | 110 | HA Sync | Isolated subnet for pfSense HA sync/CARP. |
+| 192.168.255.0 | /24 | --- | Loopback / Router-ID | OSPF router-IDs and IPSec tunnel endpoints. R1: .1, R2: .2, R3: .3, PA-FW DMZ-ISO: .138, PA-FW Site2: .139. |
+| 192.168.99.0 | /24 | 99 | OOB Management | Out-of-band management for PA-FW DMZ-ISO (.138) and PA-FW Site2 (.139). |
 
 All subnets are routed internally and firewalled to enforce least privilege access between zones.
 
@@ -1647,14 +1659,16 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 | 192.168.200.0/24 | 192.168.1.254 (pfSense) | LAB_LAN2 |
 | 192.168.2.0/24 | 192.168.1.254 (pfSense) | EXT_LAN |
 | 10.10.0.0/24 | 192.168.1.254 (pfSense) | Internal VLAN |
-| 10.20.0.0/24 | 192.168.1.201 (OPNsense) | ISO segment #1 |
+| 10.20.0.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | ISO_LAN1 via PA-FW |
+| 192.168.2.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | DMZ via PA-FW |
 | 192.168.3.0/24 | 192.168.1.99 (FortiGate) | ISO segment #2 |
-| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO segment #3 |
+| 10.30.0.0/29 | 192.168.1.6 (Cisco R1) | Cisco P2P + PA OSPF segment |
+| 10.40.0.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | Site2 remote branch via IPSec |
 | 0.0.0.0/0 | ISP | Internet |
 
 #### pfSense HA Firewalls (192.168.1.254 VIP)
 
-**Role:** Core routers for all internal VLANs
+**Role:** Core router for all internal VLANs
 
 **Directly connected:**
 - 192.168.1.0/24 (Prod_LAN)
@@ -1670,9 +1684,10 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 | 192.168.200.0/24 | Direct | LAB_LAN2 |
 | 192.168.2.0/24 | Direct | EXT_LAN |
 | 10.10.0.0/24 | Direct | Internal VLAN |
-| 10.20.0.0/24 | 192.168.1.201 (OPNsense) | ISO #1 |
+| 10.20.0.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | ISO_LAN1 via PA-FW |
 | 192.168.3.0/24 | 192.168.1.99 (FortiGate) | ISO #2 |
-| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO #3 |
+| 10.30.0.0/29 | 192.168.1.6 (Cisco R1) | Cisco P2P + PA OSPF segment |
+| 10.40.0.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | Site2 remote branch via IPSec |
 | 0.0.0.0/0 | 192.168.1.1 (ASUS) | Internet |
 
 #### OPNsense (192.168.1.201)
@@ -1692,7 +1707,8 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 | 192.168.2.0/24 | 192.168.1.254 (pfSense) | EXT_LAN |
 | 10.10.0.0/24 | 192.168.1.254 (pfSense) | Internal VLAN |
 | 192.168.3.0/24 | 192.168.1.99 (FortiGate) | ISO #2 |
-| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO #3 |
+| 10.30.0.0/29 | 192.168.1.6 (Cisco R1) | Cisco P2P + PA OSPF segment |
+| 10.40.0.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | Site2 remote branch via IPSec |
 | 0.0.0.0/0 | 192.168.1.1 (ASUS) | Internet |
 
 #### FortiGate (192.168.1.99)
@@ -1711,80 +1727,145 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 | 192.168.200.0/24 | 192.168.1.254 (pfSense) | LAB_LAN2 |
 | 192.168.2.0/24 | 192.168.1.254 (pfSense) | EXT_LAN |
 | 10.10.0.0/24 | 192.168.1.254 (pfSense) | Internal VLAN |
-| 10.20.0.0/24 | 192.168.1.201 (OPNsense) | ISO #1 |
-| 10.30.0.0/24 | 192.168.1.6 (Cisco vRouter) | ISO #3 |
+| 10.20.0.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | ISO_LAN1 via PA-FW |
+| 10.30.0.0/29 | 192.168.1.6 (Cisco R1) | Cisco P2P + PA OSPF segment |
+| 10.40.0.0/24 | 192.168.1.138 (PA-FW DMZ-ISO) | Site2 remote branch via IPSec |
 | 0.0.0.0/0 | 192.168.1.1 (ASUS) | Internet |
+
+#### PA-FW DMZ-ISO (192.168.1.138)
+
+**Hostname:** pa-fw-dmz.home.com  
+**Role:** NGFW for DMZ, ISO_LAN1, and Prod_LAN. IPSec hub to Site2. OSPF peer to Cisco R1/R2/R3.
+
+**Directly connected:**
+- 192.168.1.0/24 (Prod_LAN, eth1/3)
+- 192.168.2.0/24 (DMZ, eth1/2)
+- 10.20.0.0/24 (ISO_LAN1, eth1/1)
+- 10.30.0.4/29 (OSPF, eth1/4)
+- 192.168.255.138/32 (Lo1 / IPSec source)
+
+**OSPF adjacencies:** R1 (10.30.0.1), R2 (10.30.0.2), R3 (10.30.0.3) — Area 0 via ISO-DMZ virtual router
+
+| Destination Subnet | Next Hop | Source | Notes |
+|-------------------|----------|--------|-------|
+| 192.168.1.0/24 | Direct | ethernet1/3 | Prod_LAN |
+| 192.168.2.0/24 | Direct | ethernet1/2 | DMZ |
+| 10.20.0.0/24 | Direct | ethernet1/1 | ISO_LAN1 |
+| 10.30.0.4/29 | Direct | ethernet1/4 | OSPF peering segment |
+| 192.168.255.138/32 | Direct | loopback.1 | IPSec tunnel source / router-ID |
+| 10.40.0.0/24 | --- | tunnel.40 | Site2 via IPSec (static) |
+| 192.168.100.0/24 | 10.30.0.1 | OSPF via R1 | LAB_LAN1 |
+| 192.168.200.0/24 | 10.30.0.1 | OSPF via R1 | LAB_LAN2 |
+| 192.168.3.0/24 | 10.30.0.2 | OSPF via R2 | ISO_LAN2 |
+| 192.168.255.1/32 | 10.30.0.1 | OSPF via R1 | R1 loopback |
+| 192.168.255.2/32 | 10.30.0.2 | OSPF via R2 | R2 loopback |
+| 192.168.255.3/32 | 10.30.0.3 | OSPF via R3 | R3 loopback |
+| 192.168.255.139/32 | 192.168.1.139 | Static | PA-FW Site2 loopback (IPSec peer) |
+| 0.0.0.0/0 | 192.168.1.1 | Static | Default via ASUS |
+
+#### PA-FW Site2 (192.168.1.139)
+
+**Hostname:** palo-fw.home.com  
+**Role:** Simulated remote branch firewall. IPSec spoke to PA-FW DMZ-ISO.
+
+**Directly connected:**
+- 10.40.0.0/24 (site2-local, eth1/1)
+- 192.168.1.0/24 (Prod_LAN/uplink, eth1/2)
+- 192.168.255.139/32 (Lo1 / IPSec source)
+
+| Destination Subnet | Next Hop | Source | Notes |
+|-------------------|----------|--------|-------|
+| 10.40.0.0/24 | Direct | ethernet1/1 | Site2 local LAN |
+| 192.168.1.0/24 | Direct | ethernet1/2 | Prod_LAN uplink |
+| 192.168.255.139/32 | Direct | loopback.1 | IPSec tunnel source |
+| 10.20.0.0/24 | --- | tunnel.40 | ISO_LAN1 via IPSec to PA-FW DMZ-ISO |
+| 0.0.0.0/0 | 192.168.1.1 | Static | Default via ASUS |
 
 #### Cisco R1 vRouter (192.168.1.6)
 
 **Hostname:** R1.home.com  
-**Role:** Core router for PROD, LAB1, LAB2
+**Role:** Core router for Prod, LAB1, LAB2. OSPF DR for 10.30.0.0/29. Default route originator.
 
 **Directly connected:**
-- 192.168.1.0/24 (Prod_LAN)
-- 192.168.100.0/24 (LAB_LAN1)
-- 192.168.200.0/24 (LAB_LAN2)
-- 10.30.0.0/29 (link to R2, R3)
-- 192.168.255.1 (Lo1)
+- 192.168.1.0/24
+- 192.168.100.0/24
+- 192.168.200.0/24
+- 10.30.0.0/29
+- 192.168.255.1/32 (Lo1)
+
+**OSPF adjacencies:** R2 (10.30.0.2), R3 (10.30.0.3), PA-FW DMZ-ISO (10.30.0.4) — Area 0
 
 | Destination Subnet | Next Hop | Notes |
 |-------------------|----------|-------|
 | 192.168.1.0/24 | Direct | Prod_LAN |
 | 192.168.100.0/24 | Direct | LAB_LAN1 |
 | 192.168.200.0/24 | Direct | LAB_LAN2 |
-| 10.30.0.0/29 | Direct | to R2, R3 |
-| 192.168.255.1 | Direct | Lo1 |
+| 10.30.0.0/29 | Direct | P2P to R2, R3, PA-FW |
+| 192.168.255.1/32 | Direct | Lo1 |
 | 192.168.2.0/24 | 10.30.0.3 | OSPF via R3 |
 | 192.168.3.0/24 | 10.30.0.2 | OSPF via R2 |
-| 192.168.255.2 | 10.30.0.2 | OSPF via R2 |
-| 192.168.255.3 | 10.30.0.3 | OSPF via R3 |
-| 10.20.0.0/24 | 192.168.1.1 | Static route to ISO #1 (via ASUS) |
-| 0.0.0.0/0 | Not set | No default route configured |
+| 192.168.255.2/32 | 10.30.0.2 | OSPF via R2 |
+| 192.168.255.3/32 | 10.30.0.3 | OSPF via R3 |
+| 10.20.0.0/24 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO |
+| 192.168.2.0/24 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO (PA advertisement) |
+| 192.168.255.138/32 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO loopback |
+| 10.40.0.0/24 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO (redistributed static) |
+| 0.0.0.0/0 | Not set | No default route; originates default via OSPF |
 
 #### Cisco R2 vRouter (192.168.3.9)
 
 **Hostname:** R2.home.com  
-**Role:** Edge router for ISO_LAN2
+**Role:** Edge router for ISO_LAN2.
 
 **Directly connected:**
-- 10.30.0.0/29 (to R1, R3)
-- 192.168.3.0/24 (ISO_LAN2)
-- 192.168.255.2 (Lo1)
+- 10.30.0.0/29
+- 192.168.3.0/24
+- 192.168.255.2/32 (Lo1)
+
+**OSPF adjacencies:** R1 (10.30.0.1), R3 (10.30.0.3), PA-FW DMZ-ISO (10.30.0.4) — Area 0
 
 | Destination Subnet | Next Hop | Notes |
 |-------------------|----------|-------|
-| 10.30.0.0/29 | Direct | PTP link to R1 |
+| 10.30.0.0/29 | Direct | P2P to R1, R3, PA-FW |
 | 192.168.3.0/24 | Direct | ISO_LAN2 |
-| 192.168.255.2 | Direct | Lo1 |
+| 192.168.255.2/32 | Direct | Lo1 |
 | 192.168.1.0/24 | 10.30.0.1 | OSPF via R1 (Prod_LAN) |
 | 192.168.100.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN1) |
 | 192.168.200.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN2) |
 | 192.168.2.0/24 | 10.30.0.3 | OSPF via R3 |
-| 192.168.255.1 | 10.30.0.1 | OSPF via R1 |
-| 192.168.255.3 | 10.30.0.3 | OSPF via R3 |
+| 192.168.255.1/32 | 10.30.0.1 | OSPF via R1 |
+| 192.168.255.3/32 | 10.30.0.3 | OSPF via R3 |
+| 10.20.0.0/24 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO |
+| 192.168.255.138/32 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO loopback |
+| 10.40.0.0/24 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO (redistributed static) |
 | 0.0.0.0/0 | Not set | No default route configured |
 
 #### Cisco R3 vRouter (192.168.2.9)
 
 **Hostname:** R3.home.com  
-**Role:** Edge router for DMZ
+**Role:** Edge router for DMZ.
 
 **Directly connected:**
-- 10.30.0.0/29 (to R1, R2)
-- 192.168.2.0/24 (DMZ)
-- 192.168.255.3 (Lo1)
+- 10.30.0.0/29
+- 192.168.2.0/24
+- 192.168.255.3/32 (Lo1)
+
+**OSPF adjacencies:** R1 (10.30.0.1), R2 (10.30.0.2), PA-FW DMZ-ISO (10.30.0.4) — Area 0
 
 | Destination Subnet | Next Hop | Notes |
 |-------------------|----------|-------|
-| 10.30.0.0/29 | Direct | PTP link to R1 |
+| 10.30.0.0/29 | Direct | P2P to R1, R2, PA-FW |
 | 192.168.2.0/24 | Direct | DMZ |
-| 192.168.255.3 | Direct | Lo1 |
+| 192.168.255.3/32 | Direct | Lo1 |
 | 192.168.1.0/24 | 10.30.0.1 | OSPF via R1 (Prod_LAN) |
 | 192.168.100.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN1) |
 | 192.168.200.0/24 | 10.30.0.1 | OSPF via R1 (LAB_LAN2) |
-| 192.168.3.0/24 | 10.30.0.3 | OSPF via R2 |
-| 192.168.255.1 | 10.30.0.1 | OSPF via R1 |
-| 192.168.255.2 | 10.30.0.3 | OSPF via R2 |
+| 192.168.3.0/24 | 10.30.0.2 | OSPF via R2 |
+| 192.168.255.1/32 | 10.30.0.1 | OSPF via R1 |
+| 192.168.255.2/32 | 10.30.0.2 | OSPF via R2 |
+| 10.20.0.0/24 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO |
+| 192.168.255.138/32 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO loopback |
+| 10.40.0.0/24 | 10.30.0.4 | OSPF via PA-FW DMZ-ISO (redistributed static) |
 | 0.0.0.0/0 | Not set | No default route configured |
 
 <figure>
@@ -1801,7 +1882,7 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 | home.com | Production / Lab services | Current state: Production, lab and AD environments. Future State: migration of domain to shadowitlab.com, AD will remain on home.com. |
 | shadowitlab.com | Public DNS | Used to expose services externally through Cloudflare tunnels. Future migration to all internal DNS FQDNs. |
 ---
-## 6. Security Homelab Section Links
+## Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
 - **[Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 
