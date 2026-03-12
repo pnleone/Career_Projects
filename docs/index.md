@@ -108,7 +108,7 @@ Active participant in hands-on security training platforms (TryHackMe) and CTF c
 ### Security Operations
 Wazuh XDR • Splunk • ELK Stack • Suricata • Snort • TheHive • Shuffle SOAR • MISP • Nessus • OpenVAS • VirusTotal
 ### Network & Infrastructure
-pfSense • OPNsense • FortiGate • Proxmox • Docker • Kubernetes • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS
+pfSense • OPNsense • FortiGate • PAN-OS • Proxmox • Docker • Kubernetes • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS
 ### Identity & Access Management
 Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA • RBAC
 ### Security Tooling
@@ -116,7 +116,7 @@ Wireshark • Brim • Sysinternals • CyberChef • Volatility • Nmap • Bu
 ### Monitoring & Analysis
 Grafana • Prometheus • Checkmk • Uptime Kuma • NetAlertX • Pulse
 ### Automation & Scripting
-Python • PowerShell • Bash • SQL • Ansible • Terraform • n8n • Git/GitHub • JSON/YAML/XML • REST API
+PowerShell • Bash • SQL • Ansible • Terraform • n8n • Git/GitHub • JSON/YAML/XML • REST API
 ### Compliance & Frameworks
 NIST CSF 2.0 • CIS Controls v8.1 • ISO 27001 • MITRE ATT&CK • OWASP • CIS Benchmarks
 ### Operating System Administration
