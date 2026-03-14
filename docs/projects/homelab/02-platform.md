@@ -1869,7 +1869,7 @@ All subnets are routed internally and firewalled to enforce least privilege acce
 | 0.0.0.0/0 | Not set | No default route configured |
 
 <figure>
-      <img src="/Career_Projects/assets/diagrams/routing-flow-new.png" alt="Routing">
+      <img src="/Career_Projects/assets/diagrams/routing-flow-new2.png" alt="Routing">
       <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
         Lab Routing Flowchart.
       </figcaption>
