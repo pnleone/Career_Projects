@@ -106,21 +106,28 @@ Active participant in hands-on security training platforms (TryHackMe) and CTF c
 ## Technical Skills Summary
 
 ### Security Operations
-Wazuh XDR • Splunk • ELK Stack • Suricata • Snort • TheHive • Shuffle SOAR • MISP • Nessus • OpenVAS • VirusTotal
+Wazuh XDR • Splunk • ELK Stack • Suricata • Snort • CrowdSec • SafeLine WAF • TheHive • Cortex • Shuffle SOAR • MISP • Nessus • OpenVAS • VirusTotal • AbuseIPDB • Shodan • Hybrid Analysis • Malware Bazaar • OWASP ZAP
+
 ### Network & Infrastructure
-pfSense • OPNsense • FortiGate • PAN-OS • Proxmox • Docker • Kubernetes • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS
+pfSense • OPNsense • FortiGate • PAN-OS • Cisco IOS/IOS XE • OSPF • VLANs • Proxmox VE • Docker • Kubernetes (K3s) • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS • NetFlow
+
 ### Identity & Access Management
-Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA • RBAC
-### Security Tooling
-Wireshark • Brim • Sysinternals • CyberChef • Volatility • Nmap • Burp Suite • Metasploit 
+Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA (TOTP/FIDO2) • RBAC 
+
+### Security Tooling & DFIR
+Wireshark • Brim/ZUI • Zeek • ntopng • NetworkMiner • tcpdump • Sysinternals • CyberChef • Volatility • KAPE • Autopsy • Eric Zimmerman Tools • Velociraptor • Nmap • Hydra • Burp Suite • Metasploit
+
 ### Monitoring & Analysis
-Grafana • Prometheus • Checkmk • Uptime Kuma • NetAlertX • Pulse
+Grafana • Prometheus • Checkmk • Uptime Kuma • NetAlertX • Pulse • Blackbox Exporter • Kibana
+
 ### Automation & Scripting
 PowerShell • Bash • SQL • Ansible • Terraform • n8n • Git/GitHub • JSON/YAML/XML • REST API
+
 ### Compliance & Frameworks
-NIST CSF 2.0 • CIS Controls v8.1 • ISO 27001 • MITRE ATT&CK • OWASP • CIS Benchmarks
+NIST CSF 2.0 • NIST SP 800-53 • NIST SP 800-207 (Zero Trust) • CIS Controls v8.1 • CIS Benchmarks • CISA ZT Maturity Model v2.0 • ISO 27001 • MITRE ATT&CK • OWASP Top 10 • PCI-DSS v4.0
+
 ### Operating System Administration
-Windows 11 • Windows Server • Linux (Debian/Red Hat) • FreeBSD • macOS • iOS • Android
+Windows 11 • Windows Server • Linux (Debian/Ubuntu/Red Hat/Fedora) • FreeBSD • macOS • iOS • Android
 
 ---
 
