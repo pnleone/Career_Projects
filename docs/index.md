@@ -141,7 +141,7 @@ Windows 11 • Windows Server • Linux (Debian/Red Hat) • FreeBSD • macOS �
 ## Resume & Contact
 
 !!! info "Download Resume"
-    [:material-file-account: Current Resume (PDF)](https://github.com/pnleone/Career_Projects/blob/77388f53cac4fb72fe756653baace0efd44900c8/docs/Paul_Leone_Resume_2026-01-25.pdf)
+    [:material-file-account: Current Resume (PDF)](https://github.com/pnleone/Career_Projects/blob/77388f53cac4fb72fe756653baace0efd44900c8/docs/Paul_Leone_Resume_CS-2026-03-15.pdf)
 
 ### Connect With Me
 
