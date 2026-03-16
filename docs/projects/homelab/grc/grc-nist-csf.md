@@ -1,8 +1,8 @@
 # NIST Cybersecurity Framework 2.0
 
 **Document Control:**   
-Version: 1.0  
-Last Updated: January 2026  
+Version: 1.1  
+Last Updated: March 2026  
 Owner: Paul Leone 
  
 **Framework Version:** NIST CSF 2.0
@@ -133,7 +133,7 @@ Owner: Paul Leone
 | PR.AA-02 | Identities authenticated | SSH key-based authentication; Authentik SSO; MFA enforcement; certificate-based authentication (Step-CA) |
 | PR.AA-03 | Service provider identities authenticated | Traefik ForwardAuth SSO; OAuth2/OIDC integration; API key authentication; certificate validation |
 | PR.AA-04 | Identity assertions verified | SAML/OIDC token validation; JWT signature verification; session token validation; certificate chain verification |
-| PR.AA-05 | Access permissions/authorizations managed | Authentik RBAC groups; SSH sudo enforcement; Traefik middleware access control; least-privilege principle |
+| PR.AA-05 | Access permissions/authorizations managed | Authentik RBAC groups; SSH sudo enforcement; Traefik middleware access control; least-privilege principle; Palo Alto User-ID integrates with Active Directory (dc01/dc02.home.com) to map IP-to-user/group identity at the firewall layer. Security policies reference AD groups directly, enforcing differentiated access profiles (HR, IT, Lab users) without per-IP rule management. |
 | PR.AA-06 | Physical access managed | Physical security (personal lab): locked server rack, limited access; environmental monitoring; backup power (UPS) |
 
 ---
@@ -155,7 +155,7 @@ Owner: Paul Leone
 | Subcategory | Description | Implementation |
 |-------------|-------------|----------------|
 | PR.DS-01 | Data-at-rest protected | Encrypted backups (AES-256); TLS in transit; scan credential encryption; SSH private keys encrypted; encrypted log transmission (syslog-ng TLS to SIEM); immutable SIEM indexes |
-| PR.DS-02 | Data-in-transit protected | TLS 1.3 encryption (Traefik); Ed25519 SSH keys; DNSSEC validation; encrypted VPN tunnels (Tailscale, WireGuard) |
+| PR.DS-02 | Data-in-transit protected | TLS 1.3 encryption (Traefik); Ed25519 SSH keys; DNSSEC validation; encrypted VPN tunnels (Tailscale, WireGuard); GlobalProtect endpoint VPN - certificate-based authentication via Step-CA issued certificates; IPSec IKEv2 site-to-site tunnels - AES-256-GCM encryption, SHA-384 authentication, DH Group 20 (384-bit ECC) |
 | PR.DS-10 | Integrity/authenticity of hardware/software verified | Package signature verification; container image verification (SHA-256); Step-CA certificate validation |
 | PR.DS-11 | Data disposal practices established | Secure deletion procedures; backup rotation policies; log retention limits (90 days); expired certificate cleanup |
 
@@ -165,7 +165,7 @@ Owner: Paul Leone
 
 | Subcategory | Description | Implementation |
 |-------------|-------------|----------------|
-| PR.IR-01 | Networks/environments protected | HA DNS failover (dual Pi-hole); Traefik zero-downtime reloads; firewall clustering; network segmentation |
+| PR.IR-01 | Networks/environments protected | HA DNS failover (dual Unbound and Technitium); Traefik zero-downtime reloads; firewall clustering; network segmentation; Palo Alto PA-VM security zones enforce explicit zone-based segmentation. Zone pairs require an explicit security policy to permit traffic; default inter-zone action is deny. Zone architecture: Untrust (WAN), Trust (internal), DMZ, Management. Extends existing network segmentation entry alongside HA firewall clustering and VLAN isolation |
 | PR.IR-02 | Security architectures established/maintained | Defense-in-depth architecture; zero-trust principles; documented security controls; continuous assessment |
 | PR.IR-03 | Hardware/software disposal practices established | Limited -- homelab. Secure wiping procedures; decommissioning checklists |
 | PR.IR-04 | Adequate capacity ensured | Prometheus capacity monitoring; Pulse hypervisor monitoring; disk space alerts; resource trending |
@@ -192,7 +192,7 @@ Owner: Paul Leone
 
 | Subcategory | Description | Implementation |
 |-------------|-------------|----------------|
-| DE.AE-02 | Potentially adverse events analyzed | Vulnerability trending; exploit likelihood assessment; Cortex automated enrichment; MISP threat intelligence correlation; Shuffle orchestrated analysis workflows |
+| DE.AE-02 | Potentially adverse events analyzed | Vulnerability trending; exploit likelihood assessment; Cortex automated enrichment; MISP threat intelligence correlation; Shuffle orchestrated analysis workflows; Anomaly detection via Zeek alert/weird logging and netflow monitoring |
 | DE.AE-03 | Information on adverse events correlated | Multi-source correlation (Splunk + Elastic + Wazuh + network logs); TheHive aggregates alerts from SIEM, EDR, IDS; Shuffle orchestrates cross-platform queries |
 | DE.AE-04 | Impact of adverse events understood | TheHive case severity scoring; asset criticality assessment; business impact analysis; risk-based prioritization |
 | DE.AE-05 | Incident alert thresholds established | Splunk correlation search thresholds; Wazuh rule severity levels; TheHive case severity matrix; Prometheus alert thresholds; Grafana panel thresholds |
@@ -226,7 +226,7 @@ Owner: Paul Leone
 |-------------|-------------|----------------|
 | RS.AN-01 | Notifications investigated | Cortex multi-engine analysis; MISP correlation; Splunk queries; Wazuh forensic data; TheHive case investigation |
 | RS.AN-02 | Impact of incidents understood | Asset inventory correlation; data classification; business impact analysis; TheHive case severity assessment |
-| RS.AN-03 | Forensics performed | Wazuh forensic data collection; memory dumps; network captures; Shuffle automated forensic workflows; evidence preservation |
+| RS.AN-03 | Forensics performed | Wazuh forensic data collection; memory dumps; network captures; Shuffle automated forensic workflows; evidence preservation; Zeek logging with rapid local querying via Brim/ZUI; ntopng netflow historical data flow.  |
 | RS.AN-04 | Incidents categorized | TheHive taxonomy; MITRE ATT&CK mapping; severity scoring; incident classification (confirmed, false positive, benign) |
 | RS.AN-05 | Incident analysis processes established | Documented analysis procedures; Cortex analyzer workflows; MISP playbooks; Shuffle investigation templates |
 
@@ -258,7 +258,7 @@ Owner: Paul Leone
 
 | Subcategory | Description | Implementation |
 |-------------|-------------|----------------|
-| RS.MI-01 | Vulnerabilities mitigated/documented | Virtual patching (Safeline WAF); IDS signatures; emergency patching via Ansible; TheHive vulnerability tracking |
+| RS.MI-01 | Vulnerabilities mitigated/documented | Virtual patching (Safeline WAF); IDS signatures; emergency patching via Ansible; TheHive vulnerability tracking; Palo Alto Dynamic Block Lists (EDL) enable rapid IOC-based blocking. Threat Prevention profiles apply inline blocking for known exploit signatures |
 | RS.MI-02 | Strategies for responding to incidents established | TheHive playbooks; Shuffle workflows; Cortex responder library; documented response procedures |
 
 ---

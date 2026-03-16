@@ -156,4 +156,4 @@ Windows 11 • Windows Server • Linux (Debian/Ubuntu/Red Hat/Fedora) • FreeB
 
 ---
 
-*This portfolio is actively maintained and updated with new projects, certifications, and technical implementations. Last updated: January 2026*
+*This portfolio is actively maintained and updated with new projects, certifications, and technical implementations. Last updated: March 2026*

@@ -1,7 +1,7 @@
 # CIS Critical Security Controls v8.1
 **Document Control:**   
-Version: 1.0  
-Last Updated: January 2026  
+Version: 1.1  
+Last Updated: March 2026  
 Owner: Paul Leone 
   
 **Framework Version:** CIS Controls v8.1
@@ -202,12 +202,12 @@ Owner: Paul Leone
 | Safeguard | Requirement | Implementation | Notes |
 |-----------|-------------|----------------|-------|
 | 12.1 | Ensure network infrastructure is up-to-date | Network device patch management; monthly version checks; automated update notifications | Compliant |
-| 12.2 | Establish secure network architecture (IG2) | Documented network architecture; segmentation design; least-privilege network design | Compliant |
+| 12.2 | Establish secure network architecture (IG2) | Documented network architecture; segmentation design; least-privilege network design; Palo Alto security zones enforce explicit segmentation. Zone pairs: Untrust-to-DMZ, DMZ-to-Trust, Trust-to-Trust all require explicit allow policies. Default-deny enforced at zone level | Compliant |
 | 12.3 | Securely manage network infrastructure (IG2) | SSH key-based management; HTTPS-only interfaces; IaC version control (Git) | Compliant |
 | 12.4 | Establish architecture diagrams (IG2) | Network topology diagrams; Subnet/VLAN documentation; NetAlertX Networking mapping | Compliant |
 | 12.5 | Centralize network AAA (IG2) | Not Implemented -- Lab does not have a dedicated AAA service deployed | Gap: implement AAA service |
 | 12.6 | Use secure network protocols (IG2) | 802.1X port security (planned); WPA3 wireless; TLS 1.3; SSH v2 only | Compliant |
-| 12.7 | Ensure remote devices use VPN + AAA (IG2) | Tailscale mesh VPN requires device authentication; Cloudflare Tunnels; no direct internet exposure | Compliant |
+| 12.7 | Ensure remote devices use VPN + AAA (IG2) | Tailscale mesh VPN requires device authentication; Cloudflare Tunnels; no direct internet exposure; Palo Alto GlobalProtect VPN; 	IPSec site-to-site: IKEv2, AES-256-GCM, SHA-384, DH Group 20. Dead Peer Detection enabled. Tunnel monitoring active | Compliant |
 | 12.8 | Establish dedicated admin workstations (IG3) | Partial - Dedicated admin VM; not fully air-gapped from internet | Gap: Implement fully isolated admin workstation |
 
 **Control 12 Overall Status**: **IG1/IG2 Compliant; IG3 Partial**
@@ -218,14 +218,14 @@ Owner: Paul Leone
 
 | Safeguard | Requirement | Implementation | Notes |
 |-----------|-------------|----------------|-------|
-| 13.1 | Centralize security event alerting (IG2) | Dual SIEM (Splunk + Elastic); TheHive case management; Discord/email alerting | Compliant |
+| 13.1 | Centralize security event alerting (IG2) | Dual SIEM (Splunk + Elastic); TheHive case management; Discord/email alerting; NSM host deploys Zeek + ntopng/nProbe as dedicated network visibility layer. Logs forwarded to Elastic. Separate from SIEM host to avoid I/O contention  | Compliant |
 | 13.2 | Deploy host-based IDS (IG2) | Wazuh EDR on 25+ endpoints; FIM monitoring; rootkit detection; process monitoring | Compliant |
 | 13.3 | Deploy network IDS (IG2) | Suricata (IPS inline); Snort (IDS passive); CrowdSec (behavioral) | Compliant |
 | 13.4 | Perform traffic filtering between segments (IG2) | pfSense/OPNsense inter-VLAN ACLs; firewall rules per segment; default-deny policies | Compliant |
 | 13.5 | Manage access control for remote assets (IG2) | NAC principles applied; Tailscale device posture checks; Wazuh agent compliance verification | Compliant |
 | 13.6 | Collect network traffic flow logs (IG2) | pfSense/OPNsense flow logs; Suricata EVE JSON; packet captures (tcpdump); SIEM ingestion | Compliant |
 | 13.7 | Deploy host-based IPS (IG3) | Wazuh Active Response (firewall-drop, host-deny); EDR blocking capabilities | Compliant |
-| 13.8 | Deploy network IPS (IG3) | Suricata inline blocking mode; CrowdSec automated firewall rules; pfSense IPS integration | Compliant |
+| 13.8 | Deploy network IPS (IG3) | Suricata inline blocking mode; CrowdSec automated firewall rules; pfSense IPS integration; Palo Alto Threat Prevention profiles (inline IPS) complement Suricata/Snort. App-ID blocks unwanted applications regardless of port. | Compliant |
 | 13.9 | Deploy port-level access control (IG3) | Not Implemented -- Network switching replacement required; currently using MAC filtering + admin VLAN segmentation | Gap: Implement 802.1X NAC |
 | 13.10 | Perform application layer filtering (IG3) | SafeLine WAF (OWASP CRS rules); Traefik middleware filtering; NGINX Ingress rules | Compliant |
 | 13.11 | Tune security event alerting thresholds (IG3) | Monthly tuning of Splunk/Wazuh/Suricata thresholds; false positive reduction tracking | Compliant |
