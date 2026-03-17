@@ -19,3 +19,7 @@
 | :material-chart-box-outline: **[ Governance, Risk and Compliance Landing Page](/Career_Projects/projects/homelab/grc/grc-index/)** | Governance, Risk and Compliance Sections |
 
 
+<figure>
+    <img src="/Career_Projects/assets/diagrams/SecurityLAb_Network-2026-03-17.png.png" alt="Network Overview">
+    <figcaption>Current Lab Overview</figcaption>
+</figure>
