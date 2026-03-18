@@ -20,6 +20,6 @@
 
 
 <figure>
-    <img src="/Career_Projects/assets/diagrams/SecurityLAb_Network-2026-03-17.png.png" alt="Network Overview">
+    <img src="/Career_Projects/assets/diagrams/SecurityLab_Network-2026-03-17.png" alt="Network Overview">
     <figcaption>Current Lab Overview</figcaption>
 </figure>
