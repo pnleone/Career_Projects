@@ -1,9 +1,6 @@
 
 # **Cybersecurity & Systems Engineering Portfolio**
 
-**Building secure, data‑driven systems that elevate operational resilience**
-
----
 ## About
 **Paul Leone** | *Aspiring Security Analyst & Infrastructure Engineer*
 
