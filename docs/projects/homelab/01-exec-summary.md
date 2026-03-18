@@ -2,14 +2,14 @@
 ## Executive Overview and Security Posture
 
 **Document Control:**   
-Version: 1.0  
-Last Updated: MArch 15, 2026  
+Version: 1.1  
+Last Updated: March 18, 2026  
 Owner: Paul Leone 
  
 ---
-## 1. Executive Overview and Security Posture
+## Executive Overview and Security Posture
 
-### 1.1 Lab Mission Statement
+### Lab Mission Statement
 
 This enterprise-grade security lab demonstrates production-ready capabilities across **Security Operations (SecOps), Systems Engineering**, and **Network Defense**. Designed to simulate real-world enterprise environments, the lab serves as both a technical proving ground and a continuous learning platform focused on:
 
@@ -22,20 +22,21 @@ This enterprise-grade security lab demonstrates production-ready capabilities ac
 
 ---
 
-### 1.2 Architecture Principals
+### Architecture Principals
 
-Every design decision in this lab is guided by three core security principles that align with industry frameworks (NIST CSF 2.0, CIS Controls v8, MITRE ATTandCK):
+Every design decision in this lab is guided by three core security principles that align with industry frameworks (NIST CSF 2.0, CIS Controls v8, MITRE ATT&CK):
 
-#### 1. Defense in Depth
+### 1. Defense in Depth
 
 Multiple independent security layers ensure that a single compromised control does not result in full system compromise. Network segmentation, application-layer filtering, endpoint monitoring, and identity verification create overlapping defensive barriers.
 
 **Technical Implementation:**
 
-- Network perimeter (firewall ACLs, IDS/IPS)
-- Application layer (WAF, reverse proxy authentication)
-- Endpoint security (EDR agents, vulnerability scanning)
-- Identity controls (MFA, RBAC, PKI)
+- **Network perimeter:** Multi-platform firewall enforcement (pfSense HA, OPNsense, FortiGate 30D, Palo Alto VM-Series) with IDS/IPS inline blocking
+- **Application layer:** WAF (SafeLine), reverse proxy authentication (Traefik/ForwardAuth)
+- **Endpoint security:** EDR agents (Wazuh), vulnerability scanning (OpenVAS/Nessus)
+- **Identity controls:** MFA, RBAC, PKI
+- **Network visibility:** NSM sensor (Zeek + ntopng), NetFlow from Cisco and Palo Alto infrastructure
 
 #### 2. Secure by Design
 
@@ -43,10 +44,10 @@ Security controls are embedded into architecture from the ground up, not bolted 
 
 **Technical Implementation:**
 
-- Automated PKI with certificate lifecycle management
-- Mandatory authentication via Authentik SSO for web services
-- Encrypted DNS (DNSSEC)
-- Immutable infrastructure through IaC version control
+- **Automated PKI:** Certificate lifecycle management via StepCA + offline OpenSSL Root CA
+- **Mandatory authentication:** Authentik SSO for all web services with ForwardAuth middleware
+- **Encrypted DNS:** DNSSEC validation enforced; root-recursive resolution via Unbound
+- **Immutable infrastructure:** IaC version control via Terraform and Ansible
 
 #### 3. Zero Trust Architecture
 
@@ -54,47 +55,60 @@ No implicit trust is granted based on network location. Every request is authent
 
 **Technical Implementation:**
 
-- ForwardAuth middleware validates identity at the edge
-- Network segmentation isolates trust zones
-- Certificate-based mutual TLS for service-to-service communication
-- Tailscale mesh VPN for authenticated peer-to-peer connectivity
+- **ForwardAuth middleware:** Validates identity at the edge before proxying requests
+- **Network segmentation:** VLAN-based trust zones with default-deny inter-zone ACLs
+- **Certificate-based mTLS:** Service-to-service communication enforced via internal PKI
+- **Identity-driven policy:** Palo Alto User-ID maps AD group membership to firewall policy
+- **Mesh VPN:** Tailscale WireGuard-encrypted peer-to-peer connectivity
 
 ---
 
-### 1.3 Key Capabilities Demonstrated
+### Key Capabilities Demonstrated
 
 #### Strategic Value
 
 - **Reduced Attack Surface:** Multi-layer controls detect and block threats at network, application, and endpoint levels
 - **Operational Resilience:** High-availability architecture ensures continuous security monitoring even during maintenance
-- **Compliance Readiness:** Framework alignment with NIST CSF 2.0, CIS Controls v8, and MITRE ATTandCK demonstrates audit-ready documentation
+- **Compliance Readiness:** Framework alignment with NIST CSF 2.0, CIS Controls v8, and MITRE ATT&CK demonstrates audit-ready documentation
 - **Scalability:** Container orchestration and IaC enable rapid deployment of new security controls without manual configuration
 
 #### Engineering Depth
 
-- **Advanced Threat Detection:** Behavioral threat intelligence (CrowdSec), network anomaly detection (Suricata/Snort), and SIEM correlation (ELK Stack/Splunk)
+- **Advanced Threat Detection:** Behavioral threat intelligence (CrowdSec), multi-engine IDS/IPS (Suricata/Snort), SIEM correlation (ELK Stack/Splunk), and NSM deep inspection (Zeek/ntopng)
+- **Next-Generation Firewall:** Palo Alto VM-Series with App-ID, User-ID, WildFire, GlobalProtect, and IPSec site-to-site tunnels; FortiGate 30D physical appliance for microsegmentation
 - **Automated Incident Response:** SOAR workflows integrate TheHive case management, Cortex/MISP enrichment, and automated remediation via pfSense API
 - **Infrastructure as Code:** Terraform and Ansible enable version-controlled, repeatable deployments with full audit trails
-- **Full-Stack Observability:** Unified metrics collection (Prometheus), visualization (Grafana/Pulse), and alerting (Discord webhooks, SMTP relay)
+- **Full-Stack Observability:** Unified metrics (Prometheus), visualization (Grafana), service monitoring (Uptime Kuma, Checkmk), and NetFlow-based traffic analysis (ntopng)
 - **Forensic Readiness:** Comprehensive logging, artifact preservation, and analysis tools (Volatility, KAPE, Velociraptor) support post-incident investigation
 
 ---
 
-## 2. Security Posture
+## Security Posture
 
-### 2.1 Network and Perimeter Security
+### Network and Perimeter Security
 
 #### Network Segmentation and Zone-Based Firewall
 
-Multiple VLANs create trust boundaries between production services, internal lab systems, and isolated research environments. pfSense/OPNsense firewalls enforce stateful inspection with default-deny rules, permitting only explicitly authorized traffic flows between zones.
+Multiple VLANs create trust boundaries between production services, internal lab systems, and isolated research environments. Four independent firewall platforms enforce stateful and next-generation inspection with default-deny rules, permitting only explicitly authorized traffic flows between zones.
 
 **Security Impact:** Lateral movement is restricted; compromised systems cannot pivot freely across network segments.
 
 **Technical Details:**
 
-- Trust zones: Production (VLAN 10), Internal Lab (VLAN 20), Isolated Research (VLAN 30)
-- Inter-VLAN routing controlled by firewall ACLs with logged denials
-- Rate-limiting prevents port scanning and brute-force attempts
+- **Trust zones:** Production (VLAN 10 / 192.168.1.0/24), Lab LAN1 (VLAN 100 / 192.168.100.0/24), Lab LAN2 (VLAN 200 / 192.168.200.0/24), Isolated LAN (10.20.0.0/24), DMZ (192.168.2.0/24)
+- **Inter-VLAN routing:** Controlled by firewall ACLs with logged denials; Cisco 3560X provides hardware-based L2/L3 switching across six VLANs
+- **Rate limiting:** Prevents port scanning and brute-force attempts across all perimeter interfaces
+
+#### Multi-Platform Firewall Architecture
+
+The lab deploys four independent firewall platforms, each enforcing a distinct layer of the security policy. All platforms use default-deny baseline rules with explicit allow policies and comprehensive logging feeding the SIEM.
+
+| Platform | Role | Zone Coverage | Key Capability |
+| --- | --- | --- | --- |
+| pfSense HA Cluster | Primary perimeter firewall | Prod_LAN, Lab_LAN1/2, VPN | Active/passive HA with CARP failover; IDS/IPS (Suricata + Snort); CrowdSec bouncer |
+| OPNsense | Secondary / isolation firewall | ISO_LAN boundary | Zone-based ACLs; CrowdSec enforcement; microsegmentation for test workloads |
+| FortiGate 30D | Management VLAN firewall | VLAN 3 / 192.168.3.0/24 | Physical appliance; SSL VPN; policy-based routing; FortiOS CLI/NSE practice platform |
+| Palo Alto VM-Series | NGFW — app/identity-layer enforcement | DMZ, ISO_LAN1, Prod_LAN, Site2 | App-ID, User-ID (AD), WildFire, GlobalProtect VPN, IPSec site-to-site, NetFlow export |
 
 #### High-Availability Firewall Cluster
 
@@ -107,6 +121,20 @@ Dual pfSense VMs operate in active/passive HA mode with CARP virtual IP failover
 - Sub-second failover with maintained TCP session state
 - Configuration sync ensures policy consistency across nodes
 - Health monitoring triggers automatic failover on node failure
+
+#### Cisco Physical and Virtual Infrastructure
+
+The lab operates a mixed Cisco environment: three virtual IOS/IOS XE routers as KVM guests in Proxmox, and one physical Catalyst 3560X-24T-S Layer 3 switch. All devices participate in OSPF Area 0 for dynamic route distribution and export NetFlow to ntopng for traffic visibility.
+
+**Security Impact:** Isolated routing domain for protocol testing without impacting production; ACL and routing policy validation; L2 hardening (DHCP snooping, BPDU guard, port-security, sticky MACs) on the physical switch.
+
+**Technical Details:**
+
+- **Access control:** SSH v2 only; Telnet disabled; VTY lines restricted to 192.168.1.0/24 via MGMT_ACCESS ACL
+- **Secret hashing:** Type 9 (SCRYPT) on IOS XE; service password-encryption enabled on all devices
+- **OSPF authentication:** MD5 on all peering interfaces; passive-interface by default on all non-P2P links
+- **NetFlow export:** All three routers export to ntopng (192.168.1.48:2056) for flow-level visibility
+- **L2 hardening (3560X):** DHCP snooping, BPDU guard, port-security with sticky MACs; unused ports shut down in dead VLAN
 
 #### Inline Intrusion Prevention System (IPS)
 
@@ -136,7 +164,7 @@ OpenVAS and Nessus perform authenticated and unauthenticated scans across all ne
 
 ---
 
-### 2.2 Identity and Access Management
+### Identity and Access Management
 
 #### Centralized Identity Provider (IdP)
 
@@ -189,7 +217,7 @@ Isolated Windows domain Active Directory Enterprise Certificate Authority also d
 
 ---
 
-### 2.3 Web and Application Security
+### Web and Application Security
 
 #### Reverse Proxy with TLS Termination
 
@@ -240,46 +268,60 @@ SafeLine inspects HTTP/HTTPS traffic for OWASP Top 10 vulnerabilities including 
 
 ---
 
-### 2.4 DNS and Name Resolution
+### DNS and Name Resolution
 
-#### Network-Wide Ad Blocking and Threat Intelligence
+#### Integrated DNS Threat Filtering and Ad-Blocking
 
-Pi-hole filters DNS queries against blocklists containing advertising, tracking, and known-malicious domains. Conditional forwarding routes internal queries to Bind9 authoritative DNS server.
+Unbound provides recursive DNS resolution with ad-blocking integrated directly into the resolver. Curated blocklists are ingested nightly, sanitized, and atomically deployed as Unbound-native local-data blocks. Blocked domains return NXDOMAIN, preventing outbound connections from being established.
 
-**Security Impact:** Malware C2 communication blocked at DNS level; phishing domains prevented from resolving.
+**Security Impact:** Malware C2 communication and phishing domains blocked at the DNS layer before any network connection is attempted.
 
 **Technical Details:**
 
-- 1M+ blocked domains from curated threat feeds (StevenBlack)
-- Query logging retained for threat hunting and anomaly detection
-- ELK integration for event logging and correlation
+- Blocklists sourced from Hagezi PRO, CNAME cloaking list, DoH/DoT blockers, SmartTV and platform-specific tracking feeds
+- Nightly automation: download → normalize → deduplicate → syntax validate → atomic deploy → conditional reload
+- Query logging forwarded to SIEM for threat hunting and anomaly detection
 
 #### Privacy-Preserving Recursive DNS
 
-Unbound queries root DNS servers directly rather than forwarding to public resolvers (Google/Cloudflare), eliminating third-party visibility into DNS queries.
+Unbound queries root DNS servers directly using iterative resolution from root hints. No upstream forwarder is configured, eliminating third-party visibility into DNS query metadata.
 
-**Security Impact:** Enhanced privacy; reduced metadata exposure to external parties.
+**Security Impact:** No external resolver logs, processes, or retains query data; full privacy from ISP and third-party DNS providers.
 
 **Technical Details:**
 
-- DNSSEC validation ensures response authenticity and integrity
-- Response caching reduces query latency and upstream load
-- Prefetching popular domains improves resolution speed
+- DNSSEC validation enforced: `harden-dnssec-stripped: yes`; `val-permissive-mode: no` — invalid or stripped signatures return SERVFAIL
+- CNAME cloaking and DoH/DoT egress blocking prevent clients from bypassing resolver controls
+- Independent caches on each resolver node reduce latency and improve resilience
+
+#### Authoritative DNS (home.com)
+
+Technitium DNS provides authoritative resolution for the home.com zone. DNS01 (192.168.1.150) serves as zone master; DNS02 (192.168.1.151) maintains a full zone replica via AXFR/IXFR. Unbound forwards all home.com queries to both hosts with automatic failover.
+
+**Security Impact:** Internal namespace is fully isolated from external resolvers; zone transfer ACL restricts AXFR to DNS02 only.
+
+**Technical Details:**
+
+- SOA, NS, and glue records define dns01/dns02 as authoritative for home.com
+- Zone transfer ACL: AXFR permitted from 192.168.1.151 only
+- DNSSEC signing available; currently disabled
 
 #### High-Availability DNS Architecture
 
-Dual Pi-hole instances deployed across separate Docker hosts with external Sync mechanism for configuration replication. Clients configured with both DNS servers for automatic failover.
+Full redundancy is implemented at all tiers. Clients configure both Unbound nodes (192.168.1.153 / 192.168.1.154) as DNS servers; failover is automatic via the client resolver. Each node maintains an independent cache. Systemd watchdog on both Unbound nodes (WatchdogSec=30s) restarts the service automatically if it becomes unresponsive.
 
-**Security Impact:** DNS filtering remains operational during maintenance or host failures.
+**Security Impact:** DNS filtering, recursive resolution, and internal name resolution remain operational through single-node failure at any tier.
 
 **Technical Details:**
 
-- Automated sync of blocklists, local DNS records, and DHCP leases
-- Health monitoring via Uptime Kuma; alerts on service degradation
+- Unbound-01 (192.168.1.153) — primary recursive resolver
+- Unbound-02 (192.168.1.154) — secondary recursive resolver; independent cache; node-specific TLS keys
+- Technitium DNS01/DNS02 — redundant authoritative pair; zone synchronized via AXFR/IXFR
+- Health monitoring via Uptime Kuma; alerts on service degradation via Discord webhook
 
 ---
 
-### 2.5 Remote Access, Privacy and Endpoint Security
+### Remote Access, Privacy and Endpoint Security
 
 #### Hardened SSH Configuration
 
@@ -298,7 +340,7 @@ SSH event logging in Wazuh with active response rules to block access when multi
 
 #### Endpoint Detection and Response (EDR)
 
-Wazuh agents collect security telemetry from Windows, Linux, FreeBSD, and macOS endpoints. Central manager correlates events using MITRE ATTandCK-aligned rules, generating alerts for suspicious activities.
+Wazuh agents collect security telemetry from Windows, Linux, FreeBSD, and macOS endpoints. Central manager correlates events using MITRE ATT&CK-aligned rules, generating alerts for suspicious activities.
 
 **Security Impact:** Real-time visibility into endpoint behavior; detection of Living-off-the-Land (LOTL) techniques and anomalous processes.
 
@@ -346,7 +388,29 @@ Select subnets and containers route outbound traffic through VPN gateways (PIA, 
 
 ---
 
-### 2.6 Observability and Monitoring
+### Observability and Monitoring
+
+#### Network Security Monitoring (NSM) — Zeek + ntopng
+
+Dedicated Ubuntu-based sensor VM (192.168.1.48) running on Proxmox, purpose-built for deep packet inspection, network flow collection, and protocol metadata extraction. Operates as a passive, observe-only node — no traffic is routed through it. Log output feeds the Elastic stack for long-term retention and Brim/Zui for local forensic analysis.
+
+**Security Impact:** Full protocol metadata across all monitored segments; NetFlow-based east-west and north-south visibility; passive-only design eliminates sensor as an attack vector or pivot point; SOC-grade log output for correlation, alerting, and forensic review.
+
+##### Zeek — Protocol Metadata Engine
+
+Zeek runs in a cluster layout across three capture interfaces. All output is JSON-formatted for direct ingestion by Elastic and Brim/Zui.
+
+- **Protocol analyzers:** DNS, HTTP, SSL/TLS, SSH, SMB, RDP, DCE-RPC
+- **Frameworks:** Notice, Intel, Weird, File hashing
+- **Log path:** /opt/monitoring/zeek/ (site/, logs/, spool/)
+
+##### ntopng — Flow Visibility
+
+ntopng ingests NetFlow v9 exports from pfSense, OPNsense, Cisco routers (R1, R2, R3), and Palo Alto firewalls. Provides flow-level traffic analysis via web UI, complementing Zeek's per-connection metadata with aggregate traffic patterns, top-talkers, and bandwidth consumption.
+
+- **NetFlow sources:** pfSense, OPNsense, Cisco R1/R2/R3, Palo Alto (all exporting to 192.168.1.48:2056)
+- **Visibility:** East-west and north-south traffic; per-host/application flow aggregation
+- **SIEM integration:** Flow data available for correlation with Zeek metadata and Wazuh alerts
 
 #### Unified Metrics Platform
 
@@ -398,7 +462,7 @@ Checkmk deploys agents to monitor OS-level metrics, application services, and ne
 
 ---
 
-### 2.7 Alerting and Notification Infrastructure
+### Alerting and Notification Infrastructure
 
 #### Centralized Alert Hub (Discord)
 
@@ -438,7 +502,7 @@ Gmail SMTP relay with app-specific password and TLS encryption enables email not
 
 ---
 
-### 2.8 Automation and Orchestration
+### Automation and Orchestration
 
 #### Infrastructure as Code (IaC)
 
@@ -500,13 +564,13 @@ Multi-platform patch management ensures timely deployment of security updates ac
 
 **Technical Details:**
 
-- PatchMon: Monitors Linux hosts for outdated packages via apt/yum/dnf; alerts on available security updates with CVE mapping
-- Watchtower and WUD (What's Up Docker): Monitors Docker container images for new releases; WUD sends Discord alerts when updates available; Watchtower automates container updates on approved images
-- Windows Server Update Services (WSUS): Centralized management of Microsoft product updates; approval workflows ensure controlled deployment; clients pull updates from internal WSUS server reducing internet bandwidth consumption
+- **PatchMon:** Monitors Linux hosts for outdated packages via apt/yum/dnf; alerts on available security updates with CVE mapping
+- **Watchtower and WUD (What's Up Docker):** Monitors Docker container images for new releases; WUD sends Discord alerts when updates available; Watchtower automates container updates on approved images
+- **Windows Server Update Services (WSUS):** Centralized management of Microsoft product updates; approval workflows ensure controlled deployment; clients pull updates from internal WSUS server reducing internet bandwidth consumption
 
 ---
 
-### 2.9 Security Orchestration, Automation and Response (SOAR)
+### Security Orchestration, Automation and Response (SOAR)
 
 #### Incident Case Management (TheHive)
 
@@ -533,7 +597,7 @@ Shuffle SOAR orchestrates multi-step response actions across tools via visual wo
 
 ---
 
-### 2.10 Behavioral Threat Intelligence (CrowdSec)
+### Behavioral Threat Intelligence (CrowdSec)
 
 #### Community-Driven Threat Detection
 
@@ -561,9 +625,9 @@ pfSense firewall bouncer receives blocking decisions from CrowdSec Local API and
 
 ---
 
-### 2.11 Security Tooling and Digital Forensics
+### Security Tooling and Digital Forensics
 
-#### Offensive Security Validation (Kali ParrotOS Linux)
+#### Offensive Security Validation (Kali / ParrotOS Linux)
 
 Dedicated attack platform validates security controls via authorized penetration testing. Tools include Nmap (service discovery), Metasploit (exploitation), Burp Suite (web app testing), and Hydra (credential testing).
 
@@ -576,7 +640,7 @@ Dedicated attack platform validates security controls via authorized penetration
 
 #### Network Forensics and Packet Analysis
 
-Wireshark, Brim, and tcpdump capture and analyze network traffic for incident investigation, protocol troubleshooting, and malware C2 detection.
+Wireshark, Brim/ZUI, and tcpdump capture and analyze network traffic for incident investigation, protocol troubleshooting, and malware C2 detection.
 
 **Security Impact:** Deep visibility into encrypted handshakes, anomalous protocols, and data exfiltration attempts.
 
@@ -600,7 +664,7 @@ Comprehensive DFIR toolkit including Volatility (memory forensics), KAPE (rapid 
 
 ---
 
-### 2.12 Backup and Business Continuity
+### Backup and Business Continuity
 
 #### Multi-Tier Backup Strategy
 
@@ -621,19 +685,19 @@ Proxmox snapshots captured before configuration changes, system updates, or expe
 
 **Technical Details:**
 
-- Snapshot naming convention: YYYY-MM-DD_<description> (e.g., 2025-01-08_kernel-update)
+- Snapshot naming convention: YYYY-MM-DD_\<description\> (e.g., 2025-01-08_kernel-update)
 - Pre-update checklist enforces snapshot creation
 - Snapshot storage monitoring prevents disk exhaustion
 
 ---
-## 3 Security Homelab Section Links
+
+## Security Homelab Section Links
 
 - **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)**
-- **[Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** 
-- **[Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** 
-- **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** 
+- **[Infrastructure Platform, Virtualization Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)**
+- **[Network Security, Privacy and Remote Access](/Career_Projects/projects/homelab/03-network/)**
+- **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)**
 - **[Automation and IaC](/Career_Projects/projects/homelab/05-auto-iac/)**
 - **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
 - **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
-
