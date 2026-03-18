@@ -26,7 +26,13 @@
     <figcaption>Current Lab Overview</figcaption>
 </figure>
 
-## Documentation Downloads
+<!-- ## Documentation Downloads
 !!! info "Download Documentation"
     * [:material-file-account: Security Lab Diagrams (PDF)](https://github.com/pnleone/Career_Projects/blob/8dfc1bc559389d47525de684ef8997fa11dc8da3/docs/security_lab_diagrams.pdf)
-    * [:material-file-account: Mission Statement and Security Posture (PDF)](https://github.com/pnleone/Career_Projects/)
+    * [:material-file-account: Mission Statement and Security Posture (PDF)](https://github.com/pnleone/Career_Projects/) -->
+
+## Documentation Downloads
+
+!!! info "Download Documentation"
+    * [:material-file-download: Security Lab Diagrams (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/security_lab_diagrams.pdf){ download="Security_Lab_Diagrams.pdf" }
+    * [:material-file-download: Mission Statement (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/mission_statement.pdf){ download="Security_Posture.pdf" }
