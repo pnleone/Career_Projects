@@ -24,3 +24,5 @@
     <img src="/Career_Projects/assets/diagrams/securitylab-subnets.png" alt="Network Overview">
     <figcaption>Current Lab Overview</figcaption>
 </figure>
+!!! info "Download Diagrams"
+    [:material-file-account: Security Lab Diagrams (PDF)](https://github.com/pnleone/Career_Projects/security_lab_diagrams.pdf)
