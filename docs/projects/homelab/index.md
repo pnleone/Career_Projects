@@ -25,4 +25,4 @@
     <figcaption>Current Lab Overview</figcaption>
 </figure>
 !!! info "Download Diagrams"
-    [:material-file-account: Security Lab Diagrams (PDF)](https://github.com/pnleone/Career_Projects/security_lab_diagrams.pdf)
+    [:material-file-account: Security Lab Diagrams (PDF)](https://github.com/pnleone/Career_Projects/blob/8dfc1bc559389d47525de684ef8997fa11dc8da3/docs/security_lab_diagrams.pdf)
