@@ -18,11 +18,15 @@
 | :material-shield-lock: **[Observability and Response, Part 2 ](/Career_Projects/projects/homelab/08-vis-response-pt2/)** | Security Orchestration, Automation and Response (SOAR), Monitoring, Alerting and Notification Architecture |
 | :material-chart-box-outline: **[ Governance, Risk and Compliance Landing Page](/Career_Projects/projects/homelab/grc/grc-index/)** | Governance, Risk and Compliance Sections |
 
+## Topology
 
 <figure>
     <img src="/Career_Projects/assets/diagrams/SecurityLab_Network-2026-03-17.png" alt="Network Overview">
     <img src="/Career_Projects/assets/diagrams/securitylab-subnets.png" alt="Network Overview">
     <figcaption>Current Lab Overview</figcaption>
 </figure>
-!!! info "Download Diagrams"
+
+## Documentation PDF Download
+!!! info "Download Documentation"
     [:material-file-account: Security Lab Diagrams (PDF)](https://github.com/pnleone/Career_Projects/blob/8dfc1bc559389d47525de684ef8997fa11dc8da3/docs/security_lab_diagrams.pdf)
+        [:material-file-account: Mission Statement and Security Posture (PDF)](https://github.com/pnleone/Career_Projects/)
