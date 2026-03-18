@@ -35,4 +35,4 @@
 
 !!! info "Download Documentation"
     * [:material-file-download: Security Lab Diagrams (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/security_lab_diagrams.pdf){ download="Security_Lab_Diagrams.pdf" }
-    * [:material-file-download: Mission Statement (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/mission_statement.pdf){ download="Security_Posture.pdf" }
+    * [:material-file-download: Mission Statement (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/00-executive_overview_and_security_posture-20260318.pdf){ download="Security_Posture.pdf" }
