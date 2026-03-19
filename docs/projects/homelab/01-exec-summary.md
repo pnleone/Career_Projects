@@ -26,7 +26,7 @@ This enterprise-grade security lab demonstrates production-ready capabilities ac
 
 Every design decision in this lab is guided by three core security principles that align with industry frameworks (NIST CSF 2.0, CIS Controls v8, MITRE ATT&CK):
 
-### 1. Defense in Depth
+#### 1. Defense in Depth
 
 Multiple independent security layers ensure that a single compromised control does not result in full system compromise. Network segmentation, application-layer filtering, endpoint monitoring, and identity verification create overlapping defensive barriers.
 
