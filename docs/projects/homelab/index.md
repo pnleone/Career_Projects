@@ -9,7 +9,7 @@
 | Section | Description |
 |---------|-------------|
 | :material-home-analytics: **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)** | Enterprise-grade security laboratory demonstrating production-ready capabilities across SecOps, systems engineering, and network defense. Multi-layered architecture with SIEM, IDS/IPS, SOAR automation, and zero trust controls. |
-| :material-shield-lock: **[Infrastructure Platform, Virtualzation Stack and Hardware](/Career_Projects/projects/homelab/02-platform/)** | Proxmox virtualization stack, Workload deployment, VMware, Cisco and Container envionment overview |
+| :material-shield-lock: **[Infrastructure Platform and Workload Overview](/Career_Projects/projects/homelab/02-platform/)** | Proxmox virtualization stack, Workload deployment, VMware, Cisco and Container envionment overview |
 | :material-shield-lock: **[Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** | Network security architecture (Firewall/IPS/WAF), Privacy and remote access |
 | :material-shield-lock: **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** | PKI/Certificate Authority Overview, Identity and Access Management (Authentik/Active Directory), Secrets Management |
 | :material-shield-lock: **[Automation and Infrastructure as Code (IaC)](/Career_Projects/projects/homelab/05-auto-iac/)** | Infrastructure provision with Terraform, Configuration Management with Ansible, Workflow automation with n8n, PowerShell, Bash and Python scripting |
@@ -36,3 +36,4 @@
 !!! info "Download Documentation"
     * [:material-file-download: Security Lab Diagrams (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/security_lab_diagrams.pdf){ download="Security_Lab_Diagrams.pdf" }
     * [:material-file-download: Overview and Security Posture (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/00-executive_overview_and_security_posture-20260318.pdf){ download="00-executive_overview_and_security_posture-20260318.pdf" }
+    * [:material-file-download: Infrastructure Platform and Workload Overview (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/01-infrastructure_virtualzation_platform-20260318.pdf){ download="01-infrastructure_virtualzation_platform-20260318.pdf" }
