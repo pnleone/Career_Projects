@@ -33,7 +33,7 @@
 
 ## Documentation Downloads
 
-!!! info "Download Documentation"
+!!! info "Files"
     * [:material-file-download: Security Lab Diagrams (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/security_lab_diagrams.pdf){ download="Security_Lab_Diagrams.pdf" }
     * [:material-file-download: Overview and Security Posture (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/00-executive_overview_and_security_posture-20260318.pdf){ download="00-executive_overview_and_security_posture-20260318.pdf" }
     * [:material-file-download: Infrastructure Platform and Workload Overview (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/01-infrastructure_virtualzation_platform-20260318.pdf){ download="01-infrastructure_virtualzation_platform-20260318.pdf" }

@@ -1,25 +1,73 @@
 # Network Security, Privacy and Remote Access Architecture
 
 **Document Control:**   
-Version: 1.1  
-Last Updated: March 11, 2026  
+Version: 1.2  
+Last Updated: March 19, 2026  
 Owner: Paul Leone 
 
 ---
 
 ## Network Security Architecture
 
-A defense-in-depth edge security architecture implements multiple layers of inspection, filtering, and threat mitigation across network perimeter, application layer, and endpoint boundaries. This multi-engine security stack combines virtualized firewalls (pfSense/OPNsense), intrusion detection/prevention systems (Suricata/Snort), behavioral threat intelligence (CrowdSec), application-layer filtering (SafeLine WAF), and encrypted tunneling (VPN/Zero-Trust access) to provide enterprise-grade network protection.
+A defense-in-depth edge security architecture implements multiple layers of inspection, filtering, and threat mitigation across network perimeter, application layer, and endpoint boundaries. The security stack spans four independent firewall platforms (pfSense HA, OPNsense, FortiGate 30D, Palo Alto VM-Series), multi-engine intrusion detection and prevention (Suricata, Snort, CrowdSec), next-generation application and identity-layer controls (Palo Alto App-ID/User-ID, WildFire), application-layer filtering (SafeLine WAF), network security monitoring (Zeek, ntopng), and encrypted tunneling (VPN/Zero-Trust access) to provide enterprise-grade network protection.
 
-**Security Impact:** Multi-layer inspection detects threats missed by single-engine solutions; behavioral analysis identifies zero-day attacks before signature updates; high-availability clustering ensures uninterrupted protection during maintenance; centralized logging enables threat correlation across all security layers; encrypted tunneling protects data in transit and provides secure remote access without exposing internal infrastructure.
+**Security Impact:** Four independent policy engines provide overlapping enforcement that no single platform can deliver alone. Palo Alto NGFW adds App-ID and User-ID layers that signature-based firewalls cannot replicate. Multi-engine IDS/IPS (Suricata + Snort + CrowdSec) reduces single-engine miss rates from ~15-20% to <5%. Passive NSM (Zeek + ntopng) captures full protocol metadata and NetFlow across all monitored segments without disrupting traffic flows. High-availability clustering ensures uninterrupted perimeter protection during maintenance. Centralized logging and NetFlow aggregation from all firewall and routing platforms enables threat correlation across the entire security stack.
 
-**Deployment Rationale:** Enterprise networks deploy layered security controls because attackers increasingly use evasion techniques (encryption, polymorphic malware, living-off-the-land tactics) that bypass signature-based detection. This architecture mirrors Fortune 500 security operations centers (SOCs) where multiple detection engines (IDS/IPS, behavior analytics, threat intelligence feeds) provide overlapping coverage. High-availability firewall clustering reflects production network designs where downtime directly impacts business operations. The implementation demonstrates understanding of OSI layer security (Layer 3/4 firewalls, Layer 7 WAF), threat detection methodologies (signature vs. behavioral), and modern zero-trust access patterns.
+**Deployment Rationale:** Enterprise networks deploy layered security controls because attackers increasingly use evasion techniques (encryption, polymorphic malware, living-off-the-land tactics) that bypass signature-based detection. This architecture mirrors enterprise SOC designs where multiple detection engines provide overlapping coverage. The inclusion of Palo Alto NGFW alongside traditional stateful firewalls reflects production environments where App-ID and User-ID enforcement replaces port-based rules and IP-to-user mapping tables. The physical Cisco 3560X and virtual Cisco IOS/IOS XE routers demonstrate proficiency with enterprise routing infrastructure, OSPF dynamic routing, and L2 security hardening. The NSM sensor fills the gap general infrastructure monitoring tools leave — providing protocol-level and flow-level network visibility that EDR and SIEM alone cannot cover.
 
 **Architecture Principles Alignment:**
 
-- **Defense in Depth:** Five security layers (firewall ACLs → IDS/IPS → behavioral detection → WAF → endpoint protection) ensure single-layer bypass doesn't compromise entire network
-- **Secure by Design:** Default-deny firewall policies; encrypted VPN tunnels for remote access; automatic security updates for threat signatures
-- **Zero Trust:** Identity verification required for all remote access (Tailscale authentication); no implicit trust based on network location; microsegmentation isolates compromised systems
+- **Defense in Depth:** Seven security layers — firewall ACLs (four platforms) → App-ID/User-ID NGFW enforcement → IDS/IPS inline blocking (Suricata + Snort) → behavioral detection (CrowdSec) → WAF (SafeLine) → NSM passive monitoring (Zeek + ntopng) → endpoint protection (Wazuh EDR) — ensure a single-layer bypass cannot compromise the full network.
+- **Secure by Design:** Default-deny firewall policies across all platforms; encrypted VPN tunnels for remote access; automated signature updates for IDS/IPS; OSPF MD5 authentication prevents route injection; Palo Alto WildFire sandbox analysis applied to all permitted flows; NSM sensor operates as observe-only with no routing function, eliminating it as an attack surface.
+- **Zero Trust:** Palo Alto User-ID maps Active Directory group membership to firewall policy — enforcement follows identity, not IP address; Tailscale device authentication required for remote access; no implicit trust between network zones; microsegmentation isolates workloads across dedicated VLANs with explicit inter-zone ACLs; all east-west and north-south traffic flows visible via Zeek metadata and ntopng NetFlow.
+
+---
+
+### Security Platform Overview
+
+| Layer | Platform | Function | Coverage |
+|-------|----------|----------|----------|
+| Perimeter Firewall | pfSense HA Cluster | Active/passive HA; stateful inspection; VPN termination; IDS/IPS; CrowdSec bouncer | All inbound/outbound traffic |
+| NGFW | Palo Alto VM-Series (x2) | App-ID, User-ID (AD), WildFire, IPSec site-to-site, GlobalProtect VPN, OSPF, NetFlow | DMZ, ISO_LAN1, Prod_LAN, Site2 |
+| Microsegmentation FW | OPNsense | Zone-based ACLs; CrowdSec enforcement; inter-VLAN isolation | ISO_LAN boundary |
+| Management FW | FortiGate 30D (Physical) | L3/L4 policy; SSL VPN; FortiOS management platform | VLAN 3 / 192.168.3.0/24 |
+| Routing Infrastructure | Cisco vIOS R1/R2, CSR1000V R3, 3560X | OSPF Area 0; NetFlow export; L2/L3 switching; DHCP snooping; port-security | All lab segments |
+| Intrusion Detection/Prevention | Suricata + Snort | Signature + anomaly detection; inline blocking; 40,000+ rules | All LAN, VPN interfaces |
+| Behavioral Detection | CrowdSec | Community-driven behavioral analytics; firewall bouncer enforcement | Logs from all platforms |
+| Application Firewall | SafeLine WAF | OWASP Top 10; bot mitigation; HTTP-flood DDoS; ML anomaly detection | All protected web portals |
+| Network Security Monitoring | Zeek + ntopng | Protocol metadata (DNS, HTTP, TLS, SSH, SMB, RDP); NetFlow aggregation from all sources | prod_lan, lab_lan1, lab_lan2 |
+| Threat Intelligence | pfBlockerNG + MISP | IP reputation; GeoIP blocking; IOC correlation | Firewall and SIEM |
+
+---
+
+### Network Segmentation and Zone Architecture
+
+| Zone / VLAN | Subnet | Gateway | Purpose |
+|-------------|--------|---------|---------|
+| Prod_LAN (VLAN 10) | 192.168.1.0/24 | pfSense 192.168.1.254 | Production environment; lab services |
+| Lab_LAN1 (VLAN 100) | 192.168.100.0/24 | pfSense / R1 192.168.100.6 | Lab services, VMware, PKI |
+| Lab_LAN2 (VLAN 200) | 192.168.200.0/24 | pfSense / R1 192.168.200.6 | K3s cluster, SOC namespace, server-admin workloads |
+| Ext_LAN / DMZ (VLAN 20) | 192.168.2.0/24 | PA-FW 192.168.2.138 / R3 192.168.2.9 | DMZ services; external-facing workloads |
+| ISO_LAN1 (VLAN 120) | 10.20.0.0/24 | PA-FW 10.20.0.138 | NGFW-enforced isolated segment |
+| ISO_LAN2 / MGMT (VLAN 30) | 192.168.3.0/24 | FortiGate 192.168.3.1 / R2 192.168.3.9 | Management VLAN; isolated testing |
+| HA Sync (VLAN 110) | 10.10.0.0/24 | pfSense dedicated | pfSense CARP state synchronization |
+| Cisco P2P + PA OSPF | 10.30.0.0/29 | R1 10.30.0.1 / PA-FW 10.30.0.4 | OSPF peering between Cisco routers and PA-FW |
+| Site2 Branch (simulated) | 10.40.0.0/24 | PA-FW Site2 10.40.0.2 | Simulated remote branch via IPSec tunnel |
+
+---
+
+### Detection and Response Capabilities
+
+| Metric | Detail |
+|--------|--------|
+| Alert latency | Suricata/Snort alerts forwarded to Splunk/Elastic within seconds |
+| Automated blocking | CrowdSec decisions enforced at firewall in <5 seconds via LAPI bouncer |
+| IDS rule coverage | 40,000+ rules across Suricata and Snort (Emerging Threats, Snort Community, Talos) |
+| Community intelligence | CrowdSec shares threat data with global network; >1M malicious IPs in feed |
+| NetFlow visibility | pfSense, OPNsense, Cisco R1/R2/R3, Palo Alto all exporting to ntopng (192.168.1.48:2056) |
+| Protocol metadata | Zeek captures full L7 metadata across prod_lan, lab_lan1, lab_lan2 (AF_PACKET cluster, 3 workers) |
+| Log retention | 90 days in Splunk/Elastic; 30 days on local firewall storage |
+| Incident response | Documented playbooks for DDoS, brute force, lateral movement, ransomware |
 
 ---
 
