@@ -11,7 +11,22 @@ Owner: Paul Leone
 
 ### Architecture Overview
 
-The lab implements a comprehensive automation strategy using infrastructure as code principles, configuration management, and workflow orchestration. This approach provides repeatable deployments, consistent configurations, and automated operations across the entire infrastructure stack.
+
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The lab implements a comprehensive automation strategy using infrastructure as code principles, configuration management, and workflow orchestration. This approach provides repeatable deployments, consistent configurations, and automated operations across the entire infrastructure stack.
+
+    </p>
+  </div>
+
+  <figure>
+      <img src="/Career_Projects/assets/diagrams/iac-overview.png" alt="FortiGate">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Automation/IaC Overview.
+      </figcaption>
+    </figure>
+</div>
 
 **Security Impact**
 
