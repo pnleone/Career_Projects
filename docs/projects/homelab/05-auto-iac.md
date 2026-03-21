@@ -903,8 +903,6 @@ pre_tasks:
 
 ### Version Control Strategy
 
-**Diagram Placeholder: GitHub Repository Screenshots (3 images)**
-
 All infrastructure‑as‑code assets for this solution — including Ansible playbooks, Terraform configurations, and related modules — are stored in a dedicated GitHub repository using Git on the local host.
 
 This [central repository](https://github.com/pnleone/Lab-Configs) provides:
@@ -916,6 +914,13 @@ This [central repository](https://github.com/pnleone/Lab-Configs) provides:
 Configuration files for hosted and platform services — including YAML, JSON, HTML, CSS, Python, and PowerShell scripts — are stored in a separate repository. This repository is fully integrated with Visual Studio Code, allowing seamless local and remote (via SSH) integration editing.
 
 By keeping both provisioning (Terraform) and configuration management (Ansible) in one repository, and separating hosted/platform service configs into another, the architecture ensures that each layer of the stack is versioned, auditable, and maintainable.
+
+<figure>
+  <img src="/Career_Projects/assets/screenshots/git.png" alt="GitHub Configuration">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Git/GitHub Repository.
+  </figcaption>
+</figure>
 
 ---
 
