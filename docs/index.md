@@ -106,10 +106,10 @@ Active participant in hands-on security training platforms (TryHackMe) and CTF c
 Wazuh XDR • Splunk • ELK Stack • Suricata • Snort • CrowdSec • SafeLine WAF • TheHive • Cortex • Shuffle SOAR • MISP • Nessus • OpenVAS • VirusTotal • AbuseIPDB • Shodan • Hybrid Analysis • Malware Bazaar • OWASP ZAP
 
 ### Network & Infrastructure
-pfSense • OPNsense • FortiGate • PAN-OS • Cisco IOS/IOS XE • OSPF • VLANs • Proxmox VE • Docker • Kubernetes (K3s) • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS • NetFlow
+pfSense • OPNsense • FortiGate • PAN-OS • Cisco IOS/IOS XE • OSPF • VLANs • Proxmox VE • Docker • Kubernetes (K3s) • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS • NetFlow • AWS • Azure • Google Cloud Platform
 
 ### Identity & Access Management
-Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA (TOTP/FIDO2) • RBAC 
+Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA (TOTP/FIDO2) • RBAC • Entra ID • AWS/GCP IAM
 
 ### Security Tooling & DFIR
 Wireshark • Brim/ZUI • Zeek • ntopng • NetworkMiner • tcpdump • Sysinternals • CyberChef • Volatility • KAPE • Autopsy • Eric Zimmerman Tools • Velociraptor • Nmap • Hydra • Burp Suite • Metasploit
@@ -153,4 +153,4 @@ Windows 11 • Windows Server • Linux (Debian/Ubuntu/Red Hat/Fedora) • FreeB
 
 ---
 
-*This portfolio is actively maintained and updated with new projects, certifications, and technical implementations. Last updated: March 2026*
+*This portfolio is actively maintained and updated with new projects, certifications, and technical implementations. Last updated: April 2026*

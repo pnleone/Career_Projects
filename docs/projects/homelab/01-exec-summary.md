@@ -701,3 +701,4 @@ Proxmox snapshots captured before configuration changes, system updates, or expe
 - **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)**
 - **[Observability and Response, Part 1](/Career_Projects/projects/homelab/07-vis-response-pt1/)**
 - **[Observability and Response, Part 2](/Career_Projects/projects/homelab/08-vis-response-pt2/)**
+- **[Cloud IaaS Integration – AWS, Azure and GCP](/Career_Projects/projects/homelab/09-cloud-iaas/)**

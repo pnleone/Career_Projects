@@ -16,6 +16,7 @@
 | :material-shield-lock: **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)** | DNS, Reverse Proxy, Web Services and Ingress Controller Architecture, Secure Shell (SSH) Access, Malware, Vulnerability and Software Patch Management |
 | :material-shield-lock: **[Observability and Response, Part 1 ](/Career_Projects/projects/homelab/07-vis-response-pt1/)** | Security Information and Event Management (SIEM) Platforms, Endpoint Detection and Response (EDR) |
 | :material-shield-lock: **[Observability and Response, Part 2 ](/Career_Projects/projects/homelab/08-vis-response-pt2/)** | Security Orchestration, Automation and Response (SOAR), Monitoring, Alerting and Notification Architecture |
+| :material-shield-lock: **[Cloud IaaS Integration – AWS, Azure and GCP](/Career_Projects/projects/homelab/09-cloud-iaas/)** | Lab integration in Amazon Web Services (AWS), Google Cloud Platform (GCP) and Microsoft Azure using Tailscale Mesh VPN |
 | :material-chart-box-outline: **[ Governance, Risk and Compliance Landing Page](/Career_Projects/projects/homelab/grc/grc-index/)** | Governance, Risk and Compliance Sections |
 
 ## Topology
