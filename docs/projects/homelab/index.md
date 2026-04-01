@@ -9,14 +9,14 @@
 | Section | Description |
 |---------|-------------|
 | :material-home-analytics: **[Executive Summary and Security Posture](/Career_Projects/projects/homelab/01-exec-summary/)** | Enterprise-grade security laboratory demonstrating production-ready capabilities across SecOps, systems engineering, and network defense. Multi-layered architecture with SIEM, IDS/IPS, SOAR automation, and zero trust controls. |
-| :material-shield-lock: **[Infrastructure Platform and Workload Overview](/Career_Projects/projects/homelab/02-platform/)** | Proxmox virtualization stack, Workload deployment, VMware, Cisco and Container envionment overview |
-| :material-shield-lock: **[Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** | Network security architecture (Firewall/IPS/WAF), Privacy and remote access |
-| :material-shield-lock: **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** | PKI/Certificate Authority Overview, Identity and Access Management (Authentik/Active Directory), Secrets Management |
-| :material-shield-lock: **[Automation and Infrastructure as Code (IaC)](/Career_Projects/projects/homelab/05-auto-iac/)** | Infrastructure provision with Terraform, Configuration Management with Ansible, Workflow automation with n8n, PowerShell, Bash and Python scripting |
-| :material-shield-lock: **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)** | DNS, Reverse Proxy, Web Services and Ingress Controller Architecture, Secure Shell (SSH) Access, Malware, Vulnerability and Software Patch Management |
-| :material-shield-lock: **[Observability and Response, Part 1 ](/Career_Projects/projects/homelab/07-vis-response-pt1/)** | Security Information and Event Management (SIEM) Platforms, Endpoint Detection and Response (EDR) |
-| :material-shield-lock: **[Observability and Response, Part 2 ](/Career_Projects/projects/homelab/08-vis-response-pt2/)** | Security Orchestration, Automation and Response (SOAR), Monitoring, Alerting and Notification Architecture |
-| :material-shield-lock: **[Cloud IaaS Integration – AWS, Azure and GCP](/Career_Projects/projects/homelab/09-cloud-iaas/)** | Lab integration in Amazon Web Services (AWS), Google Cloud Platform (GCP) and Microsoft Azure using Tailscale Mesh VPN |
+| :material-shield-lock: **[Infrastructure Platform and Workload Overview](/Career_Projects/projects/homelab/02-platform/)** | Proxmox virtualization stack, workload deployment, VMware, Cisco and container envionment overview |
+| :material-shield-lock: **[Network Security, Pirvacy and Remote Access](/Career_Projects/projects/homelab/03-network/)** | Network security architecture (Firewall/IPS/WAF), privacy and remote access |
+| :material-shield-lock: **[Identity, Access, Secrets and Trust Management](/Career_Projects/projects/homelab/04-iam-secrets/)** | PKI/Certificate Authority overview, identity and access management (Authentik/Active Directory), secrets management |
+| :material-shield-lock: **[Automation and Infrastructure as Code (IaC)](/Career_Projects/projects/homelab/05-auto-iac/)** | Infrastructure provision with Terraform, configuration management with Ansible, workflow automation with n8n, PowerShell, Bash and Python scripting |
+| :material-shield-lock: **[Applications and Services](/Career_Projects/projects/homelab/06-apps-service/)** | DNS, reverse proxy, web services and ingress controller architecture, Secure Shell (SSH) access, malware, vulnerability and software patch management |
+| :material-shield-lock: **[Observability and Response, Part 1 ](/Career_Projects/projects/homelab/07-vis-response-pt1/)** | Security Information and Event Management (SIEM) platforms, Endpoint Detection and Response (EDR) |
+| :material-shield-lock: **[Observability and Response, Part 2 ](/Career_Projects/projects/homelab/08-vis-response-pt2/)** | Security Orchestration, Automation and Response (SOAR), monitoring, alerting and notification architecture |
+| :material-shield-lock: **[Cloud IaaS Integration – AWS, Azure and GCP](/Career_Projects/projects/homelab/09-cloud-iaas/)** | Hybrid cloud integration with Amazon Web Services (AWS), Google Cloud Platform (GCP) and Microsoft Azure using Tailscale mesh VPN |
 | :material-chart-box-outline: **[ Governance, Risk and Compliance Landing Page](/Career_Projects/projects/homelab/grc/grc-index/)** | Governance, Risk and Compliance Sections |
 
 ## Topology
