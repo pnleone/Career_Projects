@@ -516,7 +516,6 @@ All three routers form OSPF adjacencies over 10.30.0.0/29 using MD5 authenticati
   * monitored, logged, and reported.                *
   ***************************************************
 ```
----
 
 ### NetFlow / Flexible NetFlow Configuration
 
