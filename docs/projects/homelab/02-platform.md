@@ -509,12 +509,12 @@ All three routers form OSPF adjacencies over 10.30.0.0/29 using MD5 authenticati
 **Banners:** All devices enforce login, exec, and incoming banners identifying the lab domain (shadowitlab.com) and prohibiting unauthorized access.
 
 ```text
-***************************************************
-* Homelab, shadowitlab.com                        *
-* AUTHORIZED ACCESS ONLY                          *
-* Unauthorized access is prohibited and will be   *
-* monitored, logged, and reported.                *
-***************************************************
+  ***************************************************
+  * Homelab, shadowitlab.com                        *
+  * AUTHORIZED ACCESS ONLY                          *
+  * Unauthorized access is prohibited and will be   *
+  * monitored, logged, and reported.                *
+  ***************************************************
 ```
 ---
 
@@ -1613,8 +1613,8 @@ spec:
   ports:
   - port: 6379
     targetPort: 6379
-
 ```
+
 ---
 ### Version Control Strategy
 

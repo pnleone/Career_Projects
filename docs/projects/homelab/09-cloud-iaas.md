@@ -1,9 +1,9 @@
 # Cloud IaaS Integration – AWS, Azure and GCP
 
-**Document Control:**
-Version: 1.0
-Last Updated: March 31, 2026
-Owner: Paul Leone
+**Document Control:**   
+Version: 1.1  
+Last Updated: April 01, 2026  
+Owner: Paul Leone 
 
 ---
 
@@ -297,13 +297,6 @@ Management and API audit logging enabled for all events. Logs delivered to S3 wi
 Infrastructure metrics collected from both EC2 instances via CloudWatch Agent. Custom metrics and log groups forward application and system logs. Alarms trigger SNS notifications and can initiate Lambda-based automated response. VPC Flow Logs (fl-03179f74e54bf1aa4) delivered to CloudWatch Logs capture all accepted and rejected traffic with ENI, source/destination addresses, ports, and action.
 
 ### Monitoring and Alerting
-
-<figure>
-  <img src="/Career_Projects/assets/screenshots/aws-console.png" alt="AWS Console Overview">
-  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-    AWS Console Overview
-  </figcaption>
-</figure>
 
 | Source | Alert Type | Destination |
 |--------|-----------|-------------|
@@ -733,13 +726,6 @@ homelab-log is the central log repository for all Azure diagnostic data: VM perf
 The Connected Machine Agent is installed on both Azure VMs and is planned for extension to on-premises Proxmox-hosted Linux hosts and AWS EC2 instances. Arc registers each machine as a resource in Azure Resource Manager, enabling Defender for Cloud Secure Score recommendations, Azure Policy assignments, and Guest Configuration auditing to apply uniformly across cloud and on-premises workloads.
 
 ### Monitoring and Alerting
-
-<figure>
-  <img src="/Career_Projects/assets/screenshots/azure-console.png" alt="Azure Console Overview">
-  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
-    Azure Console Overview
-  </figcaption>
-</figure>
 
 | Source | Alert Type | Destination |
 |--------|-----------|-------------|
