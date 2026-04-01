@@ -4,9 +4,9 @@
 ## About
 **Paul Leone** | *Aspiring Security Analyst & Infrastructure Engineer*
 
-Welcome to my professional portfolio. This site showcases my journey into cybersecurity, documenting the technical labs, security frameworks, and automation workflows I've built to defend modern infrastructure.
+Welcome to my professional portfolio. This site showcases my journey into cybersecurity, documenting the technical labs, security frameworks, and automation workflows I've built to defend modern hybrid infrastructure.
 
-My focus is on bridging the gap between IT Operations (SysAdmin) and Security Operations (Blue Teaming). Through these projects, I demonstrate a commitment to continuous learning, a "secure-by-design" mindset, and the technical proficiency required to mitigate risks in enterprise environments.
+My focus is on bridging the gap between IT Operations (SysAdmin) and Security Operations (Blue Teaming). Through these projects, I demonstrate a commitment to continuous learning, a "secure-by-design" mindset, and the technical proficiency required to mitigate risks across on-premises and cloud environments.
 
 ---
 
@@ -16,7 +16,7 @@ My focus is on bridging the gap between IT Operations (SysAdmin) and Security Op
 |---------|-------------|
 | :material-chart-line: **[Business Intelligence & Data Analytics](/Career_Projects/projects/business-intelligence/)** | Engineered data pipelines using SQL Server and Power Query to transform raw data into actionable insights. Developed automated reporting dashboards in Power BI for executive decision support. |
 | :material-shield-search: **[Threat Intelligence Brief & SOC Improvement Plan](/Career_Projects/projects/threat-intel/)** | Enhanced threat intelligence brief with TTP breakdown mapped to MITRE ATT&CK framework. Strategic improvement plan aligned to NIST CSF 2.0 and CIS Controls 8.1 with custom YARA and Sigma detection rules. |
-| :material-home-analytics: **[Security Homelab: Overview and Landing Page](/Career_Projects/projects/homelab/)** | Enterprise-grade security laboratory demonstrating production-ready capabilities across SecOps, systems engineering, and network defense. Multi-layered architecture with SIEM, IDS/IPS, SOAR automation, and zero trust controls. |
+| :material-home-analytics: **[Security Homelab: Overview and Landing Page](/Career_Projects/projects/homelab/)** | Enterprise-grade security laboratory demonstrating production-ready capabilities across SecOps, systems engineering, and network defense. Multi-layered architecture with SIEM, IDS/IPS, SOAR automation, zero trust controls and hybrid-cloud connectivity. |
 
 
 ---
@@ -30,15 +30,15 @@ My focus is on bridging the gap between IT Operations (SysAdmin) and Security Op
     
     - **Advanced Threat Detection** — Behavioral threat intelligence (CrowdSec), network anomaly detection (Suricata/Snort), and SIEM correlation (ELK Stack/Splunk)
     - **Automated Incident Response** — SOAR workflows integrate TheHive case management, Cortex/MISP enrichment, and automated remediation
-    - **Defense-in-Depth Architecture** — Multi-layer controls spanning network perimeter, application layer, identity management, and endpoint protection
-    - **Infrastructure as Code** — Terraform and Ansible enable version-controlled, repeatable deployments with full audit trails
+    - **Defense-in-Depth Architecture** — Multi-layer controls spanning network perimeter, application layer, identity management, and hybrid-cloud exit nodes
+    - **Infrastructure as Code** — Terraform and Ansible enable version-controlled, repeatable deployments across Proxmox, AWS, GCP, and Azure with full audit trails
     - **Full-Stack Observability** — Unified metrics collection (Prometheus), visualization (Grafana), and real-time alerting
 
     **Architecture Principles:**
     
     - **Defense in Depth** — Network segmentation, WAF protection, endpoint EDR, and identity verification create overlapping defensive barriers
     - **Secure by Design** — All services default to encrypted communications (TLS), authenticated access (SSO/MFA), and least-privilege authorization (RBAC)
-    - **Zero Trust Architecture** — No implicit trust based on network location; continuous authentication and authorization for every request
+    - **Zero Trust Architecture** — No implicit trust based on network location; continuous authentication and authorization for every request, extending to cloud-hosted assets
 
     [:material-arrow-right-circle: View Full Lab Documentation](/Career_Projects/projects/homelab/)
 
@@ -47,7 +47,7 @@ My focus is on bridging the gap between IT Operations (SysAdmin) and Security Op
 ## What I Do
 
 **:material-shield-lock: Security Engineering**  
-Building detection pipelines, log ingestion workflows, and monitoring architectures that provide actionable threat visibility across enterprise environments.
+Building detection pipelines, log ingestion workflows, and monitoring architectures that provide actionable threat visibility across on-prem and multi-cloud environments.
 
 **:material-bullseye-arrow: Threat-Informed Defense**  
 Mapping adversary behaviors to detections and controls using MITRE ATT&CK framework. Creating custom detection rules (YARA, Sigma) based on threat intelligence.
@@ -56,7 +56,7 @@ Mapping adversary behaviors to detections and controls using MITRE ATT&CK framew
 Transforming raw security data into dashboards and insights. Automating repetitive tasks through Python, PowerShell, and workflow orchestration (n8n, Shuffle).
 
 **:material-cloud-outline: Cloud & Infrastructure**  
-Designing secure, scalable environments using virtualization (Proxmox, Docker), infrastructure as code (Terraform, Ansible), and high-availability architectures.
+Designing secure, scalable environments using virtualization (Proxmox, Docker), infrastructure as code (Terraform, Ansible), and public cloud providers (AWS, Azure, GCP).
 
 **:material-file-document-edit: Technical Writing & Documentation**  
 Creating clear, structured documentation for complex systems. Translating technical implementations into business value for stakeholders.
@@ -71,7 +71,7 @@ I'm focused on roles where I can combine **security engineering**, **analytics**
 
 - **SOC Analyst / Security Operations** — Monitoring, detection, incident response, and threat hunting
 - **Security Engineer** — Building security controls, automation, and defensive architecture
-- **Infrastructure Security** — Securing cloud/on-prem infrastructure, identity management, and network defense
+- **Infrastructure Security** — Securing hybrid-cloud infrastructure, identity management, and network defense
 - **Detection Engineer** — Creating custom detection rules, tuning SIEM, and improving alert fidelity
 
 ---
@@ -109,7 +109,7 @@ Wazuh XDR • Splunk • ELK Stack • Suricata • Snort • CrowdSec • SafeL
 pfSense • OPNsense • FortiGate • PAN-OS • Cisco IOS/IOS XE • OSPF • VLANs • Proxmox VE • Docker • Kubernetes (K3s) • VMware ESXi • Traefik • Cloudflare • Tailscale • DNS • HTTP/HTTPS • NetFlow • AWS • Azure • Google Cloud Platform
 
 ### Identity & Access Management
-Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA (TOTP/FIDO2) • RBAC • Entra ID • AWS/GCP IAM
+Authentik • Active Directory • StepCA PKI • OAuth2/OIDC/SAML • MFA (TOTP/FIDO2) • RBAC • Entra ID • Cloud IAM (AWS/GCP)
 
 ### Security Tooling & DFIR
 Wireshark • Brim/ZUI • Zeek • ntopng • NetworkMiner • tcpdump • Sysinternals • CyberChef • Volatility • KAPE • Autopsy • Eric Zimmerman Tools • Velociraptor • Nmap • Hydra • Burp Suite • Metasploit
@@ -130,7 +130,7 @@ Windows 11 • Windows Server • Linux (Debian/Ubuntu/Red Hat/Fedora) • FreeB
 
 ## Why Work With Me
 
-**Hybrid Skillset:** Background in both IT operations (systems administration) and security operations (blue team) provides comprehensive understanding of infrastructure security.
+**Hybrid Skillset:** Background in both IT operations (systems administration) and security operations (blue team) provides a comprehensive understanding of infrastructure security across physical, virtual, and cloud layers.
 
 **Hands-On Experience:** Extensive homelab demonstrates production-ready capabilities with enterprise-grade tools and architectures directly transferable to SOC, security engineering, and infrastructure roles.
 
