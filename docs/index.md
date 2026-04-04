@@ -28,17 +28,17 @@ My focus is on bridging the gap between IT Operations (SysAdmin) and Security Op
 
     **Key Capabilities:**
     
-    - **Advanced Threat Detection** — Behavioral threat intelligence (CrowdSec), network anomaly detection (Suricata/Snort), and SIEM correlation (ELK Stack/Splunk)
-    - **Automated Incident Response** — SOAR workflows integrate TheHive case management, Cortex/MISP enrichment, and automated remediation
-    - **Defense-in-Depth Architecture** — Multi-layer controls spanning network perimeter, application layer, identity management, and hybrid-cloud exit nodes
-    - **Infrastructure as Code** — Terraform and Ansible enable version-controlled, repeatable deployments across Proxmox, AWS, GCP, and Azure with full audit trails
-    - **Full-Stack Observability** — Unified metrics collection (Prometheus), visualization (Grafana), and real-time alerting
+    - **Advanced Threat Detection**: Behavioral threat intelligence (CrowdSec), network anomaly detection (Suricata/Snort), and SIEM correlation (ELK Stack/Splunk)
+    - **Automated Incident Response**: SOAR workflows integrate TheHive case management, Cortex/MISP enrichment, and automated remediation
+    - **Defense-in-Depth Architecture**: Multi-layer controls spanning network perimeter, application layer, identity management, and hybrid-cloud exit nodes
+    - **Infrastructure as Code**: Terraform and Ansible enable version-controlled, repeatable deployments across Proxmox, AWS, GCP, and Azure with full audit trails
+    - **Full-Stack Observability**: Unified metrics collection (Prometheus), visualization (Grafana), and real-time alerting
 
     **Architecture Principles:**
     
-    - **Defense in Depth** — Network segmentation, WAF protection, endpoint EDR, and identity verification create overlapping defensive barriers
-    - **Secure by Design** — All services default to encrypted communications (TLS), authenticated access (SSO/MFA), and least-privilege authorization (RBAC)
-    - **Zero Trust Architecture** — No implicit trust based on network location; continuous authentication and authorization for every request, extending to cloud-hosted assets
+    - **Defense in Depth**: Network segmentation, WAF protection, endpoint EDR, and identity verification create overlapping defensive barriers
+    - **Secure by Design**: All services default to encrypted communications (TLS), authenticated access (SSO/MFA), and least-privilege authorization (RBAC)
+    - **Zero Trust Architecture**: No implicit trust based on network location; continuous authentication and authorization for every request, extending to cloud-hosted assets
 
     [:material-arrow-right-circle: View Full Lab Documentation](/Career_Projects/projects/homelab/)
 
@@ -69,10 +69,10 @@ Aligning security controls to industry standards (NIST CSF 2.0, CIS Controls v8,
 
 I'm focused on roles where I can combine **security engineering**, **analytics**, and **operational problem-solving**:
 
-- **SOC Analyst / Security Operations** — Monitoring, detection, incident response, and threat hunting
-- **Security Engineer** — Building security controls, automation, and defensive architecture
-- **Infrastructure Security** — Securing hybrid-cloud infrastructure, identity management, and network defense
-- **Detection Engineer** — Creating custom detection rules, tuning SIEM, and improving alert fidelity
+- **SOC Analyst / Security Operations**: Monitoring, detection, incident response, and threat hunting
+- **Security Engineer**: Building security controls, automation, and defensive architecture
+- **Infrastructure Security**: Securing hybrid-cloud infrastructure, identity management, and network defense
+- **Detection Engineer**: Creating custom detection rules, tuning SIEM, and improving alert fidelity
 
 ---
 

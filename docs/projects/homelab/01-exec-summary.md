@@ -13,10 +13,10 @@ Owner: Paul Leone
 
 This enterprise-grade security lab demonstrates production-ready capabilities across **Security Operations (SecOps), Systems Engineering**, and **Network Defense**. Designed to simulate real-world enterprise environments, the lab serves as both a technical proving ground and a continuous learning platform focused on:
 
-- **Threat Detection and Response** — Deploying SIEM/XDR platforms, orchestrating automated incident response, and implementing behavioral threat intelligence
-- **Defense-in-Depth Architecture** — Building multi-layered security controls spanning network perimeter, application layer, identity management, and endpoint protection
-- **Enterprise Infrastructure Operations** — Managing hybrid virtualization platforms, container orchestration, and high-availability services at scale
-- **Security Engineering and Automation** — Implementing Infrastructure as Code (IaC), SOAR workflows, and policy-driven security controls
+- **Threat Detection and Response**: Deploying SIEM/XDR platforms, orchestrating automated incident response, and implementing behavioral threat intelligence
+- **Defense-in-Depth Architecture**: Building multi-layered security controls spanning network perimeter, application layer, identity management, and endpoint protection
+- **Enterprise Infrastructure Operations**: Managing hybrid virtualization platforms, container orchestration, and high-availability services at scale
+- **Security Engineering and Automation**: Implementing Infrastructure as Code (IaC), SOAR workflows, and policy-driven security controls
 
 **Business Value Demonstrated:** This lab mirrors the security architecture, operational workflows, and technical complexity found in mid-to-large enterprise environments, providing hands-on experience directly transferable to SOC Analyst, Security Engineer, and Infrastructure Security roles.
 
@@ -390,13 +390,13 @@ Select subnets and containers route outbound traffic through VPN gateways (PIA, 
 
 ### Observability and Monitoring
 
-#### Network Security Monitoring (NSM) — Zeek + ntopng
+#### Network Security Monitoring (NSM): Zeek + ntopng
 
-Dedicated Ubuntu-based sensor VM (192.168.1.48) running on Proxmox, purpose-built for deep packet inspection, network flow collection, and protocol metadata extraction. Operates as a passive, observe-only node — no traffic is routed through it. Log output feeds the Elastic stack for long-term retention and Brim/Zui for local forensic analysis.
+Dedicated Ubuntu-based sensor VM (192.168.1.48) running on Proxmox, purpose-built for deep packet inspection, network flow collection, and protocol metadata extraction. Operates as a passive, observe-only node; no traffic is routed through it. Log output feeds the Elastic stack for long-term retention and Brim/Zui for local forensic analysis.
 
 **Security Impact:** Full protocol metadata across all monitored segments; NetFlow-based east-west and north-south visibility; passive-only design eliminates sensor as an attack vector or pivot point; SOC-grade log output for correlation, alerting, and forensic review.
 
-##### Zeek — Protocol Metadata Engine
+##### Zeek: Protocol Metadata Engine
 
 Zeek runs in a cluster layout across three capture interfaces. All output is JSON-formatted for direct ingestion by Elastic and Brim/Zui.
 
@@ -404,7 +404,7 @@ Zeek runs in a cluster layout across three capture interfaces. All output is JSO
 - **Frameworks:** Notice, Intel, Weird, File hashing
 - **Log path:** /opt/monitoring/zeek/ (site/, logs/, spool/)
 
-##### ntopng — Flow Visibility
+##### ntopng: Flow Visibility
 
 ntopng ingests NetFlow v9 exports from pfSense, OPNsense, Cisco routers (R1, R2, R3), and Palo Alto firewalls. Provides flow-level traffic analysis via web UI, complementing Zeek's per-connection metadata with aggregate traffic patterns, top-talkers, and bandwidth consumption.
 
