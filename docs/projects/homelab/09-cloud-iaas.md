@@ -76,6 +76,13 @@ Enterprise environments increasingly operate hybrid architectures where workload
   </div>
 </div>
 
+<figure>
+  <img src="/Career_Projects/assets/diagrams/cloud-routing-close.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    
+  </figcaption>
+</figure>
+
 **Security Impact**
 
 - Eliminates public-internet exposure of management interfaces across all cloud platforms
