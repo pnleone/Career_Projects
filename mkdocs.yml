@@ -56,6 +56,6 @@ nav:
               - CIS Controls: projects/homelab/grc/grc-cis-controls.md
               - ISO 27001: projects/homelab/grc/grc-iso27001.md
               - MITRE ATT&CK: projects/homelab/grc/grc-mitre.md
-              - AICPA SOC 2 TSC: projects/homelab/grc/aicpa-soc2.md
+              - AICPA SOC 2 TSC: projects/homelab/grc/grc-soc2.md
               - CISA Zero Trust Maturity Model: projects/homelab/grc/grc-cisa-zero-trust.md
               - NIST SP 800-207 Zero Trust: projects/homelab/grc/grc-nist-zero-trust.md
