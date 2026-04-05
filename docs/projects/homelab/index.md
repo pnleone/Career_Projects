@@ -22,7 +22,7 @@
 ## Topology
 
 <figure>
-    <img src="/Career_Projects/assets/diagrams/SecurityLab_Network-2026-03-17.png" alt="Network Overview">
+    <img src="/Career_Projects/assets/diagrams/security-lab-network-20260405.png" alt="Network Overview">
     <img src="/Career_Projects/assets/diagrams/securitylab-subnets.png" alt="Network Overview">
     <figcaption>Current Lab Overview</figcaption>
 </figure>
