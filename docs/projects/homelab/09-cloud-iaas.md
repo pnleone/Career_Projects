@@ -77,7 +77,9 @@ Enterprise environments increasingly operate hybrid architectures where workload
 </div>
 
 <figure>
-  <img src="/Career_Projects/assets/diagrams/cloud-routing-close.png" alt="AWS Console Overview">
+  <img src="/Career_Projects/assets/diagrams/cloud-routing-pt1.png" alt="Cloud Routing">
+  <img src="/Career_Projects/assets/diagrams/cloud-routing-pt2.png" alt="Cloud Routing">
+  <img src="/Career_Projects/assets/diagrams/cloud-routing-pt3.png" alt="Cloud Routing">
   <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
     
   </figcaption>
