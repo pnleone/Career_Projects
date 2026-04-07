@@ -1867,6 +1867,14 @@ All subnets are routed internally and firewalled to enforce least privilege acce
       </figcaption>
     </figure>
 
+<figure>
+      <img src="/Career_Projects/assets/diagrams/routing-flow-pt1.png" alt="Routing">
+      <img src="/Career_Projects/assets/diagrams/routing-flow-pt2.png" alt="Routing"> 
+      <img src="/Career_Projects/assets/diagrams/routing-flow-pt3.png" alt="Routing">   
+      <img src="/Career_Projects/assets/diagrams/routing-flow-pt4.png" alt="Routing">                
+
+  </figure>
+
 ### Domain Namespace Design
 
 | Domain | Purpose | Notes |
