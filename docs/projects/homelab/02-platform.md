@@ -1,8 +1,8 @@
 # Infrastructure, Platform and Hardware Summary
 
 **Document Control:**   
-Version: 1.2  
-Last Updated: March 11, 2026  
+Version: 1.3  
+Last Updated: April 07, 2026  
 Owner: Paul Leone 
 
 ---
