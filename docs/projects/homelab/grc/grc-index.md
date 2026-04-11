@@ -34,7 +34,7 @@ This cybersecurity lab demonstrates production-ready security capabilities align
 ## Documentation Downloads
 
 !!! info "Files"
-    * [:material-file-download: GRC Executive Summary (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/security_lab_diagrams.pdf){ download="Security_Lab_Diagrams.pdf" }
+    * [:material-file-download: GRC Executive Summary (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/grc-summary-20260411.pdf){ download="grc-summary-20260411.pdf" }
     * [:material-file-download: NIST Cybersecurity Framework 2.0 (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/grc-nist-crf2-20260403.pdf){ download="grc-nist-crf2-20260403.pdf" }
     * [:material-file-download: CIS Critical Security Controls v8.1 (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/grc-cis-controls-v81020260404.pdf){ download="grc-cis-controls-v81020260404.pdf" }
     * [:material-file-download: ISO 27001:2022 Annex A (PDF)](https://raw.githubusercontent.com/pnleone/Career_Projects/main/docs/grc-iso27001-2022-annexa-20260404.pdf){ download="grc-iso27001-2022-annexa-20260404.pdf" }
