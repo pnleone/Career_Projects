@@ -1,0 +1,1819 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Updated iac - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-configuration-management-with-ansible" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Updated iac
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/09-cloud-iaas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud IaaS Integration - AWS, Azure and GCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_11" id="__nav_2_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-soc2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AICPA SOC 2 TSC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-cisa-zero-trust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA Zero Trust Maturity Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../homelab/grc/grc-nist-zero-trust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-207 Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Updated iac</h1>
+
+<h2 id="3-configuration-management-with-ansible">3. Configuration Management with Ansible<a class="headerlink" href="#3-configuration-management-with-ansible" title="Permanent link">&para;</a></h2>
+<h3 id="31-architecture-overview">3.1 Architecture Overview<a class="headerlink" href="#31-architecture-overview" title="Permanent link">&para;</a></h3>
+<p>Ansible provides agentless configuration management through SSH-based automation, enforcing consistent baselines across all managed hosts (Linux, Windows, Cisco, VMware, FreeBSD), managing secrets securely via Ansible Vault, and orchestrating complex multi-host operations using declarative playbooks and Galaxy roles.</p>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Configuration drift eliminated through automated enforcement across 40+ hosts</li>
+<li>SSH hardening applied consistently via dedicated playbooks (PermitRootLogin no, key-only auth)</li>
+<li>Credential exposure prevented through Ansible Vault encryption (AES-256) and vault_* variable pattern</li>
+<li>Audit trail established via Git-based version control</li>
+<li>Manual errors eliminated through playbooks and connectivity pre-tasks</li>
+<li>Multi-platform coverage: Linux, Windows, Cisco IOS, VMware ESXi, FreeBSD (pfSense/OPNsense)</li>
+</ul>
+<p><strong>Deployment Rationale:</strong> In enterprise environments with 40+ mixed-platform hosts, manual configuration becomes error-prone and time-consuming. This approach reduces configuration time from hours to minutes while ensuring 100% consistency across systems. The lab implementation covers Linux (Debian/RHEL families), Windows Server, Cisco IOS devices, VMware ESXi, and FreeBSD firewalls, demonstrating cross-platform automation capabilities.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> SSH hardening playbooks disable weak ciphers and enforce key-based auth; firewall rules (UFW/firewalld) deployed uniformly; fail2ban configured consistently; kernel hardening via sysctl parameters; multi-platform audit playbooks provide visibility across the entire infrastructure stack</li>
+<li><strong>Secure by Design:</strong> Ansible Vault encrypts sensitive variables (vault_ansible_password, vault_root_password); no plaintext credentials in playbooks; SSH keys distributed securely via cloud-init; vault.yml encrypted with AES-256</li>
+<li><strong>Zero Trust:</strong> Every configuration change logged to Git; playbooks verify current configuration before making changes; connectivity pre-tasks skip unreachable hosts gracefully; password rotation workflow requires explicit vault updates</li>
+</ul>
+<hr />
+<h3 id="32-setup-overview">3.2 Setup Overview<a class="headerlink" href="#32-setup-overview" title="Permanent link">&para;</a></h3>
+<p><strong>Control plane: Ansible running in a Proxmox LXC</strong></p>
+<ul>
+<li>Deployed from a Proxmox Debian-based LXC ("ansible"), using a Python virtual environment</li>
+<li>SSH auth is key-based via an "ansible" user</li>
+<li>Handles initial configuration management to achieve a standard template across all hosts</li>
+<li>Standard base packages, DNS, PKI and SSH configurations plus user accounts and permissions</li>
+</ul>
+<h3 id="control-plane-configuration">Control Plane Configuration<a class="headerlink" href="#control-plane-configuration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ansible Controller</td>
+<td>Debian 12 LXC (192.168.x.x)</td>
+</tr>
+<tr>
+<td>Ansible Version</td>
+<td>2.16.x (core)</td>
+</tr>
+<tr>
+<td>Python Environment</td>
+<td>venv isolated (Python 3.11)</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>SSH key-based (ed25519)</td>
+</tr>
+<tr>
+<td>Privilege Escalation</td>
+<td>sudo (passwordless for ansible user)</td>
+</tr>
+<tr>
+<td>Inventory</td>
+<td>Dynamic (Proxmox API) + static YAML</td>
+</tr>
+<tr>
+<td>Vault Encryption</td>
+<td>ansible-vault with AES-256</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="33-inventory-and-variable-structure">3.3 Inventory and Variable Structure<a class="headerlink" href="#33-inventory-and-variable-structure" title="Permanent link">&para;</a></h3>
+<p><strong>Inventory Design Principles</strong></p>
+<p>The inventory uses a hierarchical group structure with NO host duplication. Each host appears exactly once in a platform-specific group, then aggregated via [group:children] declarations for flexible targeting.</p>
+<ul>
+<li>Host Type Groups: [lxc], [vm], [new]</li>
+<li>OS Family Groups: [debian_lxc], [debian_vm], [redhat_lxc], [redhat_vm]</li>
+<li>OS Aggregate Groups: [debian], [redhat] (children of lxc+vm OS groups)</li>
+<li>Platform Groups: [windows], [cisco], [vmware], [freebsd], [fortigate]</li>
+<li>Function Groups: [monitoring], [dns], [proxy], [pki], [docker], [k3s]</li>
+<li>Meta Groups: [linux] (all managed Linux hosts – excludes [new])</li>
+</ul>
+<p><strong>Inventory Code Snippets (hosts.ini)</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Targeting Examples:</strong>
+<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>playbook.yml<span class="w"> </span>--limit<span class="w"> </span>linux<span class="w">          </span><span class="c1"># All Linux hosts</span>
+ansible-playbook<span class="w"> </span>playbook.yml<span class="w"> </span>--limit<span class="w"> </span>lxc<span class="w">            </span><span class="c1"># All LXCs</span>
+ansible-playbook<span class="w"> </span>playbook.yml<span class="w"> </span>--limit<span class="w"> </span>debian<span class="w">         </span><span class="c1"># All Debian (LXC + VM)</span>
+ansible-playbook<span class="w"> </span>playbook.yml<span class="w"> </span>--limit<span class="w"> </span>debian_lxc<span class="w">     </span><span class="c1"># Debian LXCs only</span>
+ansible-playbook<span class="w"> </span>playbook.yml<span class="w"> </span>--limit<span class="w"> </span>lxc<span class="w"> </span>--skip-tags<span class="w"> </span>reboot<span class="w">  </span><span class="c1"># Skip reboot on LXCs</span>
+</code></pre></div></p>
+<p><strong>Variable Structure</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Vault Structure (group_vars/vault.yml - Encrypted)</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Galaxy Roles and Collections</strong></p>
+<p>Ansible Galaxy provides pre-built roles and collections for common tasks. The lab uses officially maintained roles for Wazuh, CheckMK agent deployment, plus support for Windows, VMware, and Cisco hosts.</p>
+<hr />
+<h3 id="34-core-playbooks-detailed-overview">3.4 Core Playbooks - Detailed Overview<a class="headerlink" href="#34-core-playbooks-detailed-overview" title="Permanent link">&para;</a></h3>
+<h4 id="playbook-1-multi-platform-system-audit-sys_audit_n8nyml">Playbook 1: Multi-Platform System Audit (sys_audit_n8n.yml)<a class="headerlink" href="#playbook-1-multi-platform-system-audit-sys_audit_n8nyml" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Comprehensive infrastructure audit across Linux, Windows, and FreeBSD hosts with JSON output for n8n workflow processing.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Single-play design for all platforms (Linux/Windows/FreeBSD)</li>
+<li>Connectivity pre-checks skip unreachable hosts gracefully</li>
+<li>Platform-specific data collection with conditional blocks</li>
+<li>Consolidated JSON output to /tmp/audit_report.json</li>
+<li>Integration with n8n for HTML report generation and alerting</li>
+</ul>
+<p><strong>Data Collected:</strong></p>
+<ul>
+<li>System: CPU cores, memory, disk usage %, memory usage %, uptime</li>
+<li>Network: Default gateway, nameservers, listening ports count</li>
+<li>Security: SSH keys count, Windows Defender status, running services</li>
+<li>Software: Kernel version, available updates count</li>
+</ul>
+<p><strong>Code Snippet - Connectivity Pre-Tasks</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Code Snippet - Linux Data Collection</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Code Snippet - Windows Data Collection</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Code Snippet - JSON Consolidation</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Weekly infrastructure audits via n8n automation</li>
+<li>Pre-maintenance compliance checks</li>
+<li>Capacity planning via disk/memory trending</li>
+<li>Security baseline validation (SSH keys, services, updates)</li>
+</ul>
+<hr />
+<h4 id="playbook-2-user-management-user_mgmtyml">Playbook 2: User Management (user_mgmt.yml)<a class="headerlink" href="#playbook-2-user-management-user_mgmtyml" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Centralized user account and credential management across all Linux hosts with Ansible Vault integration.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Sets ansible user password from vault_ansible_password</li>
+<li>Sets root password from vault_root_password</li>
+<li>Manages paul user with sudo access (password-based)</li>
+<li>Deploys SSH keys for authorized users</li>
+<li>Verifies ansible key-based auth after password rotation</li>
+</ul>
+<p><strong>Code Snippet - Ansible User Password Management</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Code Snippet - Paul User with Sudo Configuration</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Password Rotation Workflow:</strong></p>
+<ul>
+<li>Generate 32-char token: <code>openssl rand -base64 24</code></li>
+<li>Update vault_ansible_password in vault.yml: <code>ansible-vault edit group_vars/vault.yml</code></li>
+<li>Run playbook: <code>ansible-playbook user_mgmt.yml --tags ansible_user</code></li>
+<li>Test connectivity: <code>ansible linux -m ping</code></li>
+</ul>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Quarterly credential rotation (automated via n8n)</li>
+<li>Emergency password resets</li>
+<li>New host bootstrap user provisioning</li>
+<li>SSH key distribution after key rotation</li>
+</ul>
+<hr />
+<h4 id="playbook-3-linux-package-updates-update_linux_hostsyml">Playbook 3: Linux Package Updates (update_linux_hosts.yml)<a class="headerlink" href="#playbook-3-linux-package-updates-update_linux_hostsyml" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Update all Linux hosts with dist-upgrade/dnf update and reboot detection.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Debian: apt dist-upgrade with autoremove/autoclean</li>
+<li>RedHat: dnf update with latest packages</li>
+<li>Reboot detection for kernel updates</li>
+<li>Free strategy for parallel execution</li>
+<li>Update summary with reboot status</li>
+</ul>
+<p><strong>Code Snippet - Debian Package Updates &amp; Reboot Detection</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Weekly package updates (n8n automation)</li>
+<li>Security patch deployment</li>
+<li>Post-vulnerability scanning remediation</li>
+<li>Compliance maintenance (keep systems current)</li>
+</ul>
+<hr />
+<h4 id="playbook-4-linux-hardening-linux_hardeningyml">Playbook 4: Linux Hardening (linux_hardening.yml)<a class="headerlink" href="#playbook-4-linux-hardening-linux_hardeningyml" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Docker-aware SSH and system hardening with automatic Docker detection.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>SSH hardening: disable root login, enforce key-only auth</li>
+<li>TCP/Agent forwarding enabled for Docker/DevOps workflows</li>
+<li>Automatic Docker detection preserves IP forwarding</li>
+<li>Safe kernel parameters (sysctl hardening)</li>
+<li>Login banner deployment</li>
+</ul>
+<p><strong>Code Snippet - Docker Detection</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Code Snippet - SSH Hardening</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>New host security baseline</li>
+<li>Docker host specialized hardening</li>
+<li>Compliance enforcement (CIS benchmarks)</li>
+<li>Post-compromise hardening</li>
+</ul>
+<hr />
+<h4 id="playbook-5-new-install-baseline-new_install_baseline_rolesyml">Playbook 5: New Install Baseline (new_install_baseline_roles.yml)<a class="headerlink" href="#playbook-5-new-install-baseline-new_install_baseline_rolesyml" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Bootstrap new hosts with baseline configuration using Galaxy roles.</p>
+<p><strong>Roles Used:</strong></p>
+<ul>
+<li>wazuh.wazuh_agent (version: 4.14.2)</li>
+<li>Custom bootstrap tasks (user creation, SSH, sudo)</li>
+</ul>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Creates ansible service account with passwordless sudo</li>
+<li>Deploys SSH keys for ansible and paul users</li>
+<li>Configures sudoers with validation</li>
+<li>Installs Wazuh agent and registers with manager</li>
+<li>Installs utility packages (curl, nano, dig, traceroute)</li>
+<li>Enables qemu-guest-agent for Proxmox integration</li>
+</ul>
+<p><strong>Code Snippet - User Creation</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Fresh install bootstrap (first playbook to run)</li>
+<li>Wazuh agent deployment across new hosts</li>
+<li>Monitoring stack integration</li>
+<li>Standardized user/SSH configuration</li>
+</ul>
+<hr />
+<h2 id="5-workflow-automation-with-n8n">5. Workflow Automation with n8n<a class="headerlink" href="#5-workflow-automation-with-n8n" title="Permanent link">&para;</a></h2>
+<h3 id="51-platform-overview">5.1 Platform Overview<a class="headerlink" href="#51-platform-overview" title="Permanent link">&para;</a></h3>
+<p>n8n is a self-hosted, low-code workflow automation platform enabling visual workflow design with conditional logic, error handling, loops, and data transformation. Deployed as a containerized service behind Traefik reverse proxy with Authentik SSO.</p>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Security operations accelerated through automated SOAR workflows</li>
+<li>Manual triage eliminated via automated alert enrichment</li>
+<li>MTTR reduced through auto-generated remediation playbooks</li>
+<li>Alert fatigue minimized through intelligent deduplication and correlation</li>
+<li>Compliance audit trails automatically documented throughout the incident lifecycle</li>
+</ul>
+<p><strong>Deployment Rationale:</strong> Security operations generate thousands of events daily, manual triage is unsustainable. n8n demonstrates Security Orchestration, Automation and Response (SOAR) capabilities where vulnerability scans trigger automated ticket creation, threat intelligence enrichment queries multiple APIs, and incident response playbooks execute without human intervention. This mirrors enterprise SOAR platforms (Splunk SOAR, Palo Alto Cortex XSOAR) where analyst efficiency is multiplied through automation.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Automated vulnerability remediation workflows execute Ansible playbooks; firewall rule changes logged and reviewed; failed automation triggers manual fallback procedures</li>
+<li><strong>Secure by Design:</strong> Credentials stored in n8n credential vault (encrypted at rest); webhook endpoints authenticated via Authentik tokens; workflow execution logs forwarded to SIEM</li>
+<li><strong>Zero Trust:</strong> Every automation action logged with timestamp/user; no hardcoded credentials; API tokens expire and rotate automatically</li>
+</ul>
+<h3 id="n8n-configuration">n8n Configuration<a class="headerlink" href="#n8n-configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Version: n8n v2.7.5 (latest stable)</li>
+<li>Execution Mode: Main process (not queue mode for simplicity)</li>
+<li>Webhook URL: https://n8n.home.com</li>
+<li>TLS Certificate: Step-CA issued, auto-renewed</li>
+<li>Authentication: SSO via Authentik (no local passwords)</li>
+<li>Monitoring: Uptime Kuma</li>
+<li>Notifications: Discord webhooks, SMTP relay</li>
+</ul>
+<h3 id="security-controls">Security Controls<a class="headerlink" href="#security-controls" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Credential Encryption: All API tokens encrypted at rest, Ansible automated (ansible-vault)</li>
+<li>Webhook Security: HMAC signature validation on inbound webhooks</li>
+<li>Audit Trail: All workflow executions logged with timestamp and user</li>
+</ul>
+<hr />
+<h3 id="52-workflow-1-lab-infrastructure-audit">5.2 Workflow 1: Lab Infrastructure Audit<a class="headerlink" href="#52-workflow-1-lab-infrastructure-audit" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose:</strong> Automated weekly configuration audit and system updates across lab infrastructure with HTML reporting and dual alerting (Discord + Email).</p>
+<p>This workflow runs weekly on Sunday at 2 AM, executes the Ansible sys_audit_n8n.yml playbook, transforms the JSON output into a styled HTML report, deploys it to the Apache webserver, and sends notifications via Discord and email.</p>
+<p><strong>Workflow Summary:</strong></p>
+<ul>
+<li><strong>Scheduled Execution:</strong> Triggered weekly via n8n's Cron node (Sunday 2 AM)</li>
+<li><strong>Ansible Playbook:</strong> Executes sys_audit_n8n.yml via SSH to collect system metrics</li>
+<li><strong>Data Transformation:</strong> Parses JSON and generates HTML report with CSS styling</li>
+<li><strong>Apache Upload:</strong> Deploys HTML to /var/www/html/ and updates index page</li>
+<li><strong>Discord Alert:</strong> Sends formatted notification with report link and summary stats</li>
+<li><strong>Email Alert:</strong> Sends HTML email template with audit summary</li>
+</ul>
+<h3 id="workflow-nodes">Workflow Nodes<a class="headerlink" href="#workflow-nodes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th>Configuration</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schedule Trigger</td>
+<td>Cron: 0 2 * * 0 (Sunday 2 AM)</td>
+<td>Weekly execution</td>
+</tr>
+<tr>
+<td>SSH Node 1</td>
+<td>ansible-playbook sys_audit_n8n.yml</td>
+<td>Run audit playbook</td>
+</tr>
+<tr>
+<td>SSH Node 2</td>
+<td>cat /tmp/audit_report.json</td>
+<td>Read JSON output</td>
+</tr>
+<tr>
+<td>Code Node 1</td>
+<td>Parse JSON from stdout</td>
+<td>Extract audit data</td>
+</tr>
+<tr>
+<td>Code Node 2</td>
+<td>Generate HTML with CSS</td>
+<td>Create styled report</td>
+</tr>
+<tr>
+<td>SSH Node 3</td>
+<td>Write HTML to webserver</td>
+<td>Deploy to Apache</td>
+</tr>
+<tr>
+<td>SSH Node 4</td>
+<td>Update index.html</td>
+<td>Add report to index</td>
+</tr>
+<tr>
+<td>Code Node 3</td>
+<td>Generate Discord markdown</td>
+<td>Format alert message</td>
+</tr>
+<tr>
+<td>Discord Webhook</td>
+<td>POST to webhook URL</td>
+<td>Send Discord notification</td>
+</tr>
+<tr>
+<td>Code Node 4</td>
+<td>Generate email HTML</td>
+<td>Format email template</td>
+</tr>
+<tr>
+<td>Email Node</td>
+<td>SMTP send</td>
+<td>Send email notification</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HTML Report Features:</strong></p>
+<ul>
+<li>Responsive grid layout with host cards</li>
+<li>Platform-specific color coding (Linux/Windows/FreeBSD)</li>
+<li>Visual metrics with progress bars for disk/memory usage</li>
+<li>Warning/critical thresholds highlighted (&gt;75% yellow, &gt;90% red)</li>
+<li>Summary statistics cards (total hosts, high disk/memory usage counts)</li>
+<li>Timestamp and audit metadata in footer</li>
+</ul>
+<div class="grid cards">
+<ul>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-audit-landing.png" alt="Apache Webserver Landing Page">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">Apache Webserver Landing Page.</figcaption>
+  </figure></li>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-audit-report.png" alt="Example Audit Report">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">Example Audit Report.</figcaption>
+  </figure></li>
+</ul>
+</div>
+<div class="grid cards">
+<ul>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-audit-email.png" alt="Example Email Alert">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">Example Email Alert.</figcaption>
+  </figure></li>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-audit-discord.png" alt="Example Discord Alert">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">Example Discord Alert.</figcaption>
+  </figure></li>
+</ul>
+</div>
+<hr />
+<h3 id="53-workflow-2-threat-intelligence-aggregation">5.3 Workflow 2: Threat Intelligence Aggregation<a class="headerlink" href="#53-workflow-2-threat-intelligence-aggregation" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose:</strong> Daily ingestion and distribution of curated cybersecurity threat intelligence with AI-powered summarization.</p>
+<p>This workflow runs daily at 8 AM to ingest and distribute curated threat intelligence from multiple cybersecurity RSS feeds. It supports situational awareness and IOC enrichment across the lab environment.</p>
+<p><strong>Workflow Summary:</strong></p>
+<ul>
+<li><strong>Scheduled Execution:</strong> Triggered daily via n8n's Cron node (6 AM)</li>
+<li><strong>RSS Feed Polling:</strong> Pulls entries from curated list of cybersecurity sources</li>
+<li><strong>Feed Limiting:</strong> Filters each feed to articles added in the last 24 hours to reduce noise</li>
+<li><strong>ChatGPT Integration:</strong> NIST feed summarized via OpenAI API</li>
+<li><strong>Discord Notification:</strong> Formatted aggregated feed summary to #threat-intel channel</li>
+</ul>
+<p><strong>RSS Feeds:</strong></p>
+<ul>
+<li>Darknet Diaries (https://podcast.darknetdiaries.com/)</li>
+<li>NIST (https://www.nist.gov/blogs/cybersecurity-insights/rss.xml)</li>
+<li>Krebs on Security (https://krebsonsecurity.com/feed/)</li>
+<li>Threat Post (https://threatpost.com/feed/)</li>
+<li>BleepingComputer (https://www.bleepingcomputer.com/feed/)</li>
+<li>CIS (https://www.cisecurity.org/feed/advisories)</li>
+<li>NAO SEC (https://nao-sec.org/feed)</li>
+</ul>
+<h3 id="workflow-nodes_1">Workflow Nodes<a class="headerlink" href="#workflow-nodes_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th>Configuration</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schedule Trigger</td>
+<td>Cron: 0 8 * * * (Daily 6 AM)</td>
+<td>Daily execution</td>
+</tr>
+<tr>
+<td>RSS Feed Reader</td>
+<td>URLs: CIS, NIST, Krebs, ThreatPost, BleepingComputer, etc</td>
+<td>Ingest threat intel</td>
+</tr>
+<tr>
+<td>Filter Node</td>
+<td>Limit each feed to the last 24 hours</td>
+<td>Reduce noise</td>
+</tr>
+<tr>
+<td>Merge Node</td>
+<td>Combine all feeds</td>
+<td>Aggregate data</td>
+</tr>
+<tr>
+<td>OpenAI Node</td>
+<td>Summarize NIST feed with ChatGPT</td>
+<td>AI-powered summary</td>
+</tr>
+<tr>
+<td>Format Node</td>
+<td>Create Discord embed message</td>
+<td>Visual formatting</td>
+</tr>
+<tr>
+<td>Discord Webhook</td>
+<td>POST to #threat-intel channel</td>
+<td>Distribute to team</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Workflow Benefits:</strong></p>
+<ul>
+<li>Centralized threat intelligence (7 sources → 1 channel)</li>
+<li>AI-powered summarization reduces information overload</li>
+<li>Daily cadence ensures timely awareness of emerging threats</li>
+<li>Supports incident response and vulnerability management</li>
+</ul>
+<div class="grid cards">
+<ul>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-nist-alert.png" alt="NIST Summary Alert">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">NIST Summary Alert.</figcaption>
+  </figure></li>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-discord-alerts.png" alt="Example Discord Alerts">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">Example Discord Alerts.</figcaption>
+  </figure></li>
+</ul>
+</div>
+<hr />
+<h3 id="54-workflow-3-weekly-package-updates-with-alerting">5.4 Workflow 3: Weekly Package Updates with Alerting<a class="headerlink" href="#54-workflow-3-weekly-package-updates-with-alerting" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose:</strong> Automated weekly package manager updates across all Linux hosts with Discord and email alerting.</p>
+<p>This workflow runs weekly on Friday at 3 AM, executes the update_linux_hosts.yml Ansible playbook, parses the output to categorize update results, and sends formatted notifications via Discord and email.</p>
+<p><strong>Workflow Summary:</strong></p>
+<ul>
+<li><strong>Scheduled Execution:</strong> Weekly trigger (Friday 3 AM)</li>
+<li><strong>Ansible Playbook:</strong> Executes update_linux_hosts.yml for apt/dnf updates</li>
+<li><strong>Data Parsing:</strong> Converts raw Ansible stdout to structured JSON</li>
+<li><strong>Update Categorization:</strong> Hosts grouped by status (no updates, updated, reboot required, errors)</li>
+<li><strong>Markdown Generation:</strong> Creates formatted summary for Discord</li>
+<li><strong>HTML Generation:</strong> Creates formatted report for email</li>
+<li><strong>Discord Alert:</strong> Sends markdown summary with status counts</li>
+<li><strong>Email Alert:</strong> Sends HTML email with detailed update report</li>
+</ul>
+<h3 id="workflow-nodes_2">Workflow Nodes<a class="headerlink" href="#workflow-nodes_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th>Configuration</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schedule Trigger</td>
+<td>Cron: 0 3 * * 5 (Friday 3 AM)</td>
+<td>Weekly execution</td>
+</tr>
+<tr>
+<td>SSH Node</td>
+<td>ansible-playbook update_linux_hosts.yml</td>
+<td>Run package updates</td>
+</tr>
+<tr>
+<td>Code Node 1</td>
+<td>Parse stdout: extract reachable/unreachable hosts, summaries, recap</td>
+<td>Convert to structured JSON</td>
+</tr>
+<tr>
+<td>Code Node 2</td>
+<td>Generate markdown and HTML summaries with categorization</td>
+<td>Format alert content</td>
+</tr>
+<tr>
+<td>Discord Node</td>
+<td>POST markdown summary</td>
+<td>Send Discord notification</td>
+</tr>
+<tr>
+<td>Email Node</td>
+<td>SMTP send HTML report</td>
+<td>Send email notification</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Data Flow and Parsing Logic</strong></p>
+<p>The workflow parses Ansible's stdout output to extract comprehensive update information:</p>
+<ul>
+<li>Reachable Hosts: Extracted from 'ok: [hostname]' lines</li>
+<li>Unreachable Hosts: Extracted from 'fatal: [hostname]' lines</li>
+<li>Update Summaries: Parsed from 'msg' fields containing platform, packages updated, reboot status</li>
+<li>Play Recap: Structured data showing ok/changed/failed/skipped counts per host</li>
+</ul>
+<p><strong>Host Categorization</strong></p>
+<p>Hosts are automatically categorized based on update results:</p>
+<ul>
+<li>No Updates Required: Hosts with packages_updated = False</li>
+<li>Updates Applied: Hosts with packages_updated = True and reboot_required = False</li>
+<li>Reboot Required: Hosts with reboot_required = True</li>
+<li>Errors Detected: Hosts with empty/null platform, packages_updated, reboot_required</li>
+<li>Unreachable: Hosts that failed connectivity checks</li>
+</ul>
+<p><strong>Code Snippet - Stdout to JSON Parsing</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Code Snippet - Categorization and Formatting</strong>
+<div class="highlight"><pre><span></span><code>placeholder
+</code></pre></div></p>
+<p><strong>Workflow Benefits:</strong></p>
+<ul>
+<li>Automated weekly package updates reduce manual maintenance</li>
+<li>Categorized results prioritize attention (errors and reboots first)</li>
+<li>Dual alerting ensures visibility across communication channels</li>
+<li>Structured parsing enables trend analysis over time</li>
+<li>Unreachable host detection prevents silent failures</li>
+</ul>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Weekly security patch deployment</li>
+<li>Compliance maintenance (systems up-to-date)</li>
+<li>Post-vulnerability scanning remediation</li>
+<li>Reboot planning based on kernel updates</li>
+<li>Infrastructure health monitoring</li>
+</ul>
+<div class="grid cards">
+<ul>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-updates-discord.png" alt="Discord Alert Example">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">Discord Alert Example.</figcaption>
+  </figure></li>
+<li><figure>
+    <img src="/Career_Projects/assets/screenshots/n8n-updates-email.png" alt="Email Alert Example">
+    <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">Email Alert Example.</figcaption>
+  </figure></li>
+</ul>
+</div>
+<hr />
+<h3 id="55-workflow-4-monthly-automated-ansible-token-rotation">5.5 Workflow 4: Monthly Automated Ansible Token Rotation<a class="headerlink" href="#55-workflow-4-monthly-automated-ansible-token-rotation" title="Permanent link">&para;</a></h3>
+<p><strong>[PLACEHOLDER - Implementation Pending]</strong></p>
+<p><strong>Purpose:</strong> Automated monthly credential rotation for Ansible vault with random token generation, vault file update, user management playbook execution, and dual alerting.</p>
+<p><strong>Planned Workflow Summary:</strong></p>
+<ul>
+<li><strong>Scheduled Execution:</strong> Monthly trigger (1st of month at 4 AM)</li>
+<li><strong>Token Generation:</strong> Create cryptographically random 32-char token (base64)</li>
+<li><strong>Vault Update:</strong> SSH to Ansible controller and update vault_ansible_password in vault.yml</li>
+<li><strong>Playbook Execution:</strong> Run user_mgmt.yml --tags ansible_user to propagate new password</li>
+<li><strong>Connectivity Test:</strong> Verify Ansible can still connect to all hosts via ping</li>
+<li><strong>Discord Alert:</strong> Send success/failure notification with rotation summary</li>
+<li><strong>Email Alert:</strong> Send HTML email confirming rotation and test results</li>
+</ul>
+<h3 id="planned-workflow-nodes">Planned Workflow Nodes<a class="headerlink" href="#planned-workflow-nodes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th>Configuration</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schedule Trigger</td>
+<td>Cron: 0 4 1 * * (1st of month 4 AM)</td>
+<td>Monthly execution</td>
+</tr>
+<tr>
+<td>Code Node 1</td>
+<td>Generate token: crypto.randomBytes(24).toString('base64')</td>
+<td>Create new password</td>
+</tr>
+<tr>
+<td>SSH Node 1</td>
+<td>Backup current vault.yml</td>
+<td>Create vault backup</td>
+</tr>
+<tr>
+<td>SSH Node 2</td>
+<td>ansible-vault edit vault.yml (update vault_ansible_password)</td>
+<td>Update vault variable</td>
+</tr>
+<tr>
+<td>SSH Node 3</td>
+<td>ansible-playbook user_mgmt.yml --tags ansible_user</td>
+<td>Propagate new password</td>
+</tr>
+<tr>
+<td>SSH Node 4</td>
+<td>ansible linux -m ping</td>
+<td>Test connectivity</td>
+</tr>
+<tr>
+<td>Code Node 2</td>
+<td>Parse ping results for success count</td>
+<td>Verify all hosts accessible</td>
+</tr>
+<tr>
+<td>IF Node</td>
+<td>Check if ping success == total hosts</td>
+<td>Route to success/failure</td>
+</tr>
+<tr>
+<td>Code Node 3</td>
+<td>Generate Discord success message</td>
+<td>Format success alert</td>
+</tr>
+<tr>
+<td>Discord Webhook</td>
+<td>POST rotation success to Discord</td>
+<td>Send Discord notification</td>
+</tr>
+<tr>
+<td>Code Node 4</td>
+<td>Generate HTML email template</td>
+<td>Format email report</td>
+</tr>
+<tr>
+<td>Email Node</td>
+<td>SMTP send with rotation details</td>
+<td>Send email notification</td>
+</tr>
+<tr>
+<td>Error Handler</td>
+<td>Rollback vault.yml and alert on failure</td>
+<td>Handle rotation errors</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Considerations for Token Rotation:</strong></p>
+<ul>
+<li>Token generation uses crypto.randomBytes (cryptographically secure)</li>
+<li>Vault backup created before each rotation for rollback capability</li>
+<li>Connectivity test verifies all hosts accessible before confirming rotation</li>
+<li>Error handler automatically reverts to backup vault on failure</li>
+<li>Credentials never logged or displayed in workflow execution history</li>
+<li>n8n credential vault stores vault password with AES-256 encryption</li>
+</ul>
+<p><strong>Expected Alert Content:</strong></p>
+<ul>
+<li>Rotation timestamp</li>
+<li>Token generation success</li>
+<li>Vault update status</li>
+<li>User management playbook execution result</li>
+<li>Connectivity test results (hosts reachable/unreachable)</li>
+<li>Rollback status (if applicable)</li>
+</ul>
+<hr />
+<h3 id="56-best-practices-and-lessons-learned">5.6 Best Practices and Lessons Learned<a class="headerlink" href="#56-best-practices-and-lessons-learned" title="Permanent link">&para;</a></h3>
+<p><strong>Error Handling and Resilience:</strong></p>
+<ul>
+<li>All SSH nodes include timeout settings (30-60 seconds)</li>
+<li>Workflow execution logs retained for 30 days in n8n database</li>
+</ul>
+<p><strong>Credential Management:</strong></p>
+<ul>
+<li>All credentials stored in n8n vault (never hardcoded)</li>
+<li>SSH credentials use key-based auth where possible</li>
+<li>Webhook URLs stored as environment variables</li>
+<li>SMTP credentials encrypted with AES-256 at rest</li>
+</ul>
+<p><strong>Notification Design:</strong></p>
+<ul>
+<li>Discord: Concise markdown with key metrics and report links</li>
+<li>Email: Detailed HTML templates with embedded CSS for compatibility</li>
+<li>Critical alerts include @ mentions for immediate attention</li>
+<li>All notifications include timestamp and workflow execution ID</li>
+</ul>
+<p><strong>Integration Patterns:</strong></p>
+<ul>
+<li>Ansible workflows use SSH node for remote execution</li>
+<li>JSON output from playbooks parsed in Code nodes</li>
+<li>HTML and Markdown generation via JavaScript templates</li>
+<li>Apache webserver deployment via SSH file write operations</li>
+<li>Multi-platform support handled through conditional Ansible blocks</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1600 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../grc-cisa-zero-trust/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>NIST SP 800-207 Zero Trust - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nist-sp-800-207-zero-trust-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NIST SP 800-207 Zero Trust
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09-cloud-iaas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud IaaS Integration - AWS, Azure and GCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_11" id="__nav_2_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-soc2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AICPA SOC 2 TSC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc-cisa-zero-trust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA Zero Trust Maturity Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-207 Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-207 Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#zero-trust-architecture-implementation-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero Trust Architecture Implementation Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zero-trust-tenets-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero Trust Tenets Implementation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nist-sp-800-207-logical-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NIST SP 800-207 Logical Components
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-sources-for-policy-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Sources for Policy Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zta-deployment-model-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ZTA Deployment Model Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zta-use-case-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ZTA Use Case Alignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threats-and-mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Threats and Mitigations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-maturity-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Maturity Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Framework Alignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="nist-sp-800-207-zero-trust-architecture">NIST SP 800-207 Zero Trust Architecture<a class="headerlink" href="#nist-sp-800-207-zero-trust-architecture" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong></p>
+<p><strong>Version:</strong> 2.0
+<strong>Last Updated:</strong> April 2026
+<strong>Owner:</strong> Paul Leone
+<strong>Framework Version:</strong> NIST SP 800-207 (August 2020)</p>
+<hr />
+<h2 id="zero-trust-architecture-implementation-overview">Zero Trust Architecture Implementation Overview<a class="headerlink" href="#zero-trust-architecture-implementation-overview" title="Permanent link">&para;</a></h2>
+<p>This cybersecurity lab demonstrates comprehensive Zero Trust Architecture (ZTA) principles aligned with <strong>NIST SP 800-207</strong> and <strong>CISA Zero Trust Maturity Model v2.0</strong>. The implementation achieves <strong>Advanced maturity</strong> (Stage 3 of 4) across core Zero Trust pillars through explicit verification of every access request, least-privilege enforcement via RBAC, assume-breach mentality with continuous monitoring, and encrypt-everything policies using modern cryptographic standards. Version 2.0 extends the ZTA scope to a hybrid multi-cloud architecture spanning AWS (us-east-2), Azure (North Central US), and GCP (us-central1), with 6 cloud nodes integrated into the same device agent/gateway enforcement model applied to on-premises infrastructure.</p>
+<p><strong>Overall NIST ZTA Maturity: Advanced</strong></p>
+<hr />
+<h2 id="zero-trust-tenets-implementation">Zero Trust Tenets Implementation<a class="headerlink" href="#zero-trust-tenets-implementation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tenet</th>
+<th>Implementation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tenet 1: All Data Sources and Computing Services as Resources</strong></td>
+<td>Lab treats all assets as resources requiring explicit authentication/authorization. 25+ physical hosts, 50+ containers, 30+ VMs, network devices (pfSense, OPNsense, Traefik), storage systems, and cloud-hosted services all subject to access controls. Cloud extension: 6 cloud nodes across AWS (Amazon Linux 2 EC2 t3.micro, Windows Server 2025 EC2 c7i-flex.large), Azure (Ubuntu 24.04 LTS Standard_B2ats_v2, Windows Server 2025 Standard_E2s_v3), GCP (Debian 13.4 e2.micro, Ubuntu e2.micro) enrolled in Checkmk, Wazuh, and PatchMon as explicit managed resources. Cloud VPC/VNet topology and Tailscale mesh routing tables document all cloud resource relationships. Evidence: Proxmox inventory, Docker container registry, Wazuh agent deployment (31+ endpoints), NetAlertX network discovery, Checkmk infrastructure monitoring</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Tenet 2: All Communication Secured Regardless of Network Location</strong></td>
+<td>Network location provides no implicit trust. TLS 1.3 mandatory for all web services (Traefik enforcement), SSH encrypted with Ed25519 certificates, VPN encryption via WireGuard/OpenVPN, syslog-ng TLS for log transmission. Internal traffic treated identically to external — Authentik ForwardAuth validates all requests regardless of source VLAN. Step-CA PKI provides certificate-based authentication for service-to-service communication. Cloud extension: Tailscale WireGuard (ChaCha20-Poly1305) is the mandatory encryption layer for all cloud-to-on-premises management traffic — no plaintext management paths on any cloud node. AWS Security Groups enforce default-deny with explicit Tailnet-only inbound rules. GCP VPC firewall policy (17 rules) includes Google Threat Intelligence blocking for TOR exit nodes, known malicious IPs, and sanctioned countries. Azure NSG homelab-nsg2 enforces explicit allow-list with DenyAllInBound at priority 65500. Evidence: Traefik middleware configuration, syslog-ng TLS certificates, Step-CA issuance logs, VPN encryption audit logs, cloud provider firewall rule documentation</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Tenet 3: Per-Session Resource Access with Least Privilege</strong></td>
+<td>Access granted per-session via Authentik OAuth2/OIDC with 30-minute session timeouts requiring re-authentication. OAuth2 scopes limit permissions to minimum operations. SSH sessions use temporary sudo elevation with explicit justification. No persistent elevated privileges — all access time-limited and activity-specific. Traefik ForwardAuth validates each request independently. Cloud extension: SSH key-only access for all 4 Linux cloud nodes (passwords disabled globally via Ansible); Windows cloud nodes (AWS, Azure) subject to 30-minute Authentik session timeout via domain join. No public management ports exist — all cloud access requires active Tailscale session with device-bound key. Cloud IAM instance profiles (AWS), service accounts (GCP), and Managed Identities (Azure) scoped to minimum required actions with no wildcard permissions. Evidence: Authentik session timeout logs, OAuth2 scope configurations, sudo elevation audit logs, Traefik access validation per-request</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Tenet 4: Dynamic Policy Based on Observable State</strong></td>
+<td>Policy engine (Authentik) evaluates user identity, group membership, device compliance (Wazuh status), source IP reputation, time-of-day restrictions, MFA verification, and behavioral patterns. Policies adapt based on threat intelligence (MISP correlation), failed authentication patterns, geoIP anomalies. Cloud extension: AWS GuardDuty provides ML-based behavioral detection (VPC flow logs, CloudTrail, DNS query logs) as an additional observable state source feeding policy decisions. GCP Security Command Center delivers asset and threat findings informing cloud node posture. Azure Defender for Cloud and Sentinel (KQL detection rules: NSG deny-inbound spikes, Entra ID sign-in from new geographic location, unexpected domain join events, AMA data gaps) provide cloud-layer dynamic intelligence. All cloud findings forwarded to on-premises Splunk via Wazuh agent telemetry for unified policy correlation. Evidence: Authentik policy configurations incorporating Wazuh compliance data, Splunk behavioral analytics, MISP threat correlation logs, cloud-native security service findings</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Tenet 5: Monitor and Measure All Asset Integrity</strong></td>
+<td>Wazuh agents on 25+ on-premises endpoints provide real-time compliance validation against CIS Benchmarks (92-98% compliance). Nessus authenticated scans monthly, Ansible drift detection, container health checks, VM monitoring via Proxmox. Non-compliant devices quarantined to remediation VLAN. PatchMon tracks 5,000+ packages with daily NVD CVE correlation. Cloud extension: Wazuh CIS SCA extended to all 6 cloud nodes daily — policies applied: CIS Amazon Linux (Amazon Linux 2), CIS Debian 12/13 (Debian 13.4), CIS Ubuntu 22.04/24.04 (Ubuntu nodes), CIS Windows Server 2025 (both Windows cloud nodes). PatchMon daily CVE correlation for 4 Linux cloud nodes. WSUS manages 2 Windows cloud nodes with automated approval workflows. AWS Inspector, GCP SCC vulnerability assessment, Azure Defender for Cloud recommendations provide supplemental cloud-native scanning. Critical &lt;72h MTTR SLA maintained across all 31+ endpoints. Evidence: Wazuh SCA reports (on-premises + cloud), Nessus scan results, PatchMon vulnerability tracking, Ansible compliance playbooks</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Tenet 6: Dynamic Authentication and Authorization</strong></td>
+<td>Authentik provides dynamic ICAM with MFA (TOTP, FIDO2/WebAuthn planning), OAuth2/OIDC integration, LDAP/SAML support. Continuous evaluation via session timeouts, behavioral monitoring (Splunk analytics), threat-triggered re-authentication. Cloud extension: all 4 Linux cloud nodes authenticate via SSH Ed25519 keys distributed by Ansible — passwords disabled globally, no shared credentials. Windows cloud nodes (AWS, Azure) authenticate via domain Kerberos over Tailscale, subject to same AD Group Policy and account lockout (5 failed attempts, 10-minute lockout). Cloud console access (AWS, GCP, Azure) independently enforces provider MFA. No cloud management path exists without active device-bound Tailscale session. Evidence: Authentik MFA enforcement logs, re-authentication triggers in SIEM, behavioral anomaly detection alerts, dynamic policy application based on threat intelligence</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Tenet 7: Collect and Use Security Posture Data</strong></td>
+<td>Comprehensive telemetry: Wazuh endpoint data, Suricata/Snort network IDS, pfSense flow logs, Traefik access logs, Unbound DNS queries, Prometheus metrics, application logs. Data processed in dual SIEM (Splunk + Elastic) with correlation, behavioral analytics, threat hunting. Insights improve policy via monthly reviews, automated IOC blocking, vulnerability-driven patching. Cloud extension: AWS CloudTrail captures all management events (IAM role assumptions, Security Group modifications, EC2 lifecycle events) delivered to S3 with SSE. GCP Admin Activity logs (always-on, cannot be disabled) and Data Access audit logs capture all resource changes. Azure Activity Log and Monitor record all ARM deployments. AWS VPC flow logs, GCP VPC flow logs, Azure NSG flow logs supplement on-premises pfSense flow data. Wazuh agents on all 6 cloud nodes forward endpoint security events to on-premises Splunk via Tailscale — unified telemetry pipeline regardless of infrastructure location. Evidence: SIEM ingestion rates (100% security events on-premises + cloud), cloud-native log retention (90 days matching on-premises), Wazuh cloud agent dashboard, cloud provider flow log configuration</td>
+<td><strong>Advanced</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="nist-sp-800-207-logical-components">NIST SP 800-207 Logical Components<a class="headerlink" href="#nist-sp-800-207-logical-components" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Implementation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Policy Engine (PE)</strong></td>
+<td>Authentik serves as primary PE, evaluating access requests against enterprise policy, user attributes, device compliance (Wazuh integration), threat intelligence (MISP), behavioral baselines (Splunk), and environmental factors. Trust algorithm considers identity confidence, device posture, request context, historical behavior, current threat landscape. Trust algorithm type: hybrid score-based and criteria-based, contextual evaluation considering subject history, access patterns, anomaly detection. Cloud extension: AWS GuardDuty ML-based behavioral detection, GCP Security Command Center findings, and Azure Sentinel KQL detection rules serve as additional PE data sources. Cloud provider security posture scores (AWS Security Hub score, GCP SCC security health, Azure Defender for Cloud Secure Score) inform cloud node trust level. All cloud-native findings forwarded to on-premises Splunk for unified policy correlation. Evidence: Authentik policy logs, access decision audit trails, Wazuh compliance integration, Splunk behavioral correlation, cloud security service dashboards</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Policy Administrator (PA)</strong></td>
+<td>Authentik PA configures communication paths via Traefik middleware, generates OAuth2 tokens, manages session lifecycles, coordinates with Step-CA for certificate-based authentication. Controls session establishment/termination based on PE decisions and ongoing monitoring. Cloud extension: Tailscale admin console serves as cloud PA — managing ACL policy (default deny, explicit allow), node enrollment/revocation, and subnet route advertisement for all cloud nodes. Changes to cloud ACL policy follow same Git version-control review process as on-premises IaC changes. Evidence: OAuth2 token generation logs, session establishment/teardown events, Traefik dynamic configuration updates, Step-CA certificate issuance coordination, Tailscale audit logs</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Policy Enforcement Point (PEP)</strong></td>
+<td>Multi-component PEP architecture. Client-side: Authentik ForwardAuth integration in browsers, SSH certificate-based authentication, Wazuh agent compliance reporting, VPN device authentication. Resource-side: Traefik reverse proxy, pfSense/OPNsense firewalls, SafeLine WAF, service-specific gateways. Control plane: isolated management network for PE/PA/PEP communication. Data plane: application traffic on segregated VLANs. Deployment model: Hybrid agent/gateway (Authentik + Traefik), enclave gateway (DMZ services), resource portal (web applications). Cloud extension: cloud PEP deployed per provider — AWS: Tailscale ACL (agent/gateway) + Security Groups (enclave gateway); GCP: Tailscale ACL (agent/gateway) + VPC firewall policy with Google Threat Intelligence + Cloud Armor three-tier WAF/DDoS (enclave gateway); Azure: Tailscale ACL (agent/gateway) + NSG homelab-nsg2 + DDoS Protection plan homelab-ddos (enclave gateway). No public inbound management ports on any cloud node — PEP enforcement is the only access path. Evidence: Traefik ForwardAuth logs, firewall rule enforcement, WAF block rates, SSH certificate validation, VLAN isolation configs, cloud provider firewall rule documentation</td>
+<td><strong>Advanced</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="data-sources-for-policy-decisions">Data Sources for Policy Decisions<a class="headerlink" href="#data-sources-for-policy-decisions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Data Source</th>
+<th>Implementation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Continuous Diagnostics and Mitigation (CDM)</strong></td>
+<td>Wazuh provides CDM capabilities: vulnerability assessment, FIM, rootkit detection, CIS Benchmark compliance (SCA), patch management via PatchMon integration. Nessus authenticated scans complement. Ansible enforces configurations, detects drift. Container/VM monitoring via Proxmox and Docker health checks. Cloud extension: Wazuh CDM capabilities extended to all 6 cloud nodes — same FIM paths, rootkit detection, and SCA policies applied. PatchMon agents on 4 Linux cloud nodes provide daily package-level CDM data. WSUS provides Windows CDM for 2 Windows cloud nodes. AWS Inspector, GCP SCC, Azure Defender for Cloud provide cloud-native CDM data supplementing Wazuh. Evidence: Wazuh vulnerability reports, compliance scan results (92-98%), PatchMon package tracking (5,000+ packages), Ansible drift detection alerts</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Industry Compliance System</strong></td>
+<td>Policy framework aligned with CIS Benchmarks, NIST 800-53 controls, PCI-DSS requirements (where applicable), ISO 27001 standards. Wazuh SCA enforces CIS policies, vulnerability remediation follows NIST guidelines, encryption standards per NIST/PCI-DSS. Cloud extension: AWS Security Hub assesses CIS AWS Foundations Benchmark. Azure Defender for Cloud Secure Score tracks compliance against NIST SP 800-53 and CIS Azure Foundations. GCP SCC security health analytics validates GCP-specific CIS controls. Evidence: CIS Benchmark compliance reports, control mapping documentation, policy version control (Git), quarterly compliance reviews</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Threat Intelligence Feeds</strong></td>
+<td>MISP threat intelligence platform correlates IOCs across network logs, endpoint telemetry, application data. Splunk integrates feeds for correlation. Suricata/Snort use threat signatures. GeoIP databases identify suspicious locations. Cortex analyzers (VirusTotal, Hybrid Analysis) provide malware analysis. Cloud extension: AWS GuardDuty integrates Amazon threat intelligence for ML-based detection of VPC flow, CloudTrail, and DNS anomalies. GCP VPC network firewall policy embeds Google Cloud Threat Intelligence as priority 100-130 rules (TOR exit nodes, malicious IPs, sanctioned countries). Azure Sentinel threat intelligence connectors feed KQL detection rules with real-time IOC correlation. Evidence: MISP IOC correlation logs, automated IOC blocking (Wazuh Active Response), threat intelligence-driven alerts, cloud-native threat intelligence integration</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Network and System Activity Logs</strong></td>
+<td>Dual SIEM architecture (Splunk + Elastic) aggregates 100% security events: authentication logs, firewall traffic, DNS queries (Unbound/Technitium DNS), web access (Traefik), endpoint events (Wazuh), network IDS (Suricata), infrastructure metrics (Prometheus). Real-time correlation detects multi-stage attacks, lateral movement, data exfiltration patterns. Cloud extension: AWS CloudTrail (all management events, S3 with SSE), GCP Admin Activity logs (always-on), Azure Activity Log all forwarded to on-premises Splunk via Wazuh agents. AWS VPC flow logs (fl-03179f74e54bf1aa4 to CloudWatch Logs), GCP VPC flow logs (Flow Analyzer), Azure NSG flow logs (Network Watcher homelab-nsg2) supplement on-premises pfSense/Suricata data. Evidence: SIEM ingestion statistics, correlation rule effectiveness, alert volumes, retention compliance (90-day hot, 1-year cold)</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Data Access Policies</strong></td>
+<td>RBAC via Authentik groups mapped to resource permissions. Filesystem ACLs, database role-based permissions, application-level authorization. Policies encoded in Authentik, enforced via Traefik middleware, validated quarterly. Sensitivity-based policies (Public, Internal, Confidential, Restricted) with handling requirements. Cloud extension: AWS IAM instance profiles enforce least-privilege data access (no wildcard actions, no long-lived access keys on EC2). GCP service accounts use minimal roles (no owner/editor on Compute instances). Azure RBAC scoped per resource group. Tailscale ACL policy governs all inter-node data access paths. Evidence: Authentik RBAC configurations, quarterly access reviews, policy documentation (version-controlled), filesystem/database ACL audits</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Enterprise PKI</strong></td>
+<td>Step-CA provides automated certificate lifecycle: issuance, renewal, rotation (90-day lifetimes). SSH certificate-based authentication, TLS certificates for services, mutual TLS planning. Integration with Authentik for identity certificates. No reliance on external CA for internal services. Cloud extension: cloud nodes receive certificates via Step-CA over Tailscale — same ACME provisioner used for on-premises services. Ansible cert-manager playbooks distribute trust anchors to cloud Linux nodes. Windows cloud nodes receive certificates via Active Directory Certificate Services (dc02.home.com, Windows Server 2025 EnterpriseCA) through domain join over Tailscale. Evidence: Step-CA issuance logs, certificate rotation compliance, SSH cert validation logs, TLS certificate inventory</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>ID Management System</strong></td>
+<td>Authentik serves as authoritative identity source: user accounts, attributes, group memberships, device identities, service accounts. LDAP/OAuth2/OIDC/SAML support for federated identity. Integration with Step-CA for certificate binding. Account lifecycle management with automated provisioning/deprovisioning. Cloud extension: Linux cloud nodes managed via Ansible SSH key distribution (same centralized lifecycle as on-premises). Windows cloud nodes domain-joined to home.com via Tailscale — AD provides Kerberos, Group Policy, WSUS, and certificate auto-enrollment. AWS IAM roles, GCP service accounts, and Azure Entra ID accounts inventoried with 45-day dormancy review. Evidence: Authentik user database, group assignment logs, federated identity configurations, account lifecycle audit trails</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>SIEM System</strong></td>
+<td>Dual architecture — Splunk (primary analytics) and Elastic (secondary/redundancy) collect security-centric data for policy refinement, attack detection, forensics. 90-day hot retention, 1-year cold storage. Dashboards track vulnerabilities, patch compliance, authentication patterns, threat indicators. Alerts feed TheHive case management, Shuffle SOAR orchestration. Cloud extension: Wazuh Universal Forwarder from all 6 cloud nodes forwards to on-premises Splunk via Tailscale. AWS GuardDuty and Azure Sentinel incidents auto-create TheHive cases via Shuffle SOAR webhook. GCP SCC findings trigger alerting policy notifications routed to Discord/email. Cloud node telemetry visible in same Splunk dashboards as on-premises — unified single-pane-of-glass view. Evidence: SIEM correlation rules (100+ active), dashboard usage, alert-to-incident conversion rates, retention compliance, SOAR integration workflows</td>
+<td><strong>Advanced</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="zta-deployment-model-assessment">ZTA Deployment Model Assessment<a class="headerlink" href="#zta-deployment-model-assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Implementation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary Model: Device Agent/Gateway (Hybrid)</strong></td>
+<td>Authentik acts as central policy administrator. Client-side enforcement via browser-based ForwardAuth (no installed agent for web resources), SSH certificate agents for terminal access. Resource-side gateways include Traefik (web services), pfSense/OPNsense (network perimeter), SafeLine WAF (application layer). Strengths: no required client software for web access (BYOD-friendly), centralized policy management, defense-in-depth with multiple gateway layers. Weaknesses: limited endpoint visibility for non-enterprise devices, cannot enforce compliance before web access attempts. Cloud extension: Tailscale serves as the cloud agent/gateway — device-bound WireGuard keys enforce identity at the network layer before any cloud resource access. All 6 cloud nodes enforce this model with no exceptions. Evidence: Traefik ForwardAuth integration across 50+ services, SSH certificate distribution via Ansible, gateway configuration management, Tailscale node inventory</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Secondary Model: Enclave-Based</strong></td>
+<td>DMZ services protected by enclave gateway (pfSense), application tier isolated behind Traefik, backend services (databases, SIEM, PKI) on dedicated VLANs with restricted access. Cloud extension: each cloud provider implements an independent enclave gateway — AWS Security Groups enforce default-deny per VPC; GCP VPC network firewall policy (homelab, 17 rules) with Google Threat Intelligence blocking protects all Compute instances; Azure NSG homelab-nsg2 applied at subnet level with DenyAllInBound default; GCP Cloud Armor three-tier WAF/DDoS policies add edge, backend, and application-level enclave protection. Evidence: 3-tier architecture (DMZ, application, backend), VLAN isolation with firewall enforcement, gateway placement protecting service enclaves, cloud provider firewall documentation</td>
+<td><strong>Advanced</strong></td>
+</tr>
+<tr>
+<td><strong>Tertiary Model: Resource Portal</strong></td>
+<td>Web-based access to services via Traefik reverse proxy acting as portal. No client agents required. Authentication/authorization at portal before proxying to resources. Used for contractor access, cross-organization collaboration, public-facing authenticated services. Cloud extension: Traefik resource portal extended to cloud-hosted services where applicable. Cloudflare Tunnels provide zero-trust resource portal for external-facing cloud services — no inbound ports exposed, all access proxied through Cloudflare edge. Evidence: Traefik portal configurations, authentication workflows, contractor access logs, session management, Cloudflare Tunnel configuration</td>
+<td><strong>Advanced</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="zta-use-case-alignment">ZTA Use Case Alignment<a class="headerlink" href="#zta-use-case-alignment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Implementation</th>
+<th>Applicability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use Case 1: Enterprise with Satellite Facilities (Remote Workers)</strong></td>
+<td>Tailscale mesh VPN provides secure remote access without traditional VPN concentrator. Authentik authenticates remote users, validates device compliance via Wazuh remote agent data. Cloud-ready architecture enables direct cloud resource access without hairpinning through on-premises infrastructure. Cloud extension: cloud nodes (AWS EC2, Azure VM, GCP Compute) act as additional satellite facilities — same Tailscale mesh, same Wazuh compliance validation, same Authentik policy applies regardless of whether a node is on-premises or in a cloud provider. Evidence: Tailscale deployment, remote Wazuh agent reporting, Authentik MFA enforcement for remote sessions</td>
+<td><strong>High</strong></td>
+</tr>
+<tr>
+<td><strong>Use Case 2: Multi-Cloud/Cloud-to-Cloud</strong></td>
+<td>Applicability advanced from Medium to High. Tailscale mesh VPN connects all three cloud providers (AWS 172.31.0.0/16, GCP 10.128.0.0/16, Azure 10.130.0.0/16) and on-premises infrastructure in a unified overlay network. Cloud nodes can reach on-premises Wazuh Manager (192.168.1.219), DNS resolvers (192.168.1.153/154), PatchMon backend (192.168.200.0/24), and Checkmk server (192.168.1.126) via Tailscale without public internet exposure. Same Authentik OIDC policies, same CIS SCA baselines, same patch SLAs enforced across all providers. AWS GuardDuty, GCP SCC, and Azure Sentinel provide provider-native detection alongside on-premises SIEM. Evidence: Tailscale node inventory (9 enrolled nodes), subnet router advertisement table, cloud VPC/VNet topology documentation, unified PatchMon dashboard</td>
+<td><strong>High</strong></td>
+</tr>
+<tr>
+<td><strong>Use Case 3: Contracted Services/Nonemployee Access</strong></td>
+<td>Open guest network with internet access but no enterprise resource visibility. Authentik provides time-limited contractor accounts with restricted resource access. Smart building systems isolated on dedicated VLAN, accessible only to vendor service accounts with MFA. Visitor devices cannot discover internal resources (SDP principles). Cloud extension: cloud contractor access scoped via Tailscale ACL tags — explicit per-node allow rules required; no implicit mesh access. Time-limited Tailscale pre-authorized keys for contractor cloud node access. Evidence: Guest VLAN isolation, contractor account lifecycle, vendor MFA enforcement, network segmentation</td>
+<td><strong>High</strong></td>
+</tr>
+<tr>
+<td><strong>Use Case 4: Cross-Enterprise Collaboration</strong></td>
+<td>Authentik supports OAuth2/OIDC/SAML federation, enabling cross-organization collaboration. Can establish federated trust with partner identity providers. Resource-specific policies grant external user access to designated collaboration resources while denying access to other systems. Cloud extension: cloud provider identity federation available — AWS IAM Identity Center, GCP Workload Identity Federation, Azure Entra ID B2B — provides cross-enterprise identity without credential sharing. Evidence: Authentik federation capabilities, external identity source configurations, resource-specific policy enforcement</td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Use Case 5: Public/Customer-Facing Services</strong></td>
+<td>Public web services use Traefik with optional authentication. No enforcement of device posture for anonymous public access. Metadata collection for attack detection (rate limiting, browser fingerprinting, bot detection). Cloud extension: GCP Cloud Armor provides public-facing WAF with Google Threat Intelligence and DDoS protection for any cloud-hosted public services. Azure DDoS Protection plan homelab-ddos protects Azure VNet. Evidence: Traefik rate limiting, WAF rules blocking automated attacks, access pattern analysis</td>
+<td><strong>Low</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="threats-and-mitigations">Threats and Mitigations<a class="headerlink" href="#threats-and-mitigations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Threat</th>
+<th>Mitigations</th>
+<th>Risk Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Threat 1: Subversion of ZTA Decision Process</strong></td>
+<td>Authentik access restricted to dedicated administrator accounts with MFA. All configuration changes logged to SIEM with alerting. Git version control for policy configurations with approval workflow. Quarterly access reviews for administrative privileges. Cloud extension: cloud IAM policy changes (AWS CloudTrail, GCP Admin Activity, Azure Activity Log) alert on any PE/PA-equivalent modification. Tailscale admin console access enforces provider MFA. Evidence: Admin account audit logs, SIEM alerting on policy changes, Git commit history, privilege review documentation</td>
+<td><strong>High</strong></td>
+</tr>
+<tr>
+<td><strong>Threat 2: Denial-of-Service or Network Disruption</strong></td>
+<td>HA firewall cluster (pfSense CARP) with &lt;5-second failover. Dual DNS (Unbound/Technitium DNS) with automatic failover. Dual SIEM architecture (Splunk + Elastic) for resilience. Redundant internet connections with automatic failover. Load balancing via Traefik across multiple backends. Cloud extension: GCP Cloud Armor three-tier DDoS protection (rate limiting at edge, backend, and application layers). Azure DDoS Protection plan (homelab-ddos) protects Azure VNet. AWS Security Group rate limiting. Cloud provider native DDoS mitigation operates independently of on-premises HA cluster. Evidence: Failover testing logs, uptime statistics, redundant service configurations, cloud DDoS protection configuration</td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Threat 3: Stolen Credentials/Insider Threat</strong></td>
+<td>MFA enforcement (TOTP current, FIDO2/WebAuthn planned) reduces credential theft impact. Contextual trust algorithm detects anomalous behavior (unusual times, locations, access patterns). Session timeouts (30 minutes) limit exposure window. Behavioral analytics (Splunk) identify compromised account indicators. Least privilege limits blast radius. Cloud extension: no passwords on cloud SSH nodes (key-only); Windows cloud nodes require domain Kerberos. Azure Sentinel KQL rule detects Entra ID sign-in from new geographic location. AWS GuardDuty CredentialAccess findings detect IAM credential misuse. Evidence: MFA enforcement logs, behavioral anomaly alerts, session timeout enforcement, privilege restriction audit logs</td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Threat 4: Visibility Limitations on Encrypted Traffic</strong></td>
+<td>Metadata collection from encrypted sessions (source, destination, timing, volume). Certificate inspection for TLS connections. DNS query logging identifies suspicious domains even with encrypted payloads. Endpoint visibility via Wazuh agents provides process-level context. Network behavior analysis detects anomalies without decryption. Cloud extension: AWS VPC flow logs, GCP VPC flow logs, Azure NSG flow logs capture encrypted traffic metadata (source/destination/port/action) for all cloud node communications. GuardDuty DNS query log analysis detects DGA domains and C2 callbacks within encrypted tunnels. Evidence: Flow log analysis, DNS-based threat detection, endpoint telemetry correlation, encrypted traffic metadata dashboards</td>
+<td><strong>Low-Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Threat 5: Stored Data Compromise</strong></td>
+<td>SIEM data, network diagrams, configuration files stored with encryption at rest (AES-256). Access to security data repositories restricted to security team with MFA. Configuration management tools (Ansible, Terraform) protected with vault encryption. Most restrictive access policies on security infrastructure components. Regular access reviews for security data access. Cloud extension: AWS S3 CloudTrail logs with SSE. GCP persistent disks and GCS buckets encrypted at rest (Google-managed keys). Azure Managed Disks and Log Analytics workspace homelab-log encrypted at rest by default. Evidence: Encryption-at-rest configurations, access restriction logs, security data access audit trails</td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Threat 6: Vendor Lock-in/Proprietary Formats</strong></td>
+<td>Open-source focus (Authentik, Wazuh, Traefik, Suricata) reduces vendor lock-in. Standard protocols (OAuth2, OIDC, SAML, LDAP) enable interoperability. Infrastructure-as-code (Terraform, Ansible) allows migration to alternative platforms. Multi-vendor approach for critical functions (dual SIEM, multiple authentication methods). Cloud extension: multi-cloud deployment across AWS, GCP, and Azure reduces single-provider dependency. Tailscale as transport layer is provider-agnostic — cloud nodes can be migrated between providers without changing the ZTA enforcement model. Evidence: Open-source tool selection, standard protocol usage, IaC repositories, vendor diversity in architecture</td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Threat 7: Automated Agent/NPE Compromise</strong></td>
+<td>Service account credentials stored in Vaultwarden with automated retrieval. API keys rotated quarterly with automated expiration. Service account activity logged and monitored for anomalies. Principle of least privilege for automation accounts (read-only where possible). Automated agent authentication via certificate-based methods (Step-CA). Cloud extension: AWS EC2 instance profiles replace service account passwords (no long-lived access keys on any cloud node). GCP uses Workload Identity-compatible service accounts with minimal roles. Azure Managed Identity for service-to-service authentication without credentials. Ansible automation uses SSH key authentication for all cloud node access. Evidence: Service account activity logs, API key rotation schedules, certificate-based automation authentication, anomaly detection for NPE accounts</td>
+<td><strong>Medium</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="deployment-maturity-assessment">Deployment Maturity Assessment<a class="headerlink" href="#deployment-maturity-assessment" title="Permanent link">&para;</a></h2>
+<p><strong>Overall NIST ZTA Maturity: Advanced</strong></p>
+<p><strong>Strengths</strong></p>
+<ul>
+<li>Comprehensive implementation of ZT tenets 1-7 with cloud scope extending all tenets to hybrid infrastructure</li>
+<li>Mature logical component deployment (PE, PA, PEP) extended to cloud via Tailscale ACL, provider-native firewall policies, and Wazuh compliance validation</li>
+<li>Rich data sources for policy decisions (CDM, threat intel, SIEM, PKI, IAM) now include cloud-native sources (GuardDuty, SCC, Defender for Cloud)</li>
+<li>Hybrid deployment model supporting diverse use cases; Use Case 2 (Multi-Cloud) advanced from Medium to High applicability</li>
+<li>Strong threat mitigation posture with cloud-specific mitigations for all 7 identified threats</li>
+<li>Open standards and interoperability focus: Tailscale, Wazuh, and Ansible are provider-agnostic across all three cloud platforms</li>
+</ul>
+<p><strong>Gaps to Optimal</strong></p>
+<ul>
+<li>Device agents for comprehensive endpoint coverage on all cloud node types</li>
+<li>Full passwordless authentication (FIDO2/WebAuthn) across on-premises and cloud</li>
+<li>Continuous authentication beyond session-based model</li>
+<li>Machine learning/UEBA for predictive analytics — cloud-native ML (GuardDuty, Sentinel) partially fills this for cloud nodes</li>
+<li>Mutual TLS (mTLS) for all service-to-service communication including cloud workloads</li>
+<li>Just-in-time access provisioning enterprise-wide</li>
+<li>Hardware security modules for critical key material</li>
+<li>Azure Spot instance eviction automation (manual restart documented, automated restart workflow pending)</li>
+</ul>
+<p><strong>Recommended Priorities Q2-Q3 2026</strong></p>
+<ul>
+<li>FIDO2/WebAuthn deployment for passwordless MFA (on-premises and cloud console)</li>
+<li>Trivy/Grype for comprehensive SBOM tracking across on-premises and cloud node packages</li>
+<li>UEBA capabilities in SIEM platforms; supplement GuardDuty/Sentinel ML for on-premises behavioral analytics</li>
+<li>Mutual TLS for all service-to-service communication</li>
+<li>Azure Spot instance restart automation via Azure Automation or ARM template trigger</li>
+<li>Formal federated identity program for cross-enterprise collaboration (Use Case 4)</li>
+</ul>
+<hr />
+<h2 id="framework-alignment">Framework Alignment<a class="headerlink" href="#framework-alignment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Alignment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NIST SP 800-207</td>
+<td>Advanced maturity — all 7 ZT tenets implemented across on-premises and hybrid cloud scope</td>
+</tr>
+<tr>
+<td>NIST RMF</td>
+<td>Access policies risk-based, continuous monitoring aligned, cloud node risk assessment integrated</td>
+</tr>
+<tr>
+<td>FICAM</td>
+<td>Strong identity governance, MFA enforcement, lifecycle management extended to cloud IAM</td>
+</tr>
+<tr>
+<td>TIC 3.0</td>
+<td>Network security capabilities aligned, PEP-based enforcement — cloud nodes use provider-native PEP equivalents</td>
+</tr>
+<tr>
+<td>CDM</td>
+<td>Mature diagnostics and mitigation via Wazuh/PatchMon, extended to all cloud nodes</td>
+</tr>
+<tr>
+<td>Cloud Smart</td>
+<td>Full hybrid deployment demonstrated: AWS, Azure, GCP nodes with consistent ZTA enforcement</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="version-history">Version History<a class="headerlink" href="#version-history" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>January 2026</td>
+<td>Initial release</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>April 2026</td>
+<td>Cloud IaaS integration (AWS, Azure, GCP — 6 nodes). Cloud content integrated into all sections. Use Case 2 (Multi-Cloud) applicability advanced from Medium to High. Overall maturity remains Advanced</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

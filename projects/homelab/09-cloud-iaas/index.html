@@ -1,0 +1,3719 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../08-vis-response-pt2/">
+      
+      
+        <link rel="next" href="../grc/grc-index/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cloud IaaS Integration - AWS, Azure and GCP - Paul Leone – Projects & Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/image-overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cloud-iaas-integration-aws-azure-and-gcp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-header__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paul Leone – Projects & Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cloud IaaS Integration - AWS, Azure and GCP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Paul Leone – Projects &amp; Portfolio" class="md-nav__button md-logo" aria-label="Paul Leone – Projects & Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm0 4a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.13 12A9.7 9.7 0 0 1 12 20.92 9.7 9.7 0 0 1 6.87 17c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3s6 1.32 6 3c-.24.53-.53 1.03-.87 1.53"/></svg>
+
+    </a>
+    Paul Leone – Projects & Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business-intelligence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Intelligence & Data Analytics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threat-intel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Intelligence Brief & SOC Improvement Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Homelab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security Homelab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-exec-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executive Summary/Posture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform and Virtualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security and Remote Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-iam-secrets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity, Access and Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-auto-iac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation and IaC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-apps-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications and Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-vis-response-pt1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-vis-response-pt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability and Response, part 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud IaaS Integration - AWS, Azure and GCP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloud IaaS Integration - AWS, Azure and GCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tailscale-mesh-vpn-cross-cloud-fabric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tailscale Mesh VPN — Cross-Cloud Fabric
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tailscale Mesh VPN — Cross-Cloud Fabric">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Inventory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amazon-web-services-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Amazon Web Services (AWS)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Amazon Web Services (AWS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-security-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Security Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-and-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring and Alerting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-cloud-platform-gcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Google Cloud Platform (GCP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Google Cloud Platform (GCP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-configuration_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-security-services_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Security Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ids-endpoint-and-dns-armor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IDS Endpoint and DNS Armor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-and-alerting_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring and Alerting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#microsoft-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft Azure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Microsoft Azure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-overview_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-configuration_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-security-services_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Security Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-and-alerting_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring and Alerting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-premises-management-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        On-Premises Management Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="On-Premises Management Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wazuh-edr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wazuh EDR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patchmon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatchMon
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkmk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkmk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uptime-kuma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uptime Kuma
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-homelab-section-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Homelab Section Links
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_11" id="__nav_2_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Frameworks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GRC Frameworks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Overview/Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/01-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GRC Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-csf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST CSF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-800/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-53
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-cis-controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CIS Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-iso27001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISO 27001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-mitre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-soc2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AICPA SOC 2 TSC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-cisa-zero-trust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CISA Zero Trust Maturity Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grc/grc-nist-zero-trust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NIST SP 800-207 Zero Trust
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cloud-iaas-integration-aws-azure-and-gcp">Cloud IaaS Integration – AWS, Azure and GCP<a class="headerlink" href="#cloud-iaas-integration-aws-azure-and-gcp" title="Permanent link">&para;</a></h1>
+<p><strong>Document Control:</strong> <br />
+Version: 1.1<br />
+Last Updated: April 01, 2026<br />
+Owner: Paul Leone </p>
+<hr />
+<h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      The lab extends beyond the on-premises Proxmox environment into a multi-cloud hybrid architecture spanning AWS, Azure, and Google Cloud Platform. Tailscale provides the encrypted mesh VPN fabric connecting all cloud-hosted nodes back to on-premises infrastructure without exposing management interfaces to the public internet. Each cloud provider hosts purpose-built workloads aligned with their native security services, enabling hands-on experience with enterprise cloud security patterns across the three major platforms.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/cloud-overview.png" alt="Tailscale Mesh VPN Fabric">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        Tailscale Fabric — Underlay and Private Subnet Overlay
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<p>All cloud nodes integrate with a common on-premises management stack — Wazuh EDR, PatchMon, Checkmk, Ansible, and Uptime Kuma — configured consistently across providers. DNS resolution uses the lab Unbound resolvers (192.168.1.153 / 192.168.1.154) accessed via Tailscale.</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>VM / Instance</th>
+<th>OS</th>
+<th>Primary Services</th>
+<th>Tailscale Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWS</td>
+<td>EC2 t3.micro</td>
+<td>Amazon Linux 2</td>
+<td>S3, CloudWatch, VPC, Security Hub, CloudTrail, IAM, Lambda, GuardDuty</td>
+<td>aws-ec2-host1.tailf07c05.ts.net [100.64.167.58]</td>
+</tr>
+<tr>
+<td>AWS</td>
+<td>EC2 c7i-flex.large</td>
+<td>Windows Server 2025 Datacenter</td>
+<td>S3, CloudWatch, VPC, Security Hub, CloudTrail, IAM, Lambda, GuardDuty</td>
+<td>aws-win2025-host2.tailf07c05.ts.net [100.108.70.123]</td>
+</tr>
+<tr>
+<td>GCP</td>
+<td>e2.micro (x2)</td>
+<td>Debian 13.4 / Ubuntu</td>
+<td>Security Command Center, Cloud Logging, Cloud Monitoring, IAM, VPC, Cloud Armor</td>
+<td>gcp-debian-host1.tailf07c05.ts.net [100.67.103.120]</td>
+</tr>
+<tr>
+<td>Azure</td>
+<td>Standard_B2ats v2</td>
+<td>Ubuntu 24.04 LTS</td>
+<td>Defender for Cloud, Log Analytics, Entra ID, Sentinel, MFA, NSG, Azure Arc, DDoS Protection</td>
+<td>az-ubuntu.tailf07c05.ts.net [100.96.110.40]</td>
+</tr>
+<tr>
+<td>Azure</td>
+<td>Standard_E2s v3 (Spot)</td>
+<td>Windows Server 2025 Datacenter Smalldisk</td>
+<td>Defender for Cloud, Log Analytics, Entra ID, Sentinel, MFA, NSG, Azure Arc, DDoS Protection</td>
+<td>az-win2025-dc.tailf07c05.ts.net [100.113.13.112]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Cross-cloud EDR coverage via Wazuh agents reporting to the central on-premises manager at 192.168.1.219</li>
+<li>Cloud-native security services (GuardDuty, Security Command Center, Defender for Cloud) augment on-premises SIEM with cloud-specific behavioral detection</li>
+<li>Zero-trust remote access via Tailscale — cloud nodes expose no management ports to the public internet</li>
+<li>Unified DNS via on-premises Unbound resolvers provides consistent name resolution, ad/malware blocking, and DNSSEC validation for all cloud nodes</li>
+<li>PatchMon, Checkmk, and Ansible extend on-premises patch management, monitoring, and configuration enforcement to cloud workloads</li>
+<li>Routing isolation per cloud provider prevents unintended lateral movement between cloud environments</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>Enterprise environments increasingly operate hybrid architectures where workloads span on-premises and multiple cloud providers. This deployment demonstrates proficiency with cloud-native security services, hybrid network design, and cross-environment monitoring. Each cloud provider is configured to mirror production patterns: IAM least-privilege, VPC/VNet segmentation, native logging, and endpoint agents for unified visibility.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Multiple cloud providers create independent security domains with distinct native controls; Wazuh EDR coverage spans on-premises and cloud nodes; cloud-native threat detection operates in parallel with on-premises SIEM correlation</li>
+<li><strong>Secure by Design:</strong> Cloud nodes deployed with least-privilege IAM/service account roles; all management access routed through Tailscale; native cloud audit logging enabled by default; on-premises Unbound DNS provides malware domain filtering</li>
+<li><strong>Zero Trust:</strong> Tailscale ACLs enforce explicit allow rules between cloud and on-premises nodes; cloud firewall rules restrict inbound to Tailnet CGNAT space and homelab subnets; no implicit trust between cloud providers or segments</li>
+</ul>
+<hr />
+<h2 id="tailscale-mesh-vpn-cross-cloud-fabric">Tailscale Mesh VPN — Cross-Cloud Fabric<a class="headerlink" href="#tailscale-mesh-vpn-cross-cloud-fabric" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview">Deployment Overview<a class="headerlink" href="#deployment-overview" title="Permanent link">&para;</a></h3>
+<div class="two-col-right">
+  <div class="text-col">
+    <p>
+      Tailscale provides the encrypted WireGuard-based overlay connecting all cloud nodes, on-premises infrastructure, and remote endpoints into a single private network. Each node is enrolled in the tailnet (tailf07c05.ts.net) and receives a stable CGNAT address (100.64.0.0/10). pfSense nodes advertise on-premises subnets into the tailnet; cloud VMs advertise their respective VPC/VNet CIDRs. This enables any tailnet member to reach cloud and on-premises subnets without requiring per-host agent installation on every workload.
+    </p>
+  </div>
+  <div class="image-col">
+    <figure>
+      <img src="/Career_Projects/assets/diagrams/cloud-routing-overview.png" alt="Tailscale Mesh VPN Fabric">
+      <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+        On-Premises and Cloud IaaS Routing Overview
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<figure>
+  <img src="/Career_Projects/assets/diagrams/cloud-routing-pt1.png" alt="Cloud Routing">
+  <img src="/Career_Projects/assets/diagrams/cloud-routing-pt2.png" alt="Cloud Routing">
+  <img src="/Career_Projects/assets/diagrams/cloud-routing-pt3.png" alt="Cloud Routing">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+
+  </figcaption>
+</figure>
+
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Eliminates public-internet exposure of management interfaces across all cloud platforms</li>
+<li>WireGuard encryption (ChaCha20-Poly1305) secures all inter-node traffic by default</li>
+<li>ACL-based policy enforces least-privilege connectivity — no implicit mesh between all nodes</li>
+<li>Exit node capability routes homelab egress through cloud endpoints for geo-validation and privacy testing</li>
+<li>Device-bound authentication prevents credential-only access; Tailscale identity is tied to machine keys</li>
+<li>On-premises Unbound DNS resolvers accessible to cloud nodes via Tailscale for consistent internal name resolution and filtering</li>
+</ul>
+<h3 id="node-inventory">Node Inventory<a class="headerlink" href="#node-inventory" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>Platform</th>
+<th>Local IP</th>
+<th>Tailscale IP</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>officepc.home.com</td>
+<td>Windows 11 (On-Prem)</td>
+<td>192.168.1.31</td>
+<td>100.98.158.59</td>
+<td>Endpoint</td>
+</tr>
+<tr>
+<td>pve.home.com</td>
+<td>Proxmox Host (On-Prem)</td>
+<td>192.168.1.178</td>
+<td>100.79.235.93</td>
+<td>Endpoint</td>
+</tr>
+<tr>
+<td>pfsense-a (fw.home.com)</td>
+<td>pfSense FreeBSD 15</td>
+<td>192.168.100.2</td>
+<td>100.102.245.44</td>
+<td>Subnet Router / Exit Node</td>
+</tr>
+<tr>
+<td>pfsense-b (fw.home.com)</td>
+<td>pfSense FreeBSD 15</td>
+<td>192.168.100.3</td>
+<td>100.74.247.76</td>
+<td>Subnet Router / Exit Node</td>
+</tr>
+<tr>
+<td>aws-ec2-host1</td>
+<td>Amazon Linux (AWS EC2)</td>
+<td>172.31.34.12</td>
+<td>100.64.167.58</td>
+<td>Subnet Router / Exit Node</td>
+</tr>
+<tr>
+<td>aws-win2025-host2</td>
+<td>Windows Server 2025 (AWS)</td>
+<td>172.31.46.238</td>
+<td>100.108.70.123</td>
+<td>Endpoint</td>
+</tr>
+<tr>
+<td>gcp-debian-host1</td>
+<td>Debian 13.4 (GCP e2.micro)</td>
+<td>10.128.0.2</td>
+<td>100.67.103.120</td>
+<td>Subnet Router / Exit Node</td>
+</tr>
+<tr>
+<td>az-ubuntu</td>
+<td>Ubuntu 24.04 LTS (Azure B2ats v2)</td>
+<td>10.130.0.7</td>
+<td>100.96.110.40</td>
+<td>Subnet Router / Exit Node</td>
+</tr>
+<tr>
+<td>az-win2025-dc</td>
+<td>Windows Server 2025 Datacenter (Azure E2s v3)</td>
+<td>10.130.0.5</td>
+<td>100.113.13.112</td>
+<td>Endpoint</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Subnet Advertisement</strong></p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Advertised Subnets</th>
+<th>Exit Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pfsense-a / pfsense-b</td>
+<td>192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>aws-ec2-host1</td>
+<td>172.31.0.0/16</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>gcp-debian-host1</td>
+<td>10.128.0.0/16</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>az-ubuntu</td>
+<td>10.130.0.0/16</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DNS via On-Premises Unbound</strong></p>
+<p>Cloud nodes resolve internal hostnames and benefit from malware/ad-blocking through the on-premises Unbound resolvers, accessible via the Tailscale tunnel. Windows Server nodes that are domain-joined to home.com use the on-premises Active Directory DNS servers for AD-specific resolution.</p>
+<table>
+<thead>
+<tr>
+<th>Resolver</th>
+<th>IP</th>
+<th>Role</th>
+<th>Access Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unbound-01</td>
+<td>192.168.1.153</td>
+<td>Primary recursive resolver + ad/malware blocking</td>
+<td>Via Tailscale tunnel</td>
+</tr>
+<tr>
+<td>Unbound-02</td>
+<td>192.168.1.154</td>
+<td>Secondary recursive resolver (independent cache)</td>
+<td>Via Tailscale tunnel</td>
+</tr>
+<tr>
+<td>Technitium DNS01</td>
+<td>192.168.1.150</td>
+<td>Authoritative for home.com (forwarded from Unbound)</td>
+<td>Via Tailscale tunnel</td>
+</tr>
+<tr>
+<td>Technitium DNS02</td>
+<td>192.168.1.151</td>
+<td>Secondary authoritative (zone replica)</td>
+<td>Via Tailscale tunnel</td>
+</tr>
+<tr>
+<td>DC01 / DC02 (AD DNS)</td>
+<td>192.168.1.152 / 192.168.1.142</td>
+<td>Domain DNS — used by Windows domain-joined cloud nodes</td>
+<td>Via Tailscale tunnel</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ACL Policy</strong></p>
+<p>Tailscale ACLs are maintained in the admin console and enforce explicit allow rules. Default policy denies all traffic not explicitly permitted.</p>
+<ul>
+<li>Homelab endpoints reach all subnet-router-advertised cloud CIDRs</li>
+<li>Cloud nodes reach on-premises Wazuh Manager (192.168.1.219) on TCP 1514/1515</li>
+<li>Cloud nodes reach Unbound DNS resolvers (192.168.1.153/154) on UDP/TCP 53</li>
+<li>Domain-joined Windows cloud nodes reach AD DNS (192.168.1.152/142) and domain controllers on required AD ports</li>
+<li>Cloud nodes reach PatchMon backend, Checkmk server, and Ansible controller via homelab subnets</li>
+<li>SSH (TCP 22) and RDP (TCP 3389) permitted from homelab subnets to cloud nodes only</li>
+<li>ICMP permitted within tailnet for diagnostics</li>
+</ul>
+<p><strong>Security Controls</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Implementation</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Encryption</td>
+<td>WireGuard — ChaCha20-Poly1305</td>
+<td>All tunnel traffic encrypted in transit</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>Machine keys + Tailscale identity</td>
+<td>Device-bound; no shared secrets</td>
+</tr>
+<tr>
+<td>ACL Enforcement</td>
+<td>Tailscale admin console policy</td>
+<td>Least-privilege inter-node connectivity</td>
+</tr>
+<tr>
+<td>Exit Node</td>
+<td>pfsense-a/b, aws-ec2-host1, gcp-debian-host1</td>
+<td>Controlled egress routing</td>
+</tr>
+<tr>
+<td>MagicDNS</td>
+<td>tailf07c05.ts.net</td>
+<td>Stable human-readable hostnames across tailnet</td>
+</tr>
+<tr>
+<td>Internal DNS</td>
+<td>On-premises Unbound / AD DNS via Tailscale</td>
+<td>Consistent resolution and malware blocking</td>
+</tr>
+<tr>
+<td>Key Rotation</td>
+<td>Automatic (Tailscale managed)</td>
+<td>Prevents stale key material</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="amazon-web-services-aws">Amazon Web Services (AWS)<a class="headerlink" href="#amazon-web-services-aws" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview_1">Deployment Overview<a class="headerlink" href="#deployment-overview_1" title="Permanent link">&para;</a></h3>
+<p>The AWS deployment consists of two EC2 instances: a t3.micro running Amazon Linux 2 that serves as the Tailscale subnet router for the VPC (172.31.0.0/16), and a c7i-flex.large running Windows Server 2025 Datacenter. Both instances are enrolled in the Tailscale tailnet and integrated with the on-premises management stack (Wazuh, PatchMon, Checkmk, Ansible, Uptime Kuma). The Windows Server 2025 instance is joined to the home.com Active Directory domain via Tailscale, extending enterprise identity and Group Policy to the cloud workload. AWS native services — GuardDuty, Security Hub, CloudTrail, IAM, and CloudWatch — provide cloud-layer threat detection and audit logging that complements the on-premises SOC platform.</p>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Wazuh agent provides endpoint telemetry from both instances forwarded to the central on-premises SIEM</li>
+<li>Windows Server 2025 joined to home.com AD — Group Policy, WSUS, and certificate auto-enrollment apply across the VPN</li>
+<li>PatchMon daily checks ensure package currency across on-premises and cloud nodes in a unified dashboard</li>
+<li>Checkmk monitors EC2 host health (CPU, memory, disk, services) alongside all lab infrastructure</li>
+<li>GuardDuty delivers ML-based threat detection across VPC flow logs, CloudTrail events, and DNS query logs</li>
+<li>Security Hub aggregates GuardDuty, Inspector, and IAM Access Analyzer findings into a compliance dashboard</li>
+<li>CloudTrail captures all API activity with tamper-resistant log storage in S3</li>
+<li>Security groups restrict all inbound management to Tailnet CGNAT and homelab subnets</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>AWS represents the dominant enterprise cloud platform. This deployment demonstrates proficiency with EC2 lifecycle management, VPC networking, IAM policy design, and cloud-native security services. The dual-instance topology — one Linux subnet router and one Windows domain member — mirrors common hybrid enterprise patterns where cloud workloads participate in on-premises identity and management infrastructure.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> VPC security groups enforce network-layer segmentation; GuardDuty behavioral detection operates independent of signature-based rules; CloudTrail + CloudWatch Logs provide a tamper-resistant audit trail</li>
+<li><strong>Secure by Design:</strong> EC2 instance profiles provide IAM roles without embedded credentials; S3 bucket for CloudTrail logs configured with server-side encryption</li>
+<li><strong>Zero Trust:</strong> No inbound internet-facing management ports — all access via Tailscale; IAM policies scoped to minimum required actions; VPC flow logs capture all traffic for forensic analysis</li>
+</ul>
+<h3 id="infrastructure-configuration">Infrastructure Configuration<a class="headerlink" href="#infrastructure-configuration" title="Permanent link">&para;</a></h3>
+<p><strong>EC2 Instances — Amazon Linux 2 (host1 — Subnet Router)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instance ID</td>
+<td>i-0204e2e26d7f30631</td>
+</tr>
+<tr>
+<td>Hostname</td>
+<td>aws-ec2-host1</td>
+</tr>
+<tr>
+<td>Instance Type</td>
+<td>t3.micro</td>
+</tr>
+<tr>
+<td>AMI</td>
+<td>Amazon Linux 2 (us-east-2)</td>
+</tr>
+<tr>
+<td>Availability Zone</td>
+<td>us-east-2c</td>
+</tr>
+<tr>
+<td>Private IP</td>
+<td>172.31.34.12</td>
+</tr>
+<tr>
+<td>Public IP</td>
+<td>3.16.91.166 (not used for management — Tailscale only)</td>
+</tr>
+<tr>
+<td>Tailscale IP</td>
+<td>100.64.167.58</td>
+</tr>
+<tr>
+<td>Tailscale Hostname</td>
+<td>aws-ec2-host1.tailf07c05.ts.net</td>
+</tr>
+<tr>
+<td>Tailscale Role</td>
+<td>Subnet Router / Exit Node (172.31.0.0/16)</td>
+</tr>
+<tr>
+<td>Volume</td>
+<td>8 GiB gp3</td>
+</tr>
+<tr>
+<td>Key Pair</td>
+<td>OfficePC (ed25519)</td>
+</tr>
+<tr>
+<td>Source/Dest Check</td>
+<td>Disabled (required for Tailscale subnet routing)</td>
+</tr>
+<tr>
+<td>DNS Resolvers</td>
+<td>192.168.1.153, 192.168.1.154 (on-premises Unbound via Tailscale)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>EC2 Instances — Windows Server 2025 Datacenter (host2)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Instance ID</td>
+<td>i-03e9efec4fa3fe644</td>
+</tr>
+<tr>
+<td>Hostname</td>
+<td>aws-win2025-host2</td>
+</tr>
+<tr>
+<td>Instance Type</td>
+<td>c7i-flex.large</td>
+</tr>
+<tr>
+<td>AMI</td>
+<td>Windows Server 2025 Datacenter (us-east-2)</td>
+</tr>
+<tr>
+<td>Availability Zone</td>
+<td>us-east-2c</td>
+</tr>
+<tr>
+<td>Private IP</td>
+<td>172.31.34.137</td>
+</tr>
+<tr>
+<td>Tailscale IP</td>
+<td>100.108.70.123</td>
+</tr>
+<tr>
+<td>Tailscale Hostname</td>
+<td>aws-win2025-host2.tailf07c05.ts.net</td>
+</tr>
+<tr>
+<td>Domain</td>
+<td>home.com (domain-joined via Tailscale)</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>Enabled (CloudWatch)</td>
+</tr>
+<tr>
+<td>Security Groups</td>
+<td>tailscale-access, lab-services</td>
+</tr>
+<tr>
+<td>Key Pair</td>
+<td>paul-key2</td>
+</tr>
+<tr>
+<td>Source/Dest Check</td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td>DNS Resolvers</td>
+<td>192.168.1.152, 192.168.1.142 (on-premises AD DNS via Tailscale)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>VPC Configuration</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VPC ID</td>
+<td>vpc-07db6afa9c6097fe4</td>
+</tr>
+<tr>
+<td>CIDR</td>
+<td>172.31.0.0/16</td>
+</tr>
+<tr>
+<td>Default VPC</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Region</td>
+<td>us-east-2 (Ohio)</td>
+</tr>
+<tr>
+<td>Internet Gateway</td>
+<td>igw-0d9a301fe45791b9b</td>
+</tr>
+<tr>
+<td>Route Table</td>
+<td>rtb-00a8870decfc6d646 (main)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Routing</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Node / Scope</th>
+<th>Destination</th>
+<th>Next Hop / Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tailnet</td>
+<td>pfSense-a/b</td>
+<td>172.31.0.0/16</td>
+<td>Advertised via aws-ec2-host1</td>
+</tr>
+<tr>
+<td>Tailnet</td>
+<td>aws-ec2-host1</td>
+<td>192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24</td>
+<td>Advertised via pfSense Nodes</td>
+</tr>
+<tr>
+<td>Home LAN</td>
+<td>Office PC (192.168.1.31)</td>
+<td>172.31.0.0/16</td>
+<td>192.168.1.253 (pfSense)</td>
+</tr>
+<tr>
+<td>AWS VPC</td>
+<td>VPC Route Table</td>
+<td>192.168.0.0/16</td>
+<td>ENI of EC2 Tailscale Host</td>
+</tr>
+<tr>
+<td>DNS (Linux)</td>
+<td>aws-ec2-host1</td>
+<td>192.168.1.153, 192.168.1.154</td>
+<td>Via Tailscale tunnel to on-prem Unbound</td>
+</tr>
+<tr>
+<td>DNS (Windows)</td>
+<td>aws-win2025-host2</td>
+<td>192.168.1.152, 192.168.1.142</td>
+<td>Via Tailscale tunnel to on-prem AD DNS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Groups — lab-services Inbound Rules</strong></p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Port</th>
+<th>Source</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP</td>
+<td>22</td>
+<td>192.168.0.0/16</td>
+<td>SSH — homelab subnets only (Linux)</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>3389</td>
+<td>192.168.0.0/16</td>
+<td>RDP — homelab subnets only (Windows)</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>All</td>
+<td>192.168.0.0/16</td>
+<td>Internal diagnostics</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>80</td>
+<td>192.168.1.181/32</td>
+<td>Uptime Kuma — HTTP monitor</td>
+</tr>
+<tr>
+<td>UDP</td>
+<td>33434-33600</td>
+<td>192.168.0.0/16</td>
+<td>Internal traceroute</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Groups — lab-services Outbound Rules</strong></p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Port(s)</th>
+<th>Destination</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP</td>
+<td>1514-1515, 55000</td>
+<td>192.168.1.219/32</td>
+<td>Wazuh agent ports</td>
+</tr>
+<tr>
+<td>TCP/UDP</td>
+<td>53</td>
+<td>192.168.1.153/32</td>
+<td>Unbound-01 DNS</td>
+</tr>
+<tr>
+<td>TCP/UDP</td>
+<td>53</td>
+<td>192.168.1.154/32</td>
+<td>Unbound-02 DNS</td>
+</tr>
+<tr>
+<td>All TCP</td>
+<td>*</td>
+<td>192.168.1.126/32</td>
+<td>Checkmk agent</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>3000-3001</td>
+<td>192.168.200.0/24</td>
+<td>PatchMon ports</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>*</td>
+<td>192.168.0.0/16</td>
+<td>Ping testing</td>
+</tr>
+<tr>
+<td>All Traffic</td>
+<td>AD Ports</td>
+<td>192.168.1.152/32, 192.168.1.142/32</td>
+<td>AD Domain Controller — Kerberos, LDAP, DNS, GP, SYSVOL</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Groups — tailscale-access Inbound/Outbound</strong></p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Port</th>
+<th>Source / Destination</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td>All</td>
+<td>100.64.0.0/10</td>
+<td>Bidirectional Tailnet communication</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IAM Configuration</strong></p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Count</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User Groups</td>
+<td>2</td>
+<td>Lab admin group, read-only group</td>
+</tr>
+<tr>
+<td>Users</td>
+<td>2</td>
+<td>Admin and read-only users — no long-lived access keys on EC2</td>
+</tr>
+<tr>
+<td>Roles</td>
+<td>24</td>
+<td>Service-linked + custom instance profiles</td>
+</tr>
+<tr>
+<td>Policies</td>
+<td>1</td>
+<td>Custom least-privilege policy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="native-security-services">Native Security Services<a class="headerlink" href="#native-security-services" title="Permanent link">&para;</a></h3>
+<p><strong>GuardDuty</strong></p>
+<p>Continuous threat detection analyzing VPC flow logs, CloudTrail management events, and Route 53 DNS query logs. ML-based anomaly detection identifies reconnaissance, credential compromise, and C2 communication without rule maintenance.</p>
+<table>
+<thead>
+<tr>
+<th>Data Source</th>
+<th>Detection Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VPC Flow Logs</td>
+<td>Port scanning, unusual outbound connections, lateral movement</td>
+</tr>
+<tr>
+<td>CloudTrail Logs</td>
+<td>Unauthorized API calls, credential misuse, privilege escalation</td>
+</tr>
+<tr>
+<td>DNS Query Logs</td>
+<td>DGA domains, DNS exfiltration, C2 callbacks</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Hub</strong></p>
+<p>Aggregates findings from GuardDuty, Inspector, and IAM Access Analyzer. Benchmarks include CIS AWS Foundations and AWS Foundational Security Best Practices. Findings export to CloudWatch Events for automated response via Lambda.</p>
+<p><strong>CloudTrail</strong></p>
+<p>Management and API audit logging enabled for all events. Logs delivered to S3 with server-side encryption. CloudWatch Logs integration enables real-time alerting on high-risk API calls including IAM policy changes, security group modifications, and root account usage.</p>
+<p><strong>CloudWatch</strong></p>
+<p>Infrastructure metrics collected from both EC2 instances via CloudWatch Agent. Custom metrics and log groups forward application and system logs. Alarms trigger SNS notifications and can initiate Lambda-based automated response. VPC Flow Logs (fl-03179f74e54bf1aa4) delivered to CloudWatch Logs capture all accepted and rejected traffic with ENI, source/destination addresses, ports, and action.</p>
+<h3 id="monitoring-and-alerting">Monitoring and Alerting<a class="headerlink" href="#monitoring-and-alerting" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Alert Type</th>
+<th>Destination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GuardDuty findings</td>
+<td>Threat detection (high/medium severity)</td>
+<td>Security Hub + CloudWatch Events</td>
+</tr>
+<tr>
+<td>CloudTrail</td>
+<td>High-risk API activity</td>
+<td>CloudWatch Alarms + SNS</td>
+</tr>
+<tr>
+<td>CloudWatch Agent</td>
+<td>EC2 resource thresholds</td>
+<td>CloudWatch Alarms</td>
+</tr>
+<tr>
+<td>Wazuh Agent</td>
+<td>Endpoint security events</td>
+<td>On-premises Wazuh Manager + Splunk SIEM</td>
+</tr>
+<tr>
+<td>PatchMon Agent</td>
+<td>Outdated packages / CVE correlation</td>
+<td>On-premises PatchMon dashboard + Discord</td>
+</tr>
+<tr>
+<td>Checkmk Agent</td>
+<td>Host health (CPU, disk, services)</td>
+<td>On-premises Checkmk + Discord</td>
+</tr>
+<tr>
+<td>Uptime Kuma</td>
+<td>Service availability checks</td>
+<td>Discord webhook (#uptime-kuma)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="google-cloud-platform-gcp">Google Cloud Platform (GCP)<a class="headerlink" href="#google-cloud-platform-gcp" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview_2">Deployment Overview<a class="headerlink" href="#deployment-overview_2" title="Permanent link">&para;</a></h3>
+<p>The GCP deployment consists of two e2.micro instances in the us-central1-c zone. The primary node (gcp-debian-host1) runs Debian 13.4 and serves as the Tailscale subnet router for the GCP VPC (10.128.0.0/16), advertising the GCP network into the tailnet as an exit node. A secondary Ubuntu instance (gcp-ubuntu-host2) operates as an additional workload endpoint. Both instances are enrolled in Tailscale and integrated with the on-premises management stack. GCP native services — Security Command Center, Cloud Logging, Cloud Monitoring, IAM, Cloud Armor, and VPC firewall policies — provide cloud-native security visibility that complements the on-premises SOC platform.</p>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Tailscale subnet router on gcp-debian-host1 advertises 10.128.0.0/16 into the tailnet, enabling homelab access to all GCP workloads without public internet exposure</li>
+<li>Wazuh agents on both GCP instances provide endpoint telemetry forwarded to the central on-premises Wazuh Manager</li>
+<li>Security Command Center delivers asset inventory, vulnerability findings, and threat detection across the GCP project</li>
+<li>Cloud Armor policies provide WAF protection (SQLi/XSS blocking), DDoS rate limiting, and geo-based threat intelligence blocking across three policy tiers</li>
+<li>VPC network firewall policy (homelab) enforces Google Cloud Threat Intelligence blocking for TOR exit nodes, known malicious IPs, and sanctioned countries at the network perimeter</li>
+<li>Cloud Logging captures Admin Activity and Data Access audit logs for all GCP API calls</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>GCP provides unique cloud security capabilities including Security Command Center for CSPM, Cloud Armor for WAF/DDoS protection with Google Threat Intelligence integration, and a strong IAM model with service accounts and Workload Identity. The layered Cloud Armor and VPC firewall policy architecture mirrors enterprise-grade GCP deployments where threat intelligence, rate limiting, and WAF rules operate at the edge before traffic reaches compute resources.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> VPC network firewall policy (homelab) provides the innermost perimeter with Google Threat Intelligence blocking; Cloud Armor adds edge-layer WAF and DDoS protection; Security Command Center provides independent asset and vulnerability visibility; Cloud Logging audit trail captures all control-plane API activity</li>
+<li><strong>Secure by Design:</strong> GCP service accounts with minimal IAM roles; Cloud Armor application-level policy blocks SQLi and XSS; VPC firewall policy restricts management access (SSH) to homelab subnets</li>
+<li><strong>Zero Trust:</strong> Management access exclusively via Tailscale; IAM service accounts follow least-privilege; VPC flow logs enabled for forensic traffic analysis</li>
+</ul>
+<h3 id="infrastructure-configuration_1">Infrastructure Configuration<a class="headerlink" href="#infrastructure-configuration_1" title="Permanent link">&para;</a></h3>
+<p><strong>VM Instances</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>gcp-debian-host1</th>
+<th>gcp-ubuntu-host2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Debian 13.4</td>
+<td>Ubuntu</td>
+</tr>
+<tr>
+<td>Machine Type</td>
+<td>e2.micro</td>
+<td>e2.micro</td>
+</tr>
+<tr>
+<td>Zone</td>
+<td>us-central1-c</td>
+<td>us-central1-c</td>
+</tr>
+<tr>
+<td>Internal IP</td>
+<td>10.128.0.2 (nic0)</td>
+<td>10.128.0.3 (nic0)</td>
+</tr>
+<tr>
+<td>External IP</td>
+<td>34.29.32.124</td>
+<td>108.59.80.1</td>
+</tr>
+<tr>
+<td>Tailscale IP</td>
+<td>100.67.103.120</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Tailscale Hostname</td>
+<td>gcp-debian-host1.tailf07c05.ts.net</td>
+<td>gcp-ubuntu-host2.tailf07c05.ts.net</td>
+</tr>
+<tr>
+<td>Tailscale Role</td>
+<td>Subnet Router / Exit Node</td>
+<td>Endpoint</td>
+</tr>
+<tr>
+<td>Exit Node Subnet</td>
+<td>10.128.0.0/16</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>DNS Resolvers</td>
+<td>192.168.1.153, 192.168.1.154 (via Tailscale)</td>
+<td>192.168.1.153, 192.168.1.154 (via Tailscale)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>VPC and Network Configuration</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VPC Network</td>
+<td>default</td>
+</tr>
+<tr>
+<td>Project ID</td>
+<td>project-9d2957e1-842b-4b35-ad2</td>
+</tr>
+<tr>
+<td>Region</td>
+<td>us-central1</td>
+</tr>
+<tr>
+<td>Zone</td>
+<td>us-central1-c</td>
+</tr>
+<tr>
+<td>Subnet CIDR</td>
+<td>10.128.0.0/16 (auto-mode VPC)</td>
+</tr>
+<tr>
+<td>Exit Node Subnet (Tailnet)</td>
+<td>10.128.0.0/16</td>
+</tr>
+<tr>
+<td>SMTP Port 25</td>
+<td>Blocked by GCP project policy</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Routing</strong></p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Node / Scope</th>
+<th>Destination</th>
+<th>Next Hop / Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tailnet</td>
+<td>pfSense-a/b</td>
+<td>10.128.0.0/16</td>
+<td>Advertised via gcp-debian-host1</td>
+</tr>
+<tr>
+<td>Tailnet</td>
+<td>gcp-debian-host1</td>
+<td>192.168.1.0/24, 192.168.100.0/24, 192.168.200.0/24</td>
+<td>Advertised via pfSense Nodes</td>
+</tr>
+<tr>
+<td>GCP VPC</td>
+<td>Internal routing</td>
+<td>10.128.0.0/9</td>
+<td>VPC local</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>GCP Instances</td>
+<td>192.168.1.153, 192.168.1.154</td>
+<td>Via Tailscale tunnel to on-prem Unbound</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cloud Armor Security Policies</strong></p>
+<p>Three Cloud Armor policies enforce edge-layer security for GCP workloads, operating at edge, backend, and application tiers. Policies are evaluated in the order listed; lower-priority numbers are evaluated first within each tier.</p>
+<p><strong>tailscale — Edge Security Policy</strong></p>
+<p>Applied at the global load balancer level. Restricts access to Tailscale network and homelab ranges with a default deny for all other sources.</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Action</th>
+<th>Type</th>
+<th>Match</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80</td>
+<td>Allow</td>
+<td>IP ranges</td>
+<td>100.64.0.0/10</td>
+<td>Tailscale network</td>
+</tr>
+<tr>
+<td>100</td>
+<td>Allow</td>
+<td>IP ranges</td>
+<td>192.168.0.0/16</td>
+<td>Homelab access</td>
+</tr>
+<tr>
+<td>2,147,483,647</td>
+<td>Deny (403)</td>
+<td>IP ranges</td>
+<td>* (All)</td>
+<td>Default deny</td>
+</tr>
+</tbody>
+</table>
+<p><strong>vm-ddos — Backend Security Policy</strong></p>
+<p>Backend security policy providing DDoS rate limiting for VM-level traffic.</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Action</th>
+<th>Type</th>
+<th>Match</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80</td>
+<td>Allow</td>
+<td>IP ranges</td>
+<td>100.64.0.0/10</td>
+<td>Tailscale access</td>
+</tr>
+<tr>
+<td>100</td>
+<td>Allow</td>
+<td>IP ranges</td>
+<td>192.168.0.0/16</td>
+<td>Homelab access</td>
+</tr>
+<tr>
+<td>1,000</td>
+<td>Throttle</td>
+<td>IP ranges</td>
+<td>*</td>
+<td>Rate limiting — prevents cost spikes and DDoS</td>
+</tr>
+<tr>
+<td>2,147,483,647</td>
+<td>Deny</td>
+<td>IP ranges</td>
+<td>* (All)</td>
+<td>Default deny</td>
+</tr>
+</tbody>
+</table>
+<p><strong>application-level — Backend Security Policy</strong></p>
+<p>Application-layer WAF policy blocking OWASP Top 10 attack patterns. SQLi and XSS rules use GCP's preconfigured expression sets (v33-stable).</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Action</th>
+<th>Type</th>
+<th>Match / Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>Deny</td>
+<td>WAF rule</td>
+<td>evaluatePreconfiguredExpr('sqli-v33-stable')</td>
+<td>WAF: Block SQL Injection</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Deny</td>
+<td>WAF rule</td>
+<td>evaluatePreconfiguredExpr('xss-v33-stable')</td>
+<td>WAF: Block XSS</td>
+</tr>
+<tr>
+<td>80</td>
+<td>Allow</td>
+<td>IP ranges</td>
+<td>100.64.0.0/10</td>
+<td>Tailscale overlay access</td>
+</tr>
+<tr>
+<td>100</td>
+<td>Allow</td>
+<td>IP ranges</td>
+<td>192.168.0.0/16</td>
+<td>Homelab direct access</td>
+</tr>
+<tr>
+<td>1,000</td>
+<td>Throttle</td>
+<td>IP ranges</td>
+<td>*</td>
+<td>Rate limit — prevents lab cost spikes</td>
+</tr>
+<tr>
+<td>2,147,483,647</td>
+<td>Deny (403)</td>
+<td>IP ranges</td>
+<td>* (All)</td>
+<td>Default deny</td>
+</tr>
+</tbody>
+</table>
+<p><strong>VPC Network Firewall Policy — homelab</strong></p>
+<p>The homelab VPC network firewall policy is attached to the default VPC network (42 subnets, global scope) and contains 17 rules. It replaces and extends basic per-instance firewall rules with centralized policy management, Google Cloud Threat Intelligence integration, and explicit service-level egress rules.</p>
+<p><strong>Threat Intelligence and Geo-Blocking (Priority 100-130)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Direction</th>
+<th>Source / Destination</th>
+<th>Protocols</th>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>Ingress</td>
+<td>Google Threat Intel: TOR exit nodes</td>
+<td>All</td>
+<td>Deny</td>
+<td>Block TOR exit node ingress traffic</td>
+</tr>
+<tr>
+<td>110</td>
+<td>Ingress</td>
+<td>Google Threat Intel: Known malicious IPs</td>
+<td>All</td>
+<td>Deny</td>
+<td>Block known malicious IP ingress</td>
+</tr>
+<tr>
+<td>120</td>
+<td>Egress</td>
+<td>Google Threat Intel: Known malicious IPs</td>
+<td>All</td>
+<td>Deny</td>
+<td>Block egress to known malicious IPs</td>
+</tr>
+<tr>
+<td>130</td>
+<td>Ingress</td>
+<td>Geolocations: CU, IR, KP, SY, XC, XD</td>
+<td>All</td>
+<td>Deny</td>
+<td>Block sanctioned country ingress</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Egress — On-Premises Management Services (Priority 1000-2030)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Direction</th>
+<th>Destination</th>
+<th>Protocols / Ports</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1000</td>
+<td>Egress</td>
+<td>192.168.1.153/32, 192.168.1.154/32</td>
+<td>TCP/UDP 53</td>
+<td>DNS — Unbound-01 and Unbound-02</td>
+</tr>
+<tr>
+<td>2005</td>
+<td>Egress</td>
+<td>192.168.1.219/32</td>
+<td>TCP 1514, 1515, 55000</td>
+<td>Wazuh agent — manager ports</td>
+</tr>
+<tr>
+<td>2010</td>
+<td>Egress</td>
+<td>192.168.1.126/32</td>
+<td>All</td>
+<td>Checkmk agent egress</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>Egress</td>
+<td>192.168.200.0/24</td>
+<td>TCP 3000-3001</td>
+<td>PatchMon backend</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ingress — Homelab Access (Priority 1010-2030)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Direction</th>
+<th>Source</th>
+<th>Protocols / Ports</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1010</td>
+<td>Ingress</td>
+<td>192.168.0.0/16</td>
+<td>TCP 3389</td>
+<td>RDP from homelab</td>
+</tr>
+<tr>
+<td>1020</td>
+<td>Ingress</td>
+<td>192.168.0.0/16, 172.31.0.0/16</td>
+<td>ICMP</td>
+<td>Diagnostics — homelab + AWS</td>
+</tr>
+<tr>
+<td>1030</td>
+<td>Ingress</td>
+<td>192.168.0.0/16</td>
+<td>UDP 33434-33600</td>
+<td>Traceroute from homelab</td>
+</tr>
+<tr>
+<td>1040</td>
+<td>Ingress</td>
+<td>192.168.0.0/16</td>
+<td>TCP 22</td>
+<td>SSH from homelab only</td>
+</tr>
+<tr>
+<td>2030</td>
+<td>Ingress</td>
+<td>192.168.1.181/32</td>
+<td>TCP 80, 443</td>
+<td>Uptime Kuma health checks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="native-security-services_1">Native Security Services<a class="headerlink" href="#native-security-services_1" title="Permanent link">&para;</a></h3>
+<p><strong>Security Command Center</strong></p>
+<p>SCC provides asset inventory, vulnerability assessment, misconfiguration detection, and threat detection across the GCP project.</p>
+<table>
+<thead>
+<tr>
+<th>SCC Capability</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Security Health Analytics</td>
+<td>Detects misconfigurations: open firewall rules, public IPs, weak IAM policies</td>
+</tr>
+<tr>
+<td>Asset Inventory</td>
+<td>Continuous discovery of all GCP resources across the project</td>
+</tr>
+<tr>
+<td>Vulnerability Assessment</td>
+<td>CVE scanning for known vulnerabilities on Compute Engine instances</td>
+</tr>
+<tr>
+<td>Threat Detection (Premium)</td>
+<td>Behavioral anomaly detection for credential misuse and data exfiltration (upgrade path)</td>
+</tr>
+</tbody>
+</table>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/gcp-vul.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Security Command Center - Vulnerability Findings
+  </figcaption>
+</figure>
+
+<p><strong>Network Security</strong></p>
+<h3 id="ids-endpoint-and-dns-armor">IDS Endpoint and DNS Armor<a class="headerlink" href="#ids-endpoint-and-dns-armor" title="Permanent link">&para;</a></h3>
+<p>GCP is configured to mirror a single instance, gcp-debian-host1 for all traffic with a minimum lart severity of high</p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/gcp-ids-dns.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Example IDS Traffic Output and IDS/DNS Armor configuration
+  </figcaption>
+</figure>
+
+<p><strong>Cloud Logging</strong></p>
+<p>Admin Activity audit logs are enabled by default and cannot be disabled. Data Access logs capture all GCP API calls. Log entries include resource type, method, principal identity, source IP, and request/response metadata. Log-based metrics and alerting policies surface high-risk events such as IAM role modifications and firewall rule changes.</p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/gcp-logging1.png" alt="AWS Console Overview">
+  <img src="/Career_Projects/assets/screenshots/gcp-logging2.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Example Observability Analytics and Log Explorer Output
+  </figcaption>
+</figure>
+
+<p><strong>Cloud Monitoring</strong></p>
+<p>Infrastructure metrics (CPU, memory, disk, network) collected from GCP instances via the Cloud Monitoring agent (Ops Agent). Custom dashboards and alerting policies trigger notifications on resource thresholds. Complements on-premises Checkmk and Prometheus for cross-platform visibility.</p>
+<p><strong>IAM</strong></p>
+<p>GCP IAM controls access to all project resources. Service accounts with minimal roles are used for instance operations. No owner or editor roles assigned to compute instances. IAM policy recommendations surface over-permissive bindings.</p>
+<h3 id="monitoring-and-alerting_1">Monitoring and Alerting<a class="headerlink" href="#monitoring-and-alerting_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Alert Type</th>
+<th>Destination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Security Command Center</td>
+<td>Misconfiguration findings, vulnerability detections</td>
+<td>GCP console + log-based alerts</td>
+</tr>
+<tr>
+<td>Cloud Armor</td>
+<td>WAF blocks, rate limit triggers</td>
+<td>Cloud Logging + alerting policies</td>
+</tr>
+<tr>
+<td>Cloud Logging</td>
+<td>High-risk API activity (IAM changes, firewall modifications)</td>
+<td>Cloud Monitoring alerting policies</td>
+</tr>
+<tr>
+<td>Cloud Monitoring</td>
+<td>Instance resource thresholds</td>
+<td>Cloud Monitoring alert + notification channel</td>
+</tr>
+<tr>
+<td>Wazuh Agent</td>
+<td>Endpoint security events</td>
+<td>On-premises Wazuh Manager + SIEM</td>
+</tr>
+<tr>
+<td>PatchMon Agent</td>
+<td>Outdated packages / CVE correlation</td>
+<td>On-premises PatchMon dashboard + Discord</td>
+</tr>
+<tr>
+<td>Checkmk Agent</td>
+<td>Host health (CPU, disk, services)</td>
+<td>On-premises Checkmk + Discord</td>
+</tr>
+<tr>
+<td>Uptime Kuma</td>
+<td>Service availability checks</td>
+<td>Discord webhook (#uptime-kuma)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="microsoft-azure">Microsoft Azure<a class="headerlink" href="#microsoft-azure" title="Permanent link">&para;</a></h2>
+<h3 id="deployment-overview_3">Deployment Overview<a class="headerlink" href="#deployment-overview_3" title="Permanent link">&para;</a></h3>
+<p>The Azure deployment consists of two VMs in the North Central US region: a Standard_B2ats v2 instance running Ubuntu 24.04 LTS and a Standard_E2s v3 Spot instance running Windows Server 2025 Datacenter Smalldisk. Both are enrolled in the Tailscale tailnet and provisioned via the azuredeploy.json ARM template. The Windows Server 2025 Core instance is joined to the home.com Active Directory domain over Tailscale, extending on-premises Group Policy, certificate auto-enrollment, and WSUS patch management to the cloud workload. Azure native services — Defender for Cloud, Log Analytics (homelab-log), Microsoft Sentinel, Entra ID, MFA, Azure Arc, and DDoS Protection (homelab-ddos) — provide Microsoft-native security visibility that complements the on-premises SOC platform.</p>
+<p><strong>Security Impact</strong></p>
+<ul>
+<li>Wazuh agents on both VMs provide endpoint telemetry forwarded to the central on-premises Wazuh Manager (192.168.1.219) via Tailscale</li>
+<li>Windows Server 2025 joined to home.com AD; Group Policy, WSUS, and certificate auto-enrollment operate across the Tailscale tunnel</li>
+<li>NSG enforces explicit inbound/outbound rules; management restricted to Tailscale CGNAT and homelab subnets; all internet ingress denied at highest priority</li>
+<li>Defender for Cloud delivers CSPM posture management and workload protection with regulatory compliance benchmarking (CIS, NIST, PCI-DSS)</li>
+<li>Azure Arc integration applies consistent governance policies across Azure, AWS, and on-premises Proxmox nodes</li>
+<li>Microsoft Sentinel aggregates Azure Monitor logs with custom KQL detection rules and automated response playbooks</li>
+<li>Entra ID provides cloud identity with conditional access policies and MFA enforcement</li>
+</ul>
+<p><strong>Deployment Rationale</strong></p>
+<p>Azure completes the three-provider hybrid architecture and demonstrates proficiency with the Microsoft cloud security stack. Entra ID and Defender for Cloud are deployed in the majority of enterprise environments alongside AWS or GCP. The dual-VM topology adds a Windows Server 2025 domain member, mirroring hybrid identity patterns where cloud workloads participate in on-premises AD for centralized identity, Group Policy, and patch management.</p>
+<p><strong>Architecture Principles Alignment</strong></p>
+<ul>
+<li><strong>Defense in Depth:</strong> Wazuh EDR coverage provides endpoint-layer visibility independent of Azure-native controls; Defender for Cloud and Sentinel operate as independent detection layers above network controls; Azure Arc extends on-premises Defender governance policies to cloud VMs</li>
+<li><strong>Secure by Design:</strong> VMs provisioned via secure ARM template parameters; NSG restricts SSH and RDP to 192.168.0.0/16; outbound rules explicitly permit only required management ports</li>
+<li><strong>Zero Trust:</strong> All management access via Tailscale; NSG deny-by-default with explicit allow list; Entra ID conditional access enforces MFA for all administrative actions</li>
+</ul>
+<h3 id="infrastructure-configuration_2">Infrastructure Configuration<a class="headerlink" href="#infrastructure-configuration_2" title="Permanent link">&para;</a></h3>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/az-overview.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Homelab Resource Group Visualizer
+  </figcaption>
+</figure>
+
+<p><strong>VM Instances — Ubuntu 24.04 LTS (az-ubuntu)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VM Name</td>
+<td>az-ubuntu</td>
+</tr>
+<tr>
+<td>VM Size</td>
+<td>Standard B2ats v2</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Ubuntu 24.04 LTS (Canonical)</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td>On-Demand</td>
+</tr>
+<tr>
+<td>NIC</td>
+<td>az-ubuntu440</td>
+</tr>
+<tr>
+<td>Admin Username</td>
+<td>paul</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>Private IP</td>
+<td>10.130.0.7</td>
+</tr>
+<tr>
+<td>Tailscale IP</td>
+<td>100.96.110.40</td>
+</tr>
+<tr>
+<td>Tailscale Hostname</td>
+<td>az-ubuntu.tailf07c05.ts.net</td>
+</tr>
+<tr>
+<td>Tailscale Role</td>
+<td>Subnet Router (10.130.0.0/16) / Exit Node</td>
+</tr>
+<tr>
+<td>DNS Resolvers</td>
+<td>192.168.1.153, 192.168.1.154 (on-premises Unbound via Tailscale)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>VM Instances — Windows Server 2025 Datacenter (az-win2025-dc)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VM Name</td>
+<td>az-win2025-dc</td>
+</tr>
+<tr>
+<td>VM Size</td>
+<td>Standard E2s v3</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Windows Server 2025 Datacenter Azure Edition Smalldisk</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td>Spot</td>
+</tr>
+<tr>
+<td>Eviction Policy</td>
+<td>Deallocate</td>
+</tr>
+<tr>
+<td>NIC</td>
+<td>az-win2025-dc480</td>
+</tr>
+<tr>
+<td>Admin Username</td>
+<td>Paul</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>Private IP</td>
+<td>10.130.0.5</td>
+</tr>
+<tr>
+<td>Tailscale IP</td>
+<td>100.113.13.112</td>
+</tr>
+<tr>
+<td>Tailscale Hostname</td>
+<td>az-win2025-dc.tailf07c05.ts.net</td>
+</tr>
+<tr>
+<td>Tailscale Role</td>
+<td>Endpoint</td>
+</tr>
+<tr>
+<td>Domain</td>
+<td>home.com (domain-joined via Tailscale)</td>
+</tr>
+<tr>
+<td>DNS Resolvers</td>
+<td>192.168.1.152, 192.168.1.142 (on-premises AD DNS via Tailscale)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>VNet and Subnet Configuration</strong></p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNet Name</td>
+<td>homelab-vnet2</td>
+</tr>
+<tr>
+<td>VNet Address Space</td>
+<td>10.130.0.0/16</td>
+</tr>
+<tr>
+<td>Subnet Name</td>
+<td>homelab-subnet</td>
+</tr>
+<tr>
+<td>Subnet CIDR</td>
+<td>10.130.0.0/24</td>
+</tr>
+<tr>
+<td>NSG Attached</td>
+<td>homelab-nsg2 (applied at subnet level, North Central US)</td>
+</tr>
+<tr>
+<td>DDoS Protection</td>
+<td>homelab-ddos</td>
+</tr>
+<tr>
+<td>Route Table</td>
+<td>to-homelab</td>
+</tr>
+</tbody>
+</table>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/az-vnet.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Homelab VNet Visualizer
+  </figcaption>
+</figure>
+
+<p><strong>Azure Resource Inventory</strong></p>
+<table>
+<thead>
+<tr>
+<th>Resource Name</th>
+<th>Type</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>az-ubuntu</td>
+<td>Virtual machine</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>az-ubuntu-ip</td>
+<td>Public IP address</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>az-ubuntu440</td>
+<td>Network Interface</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>az-win2025-dc</td>
+<td>Virtual machine</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>az-win2025-dc-ip</td>
+<td>Public IP address</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>az-win2025-dc480</td>
+<td>Network Interface</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>home-lab-endpoints</td>
+<td>Data collection rule</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>homelab-ddos</td>
+<td>DDoS protection plan</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>homelab-log</td>
+<td>Log Analytics workspace</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>homelab-nsg</td>
+<td>Network security group</td>
+<td>East US 2</td>
+</tr>
+<tr>
+<td>homelab-nsg2</td>
+<td>Network security group</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>homelab-vnet2</td>
+<td>Virtual network</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>win2025-dc</td>
+<td>Data collection endpoint</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>to-homelab</td>
+<td>Route table</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>RecommendedAlertRules-AG-1</td>
+<td>Action group</td>
+<td>Global</td>
+</tr>
+<tr>
+<td>SecurityCenterFree(homelab-log)</td>
+<td>Solution</td>
+<td>North Central US</td>
+</tr>
+<tr>
+<td>NetworkWatcher_northcentralus</td>
+<td>Network Watcher</td>
+<td>North Central US</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Network Security Group — homelab-nsg2 Inbound Rules</strong></p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Protocol</th>
+<th>Port</th>
+<th>Source</th>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1000</td>
+<td>*</td>
+<td>*</td>
+<td>100.64.0.0/10</td>
+<td>Allow</td>
+<td>Tailscale CGNAT — bidirectional Tailnet communication</td>
+</tr>
+<tr>
+<td>1040</td>
+<td>TCP</td>
+<td>22</td>
+<td>192.168.0.0/16</td>
+<td>Allow</td>
+<td>SSH — homelab subnets only (Ubuntu)</td>
+</tr>
+<tr>
+<td>1044</td>
+<td>*</td>
+<td>6516</td>
+<td>Any</td>
+<td>Allow</td>
+<td>Windows Admin Center Access</td>
+</tr>
+<tr>
+<td>1045</td>
+<td>TCP</td>
+<td>3389</td>
+<td>192.168.0.0/16</td>
+<td>Allow</td>
+<td>RDP — homelab subnets only (Windows)</td>
+</tr>
+<tr>
+<td>1050</td>
+<td>ICMP</td>
+<td>*</td>
+<td>192.168.0.0/16</td>
+<td>Allow</td>
+<td>ICMP diagnostics from homelab</td>
+</tr>
+<tr>
+<td>1060</td>
+<td>TCP</td>
+<td>80</td>
+<td>192.168.1.181/32</td>
+<td>Allow</td>
+<td>Uptime Kuma HTTP health checks</td>
+</tr>
+<tr>
+<td>1070</td>
+<td>UDP</td>
+<td>33434-33600</td>
+<td>192.168.0.0/16</td>
+<td>Allow</td>
+<td>Traceroute from homelab</td>
+</tr>
+<tr>
+<td>65000</td>
+<td>*</td>
+<td>*</td>
+<td>Any</td>
+<td>Allow</td>
+<td>VirtualNetwork: AllowVnetInBound</td>
+</tr>
+<tr>
+<td>65001</td>
+<td>*</td>
+<td>*</td>
+<td>Any</td>
+<td>Allow</td>
+<td>AzureLoadBalancer: AllowAzureLoadBalance</td>
+</tr>
+<tr>
+<td>65500</td>
+<td>*</td>
+<td>*</td>
+<td>Any</td>
+<td>Deny</td>
+<td>DenyAllInBound</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Network Security Group — homelab-nsg2 Outbound Rules</strong></p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Protocol</th>
+<th>Port(s)</th>
+<th>Destination</th>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>*</td>
+<td>*</td>
+<td>Any</td>
+<td>Allow</td>
+<td>AzureCloud</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>*</td>
+<td>*</td>
+<td>100.64.0.0/10</td>
+<td>Allow</td>
+<td>Tailscale outbound: all Tailnet destinations</td>
+</tr>
+<tr>
+<td>2010</td>
+<td>TCP</td>
+<td>1514-55000</td>
+<td>192.168.1.219/32</td>
+<td>Allow</td>
+<td>Wazuh agent manager event and enrollment ports</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>*</td>
+<td>53</td>
+<td>192.168.1.153/32, 192.168.1.154/32</td>
+<td>Allow</td>
+<td>DNS: Unbound-01 and Unbound-02</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>*</td>
+<td>53</td>
+<td>192.168.1.152/32, 192.168.1.142/32</td>
+<td>Allow</td>
+<td>DNS: AD DNS DC01 and DC02</td>
+</tr>
+<tr>
+<td>2030</td>
+<td>TCP</td>
+<td>*</td>
+<td>192.168.1.126/32</td>
+<td>Allow</td>
+<td>Checkmk agent egress</td>
+</tr>
+<tr>
+<td>2040</td>
+<td>TCP</td>
+<td>3000-3001</td>
+<td>192.168.200.0/24</td>
+<td>Allow</td>
+<td>PatchMon backend</td>
+</tr>
+<tr>
+<td>2050</td>
+<td>All</td>
+<td>AD Ports</td>
+<td>192.168.1.152/32, 192.168.1.142/32</td>
+<td>Allow</td>
+<td>AD Domain Controller: Kerberos, LDAP, DNS, GP, SYSVOL</td>
+</tr>
+<tr>
+<td>3000</td>
+<td>TCP</td>
+<td>443</td>
+<td>WindowsAdminCenter</td>
+<td>Allow</td>
+<td>Windows Admin Center Access</td>
+</tr>
+<tr>
+<td>3001</td>
+<td>TCP</td>
+<td>443</td>
+<td>AzureActiveDirectory</td>
+<td>Allow</td>
+<td>Azure Active Directory Access</td>
+</tr>
+<tr>
+<td>65000</td>
+<td>*</td>
+<td>*</td>
+<td>Any</td>
+<td>Allow</td>
+<td>VirtualNetwork: AllowVnetOutBound</td>
+</tr>
+<tr>
+<td>65001</td>
+<td>*</td>
+<td>*</td>
+<td>Any</td>
+<td>Allow</td>
+<td>Internet: AllowInternetOutBound</td>
+</tr>
+<tr>
+<td>65500</td>
+<td>*</td>
+<td>*</td>
+<td>Any</td>
+<td>Deny</td>
+<td>DenyAllOutBound</td>
+</tr>
+</tbody>
+</table>
+<h3 id="native-security-services_2">Native Security Services<a class="headerlink" href="#native-security-services_2" title="Permanent link">&para;</a></h3>
+<p><strong>Defender for Cloud</strong></p>
+<p>Defender for Cloud provides Cloud Security Posture Management (CSPM) across the Azure subscription. The lab configuration targets high visibility at zero or low cost.</p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/az-defender.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Defender Attack Serface Map and Asset Overview
+  </figcaption>
+</figure>
+
+<ul>
+<li><strong>Foundational CSPM (Free):</strong> Enabled in Defender for Cloud &gt; Environment Settings. Provides the Secure Score dashboard and compliance tracking against CIS Azure Foundations, PCI-DSS, and NIST SP 800-53. Surfaces misconfigured NSG rules, missing MFA, public IP exposure, and unencrypted disks</li>
+<li><strong>Azure Arc Integration:</strong> The Connected Machine Agent (Arc) is installed on the Azure VMs and planned for extension to Proxmox-hosted Linux VMs and AWS EC2 nodes. Arc enables Defender to apply the same governance policies and Secure Score recommendations across cloud-native, on-premises hypervisor, and multi-cloud infrastructure from a single control plane</li>
+<li><strong>Defender for Servers Plan 1:</strong> Enables EDR features and Microsoft Defender for Endpoint integration on enrolled VMs. Wazuh EDR serves as the primary endpoint detection layer; Defender for Servers is deployed as a supplementary control when trial capacity is available</li>
+</ul>
+<p><strong>Microsoft Sentinel</strong></p>
+<p>Microsoft Sentinel serves as the cloud-native SIEM/SOAR for the Azure deployment, aggregating data from across the hybrid environment into the Log Analytics Workspace (homelab-log).</p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/az-sentinel.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Sentinel Log Visualizer
+  </figcaption>
+</figure>
+
+<p>Data Connectors:</p>
+<ul>
+<li><strong>Azure Activity (Free):</strong> Streams all ARM template deployments, resource changes, and control-plane operations from the Azure subscription into Sentinel. Provides visibility into NSG rule modifications, VM provisioning events, and IAM role assignments</li>
+<li><strong>Microsoft Entra ID (Free tier):</strong> Ingests Audit Logs and Sign-in Logs from Entra ID. Tracks home.com synced user activity, conditional access policy hits, MFA challenge results, and privileged account sign-ins</li>
+<li><strong>Windows Security Events via AMA:</strong> The Azure Monitor Agent (AMA) is deployed via data collection rule home-lab-endpoints. The DCR targets the Common event set (4624, 4625, 4648, 4768, 4769, 4771, 7045, 7040, 4720, 4728, 4732, 4756) and streams events into homelab-log</li>
+<li><strong>Syslog via AMA (Linux nodes):</strong> Syslog forwarding configured on az-ubuntu and gcp-debian-host1 via the home-lab-endpoints DCR. The AMA collects auth, syslog, and daemon facility events</li>
+</ul>
+<p>KQL Detection Rules (custom):</p>
+<ul>
+<li><strong>NSG Deny-Inbound Spike:</strong> Alerts when the homelab-nsg2 priority-100 deny rule fires more than 20 times per hour from a single source IP</li>
+<li><strong>Entra ID Sign-in from New Location:</strong> Correlates Entra ID sign-in logs against a known-good location baseline; fires when an administrative account authenticates from a country not seen in the prior 30 days</li>
+<li><strong>Windows Domain Join Event:</strong> Monitors Security Event 4742 (computer account changed) and correlates with the expected domain-join window; unexpected domain joins outside provisioning windows generate a Sentinel incident</li>
+<li><strong>AMA DCR Data Gap:</strong> Fires when the AMA heartbeat for any monitored VM is absent for more than 15 minutes</li>
+</ul>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/az-logging.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Log Query Examples
+  </figcaption>
+</figure>
+
+<p><strong>Entra ID and MFA</strong></p>
+<p>Entra ID serves as the cloud identity provider for Azure resource access. Conditional access policies enforce MFA for all administrative roles. Privileged Identity Management (PIM) provides just-in-time role activation for subscription-level permissions. Sign-in logs and audit events are forwarded to homelab-log for retention and correlation with Sentinel analytics rules.</p>
+<p><strong>Log Analytics Workspace</strong></p>
+<p>homelab-log is the central log repository for all Azure diagnostic data: VM performance counters, NSG flow logs, Defender for Cloud alerts, Sentinel incidents, and Entra ID sign-in events. KQL queries provide ad-hoc investigation capability. Alert rules (action group: RecommendedAlertRules-AG-1) forward critical events to notification channels and Sentinel automation rules that can trigger Shuffle SOAR webhooks on the on-premises platform.</p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/az-log2.png" alt="AWS Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Log Analytics Workspace Visualizer
+  </figcaption>
+</figure>
+
+<p><strong>Azure Arc</strong></p>
+<p>The Connected Machine Agent is installed on both Azure VMs and is planned for extension to on-premises Proxmox-hosted Linux hosts and AWS EC2 instances. Arc registers each machine as a resource in Azure Resource Manager, enabling Defender for Cloud Secure Score recommendations, Azure Policy assignments, and Guest Configuration auditing to apply uniformly across cloud and on-premises workloads.</p>
+<h3 id="monitoring-and-alerting_2">Monitoring and Alerting<a class="headerlink" href="#monitoring-and-alerting_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Alert Type</th>
+<th>Destination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Defender for Cloud</td>
+<td>Misconfiguration findings, vulnerability detections</td>
+<td>Azure portal + Log Analytics alerts</td>
+</tr>
+<tr>
+<td>Microsoft Sentinel</td>
+<td>Detection rule hits, incident creation</td>
+<td>Automation rules + Shuffle SOAR webhook</td>
+</tr>
+<tr>
+<td>NSG Flow Logs</td>
+<td>Anomalous traffic patterns</td>
+<td>Log Analytics alerting + Sentinel</td>
+</tr>
+<tr>
+<td>Log Analytics</td>
+<td>VM diagnostic thresholds</td>
+<td>Azure Monitor alerts</td>
+</tr>
+<tr>
+<td>Wazuh Agent</td>
+<td>Endpoint security events</td>
+<td>On-premises Wazuh Manager + Splunk SIEM</td>
+</tr>
+<tr>
+<td>PatchMon Agent</td>
+<td>Outdated packages / CVE correlation</td>
+<td>On-premises PatchMon dashboard + Discord</td>
+</tr>
+<tr>
+<td>Checkmk Agent</td>
+<td>Host health (CPU, disk, services)</td>
+<td>On-premises Checkmk + Discord</td>
+</tr>
+<tr>
+<td>Uptime Kuma</td>
+<td>Service availability checks</td>
+<td>Discord webhook (#uptime-kuma)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="on-premises-management-integration">On-Premises Management Integration<a class="headerlink" href="#on-premises-management-integration" title="Permanent link">&para;</a></h2>
+<p>All cloud nodes — across AWS, GCP, and Azure — are managed using the same on-premises toolchain applied to Proxmox-hosted workloads. This provides a single operational model regardless of infrastructure location: unified patch compliance dashboards, consistent security baselines, centralized alerting, and a common incident response pipeline. The toolchain reaches cloud nodes exclusively via the Tailscale mesh VPN. No management ports are exposed to the public internet.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Function</th>
+<th>Reach</th>
+<th>Port / Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wazuh EDR</td>
+<td>Endpoint detection, FIM, SCA, vulnerability assessment</td>
+<td>All cloud nodes</td>
+<td>TCP 1514/1515 outbound to 192.168.1.219</td>
+</tr>
+<tr>
+<td>PatchMon</td>
+<td>Package currency tracking, CVE correlation, patch SLA tracking</td>
+<td>Linux cloud nodes</td>
+<td>TCP 3000-3001 outbound to 192.168.200.0/24</td>
+</tr>
+<tr>
+<td>Checkmk</td>
+<td>Host health monitoring (CPU, memory, disk, services)</td>
+<td>All cloud nodes</td>
+<td>TCP 6556 inbound from 192.168.1.126</td>
+</tr>
+<tr>
+<td>Ansible</td>
+<td>Configuration baselines, hardening, user management, patching</td>
+<td>All cloud nodes</td>
+<td>SSH (TCP 22) inbound from 192.168.1.25</td>
+</tr>
+<tr>
+<td>Uptime Kuma</td>
+<td>Service availability and tunnel health checks</td>
+<td>All cloud nodes</td>
+<td>TCP 22/3389 inbound from 192.168.1.181</td>
+</tr>
+<tr>
+<td>WSUS</td>
+<td>Windows patch management</td>
+<td>Windows cloud nodes</td>
+<td>HTTP/HTTPS outbound to 192.168.1.152</td>
+</tr>
+</tbody>
+</table>
+<h3 id="wazuh-edr">Wazuh EDR<a class="headerlink" href="#wazuh-edr" title="Permanent link">&para;</a></h3>
+<p>Wazuh agents are deployed on all cloud instances and report to the on-premises Wazuh Manager (192.168.1.219) via the Tailscale tunnel. The agent provides file integrity monitoring, rootkit detection, vulnerability assessment, CIS benchmark SCA, and real-time security event forwarding to the on-premises SIEM (Splunk + Elastic).</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wazuh Manager</td>
+<td>192.168.1.219 (on-premises)</td>
+</tr>
+<tr>
+<td>Enrollment Port</td>
+<td>TCP 1515</td>
+</tr>
+<tr>
+<td>Event Forwarding Port</td>
+<td>TCP 1514</td>
+</tr>
+<tr>
+<td>API Port</td>
+<td>TCP 55000</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>Tailscale tunnel (WireGuard encrypted)</td>
+</tr>
+<tr>
+<td>Traffic Flow</td>
+<td>Cloud Agent → Tailscale → pfSense → Wazuh Manager</td>
+</tr>
+<tr>
+<td>SCA Policies Applied</td>
+<td>CIS Amazon Linux, CIS Debian 12/13, CIS Ubuntu 22.04/24.04, CIS Windows Server 2025, CIS RHEL 10</td>
+</tr>
+<tr>
+<td>Active Response</td>
+<td>firewall-drop, host-deny, disable-account on threshold breach</td>
+</tr>
+</tbody>
+</table>
+<p>Cloud nodes appear as named agents in the Wazuh dashboard alongside on-premises hosts. SCA compliance scores, vulnerability counts, and FIM alerts are visible in the unified Wazuh and Splunk dashboards without platform-specific configuration.</p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/cloud-wazuh.png" alt="Azure Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Wazuh Monitored AWS, GCP, Azure Endpoints
+  </figcaption>
+</figure>
+
+<h3 id="patchmon">PatchMon<a class="headerlink" href="#patchmon" title="Permanent link">&para;</a></h3>
+<p>PatchMon agents are deployed on all Linux cloud nodes (Amazon Linux 2, Debian 13.4, Ubuntu 24.04 LTS). The agent polls the native package manager (yum/dnf for Amazon Linux; apt for Debian/Ubuntu) on a daily schedule and reports available updates to the PatchMon backend (192.168.200.39) via Tailscale. Package versions are correlated against the NVD database to identify CVE-linked updates and calculate per-host security update counts.</p>
+<p>Windows cloud nodes are managed via WSUS (192.168.1.152) for Microsoft product updates. All cloud hosts appear in the unified PatchMon dashboard alongside on-premises hosts, grouped by cloud provider. Critical CVE MTTR target is maintained at &lt;72 hours across all platforms.</p>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/cloud-patchmon.png" alt="Azure Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Patch Management - AWS, GCP, Azure Endpoints
+  </figcaption>
+</figure>
+
+<h3 id="checkmk">Checkmk<a class="headerlink" href="#checkmk" title="Permanent link">&para;</a></h3>
+<p>Checkmk agents are deployed on all cloud instances and report to the on-premises Checkmk server (192.168.1.126) via Tailscale. The agent provides OS-level metrics — CPU utilization, memory, disk usage, running services, and process health — consistent with the monitoring applied to on-premises Proxmox guests.</p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Integration Method</th>
+<th>Key Metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aws-ec2-host1 (Amazon Linux)</td>
+<td>Checkmk Agent (TCP 6556)</td>
+<td>CPU, memory, disk, systemd services, network interfaces</td>
+</tr>
+<tr>
+<td>aws-win2025-host2 (Windows)</td>
+<td>Checkmk Windows Agent (TCP 6556)</td>
+<td>CPU, memory, disk, Windows services, event log summary</td>
+</tr>
+<tr>
+<td>gcp-debian-host1 (Debian)</td>
+<td>Checkmk Agent (TCP 6556)</td>
+<td>CPU, memory, disk, systemd services, package count</td>
+</tr>
+<tr>
+<td>gcp-ubuntu-host2 (Ubuntu)</td>
+<td>Checkmk Agent (TCP 6556)</td>
+<td>CPU, memory, disk, systemd services, package count</td>
+</tr>
+<tr>
+<td>az-ubuntu (Ubuntu)</td>
+<td>Checkmk Agent (TCP 6556)</td>
+<td>CPU, memory, disk, systemd services</td>
+</tr>
+<tr>
+<td>az-win2025-dc (Windows)</td>
+<td>Checkmk Windows Agent (TCP 6556)</td>
+<td>CPU, memory, disk, Windows services</td>
+</tr>
+</tbody>
+</table>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/cloud-checkmk.png" alt="Azure Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Infrastructure Monitoring  - AWS, GCP, Azure Endpoints
+  </figcaption>
+</figure>
+
+<h3 id="ansible">Ansible<a class="headerlink" href="#ansible" title="Permanent link">&para;</a></h3>
+<p>All cloud Linux nodes are included in the Ansible inventory and managed from the Ansible controller (192.168.1.25) via SSH over Tailscale. Windows nodes are managed via WinRM. The same playbook library applied to on-premises hosts is reused across cloud workloads with OS-family detection handling Debian/Ubuntu versus RHEL/Amazon Linux differences.</p>
+<table>
+<thead>
+<tr>
+<th>Playbook</th>
+<th>Function</th>
+<th>Target Cloud Nodes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>new_install_baseline_roles.yml</td>
+<td>Bootstrap: Wazuh agent, SSH hardening, user accounts, Checkmk agent, base packages</td>
+<td>All Linux cloud nodes (first provision)</td>
+</tr>
+<tr>
+<td>linux_hardening.yml</td>
+<td>SSH hardening, sysctl parameters, login banner, UFW/firewalld rules</td>
+<td>All Linux cloud nodes (recurring)</td>
+</tr>
+<tr>
+<td>update_linux_hosts.yml</td>
+<td>OS package updates (apt dist-upgrade / dnf update) with reboot detection</td>
+<td>All Linux cloud nodes (weekly, n8n scheduled)</td>
+</tr>
+<tr>
+<td>user_mgmt.yml</td>
+<td>ansible/paul user credentials, SSH key distribution</td>
+<td>All Linux cloud nodes (quarterly rotation)</td>
+</tr>
+<tr>
+<td>windows_baseline.yml</td>
+<td>Windows hardening baseline, Wazuh agent install, Checkmk agent install</td>
+<td>AWS Win2025, Azure Win2025 (first provision)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="uptime-kuma">Uptime Kuma<a class="headerlink" href="#uptime-kuma" title="Permanent link">&para;</a></h3>
+<p>Uptime Kuma (192.168.1.181) performs Ping and TCP health checks against all cloud nodes via the Tailscale tunnel, validating both service availability and tunnel connectivity. Failures trigger Discord webhook notifications to the #uptime-kuma channel.</p>
+<table>
+<thead>
+<tr>
+<th>Monitor</th>
+<th>Check Type</th>
+<th>Target</th>
+<th>Alert Channel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aws-ec2-host1 tunnel</td>
+<td>TCP port</td>
+<td>172.31.34.12:22</td>
+<td>#uptime-kuma (Discord)</td>
+</tr>
+<tr>
+<td>aws-win2025-host2 tunnel</td>
+<td>Ping</td>
+<td>172.31.46.238</td>
+<td>#uptime-kuma (Discord)</td>
+</tr>
+<tr>
+<td>gcp-debian-host1 tunnel</td>
+<td>TCP port</td>
+<td>100.67.103.120:22</td>
+<td>#uptime-kuma (Discord)</td>
+</tr>
+<tr>
+<td>az-ubuntu availability</td>
+<td>TCP port</td>
+<td>10.130.0.7:22</td>
+<td>#uptime-kuma (Discord)</td>
+</tr>
+<tr>
+<td>az-win2025-dc tunnel</td>
+<td>Ping</td>
+<td>10.130.0.5</td>
+<td>#uptime-kuma (Discord)</td>
+</tr>
+</tbody>
+</table>
+<figure>
+  <img src="/Career_Projects/assets/screenshots/cloud-uptimek.png" alt="Azure Console Overview">
+  <figcaption style="font-size:0.9rem; color:var(--md-secondary-text-color); margin-top:0.5rem;">
+    Host Monitoring  - AWS, GCP, Azure Endpoints
+  </figcaption>
+</figure>
+
+<hr />
+<h2 id="security-homelab-section-links">Security Homelab Section Links<a class="headerlink" href="#security-homelab-section-links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="/Career_Projects/projects/homelab/01-exec-summary/">Executive Summary and Security Posture</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/02-platform/">Infrastructure Platform, Virtualization Stack and Hardware</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/03-network/">Network Security, Privacy and Remote Access</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/04-iam-secrets/">Identity, Access, Secrets and Trust Management</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/05-auto-iac/">Automation and IaC</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/06-apps-service/">Applications and Services</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/07-vis-response-pt1/">Observability and Response, Part 1</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/08-vis-response-pt2/">Observability and Response, Part 2</a></strong></li>
+<li><strong><a href="/Career_Projects/projects/homelab/09-cloud-iaas/">Cloud IaaS Integration – AWS, Azure and GCP</a></strong></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "content.code.copy", "content.tabs.link", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
