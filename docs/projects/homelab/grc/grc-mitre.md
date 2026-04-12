@@ -1,10 +1,9 @@
 # MITRE ATT&CK Enterprise Framework v18.1
 
 **Document Control:**  
-Version: 1.0  
-Last Updated: January 2026  
-Owner: Paul Leone  
-
+**Version:** 2.0  
+**Last Updated:** April 2026  
+**Owner:** Paul Leone  
 **Framework Version:** ATT&CK v18.1 (October 2025)
 
 ---
@@ -110,13 +109,6 @@ Owner: Paul Leone
 | T1574 | Hijack Execution Flow | **MINIMAL** | FIM monitors DLL directories; limited DLL search order hijacking detection; no PATH hijacking monitoring | **GAP:** Implement DLL preloading detection; add PATH manipulation monitoring; deploy signed binary enforcement |
 | T1484 | Domain Policy Modification | **FULL** | Active Directory audit logs track GPO changes (Event ID 5136, 5137, 5141); Wazuh alerts on unauthorized GPO modifications; SIEM correlation detects privilege escalation via GPO | Implement GPO change approval workflow; add GPO baseline comparison |
 
-**Additional Unmonitored Techniques:**
-
-- **T1547** (Boot or Logon Autostart): Covered under Persistence
-- **T1037** (Boot/Logon Initialization): Partial coverage
-- **T1611** (Escape to Host): No container escape detection
-- **T1546** (Event Triggered Execution): Partial WMI coverage; T1546.018 (Python Startup Hooks) not monitored - see Persistence section
-
 **Tactic Summary:**
 
 **Strengths:** Strong privileged account monitoring, GPO change detection, scheduled task tracking
@@ -153,16 +145,6 @@ Owner: Paul Leone
 | T1036.012 | Masquerading: Browser Fingerprint | **MINIMAL** | No browser fingerprinting detection; limited user-agent analysis in Traefik/Suricata logs | **GAP:** Deploy browser telemetry collection; Implement user-agent anomaly detection; Add browser fingerprinting signature detection (Canvas, WebGL); Monitor for automation frameworks (Puppeteer, Selenium) |
 | T1562.013 | Disable or Modify Network Device Firewall | **PARTIAL** | pfSense logs firewall rule changes via syslog; Limited SNMP monitoring for network devices | **GAP:** Implement SNMP trap monitoring for all network devices; Add Checkmk SNMP monitoring for firewall config changes; Deploy configuration backup validation; Alert on unauthorized firewall rule deletions |
 
-**Major Unmonitored Defense Evasion Techniques:**
-
-- **T1550** (Use Alternate Authentication Material): Pass-the-hash, pass-the-ticket detection needed
-- **T1218** (System Binary Proxy Execution): Partial LOLBin coverage; need comprehensive monitoring
-- **T1207** (Rogue Domain Controller): No DC replication monitoring
-- **T1620** (Reflective Code Loading): No in-memory module detection
-- **T1553** (Subvert Trust Controls): Code signing bypass detection limited
-- **T1497** (Virtualization/Sandbox Evasion): No sandbox evasion detection
-- **T1599** (Network Boundary Bridging): No network bridge detection
-
 **Tactic Summary:**
 
 **Strengths:** Strong log protection, registry monitoring, security tool tampering detection
@@ -185,14 +167,6 @@ Owner: Paul Leone
 | T1557 | Adversary-in-the-Middle | **MINIMAL** | TLS validation prevents MITM; limited ARP spoofing detection | **GAP:** Deploy ARP spoofing detection (ArpWatch); implement certificate pinning; add network anomaly detection for MITM |
 | T1558 | Steal or Forge Kerberos Tickets | **MINIMAL** | No Kerberos ticket monitoring (Event ID 4769, 4768) | **GAP:** Enable Kerberos event logging; implement golden/silver ticket detection; add Kerberos encryption downgrade monitoring |
 | T1539 | Steal Web Session Cookie | **MINIMAL** | No browser cookie theft monitoring | **GAP:** Implement session hijacking detection; add browser telemetry; deploy session binding (IP, User-Agent validation) |
-
-**Additional Unmonitored Techniques:**
-
-- **T1556** (Modify Authentication Process): Partial coverage under Persistence
-- **T1040** (Network Sniffing): No promiscuous mode detection
-- **T1111** (Multi-Factor Authentication Interception): No MFA push notification monitoring
-- **T1606** (Forge Web Credentials): No SAML token forgery detection
-- **T1649** (Steal or Forge Authentication Certificates): No certificate theft detection
 
 **Tactic Summary:**
 
@@ -222,17 +196,6 @@ Owner: Paul Leone
 | T1518.002 | Backup Software Discovery | **FULL** | Sysmon/auditd tracks backup software processes; Command-line monitoring detects backup enumeration queries; Registry monitoring (HKLM\SOFTWARE\Backup); Process monitoring for backup service queries (Get-Service, sc query) | Implement backup software inventory baseline; add behavioral detection for rapid backup enumeration; deploy honeypot backup configurations |
 | T1680 | Local Storage Discovery | **PARTIAL** | Command-line monitoring detects df, mount, lsblk, fsutil commands; auditd logs storage queries on Linux; limited behavioral baseline for storage enumeration patterns | **GAP:** Implement behavioral baseline for normal storage discovery; Add detection for rapid enumeration (>10 queries/min); Deploy SIEM correlation for unusual storage profiling patterns; Add cloud storage enumeration detection |
 | T1124 | System Time Discovery | **PARTIAL** | Limited time discovery monitoring (net time, w32tm) | **GAP:** Add time synchronization monitoring; implement time-based behavioral analysis |
-
-**Additional Unmonitored Discovery Techniques:**
-
-- **T1069** (Permission Groups Discovery): Partial coverage; need comprehensive group enumeration detection
-- **T1057** (Process Discovery): Process listing commands monitored; behavioral analysis needed
-- **T1012** (Query Registry): Limited registry query monitoring outside of modifications
-- **T1518** (Software Discovery): Vulnerability scanners provide inventory; T1518.002 (Backup Software Discovery) fully covered via process/registry monitoring; limited detection for other software enumeration patterns
-- **T1135** (Network Share Discovery): No share enumeration monitoring (net view, net share)
-- **T1201** (Password Policy Discovery): No password policy query detection (net accounts)
-- **T1120** (Peripheral Device Discovery): No device enumeration monitoring
-- **T1614** (System Location Discovery): No geolocation discovery monitoring
 
 **Tactic Summary:**
 
@@ -282,16 +245,6 @@ Owner: Paul Leone
 | T1114 | Email Collection | **MINIMAL** | No email access monitoring (Outlook PST, webmail) | **GAP:** Deploy email access auditing; implement mailbox audit logging; add email exfiltration detection |
 | T1115 | Clipboard Data | **NOT APPLICABLE** | No clipboard monitoring capabilities | **GAP:** Implement clipboard access detection; add clipboard content analysis for sensitive data |
 | T1530 | Data from Cloud Storage | **NOT APPLICABLE** | Minimal cloud storage usage; no cloud access monitoring | N/A or deploy cloud access security broker (CASB) if cloud usage increases |
-
-**Major Unmonitored Collection Techniques:**
-
-- **T1213.006** (Data from Databases): No database query monitoring or exfiltration detection
-- **T1056** (Input Capture): No keylogger detection, credential input monitoring
-- **T1113** (Screen Capture): No screenshot detection capabilities
-- **T1125** (Video Capture): No webcam access monitoring
-- **T1119** (Automated Collection): Limited detection of automated data gathering scripts
-- **T1185** (Browser Session Hijacking): No browser extension/plugin monitoring for data theft
-- **T1213** (Data from Information Repositories): T1213.006 (Databases) not monitored; No SharePoint/wiki/documentation platform monitoring
 
 **Tactic Summary:**
 
@@ -349,13 +302,6 @@ Owner: Paul Leone
 | T1105 | Ingress Tool Transfer | **PARTIAL** | Monitors file downloads via HTTP/HTTPS; PowerShell DownloadFile detection; limited executable download analysis | **GAP:** Implement comprehensive download monitoring; add executable reputation checking; deploy sandbox for downloaded files |
 | T1104 | Multi-Stage Channels | **MINIMAL** | Limited multi-stage C2 detection | **GAP:** Implement C2 session correlation across channels; add multi-protocol C2 detection; deploy behavioral analysis for staged communication |
 
-**Additional Unmonitored C2 Techniques:**
-
-- **T1102** (Web Service): Limited detection of C2 over legitimate web services (Twitter, GitHub, Pastebin)
-- **T1659** (Content Injection): Minimal content injection detection in C2 channels
-- **T1205** (Traffic Signaling): No port knocking or traffic manipulation detection
-- **T1665** (Hide Infrastructure): Limited CDN/cloud fronting detection
-
 **Tactic Summary:**
 
 **Strengths:** Strong DNS monitoring, proxy detection, non-standard port identification
@@ -380,12 +326,6 @@ Owner: Paul Leone
 | T1491 | Defacement | **PARTIAL** | Wazuh FIM monitors web directories; limited web content integrity verification | **GAP:** Implement website content baseline; add automated defacement detection; deploy web application integrity monitoring |
 | T1561 | Disk Wipe | **MINIMAL** | Limited detection of disk wipe tools (diskpart, dd, shred) | **GAP:** Implement disk modification monitoring; add MBR/boot sector protection; deploy bootloader integrity verification |
 | T1499 | Endpoint Denial of Service | **PARTIAL** | Resource exhaustion monitoring; process CPU/memory limits; limited fork bomb detection | **GAP:** Implement process spawn rate limiting; add resource quota enforcement; deploy fork bomb detection |
-
-**Additional Unmonitored Impact Techniques:**
-
-- **T1495** (Firmware Corruption): No UEFI/BIOS integrity monitoring
-- **T1529** (System Shutdown/Reboot): Limited shutdown command monitoring
-- **T1531** (Account Access Removal): No bulk account deletion detection
 
 **Tactic Summary:**
 
